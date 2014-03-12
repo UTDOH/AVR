@@ -1,0 +1,899 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<transformation>
+  <info>
+    <name>time_d</name>
+    <description/>
+    <extended_description/>
+    <trans_version/>
+    <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
+    <directory>&#x2f;</directory>
+    <parameters>
+    </parameters>
+    <log>
+<trans-log-table><connection/>
+<schema/>
+<table/>
+<size_limit_lines/>
+<interval/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STATUS</id><enabled>Y</enabled><name>STATUS</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name><subject/></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name><subject/></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name><subject/></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name><subject/></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name><subject/></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name><subject/></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>STARTDATE</id><enabled>Y</enabled><name>STARTDATE</name></field><field><id>ENDDATE</id><enabled>Y</enabled><name>ENDDATE</name></field><field><id>LOGDATE</id><enabled>Y</enabled><name>LOGDATE</name></field><field><id>DEPDATE</id><enabled>Y</enabled><name>DEPDATE</name></field><field><id>REPLAYDATE</id><enabled>Y</enabled><name>REPLAYDATE</name></field><field><id>LOG_FIELD</id><enabled>Y</enabled><name>LOG_FIELD</name></field><field><id>EXECUTING_SERVER</id><enabled>N</enabled><name>EXECUTING_SERVER</name></field><field><id>EXECUTING_USER</id><enabled>N</enabled><name>EXECUTING_USER</name></field><field><id>CLIENT</id><enabled>N</enabled><name>CLIENT</name></field></trans-log-table>
+<perf-log-table><connection/>
+<schema/>
+<table/>
+<interval/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>SEQ_NR</id><enabled>Y</enabled><name>SEQ_NR</name></field><field><id>LOGDATE</id><enabled>Y</enabled><name>LOGDATE</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STEPNAME</id><enabled>Y</enabled><name>STEPNAME</name></field><field><id>STEP_COPY</id><enabled>Y</enabled><name>STEP_COPY</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>INPUT_BUFFER_ROWS</id><enabled>Y</enabled><name>INPUT_BUFFER_ROWS</name></field><field><id>OUTPUT_BUFFER_ROWS</id><enabled>Y</enabled><name>OUTPUT_BUFFER_ROWS</name></field></perf-log-table>
+<channel-log-table><connection/>
+<schema/>
+<table/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>LOG_DATE</id><enabled>Y</enabled><name>LOG_DATE</name></field><field><id>LOGGING_OBJECT_TYPE</id><enabled>Y</enabled><name>LOGGING_OBJECT_TYPE</name></field><field><id>OBJECT_NAME</id><enabled>Y</enabled><name>OBJECT_NAME</name></field><field><id>OBJECT_COPY</id><enabled>Y</enabled><name>OBJECT_COPY</name></field><field><id>REPOSITORY_DIRECTORY</id><enabled>Y</enabled><name>REPOSITORY_DIRECTORY</name></field><field><id>FILENAME</id><enabled>Y</enabled><name>FILENAME</name></field><field><id>OBJECT_ID</id><enabled>Y</enabled><name>OBJECT_ID</name></field><field><id>OBJECT_REVISION</id><enabled>Y</enabled><name>OBJECT_REVISION</name></field><field><id>PARENT_CHANNEL_ID</id><enabled>Y</enabled><name>PARENT_CHANNEL_ID</name></field><field><id>ROOT_CHANNEL_ID</id><enabled>Y</enabled><name>ROOT_CHANNEL_ID</name></field></channel-log-table>
+<step-log-table><connection/>
+<schema/>
+<table/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>LOG_DATE</id><enabled>Y</enabled><name>LOG_DATE</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STEPNAME</id><enabled>Y</enabled><name>STEPNAME</name></field><field><id>STEP_COPY</id><enabled>Y</enabled><name>STEP_COPY</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>LOG_FIELD</id><enabled>N</enabled><name>LOG_FIELD</name></field></step-log-table>
+<metrics-log-table><connection/>
+<schema/>
+<table/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>LOG_DATE</id><enabled>Y</enabled><name>LOG_DATE</name></field><field><id>METRICS_DATE</id><enabled>Y</enabled><name>METRICS_DATE</name></field><field><id>METRICS_CODE</id><enabled>Y</enabled><name>METRICS_CODE</name></field><field><id>METRICS_DESCRIPTION</id><enabled>Y</enabled><name>METRICS_DESCRIPTION</name></field><field><id>METRICS_SUBJECT</id><enabled>Y</enabled><name>METRICS_SUBJECT</name></field><field><id>METRICS_TYPE</id><enabled>Y</enabled><name>METRICS_TYPE</name></field><field><id>METRICS_VALUE</id><enabled>Y</enabled><name>METRICS_VALUE</name></field></metrics-log-table>
+    </log>
+    <maxdate>
+      <connection/>
+      <table/>
+      <field/>
+      <offset>0.0</offset>
+      <maxdiff>0.0</maxdiff>
+    </maxdate>
+    <size_rowset>10000</size_rowset>
+    <sleep_time_empty>50</sleep_time_empty>
+    <sleep_time_full>50</sleep_time_full>
+    <unique_connections>N</unique_connections>
+    <feedback_shown>Y</feedback_shown>
+    <feedback_size>50000</feedback_size>
+    <using_thread_priorities>Y</using_thread_priorities>
+    <shared_objects_file/>
+    <capture_step_performance>N</capture_step_performance>
+    <step_performance_capturing_delay>1000</step_performance_capturing_delay>
+    <step_performance_capturing_size_limit>100</step_performance_capturing_size_limit>
+    <dependencies>
+    </dependencies>
+    <partitionschemas>
+        <partitionschema>
+          <name>PartitionSchema</name>
+          <partition>            <id>1</id>
+          </partition>          <partition>            <id>2</id>
+          </partition>          <partition>            <id>3</id>
+          </partition>          <partition>            <id>4</id>
+          </partition>          <partition>            <id>5</id>
+          </partition>          <partition>            <id>6</id>
+          </partition>          <partition>            <id>7</id>
+          </partition>          <partition>            <id>8</id>
+          </partition>          <dynamic>N</dynamic>
+          <partitions_per_slave>8</partitions_per_slave>
+        </partitionschema>
+    </partitionschemas>
+    <slaveservers>
+         <slaveserver><name>BIGDW DEV</name><hostname>54.218.0.223</hostname><port>9080</port><webAppName>pentaho-di</webAppName><username>mgong</username><password>Encrypted 2be98afc86aa7f2e4bd18a2758fc3ff8e</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>Y</master></slaveserver>
+         <slaveserver><name>ClusterMaster</name><hostname>localhost</hostname><port>9000</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>Y</master></slaveserver>
+         <slaveserver><name>EE_DI_Server</name><hostname>localhost</hostname><port>9080</port><webAppName>pentaho-di</webAppName><username>joe</username><password>Encrypted 2be98afc86aa7f2e4bb18bd63c99dbdde</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>Y</master></slaveserver>
+         <slaveserver><name>LinuxMaster</name><hostname>10.100.3.165</hostname><port>8080</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>Y</master></slaveserver>
+         <slaveserver><name>LinuxSlave1</name><hostname>10.100.3.165</hostname><port>8081</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>LinuxSlave2</name><hostname>10.100.3.165</hostname><port>8082</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>QAETL Slave</name><hostname>devinf1</hostname><port>8071</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>Y</master></slaveserver>
+         <slaveserver><name>S1</name><hostname>localhost</hostname><port>8083</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>S2</name><hostname>localhost</hostname><port>8084</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave 1 - prod</name><hostname>prodinf1</hostname><port>8081</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave 1 - xabikettle</name><hostname>xabikettle</hostname><port>8081</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave 1 - xavmetldev1</name><hostname>xavmetldev1</hostname><port>8081</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave 10 - tst</name><hostname>tstinf1</hostname><port>8092</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave 10 - xavmetldev1</name><hostname>xavmetldev1</hostname><port>8095</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave 11 - tst</name><hostname>tstinf1</hostname><port>8093</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave 11 - xavmetldev1</name><hostname>xavmetldev1</hostname><port>8096</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave 12</name><hostname>devinf1</hostname><port>8094</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave 12 - xavmetldev1</name><hostname>xavmetldev1</hostname><port>8097</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave 13</name><hostname>devinf1</hostname><port>8095</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave 13 - xavmetldev1</name><hostname>xavmetldev1</hostname><port>8098</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave 14</name><hostname>devinf1</hostname><port>8096</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave 14 - xavmetldev1</name><hostname>xavmetldev1</hostname><port>8099</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave 15</name><hostname>devinf1</hostname><port>8097</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave 15 - xavmetldev1</name><hostname>xavmetldev1</hostname><port>8100</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave 16</name><hostname>devinf1</hostname><port>8098</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave 16 - xavmetldev1</name><hostname>xavmetldev1</hostname><port>8101</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave 17</name><hostname>devinf1</hostname><port>8099</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave 18</name><hostname>devinf1</hostname><port>8100</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave 19</name><hostname>devinf1</hostname><port>8101</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave 2 - prod</name><hostname>prodinf1</hostname><port>8082</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave 2 - tst</name><hostname>tstinf1</hostname><port>8082</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave 2 - xavmetldev1</name><hostname>xavmetldev1</hostname><port>8082</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave 20</name><hostname>devinf1</hostname><port>8102</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave 21</name><hostname>devinf1</hostname><port>8103</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave 22</name><hostname>devinf1</hostname><port>8104</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave 23</name><hostname>devinf1</hostname><port>8105</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave 24</name><hostname>devinf1</hostname><port>8106</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave 3 - tst</name><hostname>tstinf1</hostname><port>8083</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave 3 - xavmetldev1</name><hostname>xavmetldev1</hostname><port>8083</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave 4 - tst</name><hostname>tstinf1</hostname><port>8084</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave 4 - xavmetldev1</name><hostname>xavmetldev1</hostname><port>8084</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave 5 - tst</name><hostname>tstinf1</hostname><port>8085</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave 5 - xavmetldev1</name><hostname>xavmetldev1</hostname><port>8085</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave 6 - tst</name><hostname>tstinf1</hostname><port>8086</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave 6 - xavmetldev1</name><hostname>xavmetldev1</hostname><port>8086</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave 7 - tst</name><hostname>tstinf1</hostname><port>8087</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave 7 - xavmetldev1</name><hostname>xavmetldev1</hostname><port>8087</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave 8 - tst</name><hostname>tstinf1</hostname><port>8090</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave 8 - xavmetldev1</name><hostname>xavmetldev1</hostname><port>8093</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave 9 - tst</name><hostname>tstinf1</hostname><port>8091</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave 9 - xavmetldev1</name><hostname>xavmetldev1</hostname><port>8094</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave1</name><hostname>devinf1</hostname><port>8081</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave1 - tst</name><hostname>tstinf1</hostname><port>8081</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave10</name><hostname>devinf1</hostname><port>8090</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave11</name><hostname>devinf1</hostname><port>8092</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave2</name><hostname>devinf1</hostname><port>8082</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave3</name><hostname>devinf1</hostname><port>8083</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave4</name><hostname>devinf1</hostname><port>8084</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave5</name><hostname>devinf1</hostname><port>8085</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave6</name><hostname>devinf1</hostname><port>8086</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave7</name><hostname>devinf1</hostname><port>8087</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave8</name><hostname>devinf1</hostname><port>8093</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>Slave9</name><hostname>devinf1</hostname><port>8091</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>devinf1</name><hostname>devinf1</hostname><port>9080</port><webAppName>pentaho-di</webAppName><username>i50559</username><password>Encrypted 2be98afc86aa7f2e4b318ad64dc9bfe8e</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>Y</master></slaveserver>
+         <slaveserver><name>himalia</name><hostname>localhost</hostname><port>8181</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>Y</master></slaveserver>
+         <slaveserver><name>itvmtstinf</name><hostname>itvmtstinf1</hostname><port>9080</port><webAppName>pentaho-di</webAppName><username>joe</username><password>Encrypted 2be98afc86aa7f2e4bb18bd63c99dbdde</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>itvmtstinf1</name><hostname>itvmtstinf1</hostname><port>9080</port><webAppName>pentaho-di</webAppName><username>i50559</username><password>Encrypted 2be98afc86aa7f2e4b318ad64dc9bfe8e</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>localhost&#x3a;8083</name><hostname>localhost</hostname><port>8083</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>localhost&#x3a;8084</name><hostname>localhost</hostname><port>8084</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>mmrstikMASTER</name><hostname>localhost</hostname><port>9080</port><webAppName>pentaho-di</webAppName><username>joe</username><password>Encrypted 2be98afc86aa7f2e4bb18bd63c99dbdde</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>Y</master></slaveserver>
+         <slaveserver><name>pomona</name><hostname>pomona.int.asp.qvantel.net</hostname><port>8080</port><webAppName>pentaho-di</webAppName><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>prodinf1</name><hostname>prodinf1</hostname><port>9080</port><webAppName>pentaho-di</webAppName><username>i50559</username><password>Encrypted 2be98afc86aa7f2e4b318ad64dc9bfe8e</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+         <slaveserver><name>xabikettle</name><hostname>xabikettle</hostname><port>9080</port><webAppName>pentaho-di</webAppName><username>justinb</username><password>Encrypted 2be98afc86aa7f2e4b318ad64dc9bfe8e</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master></slaveserver>
+    </slaveservers>
+    <clusterschemas>
+        <clusterschema>
+          <name>Cluster</name>
+          <base_port>40000</base_port>
+          <sockets_buffer_size>2000</sockets_buffer_size>
+          <sockets_flush_interval>5000</sockets_flush_interval>
+          <sockets_compressed>Y</sockets_compressed>
+          <dynamic>N</dynamic>
+          <slaveservers>
+            <name>Slave 1 - xavmetldev1</name>
+            <name>Slave 2 - tst</name>
+            <name>Slave 2 - xavmetldev1</name>
+            <name>Slave 3 - tst</name>
+            <name>Slave 3 - xavmetldev1</name>
+            <name>Slave 4 - tst</name>
+            <name>Slave 4 - xavmetldev1</name>
+            <name>Slave 5 - xavmetldev1</name>
+            <name>Slave 6 - xavmetldev1</name>
+            <name>Slave 7 - xavmetldev1</name>
+            <name>Slave 8 - xavmetldev1</name>
+            <name>Slave1</name>
+            <name>Slave1 - tst</name>
+            <name>Slave2</name>
+            <name>Slave3</name>
+            <name>Slave4</name>
+            <name>devinf1</name>
+          </slaveservers>
+        </clusterschema>
+        <clusterschema>
+          <name>Cluster - 2 Node</name>
+          <base_port>40000</base_port>
+          <sockets_buffer_size>2000</sockets_buffer_size>
+          <sockets_flush_interval>5000</sockets_flush_interval>
+          <sockets_compressed>Y</sockets_compressed>
+          <dynamic>N</dynamic>
+          <slaveservers>
+            <name>Slave1</name>
+            <name>Slave2</name>
+            <name>devinf1</name>
+          </slaveservers>
+        </clusterschema>
+        <clusterschema>
+          <name>Cluster - devinf1</name>
+          <base_port>40000</base_port>
+          <sockets_buffer_size>2000</sockets_buffer_size>
+          <sockets_flush_interval>5000</sockets_flush_interval>
+          <sockets_compressed>Y</sockets_compressed>
+          <dynamic>N</dynamic>
+          <slaveservers>
+            <name>Slave1</name>
+            <name>Slave10</name>
+            <name>Slave11</name>
+            <name>Slave2</name>
+            <name>Slave3</name>
+            <name>Slave4</name>
+            <name>Slave5</name>
+            <name>Slave6</name>
+            <name>Slave7</name>
+            <name>Slave8</name>
+            <name>Slave9</name>
+            <name>devinf1</name>
+          </slaveservers>
+        </clusterschema>
+        <clusterschema>
+          <name>Foo</name>
+          <base_port>40000</base_port>
+          <sockets_buffer_size>2000</sockets_buffer_size>
+          <sockets_flush_interval>5000</sockets_flush_interval>
+          <sockets_compressed>Y</sockets_compressed>
+          <dynamic>N</dynamic>
+          <slaveservers>
+            <name>Slave 1 - xavmetldev1</name>
+            <name>devinf1</name>
+          </slaveservers>
+        </clusterschema>
+    </clusterschemas>
+  <created_user>i50592</created_user>
+  <created_date>2013&#x2f;08&#x2f;28 14&#x3a;59&#x3a;12.585</created_date>
+  <modified_user>i50592</modified_user>
+  <modified_date>2014&#x2f;03&#x2f;10 13&#x3a;26&#x3a;09.268</modified_date>
+  </info>
+  <notepads>
+  </notepads>
+  <connection>
+    <name>DW_ETL</name>
+    <server/>
+    <type>ORACLE</type>
+    <access>Native</access>
+    <database>&#x24;&#x7b;V_DW_ETL_DB&#x7d;</database>
+    <port>-1</port>
+    <username>etl</username>
+    <password>Encrypted 2be98afc86aa7f2e4cb79ce72d797bbd6</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>-1</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>Trisano OLAP DS</name>
+    <server/>
+    <type>POSTGRESQL</type>
+    <access>, </access>
+    <database>TrisanoOLAPDS</database>
+    <port>1521</port>
+    <username/>
+    <password>Encrypted </password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>Trisano TX DS</name>
+    <server/>
+    <type>POSTGRESQL</type>
+    <access>, </access>
+    <database>WebTrisanoTXDS</database>
+    <port>1521</port>
+    <username/>
+    <password>Encrypted </password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <order>
+  <hop> <from>Add Flags&#x2f;Types</from><to>Get System Info</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add sequence</from><to>Add Flags&#x2f;Types</to><enabled>Y</enabled> </hop>
+  <hop> <from>Cartesian</from><to>Sort rows</to><enabled>Y</enabled> </hop>
+  <hop> <from>Generate Hour</from><to>Hour sequence</to><enabled>Y</enabled> </hop>
+  <hop> <from>Generate Minute</from><to>Min sequence</to><enabled>Y</enabled> </hop>
+  <hop> <from>Generate Second</from><to>Sec sequence</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get System Info</from><to>dw_dim_time</to><enabled>Y</enabled> </hop>
+  <hop> <from>Hour sequence</from><to>Cartesian</to><enabled>Y</enabled> </hop>
+  <hop> <from>Min sequence</from><to>Cartesian</to><enabled>Y</enabled> </hop>
+  <hop> <from>Sec sequence</from><to>Cartesian</to><enabled>Y</enabled> </hop>
+  <hop> <from>Sort rows</from><to>Add sequence</to><enabled>Y</enabled> </hop>
+  </order>
+  <step>
+    <name>Add Flags&#x2f;Types</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>var GMT_HOUR_OF_DAY     &#x3d;HOUR_OF_DAY_24H&#x2b;6&#x3b;&#xa;var GMT_MINUTE_OF_HOUR  &#x3d;MINUTE_OF_HOUR_24H&#x3b;&#xa;var GMT_SECOND_OF_MINUTE&#x3d;SECOND_OF_MINUTE_24H&#x3b;&#xa;&#xa;var HOUR_OF_DAY_12H     &#x3d;HOUR_OF_DAY_24H&#x3b;&#xa;var MINUTE_OF_HOUR_12H  &#x3d;MINUTE_OF_HOUR_24H&#x3b;&#xa;var SECOND_OF_MINUTE_12H&#x3d;SECOND_OF_MINUTE_24H&#x3b;&#xa;&#xa;var BUSINESS_HOURS_FLG     &#x3d;0&#x3b;&#xa;var CORE_BUSINESS_HOURS_FLG&#x3d;0&#x3b;&#xa;var CALL_CENTER_HOURS_FLG  &#x3d;0&#x3b;&#xa;&#xa;var OLTP_REPORT_HOURS_FLG&#x3d;0&#x3b;&#xa;&#xa;var AM_PM_MERIDIEM         &#x3d;&#x22;AM&#x22;&#x3b;&#xa;var TIME_OF_DAY_NAME       &#x3d;&#x22;Night&#x22;&#x3b;&#xa;var TIME_OF_DAY_NAME_DETAIL&#x3d;&#x22;Mid-Night&#x22;&#x3b;&#xa;var TIME_TEXT_LONG_24      &#x3d;&#x22;&#x22;&#x3b;&#xa;var TIME_TEXT_SHORT_24     &#x3d;&#x22;&#x22;&#x3b;&#xa;var TIME_TEXT_LONG_12      &#x3d;&#x22;&#x22;&#x3b;&#xa;var TIME_TEXT_SHORT_12     &#x3d;&#x22;&#x22;&#x3b;&#xa;&#xa;if&#x28;HOUR_OF_DAY_12H&#x3e;12&#x29; HOUR_OF_DAY_12H-&#x3d;12&#x3b;&#xa;&#xa;if&#x28;GMT_HOUR_OF_DAY&#x3e;&#x3d;24&#x29; GMT_HOUR_OF_DAY-&#x3d;24&#x3b;&#xa;&#xa;if&#x28;HOUR_OF_DAY_24H&#x3e;&#x3d;12&#x29; AM_PM_MERIDIEM&#x3d;&#x22;PM&#x22;&#xa;&#xa;TIME_TEXT_LONG_24      &#x3d;lpad&#x28;HOUR_OF_DAY_24H,&#x22;0&#x22;,2&#x29;&#x2b;&#x22;&#x3a;&#x22;&#x2b;lpad&#x28;MINUTE_OF_HOUR_24H,&#x22;0&#x22;,2&#x29;&#x2b;&#x22;&#x3a;&#x22;&#x2b;lpad&#x28;SECOND_OF_MINUTE_24H,&#x22;0&#x22;,2&#x29;&#x3b;&#xa;TIME_TEXT_SHORT_24     &#x3d;lpad&#x28;HOUR_OF_DAY_24H,&#x22;0&#x22;,2&#x29;&#x2b;&#x22;&#x3a;&#x22;&#x2b;lpad&#x28;MINUTE_OF_HOUR_24H,&#x22;0&#x22;,2&#x29;&#x3b;&#xa;TIME_TEXT_LONG_12      &#x3d;lpad&#x28;HOUR_OF_DAY_12H,&#x22;0&#x22;,2&#x29;&#x2b;&#x22;&#x3a;&#x22;&#x2b;lpad&#x28;MINUTE_OF_HOUR_12H,&#x22;0&#x22;,2&#x29;&#x2b;&#x22;&#x3a;&#x22;&#x2b;lpad&#x28;SECOND_OF_MINUTE_12H,&#x22;0&#x22;,2&#x29;&#x2b;&#x22; &#x22;&#x2b;AM_PM_MERIDIEM&#x3b;&#xa;TIME_TEXT_SHORT_12     &#x3d;lpad&#x28;HOUR_OF_DAY_12H,&#x22;0&#x22;,2&#x29;&#x2b;&#x22;&#x3a;&#x22;&#x2b;lpad&#x28;MINUTE_OF_HOUR_12H,&#x22;0&#x22;,2&#x29;&#x2b;&#x22; &#x22;&#x2b;AM_PM_MERIDIEM&#x3b;&#xa;&#xa;if&#x28;HOUR_OF_DAY_24H&#x3e;&#x3d;07&#x26;&#x26;HOUR_OF_DAY_24H&#x3c;17&#x29; BUSINESS_HOURS_FLG     &#x3d;1&#x3b;&#xa;if&#x28;HOUR_OF_DAY_24H&#x3e;&#x3d;09&#x26;&#x26;HOUR_OF_DAY_24H&#x3c;16&#x29; CORE_BUSINESS_HOURS_FLG&#x3d;1&#x3b;&#xa;if&#x28;HOUR_OF_DAY_24H&#x3e;&#x3d;06&#x26;&#x26;HOUR_OF_DAY_24H&#x3c;18&#x29; CALL_CENTER_HOURS_FLG  &#x3d;1&#x3b;&#xa;if&#x28;HOUR_OF_DAY_24H&#x3c;09&#x7c;&#x7c;HOUR_OF_DAY_24H&#x3e;16&#x29;  OLTP_REPORT_HOURS_FLG  &#x3d;1&#x3b;&#xa;&#xd;&#xa;&#xd;&#xa;if&#x28;HOUR_OF_DAY_24H&#x3e;&#x3d;4&#x26;&#x26;TIME_KEY&#x3c;41401&#x29; TIME_OF_DAY_NAME&#x3d;&#x22;Morning&#x22;&#x3b; &#x2f;&#x2f; &#x3c; 11&#x3a;30&#xa;if&#x28;TIME_KEY&#x3e;&#x3d;41401&#x26;&#x26;HOUR_OF_DAY_24H&#x3c;13&#x29; TIME_OF_DAY_NAME&#x3d;&#x22;Mid-Day&#x22;&#x3b;&#xa;if&#x28;HOUR_OF_DAY_24H&#x3e;&#x3d;13&#x26;&#x26;HOUR_OF_DAY_24H&#x3c;17&#x29; TIME_OF_DAY_NAME&#x3d;&#x22;Afternoon&#x22;&#x3b;&#xa;if&#x28;HOUR_OF_DAY_24H&#x3e;&#x3d;17&#x26;&#x26;HOUR_OF_DAY_24H&#x3c;20&#x29; TIME_OF_DAY_NAME&#x3d;&#x22;Evening&#x22;&#x3b;&#xd;&#xa;&#xd;&#xa;&#xa;if&#x28;HOUR_OF_DAY_24H&#x3e;&#x3d;01&#x26;&#x26;HOUR_OF_DAY_24H&#x3c;04&#x29; TIME_OF_DAY_NAME_DETAIL&#x3d;&#x22;Late-Night&#x22;&#x3b;&#xa;if&#x28;HOUR_OF_DAY_24H&#x3e;&#x3d;04&#x26;&#x26;HOUR_OF_DAY_24H&#x3c;06&#x29; TIME_OF_DAY_NAME_DETAIL&#x3d;&#x22;Dawn&#x22;&#x3b;&#xa;if&#x28;HOUR_OF_DAY_24H&#x3e;&#x3d;06&#x26;&#x26;HOUR_OF_DAY_24H&#x3c;08&#x29; TIME_OF_DAY_NAME_DETAIL&#x3d;&#x22;Early-Morning&#x22;&#x3b;&#xa;if&#x28;HOUR_OF_DAY_24H&#x3e;&#x3d;08&#x26;&#x26;HOUR_OF_DAY_24H&#x3c;10&#x29; TIME_OF_DAY_NAME_DETAIL&#x3d;&#x22;Mid-Morning&#x22;&#x3b;&#xa;if&#x28;HOUR_OF_DAY_24H&#x3e;&#x3d;10&#x26;&#x26;HOUR_OF_DAY_24H&#x3c;12&#x29; TIME_OF_DAY_NAME_DETAIL&#x3d;&#x22;Late-Morning&#x22;&#x3b;&#xa;if&#x28;HOUR_OF_DAY_24H&#x3e;&#x3d;12&#x26;&#x26;HOUR_OF_DAY_24H&#x3c;14&#x29; TIME_OF_DAY_NAME_DETAIL&#x3d;&#x22;Early-Afternoon&#x22;&#x3b;&#xd;&#xa;&#xa;if&#x28;HOUR_OF_DAY_24H&#x3e;&#x3d;14&#x26;&#x26;TIME_KEY&#x3c;55801&#x29; TIME_OF_DAY_NAME_DETAIL&#x3d;&#x22;Mid-Afternoon&#x22;&#x3b; &#x2f;&#x2f; 14 - 15&#x3a;30&#xa;if&#x28;TIME_KEY&#x3e;&#x3d;55801&#x26;&#x26;HOUR_OF_DAY_24H&#x3c;17&#x29; TIME_OF_DAY_NAME_DETAIL&#x3d;&#x22;Late-Afternoon&#x22;&#x3b; &#xd;&#xa;&#xa;if&#x28;HOUR_OF_DAY_24H&#x3e;&#x3d;17&#x26;&#x26;HOUR_OF_DAY_24H&#x3c;18&#x29; TIME_OF_DAY_NAME_DETAIL&#x3d;&#x22;Early-Evening&#x22;&#x3b;&#xd;&#xa;if&#x28;HOUR_OF_DAY_24H&#x3e;&#x3d;18&#x26;&#x26;HOUR_OF_DAY_24H&#x3c;20&#x29; TIME_OF_DAY_NAME_DETAIL&#x3d;&#x22;Dusk&#x22;&#x3b;&#xa;if&#x28;HOUR_OF_DAY_24H&#x3e;&#x3d;20&#x26;&#x26;HOUR_OF_DAY_24H&#x3c;23&#x29; TIME_OF_DAY_NAME_DETAIL&#x3d;&#x22;Early-Night&#x22;&#x3b;&#xa;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>GMT_HOUR_OF_DAY</name>
+        <rename>GMT_HOUR_OF_DAY</rename>
+        <type>Number</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>GMT_MINUTE_OF_HOUR</name>
+        <rename>GMT_MINUTE_OF_HOUR</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>GMT_SECOND_OF_MINUTE</name>
+        <rename>GMT_SECOND_OF_MINUTE</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>HOUR_OF_DAY_12H</name>
+        <rename>HOUR_OF_DAY_12H</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>MINUTE_OF_HOUR_12H</name>
+        <rename>MINUTE_OF_HOUR_12H</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>SECOND_OF_MINUTE_12H</name>
+        <rename>SECOND_OF_MINUTE_12H</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>BUSINESS_HOURS_FLG</name>
+        <rename>BUSINESS_HOURS_FLG</rename>
+        <type>Number</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>CORE_BUSINESS_HOURS_FLG</name>
+        <rename>CORE_BUSINESS_HOURS_FLG</rename>
+        <type>Number</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>CALL_CENTER_HOURS_FLG</name>
+        <rename>CALL_CENTER_HOURS_FLG</rename>
+        <type>Number</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>OLTP_REPORT_HOURS_FLG</name>
+        <rename>OLTP_REPORT_HOURS_FLG</rename>
+        <type>Number</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>AM_PM_MERIDIEM</name>
+        <rename>AM_PM_MERIDIEM</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>TIME_OF_DAY_NAME</name>
+        <rename>TIME_OF_DAY_NAME</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>TIME_OF_DAY_NAME_DETAIL</name>
+        <rename>TIME_OF_DAY_NAME_DETAIL</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>TIME_TEXT_LONG_24</name>
+        <rename>TIME_TEXT_LONG_24</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>TIME_TEXT_SHORT_24</name>
+        <rename>TIME_TEXT_SHORT_24</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>TIME_TEXT_LONG_12</name>
+        <rename>TIME_TEXT_LONG_12</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>TIME_TEXT_SHORT_12</name>
+        <rename>TIME_TEXT_SHORT_12</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>571</xloc>
+      <yloc>308</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Add sequence</name>
+    <type>Sequence</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <valuename>TIME_KEY</valuename>
+      <use_database>N</use_database>
+      <connection/>
+      <schema/>
+      <seqname>SEQ_</seqname>
+      <use_counter>Y</use_counter>
+      <counter_name/>
+      <start_at>1</start_at>
+      <increment_by>1</increment_by>
+      <max_value>999999999</max_value>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>572</xloc>
+      <yloc>188</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Cartesian</name>
+    <type>JoinRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>out</prefix>
+      <cache_size>86400</cache_size>
+      <main/>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue/>
+ <function>&#x3d;</function>
+ <rightvalue/>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>381</xloc>
+      <yloc>188</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Generate Hour</name>
+    <type>RowGenerator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+    </fields>
+    <limit>24</limit>
+    <never_ending>N</never_ending>
+    <interval_in_ms/>
+    <row_time_field/>
+    <last_time_field/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>112</xloc>
+      <yloc>67</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Generate Minute</name>
+    <type>RowGenerator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+    </fields>
+    <limit>60</limit>
+    <never_ending>N</never_ending>
+    <interval_in_ms/>
+    <row_time_field/>
+    <last_time_field/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>112</xloc>
+      <yloc>188</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Generate Second</name>
+    <type>RowGenerator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+    </fields>
+    <limit>60</limit>
+    <never_ending>N</never_ending>
+    <interval_in_ms/>
+    <row_time_field/>
+    <last_time_field/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>112</xloc>
+      <yloc>309</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get System Info</name>
+    <type>SystemInfo</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>ETL_LOAD_DATE</name>
+        <type>system date &#x28;fixed&#x29;</type>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>572</xloc>
+      <yloc>402</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Hour sequence</name>
+    <type>Sequence</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <valuename>HOUR_OF_DAY_24H</valuename>
+      <use_database>N</use_database>
+      <connection/>
+      <schema/>
+      <seqname>SEQ_</seqname>
+      <use_counter>Y</use_counter>
+      <counter_name/>
+      <start_at>0</start_at>
+      <increment_by>1</increment_by>
+      <max_value>999999999</max_value>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>265</xloc>
+      <yloc>67</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Min sequence</name>
+    <type>Sequence</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <valuename>MINUTE_OF_HOUR_24H</valuename>
+      <use_database>N</use_database>
+      <connection/>
+      <schema/>
+      <seqname>SEQ_</seqname>
+      <use_counter>Y</use_counter>
+      <counter_name/>
+      <start_at>0</start_at>
+      <increment_by>1</increment_by>
+      <max_value>999999999</max_value>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>265</xloc>
+      <yloc>188</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Sec sequence</name>
+    <type>Sequence</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <valuename>SECOND_OF_MINUTE_24H</valuename>
+      <use_database>N</use_database>
+      <connection/>
+      <schema/>
+      <seqname>SEQ_</seqname>
+      <use_counter>Y</use_counter>
+      <counter_name/>
+      <start_at>0</start_at>
+      <increment_by>1</increment_by>
+      <max_value>999999999</max_value>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>265</xloc>
+      <yloc>309</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Shared Input 2</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection/>
+    <sql>select sysdate start_timestamp&#xa;      ,daily_limit&#xa;      ,max_minutes&#xa;      ,geocode_id&#xa;      ,curr_session_idx&#xa;      ,daily_limit_reached&#xa;      ,max_time_exceeded &#xa;  from table&#x28;etl.geocoding.initial_settings&#x29; a</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>112</xloc>
+      <yloc>67</yloc>
+      <draw>N</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Sort rows</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>out</prefix>
+      <sort_size>1000000</sort_size>
+      <free_memory/>
+      <compress>N</compress>
+      <compress_variable/>
+      <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>HOUR_OF_DAY_24H</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>MINUTE_OF_HOUR_24H</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>SECOND_OF_MINUTE_24H</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>468</xloc>
+      <yloc>188</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>dw_dim_time</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Trisano OLAP DS</connection>
+    <schema>warehouse</schema>
+    <table>dw_dim_time</table>
+    <commit>10000</commit>
+    <truncate>Y</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+        <field>
+          <column_name>HOUR_OF_DAY_24H</column_name>
+          <stream_name>HOUR_OF_DAY_24H</stream_name>
+        </field>
+        <field>
+          <column_name>MINUTE_OF_HOUR_24H</column_name>
+          <stream_name>MINUTE_OF_HOUR_24H</stream_name>
+        </field>
+        <field>
+          <column_name>SECOND_OF_MINUTE_24H</column_name>
+          <stream_name>SECOND_OF_MINUTE_24H</stream_name>
+        </field>
+        <field>
+          <column_name>TIME_KEY</column_name>
+          <stream_name>TIME_KEY</stream_name>
+        </field>
+        <field>
+          <column_name>GMT_HOUR_OF_DAY</column_name>
+          <stream_name>GMT_HOUR_OF_DAY</stream_name>
+        </field>
+        <field>
+          <column_name>GMT_MINUTE_OF_HOUR</column_name>
+          <stream_name>GMT_MINUTE_OF_HOUR</stream_name>
+        </field>
+        <field>
+          <column_name>GMT_SECOND_OF_MINUTE</column_name>
+          <stream_name>GMT_SECOND_OF_MINUTE</stream_name>
+        </field>
+        <field>
+          <column_name>HOUR_OF_DAY_12H</column_name>
+          <stream_name>HOUR_OF_DAY_12H</stream_name>
+        </field>
+        <field>
+          <column_name>MINUTE_OF_HOUR_12H</column_name>
+          <stream_name>MINUTE_OF_HOUR_12H</stream_name>
+        </field>
+        <field>
+          <column_name>SECOND_OF_MINUTE_12H</column_name>
+          <stream_name>SECOND_OF_MINUTE_12H</stream_name>
+        </field>
+        <field>
+          <column_name>BUSINESS_HOURS_FLG</column_name>
+          <stream_name>BUSINESS_HOURS_FLG</stream_name>
+        </field>
+        <field>
+          <column_name>CORE_BUSINESS_HOURS_FLG</column_name>
+          <stream_name>CORE_BUSINESS_HOURS_FLG</stream_name>
+        </field>
+        <field>
+          <column_name>CALL_CENTER_HOURS_FLG</column_name>
+          <stream_name>CALL_CENTER_HOURS_FLG</stream_name>
+        </field>
+        <field>
+          <column_name>OLTP_REPORT_HOURS_FLG</column_name>
+          <stream_name>OLTP_REPORT_HOURS_FLG</stream_name>
+        </field>
+        <field>
+          <column_name>AM_PM_MERIDIEM</column_name>
+          <stream_name>AM_PM_MERIDIEM</stream_name>
+        </field>
+        <field>
+          <column_name>TIME_OF_DAY_NAME</column_name>
+          <stream_name>TIME_OF_DAY_NAME</stream_name>
+        </field>
+        <field>
+          <column_name>TIME_OF_DAY_NAME_DETAIL</column_name>
+          <stream_name>TIME_OF_DAY_NAME_DETAIL</stream_name>
+        </field>
+        <field>
+          <column_name>TIME_TEXT_LONG_24</column_name>
+          <stream_name>TIME_TEXT_LONG_24</stream_name>
+        </field>
+        <field>
+          <column_name>TIME_TEXT_SHORT_24</column_name>
+          <stream_name>TIME_TEXT_SHORT_24</stream_name>
+        </field>
+        <field>
+          <column_name>TIME_TEXT_LONG_12</column_name>
+          <stream_name>TIME_TEXT_LONG_12</stream_name>
+        </field>
+        <field>
+          <column_name>TIME_TEXT_SHORT_12</column_name>
+          <stream_name>TIME_TEXT_SHORT_12</stream_name>
+        </field>
+        <field>
+          <column_name>ETL_LOAD_DATE</column_name>
+          <stream_name>ETL_LOAD_DATE</stream_name>
+        </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>637</xloc>
+      <yloc>490</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step_error_handling>
+  </step_error_handling>
+   <slave-step-copy-partition-distribution>
+</slave-step-copy-partition-distribution>
+   <slave_transformation>N</slave_transformation>
+
+</transformation>
