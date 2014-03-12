@@ -246,6 +246,396 @@
     </step>
 
   <step>
+    <name>Select values</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>currentMonthCy</name>
+        <rename>current_month_cy</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>currentMonthLy</name>
+        <rename>current_month_ly</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>currentWeekCy</name>
+        <rename>current_week_cy</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>currentWeekLy</name>
+        <rename>current_week_ly</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>currentYear</name>
+        <rename>current_year</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>dateFull</name>
+        <rename>date_full</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>dateFull_1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>dateLong</name>
+        <rename>date_long</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>dateLong_1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>dateMedium</name>
+        <rename>date_medium</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>dateMedium_1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>dateShort</name>
+        <rename>date_short</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>dateShort_1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>dayAbbreviation</name>
+        <rename>day_abbreviation</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>dayAbbreviation_1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>dayName</name>
+        <rename>day_name</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>dayName_1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>dayNumber</name>
+        <rename>day_number</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>daySequence</name>
+        <rename>day_sequence</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>day_in_month</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>day_in_week</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>day_in_year</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>daysInMonth</name>
+        <rename>days_in_month</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>dw_date_id</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>isFirstDayInMonth</name>
+        <rename>is_first_day_in_month</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>isFirstDayInMonth_1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>isFirstDayInWeek</name>
+        <rename>is_first_day_in_week</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>isFirstDayInWeek_1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>isLastDayInMonth</name>
+        <rename>is_last_day_in_month</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>isLastDayInMonth_1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>isLastDayInWeek</name>
+        <rename>is_last_day_in_week</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>isLastDayInWeek_1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>isWeekday</name>
+        <rename>is_weekday</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>isWeekday_1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>isWeekend</name>
+        <rename>is_weekend</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>isWeekend_1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>lastMonthCy</name>
+        <rename>last_month_cy</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>lastMonthLy</name>
+        <rename>last_month_ly</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>lastWeekCy</name>
+        <rename>last_week_cy</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>lastWeekLy</name>
+        <rename>last_week_ly</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>lastYear</name>
+        <rename>last_year</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>monthAbbreviation</name>
+        <rename>month_abbreviation</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>monthAbbreviationYear2</name>
+        <rename>month_abbreviation_year2</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>monthAbbreviationYear2_1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>monthAbbreviation_1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>monthNameVal</name>
+        <rename>month_name_val</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>monthNameVal_1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>monthSequence</name>
+        <rename>month_sequence</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>monthYear</name>
+        <rename>month_year</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>monthYear_1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>month_number</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>quarterName</name>
+        <rename>quarter_name</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>quarterName_1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>quarterYear</name>
+        <rename>quarter_year</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>quarterYear_1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>quarter_number</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>srcdateval</name>
+        <rename>src_date_val</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>totalDaysInMonth</name>
+        <rename>total_days_in_month</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>weekInMonth</name>
+        <rename>week_in_month</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>weekInMonth_1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>weekSequence</name>
+        <rename>week_sequence</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>weekStartDate</name>
+        <rename>week_start_date</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>weekStartDateDt</name>
+        <rename>week_start_date_dt</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>weekStartDate_1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>weekYear</name>
+        <rename>week_year</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>weekYearIso</name>
+        <rename>week_year_iso</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>weekYearIso_1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>weekYear_1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>week_in_year</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>week_in_year_iso</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>year2</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>year2Iso</name>
+        <rename>year2_iso</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>year2Iso_1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>year2_1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>year4</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>year4Iso</name>
+        <rename>year4_iso</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>year4Iso_1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>year4_1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>yearOfWeekEndDate</name>
+        <rename>year_of_weekend_date</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>yearWeekInt</name>
+        <rename>year_week_int</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>ytdCyDay</name>
+        <rename>ytd_cy_day</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>ytdCyMonth</name>
+        <rename>ytd_cy_month</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>ytdCyWeek</name>
+        <rename>ytd_cy_week</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>ytdLyDay</name>
+        <rename>ytd_ly_day</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>ytdLyMonth</name>
+        <rename>ytd_ly_month</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>ytdLyWeek</name>
+        <rename>ytd_ly_week</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+      <remove>        <name>dateFull_1</name>
+      </remove>      <remove>        <name>dateLong_1</name>
+      </remove>      <remove>        <name>dateMedium_1</name>
+      </remove>      <remove>        <name>dateShort_1</name>
+      </remove>      <remove>        <name>dayAbbreviation_1</name>
+      </remove>      <remove>        <name>dayName_1</name>
+      </remove>      <remove>        <name>isFirstDayInMonth_1</name>
+      </remove>      <remove>        <name>isFirstDayInWeek_1</name>
+      </remove>      <remove>        <name>isLastDayInMonth_1</name>
+      </remove>      <remove>        <name>isLastDayInWeek_1</name>
+      </remove>      <remove>        <name>isWeekday_1</name>
+      </remove>      <remove>        <name>isWeekend_1</name>
+      </remove>      <remove>        <name>monthAbbreviationYear2_1</name>
+      </remove>      <remove>        <name>monthAbbreviation_1</name>
+      </remove>      <remove>        <name>monthNameVal_1</name>
+      </remove>      <remove>        <name>monthYear_1</name>
+      </remove>      <remove>        <name>quarterName_1</name>
+      </remove>      <remove>        <name>quarterYear_1</name>
+      </remove>      <remove>        <name>weekInMonth_1</name>
+      </remove>      <remove>        <name>weekStartDate_1</name>
+      </remove>      <remove>        <name>weekYearIso_1</name>
+      </remove>      <remove>        <name>weekYear_1</name>
+      </remove>      <remove>        <name>year2Iso_1</name>
+      </remove>      <remove>        <name>year2_1</name>
+      </remove>      <remove>        <name>year4Iso_1</name>
+      </remove>      <remove>        <name>year4_1</name>
+      </remove>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>669</xloc>
+      <yloc>72</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Update Date Comparison Fields</name>
     <type>ScriptValueMod</type>
     <description/>
@@ -377,8 +767,8 @@
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>488</xloc>
-      <yloc>69</yloc>
+      <xloc>506</xloc>
+      <yloc>70</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -797,24 +1187,168 @@
         <name2/>
         </key>
       <value>
-        <name>dw_date_id</name>
-        <rename>dw_date_id</rename>
+        <name>current_month_cy</name>
+        <rename>current_month_cy</rename>
         </value>
       <value>
-        <name>src_date_val</name>
-        <rename>src_date_val</rename>
+        <name>current_month_ly</name>
+        <rename>current_month_ly</rename>
         </value>
       <value>
-        <name>day_in_week</name>
-        <rename>day_in_week</rename>
+        <name>current_week_cy</name>
+        <rename>current_week_cy</rename>
+        </value>
+      <value>
+        <name>current_week_ly</name>
+        <rename>current_week_ly</rename>
+        </value>
+      <value>
+        <name>current_year</name>
+        <rename>current_year</rename>
+        </value>
+      <value>
+        <name>date_full</name>
+        <rename>date_full</rename>
+        </value>
+      <value>
+        <name>date_long</name>
+        <rename>date_long</rename>
+        </value>
+      <value>
+        <name>date_medium</name>
+        <rename>date_medium</rename>
+        </value>
+      <value>
+        <name>date_short</name>
+        <rename>date_short</rename>
+        </value>
+      <value>
+        <name>day_abbreviation</name>
+        <rename>day_abbreviation</rename>
         </value>
       <value>
         <name>day_in_month</name>
         <rename>day_in_month</rename>
         </value>
       <value>
+        <name>day_in_week</name>
+        <rename>day_in_week</rename>
+        </value>
+      <value>
         <name>day_in_year</name>
         <rename>day_in_year</rename>
+        </value>
+      <value>
+        <name>day_name</name>
+        <rename>day_name</rename>
+        </value>
+      <value>
+        <name>day_number</name>
+        <rename>day_number</rename>
+        </value>
+      <value>
+        <name>day_sequence</name>
+        <rename>day_sequence</rename>
+        </value>
+      <value>
+        <name>days_in_month</name>
+        <rename>days_in_month</rename>
+        </value>
+      <value>
+        <name>dw_date_id</name>
+        <rename>dw_date_id</rename>
+        </value>
+      <value>
+        <name>is_first_day_in_month</name>
+        <rename>is_first_day_in_month</rename>
+        </value>
+      <value>
+        <name>is_first_day_in_week</name>
+        <rename>is_first_day_in_week</rename>
+        </value>
+      <value>
+        <name>is_last_day_in_month</name>
+        <rename>is_last_day_in_month</rename>
+        </value>
+      <value>
+        <name>is_last_day_in_week</name>
+        <rename>is_last_day_in_week</rename>
+        </value>
+      <value>
+        <name>is_weekday</name>
+        <rename>is_weekday</rename>
+        </value>
+      <value>
+        <name>is_weekend</name>
+        <rename>is_weekend</rename>
+        </value>
+      <value>
+        <name>last_month_cy</name>
+        <rename>last_month_cy</rename>
+        </value>
+      <value>
+        <name>last_month_ly</name>
+        <rename>last_month_ly</rename>
+        </value>
+      <value>
+        <name>last_week_cy</name>
+        <rename>last_week_cy</rename>
+        </value>
+      <value>
+        <name>last_week_ly</name>
+        <rename>last_week_ly</rename>
+        </value>
+      <value>
+        <name>last_year</name>
+        <rename>last_year</rename>
+        </value>
+      <value>
+        <name>month_abbreviation</name>
+        <rename>month_abbreviation</rename>
+        </value>
+      <value>
+        <name>month_abbreviation_year2</name>
+        <rename>month_abbreviation_year2</rename>
+        </value>
+      <value>
+        <name>month_name_val</name>
+        <rename>month_name_val</rename>
+        </value>
+      <value>
+        <name>month_number</name>
+        <rename>month_number</rename>
+        </value>
+      <value>
+        <name>month_sequence</name>
+        <rename>month_sequence</rename>
+        </value>
+      <value>
+        <name>month_year</name>
+        <rename>month_year</rename>
+        </value>
+      <value>
+        <name>quarter_name</name>
+        <rename>quarter_name</rename>
+        </value>
+      <value>
+        <name>quarter_number</name>
+        <rename>quarter_number</rename>
+        </value>
+      <value>
+        <name>quarter_year</name>
+        <rename>quarter_year</rename>
+        </value>
+      <value>
+        <name>src_date_val</name>
+        <rename>src_date_val</rename>
+        </value>
+      <value>
+        <name>total_days_in_month</name>
+        <rename>total_days_in_month</rename>
+        </value>
+      <value>
+        <name>week_in_month</name>
+        <rename>week_in_month</rename>
         </value>
       <value>
         <name>week_in_year</name>
@@ -825,320 +1359,72 @@
         <rename>week_in_year_iso</rename>
         </value>
       <value>
-        <name>month_number</name>
-        <rename>month_number</rename>
+        <name>week_sequence</name>
+        <rename>week_sequence</rename>
         </value>
       <value>
-        <name>quarter_number</name>
-        <rename>quarter_number</rename>
+        <name>week_start_date</name>
+        <rename>week_start_date</rename>
         </value>
       <value>
-        <name>weekInMonth</name>
-        <rename>weekInMonth</rename>
+        <name>week_start_date_dt</name>
+        <rename>week_start_date_dt</rename>
         </value>
       <value>
-        <name>dateShort</name>
-        <rename>dateShort</rename>
+        <name>week_year</name>
+        <rename>week_year</rename>
         </value>
       <value>
-        <name>dateMedium</name>
-        <rename>dateMedium</rename>
-        </value>
-      <value>
-        <name>dateLong</name>
-        <rename>dateLong</rename>
-        </value>
-      <value>
-        <name>dateFull</name>
-        <rename>dateFull</rename>
-        </value>
-      <value>
-        <name>dayName</name>
-        <rename>dayName</rename>
-        </value>
-      <value>
-        <name>dayAbbreviation</name>
-        <rename>dayAbbreviation</rename>
-        </value>
-      <value>
-        <name>monthNameVal</name>
-        <rename>monthNameVal</rename>
-        </value>
-      <value>
-        <name>monthAbbreviation</name>
-        <rename>monthAbbreviation</rename>
-        </value>
-      <value>
-        <name>monthAbbreviationYear2</name>
-        <rename>monthAbbreviationYear2</rename>
+        <name>week_year_iso</name>
+        <rename>week_year_iso</rename>
         </value>
       <value>
         <name>year2</name>
         <rename>year2</rename>
         </value>
       <value>
+        <name>year2_iso</name>
+        <rename>year2_iso</rename>
+        </value>
+      <value>
         <name>year4</name>
         <rename>year4</rename>
         </value>
       <value>
-        <name>year2Iso</name>
-        <rename>year2Iso</rename>
+        <name>year4_iso</name>
+        <rename>year4_iso</rename>
         </value>
       <value>
-        <name>year4Iso</name>
-        <rename>year4Iso</rename>
+        <name>year_of_weekend_date</name>
+        <rename>year_of_weekend_date</rename>
         </value>
       <value>
-        <name>quarterName</name>
-        <rename>quarterName</rename>
+        <name>year_week_int</name>
+        <rename>year_week_int</rename>
         </value>
       <value>
-        <name>quarterYear</name>
-        <rename>quarterYear</rename>
+        <name>ytd_cy_day</name>
+        <rename>ytd_cy_day</rename>
         </value>
       <value>
-        <name>monthYear</name>
-        <rename>monthYear</rename>
+        <name>ytd_cy_month</name>
+        <rename>ytd_cy_month</rename>
         </value>
       <value>
-        <name>weekYear</name>
-        <rename>weekYear</rename>
+        <name>ytd_cy_week</name>
+        <rename>ytd_cy_week</rename>
         </value>
       <value>
-        <name>weekYearIso</name>
-        <rename>weekYearIso</rename>
+        <name>ytd_ly_day</name>
+        <rename>ytd_ly_day</rename>
         </value>
       <value>
-        <name>isLastDayInMonth</name>
-        <rename>isLastDayInMonth</rename>
+        <name>ytd_ly_month</name>
+        <rename>ytd_ly_month</rename>
         </value>
       <value>
-        <name>isLastDayInWeek</name>
-        <rename>isLastDayInWeek</rename>
-        </value>
-      <value>
-        <name>isFirstDayInMonth</name>
-        <rename>isFirstDayInMonth</rename>
-        </value>
-      <value>
-        <name>isFirstDayInWeek</name>
-        <rename>isFirstDayInWeek</rename>
-        </value>
-      <value>
-        <name>isWeekend</name>
-        <rename>isWeekend</rename>
-        </value>
-      <value>
-        <name>isWeekday</name>
-        <rename>isWeekday</rename>
-        </value>
-      <value>
-        <name>weekStartDate</name>
-        <rename>weekStartDate</rename>
-        </value>
-      <value>
-        <name>weekInMonth_1</name>
-        <rename>weekInMonth_1</rename>
-        </value>
-      <value>
-        <name>dateShort_1</name>
-        <rename>dateShort_1</rename>
-        </value>
-      <value>
-        <name>dateMedium_1</name>
-        <rename>dateMedium_1</rename>
-        </value>
-      <value>
-        <name>dateLong_1</name>
-        <rename>dateLong_1</rename>
-        </value>
-      <value>
-        <name>dateFull_1</name>
-        <rename>dateFull_1</rename>
-        </value>
-      <value>
-        <name>dayName_1</name>
-        <rename>dayName_1</rename>
-        </value>
-      <value>
-        <name>dayAbbreviation_1</name>
-        <rename>dayAbbreviation_1</rename>
-        </value>
-      <value>
-        <name>monthNameVal_1</name>
-        <rename>monthNameVal_1</rename>
-        </value>
-      <value>
-        <name>monthAbbreviation_1</name>
-        <rename>monthAbbreviation_1</rename>
-        </value>
-      <value>
-        <name>year2_1</name>
-        <rename>year2_1</rename>
-        </value>
-      <value>
-        <name>year4_1</name>
-        <rename>year4_1</rename>
-        </value>
-      <value>
-        <name>year2Iso_1</name>
-        <rename>year2Iso_1</rename>
-        </value>
-      <value>
-        <name>year4Iso_1</name>
-        <rename>year4Iso_1</rename>
-        </value>
-      <value>
-        <name>monthAbbreviationYear2_1</name>
-        <rename>monthAbbreviationYear2_1</rename>
-        </value>
-      <value>
-        <name>quarterName_1</name>
-        <rename>quarterName_1</rename>
-        </value>
-      <value>
-        <name>quarterYear_1</name>
-        <rename>quarterYear_1</rename>
-        </value>
-      <value>
-        <name>monthYear_1</name>
-        <rename>monthYear_1</rename>
-        </value>
-      <value>
-        <name>weekStartDateDt</name>
-        <rename>weekStartDateDt</rename>
-        </value>
-      <value>
-        <name>yearOfWeekEndDate</name>
-        <rename>yearOfWeekEndDate</rename>
-        </value>
-      <value>
-        <name>weekStartDate_1</name>
-        <rename>weekStartDate_1</rename>
-        </value>
-      <value>
-        <name>weekYear_1</name>
-        <rename>weekYear_1</rename>
-        </value>
-      <value>
-        <name>weekYearIso_1</name>
-        <rename>weekYearIso_1</rename>
-        </value>
-      <value>
-        <name>dayNumber</name>
-        <rename>dayNumber</rename>
-        </value>
-      <value>
-        <name>totalDaysInMonth</name>
-        <rename>totalDaysInMonth</rename>
-        </value>
-      <value>
-        <name>isLastDayInMonth_1</name>
-        <rename>isLastDayInMonth_1</rename>
-        </value>
-      <value>
-        <name>isLastDayInWeek_1</name>
-        <rename>isLastDayInWeek_1</rename>
-        </value>
-      <value>
-        <name>isFirstDayInMonth_1</name>
-        <rename>isFirstDayInMonth_1</rename>
-        </value>
-      <value>
-        <name>isFirstDayInWeek_1</name>
-        <rename>isFirstDayInWeek_1</rename>
-        </value>
-      <value>
-        <name>isWeekend_1</name>
-        <rename>isWeekend_1</rename>
-        </value>
-      <value>
-        <name>isWeekday_1</name>
-        <rename>isWeekday_1</rename>
-        </value>
-      <value>
-        <name>daysInMonth</name>
-        <rename>daysInMonth</rename>
-        </value>
-      <value>
-        <name>yearWeekInt</name>
-        <rename>yearWeekInt</rename>
-        </value>
-      <value>
-        <name>currentWeekCy</name>
-        <rename>currentWeekCy</rename>
-        </value>
-      <value>
-        <name>currentMonthCy</name>
-        <rename>currentMonthCy</rename>
-        </value>
-      <value>
-        <name>lastWeekCy</name>
-        <rename>lastWeekCy</rename>
-        </value>
-      <value>
-        <name>lastMonthCy</name>
-        <rename>lastMonthCy</rename>
-        </value>
-      <value>
-        <name>currentWeekLy</name>
-        <rename>currentWeekLy</rename>
-        </value>
-      <value>
-        <name>currentMonthLy</name>
-        <rename>currentMonthLy</rename>
-        </value>
-      <value>
-        <name>lastWeekLy</name>
-        <rename>lastWeekLy</rename>
-        </value>
-      <value>
-        <name>lastMonthLy</name>
-        <rename>lastMonthLy</rename>
-        </value>
-      <value>
-        <name>ytdCyDay</name>
-        <rename>ytdCyDay</rename>
-        </value>
-      <value>
-        <name>ytdCyWeek</name>
-        <rename>ytdCyWeek</rename>
-        </value>
-      <value>
-        <name>ytdCyMonth</name>
-        <rename>ytdCyMonth</rename>
-        </value>
-      <value>
-        <name>ytdLyDay</name>
-        <rename>ytdLyDay</rename>
-        </value>
-      <value>
-        <name>ytdLyWeek</name>
-        <rename>ytdLyWeek</rename>
-        </value>
-      <value>
-        <name>ytdLyMonth</name>
-        <rename>ytdLyMonth</rename>
-        </value>
-      <value>
-        <name>currentYear</name>
-        <rename>currentYear</rename>
-        </value>
-      <value>
-        <name>lastYear</name>
-        <rename>lastYear</rename>
-        </value>
-      <value>
-        <name>weekSequence</name>
-        <rename>weekSequence</rename>
-        </value>
-      <value>
-        <name>monthSequence</name>
-        <rename>monthSequence</rename>
-        </value>
-      <value>
-        <name>daySequence</name>
-        <rename>daySequence</rename>
+        <name>ytd_ly_week</name>
+        <rename>ytd_ly_week</rename>
         </value>
       </lookup>
      <cluster_schema/>
@@ -1171,370 +1457,6 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>64</xloc>
       <yloc>72</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Select values</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>      <field>        <name>dw_date_id</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>srcdateval</name>
-        <rename>src_date_val</rename>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>day_in_week</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>day_in_month</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>day_in_year</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>week_in_year</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>week_in_year_iso</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>month_number</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>quarter_number</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>weekInMonth</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>dateShort</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>dateMedium</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>dateLong</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>dateFull</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>dayName</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>dayAbbreviation</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>monthNameVal</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>monthAbbreviation</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>monthAbbreviationYear2</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>year2</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>year4</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>year2Iso</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>year4Iso</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>quarterName</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>quarterYear</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>monthYear</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>weekYear</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>weekYearIso</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>isLastDayInMonth</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>isLastDayInWeek</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>isFirstDayInMonth</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>isFirstDayInWeek</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>isWeekend</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>isWeekday</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>weekStartDate</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>weekInMonth_1</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>dateShort_1</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>dateMedium_1</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>dateLong_1</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>dateFull_1</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>dayName_1</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>dayAbbreviation_1</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>monthNameVal_1</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>monthAbbreviation_1</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>year2_1</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>year4_1</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>year2Iso_1</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>year4Iso_1</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>monthAbbreviationYear2_1</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>quarterName_1</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>quarterYear_1</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>monthYear_1</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>weekStartDateDt</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>yearOfWeekEndDate</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>weekStartDate_1</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>weekYear_1</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>weekYearIso_1</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>dayNumber</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>totalDaysInMonth</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>isLastDayInMonth_1</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>isLastDayInWeek_1</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>isFirstDayInMonth_1</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>isFirstDayInWeek_1</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>isWeekend_1</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>isWeekday_1</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>daysInMonth</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>yearWeekInt</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>currentWeekCy</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>currentMonthCy</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>lastWeekCy</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>lastMonthCy</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>currentWeekLy</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>currentMonthLy</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>lastWeekLy</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>lastMonthLy</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>ytdCyDay</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>ytdCyWeek</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>ytdCyMonth</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>ytdLyDay</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>ytdLyWeek</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>ytdLyMonth</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>currentYear</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>lastYear</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>weekSequence</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>monthSequence</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>daySequence</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>        <select_unspecified>N</select_unspecified>
-    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>608</xloc>
-      <yloc>71</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
