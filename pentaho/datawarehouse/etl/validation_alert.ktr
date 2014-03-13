@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>load_dim_location</name>
+    <name>validation_alert</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
-    <trans_status>0</trans_status>
     <directory>&#x2f;</directory>
     <parameters>
     </parameters>
@@ -67,14 +66,14 @@
     <clusterschemas>
     </clusterschemas>
   <created_user>-</created_user>
-  <created_date>2014&#x2f;02&#x2f;17 13&#x3a;45&#x3a;06.363</created_date>
+  <created_date>2014&#x2f;03&#x2f;13 10&#x3a;57&#x3a;05.080</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2014&#x2f;02&#x2f;17 13&#x3a;45&#x3a;06.363</modified_date>
+  <modified_date>2014&#x2f;03&#x2f;13 10&#x3a;57&#x3a;05.080</modified_date>
   </info>
   <notepads>
   </notepads>
   <connection>
-    <name>Trisano OLAP DS</name>
+    <name>TrisanoOLAPDS</name>
     <server/>
     <type>POSTGRESQL</type>
     <access>, </access>
@@ -98,7 +97,7 @@
     </attributes>
   </connection>
   <connection>
-    <name>Trisano TX DS</name>
+    <name>WebTrisanoTXDS</name>
     <server/>
     <type>POSTGRESQL</type>
     <access>, </access>
@@ -122,11 +121,11 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>addresses</from><to>dim_locations</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Variables</from><to>Alert status</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>addresses</name>
-    <type>TableInput</type>
+    <name>Get Variables</name>
+    <type>GetVariable</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -135,23 +134,54 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>Trisano TX DS</connection>
-    <sql>SELECT &#xa;   a.id&#xa; , c1.code_description AS county&#xa; , c2.code_description AS state&#xa; , a.street_number&#xa; , a.street_name&#xa; , a.unit_number&#xa; , a.postal_code&#xa; , a.city&#xa; , a.longitude&#xa; , a.latitude&#xa;   FROM addresses a&#xa;   LEFT JOIN external_codes c1 ON a.county_id &#x3d; c1.id&#xa;   LEFT JOIN external_codes c2 ON a.state_id &#x3d; c2.id&#x3b;&#xa;</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
+    <fields>
+      <field>
+        <name>validation_test</name>
+        <variable>&#x24;&#x7b;validation_test&#x7d;</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>description</name>
+        <variable>&#x24;&#x7b;description&#x7d;</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>status</name>
+        <variable>&#x24;&#x7b;status&#x7d;</variable>
+        <type>Boolean</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>353</xloc>
-      <yloc>38</yloc>
+      <xloc>339</xloc>
+      <yloc>90</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>dim_locations</name>
+    <name>Alert status</name>
     <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -161,11 +191,11 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>Trisano OLAP DS</connection>
-    <schema>warehouse</schema>
-    <table>dw_dim_location</table>
+    <connection>TrisanoOLAPDS</connection>
+    <schema>warehouse_util</schema>
+    <table>dw_util_data_validation_status</table>
     <commit>1000</commit>
-    <truncate>Y</truncate>
+    <truncate>N</truncate>
     <ignore_errors>N</ignore_errors>
     <use_batch>Y</use_batch>
     <specify_fields>Y</specify_fields>
@@ -180,50 +210,22 @@
     <return_field/>
     <fields>
         <field>
-          <column_name>id</column_name>
-          <stream_name>id</stream_name>
+          <column_name>validation_test</column_name>
+          <stream_name>validation_test</stream_name>
         </field>
         <field>
-          <column_name>county</column_name>
-          <stream_name>county</stream_name>
+          <column_name>description</column_name>
+          <stream_name>description</stream_name>
         </field>
         <field>
-          <column_name>state</column_name>
-          <stream_name>state</stream_name>
-        </field>
-        <field>
-          <column_name>street_number</column_name>
-          <stream_name>street_number</stream_name>
-        </field>
-        <field>
-          <column_name>street_name</column_name>
-          <stream_name>street_name</stream_name>
-        </field>
-        <field>
-          <column_name>unit_number</column_name>
-          <stream_name>unit_number</stream_name>
-        </field>
-        <field>
-          <column_name>postal_code</column_name>
-          <stream_name>postal_code</stream_name>
-        </field>
-        <field>
-          <column_name>city</column_name>
-          <stream_name>city</stream_name>
-        </field>
-        <field>
-          <column_name>longitude</column_name>
-          <stream_name>longitude</stream_name>
-        </field>
-        <field>
-          <column_name>latitude</column_name>
-          <stream_name>latitude</stream_name>
+          <column_name>status</column_name>
+          <stream_name>status</stream_name>
         </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>353</xloc>
-      <yloc>176</yloc>
+      <xloc>337</xloc>
+      <yloc>191</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
