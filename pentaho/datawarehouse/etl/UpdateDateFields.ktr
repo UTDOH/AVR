@@ -348,7 +348,7 @@
         <rename>days_in_month</rename>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>dw_date_id</name>
+      </field>      <field>        <name>dw_dim_date_id</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -1181,8 +1181,8 @@
       <schema>warehouse</schema>
       <table>dw_dim_date</table>
       <key>
-        <name>dw_date_id</name>
-        <field>dw_date_id</field>
+        <name>dw_dim_date_id</name>
+        <field>dw_dim_date_id</field>
         <condition>&#x3d;</condition>
         <name2/>
         </key>
@@ -1255,8 +1255,8 @@
         <rename>days_in_month</rename>
         </value>
       <value>
-        <name>dw_date_id</name>
-        <rename>dw_date_id</rename>
+        <name>dw_dim_date_id</name>
+        <rename>dw_dim_date_id</rename>
         </value>
       <value>
         <name>is_first_day_in_month</name>
@@ -1447,7 +1447,7 @@
            <schema_name/>
            </partitioning>
     <connection>Trisano OLAP DS</connection>
-    <sql>SELECT&#xa;  dw_date_id&#xa;, src_date_val as srcDateVal&#xa;FROM warehouse.dw_dim_date&#xa;where src_date_val is not null</sql>
+    <sql>SELECT&#xa;  dw_dim_date_id&#xa;, src_date_val as srcDateVal&#xa;FROM warehouse.dw_dim_date&#xa;where src_date_val is not null</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
