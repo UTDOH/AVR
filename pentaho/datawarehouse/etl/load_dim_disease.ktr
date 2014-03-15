@@ -73,7 +73,7 @@
   <notepads>
   </notepads>
   <connection>
-    <name>TrisanoOLAPDS</name>
+    <name>Trisano OLAP DS</name>
     <server/>
     <type>POSTGRESQL</type>
     <access>, </access>
@@ -91,13 +91,14 @@
       <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
       <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SQL_CONNECT</code><attribute>set search_path&#x3d;warehouse, warehouse_util&#x3b;</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
   <connection>
-    <name>WebTrisanoTXDS</name>
+    <name>Trisano TX DS</name>
     <server/>
     <type>POSTGRESQL</type>
     <access>, </access>
@@ -113,15 +114,18 @@
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
       <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
+      <attribute><code>PREFERRED_SCHEMA_NAME</code><attribute>trisano</attribute></attribute>
       <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SQL_CONNECT</code><attribute>set search_path to trisano&#x3b;</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
   <order>
-  <hop> <from>Diseases</from><to>Insert &#x2f; Update</to><enabled>Y</enabled> </hop>
+  <hop> <from>Diseases</from><to>dim_disease</to><enabled>Y</enabled> </hop>
+  <hop> <from>dim_disease</from><to>Update dim_disease</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Diseases</name>
@@ -134,7 +138,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>WebTrisanoTXDS</connection>
+    <connection>Trisano TX DS</connection>
     <sql>SELECT&#xa;  id&#xa;, disease_name&#xa;, contact_lead_in&#xa;, place_lead_in&#xa;, treatment_lead_in&#xa;, active&#xa;, cdc_code&#xa;, &#x22;sensitive&#x22;&#xa;FROM diseases&#xa;</sql>
     <limit>0</limit>
     <lookup/>
@@ -150,8 +154,8 @@
     </step>
 
   <step>
-    <name>Insert &#x2f; Update</name>
-    <type>InsertUpdate</type>
+    <name>dim_disease</name>
+    <type>CombinationLookup</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -160,105 +164,94 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>TrisanoOLAPDS</connection>
+      <schema/>
+      <table>dim_disease</table>
+      <connection>Trisano OLAP DS</connection>
+      <commit>0</commit>
+      <cache_size>9999</cache_size>
+      <replace>Y</replace>
+      <crc>Y</crc>
+      <crcfield>hashcode</crcfield>
+      <fields>
+        <key>
+          <name>id</name>
+          <lookup>src_disease_id</lookup>
+        </key>
+        <return>
+          <name>dw_disease_id</name>
+          <creation_method>tablemax</creation_method>
+          <use_autoinc>N</use_autoinc>
+        </return>
+      </fields>
+      <sequence/>
+      <last_update_field>etl_load_date</last_update_field>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>360</xloc>
+      <yloc>136</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Update dim_disease</name>
+    <type>Update</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Trisano OLAP DS</connection>
+    <skip_lookup>N</skip_lookup>
     <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
+    <use_batch>Y</use_batch>
+    <error_ignored>N</error_ignored>
+    <ignore_flag_field/>
     <lookup>
-      <schema>warehouse</schema>
-      <table>dw_dim_disease</table>
+      <schema/>
+      <table>dim_disease</table>
       <key>
-        <name>id</name>
-        <field>id</field>
+        <name>dw_disease_id</name>
+        <field>dw_disease_id</field>
         <condition>&#x3d;</condition>
         <name2/>
-      </key>
-      <key>
-        <name>disease_name</name>
-        <field>disease_name</field>
-        <condition>&#x3d;</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>contact_lead_in</name>
-        <field>contact_lead_in</field>
-        <condition>&#x3d;</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>place_lead_in</name>
-        <field>place_lead_in</field>
-        <condition>&#x3d;</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>treatment_lead_in</name>
-        <field>treatment_lead_in</field>
-        <condition>&#x3d;</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>active</name>
-        <field>active</field>
-        <condition>&#x3d;</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>cdc_code</name>
-        <field>cdc_code</field>
-        <condition>&#x3d;</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>sensitive</name>
-        <field>sensitive</field>
-        <condition>&#x3d;</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>id</name>
-        <rename>id</rename>
-        <update>Y</update>
-      </value>
+        </key>
       <value>
         <name>disease_name</name>
         <rename>disease_name</rename>
-        <update>Y</update>
-      </value>
+        </value>
       <value>
         <name>contact_lead_in</name>
         <rename>contact_lead_in</rename>
-        <update>Y</update>
-      </value>
+        </value>
       <value>
         <name>place_lead_in</name>
         <rename>place_lead_in</rename>
-        <update>Y</update>
-      </value>
+        </value>
       <value>
         <name>treatment_lead_in</name>
         <rename>treatment_lead_in</rename>
-        <update>Y</update>
-      </value>
+        </value>
       <value>
         <name>active</name>
         <rename>active</rename>
-        <update>Y</update>
-      </value>
+        </value>
       <value>
         <name>cdc_code</name>
         <rename>cdc_code</rename>
-        <update>Y</update>
-      </value>
+        </value>
       <value>
         <name>sensitive</name>
         <rename>sensitive</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
+        </value>
+      </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>369</xloc>
-      <yloc>137</yloc>
+      <xloc>364</xloc>
+      <yloc>264</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
