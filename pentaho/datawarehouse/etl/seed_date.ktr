@@ -347,7 +347,7 @@
       <schema/>
       <table>dim_date</table>
       <connection>Trisano OLAP DS</connection>
-      <commit>1000</commit>
+      <commit>100</commit>
       <cache_size>9999</cache_size>
       <replace>N</replace>
       <crc>Y</crc>
