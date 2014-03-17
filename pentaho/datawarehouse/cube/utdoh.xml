@@ -1,68 +1,68 @@
 <Schema name="UTDOH">
-  <Dimension type="StandardDimension" visible="true" name="Disease">
-    <Hierarchy name="Disease" visible="true" hasAll="true" primaryKey="dw_dim_disease_id">
-      <Table name="dw_dim_disease" schema="warehouse" alias="">
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Disease">
+    <Hierarchy name="Disease" visible="true" hasAll="true" primaryKey="dw_disease_id">
+      <Table name="dim_disease" schema="warehouse">
       </Table>
-      <Level approxRowCount="500" name="Name" visible="true" column="disease_name" type="String" uniqueMembers="false" levelType="Regular">
+      <Level approxRowCount="500" name="Name" visible="true" column="disease_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
       </Level>
     </Hierarchy>
   </Dimension>
-  <Dimension type="TimeDimension" visible="true" name="Date Diagnosed">
-    <Hierarchy name="Date Diagnosed" visible="true" hasAll="true" primaryKey="dw_dim_date_id">
-      <Table name="dw_dim_date" schema="warehouse" alias="">
+  <Dimension type="TimeDimension" visible="true" highCardinality="false" name="Date Diagnosed">
+    <Hierarchy name="Date Diagnosed" visible="true" hasAll="true" primaryKey="dw_date_id">
+      <Table name="dim_date" schema="warehouse">
       </Table>
-      <Level name="Year" visible="true" column="year4" ordinalColumn="year_week_int" type="String" uniqueMembers="false" levelType="TimeYears">
+      <Level name="Year" visible="true" column="year4" ordinalColumn="year_week_int" type="String" uniqueMembers="false" levelType="TimeYears" hideMemberIf="Never">
       </Level>
-      <Level name="Quarter" visible="true" column="quarter_year" ordinalColumn="quarter_number" uniqueMembers="false" levelType="TimeQuarters">
+      <Level name="Quarter" visible="true" column="quarter_year" ordinalColumn="quarter_number" type="String" uniqueMembers="false" levelType="TimeQuarters" hideMemberIf="Never">
       </Level>
-      <Level name="Month" visible="true" column="month_name_val" ordinalColumn="month_number" uniqueMembers="false" levelType="TimeMonths">
+      <Level name="Month" visible="true" column="month_name_val" ordinalColumn="month_number" type="String" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never">
       </Level>
-      <Level name="Week" visible="true" column="week_in_year" ordinalColumn="week_sequence" uniqueMembers="false" levelType="TimeWeeks">
+      <Level name="Week" visible="true" column="week_in_year" ordinalColumn="week_sequence" type="String" uniqueMembers="false" levelType="TimeWeeks" hideMemberIf="Never">
       </Level>
-      <Level name="Day" visible="true" column="day_in_year" ordinalColumn="day_number" uniqueMembers="false" levelType="TimeDays">
+      <Level name="Day" visible="true" column="day_in_year" ordinalColumn="day_in_year" type="String" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
       </Level>
     </Hierarchy>
   </Dimension>
-  <Dimension type="StandardDimension" visible="true" name="Location">
-    <Hierarchy name="Location" visible="true" hasAll="true" primaryKey="dw_dim_location_id">
-      <Table name="dw_dim_location" schema="warehouse" alias="">
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Location">
+    <Hierarchy name="Location" visible="true" hasAll="true" primaryKey="dw_location_id">
+      <Table name="dim_location" schema="warehouse">
       </Table>
-      <Level approxRowCount="100" name="State" visible="true" column="state" type="String" uniqueMembers="false" levelType="Regular">
+      <Level approxRowCount="100" name="State" visible="true" column="state" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
       </Level>
-      <Level approxRowCount="500" name="City" visible="true" column="city" type="String" uniqueMembers="false" levelType="Regular">
+      <Level approxRowCount="500" name="City" visible="true" column="city" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
       </Level>
     </Hierarchy>
   </Dimension>
-  <Dimension type="TimeDimension" visible="true" name="Date of Onset">
-    <Hierarchy name="Date of Onset" visible="true" hasAll="true" primaryKey="dw_dim_date_id">
-      <Table name="dw_dim_date" schema="warehouse" alias="">
+  <Dimension type="TimeDimension" visible="true" highCardinality="false" name="Date of Onset">
+    <Hierarchy name="Date of Onset" visible="true" hasAll="true" primaryKey="dw_date_id">
+      <Table name="dim_date" schema="warehouse">
       </Table>
-      <Level name="Year" visible="true" column="year4" ordinalColumn="year_week_int" uniqueMembers="false" levelType="TimeYears">
+      <Level name="Year" visible="true" column="year4" ordinalColumn="year_week_int" type="String" uniqueMembers="false" levelType="TimeYears" hideMemberIf="Never">
       </Level>
-      <Level name="Quarter" visible="true" column="quarter_name" ordinalColumn="quarter_number" uniqueMembers="false" levelType="TimeQuarters">
+      <Level name="Quarter" visible="true" column="quarter_name" ordinalColumn="quarter_number" type="String" uniqueMembers="false" levelType="TimeQuarters" hideMemberIf="Never">
       </Level>
-      <Level name="Month" visible="true" column="month_abbreviation" ordinalColumn="month_number" uniqueMembers="false" levelType="TimeMonths">
+      <Level name="Month" visible="true" column="month_abbreviation" ordinalColumn="month_number" type="String" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never">
       </Level>
-      <Level name="Week" visible="true" column="week_in_year" ordinalColumn="week_sequence" uniqueMembers="false" levelType="TimeWeeks">
+      <Level name="Week" visible="true" column="week_in_year" ordinalColumn="week_sequence" type="String" uniqueMembers="false" levelType="TimeWeeks" hideMemberIf="Never">
       </Level>
-      <Level name="Day" visible="true" column="day_name" ordinalColumn="day_number" uniqueMembers="false" levelType="TimeDays">
+      <Level name="Day" visible="true" column="day_name" ordinalColumn="day_in_year" type="String" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
       </Level>
     </Hierarchy>
   </Dimension>
   <Cube name="disease events" visible="true" cache="true" enabled="true">
-    <Table name="fact_disease_event" schema="warehouse" alias="">
+    <Table name="fact_disease_event" schema="warehouse">
     </Table>
-    <DimensionUsage source="Disease" name="Dim Disease" visible="true" foreignKey="dim_disease_id">
+    <DimensionUsage source="Disease" name="Dim Disease" visible="true" foreignKey="dw_disease_id" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="Date Diagnosed" name="Date Diagnosed" caption="Diagnosed Date" visible="true" foreignKey="diagnosed_dim_date_id">
+    <DimensionUsage source="Date Diagnosed" name="Date Diagnosed" caption="Diagnosed Date" visible="true" foreignKey="dw_diagnosed_date_id" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="Location" name="Location" visible="true" foreignKey="dim_location_id">
+    <DimensionUsage source="Location" name="Location" visible="true" foreignKey="dw_location_id" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="Date of Onset" name="Date of Onset" caption="Date of Onset" visible="true" foreignKey="onset_dim_date_id">
+    <DimensionUsage source="Date of Onset" name="Date of Onset" caption="Date of Onset" visible="true" foreignKey="dw_onset_date_id" highCardinality="false">
     </DimensionUsage>
-    <Measure name="Disease Count" column="dim_disease_id" datatype="Integer" aggregator="count" visible="true">
+    <Measure name="Disease Count" column="dw_disease_id" datatype="Integer" aggregator="count" visible="true">
     </Measure>
-    <Measure name="Distinct Disease Count" column="dim_disease_id" datatype="Integer" aggregator="distinct-count" visible="true">
+    <Measure name="Distinct Disease Count" column="dw_disease_id" datatype="Integer" aggregator="distinct-count" visible="true">
     </Measure>
   </Cube>
 </Schema>
