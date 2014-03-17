@@ -64,16 +64,16 @@
 			<column name="day_in_year" type="integer" length="10" jt="4" >
 				<comment><![CDATA[Day number within the year]]></comment>
 			</column>
-			<column name="is_first_day_in_month" type="bool" jt="-7" >
+			<column name="is_first_day_in_month" type="smallint" length="5" jt="5" >
 				<comment><![CDATA[Flag indicating whether the date is the first day in the month]]></comment>
 			</column>
-			<column name="is_first_day_in_week" type="bool" jt="-7" >
+			<column name="is_first_day_in_week" type="smallint" length="5" jt="5" >
 				<comment><![CDATA[Flag indicating whether the date is the first day in the week.]]></comment>
 			</column>
-			<column name="is_last_day_in_month" type="bool" jt="-7" >
+			<column name="is_last_day_in_month" type="smallint" length="5" jt="5" >
 				<comment><![CDATA[Flag indicating whether the date is the last day in the month.]]></comment>
 			</column>
-			<column name="is_last_day_in_week" type="bool" jt="-7" >
+			<column name="is_last_day_in_week" type="smallint" length="5" jt="5" >
 				<comment><![CDATA[Flag indicating whether the date is the last day of the week]]></comment>
 			</column>
 			<column name="day_name" type="varchar" length="12" jt="12" >
@@ -91,13 +91,13 @@
 			<column name="week_in_year_iso" type="integer" jt="4" >
 				<comment><![CDATA[ISO standard week in year]]></comment>
 			</column>
-			<column name="week_start_date" type="varchar" length="12" jt="12" >
-				<comment><![CDATA[Textual start date of the week]]></comment>
+			<column name="week_start_date" type="date" jt="91" >
+				<comment><![CDATA[The date representing the first day of the week.]]></comment>
 			</column>
-			<column name="is_weekend" type="bool" jt="-7" >
+			<column name="is_weekend" type="smallint" length="5" jt="5" >
 				<comment><![CDATA[Flag indicating wheter or not the day Is a Saturday or Sunday?]]></comment>
 			</column>
-			<column name="is_weekday" type="bool" jt="-7" >
+			<column name="is_weekday" type="smallint" length="5" jt="5" >
 				<comment><![CDATA[Flag indicating whether or not the date is a weekday]]></comment>
 			</column>
 			<column name="month_number" type="integer" jt="4" >
@@ -118,10 +118,10 @@
 			<column name="year4" type="char" length="4" jt="1" >
 				<comment><![CDATA[Four digit year]]></comment>
 			</column>
-			<column name="year_2_iso" type="char" length="2" jt="1" >
+			<column name="year2_iso" type="char" length="2" jt="1" >
 				<comment><![CDATA[ISO two digit year]]></comment>
 			</column>
-			<column name="year_4_iso" type="char" length="4" jt="1" >
+			<column name="year4_iso" type="char" length="4" jt="1" >
 				<comment><![CDATA[ISO four digit year]]></comment>
 			</column>
 			<column name="quarter_number" type="integer" jt="4" >
@@ -145,52 +145,52 @@
 			<column name="year_week_int" type="integer" jt="4" >
 				<comment><![CDATA[Year4 and week number as numeric value for sorting and comparison]]></comment>
 			</column>
-			<column name="current_week_cy" type="bool" jt="-7" >
+			<column name="current_week_cy" type="smallint" length="5" jt="5" >
 				<comment><![CDATA[Is this the current week of the current year]]></comment>
 			</column>
-			<column name="current_month_cy" type="bool" jt="-7" >
+			<column name="current_month_cy" type="smallint" length="5" jt="5" >
 				<comment><![CDATA[Is this the current month of the current year]]></comment>
 			</column>
-			<column name="last_week_cy" type="bool" jt="-7" >
+			<column name="last_week_cy" type="smallint" length="5" jt="5" >
 				<comment><![CDATA[Is this the previous week of the current year]]></comment>
 			</column>
-			<column name="last_month_cy" type="bool" jt="-7" >
+			<column name="last_month_cy" type="smallint" length="5" jt="5" >
 				<comment><![CDATA[Flag indicating whether this date in the previous month of the current year]]></comment>
 			</column>
-			<column name="current_week_ly" type="bool" jt="-7" >
+			<column name="current_week_ly" type="smallint" length="5" jt="5" >
 				<comment><![CDATA[Is this date in the previous year, but the same week as the current week?]]></comment>
 			</column>
-			<column name="current_month_ly" type="bool" jt="-7" >
+			<column name="current_month_ly" type="smallint" length="5" jt="5" >
 				<comment><![CDATA[Is this date in the previous year, but the same month of the current year?]]></comment>
 			</column>
-			<column name="last_week_ly" type="bool" jt="-7" >
+			<column name="last_week_ly" type="smallint" length="5" jt="5" >
 				<comment><![CDATA[Is this date in the previous week the year prior?]]></comment>
 			</column>
-			<column name="last_month_ly" type="bool" jt="-7" >
+			<column name="last_month_ly" type="smallint" length="5" jt="5" >
 				<comment><![CDATA[Is this date in the previous month the year prior]]></comment>
 			</column>
-			<column name="ytd_cy_day" type="bool" jt="-7" >
+			<column name="ytd_cy_day" type="smallint" length="5" jt="5" >
 				<comment><![CDATA[Is the day portion of the date in the current year?]]></comment>
 			</column>
-			<column name="ytd_cy_week" type="bool" jt="-7" >
+			<column name="ytd_cy_week" type="smallint" length="5" jt="5" >
 				<comment><![CDATA[Is the week portion of the date in the current year?]]></comment>
 			</column>
-			<column name="ytd_cy_month" type="bool" jt="-7" >
+			<column name="ytd_cy_month" type="smallint" length="5" jt="5" >
 				<comment><![CDATA[Is the month of the date in the current year?]]></comment>
 			</column>
-			<column name="ytd_ly_day" type="bool" jt="-7" >
+			<column name="ytd_ly_day" type="smallint" length="5" jt="5" >
 				<comment><![CDATA[Is this day part of the year to date last year (for current year / previous YTD comparison calculations)]]></comment>
 			</column>
-			<column name="ytd_ly_week" type="bool" jt="-7" >
+			<column name="ytd_ly_week" type="smallint" length="5" jt="5" >
 				<comment><![CDATA[Is the date in the week last year which spilled into this year?]]></comment>
 			</column>
-			<column name="ytd_ly_month" type="bool" jt="-7" >
+			<column name="ytd_ly_month" type="smallint" length="5" jt="5" >
 				<comment><![CDATA[Is this month part of the year to date last year (for current year / previous YTD comparison calculations)]]></comment>
 			</column>
-			<column name="current_year" type="bool" jt="-7" >
+			<column name="current_year" type="smallint" length="5" jt="5" >
 				<comment><![CDATA[Is the date in the current year?]]></comment>
 			</column>
-			<column name="last_year" type="bool" jt="-7" >
+			<column name="last_year" type="smallint" length="5" jt="5" >
 				<comment><![CDATA[Is the date in the previous year?]]></comment>
 			</column>
 			<column name="day_sequence" type="integer" jt="4" >
@@ -201,6 +201,12 @@
 			</column>
 			<column name="month_sequence" type="integer" jt="4" >
 				<comment><![CDATA[How many monts back from the current month is the month this date is in?]]></comment>
+			</column>
+			<column name="year_of_weekend_date" type="integer" jt="4" >
+				<comment><![CDATA[What year does the last day of the week fall in?]]></comment>
+			</column>
+			<column name="etl_load_date" type="timestamp" jt="93" >
+				<comment><![CDATA[The date this dimension record was loaded into the data warehouse.]]></comment>
 			</column>
 			<index name="pk_dw_dim_date" unique="PRIMARY_KEY" >
 				<column name="dw_date_id" />
@@ -453,11 +459,11 @@
 			<column name="date_of_death" type="date" jt="91" >
 				<comment><![CDATA[Date of death date]]></comment>
 			</column>
-			<column name="dw_ethnicity_id" type="integer" jt="4" >
-				<comment><![CDATA[The ethnicity of this person (dw_dim_ethnicity.dw_ethnicity_id)]]></comment>
-			</column>
 			<column name="dw_language_id" type="integer" jt="4" >
 				<comment><![CDATA[The language id of this user (dw_dim_language.dw_language_id)]]></comment>
+			</column>
+			<column name="dw_ethnicity_id" type="integer" jt="4" >
+				<comment><![CDATA[The ethnicity of this person (dw_dim_ethnicity.dw_ethnicity_id)]]></comment>
 			</column>
 			<index name="pk_dw_dim_disease_0" unique="PRIMARY_KEY" >
 				<column name="dw_person_id" />
@@ -509,17 +515,15 @@
 		<sequence name="dw_dim_location_dw_dim_location_id_seq" start="1" />
 	</schema>
 	<connector name="PostgreSQL" database="PostgreSQL" driver_class="org.postgresql.Driver" driver_jar="postgresql-9.2-1003.jdbc3.jar" host="localhost" port="5432" instance="trisano_olap_dev" user="pentaho" passwd="cGVudGFobw==" schema_mapping="" />
+	<connector name="PostgreSQL_new_OLAP" database="PostgreSQL" driver_class="org.postgresql.Driver" driver_jar="postgresql-9.2-1003.jdbc3.jar" host="localhost" port="5432" instance="trisano_olap_dev" user="pentaho" passwd="cGVudGFobw==" schema_mapping="" />
 	<layout id="Layout2828475" name="warehouse" show_relation_columns="y" >
 		<entity schema="warehouse" name="fact_disease_event" color="d0def5" x="675" y="525" />
-		<entity schema="warehouse" name="dim_date" color="d0def5" x="45" y="45" />
-		<entity schema="warehouse" name="dim_person" color="d0def5" x="495" y="60" />
 		<entity schema="warehouse" name="dim_time" color="d0def5" x="675" y="45" />
 		<entity schema="warehouse" name="dim_jurisdiction" color="d0def5" x="285" y="270" />
 		<entity schema="warehouse" name="dim_ethnicity" color="d0def5" x="285" y="495" />
 		<entity schema="warehouse" name="dim_language" color="d0def5" x="480" y="495" />
 		<entity schema="warehouse" name="dim_address" color="d0def5" x="480" y="690" />
 		<entity schema="warehouse" name="dim_diagnostic_facility" color="d0def5" x="690" y="690" />
-		<entity schema="warehouse" name="dim_location" color="d0def5" x="285" y="690" />
 		<entity schema="warehouse" name="dim_disease" color="d0def5" x="285" y="45" >
 			<column name="dw_disease_id" />
 			<column name="hashcode" />
@@ -531,5 +535,193 @@
 			<column name="sensitive" />
 			<column name="etl_load_date" />
 		</entity>
+		<entity schema="warehouse" name="dim_location" color="d0def5" x="285" y="690" />
+		<entity schema="warehouse" name="dim_person" color="d0def5" x="495" y="60" />
+		<entity schema="warehouse" name="dim_date" color="d0def5" x="45" y="45" />
+		<script name="dim_date" id="SQL9743006" >
+			<string><![CDATA[CREATE TABLE warehouse.dim_date ( 
+	dw_date_id           integer  NOT NULL,
+	hashcode             integer  ,
+	src_date_val         date  ,
+	date_short           char(12)  ,
+	date_medium          char(16)  ,
+	date_long            varchar(24)  ,
+	date_full            varchar(32)  ,
+	day_in_week          integer  ,
+	day_in_month         integer  ,
+	day_in_year          integer  ,
+	is_first_day_in_month smallint  ,
+	is_first_day_in_week smallint  ,
+	is_last_day_in_month smallint  ,
+	is_last_day_in_week  smallint  ,
+	day_name             varchar(12)  ,
+	day_abbreviation     char(3)  ,
+	week_in_year         integer  ,
+	week_in_month        integer  ,
+	week_in_year_iso     integer  ,
+	week_start_date      date  ,
+	is_weekend           smallint  ,
+	is_weekday           smallint  ,
+	month_number         integer  ,
+	month_name_val       varchar(12)  ,
+	month_abbreviation   char(3)  ,
+	month_abbreviation_year2 char(6)  ,
+	year2                char(2)  ,
+	year4                char(4)  ,
+	year2_iso            char(2)  ,
+	year4_iso            char(4)  ,
+	quarter_number       integer  ,
+	quarter_name         char(2)  ,
+	quarter_year         char(7)  ,
+	month_year           char(7)  ,
+	week_year            char(7)  ,
+	week_year_iso        char(7)  ,
+	year_week_int        integer  ,
+	current_week_cy      smallint  ,
+	current_month_cy     smallint  ,
+	last_week_cy         smallint  ,
+	last_month_cy        smallint  ,
+	current_week_ly      smallint  ,
+	current_month_ly     smallint  ,
+	last_week_ly         smallint  ,
+	last_month_ly        smallint  ,
+	ytd_cy_day           smallint  ,
+	ytd_cy_week          smallint  ,
+	ytd_cy_month         smallint  ,
+	ytd_ly_day           smallint  ,
+	ytd_ly_week          smallint  ,
+	ytd_ly_month         smallint  ,
+	current_year         smallint  ,
+	last_year            smallint  ,
+	day_sequence         integer  ,
+	week_sequence        integer  ,
+	month_sequence       integer  ,
+	year_of_weekend_date integer  ,
+	etl_load_date        timestamp  ,
+	CONSTRAINT pk_dw_dim_date PRIMARY KEY ( dw_date_id )
+ );
+
+CREATE INDEX idx_dw_dim_date_lookup ON warehouse.dim_date ( hashcode );
+
+COMMENT ON TABLE warehouse.dim_date IS 'Date dimension';
+
+COMMENT ON COLUMN warehouse.dim_date.dw_date_id IS 'Technical key of the date dimension';
+
+COMMENT ON COLUMN warehouse.dim_date.hashcode IS 'Type I dimension hashcode';
+
+COMMENT ON COLUMN warehouse.dim_date.src_date_val IS 'Source date value';
+
+COMMENT ON COLUMN warehouse.dim_date.date_short IS 'Short date';
+
+COMMENT ON COLUMN warehouse.dim_date.date_medium IS 'Medium date';
+
+COMMENT ON COLUMN warehouse.dim_date.date_long IS 'Long form date';
+
+COMMENT ON COLUMN warehouse.dim_date.date_full IS 'Full form date';
+
+COMMENT ON COLUMN warehouse.dim_date.day_in_week IS 'day of the week';
+
+COMMENT ON COLUMN warehouse.dim_date.day_in_month IS 'Day number within the month';
+
+COMMENT ON COLUMN warehouse.dim_date.day_in_year IS 'Day number within the year';
+
+COMMENT ON COLUMN warehouse.dim_date.is_first_day_in_month IS 'Flag indicating whether the date is the first day in the month';
+
+COMMENT ON COLUMN warehouse.dim_date.is_first_day_in_week IS 'Flag indicating whether the date is the first day in the week.';
+
+COMMENT ON COLUMN warehouse.dim_date.is_last_day_in_month IS 'Flag indicating whether the date is the last day in the month.';
+
+COMMENT ON COLUMN warehouse.dim_date.is_last_day_in_week IS 'Flag indicating whether the date is the last day of the week';
+
+COMMENT ON COLUMN warehouse.dim_date.day_name IS 'textual name of the day of week';
+
+COMMENT ON COLUMN warehouse.dim_date.day_abbreviation IS 'Abbreviated day of week';
+
+COMMENT ON COLUMN warehouse.dim_date.week_in_year IS 'Numeric week of the year';
+
+COMMENT ON COLUMN warehouse.dim_date.week_in_month IS 'Week number within the month.';
+
+COMMENT ON COLUMN warehouse.dim_date.week_in_year_iso IS 'ISO standard week in year';
+
+COMMENT ON COLUMN warehouse.dim_date.week_start_date IS 'The date representing the first day of the week.';
+
+COMMENT ON COLUMN warehouse.dim_date.is_weekend IS 'Flag indicating wheter or not the day Is a Saturday or Sunday?';
+
+COMMENT ON COLUMN warehouse.dim_date.is_weekday IS 'Flag indicating whether or not the date is a weekday';
+
+COMMENT ON COLUMN warehouse.dim_date.month_number IS 'Month number (1..12)';
+
+COMMENT ON COLUMN warehouse.dim_date.month_name_val IS 'Name of the month';
+
+COMMENT ON COLUMN warehouse.dim_date.month_abbreviation IS 'Abbreviated month name';
+
+COMMENT ON COLUMN warehouse.dim_date.month_abbreviation_year2 IS 'Month abbreviation with digit year';
+
+COMMENT ON COLUMN warehouse.dim_date.year2 IS 'Two digit year';
+
+COMMENT ON COLUMN warehouse.dim_date.year4 IS 'Four digit year';
+
+COMMENT ON COLUMN warehouse.dim_date.year2_iso IS 'ISO two digit year';
+
+COMMENT ON COLUMN warehouse.dim_date.year4_iso IS 'ISO four digit year';
+
+COMMENT ON COLUMN warehouse.dim_date.quarter_number IS 'Numeric representation of the quarter (1..4)';
+
+COMMENT ON COLUMN warehouse.dim_date.quarter_name IS 'Name of the quarter (Q1..Q4)';
+
+COMMENT ON COLUMN warehouse.dim_date.quarter_year IS 'Quarter name + year';
+
+COMMENT ON COLUMN warehouse.dim_date.month_year IS 'Month number - year4';
+
+COMMENT ON COLUMN warehouse.dim_date.week_year IS 'Week number - year4';
+
+COMMENT ON COLUMN warehouse.dim_date.week_year_iso IS 'week number - year4 ISO standard';
+
+COMMENT ON COLUMN warehouse.dim_date.year_week_int IS 'Year4 and week number as numeric value for sorting and comparison';
+
+COMMENT ON COLUMN warehouse.dim_date.current_week_cy IS 'Is this the current week of the current year';
+
+COMMENT ON COLUMN warehouse.dim_date.current_month_cy IS 'Is this the current month of the current year';
+
+COMMENT ON COLUMN warehouse.dim_date.last_week_cy IS 'Is this the previous week of the current year';
+
+COMMENT ON COLUMN warehouse.dim_date.last_month_cy IS 'Flag indicating whether this date in the previous month of the current year';
+
+COMMENT ON COLUMN warehouse.dim_date.current_week_ly IS 'Is this date in the previous year, but the same week as the current week?';
+
+COMMENT ON COLUMN warehouse.dim_date.current_month_ly IS 'Is this date in the previous year, but the same month of the current year?';
+
+COMMENT ON COLUMN warehouse.dim_date.last_week_ly IS 'Is this date in the previous week the year prior?';
+
+COMMENT ON COLUMN warehouse.dim_date.last_month_ly IS 'Is this date in the previous month the year prior';
+
+COMMENT ON COLUMN warehouse.dim_date.ytd_cy_day IS 'Is the day portion of the date in the current year?';
+
+COMMENT ON COLUMN warehouse.dim_date.ytd_cy_week IS 'Is the week portion of the date in the current year?';
+
+COMMENT ON COLUMN warehouse.dim_date.ytd_cy_month IS 'Is the month of the date in the current year?';
+
+COMMENT ON COLUMN warehouse.dim_date.ytd_ly_day IS 'Is this day part of the year to date last year (for current year / previous YTD comparison calculations)';
+
+COMMENT ON COLUMN warehouse.dim_date.ytd_ly_week IS 'Is the date in the week last year which spilled into this year?';
+
+COMMENT ON COLUMN warehouse.dim_date.ytd_ly_month IS 'Is this month part of the year to date last year (for current year / previous YTD comparison calculations)';
+
+COMMENT ON COLUMN warehouse.dim_date.current_year IS 'Is the date in the current year?';
+
+COMMENT ON COLUMN warehouse.dim_date.last_year IS 'Is the date in the previous year?';
+
+COMMENT ON COLUMN warehouse.dim_date.day_sequence IS 'How many days back is this day from the current day?';
+
+COMMENT ON COLUMN warehouse.dim_date.week_sequence IS 'How many weeks back from the current week is the week this date is in?';
+
+COMMENT ON COLUMN warehouse.dim_date.month_sequence IS 'How many monts back from the current month is the month this date is in?';
+
+COMMENT ON COLUMN warehouse.dim_date.year_of_weekend_date IS 'What year does the last day of the week fall in?';
+
+COMMENT ON COLUMN warehouse.dim_date.etl_load_date IS 'The date this dimension record was loaded into the data warehouse.';
+
+]]></string>
+		</script>
 	</layout>
 </project>
