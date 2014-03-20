@@ -1,0 +1,81 @@
+upload database backups
+hibernate.backup  jackrabbit.backup  pentaho.backup  quartz.backup  trisano_olap_dev.backup
+
+upload pentaho.tgz
+untar / gunzip pentaho.tgz to /var/local/
+
+groupadd pentaho
+useradd pentaho -g pentaho
+- do not set passwd (no login)
+sudo chown -R pentaho /var/local/pentaho
+sudo chgrp -R pentaho /var/local/pentaho
+
+Login to postgres
+postgres=# create user pentaho with password '*****';
+postgres=# create database hibernate;
+CREATE DATABASE
+postgres=# grant all privileges on database hibernate to pentaho;
+postgres=# \c hibernate
+postgres=# grant all on all tables in schema public to pentaho
+GRANT
+postgres=# create database jackrabbit;
+CREATE DATABASE
+postgres=# grant all privileges on database jackrabbit to pentaho;
+postgres=# \c jackrabbit
+postgres=# grant all on all tables in schema public to pentaho
+GRANT
+postgres=# create database pentaho;
+CREATE DATABASE
+postgres=# grant all privileges on database pentaho to pentaho;
+postgres=# grant all on all tables in schema public to pentaho
+GRANT
+postgres=# create database quartz;
+CREATE DATABASE
+postgres=# grant all privileges on database quartz to pentaho;
+postgres=# \c quartz
+postgres=# grant all on all tables in schema public to pentaho
+GRANT
+postgres=# create database trisano_olap_dev;
+CREATE DATABASE
+postgres=# grant all privileges on database trisano_olap_dev to pentaho;
+postgres=# \c trisano_olap_dev 
+postgres=# grant all on all tables in schema public to pentaho
+postgres=# grant all on all tables in schema warehouse to pentaho
+postgres=# grant all on all tables in schema warehouse_util to pentaho
+GRANT
+\q
+
+tmacduff@uniphi:~/pentaho$ sudo -u postgres psql -d hibernate < hibernate.backup
+tmacduff@uniphi:~/pentaho$ sudo -u postgres psql -d jackrabbt < jackrabbit.backup
+tmacduff@uniphi:~/pentaho$ sudo -u postgres psql -d pentaho < pentaho.backup
+tmacduff@uniphi:~/pentaho$ sudo -u postgres psql -d quartz < quartz.backup
+tmacduff@uniphi:~/pentaho$ sudo -u postgres psql -d trisano_olap_dev < trisano_olap_dev.backupogin
+
+
+cd /var/log
+sudo mkdir pentaho
+sudo chown -R pentaho pentaho
+sudo chgrp -R pentaho pentaho
+
+cd /var/local/pentaho/tomcat/
+sudo mv logs logs_prev
+sudo ln -s /var/log/pentaho/ logs
+
+Update the ports as necessary in /var/local/pentaho/tomcat/conf/server.xml
+
+
+ProxyPass (Apache) config
+in proxy.conf, add the following:
+
+<Location /pentaho/>
+        ProxyPass http://localhost:8181/pentaho/
+        ProxyPassReverse http://localhost:8181/pentaho/
+</Location>
+
+Update the Tomcat connector to work with the proxy (<tomcat home>/conf/server.xml)
+ <Connector URIEncoding="UTF-8" port="8181" protocol="HTTP/1.1" 
+               connectionTimeout="20000" 
+               redirectPort="8543" proxyName="uniphi.chpc.utah.edu" proxyPort="80" />
+
+Restart Tomcat (wait for it to come up completely)
+Restart Apache
