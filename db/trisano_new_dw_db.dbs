@@ -46,6 +46,9 @@
 			<column name="state_case_status" type="varchar" length="50" jt="12" >
 				<comment><![CDATA[The state case status (external code)]]></comment>
 			</column>
+			<column name="etl_load_date" type="timestamp" jt="93" >
+				<comment><![CDATA[The date / time this case status dim was loaded]]></comment>
+			</column>
 			<index name="pk_dim_state_case_status" unique="PRIMARY_KEY" >
 				<column name="dw_state_case_status_id" />
 			</index>
@@ -540,6 +543,15 @@
 			<column name="outbreak_name" type="varchar" length="200" jt="12" >
 				<comment><![CDATA[The name given to this outbreak]]></comment>
 			</column>
+			<column name="outbreak_number" type="varchar" length="200" jt="12" >
+				<comment><![CDATA[The OLTP outbreak.number]]></comment>
+			</column>
+			<column name="src_parent_outbreak_id" type="integer" jt="4" >
+				<comment><![CDATA[The parent outbreak id]]></comment>
+			</column>
+			<column name="etl_load_date" type="timestamp" jt="93" >
+				<comment><![CDATA[The date / time this outbreak dim record was loaded,]]></comment>
+			</column>
 			<index name="pk_dim_outbreak" unique="PRIMARY_KEY" >
 				<column name="dw_outbreak_id" />
 			</index>
@@ -725,7 +737,6 @@
 	<connector name="PostgreSQL_new_OLAP" database="PostgreSQL" driver_class="org.postgresql.Driver" driver_jar="postgresql-9.2-1003.jdbc3.jar" host="localhost" port="5432" instance="trisano_olap_dev" user="pentaho" passwd="cGVudGFobw==" schema_mapping="" />
 	<layout id="Layout2828475" name="warehouse" show_relation_columns="y" >
 		<entity schema="warehouse" name="dim_time" color="d0def5" x="675" y="45" />
-		<entity schema="warehouse" name="dim_location" color="d0def5" x="285" y="690" />
 		<entity schema="warehouse" name="dim_date" color="d0def5" x="45" y="45" />
 		<entity schema="warehouse" name="dim_junk_lab_test" color="d0def5" x="450" y="315" />
 		<entity schema="warehouse" name="dim_language" color="d0def5" x="480" y="495" />
@@ -746,8 +757,6 @@
 		<entity schema="warehouse" name="dim_person" color="d0def5" x="495" y="60" />
 		<entity schema="warehouse" name="dim_diagnostic_facility" color="d0def5" x="690" y="690" />
 		<entity schema="warehouse" name="fact_disease_event" color="d0def5" x="675" y="525" />
-		<entity schema="warehouse" name="dim_outbreak" color="d0def5" x="255" y="1080" />
-		<entity schema="warehouse" name="dim_case_status" color="d0def5" x="450" y="1050" />
 		<entity schema="warehouse" name="dim_workflow" color="d0def5" x="255" y="1290" />
 		<entity schema="warehouse" name="dim_event_type" color="d0def5" x="255" y="1200" />
 		<entity schema="warehouse" name="dim_investigator" color="d0def5" x="450" y="1185" />
@@ -759,9 +768,7 @@
 			<column name="dw_event_onset_date_id" />
 			<column name="event_name" />
 			<column name="dw_outbreak_id" />
-			<column name="dw_investigation_stated_date" />
 			<column name="dw_investigation_completed_by_state_id" />
-			<column name="dw_first_reported_ph_date" />
 			<column name="dw_first_reported_ph_date_id" />
 			<column name="dw_investigation_stated_date_id" />
 			<column name="dw_first_reported_to_clinician_date_id" />
@@ -776,5 +783,8 @@
 			<column name="dw_jurisdiction_id" />
 		</entity>
 		<entity schema="warehouse" name="dim_contact_type" color="d0def5" x="450" y="1425" />
+		<entity schema="warehouse" name="dim_location" color="d0def5" x="285" y="690" />
+		<entity schema="warehouse" name="dim_outbreak" color="d0def5" x="255" y="1050" />
+		<entity schema="warehouse" name="dim_case_status" color="d0def5" x="450" y="1050" />
 	</layout>
 </project>
