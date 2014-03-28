@@ -486,6 +486,9 @@
 			<column name="src_modified_at" type="timestamp" jt="93" >
 				<comment><![CDATA[Source modified time]]></comment>
 			</column>
+			<column name="etl_load_date" type="timestamp" jt="93" >
+				<comment><![CDATA[The date / time the language dimension record was created.]]></comment>
+			</column>
 			<index name="idx_dw_dim_language_lookup" unique="NORMAL" >
 				<column name="hashcode" />
 			</index>
@@ -728,6 +731,59 @@
 				<comment><![CDATA[The ID of the dim_jurisdiction]]></comment>
 			</column>
 		</table>
+		<view name="vw_table_row_counts" >
+			<view_script><![CDATA[select 
+	'dim_date' as tbl
+	,count(1) as rowct 
+from warehouse.dim_date
+union
+select 
+	'dim_time' as tbl
+	,count(1) as rowct 
+from warehouse.dim_time
+union
+select 
+	'dim_disease' as tbl
+	,count(1) as rowct 
+from warehouse.dim_disease
+union
+select 
+	'dim_outbreak' as tbl
+	,count(1) as rowct 
+from warehouse.dim_outbreak
+union
+select 
+	'dim_jurisdction' as tbl
+	,count(1) as rowct 
+from warehouse.dim_jurisdiction
+union
+select
+	'dim_location' as tbl
+	,count(1) as rowct 
+from warehouse.dim_location
+union
+select
+	'dim_language' as tbl
+	,count(1) as rowct 
+from warehouse.dim_language
+union
+select
+	'dim_ethnicity' as tbl
+	,count(1) as rowct 
+from warehouse.dim_ethnicity
+union
+select
+	'dim_person' as tbl
+	,count(1) as rowct 
+from warehouse.dim_person
+union
+select
+	'fact_disease_event' as tbl
+	,count(1) as rowct 
+from warehouse.fact_disease_event;]]></view_script>
+			<column name="rowct" type="bigint" />
+			<column name="tbl" type="text" />
+		</view>
 		<sequence name="dim_addresses_dim_address_key_seq" start="1" />
 		<sequence name="dim_diagnostic_facilites_dim_diagnostic_facilities_seq" start="1" />
 		<sequence name="dim_junk_lab_test_seq" start="1" />
@@ -739,7 +795,6 @@
 		<entity schema="warehouse" name="dim_time" color="d0def5" x="675" y="45" />
 		<entity schema="warehouse" name="dim_date" color="d0def5" x="45" y="45" />
 		<entity schema="warehouse" name="dim_junk_lab_test" color="d0def5" x="450" y="315" />
-		<entity schema="warehouse" name="dim_language" color="d0def5" x="480" y="495" />
 		<entity schema="warehouse" name="dim_disease" color="d0def5" x="285" y="45" >
 			<column name="dw_disease_id" />
 			<column name="hashcode" />
@@ -786,5 +841,7 @@
 		<entity schema="warehouse" name="dim_location" color="d0def5" x="285" y="690" />
 		<entity schema="warehouse" name="dim_outbreak" color="d0def5" x="255" y="1050" />
 		<entity schema="warehouse" name="dim_case_status" color="d0def5" x="450" y="1050" />
+		<entity schema="warehouse" name="dim_language" color="d0def5" x="480" y="495" />
+		<entity schema="warehouse" name="vw_table_row_counts" color="d0def5" x="75" y="1110" />
 	</layout>
 </project>

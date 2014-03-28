@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>dim_language</name>
+    <name>truncate_data_warehouse</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -66,9 +66,9 @@
     <clusterschemas>
     </clusterschemas>
   <created_user>-</created_user>
-  <created_date>2014&#x2f;03&#x2f;17 11&#x3a;38&#x3a;26.482</created_date>
+  <created_date>2014&#x2f;03&#x2f;27 21&#x3a;44&#x3a;36.489</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2014&#x2f;03&#x2f;17 11&#x3a;38&#x3a;26.482</modified_date>
+  <modified_date>2014&#x2f;03&#x2f;27 21&#x3a;44&#x3a;36.489</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -91,8 +91,9 @@
       <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
       <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SQL_CONNECT</code><attribute>set search_path&#x3d;warehouse, warehouse_util&#x3b;</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
@@ -113,45 +114,20 @@
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
       <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
+      <attribute><code>PREFERRED_SCHEMA_NAME</code><attribute>trisano</attribute></attribute>
       <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SQL_CONNECT</code><attribute>set search_path to trisano&#x3b;</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
   <order>
-  <hop> <from>language</from><to>dim_language</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>language</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>Trisano TX DS</connection>
-    <sql>select &#xa;   id as src_language_id&#xa;  ,code_name&#xa;  ,the_code&#xa;  ,code_description&#xa;  ,created_at as src_created_at&#xa;  ,updated_at as src_modified_at&#xa;from external_codes &#xa;where code_name&#x3d;&#x27;language&#x27;</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>357</xloc>
-      <yloc>67</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>dim_language</name>
-    <type>TableOutput</type>
+    <name>truncate data warehouse</name>
+    <type>ExecSQL</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -161,52 +137,22 @@
            <schema_name/>
            </partitioning>
     <connection>Trisano OLAP DS</connection>
-    <schema>warehouse</schema>
-    <table>dim_language</table>
-    <commit>1000</commit>
-    <truncate>Y</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
-    <fields>
-        <field>
-          <column_name>src_language_id</column_name>
-          <stream_name>src_language_id</stream_name>
-        </field>
-        <field>
-          <column_name>code_name</column_name>
-          <stream_name>code_name</stream_name>
-        </field>
-        <field>
-          <column_name>the_code</column_name>
-          <stream_name>the_code</stream_name>
-        </field>
-        <field>
-          <column_name>code_description</column_name>
-          <stream_name>code_description</stream_name>
-        </field>
-        <field>
-          <column_name>src_created_at</column_name>
-          <stream_name>src_created_at</stream_name>
-        </field>
-        <field>
-          <column_name>src_modified_at</column_name>
-          <stream_name>src_modified_at</stream_name>
-        </field>
-    </fields>
+    <execute_each_row>N</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>set search_path &#x3d; warehouse&#x3b;&#xa;&#xa;truncate dim_disease&#x3b;&#xa;&#xa;truncate dim_outbreak&#x3b;&#xa;&#xa;truncate dim_jurisdiction&#x3b;&#xa;&#xa;-- select &#x2a; from dim_disease&#x3b;&#xa;&#xa;truncate dim_disease&#x3b;&#xa;&#xa;truncate dim_location&#x3b;&#xa;&#xa;truncate dim_date&#x3b;&#xa;&#xa;truncate dim_time&#x3b;&#xa;&#xa;truncate fact_disease_event&#x3b;</sql>
+    <set_params>N</set_params>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+    </arguments>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>360</xloc>
-      <yloc>244</yloc>
+      <xloc>264</xloc>
+      <yloc>209</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
