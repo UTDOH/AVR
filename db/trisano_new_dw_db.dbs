@@ -32,56 +32,6 @@
 				<column name="dw_address_id" />
 			</index>
 		</table>
-		<table name="dim_case_status" >
-			<comment>&quot;state&quot; case status and &quot;lhd&quot; case status</comment>
-			<column name="dw_state_case_status_id" type="integer" jt="4" mandatory="y" >
-				<comment><![CDATA[TK of the state case status dimension]]></comment>
-			</column>
-			<column name="hashcode" type="integer" jt="4" >
-				<comment><![CDATA[hashcode of the state case dimension record]]></comment>
-			</column>
-			<column name="src_state_case_status_id" type="integer" length="1" jt="4" >
-				<comment><![CDATA[The OLTP state case status ID (external_code.id)]]></comment>
-			</column>
-			<column name="state_case_status" type="varchar" length="50" jt="12" >
-				<comment><![CDATA[The state case status (external code)]]></comment>
-			</column>
-			<column name="etl_load_date" type="timestamp" jt="93" >
-				<comment><![CDATA[The date / time this case status dim was loaded]]></comment>
-			</column>
-			<index name="pk_dim_state_case_status" unique="PRIMARY_KEY" >
-				<column name="dw_state_case_status_id" />
-			</index>
-			<index name="idx_dim_state_case_status" unique="NORMAL" >
-				<column name="hashcode" />
-			</index>
-		</table>
-		<table name="dim_contact_disposition" >
-			<column name="dw_contact_dispostion_id" type="integer" jt="4" mandatory="y" >
-				<comment><![CDATA[The OLAP TK of the dim_contact_disposition dimension]]></comment>
-			</column>
-			<column name="hashcode" type="integer" jt="4" >
-				<comment><![CDATA[The hashcode of this contact disposition dimension]]></comment>
-			</column>
-			<column name="contact_disposition_description" type="varchar" length="100" jt="12" >
-				<comment><![CDATA[The contact disposition description]]></comment>
-			</column>
-			<index name="pk_dim_contact_disposition" unique="PRIMARY_KEY" >
-				<column name="dw_contact_dispostion_id" />
-			</index>
-		</table>
-		<table name="dim_contact_type" >
-			<comment>The contact type dimension</comment>
-			<column name="dw_contact_type" type="integer" jt="4" >
-				<comment><![CDATA[The OLAP TK of the contact_type dimension]]></comment>
-			</column>
-			<column name="hashcode" type="integer" jt="4" >
-				<comment><![CDATA[The hashcode of the contact type dimension]]></comment>
-			</column>
-			<column name="contact_type_description" type="varchar" length="100" jt="12" >
-				<comment><![CDATA[The description of the contact_type]]></comment>
-			</column>
-		</table>
 		<table name="dim_date" >
 			<comment>Date dimension</comment>
 			<column name="dw_date_id" type="integer" length="10" jt="4" mandatory="y" >
@@ -162,16 +112,16 @@
 			<column name="month_abbreviation_year2" type="char" length="6" jt="1" >
 				<comment><![CDATA[Month abbreviation with digit year]]></comment>
 			</column>
-			<column name="year2" type="char" length="2" jt="1" >
+			<column name="year2" type="integer" length="10" decimal="0" jt="4" >
 				<comment><![CDATA[Two digit year]]></comment>
 			</column>
-			<column name="year4" type="char" length="4" jt="1" >
+			<column name="year4" type="integer" length="10" decimal="0" jt="4" >
 				<comment><![CDATA[Four digit year]]></comment>
 			</column>
-			<column name="year2_iso" type="char" length="2" jt="1" >
+			<column name="year2_iso" type="integer" length="10" decimal="0" jt="4" >
 				<comment><![CDATA[ISO two digit year]]></comment>
 			</column>
-			<column name="year4_iso" type="char" length="4" jt="1" >
+			<column name="year4_iso" type="integer" length="10" decimal="0" jt="4" >
 				<comment><![CDATA[ISO four digit year]]></comment>
 			</column>
 			<column name="quarter_number" type="integer" jt="4" >
@@ -376,21 +326,6 @@
 				<column name="hashcode" />
 			</index>
 		</table>
-		<table name="dim_event_type" >
-			<comment>The event type dimension</comment>
-			<column name="dw_event_type_id" type="integer" jt="4" mandatory="y" >
-				<comment><![CDATA[The OLAP TK of the dim_event_type]]></comment>
-			</column>
-			<column name="hashcode" type="integer" jt="4" >
-				<comment><![CDATA[The hascode of this event type]]></comment>
-			</column>
-			<column name="event_type" type="varchar" length="255" jt="12" >
-				<comment><![CDATA[The event_type value]]></comment>
-			</column>
-			<index name="pk_dim_event_type" unique="PRIMARY_KEY" >
-				<column name="dw_event_type_id" />
-			</index>
-		</table>
 		<table name="dim_investigator" >
 			<comment>The investigator dimension</comment>
 			<column name="dw_investigator_id" type="integer" jt="4" mandatory="y" >
@@ -420,6 +355,36 @@
 			<column name="lab_test_status_description" type="varchar" length="100" jt="12" />
 			<index name="dim_junk_lab_test_pkey" unique="PRIMARY_KEY" >
 				<column name="dw_junk_lab_test_id" />
+			</index>
+		</table>
+		<table name="dim_junk_status_type" >
+			<comment>Junk dimension of status codes and types</comment>
+			<column name="dw_junk_status_type_id" type="integer" jt="4" mandatory="y" >
+				<comment><![CDATA[TK of the junk status type dmension]]></comment>
+			</column>
+			<column name="hashcode" type="integer" jt="4" >
+				<comment><![CDATA[Type 1 dimension hashcode]]></comment>
+			</column>
+			<column name="event_type" type="varchar" length="255" jt="12" >
+				<comment><![CDATA[The event type value]]></comment>
+			</column>
+			<column name="contact_disposition_description" type="varchar" length="100" jt="12" >
+				<comment><![CDATA[The contact disposition text]]></comment>
+			</column>
+			<column name="contact_type_description" type="varchar" length="100" jt="12" >
+				<comment><![CDATA[The description of the contact type.]]></comment>
+			</column>
+			<column name="src_state_case_status_id" type="integer" length="1" jt="4" >
+				<comment><![CDATA[The OLTP state case status id]]></comment>
+			</column>
+			<column name="state_case_status" type="varchar" length="50" jt="12" >
+				<comment><![CDATA[The text description of the state case status]]></comment>
+			</column>
+			<index name="pk_dim_junk_status_type" unique="PRIMARY_KEY" >
+				<column name="dw_junk_status_type_id" />
+			</index>
+			<index name="idx_dim_junk_status_type" unique="NORMAL" >
+				<column name="hashcode" />
 			</index>
 		</table>
 		<table name="dim_jurisdiction" >
@@ -679,9 +644,6 @@
 			<column name="src_modifed_at" type="timestamp" jt="93" >
 				<comment><![CDATA[The date / time the event was last modified]]></comment>
 			</column>
-			<column name="dw_state_case_status_id" type="integer" length="1" jt="4" >
-				<comment><![CDATA[The dim_state_case_status.dw_state_case_status_id value]]></comment>
-			</column>
 			<column name="dw_event_onset_date_id" type="integer" jt="4" >
 				<comment><![CDATA[date the event onset occurred (dim_date.dw_date_id)]]></comment>
 			</column>
@@ -706,9 +668,6 @@
 			<column name="dw_lhd_case_status_id" type="integer" length="1" jt="4" >
 				<comment><![CDATA[The LHD dim_case_status id]]></comment>
 			</column>
-			<column name="dw_event_type_id" type="integer" jt="4" >
-				<comment><![CDATA[The dim_event_type id]]></comment>
-			</column>
 			<column name="age_at_onset" type="integer" jt="4" >
 				<comment><![CDATA[The patient's age at the onset of the event]]></comment>
 			</column>
@@ -721,66 +680,15 @@
 			<column name="dw_workflow_id" type="integer" jt="4" >
 				<comment><![CDATA[The dim_workflow ID]]></comment>
 			</column>
-			<column name="dw_contact_disposition_id" type="integer" jt="4" >
-				<comment><![CDATA[The OLAP id of the dim_contact_disposition]]></comment>
-			</column>
-			<column name="dw_contact_type_id" type="integer" jt="4" >
-				<comment><![CDATA[The ID of the dim_contact_type]]></comment>
-			</column>
 			<column name="dw_jurisdiction_id" type="integer" jt="4" >
 				<comment><![CDATA[The ID of the dim_jurisdiction]]></comment>
 			</column>
+			<column name="dw_junk_status_type_id" type="integer" length="1" jt="4" >
+				<comment><![CDATA[FK to dim_junk_status_type junk dimension table.]]></comment>
+			</column>
 		</table>
 		<view name="vw_table_row_counts" >
-			<view_script><![CDATA[select 
-	'dim_date' as tbl
-	,count(1) as rowct 
-from warehouse.dim_date
-union
-select 
-	'dim_time' as tbl
-	,count(1) as rowct 
-from warehouse.dim_time
-union
-select 
-	'dim_disease' as tbl
-	,count(1) as rowct 
-from warehouse.dim_disease
-union
-select 
-	'dim_outbreak' as tbl
-	,count(1) as rowct 
-from warehouse.dim_outbreak
-union
-select 
-	'dim_jurisdction' as tbl
-	,count(1) as rowct 
-from warehouse.dim_jurisdiction
-union
-select
-	'dim_location' as tbl
-	,count(1) as rowct 
-from warehouse.dim_location
-union
-select
-	'dim_language' as tbl
-	,count(1) as rowct 
-from warehouse.dim_language
-union
-select
-	'dim_ethnicity' as tbl
-	,count(1) as rowct 
-from warehouse.dim_ethnicity
-union
-select
-	'dim_person' as tbl
-	,count(1) as rowct 
-from warehouse.dim_person
-union
-select
-	'fact_disease_event' as tbl
-	,count(1) as rowct 
-from warehouse.fact_disease_event;]]></view_script>
+			<view_script><![CDATA[((((((((SELECT 'dim_date'::text AS tbl, count(1) AS rowct FROM warehouse.dim_date UNION SELECT 'dim_time'::text AS tbl, count(1) AS rowct FROM warehouse.dim_time) UNION SELECT 'dim_disease'::text AS tbl, count(1) AS rowct FROM warehouse.dim_disease) UNION SELECT 'dim_outbreak'::text AS tbl, count(1) AS rowct FROM warehouse.dim_outbreak) UNION SELECT 'dim_jurisdction'::text AS tbl, count(1) AS rowct FROM warehouse.dim_jurisdiction) UNION SELECT 'dim_location'::text AS tbl, count(1) AS rowct FROM warehouse.dim_location) UNION SELECT 'dim_language'::text AS tbl, count(1) AS rowct FROM warehouse.dim_language) UNION SELECT 'dim_ethnicity'::text AS tbl, count(1) AS rowct FROM warehouse.dim_ethnicity) UNION SELECT 'dim_person'::text AS tbl, count(1) AS rowct FROM warehouse.dim_person) UNION SELECT 'fact_disease_event'::text AS tbl, count(1) AS rowct FROM warehouse.fact_disease_event;]]></view_script>
 			<column name="rowct" type="bigint" />
 			<column name="tbl" type="text" />
 		</view>
@@ -793,7 +701,6 @@ from warehouse.fact_disease_event;]]></view_script>
 	<connector name="PostgreSQL_new_OLAP" database="PostgreSQL" driver_class="org.postgresql.Driver" driver_jar="postgresql-9.2-1003.jdbc3.jar" host="localhost" port="5432" instance="trisano_olap_dev" user="pentaho" passwd="cGVudGFobw==" schema_mapping="" />
 	<layout id="Layout2828475" name="warehouse" show_relation_columns="y" >
 		<entity schema="warehouse" name="dim_time" color="d0def5" x="675" y="45" />
-		<entity schema="warehouse" name="dim_date" color="d0def5" x="45" y="45" />
 		<entity schema="warehouse" name="dim_junk_lab_test" color="d0def5" x="450" y="315" />
 		<entity schema="warehouse" name="dim_disease" color="d0def5" x="285" y="45" >
 			<column name="dw_disease_id" />
@@ -806,42 +713,20 @@ from warehouse.fact_disease_event;]]></view_script>
 			<column name="sensitive" />
 			<column name="etl_load_date" />
 		</entity>
-		<entity schema="warehouse" name="dim_address" color="d0def5" x="480" y="690" />
 		<entity schema="warehouse" name="dim_ethnicity" color="d0def5" x="285" y="495" />
 		<entity schema="warehouse" name="dim_jurisdiction" color="d0def5" x="285" y="270" />
 		<entity schema="warehouse" name="dim_person" color="d0def5" x="495" y="60" />
 		<entity schema="warehouse" name="dim_diagnostic_facility" color="d0def5" x="690" y="690" />
 		<entity schema="warehouse" name="fact_disease_event" color="d0def5" x="675" y="525" />
-		<entity schema="warehouse" name="dim_workflow" color="d0def5" x="255" y="1290" />
-		<entity schema="warehouse" name="dim_event_type" color="d0def5" x="255" y="1200" />
-		<entity schema="warehouse" name="dim_investigator" color="d0def5" x="450" y="1185" />
-		<entity schema="warehouse" name="dim_contact_disposition" color="d0def5" x="450" y="1305" />
-		<entity schema="warehouse" name="fact_event" color="d0def5" x="675" y="1035" >
-			<column name="src_event_id" />
-			<column name="src_created_at" />
-			<column name="src_modifed_at" />
-			<column name="dw_event_onset_date_id" />
-			<column name="event_name" />
-			<column name="dw_outbreak_id" />
-			<column name="dw_investigation_completed_by_state_id" />
-			<column name="dw_first_reported_ph_date_id" />
-			<column name="dw_investigation_stated_date_id" />
-			<column name="dw_first_reported_to_clinician_date_id" />
-			<column name="dw_lhd_case_status_id" />
-			<column name="dw_event_type_id" />
-			<column name="age_at_onset" />
-			<column name="dw_investigator_id" />
-			<column name="src_parent_event_id" />
-			<column name="dw_workflow_id" />
-			<column name="dw_contact_disposition_id" />
-			<column name="dw_contact_type_id" />
-			<column name="dw_jurisdiction_id" />
-		</entity>
-		<entity schema="warehouse" name="dim_contact_type" color="d0def5" x="450" y="1425" />
 		<entity schema="warehouse" name="dim_location" color="d0def5" x="285" y="690" />
 		<entity schema="warehouse" name="dim_outbreak" color="d0def5" x="255" y="1050" />
-		<entity schema="warehouse" name="dim_case_status" color="d0def5" x="450" y="1050" />
 		<entity schema="warehouse" name="dim_language" color="d0def5" x="480" y="495" />
+		<entity schema="warehouse" name="dim_address" color="d0def5" x="480" y="690" />
+		<entity schema="warehouse" name="dim_workflow" color="d0def5" x="255" y="1215" />
+		<entity schema="warehouse" name="dim_investigator" color="d0def5" x="480" y="1065" />
+		<entity schema="warehouse" name="dim_junk_status_type" color="b2cdf7" x="435" y="1215" />
+		<entity schema="warehouse" name="fact_event" color="d0def5" x="675" y="1035" />
 		<entity schema="warehouse" name="vw_table_row_counts" color="d0def5" x="75" y="1110" />
+		<entity schema="warehouse" name="dim_date" color="d0def5" x="45" y="45" />
 	</layout>
 </project>

@@ -7,45 +7,39 @@
       </Level>
     </Hierarchy>
   </Dimension>
-  <Dimension type="TimeDimension" visible="true" highCardinality="false" name="Date Diagnosed">
-    <Hierarchy name="Date Diagnosed" visible="true" hasAll="true" primaryKey="dw_date_id">
-      <Table name="dim_date" schema="warehouse">
-      </Table>
-      <Level name="Year" visible="true" column="year4" ordinalColumn="year_week_int" type="String" uniqueMembers="false" levelType="TimeYears" hideMemberIf="Never">
-      </Level>
-      <Level name="Quarter" visible="true" column="quarter_year" ordinalColumn="quarter_number" type="String" uniqueMembers="false" levelType="TimeQuarters" hideMemberIf="Never">
-      </Level>
-      <Level name="Month" visible="true" column="month_name_val" ordinalColumn="month_number" type="String" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never">
-      </Level>
-      <Level name="Week" visible="true" column="week_in_year" ordinalColumn="week_sequence" type="String" uniqueMembers="false" levelType="TimeWeeks" hideMemberIf="Never">
-      </Level>
-      <Level name="Day" visible="true" column="day_in_year" ordinalColumn="day_in_year" type="String" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
-      </Level>
-    </Hierarchy>
-  </Dimension>
   <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Location">
     <Hierarchy name="Location" visible="true" hasAll="true" primaryKey="dw_location_id">
       <Table name="dim_location" schema="warehouse">
       </Table>
       <Level approxRowCount="100" name="State" visible="true" column="state" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
       </Level>
-      <Level approxRowCount="500" name="City" visible="true" column="city" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      <Level approxRowCount="500" name="City" visible="true" column="city" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
       </Level>
     </Hierarchy>
   </Dimension>
-  <Dimension type="TimeDimension" visible="true" highCardinality="false" name="Date of Onset">
-    <Hierarchy name="Date of Onset" visible="true" hasAll="true" primaryKey="dw_date_id">
+  <Dimension type="TimeDimension" visible="true" highCardinality="false" name="EventDate">
+    <Hierarchy name="YQMWD" visible="true" hasAll="true" allMemberName="All Years" primaryKey="dw_date_id">
       <Table name="dim_date" schema="warehouse">
       </Table>
-      <Level name="Year" visible="true" column="year4" ordinalColumn="year_week_int" type="String" uniqueMembers="false" levelType="TimeYears" hideMemberIf="Never">
+      <Level approxRowCount="25" name="Year" visible="true" column="year4" type="String" uniqueMembers="false" levelType="TimeYears" hideMemberIf="Never">
       </Level>
-      <Level name="Quarter" visible="true" column="quarter_name" ordinalColumn="quarter_number" type="String" uniqueMembers="false" levelType="TimeQuarters" hideMemberIf="Never">
+      <Level approxRowCount="4" name="Quarter" visible="true" column="quarter_number" nameColumn="quarter_year" type="Numeric" uniqueMembers="false" levelType="TimeQuarters" hideMemberIf="Never">
       </Level>
-      <Level name="Month" visible="true" column="month_abbreviation" ordinalColumn="month_number" type="String" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never">
+      <Level approxRowCount="12" name="Month" visible="true" column="month_number" nameColumn="month_abbreviation_year2" type="Numeric" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never">
       </Level>
-      <Level name="Week" visible="true" column="week_in_year" ordinalColumn="week_sequence" type="String" uniqueMembers="false" levelType="TimeWeeks" hideMemberIf="Never">
+      <Level name="Week" visible="true" column="year_week_int" type="Numeric" uniqueMembers="false" levelType="TimeWeeks" hideMemberIf="Never" captionColumn="week_start_date">
       </Level>
-      <Level name="Day" visible="true" column="day_name" ordinalColumn="day_in_year" type="String" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+      <Level name="Day" visible="true" column="day_in_month" nameColumn="date_short" type="Numeric" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="DateSequence" visible="true" hasAll="true" allMemberName="All Dates" primaryKey="dw_date_id">
+      <Table name="dim_date" schema="warehouse">
+      </Table>
+      <Level approxRowCount="500" name="MonthSequence" visible="true" column="month_sequence" type="Numeric" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never" description="# of Months From Current Month" captionColumn="month_year">
+      </Level>
+      <Level approxRowCount="500" name="WeekSequence" visible="true" column="week_sequence" type="Numeric" uniqueMembers="false" levelType="TimeWeeks" hideMemberIf="Never" description="# of Weeks From the Current Week">
+      </Level>
+      <Level approxRowCount="1000" name="DaySequence" visible="true" column="day_sequence" type="Numeric" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never" description="# of Days from Current Date">
       </Level>
     </Hierarchy>
   </Dimension>
@@ -54,11 +48,15 @@
     </Table>
     <DimensionUsage source="Disease" name="Dim Disease" visible="true" foreignKey="dw_disease_id" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="Date Diagnosed" name="Date Diagnosed" caption="Diagnosed Date" visible="true" foreignKey="dw_diagnosed_date_id" highCardinality="false">
+    <DimensionUsage source="EventDate" name="Date Diagnosed" caption="Diagnosed Date" visible="true" foreignKey="dw_diagnosed_date_id" highCardinality="false">
     </DimensionUsage>
     <DimensionUsage source="Location" name="Location" visible="true" foreignKey="dw_location_id" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="Date of Onset" name="Date of Onset" caption="Date of Onset" visible="true" foreignKey="dw_onset_date_id" highCardinality="false">
+    <DimensionUsage source="EventDate" name="Date of Onset" caption="Date of Onset" visible="true" foreignKey="dw_onset_date_id" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="EventDate" name="Date Diagnosed Filter" caption="Diagnosed Date Filter" visible="true" foreignKey="dw_diagnosed_date_id" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="EventDate" name="Date of Onset Filter" caption="Date of Onset Filter" visible="true" foreignKey="dw_onset_date_id" highCardinality="false">
     </DimensionUsage>
     <Measure name="Disease Count" column="dw_disease_id" datatype="Integer" aggregator="count" visible="true">
     </Measure>
