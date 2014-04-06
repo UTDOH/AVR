@@ -1,0 +1,33 @@
+with member [Measures].[Last Month Disease Count]
+as
+(
+    [Measures].[Disease Count],
+    [Date of Onset.DateSequence].[MonthSequence].CurrentMember.PrevMember
+)
+member [Measures].[PctChange] as 
+'([Measures].[Disease Count] / COALESCEEMPTY([Measures].[Last Month Disease Count], 1)) * 100', FORMAT_STRING = IIf([Measures].[PctChange] >= 150, '|#.000|style=red', '|#.000|style=orange')
+
+member [Measures].[Disease Count Formatted] as
+'[Measures].[Disease Count]', FORMAT_STRING = IIf([Measures].[PctChange] >= 150, '|#|style=red', '|#|style=orange')
+
+member [Measures].[Disease Count Formatted2] as
+'[Measures].[Disease Count]', FORMAT_STRING = 
+    CASE  
+        WHEN [Measures].[PctChange] > 0 AND [Measures].[PctChange] <= 100 THEN '|#|style=green'
+        WHEN [Measures].[PctChange] >= 100 AND [Measures].[PctChange] <= 225 THEN '|#|style=orange'
+        ELSE '|#|style=RED'
+    END
+
+set [DateRange1] as 
+{[Date of Onset Filter.DateSequence].[MonthSequence].[-11], [Date of Onset Filter.DateSequence].[MonthSequence].[-10], [Date of Onset Filter.DateSequence].[MonthSequence].[-9], [Date of Onset Filter.DateSequence].[MonthSequence].[-8]}
+
+set [DateRange2] as 
+{[Date of Onset Filter.DateSequence].[MonthSequence].[-9]}
+
+select
+ [DateRange1] on 0,
+NON EMPTY Crossjoin([Dim Disease.Disease].[Name].Members,
+{
+[Measures].[Disease Count Formatted2]
+}) on 1
+FROM [disease events]

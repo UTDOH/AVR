@@ -686,6 +686,9 @@
 			<column name="dw_junk_status_type_id" type="integer" length="1" jt="4" >
 				<comment><![CDATA[FK to dim_junk_status_type junk dimension table.]]></comment>
 			</column>
+			<column name="dw_disease_id" type="integer" jt="4" >
+				<comment><![CDATA[TK of the disease of this fact]]></comment>
+			</column>
 		</table>
 		<view name="vw_table_row_counts" >
 			<view_script><![CDATA[((((((((SELECT 'dim_date'::text AS tbl, count(1) AS rowct FROM warehouse.dim_date UNION SELECT 'dim_time'::text AS tbl, count(1) AS rowct FROM warehouse.dim_time) UNION SELECT 'dim_disease'::text AS tbl, count(1) AS rowct FROM warehouse.dim_disease) UNION SELECT 'dim_outbreak'::text AS tbl, count(1) AS rowct FROM warehouse.dim_outbreak) UNION SELECT 'dim_jurisdction'::text AS tbl, count(1) AS rowct FROM warehouse.dim_jurisdiction) UNION SELECT 'dim_location'::text AS tbl, count(1) AS rowct FROM warehouse.dim_location) UNION SELECT 'dim_language'::text AS tbl, count(1) AS rowct FROM warehouse.dim_language) UNION SELECT 'dim_ethnicity'::text AS tbl, count(1) AS rowct FROM warehouse.dim_ethnicity) UNION SELECT 'dim_person'::text AS tbl, count(1) AS rowct FROM warehouse.dim_person) UNION SELECT 'fact_disease_event'::text AS tbl, count(1) AS rowct FROM warehouse.fact_disease_event;]]></view_script>
@@ -725,8 +728,8 @@
 		<entity schema="warehouse" name="dim_workflow" color="d0def5" x="255" y="1215" />
 		<entity schema="warehouse" name="dim_investigator" color="d0def5" x="480" y="1065" />
 		<entity schema="warehouse" name="dim_junk_status_type" color="b2cdf7" x="435" y="1215" />
-		<entity schema="warehouse" name="fact_event" color="d0def5" x="675" y="1035" />
 		<entity schema="warehouse" name="vw_table_row_counts" color="d0def5" x="75" y="1110" />
 		<entity schema="warehouse" name="dim_date" color="d0def5" x="45" y="45" />
+		<entity schema="warehouse" name="fact_event" color="d0def5" x="675" y="1035" />
 	</layout>
 </project>
