@@ -121,7 +121,6 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>lab_results</from><to>Collection date</to><enabled>Y</enabled> </hop>
   <hop> <from>Collection date</from><to>junk lookup</to><enabled>Y</enabled> </hop>
   <hop> <from>junk lookup</from><to>Lab Test Date</to><enabled>Y</enabled> </hop>
   <hop> <from>dw_dim_date</from><to>Collection date</to><enabled>Y</enabled> </hop>
@@ -129,139 +128,14 @@
   <hop> <from>dw_dim_date 4</from><to>Lab Test Date</to><enabled>Y</enabled> </hop>
   <hop> <from>dim_organism</from><to>Organism</to><enabled>Y</enabled> </hop>
   <hop> <from>Lab Test Date</from><to>Organism</to><enabled>Y</enabled> </hop>
-  <hop> <from>Organism</from><to>Select values</to><enabled>Y</enabled> </hop>
   <hop> <from>Select values</from><to>fact_lab_test</to><enabled>Y</enabled> </hop>
+  <hop> <from>lab_results</from><to>Get person</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get person</from><to>Collection date</to><enabled>Y</enabled> </hop>
+  <hop> <from>dim_people</from><to>Get person</to><enabled>Y</enabled> </hop>
+  <hop> <from>Organism</from><to>Disease</to><enabled>Y</enabled> </hop>
+  <hop> <from>Disease</from><to>Select values</to><enabled>Y</enabled> </hop>
+  <hop> <from>dim_disease</from><to>Disease</to><enabled>Y</enabled> </hop>
   </order>
-  <step>
-    <name>lab_results</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>Trisano TX DS</connection>
-    <sql>select  &#xa;   collection_date&#xa;  ,lab_test_date&#xa;  ,created_at as src_created_at&#xa;  ,updated_at as src_updated_at&#xa;  ,coalesce&#x28;test_type_id,0&#x29;   as src_lab_test_type_id&#xa;  ,coalesce&#x28;test_result_id,0&#x29; as src_lab_test_result_id&#xa;  ,coalesce&#x28;test_status_id,0&#x29; as src_lab_test_status_id&#xa;  ,coalesce&#x28;organism_id,0&#x29;    as src_organism_id&#xa;from lab_results&#x3b;&#xa;</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>348</xloc>
-      <yloc>17</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>dw_dim_date</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>Trisano OLAP DS</connection>
-    <sql>SELECT &#xa;  dw_dim_date_id&#xa;  ,src_date_val &#xa;FROM &#xa;warehouse.dw_dim_date</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>210</xloc>
-      <yloc>89</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>dw_dim_date 4</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>Trisano OLAP DS</connection>
-    <sql>SELECT &#xa;  dw_dim_date_id&#xa;  ,src_date_val &#xa;FROM &#xa;warehouse.dw_dim_date</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>226</xloc>
-      <yloc>250</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>dim_organism</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>Trisano OLAP DS</connection>
-    <sql>SELECT &#xa;  dw_organism_id&#xa;  ,src_id as src_organism_id&#xa;from warehouse.dim_organism</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>226</xloc>
-      <yloc>337</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>dim_junk_lab_test</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>Trisano OLAP DS</connection>
-    <sql>select &#xa;   dw_junk_lab_test_id&#xa;  ,src_lab_test_result_id&#xa;  ,src_lab_test_status_id&#xa;  ,src_lab_test_type_id&#xa;from warehouse.dim_junk_lab_test</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>492</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
   <step>
     <name>Collection date</name>
     <type>StreamLookup</type>
@@ -292,8 +166,301 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>349</xloc>
-      <yloc>92</yloc>
+      <xloc>353</xloc>
+      <yloc>173</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Lab Test Date</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <from>dw_dim_date 4</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>lab_test_date</name>
+        <field>src_date_val</field>
+      </key>
+      <value>
+        <name>dw_dim_date_id</name>
+        <rename>dw_lab_test_date_id</rename>
+        <default>0</default>
+        <type>Integer</type>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>354</xloc>
+      <yloc>332</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Organism</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <from>dim_organism</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>src_organism_id</name>
+        <field>src_organism_id</field>
+      </key>
+      <value>
+        <name>dw_organism_id</name>
+        <rename>dw_organism_id</rename>
+        <default>0</default>
+        <type>Integer</type>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>355</xloc>
+      <yloc>417</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Select values</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>        <select_unspecified>N</select_unspecified>
+      <remove>        <name>collection_date</name>
+      </remove>      <remove>        <name>lab_test_date</name>
+      </remove>      <remove>        <name>src_created_at</name>
+      </remove>      <remove>        <name>src_updated_at</name>
+      </remove>      <remove>        <name>src_lab_test_type_id</name>
+      </remove>      <remove>        <name>src_lab_test_result_id</name>
+      </remove>      <remove>        <name>src_lab_test_status_id</name>
+      </remove>      <remove>        <name>src_organism_id</name>
+      </remove>      <remove>        <name>participation_id</name>
+      </remove>      <remove>        <name>entity_id</name>
+      </remove>      <remove>        <name>src_disease_id</name>
+      </remove>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>355</xloc>
+      <yloc>570</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>dim_junk_lab_test</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Trisano OLAP DS</connection>
+    <sql>select &#xa;   dw_junk_lab_test_id&#xa;  ,src_lab_test_result_id&#xa;  ,src_lab_test_status_id&#xa;  ,src_lab_test_type_id&#xa;from warehouse.dim_junk_lab_test</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>496</xloc>
+      <yloc>257</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>dim_organism</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Trisano OLAP DS</connection>
+    <sql>SELECT &#xa;  dw_organism_id&#xa;  ,src_id as src_organism_id&#xa;from warehouse.dim_organism</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>230</xloc>
+      <yloc>418</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>dw_dim_date</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Trisano OLAP DS</connection>
+    <sql>SELECT &#xa;  dw_dim_date_id&#xa;  ,src_date_val &#xa;FROM &#xa;warehouse.dw_dim_date</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>240</xloc>
+      <yloc>174</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>dw_dim_date 4</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Trisano OLAP DS</connection>
+    <sql>SELECT &#xa;  dw_dim_date_id&#xa;  ,src_date_val &#xa;FROM &#xa;warehouse.dw_dim_date</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>230</xloc>
+      <yloc>331</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>fact_lab_test</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Trisano OLAP DS</connection>
+    <schema>warehouse</schema>
+    <table>fact_lab_test</table>
+    <commit>1000</commit>
+    <truncate>Y</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+        <field>
+          <column_name>food_handler</column_name>
+          <stream_name>food_handler</stream_name>
+        </field>
+        <field>
+          <column_name>health_care_worker</column_name>
+          <stream_name>health_care_worker</stream_name>
+        </field>
+        <field>
+          <column_name>group_living</column_name>
+          <stream_name>group_living</stream_name>
+        </field>
+        <field>
+          <column_name>day_care</column_name>
+          <stream_name>day_care</stream_name>
+        </field>
+        <field>
+          <column_name>pregnancy_due_date</column_name>
+          <stream_name>pregnancy_due_date</stream_name>
+        </field>
+        <field>
+          <column_name>risk_factors</column_name>
+          <stream_name>risk_factors</stream_name>
+        </field>
+        <field>
+          <column_name>dw_person_id</column_name>
+          <stream_name>dw_person_id</stream_name>
+        </field>
+        <field>
+          <column_name>dw_collection_date_id</column_name>
+          <stream_name>dw_collection_date_id</stream_name>
+        </field>
+        <field>
+          <column_name>dw_junk_lab_test_id</column_name>
+          <stream_name>dw_junk_lab_test_id</stream_name>
+        </field>
+        <field>
+          <column_name>dw_lab_test_date_id</column_name>
+          <stream_name>dw_lab_test_date_id</stream_name>
+        </field>
+        <field>
+          <column_name>dw_organism_id</column_name>
+          <stream_name>dw_organism_id</stream_name>
+        </field>
+        <field>
+          <column_name>dw_disease_id</column_name>
+          <stream_name>dw_disease_id</stream_name>
+        </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>358</xloc>
+      <yloc>676</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -336,14 +503,40 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>349</xloc>
-      <yloc>177</yloc>
+      <xloc>353</xloc>
+      <yloc>258</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Lab Test Date</name>
+    <name>lab_results</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Trisano TX DS</connection>
+    <sql>select  &#xa;   coalesce&#x28;p.primary_entity_id,p.secondary_entity_id,0&#x29; as entity_id&#xa;  ,l.participation_id&#xa;  ,l.collection_date&#xa;  ,l.lab_test_date&#xa;  ,l.created_at as src_created_at&#xa;  ,l.updated_at as src_updated_at&#xa;  ,coalesce&#x28;l.test_type_id,0&#x29;   as src_lab_test_type_id&#xa;  ,coalesce&#x28;l.test_result_id,0&#x29; as src_lab_test_result_id&#xa;  ,coalesce&#x28;l.test_status_id,0&#x29; as src_lab_test_status_id&#xa;  ,coalesce&#x28;l.organism_id,0&#x29;    as src_organism_id&#xa;  ,case when r.food_handler_id         is not null then true else false end as food_handler &#xa;  ,case when r.healthcare_worker_id    is not null then true else false end as health_care_worker&#xa;  ,case when r.group_living_id         is not null then true else false end as group_living&#xa;  ,case when r.day_care_association_id is not null then true else false end as day_care&#xa;  ,r.pregnancy_due_date&#xa;  ,r.risk_factors&#xa;  ,de.disease_id as src_disease_id&#xa;from lab_results l left outer join participations p&#xa;on l.participation_id &#x3d; p.id&#xa;left outer join participations_risk_factors r&#xa;on l.participation_id &#x3d; r.participation_id&#xa;left outer join disease_events de&#xa;on p.event_id &#x3d; de.event_id&#x3b;</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>348</xloc>
+      <yloc>17</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get person</name>
     <type>StreamLookup</type>
     <description/>
     <distribute>Y</distribute>
@@ -353,98 +546,34 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <from>dw_dim_date 4</from>
+    <from>dim_people</from>
     <input_sorted>N</input_sorted>
     <preserve_memory>Y</preserve_memory>
     <sorted_list>N</sorted_list>
     <integer_pair>N</integer_pair>
     <lookup>
       <key>
-        <name>lab_test_date</name>
-        <field>src_date_val</field>
+        <name>entity_id</name>
+        <field>src_entity_id</field>
       </key>
       <value>
-        <name>dw_dim_date_id</name>
-        <rename>dw_lab_test_date_id</rename>
+        <name>dw_person_id</name>
+        <rename>dw_person_id</rename>
         <default>0</default>
         <type>Integer</type>
       </value>
     </lookup>
      <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>350</xloc>
-      <yloc>251</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Organism</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <from>dim_organism</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>Y</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>src_organism_id</name>
-        <field>src_organism_id</field>
-      </key>
-      <value>
-        <name>dw_organism_id</name>
-        <rename>dw_organism_id</rename>
-        <default>0</default>
-        <type>Integer</type>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>351</xloc>
-      <yloc>336</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Select values</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>        <select_unspecified>N</select_unspecified>
-      <remove>        <name>collection_date</name>
-      </remove>      <remove>        <name>lab_test_date</name>
-      </remove>      <remove>        <name>src_created_at</name>
-      </remove>      <remove>        <name>src_updated_at</name>
-      </remove>      <remove>        <name>src_lab_test_type_id</name>
-      </remove>      <remove>        <name>src_lab_test_result_id</name>
-      </remove>      <remove>        <name>src_lab_test_status_id</name>
-      </remove>      <remove>        <name>src_organism_id</name>
-      </remove>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>349</xloc>
-      <yloc>440</yloc>
+      <yloc>97</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>fact_lab_test</name>
-    <type>TableOutput</type>
+    <name>dim_people</name>
+    <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -454,44 +583,78 @@
            <schema_name/>
            </partitioning>
     <connection>Trisano OLAP DS</connection>
-    <schema>warehouse</schema>
-    <table>fact_lab_test</table>
-    <commit>1000</commit>
-    <truncate>Y</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
-    <fields>
-        <field>
-          <column_name>dw_collection_date_id</column_name>
-          <stream_name>dw_collection_date_id</stream_name>
-        </field>
-        <field>
-          <column_name>dw_junk_lab_test_id</column_name>
-          <stream_name>dw_junk_lab_test_id</stream_name>
-        </field>
-        <field>
-          <column_name>dw_lab_test_date_id</column_name>
-          <stream_name>dw_lab_test_date_id</stream_name>
-        </field>
-        <field>
-          <column_name>dw_organism_id</column_name>
-          <stream_name>dw_organism_id</stream_name>
-        </field>
-    </fields>
+    <sql>SELECT src_entity_id,dw_person_id from warehouse.dim_person</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>352</xloc>
-      <yloc>546</yloc>
+      <xloc>467</xloc>
+      <yloc>97</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Disease</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <from>dim_disease</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>src_disease_id</name>
+        <field>src_disease_id</field>
+      </key>
+      <value>
+        <name>dw_disease_id</name>
+        <rename>dw_disease_id</rename>
+        <default>0</default>
+        <type>Integer</type>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>359</xloc>
+      <yloc>499</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>dim_disease</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Trisano OLAP DS</connection>
+    <sql>SELECT dw_disease_id, src_disease_id from warehouse.dim_disease</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>478</xloc>
+      <yloc>500</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

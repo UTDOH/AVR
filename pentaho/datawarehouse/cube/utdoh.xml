@@ -1,7 +1,7 @@
 <Schema name="UTDOH">
   <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Disease">
-    <Hierarchy name="Disease" visible="true" hasAll="true" primaryKey="dw_dim_disease_id">
-      <Table name="dw_dim_disease" schema="warehouse">
+    <Hierarchy name="Disease" visible="true" hasAll="true" primaryKey="dw_disease_id">
+      <Table name="dim_disease" schema="warehouse">
       </Table>
       <Level approxRowCount="500" name="Name" visible="true" column="disease_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
       </Level>
@@ -109,6 +109,20 @@
       </Level>
     </Hierarchy>
   </Dimension>
+  <Dimension type="StandardDimension" visible="true" name="Person">
+    <Hierarchy name="Person" visible="true" hasAll="true">
+      <Table name="dim_person" schema="warehouse" alias="">
+      </Table>
+      <Level name="First Name" visible="true" column="first_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="Last Name" visible="true" column="last_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="Birth Date" visible="true" column="birth_date" type="Date" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="Gender" visible="true" column="birth_gender_id" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
   <Cube name="disease events" visible="true" cache="true" enabled="true">
     <Table name="fact_disease_event" schema="warehouse">
     </Table>
@@ -138,6 +152,42 @@
     </DimensionUsage>
     <DimensionUsage source="Lab Test Status" name="Lab Test Status" visible="true" foreignKey="dw_junk_lab_test_id" highCardinality="false">
     </DimensionUsage>
+    <DimensionUsage source="Disease" name="Disease" visible="true" foreignKey="dw_disease_id">
+    </DimensionUsage>
+    <DimensionUsage source="Person" name="Person" visible="true" foreignKey="dw_person_id">
+    </DimensionUsage>
+    <Dimension type="StandardDimension" visible="true" foreignKey="dw_person_id" name="Group Living">
+      <Hierarchy name="Group Living" visible="true" hasAll="true">
+        <Table name="fact_lab_test" schema="warehouse" alias="">
+        </Table>
+        <Level name="Group Living" visible="true" column="group_living" type="Boolean" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="dw_person_id" name="Food Handler">
+      <Hierarchy name="Food Handler" visible="true" hasAll="true">
+        <Table name="fact_lab_test" schema="warehouse" alias="">
+        </Table>
+        <Level name="Food Handler" visible="true" column="food_handler" type="Boolean" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="dw_person_id" name="Health Care Worker">
+      <Hierarchy name="Health Care Worker" visible="true" hasAll="true">
+        <Table name="fact_lab_test" schema="warehouse" alias="">
+        </Table>
+        <Level name="Health Care Worker" visible="true" column="health_care_worker" type="Boolean" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="dw_person_id" name="Risk Factor">
+      <Hierarchy name="Risk Factor" visible="true" hasAll="true">
+        <Table name="fact_lab_test" schema="warehouse" alias="">
+        </Table>
+        <Level name="Risk Factor" visible="true" column="risk_factors" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
     <Measure name="Count of Lab Test" column="dw_fact_lab_test_id" aggregator="count" visible="true">
     </Measure>
   </Cube>
