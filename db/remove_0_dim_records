@@ -1,0 +1,21 @@
+﻿delete from warehouse.dim_disease where dw_disease_id = 0;
+
+delete from warehouse.dim_address where dw_address_id = 0;
+
+delete from warehouse.dim_diagnostic_facility where dw_diagnostic_facility_id = 0;
+
+delete from warehouse.dim_ethnicity where dw_ethnicity_id = 0;
+
+delete from warehouse.dim_investigator where dw_investigator_id = 0;
+
+delete from warehouse.dim_jurisdiction where dw_jurisdiction_id = 0;
+
+delete from warehouse.dim_language where dw_language_id = 0;
+
+delete from warehouse.dim_location where dw_location_id = 0;
+
+delete from warehouse.dim_outbreak where dw_outbreak_id = 0;
+
+delete from warehouse.dim_person where dw_person_id = 0;
+
+delete from warehouse.dim_workflow where dw_workflow_id = 0;

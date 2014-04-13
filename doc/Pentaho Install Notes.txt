@@ -11,37 +11,39 @@ sudo chown -R pentaho /var/local/pentaho
 sudo chgrp -R pentaho /var/local/pentaho
 
 Login to postgres
-postgres=# create user pentaho with password '*****';
+postgres=# create user pentaho with password '*****'; 
 postgres=# create database hibernate;
 CREATE DATABASE
 postgres=# grant all privileges on database hibernate to pentaho;
 postgres=# \c hibernate
-postgres=# grant all on all tables in schema public to pentaho
+postgres=# grant all on all tables in schema public to pentaho;
 GRANT
 postgres=# create database jackrabbit;
 CREATE DATABASE
-postgres=# grant all privileges on database jackrabbit to pentaho;
+postgres=# create user jcr_user with password 'pentaho';
+postgres=# grant all privileges on database jackrabbit to jcr_user;
+postgres=# alter database jackrabbit owner to jcr_user;
 postgres=# \c jackrabbit
-postgres=# grant all on all tables in schema public to pentaho
+postgres=# grant all on all tables in schema public to jcr_user;
 GRANT
 postgres=# create database pentaho;
 CREATE DATABASE
 postgres=# grant all privileges on database pentaho to pentaho;
-postgres=# grant all on all tables in schema public to pentaho
+postgres=# grant all on all tables in schema public to pentaho;
 GRANT
 postgres=# create database quartz;
 CREATE DATABASE
 postgres=# grant all privileges on database quartz to pentaho;
 postgres=# \c quartz
-postgres=# grant all on all tables in schema public to pentaho
+postgres=# grant all on all tables in schema public to pentaho;
 GRANT
 postgres=# create database trisano_olap_dev;
 CREATE DATABASE
 postgres=# grant all privileges on database trisano_olap_dev to pentaho;
 postgres=# \c trisano_olap_dev 
-postgres=# grant all on all tables in schema public to pentaho
-postgres=# grant all on all tables in schema warehouse to pentaho
-postgres=# grant all on all tables in schema warehouse_util to pentaho
+postgres=# grant all on all tables in schema public to pentaho;
+postgres=# grant all on all tables in schema warehouse to pentaho;
+postgres=# grant all on all tables in schema warehouse_util to pentaho;
 GRANT
 \q
 

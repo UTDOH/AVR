@@ -476,7 +476,7 @@
            <schema_name/>
            </partitioning>
     <connection>Trisano TX DS</connection>
-    <sql>SELECT &#xa;   d.disease_id as disease_id&#xa;  ,date&#x28;d.created_at&#x29; as date_diagnosed&#xa;  ,date&#x28;d.created_at&#x29; as disease_onset_date&#xa;  ,addr.id as location_id&#xa;  ,juris.id as jurisdiction_id&#xa;FROM &#xa;  vw_disease_events d inner join vw_addresses addr on d.event_id &#x3d; addr.event_id&#xa;  left join participations juris on juris.id &#x3d; d.participation_id and juris.type&#x3a;&#x3a;text &#x3d; &#x27;Jurisdiction&#x27;&#x3a;&#x3a;text&#xa;&#x3b;</sql>
+    <sql>SELECT &#xa;   d.disease_id as disease_id&#xa;  ,date&#x28;d.created_at&#x29; as date_diagnosed&#xa;  ,date&#x28;d.created_at&#x29; as disease_onset_date&#xa;  ,addr.id as location_id&#xa;  ,juris.id as jurisdiction_id&#xa;  ,d.event_id as src_event_id&#xa;FROM &#xa;  vw_disease_events d inner join vw_addresses addr on d.event_id &#x3d; addr.event_id&#xa;  left join participations juris on juris.id &#x3d; d.participation_id and juris.type&#x3a;&#x3a;text &#x3d; &#x27;Jurisdiction&#x27;&#x3a;&#x3a;text&#xa;&#x3b;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -557,6 +557,10 @@
         <precision>-2</precision>
       </field>      <field>        <name>dw_jurisdiction_id</name>
         <rename>dw_jurisdiction_id</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>src_event_id</name>
+        <rename>src_event_id</rename>
         <length>-2</length>
         <precision>-2</precision>
       </field>        <select_unspecified>N</select_unspecified>
@@ -718,7 +722,7 @@
            </partitioning>
        <calculation><field_name>dw_jurisdiction_id</field_name>
 <calc_type>CONSTANT</calc_type>
-<field_a>-1</field_a>
+<field_a>0</field_a>
 <field_b/>
 <field_c/>
 <value_type>Integer</value_type>
