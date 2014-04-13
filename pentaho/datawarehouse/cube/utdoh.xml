@@ -17,9 +17,9 @@
       </Level>
     </Hierarchy>
   </Dimension>
-  <Dimension type="TimeDimension" visible="true" name="Date">
+  <Dimension type="TimeDimension" visible="true" highCardinality="false" name="Date">
     <Hierarchy name="Date" visible="true" hasAll="true" primaryKey="dw_dim_date_id">
-      <Table name="dw_dim_date" schema="warehouse" alias="">
+      <Table name="dw_dim_date" schema="warehouse">
       </Table>
       <Level name="Year" visible="true" table="dw_dim_date" column="year4" ordinalColumn="year_week_int" type="String" internalType="int" uniqueMembers="false" levelType="TimeYears" hideMemberIf="Never">
       </Level>
@@ -29,47 +29,63 @@
       </Level>
       <Level name="Week" visible="true" column="week_in_year" ordinalColumn="week_sequence" type="String" uniqueMembers="false" levelType="TimeWeeks" hideMemberIf="Never">
       </Level>
-      <Level name="Day" visible="true" column="day_name" ordinalColumn="day_sequence" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+      <Level name="Day" visible="true" column="day_name" ordinalColumn="day_sequence" type="String" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
       </Level>
     </Hierarchy>
   </Dimension>
-  <Dimension type="StandardDimension" visible="true" name="Organism">
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Organism">
     <Hierarchy name="Organism" visible="true" hasAll="true" primaryKey="dw_organism_id">
-      <Table name="dim_organism" schema="warehouse" alias="">
+      <Table name="dim_organism" schema="warehouse">
       </Table>
       <Level name="Organism" visible="true" table="dim_organism" column="organism_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
         <Property name="snomed name" column="snomed_name" type="String">
         </Property>
-        <Property name="snomed code" column="snomed_code">
+        <Property name="snomed code" column="snomed_code" type="String">
         </Property>
       </Level>
     </Hierarchy>
   </Dimension>
-  <Dimension type="StandardDimension" visible="true" name="Lab Test Name">
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Lab Test Name">
     <Hierarchy name="Test Name" visible="true" hasAll="true" primaryKey="dw_junk_lab_test_id">
-      <Table name="dim_junk_lab_test" schema="warehouse" alias="">
+      <Table name="dim_junk_lab_test" schema="warehouse">
       </Table>
-      <Level name="Test Name" visible="true" column="test_name" type="String" uniqueMembers="true" levelType="Regular">
+      <Level name="Test Name" visible="true" column="test_name" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
       </Level>
     </Hierarchy>
   </Dimension>
-  <Dimension type="StandardDimension" visible="true" name="Lab Test Result">
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Lab Test Result">
     <Hierarchy name="Test Result" visible="true" hasAll="true" primaryKey="dw_junk_lab_test_id">
-      <Table name="dim_junk_lab_test" schema="warehouse" alias="">
+      <Table name="dim_junk_lab_test" schema="warehouse">
       </Table>
-      <Level name="Result Description" visible="true" table="dim_junk_lab_test" column="lab_test_result_description" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      <Level name="Result Description" visible="true" table="dim_junk_lab_test" column="lab_test_result_description" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
         <Property name="Result Code" column="lab_test_result_code" type="String">
         </Property>
       </Level>
     </Hierarchy>
   </Dimension>
-  <Dimension type="StandardDimension" visible="true" name="Lab Test Status">
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Lab Test Status">
     <Hierarchy name="Test Status" visible="true" hasAll="true" primaryKey="dw_junk_lab_test_id">
-      <Table name="dim_junk_lab_test" schema="warehouse" alias="">
+      <Table name="dim_junk_lab_test" schema="warehouse">
       </Table>
       <Level name="Status Description" visible="true" table="dim_junk_lab_test" column="lab_test_status_description" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
         <Property name="Status Code" column="lab_test_status_code" type="String">
         </Property>
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="TimeDimension" visible="true" highCardinality="false" name="Date of Onset">
+    <Hierarchy name="Date of Onset" visible="true" hasAll="true" primaryKey="dw_dim_date_id">
+      <Table name="dw_dim_date" schema="warehouse">
+      </Table>
+      <Level name="Year" visible="true" table="dw_dim_date" column="year4" ordinalColumn="year_week_int" type="String" internalType="int" uniqueMembers="false" levelType="TimeYears" hideMemberIf="Never">
+      </Level>
+      <Level name="Quarter" visible="true" column="quarter_name" ordinalColumn="quarter_number" type="String" uniqueMembers="false" levelType="TimeQuarters" hideMemberIf="Never">
+      </Level>
+      <Level name="Month" visible="true" column="month_abbreviation" ordinalColumn="month_number" type="String" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never">
+      </Level>
+      <Level name="Week" visible="true" column="week_in_year" ordinalColumn="week_sequence" type="String" uniqueMembers="false" levelType="TimeWeeks" hideMemberIf="Never">
+      </Level>
+      <Level name="Day" visible="true" column="day_name" ordinalColumn="day_sequence" type="String" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
       </Level>
     </Hierarchy>
   </Dimension>
@@ -82,27 +98,25 @@
     </DimensionUsage>
     <DimensionUsage source="Location" name="Location" visible="true" foreignKey="dim_location_id" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="Date" name="Date of Onset" caption="Date of Onset" visible="true" foreignKey="onset_dim_date_id" highCardinality="false">
+    <DimensionUsage source="Date of Onset" name="Date of Onset" caption="Date of Onset" visible="true" foreignKey="onset_dim_date_id" highCardinality="false">
     </DimensionUsage>
     <Measure name="Disease Count" column="dim_disease_id" datatype="Integer" aggregator="count" visible="true">
     </Measure>
-    <Measure name="Distinct Disease Count" column="dim_disease_id" datatype="Integer" aggregator="distinct-count" visible="true">
-    </Measure>
   </Cube>
   <Cube name="lab test" visible="true" cache="true" enabled="true">
-    <Table name="fact_lab_test" schema="warehouse" alias="">
+    <Table name="fact_lab_test" schema="warehouse">
     </Table>
-    <DimensionUsage source="Date" name="Date of Collection" visible="true" foreignKey="dw_collection_date_id">
+    <DimensionUsage source="Date" name="Date of Collection" visible="true" foreignKey="dw_collection_date_id" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="Date" name="Date of Lab Test" visible="true" foreignKey="dw_lab_test_date_id">
+    <DimensionUsage source="Date" name="Date of Lab Test" visible="true" foreignKey="dw_lab_test_date_id" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="Organism" name="Organism" visible="true" foreignKey="dw_organism_id">
+    <DimensionUsage source="Organism" name="Organism" visible="true" foreignKey="dw_organism_id" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="Lab Test Name" name="Lab Test Name" visible="true" foreignKey="dw_junk_lab_test_id">
+    <DimensionUsage source="Lab Test Name" name="Lab Test Name" visible="true" foreignKey="dw_junk_lab_test_id" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="Lab Test Result" name="Lab Test Result" visible="true" foreignKey="dw_junk_lab_test_id">
+    <DimensionUsage source="Lab Test Result" name="Lab Test Result" visible="true" foreignKey="dw_junk_lab_test_id" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="Lab Test Status" name="Lab Test Status" visible="true" foreignKey="dw_junk_lab_test_id">
+    <DimensionUsage source="Lab Test Status" name="Lab Test Status" visible="true" foreignKey="dw_junk_lab_test_id" highCardinality="false">
     </DimensionUsage>
     <Measure name="Count of Lab Test" column="dw_fact_lab_test_id" aggregator="count" visible="true">
     </Measure>
