@@ -51,6 +51,10 @@
       </Table>
       <Level name="Test Name" visible="true" column="test_name" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
       </Level>
+      <Level name="Test Status" visible="true" column="lab_test_status_description" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="Test Result" visible="true" column="lab_test_result_description" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
     </Hierarchy>
   </Dimension>
   <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Lab Test Result">
@@ -70,6 +74,22 @@
       <Level name="Status Description" visible="true" table="dim_junk_lab_test" column="lab_test_status_description" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
         <Property name="Status Code" column="lab_test_status_code" type="String">
         </Property>
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="TimeDimension" visible="true" highCardinality="false" name="Date of Collection">
+    <Hierarchy name="Date of Collection" visible="true" hasAll="true" primaryKey="dw_dim_date_id">
+      <Table name="dw_dim_date" schema="warehouse">
+      </Table>
+      <Level name="Year" visible="true" table="dw_dim_date" column="year4" ordinalColumn="year_week_int" type="String" internalType="int" uniqueMembers="false" levelType="TimeYears" hideMemberIf="Never">
+      </Level>
+      <Level name="Quarter" visible="true" column="quarter_name" ordinalColumn="quarter_number" type="String" uniqueMembers="false" levelType="TimeQuarters" hideMemberIf="Never">
+      </Level>
+      <Level name="Month" visible="true" column="month_abbreviation" ordinalColumn="month_number" type="String" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never">
+      </Level>
+      <Level name="Week" visible="true" column="week_in_year" ordinalColumn="week_sequence" type="String" uniqueMembers="false" levelType="TimeWeeks" hideMemberIf="Never">
+      </Level>
+      <Level name="Day" visible="true" column="day_name" ordinalColumn="day_sequence" type="String" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
       </Level>
     </Hierarchy>
   </Dimension>
@@ -98,7 +118,7 @@
     </DimensionUsage>
     <DimensionUsage source="Location" name="Location" visible="true" foreignKey="dim_location_id" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="Date of Onset" name="Date of Onset" caption="Date of Onset" visible="true" foreignKey="onset_dim_date_id" highCardinality="false">
+    <DimensionUsage source="Date of Onset" name="Date of Onset" caption="Onset Date" visible="true" foreignKey="onset_dim_date_id" highCardinality="false">
     </DimensionUsage>
     <Measure name="Disease Count" column="dim_disease_id" datatype="Integer" aggregator="count" visible="true">
     </Measure>
@@ -106,9 +126,9 @@
   <Cube name="lab test" visible="true" cache="true" enabled="true">
     <Table name="fact_lab_test" schema="warehouse">
     </Table>
-    <DimensionUsage source="Date" name="Date of Collection" visible="true" foreignKey="dw_collection_date_id" highCardinality="false">
+    <DimensionUsage source="Date of Collection" name="Date of Collection" caption="Collection Date" visible="true" foreignKey="dw_collection_date_id" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="Date" name="Date of Lab Test" visible="true" foreignKey="dw_lab_test_date_id" highCardinality="false">
+    <DimensionUsage source="Date" name="Date of Lab Test" caption="Lab Test Date" visible="true" foreignKey="dw_lab_test_date_id" highCardinality="false">
     </DimensionUsage>
     <DimensionUsage source="Organism" name="Organism" visible="true" foreignKey="dw_organism_id" highCardinality="false">
     </DimensionUsage>
