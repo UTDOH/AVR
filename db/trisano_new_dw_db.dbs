@@ -528,14 +528,41 @@
 			</index>
 		</table>
 		<table name="dim_organism" >
-			<column name="dw_organism_id" type="serial" length="10" decimal="0" jt="4" mandatory="y" />
-			<column name="src_id" type="integer" length="10" decimal="0" jt="4" />
-			<column name="organism_name" type="varchar" length="255" decimal="0" jt="12" />
-			<column name="snomed_name" type="varchar" length="255" decimal="0" jt="12" />
-			<column name="snomed_code" type="varchar" length="255" decimal="0" jt="12" />
-			<column name="snomed_id" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="dw_organism_id" type="serial" length="10" decimal="0" jt="4" mandatory="y" >
+				<comment><![CDATA[OLAP TK of the dim organism entity.]]></comment>
+			</column>
+			<column name="hashcode" type="bigint" jt="-5" >
+				<comment><![CDATA[Type I dimension hashcode]]></comment>
+			</column>
+			<column name="src_organism_id" type="integer" length="10" decimal="0" jt="4" >
+				<comment><![CDATA[The OLTP organisms.id value.]]></comment>
+			</column>
+			<column name="organism_name" type="varchar" length="255" decimal="0" jt="12" >
+				<comment><![CDATA[The name of the organism.]]></comment>
+			</column>
+			<column name="snomed_name" type="varchar" length="255" decimal="0" jt="12" >
+				<comment><![CDATA[The source snomed name]]></comment>
+			</column>
+			<column name="snomed_code" type="varchar" length="255" decimal="0" jt="12" >
+				<comment><![CDATA[The src snomed code]]></comment>
+			</column>
+			<column name="snomed_id" type="varchar" length="255" decimal="0" jt="12" >
+				<comment><![CDATA[The source snomed id.]]></comment>
+			</column>
+			<column name="src_created_at" type="timestamp" jt="93" >
+				<comment><![CDATA[The source created_at time.]]></comment>
+			</column>
+			<column name="src_updated_at" type="timestamp" jt="93" >
+				<comment><![CDATA[The source updated at timestamp]]></comment>
+			</column>
+			<column name="etl_load_date" type="timestamp" jt="93" >
+				<comment><![CDATA[The timestamp of when this organism dim record was last updated.]]></comment>
+			</column>
 			<index name="dim_organism_pkey" unique="PRIMARY_KEY" >
 				<column name="dw_organism_id" />
+			</index>
+			<index name="idx_dim_organism_lookup" unique="NORMAL" >
+				<column name="hashcode" />
 			</index>
 		</table>
 		<table name="dim_outbreak" >
@@ -774,7 +801,6 @@
 		</entity>
 		<entity schema="warehouse" name="dim_ethnicity" color="d0def5" x="285" y="495" />
 		<entity schema="warehouse" name="dim_jurisdiction" color="d0def5" x="285" y="270" />
-		<entity schema="warehouse" name="dim_person" color="d0def5" x="495" y="60" />
 		<entity schema="warehouse" name="fact_disease_event" color="d0def5" x="675" y="525" />
 		<entity schema="warehouse" name="dim_outbreak" color="d0def5" x="255" y="1050" />
 		<entity schema="warehouse" name="dim_language" color="d0def5" x="480" y="495" />
@@ -788,7 +814,47 @@
 		<entity schema="warehouse" name="dim_workflow" color="d0def5" x="255" y="1215" />
 		<entity schema="warehouse" name="dim_external_code" color="b2cdf7" x="270" y="1350" />
 		<entity schema="warehouse" name="fact_event" color="d0def5" x="675" y="1035" />
-		<entity schema="warehouse" name="dim_organism" color="b2cdf7" x="1005" y="330" />
-		<entity schema="warehouse" name="fact_lab_test" color="b2cdf7" x="1005" y="510" />
+		<entity schema="warehouse" name="fact_lab_test" color="b2cdf7" x="930" y="660" />
+		<entity schema="warehouse" name="dim_person" color="d0def5" x="495" y="60" />
+		<entity schema="warehouse" name="dim_organism" color="b2cdf7" x="930" y="450" />
+		<script name="dim_organism" id="SQL5372944" >
+			<string><![CDATA[CREATE TABLE warehouse.dim_organism ( 
+	dw_organism_id       serial  NOT NULL,
+	hashcode             bigint  ,
+	src_organism_id      integer  ,
+	organism_name        varchar(255)  ,
+	snomed_name          varchar(255)  ,
+	snomed_code          varchar(255)  ,
+	snomed_id            varchar(255)  ,
+	src_created_at       timestamp  ,
+	src_updated_at       timestamp  ,
+	etl_load_date        timestamp  ,
+	CONSTRAINT dim_organism_pkey PRIMARY KEY ( dw_organism_id )
+ );
+
+CREATE INDEX idx_dim_organism_lookup ON warehouse.dim_organism ( hashcode );
+
+COMMENT ON COLUMN warehouse.dim_organism.dw_organism_id IS 'OLAP TK of the dim organism entity.';
+
+COMMENT ON COLUMN warehouse.dim_organism.hashcode IS 'Type I dimension hashcode';
+
+COMMENT ON COLUMN warehouse.dim_organism.src_organism_id IS 'The OLTP organisms.id value.';
+
+COMMENT ON COLUMN warehouse.dim_organism.organism_name IS 'The name of the organism.';
+
+COMMENT ON COLUMN warehouse.dim_organism.snomed_name IS 'The source snomed name';
+
+COMMENT ON COLUMN warehouse.dim_organism.snomed_code IS 'The src snomed code';
+
+COMMENT ON COLUMN warehouse.dim_organism.snomed_id IS 'The source snomed id.';
+
+COMMENT ON COLUMN warehouse.dim_organism.src_created_at IS 'The source created_at time.';
+
+COMMENT ON COLUMN warehouse.dim_organism.src_updated_at IS 'The source updated at timestamp';
+
+COMMENT ON COLUMN warehouse.dim_organism.etl_load_date IS 'The timestamp of when this organism dim record was last updated.';
+
+]]></string>
+		</script>
 	</layout>
 </project>

@@ -207,8 +207,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>850</xloc>
-      <yloc>360</yloc>
+      <xloc>844</xloc>
+      <yloc>437</yloc>
       </entry>
     <entry>
       <name>Abort job</name>
@@ -251,8 +251,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>850</xloc>
-      <yloc>149</yloc>
+      <xloc>845</xloc>
+      <yloc>230</yloc>
       </entry>
     <entry>
       <name>upsert_id_0_dim_records2</name>
@@ -284,8 +284,41 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>851</xloc>
-      <yloc>257</yloc>
+      <xloc>843</xloc>
+      <yloc>148</yloc>
+      </entry>
+    <entry>
+      <name>load_fact_lab_test</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;load_fact_lab_test.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>845</xloc>
+      <yloc>326</yloc>
       </entry>
   </entries>
   <hops>
@@ -345,11 +378,29 @@
     </hop>
     <hop>
       <from>load_person_related_dims</from>
+      <to>upsert_id_0_dim_records2</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>upsert_id_0_dim_records2</from>
       <to>load_fact_disease_event</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>upsert_id_0_dim_records2</from>
+      <to>Abort job</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
       <unconditional>N</unconditional>
     </hop>
     <hop>
@@ -363,7 +414,7 @@
     </hop>
     <hop>
       <from>load_fact_disease_event</from>
-      <to>upsert_id_0_dim_records2</to>
+      <to>load_fact_lab_test</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -371,7 +422,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>upsert_id_0_dim_records2</from>
+      <from>load_fact_lab_test</from>
       <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -380,7 +431,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>upsert_id_0_dim_records2</from>
+      <from>load_fact_lab_test</from>
       <to>Abort job</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>

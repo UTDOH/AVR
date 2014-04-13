@@ -4,7 +4,7 @@
 
 -- Dumped from database version 9.2.6
 -- Dumped by pg_dump version 9.2.6
--- Started on 2014-04-13 15:27:02 MDT
+-- Started on 2014-04-13 16:07:51 MDT
 
 SET statement_timeout = 0;
 SET client_encoding = 'UTF8';
@@ -23,7 +23,7 @@ CREATE SCHEMA warehouse;
 ALTER SCHEMA warehouse OWNER TO pentaho;
 
 --
--- TOC entry 2982 (class 0 OID 0)
+-- TOC entry 2986 (class 0 OID 0)
 -- Dependencies: 7
 -- Name: SCHEMA warehouse; Type: COMMENT; Schema: -; Owner: pentaho
 --
@@ -42,7 +42,7 @@ CREATE SCHEMA warehouse_util;
 ALTER SCHEMA warehouse_util OWNER TO postgres;
 
 --
--- TOC entry 198 (class 3079 OID 12595)
+-- TOC entry 199 (class 3079 OID 12595)
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
 --
 
@@ -50,8 +50,8 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- TOC entry 2984 (class 0 OID 0)
--- Dependencies: 198
+-- TOC entry 2988 (class 0 OID 0)
+-- Dependencies: 199
 -- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
 --
 
@@ -96,7 +96,7 @@ CREATE TABLE dim_address (
 ALTER TABLE warehouse.dim_address OWNER TO postgres;
 
 --
--- TOC entry 2985 (class 0 OID 0)
+-- TOC entry 2989 (class 0 OID 0)
 -- Dependencies: 176
 -- Name: COLUMN dim_address.dw_address_id; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -105,7 +105,7 @@ COMMENT ON COLUMN dim_address.dw_address_id IS 'Technical key of the address dim
 
 
 --
--- TOC entry 2986 (class 0 OID 0)
+-- TOC entry 2990 (class 0 OID 0)
 -- Dependencies: 176
 -- Name: COLUMN dim_address.src_address_id; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -114,7 +114,7 @@ COMMENT ON COLUMN dim_address.src_address_id IS 'Source address id (OLTP)';
 
 
 --
--- TOC entry 2987 (class 0 OID 0)
+-- TOC entry 2991 (class 0 OID 0)
 -- Dependencies: 176
 -- Name: COLUMN dim_address.etl_load_date; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -138,7 +138,7 @@ CREATE SEQUENCE dim_addresses_dim_address_key_seq
 ALTER TABLE warehouse.dim_addresses_dim_address_key_seq OWNER TO postgres;
 
 --
--- TOC entry 2988 (class 0 OID 0)
+-- TOC entry 2992 (class 0 OID 0)
 -- Dependencies: 175
 -- Name: dim_addresses_dim_address_key_seq; Type: SEQUENCE OWNED BY; Schema: warehouse; Owner: postgres
 --
@@ -216,7 +216,7 @@ CREATE TABLE dim_date (
 ALTER TABLE warehouse.dim_date OWNER TO postgres;
 
 --
--- TOC entry 2989 (class 0 OID 0)
+-- TOC entry 2993 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: TABLE dim_date; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -225,7 +225,7 @@ COMMENT ON TABLE dim_date IS 'Date dimension';
 
 
 --
--- TOC entry 2990 (class 0 OID 0)
+-- TOC entry 2994 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.dw_date_id; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -234,7 +234,7 @@ COMMENT ON COLUMN dim_date.dw_date_id IS 'Technical key of the date dimension';
 
 
 --
--- TOC entry 2991 (class 0 OID 0)
+-- TOC entry 2995 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.hashcode; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -243,7 +243,7 @@ COMMENT ON COLUMN dim_date.hashcode IS 'Type I dimension hashcode';
 
 
 --
--- TOC entry 2992 (class 0 OID 0)
+-- TOC entry 2996 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.src_date_val; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -252,7 +252,7 @@ COMMENT ON COLUMN dim_date.src_date_val IS 'Source date value';
 
 
 --
--- TOC entry 2993 (class 0 OID 0)
+-- TOC entry 2997 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.date_short; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -261,7 +261,7 @@ COMMENT ON COLUMN dim_date.date_short IS 'Short date';
 
 
 --
--- TOC entry 2994 (class 0 OID 0)
+-- TOC entry 2998 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.date_medium; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -270,7 +270,7 @@ COMMENT ON COLUMN dim_date.date_medium IS 'Medium date';
 
 
 --
--- TOC entry 2995 (class 0 OID 0)
+-- TOC entry 2999 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.date_long; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -279,7 +279,7 @@ COMMENT ON COLUMN dim_date.date_long IS 'Long form date';
 
 
 --
--- TOC entry 2996 (class 0 OID 0)
+-- TOC entry 3000 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.date_full; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -288,7 +288,7 @@ COMMENT ON COLUMN dim_date.date_full IS 'Full form date';
 
 
 --
--- TOC entry 2997 (class 0 OID 0)
+-- TOC entry 3001 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.day_in_week; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -297,7 +297,7 @@ COMMENT ON COLUMN dim_date.day_in_week IS 'day of the week';
 
 
 --
--- TOC entry 2998 (class 0 OID 0)
+-- TOC entry 3002 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.day_in_month; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -306,7 +306,7 @@ COMMENT ON COLUMN dim_date.day_in_month IS 'Day number within the month';
 
 
 --
--- TOC entry 2999 (class 0 OID 0)
+-- TOC entry 3003 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.day_in_year; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -315,7 +315,7 @@ COMMENT ON COLUMN dim_date.day_in_year IS 'Day number within the year';
 
 
 --
--- TOC entry 3000 (class 0 OID 0)
+-- TOC entry 3004 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.is_first_day_in_month; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -324,7 +324,7 @@ COMMENT ON COLUMN dim_date.is_first_day_in_month IS 'Flag indicating whether the
 
 
 --
--- TOC entry 3001 (class 0 OID 0)
+-- TOC entry 3005 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.is_first_day_in_week; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -333,7 +333,7 @@ COMMENT ON COLUMN dim_date.is_first_day_in_week IS 'Flag indicating whether the 
 
 
 --
--- TOC entry 3002 (class 0 OID 0)
+-- TOC entry 3006 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.is_last_day_in_month; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -342,7 +342,7 @@ COMMENT ON COLUMN dim_date.is_last_day_in_month IS 'Flag indicating whether the 
 
 
 --
--- TOC entry 3003 (class 0 OID 0)
+-- TOC entry 3007 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.is_last_day_in_week; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -351,7 +351,7 @@ COMMENT ON COLUMN dim_date.is_last_day_in_week IS 'Flag indicating whether the d
 
 
 --
--- TOC entry 3004 (class 0 OID 0)
+-- TOC entry 3008 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.day_name; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -360,7 +360,7 @@ COMMENT ON COLUMN dim_date.day_name IS 'textual name of the day of week';
 
 
 --
--- TOC entry 3005 (class 0 OID 0)
+-- TOC entry 3009 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.day_abbreviation; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -369,7 +369,7 @@ COMMENT ON COLUMN dim_date.day_abbreviation IS 'Abbreviated day of week';
 
 
 --
--- TOC entry 3006 (class 0 OID 0)
+-- TOC entry 3010 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.week_in_year; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -378,7 +378,7 @@ COMMENT ON COLUMN dim_date.week_in_year IS 'Numeric week of the year';
 
 
 --
--- TOC entry 3007 (class 0 OID 0)
+-- TOC entry 3011 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.week_in_month; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -387,7 +387,7 @@ COMMENT ON COLUMN dim_date.week_in_month IS 'Week number within the month.';
 
 
 --
--- TOC entry 3008 (class 0 OID 0)
+-- TOC entry 3012 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.week_in_year_iso; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -396,7 +396,7 @@ COMMENT ON COLUMN dim_date.week_in_year_iso IS 'ISO standard week in year';
 
 
 --
--- TOC entry 3009 (class 0 OID 0)
+-- TOC entry 3013 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.week_start_date; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -405,7 +405,7 @@ COMMENT ON COLUMN dim_date.week_start_date IS 'The date representing the first d
 
 
 --
--- TOC entry 3010 (class 0 OID 0)
+-- TOC entry 3014 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.is_weekend; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -414,7 +414,7 @@ COMMENT ON COLUMN dim_date.is_weekend IS 'Flag indicating wheter or not the day 
 
 
 --
--- TOC entry 3011 (class 0 OID 0)
+-- TOC entry 3015 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.is_weekday; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -423,7 +423,7 @@ COMMENT ON COLUMN dim_date.is_weekday IS 'Flag indicating whether or not the dat
 
 
 --
--- TOC entry 3012 (class 0 OID 0)
+-- TOC entry 3016 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.month_number; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -432,7 +432,7 @@ COMMENT ON COLUMN dim_date.month_number IS 'Month number (1..12)';
 
 
 --
--- TOC entry 3013 (class 0 OID 0)
+-- TOC entry 3017 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.month_name_val; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -441,7 +441,7 @@ COMMENT ON COLUMN dim_date.month_name_val IS 'Name of the month';
 
 
 --
--- TOC entry 3014 (class 0 OID 0)
+-- TOC entry 3018 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.month_abbreviation; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -450,7 +450,7 @@ COMMENT ON COLUMN dim_date.month_abbreviation IS 'Abbreviated month name';
 
 
 --
--- TOC entry 3015 (class 0 OID 0)
+-- TOC entry 3019 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.month_abbreviation_year2; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -459,7 +459,7 @@ COMMENT ON COLUMN dim_date.month_abbreviation_year2 IS 'Month abbreviation with 
 
 
 --
--- TOC entry 3016 (class 0 OID 0)
+-- TOC entry 3020 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.year2; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -468,7 +468,7 @@ COMMENT ON COLUMN dim_date.year2 IS 'Two digit year';
 
 
 --
--- TOC entry 3017 (class 0 OID 0)
+-- TOC entry 3021 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.year4; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -477,7 +477,7 @@ COMMENT ON COLUMN dim_date.year4 IS 'Four digit year';
 
 
 --
--- TOC entry 3018 (class 0 OID 0)
+-- TOC entry 3022 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.year2_iso; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -486,7 +486,7 @@ COMMENT ON COLUMN dim_date.year2_iso IS 'ISO two digit year';
 
 
 --
--- TOC entry 3019 (class 0 OID 0)
+-- TOC entry 3023 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.year4_iso; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -495,7 +495,7 @@ COMMENT ON COLUMN dim_date.year4_iso IS 'ISO four digit year';
 
 
 --
--- TOC entry 3020 (class 0 OID 0)
+-- TOC entry 3024 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.quarter_number; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -504,7 +504,7 @@ COMMENT ON COLUMN dim_date.quarter_number IS 'Numeric representation of the quar
 
 
 --
--- TOC entry 3021 (class 0 OID 0)
+-- TOC entry 3025 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.quarter_name; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -513,7 +513,7 @@ COMMENT ON COLUMN dim_date.quarter_name IS 'Name of the quarter (Q1..Q4)';
 
 
 --
--- TOC entry 3022 (class 0 OID 0)
+-- TOC entry 3026 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.quarter_year; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -522,7 +522,7 @@ COMMENT ON COLUMN dim_date.quarter_year IS 'Quarter name + year';
 
 
 --
--- TOC entry 3023 (class 0 OID 0)
+-- TOC entry 3027 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.month_year; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -531,7 +531,7 @@ COMMENT ON COLUMN dim_date.month_year IS 'Month number - year4';
 
 
 --
--- TOC entry 3024 (class 0 OID 0)
+-- TOC entry 3028 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.week_year; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -540,7 +540,7 @@ COMMENT ON COLUMN dim_date.week_year IS 'Week number - year4';
 
 
 --
--- TOC entry 3025 (class 0 OID 0)
+-- TOC entry 3029 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.week_year_iso; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -549,7 +549,7 @@ COMMENT ON COLUMN dim_date.week_year_iso IS 'week number - year4 ISO standard';
 
 
 --
--- TOC entry 3026 (class 0 OID 0)
+-- TOC entry 3030 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.year_week_int; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -558,7 +558,7 @@ COMMENT ON COLUMN dim_date.year_week_int IS 'Year4 and week number as numeric va
 
 
 --
--- TOC entry 3027 (class 0 OID 0)
+-- TOC entry 3031 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.current_week_cy; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -567,7 +567,7 @@ COMMENT ON COLUMN dim_date.current_week_cy IS 'Is this the current week of the c
 
 
 --
--- TOC entry 3028 (class 0 OID 0)
+-- TOC entry 3032 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.current_month_cy; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -576,7 +576,7 @@ COMMENT ON COLUMN dim_date.current_month_cy IS 'Is this the current month of the
 
 
 --
--- TOC entry 3029 (class 0 OID 0)
+-- TOC entry 3033 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.last_week_cy; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -585,7 +585,7 @@ COMMENT ON COLUMN dim_date.last_week_cy IS 'Is this the previous week of the cur
 
 
 --
--- TOC entry 3030 (class 0 OID 0)
+-- TOC entry 3034 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.last_month_cy; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -594,7 +594,7 @@ COMMENT ON COLUMN dim_date.last_month_cy IS 'Flag indicating whether this date i
 
 
 --
--- TOC entry 3031 (class 0 OID 0)
+-- TOC entry 3035 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.current_week_ly; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -603,7 +603,7 @@ COMMENT ON COLUMN dim_date.current_week_ly IS 'Is this date in the previous year
 
 
 --
--- TOC entry 3032 (class 0 OID 0)
+-- TOC entry 3036 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.current_month_ly; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -612,7 +612,7 @@ COMMENT ON COLUMN dim_date.current_month_ly IS 'Is this date in the previous yea
 
 
 --
--- TOC entry 3033 (class 0 OID 0)
+-- TOC entry 3037 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.last_week_ly; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -621,7 +621,7 @@ COMMENT ON COLUMN dim_date.last_week_ly IS 'Is this date in the previous week th
 
 
 --
--- TOC entry 3034 (class 0 OID 0)
+-- TOC entry 3038 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.last_month_ly; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -630,7 +630,7 @@ COMMENT ON COLUMN dim_date.last_month_ly IS 'Is this date in the previous month 
 
 
 --
--- TOC entry 3035 (class 0 OID 0)
+-- TOC entry 3039 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.ytd_cy_day; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -639,7 +639,7 @@ COMMENT ON COLUMN dim_date.ytd_cy_day IS 'Is the day portion of the date in the 
 
 
 --
--- TOC entry 3036 (class 0 OID 0)
+-- TOC entry 3040 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.ytd_cy_week; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -648,7 +648,7 @@ COMMENT ON COLUMN dim_date.ytd_cy_week IS 'Is the week portion of the date in th
 
 
 --
--- TOC entry 3037 (class 0 OID 0)
+-- TOC entry 3041 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.ytd_cy_month; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -657,7 +657,7 @@ COMMENT ON COLUMN dim_date.ytd_cy_month IS 'Is the month of the date in the curr
 
 
 --
--- TOC entry 3038 (class 0 OID 0)
+-- TOC entry 3042 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.ytd_ly_day; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -666,7 +666,7 @@ COMMENT ON COLUMN dim_date.ytd_ly_day IS 'Is this day part of the year to date l
 
 
 --
--- TOC entry 3039 (class 0 OID 0)
+-- TOC entry 3043 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.ytd_ly_week; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -675,7 +675,7 @@ COMMENT ON COLUMN dim_date.ytd_ly_week IS 'Is the date in the week last year whi
 
 
 --
--- TOC entry 3040 (class 0 OID 0)
+-- TOC entry 3044 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.ytd_ly_month; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -684,7 +684,7 @@ COMMENT ON COLUMN dim_date.ytd_ly_month IS 'Is this month part of the year to da
 
 
 --
--- TOC entry 3041 (class 0 OID 0)
+-- TOC entry 3045 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.current_year; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -693,7 +693,7 @@ COMMENT ON COLUMN dim_date.current_year IS 'Is the date in the current year?';
 
 
 --
--- TOC entry 3042 (class 0 OID 0)
+-- TOC entry 3046 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.last_year; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -702,7 +702,7 @@ COMMENT ON COLUMN dim_date.last_year IS 'Is the date in the previous year?';
 
 
 --
--- TOC entry 3043 (class 0 OID 0)
+-- TOC entry 3047 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.day_sequence; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -711,7 +711,7 @@ COMMENT ON COLUMN dim_date.day_sequence IS 'How many days back is this day from 
 
 
 --
--- TOC entry 3044 (class 0 OID 0)
+-- TOC entry 3048 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.week_sequence; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -720,7 +720,7 @@ COMMENT ON COLUMN dim_date.week_sequence IS 'How many weeks back from the curren
 
 
 --
--- TOC entry 3045 (class 0 OID 0)
+-- TOC entry 3049 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.month_sequence; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -729,7 +729,7 @@ COMMENT ON COLUMN dim_date.month_sequence IS 'How many monts back from the curre
 
 
 --
--- TOC entry 3046 (class 0 OID 0)
+-- TOC entry 3050 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.year_of_weekend_date; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -738,7 +738,7 @@ COMMENT ON COLUMN dim_date.year_of_weekend_date IS 'What year does the last day 
 
 
 --
--- TOC entry 3047 (class 0 OID 0)
+-- TOC entry 3051 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: COLUMN dim_date.etl_load_date; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -777,7 +777,7 @@ CREATE TABLE dim_diagnostic_facility (
 ALTER TABLE warehouse.dim_diagnostic_facility OWNER TO postgres;
 
 --
--- TOC entry 3048 (class 0 OID 0)
+-- TOC entry 3052 (class 0 OID 0)
 -- Dependencies: 178
 -- Name: COLUMN dim_diagnostic_facility.dw_diagnostic_facility_id; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -786,7 +786,7 @@ COMMENT ON COLUMN dim_diagnostic_facility.dw_diagnostic_facility_id IS 'Diagnost
 
 
 --
--- TOC entry 3049 (class 0 OID 0)
+-- TOC entry 3053 (class 0 OID 0)
 -- Dependencies: 178
 -- Name: COLUMN dim_diagnostic_facility.src_event_id; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -795,7 +795,7 @@ COMMENT ON COLUMN dim_diagnostic_facility.src_event_id IS 'OLTP source event id'
 
 
 --
--- TOC entry 3050 (class 0 OID 0)
+-- TOC entry 3054 (class 0 OID 0)
 -- Dependencies: 178
 -- Name: COLUMN dim_diagnostic_facility.src_entity_id; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -804,7 +804,7 @@ COMMENT ON COLUMN dim_diagnostic_facility.src_entity_id IS 'OLTP source entity I
 
 
 --
--- TOC entry 3051 (class 0 OID 0)
+-- TOC entry 3055 (class 0 OID 0)
 -- Dependencies: 178
 -- Name: COLUMN dim_diagnostic_facility.diagnostic_facility; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -813,7 +813,7 @@ COMMENT ON COLUMN dim_diagnostic_facility.diagnostic_facility IS 'Name of the di
 
 
 --
--- TOC entry 3052 (class 0 OID 0)
+-- TOC entry 3056 (class 0 OID 0)
 -- Dependencies: 178
 -- Name: COLUMN dim_diagnostic_facility.etl_load_date; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -837,7 +837,7 @@ CREATE SEQUENCE dim_diagnostic_facilites_dim_diagnostic_facilities_seq
 ALTER TABLE warehouse.dim_diagnostic_facilites_dim_diagnostic_facilities_seq OWNER TO postgres;
 
 --
--- TOC entry 3053 (class 0 OID 0)
+-- TOC entry 3057 (class 0 OID 0)
 -- Dependencies: 177
 -- Name: dim_diagnostic_facilites_dim_diagnostic_facilities_seq; Type: SEQUENCE OWNED BY; Schema: warehouse; Owner: postgres
 --
@@ -868,7 +868,7 @@ CREATE TABLE dim_disease (
 ALTER TABLE warehouse.dim_disease OWNER TO postgres;
 
 --
--- TOC entry 3054 (class 0 OID 0)
+-- TOC entry 3058 (class 0 OID 0)
 -- Dependencies: 183
 -- Name: TABLE dim_disease; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -877,7 +877,7 @@ COMMENT ON TABLE dim_disease IS 'Disease dimension';
 
 
 --
--- TOC entry 3055 (class 0 OID 0)
+-- TOC entry 3059 (class 0 OID 0)
 -- Dependencies: 183
 -- Name: COLUMN dim_disease.dw_disease_id; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -886,7 +886,7 @@ COMMENT ON COLUMN dim_disease.dw_disease_id IS 'Technical key of the disease dim
 
 
 --
--- TOC entry 3056 (class 0 OID 0)
+-- TOC entry 3060 (class 0 OID 0)
 -- Dependencies: 183
 -- Name: COLUMN dim_disease.hashcode; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -895,7 +895,7 @@ COMMENT ON COLUMN dim_disease.hashcode IS 'Type I dimension hashcode';
 
 
 --
--- TOC entry 3057 (class 0 OID 0)
+-- TOC entry 3061 (class 0 OID 0)
 -- Dependencies: 183
 -- Name: COLUMN dim_disease.src_disease_id; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -904,7 +904,7 @@ COMMENT ON COLUMN dim_disease.src_disease_id IS 'Source OLTP disease_id';
 
 
 --
--- TOC entry 3058 (class 0 OID 0)
+-- TOC entry 3062 (class 0 OID 0)
 -- Dependencies: 183
 -- Name: COLUMN dim_disease.disease_name; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -913,7 +913,7 @@ COMMENT ON COLUMN dim_disease.disease_name IS 'Name of the disease';
 
 
 --
--- TOC entry 3059 (class 0 OID 0)
+-- TOC entry 3063 (class 0 OID 0)
 -- Dependencies: 183
 -- Name: COLUMN dim_disease.contact_lead_in; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -922,7 +922,7 @@ COMMENT ON COLUMN dim_disease.contact_lead_in IS 'Contact lead in value';
 
 
 --
--- TOC entry 3060 (class 0 OID 0)
+-- TOC entry 3064 (class 0 OID 0)
 -- Dependencies: 183
 -- Name: COLUMN dim_disease.place_lead_in; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -931,7 +931,7 @@ COMMENT ON COLUMN dim_disease.place_lead_in IS 'Place Lead In value';
 
 
 --
--- TOC entry 3061 (class 0 OID 0)
+-- TOC entry 3065 (class 0 OID 0)
 -- Dependencies: 183
 -- Name: COLUMN dim_disease.treatment_lead_in; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -940,7 +940,7 @@ COMMENT ON COLUMN dim_disease.treatment_lead_in IS 'Treatment lead in value';
 
 
 --
--- TOC entry 3062 (class 0 OID 0)
+-- TOC entry 3066 (class 0 OID 0)
 -- Dependencies: 183
 -- Name: COLUMN dim_disease.active; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -949,7 +949,7 @@ COMMENT ON COLUMN dim_disease.active IS 'active flag';
 
 
 --
--- TOC entry 3063 (class 0 OID 0)
+-- TOC entry 3067 (class 0 OID 0)
 -- Dependencies: 183
 -- Name: COLUMN dim_disease.cdc_code; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -958,7 +958,7 @@ COMMENT ON COLUMN dim_disease.cdc_code IS 'CDC code value';
 
 
 --
--- TOC entry 3064 (class 0 OID 0)
+-- TOC entry 3068 (class 0 OID 0)
 -- Dependencies: 183
 -- Name: COLUMN dim_disease.sensitive; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -967,7 +967,7 @@ COMMENT ON COLUMN dim_disease.sensitive IS 'Is this disease termed a sensitive d
 
 
 --
--- TOC entry 3065 (class 0 OID 0)
+-- TOC entry 3069 (class 0 OID 0)
 -- Dependencies: 183
 -- Name: COLUMN dim_disease.etl_load_date; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -996,7 +996,7 @@ CREATE TABLE dim_ethnicity (
 ALTER TABLE warehouse.dim_ethnicity OWNER TO pentaho;
 
 --
--- TOC entry 3066 (class 0 OID 0)
+-- TOC entry 3070 (class 0 OID 0)
 -- Dependencies: 173
 -- Name: COLUMN dim_ethnicity.dw_ethnicity_id; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1005,7 +1005,7 @@ COMMENT ON COLUMN dim_ethnicity.dw_ethnicity_id IS 'The data warehouse technical
 
 
 --
--- TOC entry 3067 (class 0 OID 0)
+-- TOC entry 3071 (class 0 OID 0)
 -- Dependencies: 173
 -- Name: COLUMN dim_ethnicity.hashcode; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1014,7 +1014,7 @@ COMMENT ON COLUMN dim_ethnicity.hashcode IS 'The type I dimension hashcode';
 
 
 --
--- TOC entry 3068 (class 0 OID 0)
+-- TOC entry 3072 (class 0 OID 0)
 -- Dependencies: 173
 -- Name: COLUMN dim_ethnicity.src_ethnicity_id; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1023,7 +1023,7 @@ COMMENT ON COLUMN dim_ethnicity.src_ethnicity_id IS 'the OTLP ethnicity ID (exte
 
 
 --
--- TOC entry 3069 (class 0 OID 0)
+-- TOC entry 3073 (class 0 OID 0)
 -- Dependencies: 173
 -- Name: COLUMN dim_ethnicity.code_name; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1032,7 +1032,7 @@ COMMENT ON COLUMN dim_ethnicity.code_name IS 'The code name of the ethnicity';
 
 
 --
--- TOC entry 3070 (class 0 OID 0)
+-- TOC entry 3074 (class 0 OID 0)
 -- Dependencies: 173
 -- Name: COLUMN dim_ethnicity.the_code; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1041,7 +1041,7 @@ COMMENT ON COLUMN dim_ethnicity.the_code IS 'The code value';
 
 
 --
--- TOC entry 3071 (class 0 OID 0)
+-- TOC entry 3075 (class 0 OID 0)
 -- Dependencies: 173
 -- Name: COLUMN dim_ethnicity.code_description; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1050,7 +1050,7 @@ COMMENT ON COLUMN dim_ethnicity.code_description IS 'The code description';
 
 
 --
--- TOC entry 3072 (class 0 OID 0)
+-- TOC entry 3076 (class 0 OID 0)
 -- Dependencies: 173
 -- Name: COLUMN dim_ethnicity.src_created_at; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1059,7 +1059,7 @@ COMMENT ON COLUMN dim_ethnicity.src_created_at IS 'Source created timestamp';
 
 
 --
--- TOC entry 3073 (class 0 OID 0)
+-- TOC entry 3077 (class 0 OID 0)
 -- Dependencies: 173
 -- Name: COLUMN dim_ethnicity.src_modified_at; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1068,7 +1068,7 @@ COMMENT ON COLUMN dim_ethnicity.src_modified_at IS 'Source modified time';
 
 
 --
--- TOC entry 3074 (class 0 OID 0)
+-- TOC entry 3078 (class 0 OID 0)
 -- Dependencies: 173
 -- Name: COLUMN dim_ethnicity.etl_load_date; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1093,7 +1093,7 @@ CREATE TABLE dim_external_code (
 ALTER TABLE warehouse.dim_external_code OWNER TO pentaho;
 
 --
--- TOC entry 3075 (class 0 OID 0)
+-- TOC entry 3079 (class 0 OID 0)
 -- Dependencies: 191
 -- Name: COLUMN dim_external_code.dw_external_code_id; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1102,7 +1102,7 @@ COMMENT ON COLUMN dim_external_code.dw_external_code_id IS 'The dim_external_cod
 
 
 --
--- TOC entry 3076 (class 0 OID 0)
+-- TOC entry 3080 (class 0 OID 0)
 -- Dependencies: 191
 -- Name: COLUMN dim_external_code.hashcode; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1111,7 +1111,7 @@ COMMENT ON COLUMN dim_external_code.hashcode IS 'The dim_external_code hashcode'
 
 
 --
--- TOC entry 3077 (class 0 OID 0)
+-- TOC entry 3081 (class 0 OID 0)
 -- Dependencies: 191
 -- Name: COLUMN dim_external_code.src_external_code_id; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1120,7 +1120,7 @@ COMMENT ON COLUMN dim_external_code.src_external_code_id IS 'The OLTP external c
 
 
 --
--- TOC entry 3078 (class 0 OID 0)
+-- TOC entry 3082 (class 0 OID 0)
 -- Dependencies: 191
 -- Name: COLUMN dim_external_code.code_description; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1129,7 +1129,7 @@ COMMENT ON COLUMN dim_external_code.code_description IS 'The external code descr
 
 
 --
--- TOC entry 3079 (class 0 OID 0)
+-- TOC entry 3083 (class 0 OID 0)
 -- Dependencies: 191
 -- Name: COLUMN dim_external_code.etl_load_date; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1154,7 +1154,7 @@ CREATE TABLE dim_investigator (
 ALTER TABLE warehouse.dim_investigator OWNER TO pentaho;
 
 --
--- TOC entry 3080 (class 0 OID 0)
+-- TOC entry 3084 (class 0 OID 0)
 -- Dependencies: 186
 -- Name: TABLE dim_investigator; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1163,7 +1163,7 @@ COMMENT ON TABLE dim_investigator IS 'The investigator dimension';
 
 
 --
--- TOC entry 3081 (class 0 OID 0)
+-- TOC entry 3085 (class 0 OID 0)
 -- Dependencies: 186
 -- Name: COLUMN dim_investigator.dw_investigator_id; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1172,7 +1172,7 @@ COMMENT ON COLUMN dim_investigator.dw_investigator_id IS 'The OLAP TK of the inv
 
 
 --
--- TOC entry 3082 (class 0 OID 0)
+-- TOC entry 3086 (class 0 OID 0)
 -- Dependencies: 186
 -- Name: COLUMN dim_investigator.hashcode; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1181,7 +1181,7 @@ COMMENT ON COLUMN dim_investigator.hashcode IS 'The hashcode of the investigator
 
 
 --
--- TOC entry 3083 (class 0 OID 0)
+-- TOC entry 3087 (class 0 OID 0)
 -- Dependencies: 186
 -- Name: COLUMN dim_investigator.src_investigator_id; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1190,7 +1190,7 @@ COMMENT ON COLUMN dim_investigator.src_investigator_id IS 'The OLTP id of the in
 
 
 --
--- TOC entry 3084 (class 0 OID 0)
+-- TOC entry 3088 (class 0 OID 0)
 -- Dependencies: 186
 -- Name: COLUMN dim_investigator.investigator_name; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1199,7 +1199,7 @@ COMMENT ON COLUMN dim_investigator.investigator_name IS 'The name of the investi
 
 
 --
--- TOC entry 3085 (class 0 OID 0)
+-- TOC entry 3089 (class 0 OID 0)
 -- Dependencies: 186
 -- Name: COLUMN dim_investigator.etl_load_date; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1261,7 +1261,7 @@ CREATE TABLE dim_junk_status_type (
 ALTER TABLE warehouse.dim_junk_status_type OWNER TO pentaho;
 
 --
--- TOC entry 3086 (class 0 OID 0)
+-- TOC entry 3090 (class 0 OID 0)
 -- Dependencies: 188
 -- Name: TABLE dim_junk_status_type; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1270,7 +1270,7 @@ COMMENT ON TABLE dim_junk_status_type IS 'Junk dimension of status codes and typ
 
 
 --
--- TOC entry 3087 (class 0 OID 0)
+-- TOC entry 3091 (class 0 OID 0)
 -- Dependencies: 188
 -- Name: COLUMN dim_junk_status_type.dw_junk_status_type_id; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1279,7 +1279,7 @@ COMMENT ON COLUMN dim_junk_status_type.dw_junk_status_type_id IS 'TK of the junk
 
 
 --
--- TOC entry 3088 (class 0 OID 0)
+-- TOC entry 3092 (class 0 OID 0)
 -- Dependencies: 188
 -- Name: COLUMN dim_junk_status_type.hashcode; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1288,7 +1288,7 @@ COMMENT ON COLUMN dim_junk_status_type.hashcode IS 'Type 1 dimension hashcode';
 
 
 --
--- TOC entry 3089 (class 0 OID 0)
+-- TOC entry 3093 (class 0 OID 0)
 -- Dependencies: 188
 -- Name: COLUMN dim_junk_status_type.event_type; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1297,7 +1297,7 @@ COMMENT ON COLUMN dim_junk_status_type.event_type IS 'The event type value';
 
 
 --
--- TOC entry 3090 (class 0 OID 0)
+-- TOC entry 3094 (class 0 OID 0)
 -- Dependencies: 188
 -- Name: COLUMN dim_junk_status_type.contact_disposition_description; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1306,7 +1306,7 @@ COMMENT ON COLUMN dim_junk_status_type.contact_disposition_description IS 'The c
 
 
 --
--- TOC entry 3091 (class 0 OID 0)
+-- TOC entry 3095 (class 0 OID 0)
 -- Dependencies: 188
 -- Name: COLUMN dim_junk_status_type.contact_type_description; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1315,7 +1315,7 @@ COMMENT ON COLUMN dim_junk_status_type.contact_type_description IS 'The descript
 
 
 --
--- TOC entry 3092 (class 0 OID 0)
+-- TOC entry 3096 (class 0 OID 0)
 -- Dependencies: 188
 -- Name: COLUMN dim_junk_status_type.src_state_case_status_id; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1324,7 +1324,7 @@ COMMENT ON COLUMN dim_junk_status_type.src_state_case_status_id IS 'The OLTP sta
 
 
 --
--- TOC entry 3093 (class 0 OID 0)
+-- TOC entry 3097 (class 0 OID 0)
 -- Dependencies: 188
 -- Name: COLUMN dim_junk_status_type.state_case_status; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1354,7 +1354,7 @@ CREATE TABLE dim_jurisdiction (
 ALTER TABLE warehouse.dim_jurisdiction OWNER TO pentaho;
 
 --
--- TOC entry 3094 (class 0 OID 0)
+-- TOC entry 3098 (class 0 OID 0)
 -- Dependencies: 172
 -- Name: TABLE dim_jurisdiction; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1363,7 +1363,7 @@ COMMENT ON TABLE dim_jurisdiction IS 'Jurisdiction dimension';
 
 
 --
--- TOC entry 3095 (class 0 OID 0)
+-- TOC entry 3099 (class 0 OID 0)
 -- Dependencies: 172
 -- Name: COLUMN dim_jurisdiction.dw_jurisdiction_id; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1372,7 +1372,7 @@ COMMENT ON COLUMN dim_jurisdiction.dw_jurisdiction_id IS 'Technical key of the j
 
 
 --
--- TOC entry 3096 (class 0 OID 0)
+-- TOC entry 3100 (class 0 OID 0)
 -- Dependencies: 172
 -- Name: COLUMN dim_jurisdiction.hashcode; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1381,7 +1381,7 @@ COMMENT ON COLUMN dim_jurisdiction.hashcode IS 'Type I dimension hash code';
 
 
 --
--- TOC entry 3097 (class 0 OID 0)
+-- TOC entry 3101 (class 0 OID 0)
 -- Dependencies: 172
 -- Name: COLUMN dim_jurisdiction.src_places_id; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1390,7 +1390,7 @@ COMMENT ON COLUMN dim_jurisdiction.src_places_id IS 'OLTP trisano.places.places_
 
 
 --
--- TOC entry 3098 (class 0 OID 0)
+-- TOC entry 3102 (class 0 OID 0)
 -- Dependencies: 172
 -- Name: COLUMN dim_jurisdiction.src_entity_id; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1399,7 +1399,7 @@ COMMENT ON COLUMN dim_jurisdiction.src_entity_id IS 'OLTP - trisano.entities.ent
 
 
 --
--- TOC entry 3099 (class 0 OID 0)
+-- TOC entry 3103 (class 0 OID 0)
 -- Dependencies: 172
 -- Name: COLUMN dim_jurisdiction.name; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1408,7 +1408,7 @@ COMMENT ON COLUMN dim_jurisdiction.name IS 'Name of the jurisdiction';
 
 
 --
--- TOC entry 3100 (class 0 OID 0)
+-- TOC entry 3104 (class 0 OID 0)
 -- Dependencies: 172
 -- Name: COLUMN dim_jurisdiction.short_name; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1417,7 +1417,7 @@ COMMENT ON COLUMN dim_jurisdiction.short_name IS 'Shortened name of the jurisdic
 
 
 --
--- TOC entry 3101 (class 0 OID 0)
+-- TOC entry 3105 (class 0 OID 0)
 -- Dependencies: 172
 -- Name: COLUMN dim_jurisdiction.is_primary; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1426,7 +1426,7 @@ COMMENT ON COLUMN dim_jurisdiction.is_primary IS 'flag indicating whether or not
 
 
 --
--- TOC entry 3102 (class 0 OID 0)
+-- TOC entry 3106 (class 0 OID 0)
 -- Dependencies: 172
 -- Name: COLUMN dim_jurisdiction.src_created_at; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1435,7 +1435,7 @@ COMMENT ON COLUMN dim_jurisdiction.src_created_at IS 'Source created time';
 
 
 --
--- TOC entry 3103 (class 0 OID 0)
+-- TOC entry 3107 (class 0 OID 0)
 -- Dependencies: 172
 -- Name: COLUMN dim_jurisdiction.src_modified_at; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1444,7 +1444,7 @@ COMMENT ON COLUMN dim_jurisdiction.src_modified_at IS 'Source modified timestamp
 
 
 --
--- TOC entry 3104 (class 0 OID 0)
+-- TOC entry 3108 (class 0 OID 0)
 -- Dependencies: 172
 -- Name: COLUMN dim_jurisdiction.etl_load_date; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1473,7 +1473,7 @@ CREATE TABLE dim_language (
 ALTER TABLE warehouse.dim_language OWNER TO pentaho;
 
 --
--- TOC entry 3105 (class 0 OID 0)
+-- TOC entry 3109 (class 0 OID 0)
 -- Dependencies: 174
 -- Name: COLUMN dim_language.dw_language_id; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1482,7 +1482,7 @@ COMMENT ON COLUMN dim_language.dw_language_id IS 'The data warehouse technical k
 
 
 --
--- TOC entry 3106 (class 0 OID 0)
+-- TOC entry 3110 (class 0 OID 0)
 -- Dependencies: 174
 -- Name: COLUMN dim_language.hashcode; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1491,7 +1491,7 @@ COMMENT ON COLUMN dim_language.hashcode IS 'The type I dimension hashcode';
 
 
 --
--- TOC entry 3107 (class 0 OID 0)
+-- TOC entry 3111 (class 0 OID 0)
 -- Dependencies: 174
 -- Name: COLUMN dim_language.src_language_id; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1500,7 +1500,7 @@ COMMENT ON COLUMN dim_language.src_language_id IS 'the OTLP language ID (externa
 
 
 --
--- TOC entry 3108 (class 0 OID 0)
+-- TOC entry 3112 (class 0 OID 0)
 -- Dependencies: 174
 -- Name: COLUMN dim_language.code_name; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1509,7 +1509,7 @@ COMMENT ON COLUMN dim_language.code_name IS 'The code name of the ethnicity';
 
 
 --
--- TOC entry 3109 (class 0 OID 0)
+-- TOC entry 3113 (class 0 OID 0)
 -- Dependencies: 174
 -- Name: COLUMN dim_language.the_code; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1518,7 +1518,7 @@ COMMENT ON COLUMN dim_language.the_code IS 'The code value';
 
 
 --
--- TOC entry 3110 (class 0 OID 0)
+-- TOC entry 3114 (class 0 OID 0)
 -- Dependencies: 174
 -- Name: COLUMN dim_language.code_description; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1527,7 +1527,7 @@ COMMENT ON COLUMN dim_language.code_description IS 'The code description';
 
 
 --
--- TOC entry 3111 (class 0 OID 0)
+-- TOC entry 3115 (class 0 OID 0)
 -- Dependencies: 174
 -- Name: COLUMN dim_language.src_created_at; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1536,7 +1536,7 @@ COMMENT ON COLUMN dim_language.src_created_at IS 'Source created timestamp';
 
 
 --
--- TOC entry 3112 (class 0 OID 0)
+-- TOC entry 3116 (class 0 OID 0)
 -- Dependencies: 174
 -- Name: COLUMN dim_language.src_modified_at; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1545,7 +1545,7 @@ COMMENT ON COLUMN dim_language.src_modified_at IS 'Source modified time';
 
 
 --
--- TOC entry 3113 (class 0 OID 0)
+-- TOC entry 3117 (class 0 OID 0)
 -- Dependencies: 174
 -- Name: COLUMN dim_language.etl_load_date; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1585,7 +1585,7 @@ CREATE TABLE dim_location (
 ALTER TABLE warehouse.dim_location OWNER TO postgres;
 
 --
--- TOC entry 3114 (class 0 OID 0)
+-- TOC entry 3118 (class 0 OID 0)
 -- Dependencies: 182
 -- Name: COLUMN dim_location.dw_location_id; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -1594,7 +1594,7 @@ COMMENT ON COLUMN dim_location.dw_location_id IS 'Location technical key';
 
 
 --
--- TOC entry 3115 (class 0 OID 0)
+-- TOC entry 3119 (class 0 OID 0)
 -- Dependencies: 182
 -- Name: COLUMN dim_location.hashcode; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -1603,7 +1603,7 @@ COMMENT ON COLUMN dim_location.hashcode IS 'Type I dimension hashcode';
 
 
 --
--- TOC entry 3116 (class 0 OID 0)
+-- TOC entry 3120 (class 0 OID 0)
 -- Dependencies: 182
 -- Name: COLUMN dim_location.src_location_id; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -1612,12 +1612,147 @@ COMMENT ON COLUMN dim_location.src_location_id IS 'OLTP source location ID';
 
 
 --
--- TOC entry 3117 (class 0 OID 0)
+-- TOC entry 3121 (class 0 OID 0)
 -- Dependencies: 182
 -- Name: COLUMN dim_location.county_id; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
 
 COMMENT ON COLUMN dim_location.county_id IS 'The ID of the county';
+
+
+--
+-- TOC entry 198 (class 1259 OID 51978)
+-- Name: dim_organism; Type: TABLE; Schema: warehouse; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE dim_organism (
+    dw_organism_id integer NOT NULL,
+    hashcode bigint,
+    src_organism_id integer,
+    organism_name character varying(255),
+    snomed_name character varying(255),
+    snomed_code character varying(255),
+    snomed_id character varying(255),
+    src_created_at timestamp without time zone,
+    src_updated_at timestamp without time zone,
+    etl_load_date timestamp without time zone
+);
+
+
+ALTER TABLE warehouse.dim_organism OWNER TO postgres;
+
+--
+-- TOC entry 3122 (class 0 OID 0)
+-- Dependencies: 198
+-- Name: COLUMN dim_organism.dw_organism_id; Type: COMMENT; Schema: warehouse; Owner: postgres
+--
+
+COMMENT ON COLUMN dim_organism.dw_organism_id IS 'OLAP TK of the dim organism entity.';
+
+
+--
+-- TOC entry 3123 (class 0 OID 0)
+-- Dependencies: 198
+-- Name: COLUMN dim_organism.hashcode; Type: COMMENT; Schema: warehouse; Owner: postgres
+--
+
+COMMENT ON COLUMN dim_organism.hashcode IS 'Type I dimension hashcode';
+
+
+--
+-- TOC entry 3124 (class 0 OID 0)
+-- Dependencies: 198
+-- Name: COLUMN dim_organism.src_organism_id; Type: COMMENT; Schema: warehouse; Owner: postgres
+--
+
+COMMENT ON COLUMN dim_organism.src_organism_id IS 'The OLTP organisms.id value.';
+
+
+--
+-- TOC entry 3125 (class 0 OID 0)
+-- Dependencies: 198
+-- Name: COLUMN dim_organism.organism_name; Type: COMMENT; Schema: warehouse; Owner: postgres
+--
+
+COMMENT ON COLUMN dim_organism.organism_name IS 'The name of the organism.';
+
+
+--
+-- TOC entry 3126 (class 0 OID 0)
+-- Dependencies: 198
+-- Name: COLUMN dim_organism.snomed_name; Type: COMMENT; Schema: warehouse; Owner: postgres
+--
+
+COMMENT ON COLUMN dim_organism.snomed_name IS 'The source snomed name';
+
+
+--
+-- TOC entry 3127 (class 0 OID 0)
+-- Dependencies: 198
+-- Name: COLUMN dim_organism.snomed_code; Type: COMMENT; Schema: warehouse; Owner: postgres
+--
+
+COMMENT ON COLUMN dim_organism.snomed_code IS 'The src snomed code';
+
+
+--
+-- TOC entry 3128 (class 0 OID 0)
+-- Dependencies: 198
+-- Name: COLUMN dim_organism.snomed_id; Type: COMMENT; Schema: warehouse; Owner: postgres
+--
+
+COMMENT ON COLUMN dim_organism.snomed_id IS 'The source snomed id.';
+
+
+--
+-- TOC entry 3129 (class 0 OID 0)
+-- Dependencies: 198
+-- Name: COLUMN dim_organism.src_created_at; Type: COMMENT; Schema: warehouse; Owner: postgres
+--
+
+COMMENT ON COLUMN dim_organism.src_created_at IS 'The source created_at time.';
+
+
+--
+-- TOC entry 3130 (class 0 OID 0)
+-- Dependencies: 198
+-- Name: COLUMN dim_organism.src_updated_at; Type: COMMENT; Schema: warehouse; Owner: postgres
+--
+
+COMMENT ON COLUMN dim_organism.src_updated_at IS 'The source updated at timestamp';
+
+
+--
+-- TOC entry 3131 (class 0 OID 0)
+-- Dependencies: 198
+-- Name: COLUMN dim_organism.etl_load_date; Type: COMMENT; Schema: warehouse; Owner: postgres
+--
+
+COMMENT ON COLUMN dim_organism.etl_load_date IS 'The timestamp of when this organism dim record was last updated.';
+
+
+--
+-- TOC entry 197 (class 1259 OID 51976)
+-- Name: dim_organism_dw_organism_id_seq; Type: SEQUENCE; Schema: warehouse; Owner: postgres
+--
+
+CREATE SEQUENCE dim_organism_dw_organism_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE warehouse.dim_organism_dw_organism_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3132 (class 0 OID 0)
+-- Dependencies: 197
+-- Name: dim_organism_dw_organism_id_seq; Type: SEQUENCE OWNED BY; Schema: warehouse; Owner: postgres
+--
+
+ALTER SEQUENCE dim_organism_dw_organism_id_seq OWNED BY dim_organism.dw_organism_id;
 
 
 --
@@ -1634,23 +1769,6 @@ CREATE SEQUENCE dim_organism_seq
 
 
 ALTER TABLE warehouse.dim_organism_seq OWNER TO postgres;
-
---
--- TOC entry 195 (class 1259 OID 51949)
--- Name: dim_organism; Type: TABLE; Schema: warehouse; Owner: postgres; Tablespace: 
---
-
-CREATE TABLE dim_organism (
-    dw_organism_id integer DEFAULT nextval('dim_organism_seq'::regclass) NOT NULL,
-    src_id integer,
-    organism_name character varying(255),
-    snomed_name character varying(255),
-    snomed_code character varying(255),
-    snomed_id character varying(255)
-);
-
-
-ALTER TABLE warehouse.dim_organism OWNER TO postgres;
 
 --
 -- TOC entry 185 (class 1259 OID 35099)
@@ -1671,7 +1789,7 @@ CREATE TABLE dim_outbreak (
 ALTER TABLE warehouse.dim_outbreak OWNER TO pentaho;
 
 --
--- TOC entry 3118 (class 0 OID 0)
+-- TOC entry 3133 (class 0 OID 0)
 -- Dependencies: 185
 -- Name: TABLE dim_outbreak; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1680,7 +1798,7 @@ COMMENT ON TABLE dim_outbreak IS 'The outbreak dimension';
 
 
 --
--- TOC entry 3119 (class 0 OID 0)
+-- TOC entry 3134 (class 0 OID 0)
 -- Dependencies: 185
 -- Name: COLUMN dim_outbreak.dw_outbreak_id; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1689,7 +1807,7 @@ COMMENT ON COLUMN dim_outbreak.dw_outbreak_id IS 'TK of the dim_outbreak';
 
 
 --
--- TOC entry 3120 (class 0 OID 0)
+-- TOC entry 3135 (class 0 OID 0)
 -- Dependencies: 185
 -- Name: COLUMN dim_outbreak.hashcode; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1698,7 +1816,7 @@ COMMENT ON COLUMN dim_outbreak.hashcode IS 'The hashcode of the outbreak dimensi
 
 
 --
--- TOC entry 3121 (class 0 OID 0)
+-- TOC entry 3136 (class 0 OID 0)
 -- Dependencies: 185
 -- Name: COLUMN dim_outbreak.src_outbreak_id; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1707,7 +1825,7 @@ COMMENT ON COLUMN dim_outbreak.src_outbreak_id IS 'The OLTP id of the outbreak t
 
 
 --
--- TOC entry 3122 (class 0 OID 0)
+-- TOC entry 3137 (class 0 OID 0)
 -- Dependencies: 185
 -- Name: COLUMN dim_outbreak.outbreak_name; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1716,7 +1834,7 @@ COMMENT ON COLUMN dim_outbreak.outbreak_name IS 'The name given to this outbreak
 
 
 --
--- TOC entry 3123 (class 0 OID 0)
+-- TOC entry 3138 (class 0 OID 0)
 -- Dependencies: 185
 -- Name: COLUMN dim_outbreak.outbreak_number; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1725,7 +1843,7 @@ COMMENT ON COLUMN dim_outbreak.outbreak_number IS 'The OLTP outbreak.number';
 
 
 --
--- TOC entry 3124 (class 0 OID 0)
+-- TOC entry 3139 (class 0 OID 0)
 -- Dependencies: 185
 -- Name: COLUMN dim_outbreak.src_parent_outbreak_id; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1734,7 +1852,7 @@ COMMENT ON COLUMN dim_outbreak.src_parent_outbreak_id IS 'The parent outbreak id
 
 
 --
--- TOC entry 3125 (class 0 OID 0)
+-- TOC entry 3140 (class 0 OID 0)
 -- Dependencies: 185
 -- Name: COLUMN dim_outbreak.etl_load_date; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1767,7 +1885,7 @@ CREATE TABLE dim_person (
 ALTER TABLE warehouse.dim_person OWNER TO pentaho;
 
 --
--- TOC entry 3126 (class 0 OID 0)
+-- TOC entry 3141 (class 0 OID 0)
 -- Dependencies: 171
 -- Name: TABLE dim_person; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1776,7 +1894,7 @@ COMMENT ON TABLE dim_person IS 'Person dimension';
 
 
 --
--- TOC entry 3127 (class 0 OID 0)
+-- TOC entry 3142 (class 0 OID 0)
 -- Dependencies: 171
 -- Name: COLUMN dim_person.dw_person_id; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1785,7 +1903,7 @@ COMMENT ON COLUMN dim_person.dw_person_id IS 'Technical key of the person dimens
 
 
 --
--- TOC entry 3128 (class 0 OID 0)
+-- TOC entry 3143 (class 0 OID 0)
 -- Dependencies: 171
 -- Name: COLUMN dim_person.hashcode; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1794,7 +1912,7 @@ COMMENT ON COLUMN dim_person.hashcode IS 'Type I dimension hashcode';
 
 
 --
--- TOC entry 3129 (class 0 OID 0)
+-- TOC entry 3144 (class 0 OID 0)
 -- Dependencies: 171
 -- Name: COLUMN dim_person.src_people_id; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1803,7 +1921,7 @@ COMMENT ON COLUMN dim_person.src_people_id IS 'The source people_id of the perso
 
 
 --
--- TOC entry 3130 (class 0 OID 0)
+-- TOC entry 3145 (class 0 OID 0)
 -- Dependencies: 171
 -- Name: COLUMN dim_person.src_entity_id; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1812,7 +1930,7 @@ COMMENT ON COLUMN dim_person.src_entity_id IS 'The source entity ID of the perso
 
 
 --
--- TOC entry 3131 (class 0 OID 0)
+-- TOC entry 3146 (class 0 OID 0)
 -- Dependencies: 171
 -- Name: COLUMN dim_person.birth_gender_id; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1821,7 +1939,7 @@ COMMENT ON COLUMN dim_person.birth_gender_id IS 'The gender of the person';
 
 
 --
--- TOC entry 3132 (class 0 OID 0)
+-- TOC entry 3147 (class 0 OID 0)
 -- Dependencies: 171
 -- Name: COLUMN dim_person.first_name; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1830,7 +1948,7 @@ COMMENT ON COLUMN dim_person.first_name IS 'Person first name';
 
 
 --
--- TOC entry 3133 (class 0 OID 0)
+-- TOC entry 3148 (class 0 OID 0)
 -- Dependencies: 171
 -- Name: COLUMN dim_person.middle_name; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1839,7 +1957,7 @@ COMMENT ON COLUMN dim_person.middle_name IS 'person middle name';
 
 
 --
--- TOC entry 3134 (class 0 OID 0)
+-- TOC entry 3149 (class 0 OID 0)
 -- Dependencies: 171
 -- Name: COLUMN dim_person.last_name; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1848,7 +1966,7 @@ COMMENT ON COLUMN dim_person.last_name IS 'Person last name';
 
 
 --
--- TOC entry 3135 (class 0 OID 0)
+-- TOC entry 3150 (class 0 OID 0)
 -- Dependencies: 171
 -- Name: COLUMN dim_person.birth_date; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1857,7 +1975,7 @@ COMMENT ON COLUMN dim_person.birth_date IS 'Person birth date';
 
 
 --
--- TOC entry 3136 (class 0 OID 0)
+-- TOC entry 3151 (class 0 OID 0)
 -- Dependencies: 171
 -- Name: COLUMN dim_person.date_of_death; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1866,7 +1984,7 @@ COMMENT ON COLUMN dim_person.date_of_death IS 'Date of death date';
 
 
 --
--- TOC entry 3137 (class 0 OID 0)
+-- TOC entry 3152 (class 0 OID 0)
 -- Dependencies: 171
 -- Name: COLUMN dim_person.dw_ethnicity_id; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1875,7 +1993,7 @@ COMMENT ON COLUMN dim_person.dw_ethnicity_id IS 'The ethnicity of this person (d
 
 
 --
--- TOC entry 3138 (class 0 OID 0)
+-- TOC entry 3153 (class 0 OID 0)
 -- Dependencies: 171
 -- Name: COLUMN dim_person.dw_language_id; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1884,7 +2002,7 @@ COMMENT ON COLUMN dim_person.dw_language_id IS 'The language id of this user (dw
 
 
 --
--- TOC entry 3139 (class 0 OID 0)
+-- TOC entry 3154 (class 0 OID 0)
 -- Dependencies: 171
 -- Name: COLUMN dim_person.etl_load_date; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1943,7 +2061,7 @@ CREATE TABLE dim_workflow (
 ALTER TABLE warehouse.dim_workflow OWNER TO pentaho;
 
 --
--- TOC entry 3140 (class 0 OID 0)
+-- TOC entry 3155 (class 0 OID 0)
 -- Dependencies: 187
 -- Name: COLUMN dim_workflow.dw_workflow_id; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1952,7 +2070,7 @@ COMMENT ON COLUMN dim_workflow.dw_workflow_id IS 'The OLAP TK workflow ID';
 
 
 --
--- TOC entry 3141 (class 0 OID 0)
+-- TOC entry 3156 (class 0 OID 0)
 -- Dependencies: 187
 -- Name: COLUMN dim_workflow.hashcode; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1961,7 +2079,7 @@ COMMENT ON COLUMN dim_workflow.hashcode IS 'The dim_workflow hashcode';
 
 
 --
--- TOC entry 3142 (class 0 OID 0)
+-- TOC entry 3157 (class 0 OID 0)
 -- Dependencies: 187
 -- Name: COLUMN dim_workflow.workflow_description; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -1970,7 +2088,7 @@ COMMENT ON COLUMN dim_workflow.workflow_description IS 'The workflow text';
 
 
 --
--- TOC entry 3143 (class 0 OID 0)
+-- TOC entry 3158 (class 0 OID 0)
 -- Dependencies: 187
 -- Name: COLUMN dim_workflow.etl_load_date; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -2011,7 +2129,7 @@ CREATE TABLE fact_disease_event (
 ALTER TABLE warehouse.fact_disease_event OWNER TO postgres;
 
 --
--- TOC entry 3144 (class 0 OID 0)
+-- TOC entry 3159 (class 0 OID 0)
 -- Dependencies: 180
 -- Name: COLUMN fact_disease_event.dw_jurisdiction_id; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -2020,7 +2138,7 @@ COMMENT ON COLUMN fact_disease_event.dw_jurisdiction_id IS 'TK of the dim_jurisd
 
 
 --
--- TOC entry 3145 (class 0 OID 0)
+-- TOC entry 3160 (class 0 OID 0)
 -- Dependencies: 180
 -- Name: COLUMN fact_disease_event.src_event_id; Type: COMMENT; Schema: warehouse; Owner: postgres
 --
@@ -2058,7 +2176,7 @@ CREATE TABLE fact_event (
 ALTER TABLE warehouse.fact_event OWNER TO pentaho;
 
 --
--- TOC entry 3146 (class 0 OID 0)
+-- TOC entry 3161 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: TABLE fact_event; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -2067,7 +2185,7 @@ COMMENT ON TABLE fact_event IS 'Contact and Morbidity Events';
 
 
 --
--- TOC entry 3147 (class 0 OID 0)
+-- TOC entry 3162 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: COLUMN fact_event.src_event_id; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -2076,7 +2194,7 @@ COMMENT ON COLUMN fact_event.src_event_id IS 'The OLTP event_id value';
 
 
 --
--- TOC entry 3148 (class 0 OID 0)
+-- TOC entry 3163 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: COLUMN fact_event.src_created_at; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -2085,7 +2203,7 @@ COMMENT ON COLUMN fact_event.src_created_at IS 'The date / time the event was cr
 
 
 --
--- TOC entry 3149 (class 0 OID 0)
+-- TOC entry 3164 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: COLUMN fact_event.src_modifed_at; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -2094,7 +2212,7 @@ COMMENT ON COLUMN fact_event.src_modifed_at IS 'The date / time the event was la
 
 
 --
--- TOC entry 3150 (class 0 OID 0)
+-- TOC entry 3165 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: COLUMN fact_event.event_name; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -2103,7 +2221,7 @@ COMMENT ON COLUMN fact_event.event_name IS 'The name given to the event';
 
 
 --
--- TOC entry 3151 (class 0 OID 0)
+-- TOC entry 3166 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: COLUMN fact_event.dw_event_onset_date_id; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -2112,7 +2230,7 @@ COMMENT ON COLUMN fact_event.dw_event_onset_date_id IS 'date the event onset occ
 
 
 --
--- TOC entry 3152 (class 0 OID 0)
+-- TOC entry 3167 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: COLUMN fact_event.dw_outbreak_id; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -2121,7 +2239,7 @@ COMMENT ON COLUMN fact_event.dw_outbreak_id IS 'The outbreak dmension value';
 
 
 --
--- TOC entry 3153 (class 0 OID 0)
+-- TOC entry 3168 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: COLUMN fact_event.dw_investigation_completed_by_state_date_id; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -2130,7 +2248,7 @@ COMMENT ON COLUMN fact_event.dw_investigation_completed_by_state_date_id IS 'The
 
 
 --
--- TOC entry 3154 (class 0 OID 0)
+-- TOC entry 3169 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: COLUMN fact_event.dw_first_reported_ph_date_id; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -2139,7 +2257,7 @@ COMMENT ON COLUMN fact_event.dw_first_reported_ph_date_id IS 'The dim_date this 
 
 
 --
--- TOC entry 3155 (class 0 OID 0)
+-- TOC entry 3170 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: COLUMN fact_event.dw_investigation_stated_date_id; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -2148,7 +2266,7 @@ COMMENT ON COLUMN fact_event.dw_investigation_stated_date_id IS 'The dim_date th
 
 
 --
--- TOC entry 3156 (class 0 OID 0)
+-- TOC entry 3171 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: COLUMN fact_event.dw_first_reported_to_clinician_date_id; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -2157,7 +2275,7 @@ COMMENT ON COLUMN fact_event.dw_first_reported_to_clinician_date_id IS 'The dim_
 
 
 --
--- TOC entry 3157 (class 0 OID 0)
+-- TOC entry 3172 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: COLUMN fact_event.dw_lhd_case_status_id; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -2166,7 +2284,7 @@ COMMENT ON COLUMN fact_event.dw_lhd_case_status_id IS 'The LHD dim_case_status i
 
 
 --
--- TOC entry 3158 (class 0 OID 0)
+-- TOC entry 3173 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: COLUMN fact_event.age_at_onset; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -2175,7 +2293,7 @@ COMMENT ON COLUMN fact_event.age_at_onset IS 'The patient`s age at the onset of 
 
 
 --
--- TOC entry 3159 (class 0 OID 0)
+-- TOC entry 3174 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: COLUMN fact_event.dw_investigator_id; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -2184,7 +2302,7 @@ COMMENT ON COLUMN fact_event.dw_investigator_id IS 'The dim_investigator id';
 
 
 --
--- TOC entry 3160 (class 0 OID 0)
+-- TOC entry 3175 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: COLUMN fact_event.src_parent_event_id; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -2193,7 +2311,7 @@ COMMENT ON COLUMN fact_event.src_parent_event_id IS 'The id of this event`s pare
 
 
 --
--- TOC entry 3161 (class 0 OID 0)
+-- TOC entry 3176 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: COLUMN fact_event.dw_workflow_id; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -2202,7 +2320,7 @@ COMMENT ON COLUMN fact_event.dw_workflow_id IS 'The dim_workflow ID';
 
 
 --
--- TOC entry 3162 (class 0 OID 0)
+-- TOC entry 3177 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: COLUMN fact_event.dw_jurisdiction_id; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -2211,7 +2329,7 @@ COMMENT ON COLUMN fact_event.dw_jurisdiction_id IS 'The ID of the dim_jurisdicti
 
 
 --
--- TOC entry 3163 (class 0 OID 0)
+-- TOC entry 3178 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: COLUMN fact_event.dw_junk_status_type_id; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -2220,7 +2338,7 @@ COMMENT ON COLUMN fact_event.dw_junk_status_type_id IS 'FK to dim_junk_status_ty
 
 
 --
--- TOC entry 3164 (class 0 OID 0)
+-- TOC entry 3179 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: COLUMN fact_event.dw_disease_id; Type: COMMENT; Schema: warehouse; Owner: pentaho
 --
@@ -2229,7 +2347,7 @@ COMMENT ON COLUMN fact_event.dw_disease_id IS 'TK of the disease of this fact';
 
 
 --
--- TOC entry 196 (class 1259 OID 51958)
+-- TOC entry 195 (class 1259 OID 51958)
 -- Name: fact_lab_test_seq; Type: SEQUENCE; Schema: warehouse; Owner: postgres
 --
 
@@ -2244,7 +2362,7 @@ CREATE SEQUENCE fact_lab_test_seq
 ALTER TABLE warehouse.fact_lab_test_seq OWNER TO postgres;
 
 --
--- TOC entry 197 (class 1259 OID 51960)
+-- TOC entry 196 (class 1259 OID 51960)
 -- Name: fact_lab_test; Type: TABLE; Schema: warehouse; Owner: postgres; Tablespace: 
 --
 
@@ -2289,7 +2407,7 @@ CREATE TABLE dw_util_data_validation_status (
 ALTER TABLE warehouse_util.dw_util_data_validation_status OWNER TO postgres;
 
 --
--- TOC entry 3165 (class 0 OID 0)
+-- TOC entry 3180 (class 0 OID 0)
 -- Dependencies: 170
 -- Name: COLUMN dw_util_data_validation_status.id; Type: COMMENT; Schema: warehouse_util; Owner: postgres
 --
@@ -2298,7 +2416,7 @@ COMMENT ON COLUMN dw_util_data_validation_status.id IS 'Primary key';
 
 
 --
--- TOC entry 3166 (class 0 OID 0)
+-- TOC entry 3181 (class 0 OID 0)
 -- Dependencies: 170
 -- Name: COLUMN dw_util_data_validation_status.status_key; Type: COMMENT; Schema: warehouse_util; Owner: postgres
 --
@@ -2307,7 +2425,7 @@ COMMENT ON COLUMN dw_util_data_validation_status.status_key IS 'Unique text key 
 
 
 --
--- TOC entry 3167 (class 0 OID 0)
+-- TOC entry 3182 (class 0 OID 0)
 -- Dependencies: 170
 -- Name: COLUMN dw_util_data_validation_status.status; Type: COMMENT; Schema: warehouse_util; Owner: postgres
 --
@@ -2316,7 +2434,7 @@ COMMENT ON COLUMN dw_util_data_validation_status.status IS 'Flag indicating the 
 
 
 --
--- TOC entry 3168 (class 0 OID 0)
+-- TOC entry 3183 (class 0 OID 0)
 -- Dependencies: 170
 -- Name: COLUMN dw_util_data_validation_status.update_time; Type: COMMENT; Schema: warehouse_util; Owner: postgres
 --
@@ -2325,7 +2443,7 @@ COMMENT ON COLUMN dw_util_data_validation_status.update_time IS 'Validation upda
 
 
 --
--- TOC entry 3169 (class 0 OID 0)
+-- TOC entry 3184 (class 0 OID 0)
 -- Dependencies: 170
 -- Name: COLUMN dw_util_data_validation_status.description; Type: COMMENT; Schema: warehouse_util; Owner: postgres
 --
@@ -2349,7 +2467,7 @@ CREATE SEQUENCE dw_util_data_validation_status_id_seq
 ALTER TABLE warehouse_util.dw_util_data_validation_status_id_seq OWNER TO postgres;
 
 --
--- TOC entry 3170 (class 0 OID 0)
+-- TOC entry 3185 (class 0 OID 0)
 -- Dependencies: 169
 -- Name: dw_util_data_validation_status_id_seq; Type: SEQUENCE OWNED BY; Schema: warehouse_util; Owner: postgres
 --
@@ -2360,7 +2478,7 @@ ALTER SEQUENCE dw_util_data_validation_status_id_seq OWNED BY dw_util_data_valid
 SET search_path = warehouse, pg_catalog;
 
 --
--- TOC entry 2785 (class 2604 OID 34898)
+-- TOC entry 2787 (class 2604 OID 34898)
 -- Name: dw_address_id; Type: DEFAULT; Schema: warehouse; Owner: postgres
 --
 
@@ -2368,17 +2486,25 @@ ALTER TABLE ONLY dim_address ALTER COLUMN dw_address_id SET DEFAULT nextval('dim
 
 
 --
--- TOC entry 2786 (class 2604 OID 34910)
+-- TOC entry 2788 (class 2604 OID 34910)
 -- Name: dw_diagnostic_facility_id; Type: DEFAULT; Schema: warehouse; Owner: postgres
 --
 
 ALTER TABLE ONLY dim_diagnostic_facility ALTER COLUMN dw_diagnostic_facility_id SET DEFAULT nextval('dim_diagnostic_facilites_dim_diagnostic_facilities_seq'::regclass);
 
 
+--
+-- TOC entry 2791 (class 2604 OID 51981)
+-- Name: dw_organism_id; Type: DEFAULT; Schema: warehouse; Owner: postgres
+--
+
+ALTER TABLE ONLY dim_organism ALTER COLUMN dw_organism_id SET DEFAULT nextval('dim_organism_dw_organism_id_seq'::regclass);
+
+
 SET search_path = warehouse_util, pg_catalog;
 
 --
--- TOC entry 2784 (class 2604 OID 26511)
+-- TOC entry 2786 (class 2604 OID 26511)
 -- Name: id; Type: DEFAULT; Schema: warehouse_util; Owner: postgres
 --
 
@@ -2388,7 +2514,7 @@ ALTER TABLE ONLY dw_util_data_validation_status ALTER COLUMN id SET DEFAULT next
 SET search_path = warehouse, pg_catalog;
 
 --
--- TOC entry 2956 (class 0 OID 34895)
+-- TOC entry 2959 (class 0 OID 34895)
 -- Dependencies: 176
 -- Data for Name: dim_address; Type: TABLE DATA; Schema: warehouse; Owner: postgres
 --
@@ -2399,7 +2525,7 @@ COPY dim_address (dw_address_id, src_address_id, location_id, county_id, county,
 
 
 --
--- TOC entry 3171 (class 0 OID 0)
+-- TOC entry 3186 (class 0 OID 0)
 -- Dependencies: 175
 -- Name: dim_addresses_dim_address_key_seq; Type: SEQUENCE SET; Schema: warehouse; Owner: postgres
 --
@@ -2408,7 +2534,7 @@ SELECT pg_catalog.setval('dim_addresses_dim_address_key_seq', 1, false);
 
 
 --
--- TOC entry 2969 (class 0 OID 35444)
+-- TOC entry 2972 (class 0 OID 35444)
 -- Dependencies: 189
 -- Data for Name: dim_date; Type: TABLE DATA; Schema: warehouse; Owner: postgres
 --
@@ -6070,7 +6196,7 @@ COPY dim_date (dw_date_id, hashcode, src_date_val, date_short, date_medium, date
 
 
 --
--- TOC entry 3172 (class 0 OID 0)
+-- TOC entry 3187 (class 0 OID 0)
 -- Dependencies: 177
 -- Name: dim_diagnostic_facilites_dim_diagnostic_facilities_seq; Type: SEQUENCE SET; Schema: warehouse; Owner: postgres
 --
@@ -6079,7 +6205,7 @@ SELECT pg_catalog.setval('dim_diagnostic_facilites_dim_diagnostic_facilities_seq
 
 
 --
--- TOC entry 2958 (class 0 OID 34907)
+-- TOC entry 2961 (class 0 OID 34907)
 -- Dependencies: 178
 -- Data for Name: dim_diagnostic_facility; Type: TABLE DATA; Schema: warehouse; Owner: postgres
 --
@@ -6090,7 +6216,7 @@ COPY dim_diagnostic_facility (dw_diagnostic_facility_id, src_event_id, src_entit
 
 
 --
--- TOC entry 2963 (class 0 OID 34997)
+-- TOC entry 2966 (class 0 OID 34997)
 -- Dependencies: 183
 -- Data for Name: dim_disease; Type: TABLE DATA; Schema: warehouse; Owner: postgres
 --
@@ -6274,7 +6400,7 @@ COPY dim_disease (dw_disease_id, hashcode, src_disease_id, disease_name, contact
 
 
 --
--- TOC entry 2953 (class 0 OID 34772)
+-- TOC entry 2956 (class 0 OID 34772)
 -- Dependencies: 173
 -- Data for Name: dim_ethnicity; Type: TABLE DATA; Schema: warehouse; Owner: pentaho
 --
@@ -6289,7 +6415,7 @@ COPY dim_ethnicity (dw_ethnicity_id, hashcode, src_ethnicity_id, code_name, the_
 
 
 --
--- TOC entry 2970 (class 0 OID 43677)
+-- TOC entry 2973 (class 0 OID 43677)
 -- Dependencies: 191
 -- Data for Name: dim_external_code; Type: TABLE DATA; Schema: warehouse; Owner: pentaho
 --
@@ -6631,7 +6757,7 @@ COPY dim_external_code (dw_external_code_id, hashcode, src_external_code_id, cod
 
 
 --
--- TOC entry 2966 (class 0 OID 35110)
+-- TOC entry 2969 (class 0 OID 35110)
 -- Dependencies: 186
 -- Data for Name: dim_investigator; Type: TABLE DATA; Schema: warehouse; Owner: pentaho
 --
@@ -6642,7 +6768,7 @@ COPY dim_investigator (dw_investigator_id, hashcode, src_investigator_id, invest
 
 
 --
--- TOC entry 2972 (class 0 OID 51938)
+-- TOC entry 2975 (class 0 OID 51938)
 -- Dependencies: 193
 -- Data for Name: dim_junk_lab_test; Type: TABLE DATA; Schema: warehouse; Owner: postgres
 --
@@ -6652,7 +6778,7 @@ COPY dim_junk_lab_test (dw_junk_lab_test_id, src_lab_test_result_id, lab_test_re
 
 
 --
--- TOC entry 3173 (class 0 OID 0)
+-- TOC entry 3188 (class 0 OID 0)
 -- Dependencies: 192
 -- Name: dim_junk_lab_test_seq; Type: SEQUENCE SET; Schema: warehouse; Owner: postgres
 --
@@ -6661,7 +6787,7 @@ SELECT pg_catalog.setval('dim_junk_lab_test_seq', 1, false);
 
 
 --
--- TOC entry 2968 (class 0 OID 35417)
+-- TOC entry 2971 (class 0 OID 35417)
 -- Dependencies: 188
 -- Data for Name: dim_junk_status_type; Type: TABLE DATA; Schema: warehouse; Owner: pentaho
 --
@@ -6671,7 +6797,7 @@ COPY dim_junk_status_type (dw_junk_status_type_id, hashcode, event_type, contact
 
 
 --
--- TOC entry 2952 (class 0 OID 34749)
+-- TOC entry 2955 (class 0 OID 34749)
 -- Dependencies: 172
 -- Data for Name: dim_jurisdiction; Type: TABLE DATA; Schema: warehouse; Owner: pentaho
 --
@@ -6697,7 +6823,7 @@ COPY dim_jurisdiction (dw_jurisdiction_id, hashcode, src_places_id, src_entity_i
 
 
 --
--- TOC entry 2954 (class 0 OID 34781)
+-- TOC entry 2957 (class 0 OID 34781)
 -- Dependencies: 174
 -- Data for Name: dim_language; Type: TABLE DATA; Schema: warehouse; Owner: pentaho
 --
@@ -6745,7 +6871,7 @@ COPY dim_language (dw_language_id, hashcode, src_language_id, code_name, the_cod
 
 
 --
--- TOC entry 2962 (class 0 OID 34980)
+-- TOC entry 2965 (class 0 OID 34980)
 -- Dependencies: 182
 -- Data for Name: dim_location; Type: TABLE DATA; Schema: warehouse; Owner: postgres
 --
@@ -7263,17 +7389,360 @@ COPY dim_location (dw_location_id, hashcode, src_location_id, county_id, county,
 
 
 --
--- TOC entry 2974 (class 0 OID 51949)
--- Dependencies: 195
+-- TOC entry 2980 (class 0 OID 51978)
+-- Dependencies: 198
 -- Data for Name: dim_organism; Type: TABLE DATA; Schema: warehouse; Owner: postgres
 --
 
-COPY dim_organism (dw_organism_id, src_id, organism_name, snomed_name, snomed_code, snomed_id) FROM stdin;
+COPY dim_organism (dw_organism_id, hashcode, src_organism_id, organism_name, snomed_name, snomed_code, snomed_id, src_created_at, src_updated_at, etl_load_date) FROM stdin;
+1	1	1	Brucella species	\N	\N	\N	2009-10-23 20:21:34.422	2009-10-23 20:21:34.422	2014-04-13 15:43:36.855
+2	2	2	Hepatitis B virus	\N	\N	\N	2009-10-23 20:21:34.859	2009-10-23 20:21:34.859	2014-04-13 15:43:36.887
+3	3	3	Hepatitis C virus	\N	\N	\N	2009-10-23 20:21:35.014	2009-10-23 20:21:35.014	2014-04-13 15:43:37.036
+4	4	4	Plasmodium falciparum	\N	\N	\N	2009-10-23 20:21:35.126	2009-10-23 20:21:35.126	2014-04-13 15:43:37.07
+5	5	5	Borrelia burgdorferi	\N	\N	\N	2009-10-23 20:21:35.405	2009-10-23 20:21:35.405	2014-04-13 15:43:37.1
+10	10	10	La Crosse virus	\N	\N	\N	2009-10-23 20:21:35.639	2009-10-23 20:21:35.639	2014-04-13 15:43:37.215
+101	102	102	Shigella flexneri	\N	\N	\N	2009-10-23 20:22:23.116	2009-10-23 20:22:23.116	2014-04-13 15:43:38.656
+102	103	103	Shigella sonnei	\N	\N	\N	2009-10-23 20:22:23.155	2009-10-23 20:22:23.155	2014-04-13 15:43:38.67
+103	104	104	Shigella boydii	\N	\N	\N	2009-10-23 20:22:23.181	2009-10-23 20:22:23.181	2014-04-13 15:43:38.679
+104	105	105	Shigella dysenteriae	\N	\N	\N	2009-10-23 20:22:23.247	2009-10-23 20:22:23.247	2014-04-13 15:43:38.697
+105	106	106	Entamoeba histolytica cysts	\N	\N	\N	2009-10-23 20:22:23.349	2009-10-23 20:22:23.349	2014-04-13 15:43:38.714
+106	107	107	Entamoeba histolytica trophozoites	\N	\N	\N	2009-10-23 20:22:23.373	2009-10-23 20:22:23.373	2014-04-13 15:43:38.734
+107	108	108	Neisseria meningitidis group A	\N	\N	\N	2009-10-23 20:22:23.768	2009-10-23 20:22:23.768	2014-04-13 15:43:38.759
+108	49	49	Salmonella Paratyphi A	\N	\N	\N	2009-10-23 20:21:43.402	2009-10-28 07:50:41.936	2014-04-13 15:43:38.776
+109	109	109	Neisseria meningitidis group B	\N	\N	\N	2009-10-23 20:22:23.796	2009-10-23 20:22:23.796	2014-04-13 15:43:38.81
+110	110	110	Neisseria meningitidis group C	\N	\N	\N	2009-10-23 20:22:23.824	2009-10-23 20:22:23.824	2014-04-13 15:43:38.826
+111	111	111	Neisseria meningitidis group Y	\N	\N	\N	2009-10-23 20:22:25.772	2009-10-23 20:22:25.772	2014-04-13 15:43:38.857
+6	6	6	Cyclospora cayetanensis	\N	\N	\N	2009-10-23 20:21:35.437	2009-10-23 20:21:35.437	2014-04-13 15:43:37.118
+7	7	7	Escherichia coli O157:H7	\N	\N	\N	2009-10-23 20:21:35.469	2009-10-23 20:21:35.469	2014-04-13 15:43:37.151
+8	8	8	Varicella-zoster virus	\N	\N	\N	2009-10-23 20:21:35.498	2009-10-23 20:21:35.498	2014-04-13 15:43:37.176
+9	9	9	Eastern equine encephalitis virus	\N	\N	\N	2009-10-23 20:21:35.527	2009-10-23 20:21:35.527	2014-04-13 15:43:37.193
+11	11	11	Saint Louis encephalitis virus	\N	\N	\N	2009-10-23 20:21:35.708	2009-10-23 20:21:35.708	2014-04-13 15:43:37.236
+12	12	12	Treponema pallidum	\N	\N	\N	2009-10-23 20:21:35.964	2009-10-23 20:21:35.964	2014-04-13 15:43:37.253
+13	13	13	Haemophilus ducreyi	\N	\N	\N	2009-10-23 20:21:36.012	2009-10-23 20:21:36.012	2014-04-13 15:43:37.269
+14	14	14	Bacillus anthracis	\N	\N	\N	2009-10-23 20:21:36.084	2009-10-23 20:21:36.084	2014-04-13 15:43:37.298
+15	15	15	Clostridium botulinum	\N	\N	\N	2009-10-23 20:21:36.112	2009-10-23 20:21:36.112	2014-04-13 15:43:37.314
+16	16	16	Cryptococcus species	\N	\N	\N	2009-10-23 20:21:36.143	2009-10-23 20:21:36.143	2014-04-13 15:43:37.341
+17	17	17	Rickettsia rickettsii	\N	\N	\N	2009-10-23 20:21:36.256	2009-10-23 20:21:36.256	2014-04-13 15:43:37.371
+18	18	18	Ehrlichia chaffeensis	\N	\N	\N	2009-10-23 20:21:36.571	2009-10-23 20:21:36.571	2014-04-13 15:43:37.404
+19	19	19	Hepatitis D virus	\N	\N	\N	2009-10-23 20:21:36.903	2009-10-23 20:21:36.903	2014-04-13 15:43:37.419
+20	20	20	Legionella pneumophila	\N	\N	\N	2009-10-23 20:21:36.93	2009-10-23 20:21:36.93	2014-04-13 15:43:37.427
+21	21	21	Legionella longbeachii	\N	\N	\N	2009-10-23 20:21:36.958	2009-10-23 20:21:36.958	2014-04-13 15:43:37.447
+22	22	22	Mumps virus	\N	\N	\N	2009-10-23 20:21:36.986	2009-10-23 20:21:36.986	2014-04-13 15:43:37.457
+23	23	23	Rubella virus	\N	\N	\N	2009-10-23 20:21:37.033	2009-10-23 20:21:37.033	2014-04-13 15:43:37.475
+24	24	24	Measles virus	\N	\N	\N	2009-10-23 20:21:37.085	2009-10-23 20:21:37.085	2014-04-13 15:43:37.489
+25	25	25	Hepatitis A virus (human enterovirus 72)	\N	\N	\N	2009-10-23 20:21:37.223	2009-10-23 20:21:37.223	2014-04-13 15:43:37.5
+26	26	26	Mycobacterium tuberculosis complex	\N	\N	\N	2009-10-23 20:21:37.345	2009-10-23 20:21:37.345	2014-04-13 15:43:37.516
+27	27	27	Entamoeba histolytica	\N	\N	\N	2009-10-23 20:21:37.412	2009-10-23 20:21:37.412	2014-04-13 15:43:37.529
+28	28	28	Neisseria gonorrhoeae	\N	\N	\N	2009-10-23 20:21:37.437	2009-10-23 20:21:37.437	2014-04-13 15:43:37.546
+29	29	29	Chlamydia psittaci	\N	\N	\N	2009-10-23 20:21:37.476	2009-10-23 20:21:37.476	2014-04-13 15:43:37.564
+30	30	30	Chlamydia trachomatis, serotype C virus	\N	\N	\N	2009-10-23 20:21:37.501	2009-10-23 20:21:37.501	2014-04-13 15:43:37.578
+31	31	31	Francisella tularensis	\N	\N	\N	2009-10-23 20:21:37.544	2009-10-23 20:21:37.544	2014-04-13 15:43:37.591
+32	32	32	Giardia lamblia	\N	\N	\N	2009-10-23 20:21:37.568	2009-10-23 20:21:37.568	2014-04-13 15:43:37.605
+33	33	33	Hepatitis E virus	\N	\N	\N	2009-10-23 20:21:37.593	2009-10-23 20:21:37.593	2014-04-13 15:43:37.625
+34	34	34	Chlamydia trachomatis	\N	\N	\N	2009-10-23 20:21:37.71	2009-10-23 20:21:37.71	2014-04-13 15:43:37.632
+35	35	35	Neisseria meningitidis	\N	\N	\N	2009-10-23 20:21:38.618	2009-10-23 20:21:38.618	2014-04-13 15:43:37.653
+36	36	36	Campylobacter coli	\N	\N	\N	2009-10-23 20:21:38.717	2009-10-23 20:21:38.717	2014-04-13 15:43:37.666
+37	37	37	Campylobacter jejuni	\N	\N	\N	2009-10-23 20:21:38.743	2009-10-23 20:21:38.743	2014-04-13 15:43:37.69
+38	38	38	Campylobacter laridis	\N	\N	\N	2009-10-23 20:21:38.77	2009-10-23 20:21:38.77	2014-04-13 15:43:37.708
+39	39	39	Campylobacter species	\N	\N	\N	2009-10-23 20:21:38.817	2009-10-23 20:21:38.817	2014-04-13 15:43:37.725
+40	40	40	Chlamydia species	\N	\N	\N	2009-10-23 20:21:38.844	2009-10-23 20:21:38.844	2014-04-13 15:43:37.737
+41	41	41	Corynebacterium diphtheriae	\N	\N	\N	2009-10-23 20:21:38.924	2009-10-23 20:21:38.924	2014-04-13 15:43:37.754
+42	42	42	Anaplasma phagocytophilum	\N	\N	\N	2009-10-23 20:21:38.949	2009-10-23 20:21:38.949	2014-04-13 15:43:37.767
+43	43	43	Legionella pneumophila serogroup 1	\N	\N	\N	2009-10-23 20:21:39.321	2009-10-23 20:21:39.321	2014-04-13 15:43:37.778
+44	44	44	Rickettsia spotted fever group	\N	\N	\N	2009-10-23 20:21:39.468	2009-10-23 20:21:39.468	2014-04-13 15:43:37.8
+45	45	45	Trichinella spiralis	\N	\N	\N	2009-10-23 20:21:39.686	2009-10-23 20:21:39.686	2014-04-13 15:43:37.811
+46	46	46	Western equine encephalitis virus	\N	\N	\N	2009-10-23 20:21:39.783	2009-10-23 20:21:39.783	2014-04-13 15:43:37.832
+47	47	47	Enterohemorrhagic Escherichia coli (STEC)	\N	\N	\N	2009-10-23 20:21:42.665	2009-10-23 20:21:42.665	2014-04-13 15:43:37.851
+48	48	48	Legionella species	\N	\N	\N	2009-10-23 20:21:42.691	2009-10-23 20:21:42.691	2014-04-13 15:43:37.862
+49	322	322	Enterobacter Cloacae	\N	\N	\N	2010-11-09 09:22:10.166	2010-11-09 09:22:10.166	2014-04-13 15:43:37.883
+50	50	50	Burkholderia mallei	\N	\N	\N	2009-10-23 20:21:43.565	2009-10-23 20:21:43.565	2014-04-13 15:43:37.89
+51	51	51	Coxiella burnetii	\N	\N	\N	2009-10-23 20:21:43.631	2009-10-23 20:21:43.631	2014-04-13 15:43:37.906
+52	53	53	Bordetella pertussis	\N	\N	\N	2009-10-23 20:21:43.764	2009-10-23 20:21:43.764	2014-04-13 15:43:37.923
+53	54	54	Hantavirus (sin nombre)	\N	\N	\N	2009-10-23 20:21:43.86	2009-10-23 20:21:43.86	2014-04-13 15:43:37.937
+54	55	55	Dengue virus	\N	\N	\N	2009-10-23 20:21:44.066	2009-10-23 20:21:44.066	2014-04-13 15:43:37.946
+55	56	56	Influenza A/B undifferentiated	\N	\N	\N	2009-10-23 20:21:44.122	2009-10-23 20:21:44.122	2014-04-13 15:43:37.964
+56	57	57	West Nile virus	\N	\N	\N	2009-10-23 20:21:44.566	2009-10-23 20:21:44.566	2014-04-13 15:43:37.975
+57	58	58	Jamestown Canyon virus	\N	\N	\N	2009-10-23 20:21:44.928	2009-10-23 20:21:44.928	2014-04-13 15:43:37.991
+58	59	59	Powassan virus	\N	\N	\N	2009-10-23 20:21:44.983	2009-10-23 20:21:44.983	2014-04-13 15:43:38.009
+59	60	60	Coccidioides species	\N	\N	\N	2009-10-23 20:21:45.125	2009-10-23 20:21:45.125	2014-04-13 15:43:38.016
+60	61	61	Vibrio cholerae	\N	\N	\N	2009-10-23 20:21:45.235	2009-10-23 20:21:45.235	2014-04-13 15:43:38.037
+61	62	62	Influenza A	\N	\N	\N	2009-10-23 20:21:45.273	2009-10-23 20:21:45.273	2014-04-13 15:43:38.063
+62	63	63	Influenza B	\N	\N	\N	2009-10-23 20:21:45.312	2009-10-23 20:21:45.312	2014-04-13 15:43:38.084
+63	64	64	Coccidioides immitis	\N	\N	\N	2009-10-23 20:21:45.661	2009-10-23 20:21:45.661	2014-04-13 15:43:38.106
+64	65	65	SARS coronavirus	\N	\N	\N	2009-10-23 20:21:45.775	2009-10-23 20:21:45.775	2014-04-13 15:43:38.121
+65	66	66	Hantavirus species	\N	\N	\N	2009-10-23 20:21:45.92	2009-10-23 20:21:45.92	2014-04-13 15:43:38.138
+66	67	67	Norovirus	\N	\N	\N	2009-10-23 20:21:46.327	2009-10-23 20:21:46.327	2014-04-13 15:43:38.154
+67	68	68	Cryptosporidium species	\N	\N	\N	2009-10-23 20:21:46.404	2009-10-23 20:21:46.404	2014-04-13 15:43:38.168
+68	69	69	Yersinia species	\N	\N	\N	2009-10-23 20:21:46.499	2009-10-23 20:21:46.499	2014-04-13 15:43:38.18
+69	70	70	Chlamydia trachomatis serotype L2	\N	\N	\N	2009-10-23 20:21:46.679	2009-10-23 20:21:46.679	2014-04-13 15:43:38.196
+70	71	71	Chlamydia trachomatis, serotype L2	\N	\N	\N	2009-10-23 20:21:46.983	2009-10-23 20:21:46.983	2014-04-13 15:43:38.209
+71	72	72	Group B strep (Streptococcus agalactiae)	\N	\N	\N	2009-10-23 20:21:47.36	2009-10-23 20:21:47.36	2014-04-13 15:43:38.225
+72	73	73	Group A strep (Streptococcus pyogenes)	\N	\N	\N	2009-10-23 20:21:47.382	2009-10-23 20:21:47.382	2014-04-13 15:43:38.242
+73	74	74	Brucella abortus	\N	\N	\N	2009-10-23 20:21:47.541	2009-10-23 20:21:47.541	2014-04-13 15:43:38.251
+74	75	75	Brucella canis	\N	\N	\N	2009-10-23 20:21:47.601	2009-10-23 20:21:47.601	2014-04-13 15:43:38.265
+75	76	76	Brucella melitensis	\N	\N	\N	2009-10-23 20:21:47.623	2009-10-23 20:21:47.623	2014-04-13 15:43:38.284
+76	77	77	Brucella suis	\N	\N	\N	2009-10-23 20:21:47.645	2009-10-23 20:21:47.645	2014-04-13 15:43:38.293
+77	78	78	Yersinia enterocolitica serogroup O:3	\N	\N	\N	2009-10-23 20:21:48.72	2009-10-23 20:21:48.72	2014-04-13 15:43:38.311
+78	79	79	Yersinia enterocolitica serogroup O:8	\N	\N	\N	2009-10-23 20:21:48.742	2009-10-23 20:21:48.742	2014-04-13 15:43:38.324
+79	80	80	Yersinia enterocolitica serogroup O:9	\N	\N	\N	2009-10-23 20:21:48.763	2009-10-23 20:21:48.763	2014-04-13 15:43:38.334
+80	81	81	Yersinia pseudotuberculosis	\N	\N	\N	2009-10-23 20:21:48.784	2009-10-23 20:21:48.784	2014-04-13 15:43:38.352
+81	82	82	Clostridium tetani	\N	\N	\N	2009-10-23 20:21:49.921	2009-10-23 20:21:49.921	2014-04-13 15:43:38.362
+82	83	83	Rabies virus	\N	\N	\N	2009-10-23 20:21:50.721	2009-10-23 20:21:50.721	2014-04-13 15:43:38.376
+112	112	112	Neisseria meningitidis group W135	\N	\N	\N	2009-10-23 20:22:25.853	2009-10-23 20:22:25.853	2014-04-13 15:43:38.877
+113	113	113	Neisseria meningitidis, non-typable	\N	\N	\N	2009-10-23 20:22:25.897	2009-10-23 20:22:25.897	2014-04-13 15:43:38.905
+114	114	114	Chlamydia trachomatis, serotype L	\N	\N	\N	2009-10-23 20:22:26.016	2009-10-23 20:22:26.016	2014-04-13 15:43:38.923
+115	115	115	Chlamydia trachomatis, serotype L1	\N	\N	\N	2009-10-23 20:22:26.069	2009-10-23 20:22:26.069	2014-04-13 15:43:38.946
+201	197	197	Salmonella Minnesota	\N	\N	\N	2009-10-26 10:47:50.422	2009-10-28 07:49:31.602	2014-04-13 15:43:39.961
+202	201	201	Salmonella Mississippi	\N	\N	\N	2009-10-26 11:38:01.479	2009-10-28 07:49:36.616	2014-04-13 15:43:39.972
+203	200	200	Salmonella Montevideo	\N	\N	\N	2009-10-26 11:37:27.391	2009-10-28 07:49:58.694	2014-04-13 15:43:39.98
+204	191	191	Salmonella Newport	\N	\N	\N	2009-10-26 10:45:09.826	2009-10-28 07:50:05.367	2014-04-13 15:43:39.988
+205	193	193	Salmonella Oranienburg	\N	\N	\N	2009-10-26 10:46:21.406	2009-10-28 07:50:21.426	2014-04-13 15:43:39.998
+206	202	202	Salmonella Oslo	\N	\N	\N	2009-10-26 11:38:20.595	2009-10-28 07:50:48.561	2014-04-13 15:43:40.005
+207	196	196	Salmonella Poona	\N	\N	\N	2009-10-26 10:47:27.536	2009-10-28 07:51:17.321	2014-04-13 15:43:40.012
+208	210	210	Salmonella Saintpaul	\N	\N	\N	2009-10-26 11:41:34.987	2009-10-28 07:51:35.676	2014-04-13 15:43:40.019
+209	206	206	Salmonella Senftenberg	\N	\N	\N	2009-10-26 11:39:57.164	2009-10-28 07:51:41.519	2014-04-13 15:43:40.026
+210	192	192	Salmonella Shubra	\N	\N	\N	2009-10-26 10:45:59.678	2009-10-28 07:52:01.552	2014-04-13 15:43:40.038
+211	205	205	Salmonella Typhimurium var. 5 negative	\N	\N	\N	2009-10-26 11:39:33.693	2009-10-28 07:52:09.481	2014-04-13 15:43:40.045
+212	184	184	Streptococcus sanguinis	\N	\N	\N	2009-10-26 10:11:06.215	2011-03-15 09:53:06.774	2014-04-13 15:43:40.052
+213	325	325	Nocardia species	\N	\N	\N	2010-12-29 13:03:24.338	2010-12-29 13:03:24.338	2014-04-13 15:43:40.06
+214	215	215	Salmonella Javiana	\N	\N	\N	2009-10-26 12:34:31.359	2009-10-28 07:49:09.532	2014-04-13 15:43:40.068
+215	326	326	Gram negative rods	\N	\N	\N	2011-02-03 09:58:36.807	2011-02-03 09:58:36.807	2014-04-13 15:43:40.075
+216	327	327	Streptococcus vestibularis	\N	\N	\N	2011-04-28 14:26:51.102	2011-04-28 14:26:51.102	2014-04-13 15:43:40.083
+217	328	328	Streptococcus dysgalactiae	\N	\N	\N	2011-06-22 16:03:46.042	2011-06-22 16:03:46.042	2014-04-13 15:43:40.091
+218	329	329	Norovirus type 1	\N	\N	\N	2011-07-19 16:44:59.319	2011-07-19 16:44:59.319	2014-04-13 15:43:40.098
+219	330	330	Norovirus type 2	\N	\N	\N	2011-07-19 16:45:21.247	2011-07-19 16:45:21.247	2014-04-13 15:43:40.105
+220	217	217	Influenza A seasonal H1	\N	\N	\N	2009-10-27 08:59:45.856	2009-10-27 08:59:45.856	2014-04-13 15:43:40.118
+221	218	218	Influenza A seasonal H3	\N	\N	\N	2009-10-27 09:00:50.364	2009-10-27 09:00:50.364	2014-04-13 15:43:40.126
+222	219	219	Influenza A Novel H1N1	\N	\N	\N	2009-10-27 09:01:19.734	2009-10-27 09:01:19.734	2014-04-13 15:43:40.143
+223	220	220	Streptococcus milleri	\N	\N	\N	2009-10-27 12:41:42.616	2009-10-27 12:41:42.616	2014-04-13 15:43:40.151
+224	222	222	Escherichia coli O111	\N	\N	\N	2009-10-27 16:28:20.741	2009-10-27 16:29:04.906	2014-04-13 15:43:40.158
+83	84	84	Yellow Fever virus	\N	\N	\N	2009-10-23 20:21:51.054	2009-10-23 20:21:51.054	2014-04-13 15:43:38.391
+84	85	85	Yersinia enterocolitica serogroup O:5	\N	\N	\N	2009-10-23 20:21:51.775	2009-10-23 20:21:51.775	2014-04-13 15:43:38.408
+85	86	86	Yersinia enterocolitica	\N	\N	\N	2009-10-23 20:21:51.821	2009-10-23 20:21:51.821	2014-04-13 15:43:38.418
+86	87	87	Coxiella burnetii Phase I	\N	\N	\N	2009-10-23 20:21:52.016	2009-10-23 20:21:52.016	2014-04-13 15:43:38.436
+87	88	88	Coxiella burnetii Phase 2	\N	\N	\N	2009-10-23 20:21:52.034	2009-10-23 20:21:52.034	2014-04-13 15:43:38.449
+88	89	89	Hantavirus (puumala)	\N	\N	\N	2009-10-23 20:21:52.172	2009-10-23 20:21:52.172	2014-04-13 15:43:38.468
+89	90	90	Legionella pneumophila serogroup 5	\N	\N	\N	2009-10-23 20:21:53.004	2009-10-23 20:21:53.004	2014-04-13 15:43:38.477
+90	91	91	Legionella pneumophila serogroup 6	\N	\N	\N	2009-10-23 20:21:53.022	2009-10-23 20:21:53.022	2014-04-13 15:43:38.496
+91	92	92	Echinococcus species	\N	\N	\N	2009-10-23 20:21:53.204	2009-10-23 20:21:53.204	2014-04-13 15:43:38.509
+92	93	93	Vibrio cholerae, 01	\N	\N	\N	2009-10-23 20:22:22.311	2009-10-23 20:22:22.311	2014-04-13 15:43:38.529
+93	94	94	Vibrio cholerae, classical	\N	\N	\N	2009-10-23 20:22:22.393	2009-10-23 20:22:22.393	2014-04-13 15:43:38.536
+94	95	95	Vibrio cholerae, El tor	\N	\N	\N	2009-10-23 20:22:22.445	2009-10-23 20:22:22.445	2014-04-13 15:43:38.547
+95	96	96	Vibrio cholerae, Hikojima	\N	\N	\N	2009-10-23 20:22:22.484	2009-10-23 20:22:22.484	2014-04-13 15:43:38.567
+96	97	97	Vibrio cholerae, Inaba	\N	\N	\N	2009-10-23 20:22:22.558	2009-10-23 20:22:22.558	2014-04-13 15:43:38.577
+97	98	98	Vibrio cholerae, Ogawa	\N	\N	\N	2009-10-23 20:22:22.6	2009-10-23 20:22:22.6	2014-04-13 15:43:38.587
+98	99	99	Vibrio cholerae serogroup O139	\N	\N	\N	2009-10-23 20:22:22.769	2009-10-23 20:22:22.769	2014-04-13 15:43:38.607
+99	100	100	Mycobacterium leprae	\N	\N	\N	2009-10-23 20:22:23.058	2009-10-23 20:22:23.058	2014-04-13 15:43:38.619
+100	101	101	Shigella species	\N	\N	\N	2009-10-23 20:22:23.09	2009-10-23 20:22:23.09	2014-04-13 15:43:38.639
+116	116	116	Chlamydia trachomatis, serotype L3	\N	\N	\N	2009-10-23 20:22:26.2	2009-10-23 20:22:26.2	2014-04-13 15:43:38.963
+117	117	117	Bacillus anthracis - Pasteur strain	\N	\N	\N	2009-10-23 20:22:26.247	2009-10-23 20:22:26.247	2014-04-13 15:43:38.974
+118	118	118	Bacillus anthracis - Sterne Strain	\N	\N	\N	2009-10-23 20:22:26.271	2009-10-23 20:22:26.271	2014-04-13 15:43:38.99
+119	119	119	Bacillus anthracis - virulent strain	\N	\N	\N	2009-10-23 20:22:26.295	2009-10-23 20:22:26.295	2014-04-13 15:43:39.003
+120	120	120	Kunjin virus	\N	\N	\N	2009-10-23 20:22:26.368	2009-10-23 20:22:26.368	2014-04-13 15:43:39.018
+121	121	121	Clostridium botulinum - non toxin producer	\N	\N	\N	2009-10-23 20:22:26.458	2009-10-23 20:22:26.458	2014-04-13 15:43:39.031
+122	122	122	Clostridium botulinum, type A	\N	\N	\N	2009-10-23 20:22:26.65	2009-10-23 20:22:26.65	2014-04-13 15:43:39.044
+123	123	123	Clostridium botulinum, type B	\N	\N	\N	2009-10-23 20:22:26.706	2009-10-23 20:22:26.706	2014-04-13 15:43:39.058
+124	124	124	Clostridium botulinum, type C	\N	\N	\N	2009-10-23 20:22:26.762	2009-10-23 20:22:26.762	2014-04-13 15:43:39.072
+125	125	125	Clostridium botulinum, type D	\N	\N	\N	2009-10-23 20:22:26.863	2009-10-23 20:22:26.863	2014-04-13 15:43:39.086
+126	126	126	Clostridium botulinum, type E	\N	\N	\N	2009-10-23 20:22:26.917	2009-10-23 20:22:26.917	2014-04-13 15:43:39.099
+127	127	127	Clostridium botulinum, type F	\N	\N	\N	2009-10-23 20:22:26.97	2009-10-23 20:22:26.97	2014-04-13 15:43:39.113
+128	128	128	Variola virus	\N	\N	\N	2009-10-23 20:22:27.042	2009-10-23 20:22:27.042	2014-04-13 15:43:39.127
+129	129	129	Hepatitis G virus	\N	\N	\N	2009-10-23 20:22:27.104	2009-10-23 20:22:27.104	2014-04-13 15:43:39.141
+130	130	130	Hepatitis E, acute virus	\N	\N	\N	2009-10-23 20:22:27.184	2009-10-23 20:22:27.184	2014-04-13 15:43:39.155
+131	131	131	Chlamydia trachomatis, serotype A	\N	\N	\N	2009-10-23 20:22:27.261	2009-10-23 20:22:27.261	2014-04-13 15:43:39.169
+132	132	132	Chlamydia trachomatis, serotype B	\N	\N	\N	2009-10-23 20:22:27.285	2009-10-23 20:22:27.285	2014-04-13 15:43:39.177
+133	133	133	Chlamydia trachomatis, serotype Ba	\N	\N	\N	2009-10-23 20:22:27.31	2009-10-23 20:22:27.31	2014-04-13 15:43:39.194
+134	323	323	Salmonella Sandiego	\N	\N	\N	2010-11-29 13:10:26.533	2010-11-29 13:10:26.533	2014-04-13 15:43:39.209
+135	135	135	Chlamydia trachomatis, serotype D	\N	\N	\N	2009-10-23 20:22:27.357	2009-10-23 20:22:27.357	2014-04-13 15:43:39.222
+136	136	136	Chlamydia trachomatis, serotype E	\N	\N	\N	2009-10-23 20:22:27.381	2009-10-23 20:22:27.381	2014-04-13 15:43:39.233
+137	137	137	Chlamydia trachomatis, serotype F	\N	\N	\N	2009-10-23 20:22:27.406	2009-10-23 20:22:27.406	2014-04-13 15:43:39.25
+138	138	138	Chlamydia trachomatis, serotype I	\N	\N	\N	2009-10-23 20:22:27.43	2009-10-23 20:22:27.43	2014-04-13 15:43:39.265
+139	139	139	Chlamydia trachomatis, serotype J	\N	\N	\N	2009-10-23 20:22:27.455	2009-10-23 20:22:27.455	2014-04-13 15:43:39.279
+140	140	140	Chlamydia trachomatis, serotype K	\N	\N	\N	2009-10-23 20:22:27.481	2009-10-23 20:22:27.481	2014-04-13 15:43:39.305
+141	141	141	Yersinia intermedia	\N	\N	\N	2009-10-23 20:22:27.539	2009-10-23 20:22:27.539	2014-04-13 15:43:39.32
+142	142	142	Yersinia frederiksenii	\N	\N	\N	2009-10-23 20:22:27.639	2009-10-23 20:22:27.639	2014-04-13 15:43:39.339
+143	143	143	Yellow Fever virus group	\N	\N	\N	2009-10-23 20:22:27.755	2009-10-23 20:22:27.755	2014-04-13 15:43:39.356
+144	144	144	Streptococcus pneumoniae	\N	\N	\N	2009-10-23 20:22:27.815	2009-10-23 20:22:27.815	2014-04-13 15:43:39.364
+145	145	145	Legionella feeleii	\N	\N	\N	2009-10-23 20:22:27.884	2009-10-23 20:22:27.884	2014-04-13 15:43:39.382
+146	146	146	Legionella rubrilucens	\N	\N	\N	2009-10-23 20:22:27.908	2009-10-23 20:22:27.908	2014-04-13 15:43:39.397
+147	147	147	Legionella anisa	\N	\N	\N	2009-10-23 20:22:27.932	2009-10-23 20:22:27.932	2014-04-13 15:43:39.413
+148	148	148	Legionella pneumophila ss. fraseri	\N	\N	\N	2009-10-23 20:22:27.956	2009-10-23 20:22:27.956	2014-04-13 15:43:39.425
+149	149	149	Legionella pneumophila ss. pascullei	\N	\N	\N	2009-10-23 20:22:27.997	2009-10-23 20:22:27.997	2014-04-13 15:43:39.444
+150	150	150	Legionella pneumophila ss. pneumophila	\N	\N	\N	2009-10-23 20:22:28.021	2009-10-23 20:22:28.021	2014-04-13 15:43:39.458
+151	151	151	Legionella pneumophila serogroup 2	\N	\N	\N	2009-10-23 20:22:28.134	2009-10-23 20:22:28.134	2014-04-13 15:43:39.474
+152	152	152	Legionella pneumophila serogroup 3	\N	\N	\N	2009-10-23 20:22:28.164	2009-10-23 20:22:28.164	2014-04-13 15:43:39.489
+153	153	153	Legionella pneumophila serogroup 4	\N	\N	\N	2009-10-23 20:22:28.189	2009-10-23 20:22:28.189	2014-04-13 15:43:39.505
+154	154	154	Legionella pneumophila serogroup 8	\N	\N	\N	2009-10-23 20:22:28.246	2009-10-23 20:22:28.246	2014-04-13 15:43:39.528
+155	155	155	Legionella pneumophilia serogroup 12	\N	\N	\N	2009-10-23 20:22:28.27	2009-10-23 20:22:28.27	2014-04-13 15:43:39.536
+156	156	156	Vibrio species	\N	\N	\N	2009-10-23 20:22:28.359	2009-10-23 20:22:28.359	2014-04-13 15:43:39.554
+157	157	157	Vibrio parahemolyticus	\N	\N	\N	2009-10-23 20:22:28.384	2009-10-23 20:22:28.384	2014-04-13 15:43:39.562
+158	158	158	Vibrio alginolyticus	\N	\N	\N	2009-10-23 20:22:28.407	2009-10-23 20:22:28.407	2014-04-13 15:43:39.579
+159	159	159	Vibrio vulnificus	\N	\N	\N	2009-10-23 20:22:28.431	2009-10-23 20:22:28.431	2014-04-13 15:43:39.594
+160	160	160	Vibrio fluvialis	\N	\N	\N	2009-10-23 20:22:28.454	2009-10-23 20:22:28.454	2014-04-13 15:43:39.615
+161	161	161	Vibrio cholerae non O1/nonO139	\N	\N	\N	2009-10-23 20:22:28.478	2009-10-23 20:22:28.478	2014-04-13 15:43:39.626
+162	162	162	Ehrlichia ewingii	\N	\N	\N	2009-10-23 20:22:28.613	2009-10-23 20:22:28.613	2014-04-13 15:43:39.635
+163	163	163	Group C strep	\N	\N	\N	2009-10-23 20:22:28.686	2009-10-23 20:22:28.686	2014-04-13 15:43:39.647
+164	164	164	Group G strep	\N	\N	\N	2009-10-23 20:22:28.709	2009-10-23 20:22:28.709	2014-04-13 15:43:39.658
+165	165	165	Burkholderia pseudomallei	\N	\N	\N	2009-10-23 20:22:28.75	2009-10-23 20:22:28.75	2014-04-13 15:43:39.665
+166	166	166	Brucella maris	\N	\N	\N	2009-10-23 20:22:28.912	2009-10-23 20:22:28.912	2014-04-13 15:43:39.672
+167	167	167	Brucella neotomae	\N	\N	\N	2009-10-23 20:22:28.939	2009-10-23 20:22:28.939	2014-04-13 15:43:39.68
+168	168	168	Brucella ovis	\N	\N	\N	2009-10-23 20:22:28.963	2009-10-23 20:22:28.963	2014-04-13 15:43:39.691
+169	169	169	Brucella rangiferi tarandi	\N	\N	\N	2009-10-23 20:22:28.987	2009-10-23 20:22:28.987	2014-04-13 15:43:39.699
+170	170	170	Haemophilus influenzae	\N	\N	\N	2009-10-23 20:22:29.029	2009-10-23 20:22:29.029	2014-04-13 15:43:39.707
+171	171	171	Haemophilus influenzae, non-typable	\N	\N	\N	2009-10-23 20:22:29.052	2009-10-23 20:22:29.052	2014-04-13 15:43:39.715
+225	221	221	Escherichia coli O26	\N	\N	\N	2009-10-27 16:22:16.571	2009-10-27 16:29:27.841	2014-04-13 15:43:40.166
+226	223	223	Escherichia coli O121	\N	\N	\N	2009-10-27 16:30:31.582	2009-10-27 16:30:31.582	2014-04-13 15:43:40.173
+227	224	224	Escherichia coli O45	\N	\N	\N	2009-10-27 16:32:03.911	2009-10-27 16:32:03.911	2014-04-13 15:43:40.18
+228	225	225	Escherichia coli O103	\N	\N	\N	2009-10-27 16:32:24.112	2009-10-27 16:32:24.112	2014-04-13 15:43:40.188
+229	211	211	Salmonella Agona	\N	\N	\N	2009-10-26 11:42:06.891	2009-10-28 07:45:42.807	2014-04-13 15:43:40.193
+230	195	195	Salmonella Braenderup	\N	\N	\N	2009-10-26 10:47:03.184	2009-10-28 07:46:46.771	2014-04-13 15:43:40.201
+301	293	293	Salmonella II 50:b:z6	\N	\N	\N	2010-08-04 12:03:05.04	2010-08-04 12:03:05.04	2014-04-13 15:43:40.772
+302	294	294	California serogroup virus	\N	\N	\N	2010-08-10 08:43:59.797	2010-08-10 08:43:59.797	2014-04-13 15:43:40.783
+303	295	295	Giardia species	\N	\N	\N	2010-08-10 09:43:28.762	2010-08-10 09:43:28.762	2014-04-13 15:43:40.794
+304	296	296	Salmonella IIIb 53:z10:z35	\N	\N	\N	2010-08-16 14:25:06.958	2010-08-16 14:25:06.958	2014-04-13 15:43:40.804
+305	297	297	Salmonella I Rough:m,t:-	\N	\N	\N	2010-08-16 14:25:33.101	2010-08-16 14:25:33.101	2014-04-13 15:43:40.81
+306	298	298	Salmonella II 30 b:-	\N	\N	\N	2010-08-19 12:10:20.36	2010-08-19 12:10:20.36	2014-04-13 15:43:40.816
+307	299	299	Salmonella Reading	\N	\N	\N	2010-08-24 13:23:54.454	2010-08-24 13:23:54.454	2014-04-13 15:43:40.824
+308	300	300	Salmonella Bareily	\N	\N	\N	2010-08-30 15:41:55.037	2010-08-30 15:41:55.037	2014-04-13 15:43:40.832
+309	301	301	Moraxella osloensis	\N	\N	\N	2010-09-01 09:25:38.403	2010-09-01 09:25:38.403	2014-04-13 15:43:40.841
+310	302	302	Salmonella Monschaui	\N	\N	\N	2010-09-02 09:02:48.766	2010-09-02 09:02:48.766	2014-04-13 15:43:40.853
+311	303	303	Salmonella Rubislaw	\N	\N	\N	2010-09-02 09:12:51.605	2010-09-02 09:12:51.605	2014-04-13 15:43:40.863
+312	304	304	Salmonella IV 48:g,z51:-	\N	\N	\N	2010-09-02 09:23:18.502	2010-09-02 09:23:18.502	2014-04-13 15:43:40.871
+313	305	305	Salmonella IV 16:z4,z32:-	\N	\N	\N	2010-09-02 09:24:49.145	2010-09-02 09:24:49.145	2014-04-13 15:43:40.877
+314	306	306	Salmonella Worthington	\N	\N	\N	2010-09-02 09:35:56.583	2010-09-02 09:35:56.583	2014-04-13 15:43:40.885
+315	307	307	Salmonella Schwarzengrund	\N	\N	\N	2010-09-02 09:48:40.523	2010-09-02 09:48:40.523	2014-04-13 15:43:40.893
+316	308	308	Salmonella Poano	\N	\N	\N	2010-09-02 09:49:39.523	2010-09-02 09:49:39.523	2014-04-13 15:43:40.9
+317	309	309	Salmonella Stanleyville	\N	\N	\N	2010-09-02 09:59:45.119	2010-09-02 09:59:45.119	2014-04-13 15:43:40.907
+318	310	310	Salmonella IIIa 18:z4,z23:-	\N	\N	\N	2010-09-02 10:11:29.799	2010-09-02 10:11:29.799	2014-04-13 15:43:40.917
+319	311	311	Salmonella IIIa 44:z4,z32-	\N	\N	\N	2010-09-02 10:12:26.226	2010-09-02 10:12:26.226	2014-04-13 15:43:40.925
+320	312	312	Salmonella Weltevreden	\N	\N	\N	2010-09-02 10:45:22.044	2010-09-02 10:45:22.044	2014-04-13 15:43:40.932
+321	313	313	Salmonella Bere	\N	\N	\N	2010-09-02 11:07:35.211	2010-09-02 11:07:35.211	2014-04-13 15:43:40.939
+322	314	314	Salmonella B:1:-monophasic	\N	\N	\N	2010-09-02 11:16:40.119	2010-09-02 11:16:40.119	2014-04-13 15:43:40.945
+323	315	315	Salmonella Brandenburg	\N	\N	\N	2010-09-02 11:21:08.309	2010-09-02 11:21:08.309	2014-04-13 15:43:40.952
+324	316	316	Salmonella Muenster	\N	\N	\N	2010-09-02 12:39:17.799	2010-09-02 12:39:17.799	2014-04-13 15:43:40.963
+325	317	317	Salmonella Inverness	\N	\N	\N	2010-09-02 12:42:20.854	2010-09-02 12:42:20.854	2014-04-13 15:43:40.973
+326	318	318	Salmonella Berta	\N	\N	\N	2010-09-20 16:21:31.615	2010-09-20 16:21:31.615	2014-04-13 15:43:40.981
+327	319	319	Salmonella IIIa 41:z4,	\N	\N	\N	2010-09-21 08:45:43.121	2010-09-21 08:45:43.121	2014-04-13 15:43:40.989
+328	320	320	Salmonella IIIb 47:k:z35	\N	\N	\N	2010-09-21 08:46:10.026	2010-09-21 08:46:10.026	2014-04-13 15:43:40.998
+329	321	321	Salmonella Uganda	\N	\N	\N	2010-09-21 16:31:56.539	2010-09-21 16:31:56.539	2014-04-13 15:43:41.006
+330	331	331	Babesia microti	\N	\N	\N	2012-01-05 15:39:29.462937	2012-01-05 15:39:29.462937	2014-04-13 15:43:41.014
+331	332	332	Trypanosoma cruzi	\N	\N	\N	2012-01-05 15:40:23.299623	2012-01-05 15:40:23.299623	2014-04-13 15:43:41.021
+332	333	333	Human Immunodeficiency Virus (HIV-1)	\N	\N	\N	2012-09-06 09:58:26.359	2012-09-06 15:08:26.098	2014-04-13 15:43:41.029
+333	334	334	Human Immunodeficiency Virus (HIV-2)	\N	\N	\N	2012-09-06 15:09:07.871	2012-09-06 15:09:07.871	2014-04-13 15:43:41.039
+334	335	335	Human Immunodeficiency Virus (HIV-1/2), undifferentiated	\N	\N	\N	2012-09-06 15:09:42.539	2012-09-06 15:09:42.539	2014-04-13 15:43:41.05
+172	172	172	Haemophilus influenzae, type A	\N	\N	\N	2009-10-23 20:22:29.077	2009-10-23 20:22:29.077	2014-04-13 15:43:39.723
+173	173	173	Haemophilus influenzae, type B	\N	\N	\N	2009-10-23 20:22:29.107	2009-10-23 20:22:29.107	2014-04-13 15:43:39.736
+174	174	174	Haemophilus influenzae, type D	\N	\N	\N	2009-10-23 20:22:29.14	2009-10-23 20:22:29.14	2014-04-13 15:43:39.744
+175	175	175	Haemophilus influenzae, type E	\N	\N	\N	2009-10-23 20:22:29.165	2009-10-23 20:22:29.165	2014-04-13 15:43:39.75
+176	176	176	Haemophilus influenzae, type F	\N	\N	\N	2009-10-23 20:22:29.189	2009-10-23 20:22:29.189	2014-04-13 15:43:39.757
+177	177	177	Borrelia recurrentis	\N	\N	\N	2009-10-23 20:22:29.214	2009-10-23 20:22:29.214	2014-04-13 15:43:39.765
+178	178	178	Borrelia hermsii	\N	\N	\N	2009-10-23 20:22:29.237	2009-10-23 20:22:29.237	2014-04-13 15:43:39.772
+179	179	179	Borrelia parkerii	\N	\N	\N	2009-10-23 20:22:29.262	2009-10-23 20:22:29.262	2014-04-13 15:43:39.778
+180	180	180	Borrelia turicatae	\N	\N	\N	2009-10-23 20:22:29.286	2009-10-23 20:22:29.286	2014-04-13 15:43:39.788
+181	181	181	Donovania granulomatis	\N	\N	\N	2009-10-23 20:22:29.312	2009-10-23 20:22:29.312	2014-04-13 15:43:39.796
+182	182	182	Yersinia pestis	\N	\N	\N	2009-10-23 20:22:29.337	2009-10-23 20:22:29.337	2014-04-13 15:43:39.808
+183	183	183	Mycobacterium avium intracellulare complex (MAIC)	\N	\N	\N	2009-10-26 08:47:06.943	2009-10-26 08:47:06.943	2014-04-13 15:43:39.818
+184	324	324	Streptococcus cremoris	\N	\N	\N	2010-12-09 10:37:27.056	2010-12-09 10:37:27.056	2014-04-13 15:43:39.827
+185	185	185	Streptococcus viridans	\N	\N	\N	2009-10-26 10:12:09.669	2009-10-26 10:12:09.669	2014-04-13 15:43:39.836
+186	186	186	Alpha hemolytic streptococci	\N	\N	\N	2009-10-26 10:14:10.106	2009-10-26 10:14:10.106	2014-04-13 15:43:39.844
+187	187	187	Streptococcus anginosus	\N	\N	\N	2009-10-26 10:18:41.186	2009-10-26 10:18:41.186	2014-04-13 15:43:39.851
+188	188	188	Salmonella species	\N	\N	\N	2009-10-26 10:35:33.61	2009-10-26 10:35:33.61	2014-04-13 15:43:39.863
+189	189	189	Salmonella Typhimurium	\N	\N	\N	2009-10-26 10:38:49.56	2009-10-26 10:38:49.56	2014-04-13 15:43:39.87
+190	213	213	Salmonella B	\N	\N	\N	2009-10-26 11:43:08.716	2009-10-26 11:43:08.716	2014-04-13 15:43:39.878
+191	204	204	Salmonella Anatum	\N	\N	\N	2009-10-26 11:39:09.38	2009-10-28 07:46:00.682	2014-04-13 15:43:39.886
+192	214	214	Salmonella Bofflens	\N	\N	\N	2009-10-26 11:43:38.304	2009-10-28 07:46:20.529	2014-04-13 15:43:39.893
+193	208	208	Salmonella Carrau	\N	\N	\N	2009-10-26 11:40:43.595	2009-10-28 07:46:51.216	2014-04-13 15:43:39.901
+194	194	194	Salmonella Gaminara	\N	\N	\N	2009-10-26 10:46:43.178	2009-10-28 07:47:19.598	2014-04-13 15:43:39.909
+195	199	199	Salmonella Give	\N	\N	\N	2009-10-26 10:50:16.578	2009-10-28 07:47:43.538	2014-04-13 15:43:39.917
+196	209	209	Salmonella Hadar	\N	\N	\N	2009-10-26 11:41:00.361	2009-10-28 07:47:47.899	2014-04-13 15:43:39.924
+197	207	207	Salmonella Havana	\N	\N	\N	2009-10-26 11:40:21.507	2009-10-28 07:48:08.885	2014-04-13 15:43:39.932
+198	190	190	Salmonella Heidelberg	\N	\N	\N	2009-10-26 10:44:47.85	2009-10-28 07:48:13.838	2014-04-13 15:43:39.939
+199	198	198	Salmonella Holcomb	\N	\N	\N	2009-10-26 10:48:09.78	2009-10-28 07:48:35.336	2014-04-13 15:43:39.947
+200	203	203	Salmonella Java	\N	\N	\N	2009-10-26 11:38:43.416	2009-10-28 07:49:02.479	2014-04-13 15:43:39.954
+231	52	52	Salmonella Enteritidis	\N	\N	\N	2009-10-23 20:21:43.71	2009-10-28 07:47:14.846	2014-04-13 15:43:40.21
+232	216	216	Salmonella Infantis	\N	\N	\N	2009-10-26 12:34:55.711	2009-10-28 07:48:42.276	2014-04-13 15:43:40.221
+233	212	212	Salmonella Paratyphi B var. tartrate positive	\N	\N	\N	2009-10-26 11:42:43.707	2009-10-28 07:51:08.268	2014-04-13 15:43:40.228
+234	226	226	Salmonella Panama	\N	\N	\N	2009-10-29 07:37:50.718	2009-10-29 07:37:50.718	2014-04-13 15:43:40.235
+235	227	227	Staphylococcus aureus	\N	\N	\N	2009-10-29 10:35:46.139	2009-10-29 10:35:46.139	2014-04-13 15:43:40.241
+236	228	228	Enterovirus	\N	\N	\N	2009-11-03 08:16:25.808	2009-11-03 08:16:25.808	2014-04-13 15:43:40.251
+237	229	229	Salmonella Lomalinda	\N	\N	\N	2009-11-09 07:58:45.461	2009-11-09 07:58:45.461	2014-04-13 15:43:40.259
+238	230	230	Salmonella Stanley	\N	\N	\N	2009-11-09 08:08:34.057	2009-11-09 08:08:34.057	2014-04-13 15:43:40.265
+239	231	231	Streptococcus mitis	\N	\N	\N	2009-11-09 15:02:19.692	2009-11-09 15:02:19.692	2014-04-13 15:43:40.271
+240	232	232	Salmonella Pomona	\N	\N	\N	2009-11-19 09:09:42.375	2009-11-19 09:09:42.375	2014-04-13 15:43:40.278
+241	233	233	Staphylococcus aureus, methicillin resistant (MRSA)	\N	\N	\N	2009-11-19 10:20:15.081	2009-11-19 10:20:15.081	2014-04-13 15:43:40.286
+242	234	234	Salmonella Johannesburg	\N	\N	\N	2009-11-23 16:34:30.239	2009-11-23 16:34:30.239	2014-04-13 15:43:40.293
+243	235	235	Human spongiform encephalopathy agent (prion)	\N	\N	\N	2009-11-25 13:11:24.555	2009-11-25 13:11:24.555	2014-04-13 15:43:40.3
+244	236	236	Creutzfeldt-Jacob agent	\N	\N	\N	2009-11-25 13:12:15.286	2009-11-25 13:12:15.286	2014-04-13 15:43:40.306
+245	237	237	Herpes simplex virus	\N	\N	\N	2009-11-25 15:26:26.479	2009-11-25 15:26:26.479	2014-04-13 15:43:40.313
+246	238	238	Salmonella Thompson	\N	\N	\N	2009-12-03 08:49:24.473	2009-12-03 08:49:24.473	2014-04-13 15:43:40.32
+247	239	239	Salmonella Ealing	\N	\N	\N	2009-12-03 09:40:35.17	2009-12-03 09:40:35.17	2014-04-13 15:43:40.328
+248	240	240	Salmonella Ago	\N	\N	\N	2009-12-03 10:05:42.271	2009-12-03 10:05:42.271	2014-04-13 15:43:40.336
+249	241	241	Salmonella 50:g,z51:-	\N	\N	\N	2009-12-03 10:06:19.335	2009-12-03 10:06:19.335	2014-04-13 15:43:40.342
+250	242	242	Mycobacterium chelonae-abscessus	\N	\N	\N	2009-12-07 13:39:51.358	2009-12-07 13:39:51.358	2014-04-13 15:43:40.349
+251	243	243	Mycobacterium gordonae	\N	\N	\N	2009-12-07 13:41:51.519	2009-12-07 13:41:51.519	2014-04-13 15:43:40.356
+252	244	244	Mycobacterium kansasii	\N	\N	\N	2009-12-07 13:46:01.304	2009-12-07 13:46:01.304	2014-04-13 15:43:40.364
+253	245	245	Mycobacterium other	\N	\N	\N	2009-12-07 13:46:27.516	2009-12-07 13:46:27.516	2014-04-13 15:43:40.371
+254	246	246	Bordetella parapertussis	\N	\N	\N	2009-12-07 17:28:30.494	2009-12-07 17:28:30.494	2014-04-13 15:43:40.378
+255	247	247	Streptococcus mutans	\N	\N	\N	2009-12-09 12:16:53.88	2009-12-09 12:16:53.88	2014-04-13 15:43:40.387
+256	248	248	Salmonella Cerro	\N	\N	\N	2009-12-10 09:21:22.423	2009-12-10 09:21:22.423	2014-04-13 15:43:40.394
+257	249	249	Streptococcus bovis	\N	\N	\N	2009-12-15 09:09:32.719	2009-12-15 09:09:32.719	2014-04-13 15:43:40.401
+258	250	250	Streptococcus species	\N	\N	\N	2009-12-15 16:41:35.857	2009-12-15 16:41:35.857	2014-04-13 15:43:40.408
+259	251	251	Streptococcus salivarius	\N	\N	\N	2009-12-15 16:42:38.26	2009-12-15 16:42:38.26	2014-04-13 15:43:40.415
+260	252	252	Staphylococcus species	\N	\N	\N	2009-12-15 17:59:30.329	2009-12-15 17:59:30.329	2014-04-13 15:43:40.421
+261	253	253	Staphylococcus species, coagulase negative	\N	\N	\N	2009-12-23 16:31:21.027	2009-12-23 16:31:21.027	2014-04-13 15:43:40.432
+262	254	254	Listeria monocytogenes	\N	\N	\N	2009-12-28 10:12:26.033	2009-12-28 10:12:26.033	2014-04-13 15:43:40.44
+263	255	255	Salmonella Typhi	\N	\N	\N	2010-01-14 08:00:58.524	2010-01-14 08:00:58.524	2014-04-13 15:43:40.453
+264	256	256	Enterococcus faecium	\N	\N	\N	2010-01-14 13:12:31.635	2010-01-14 13:12:31.635	2014-04-13 15:43:40.463
+265	257	257	Escherichia coli (NOT STEC)	\N	\N	\N	2010-01-25 16:55:20.003	2010-01-25 16:55:20.003	2014-04-13 15:43:40.468
+266	258	258	Epstein Barr Virus	\N	\N	\N	2010-01-25 17:16:04.578	2010-01-25 17:16:04.578	2014-04-13 15:43:40.475
+267	259	259	Plasmodium vivax	\N	\N	\N	2010-03-01 13:45:34.19	2010-03-01 13:45:34.19	2014-04-13 15:43:40.484
+268	260	260	Streptococcus parasanguinis	\N	\N	\N	2010-03-01 17:31:03.65	2010-03-02 14:20:35.698	2014-04-13 15:43:40.492
+269	261	261	Salmonella Kentucky	\N	\N	\N	2010-03-08 11:58:35.566	2010-03-08 11:59:07.302	2014-04-13 15:43:40.501
+270	262	262	Human metapneumovirus	\N	\N	\N	2010-03-11 13:36:45.39	2010-03-11 13:36:45.39	2014-04-13 15:43:40.509
+271	263	263	Salmonella Urbana	\N	\N	\N	2010-03-15 13:47:24.058	2010-03-15 13:47:24.058	2014-04-13 15:43:40.517
+272	264	264	Salmonella Muenchen	\N	\N	\N	2010-03-16 14:42:31.549	2010-03-16 14:42:31.549	2014-04-13 15:43:40.525
+273	265	265	Salmonella Concord	\N	\N	\N	2010-03-22 10:38:36.365	2010-03-22 10:38:36.365	2014-04-13 15:43:40.531
+274	266	266	Salmonella Mbandaka	\N	\N	\N	2010-03-29 15:40:55.149	2010-03-29 15:40:55.149	2014-04-13 15:43:40.539
+275	267	267	Group F Strep	\N	\N	\N	2010-04-01 13:24:55.036	2010-04-01 13:24:55.036	2014-04-13 15:43:40.546
+276	268	268	Salmonella Tennessee	\N	\N	\N	2010-04-05 13:36:29.663	2010-04-05 13:36:29.663	2014-04-13 15:43:40.554
+277	269	269	Acinetobacter baumannii	\N	\N	\N	2010-04-12 13:23:01.051	2010-04-12 13:23:01.051	2014-04-13 15:43:40.563
+278	270	270	Klebsiella pneumoniae	\N	\N	\N	2010-04-14 09:22:35.679	2010-04-14 09:22:35.679	2014-04-13 15:43:40.57
+279	271	271	Histoplasma species	\N	\N	\N	2010-04-14 09:30:17.64	2010-04-14 09:30:17.64	2014-04-13 15:43:40.58
+280	272	272	Histoplasma capsulatum	\N	\N	\N	2010-04-14 09:30:41.65	2010-04-14 09:30:41.65	2014-04-13 15:43:40.588
+281	273	273	Streptococcus intermedius	\N	\N	\N	2010-04-15 09:44:18.786	2010-04-15 09:44:18.786	2014-04-13 15:43:40.6
+282	274	274	Salmonella D:non-motile	\N	\N	\N	2010-04-28 09:05:52.298	2010-04-28 09:06:14.923	2014-04-13 15:43:40.618
+283	275	275	Proteus mirabilis	\N	\N	\N	2010-04-29 10:35:56.2	2010-04-29 10:35:56.2	2014-04-13 15:43:40.625
+284	276	276	Salmonella Cotham	\N	\N	\N	2010-05-10 14:43:56.513	2010-05-10 14:43:56.513	2014-04-13 15:43:40.635
+285	277	277	Salmonella Litchfield	\N	\N	\N	2010-05-19 12:30:42.967	2010-05-19 12:30:42.967	2014-04-13 15:43:40.643
+286	278	278	Salmonella Chester	\N	\N	\N	2010-06-08 13:33:45.597	2010-06-08 13:33:45.597	2014-04-13 15:43:40.65
+287	279	279	Streptococcus morbillorum	\N	\N	\N	2010-06-10 17:41:39.899	2010-06-10 17:41:39.899	2014-04-13 15:43:40.661
+288	280	280	Enterococcus faecalis	\N	\N	\N	2010-06-10 17:44:52.099	2010-06-10 17:44:52.099	2014-04-13 15:43:40.671
+289	281	281	Enterococcus species	\N	\N	\N	2010-06-10 17:45:08.078	2010-06-10 17:45:08.078	2014-04-13 15:43:40.679
+290	282	282	Escherichia coli O145	\N	\N	\N	2010-06-30 09:25:33.901	2010-06-30 09:25:33.901	2014-04-13 15:43:40.688
+291	283	283	Group D strep - not enterococcus	\N	\N	\N	2010-07-06 10:53:44.443	2010-07-06 10:53:44.443	2014-04-13 15:43:40.696
+292	284	284	Pseudomonas aeruginosa	\N	\N	\N	2010-07-06 17:22:34.122	2010-07-06 17:22:34.122	2014-04-13 15:43:40.702
+293	285	285	Aerococcus species	\N	\N	\N	2010-07-06 18:29:34.555	2010-07-06 18:29:34.555	2014-04-13 15:43:40.708
+294	286	286	Mixed flora/Normal flora	\N	\N	\N	2010-07-06 18:34:15.254	2010-07-06 18:34:15.254	2014-04-13 15:43:40.714
+295	287	287	Haemophilus parainfluenzae	\N	\N	\N	2010-07-06 18:44:55.609	2010-07-06 18:44:55.609	2014-04-13 15:43:40.724
+296	288	288	Streptococcus lactis	\N	\N	\N	2010-07-07 09:22:24.256	2010-07-07 09:22:24.256	2014-04-13 15:43:40.731
+297	289	289	Acinetobacter species	\N	\N	\N	2010-07-19 14:20:57.758	2010-07-19 14:20:57.758	2014-04-13 15:43:40.738
+298	290	290	Salmonella Adelaide	\N	\N	\N	2010-07-21 17:02:04.465	2010-07-21 17:03:33.45	2014-04-13 15:43:40.746
+299	291	291	Salmonella Virchow	\N	\N	\N	2010-08-04 11:00:57.656	2010-08-04 11:00:57.656	2014-04-13 15:43:40.753
+300	292	292	Salmonella Dublin	\N	\N	\N	2010-08-04 12:02:40.218	2010-08-04 12:02:40.218	2014-04-13 15:43:40.76
 \.
 
 
 --
--- TOC entry 3174 (class 0 OID 0)
+-- TOC entry 3189 (class 0 OID 0)
+-- Dependencies: 197
+-- Name: dim_organism_dw_organism_id_seq; Type: SEQUENCE SET; Schema: warehouse; Owner: postgres
+--
+
+SELECT pg_catalog.setval('dim_organism_dw_organism_id_seq', 1, false);
+
+
+--
+-- TOC entry 3190 (class 0 OID 0)
 -- Dependencies: 194
 -- Name: dim_organism_seq; Type: SEQUENCE SET; Schema: warehouse; Owner: postgres
 --
@@ -7282,7 +7751,7 @@ SELECT pg_catalog.setval('dim_organism_seq', 1, false);
 
 
 --
--- TOC entry 2965 (class 0 OID 35099)
+-- TOC entry 2968 (class 0 OID 35099)
 -- Dependencies: 185
 -- Data for Name: dim_outbreak; Type: TABLE DATA; Schema: warehouse; Owner: pentaho
 --
@@ -7509,7 +7978,7 @@ COPY dim_outbreak (dw_outbreak_id, hashcode, src_outbreak_id, outbreak_name, out
 
 
 --
--- TOC entry 2951 (class 0 OID 34744)
+-- TOC entry 2954 (class 0 OID 34744)
 -- Dependencies: 171
 -- Data for Name: dim_person; Type: TABLE DATA; Schema: warehouse; Owner: pentaho
 --
@@ -7932,7 +8401,7 @@ COPY dim_person (dw_person_id, hashcode, src_people_id, src_entity_id, birth_gen
 
 
 --
--- TOC entry 2959 (class 0 OID 34943)
+-- TOC entry 2962 (class 0 OID 34943)
 -- Dependencies: 179
 -- Data for Name: dim_time; Type: TABLE DATA; Schema: warehouse; Owner: postgres
 --
@@ -7942,7 +8411,7 @@ COPY dim_time (hour_of_day_24h, minute_of_hour_24h, second_of_minute_24h, time_k
 
 
 --
--- TOC entry 2967 (class 0 OID 35119)
+-- TOC entry 2970 (class 0 OID 35119)
 -- Dependencies: 187
 -- Data for Name: dim_workflow; Type: TABLE DATA; Schema: warehouse; Owner: pentaho
 --
@@ -7953,7 +8422,7 @@ COPY dim_workflow (dw_workflow_id, hashcode, workflow_description, etl_load_date
 
 
 --
--- TOC entry 3175 (class 0 OID 0)
+-- TOC entry 3191 (class 0 OID 0)
 -- Dependencies: 181
 -- Name: dw_dim_location_dw_dim_location_id_seq; Type: SEQUENCE SET; Schema: warehouse; Owner: pentaho
 --
@@ -7962,7 +8431,7 @@ SELECT pg_catalog.setval('dw_dim_location_dw_dim_location_id_seq', 1, false);
 
 
 --
--- TOC entry 2960 (class 0 OID 34949)
+-- TOC entry 2963 (class 0 OID 34949)
 -- Dependencies: 180
 -- Data for Name: fact_disease_event; Type: TABLE DATA; Schema: warehouse; Owner: postgres
 --
@@ -8234,7 +8703,7 @@ COPY fact_disease_event (dw_disease_id, dw_location_id, dw_diagnosed_date_id, dw
 
 
 --
--- TOC entry 2964 (class 0 OID 35090)
+-- TOC entry 2967 (class 0 OID 35090)
 -- Dependencies: 184
 -- Data for Name: fact_event; Type: TABLE DATA; Schema: warehouse; Owner: pentaho
 --
@@ -8591,28 +9060,260 @@ COPY fact_event (src_event_id, src_created_at, src_modifed_at, event_name, dw_ev
 
 
 --
--- TOC entry 2976 (class 0 OID 51960)
--- Dependencies: 197
+-- TOC entry 2978 (class 0 OID 51960)
+-- Dependencies: 196
 -- Data for Name: fact_lab_test; Type: TABLE DATA; Schema: warehouse; Owner: postgres
 --
 
 COPY fact_lab_test (dw_fact_lab_test_id, dw_collection_date_id, dw_junk_lab_test_id, dw_lab_test_date_id, dw_organism_id) FROM stdin;
+1	3012	\N	0	183
+2	3009	\N	0	183
+3	3009	\N	0	0
+4	3020	\N	3021	34
+5	2671	\N	2673	5
+6	2661	\N	2663	5
+7	3013	\N	3015	7
+8	0	\N	0	0
+9	2630	\N	2631	0
+10	3023	\N	3024	34
+11	2598	\N	2601	32
+12	3077	\N	3079	34
+13	3078	\N	3079	39
+14	3084	\N	3085	34
+15	3084	\N	3085	34
+16	3084	\N	3085	34
+17	3084	\N	3085	34
+18	3084	\N	3085	34
+19	3084	\N	3085	34
+20	3084	\N	3085	3
+21	3084	\N	3085	34
+22	3084	\N	3085	34
+23	3084	\N	3085	3
+24	3084	\N	3085	12
+25	3085	\N	3086	12
+26	3084	\N	3085	34
+27	3084	\N	3085	34
+28	3084	\N	3085	2
+29	3085	\N	3086	3
+30	3085	\N	3086	12
+31	3086	\N	3087	12
+32	3086	\N	3087	12
+33	3086	\N	3087	12
+34	3087	\N	3088	12
+35	3087	\N	3088	12
+36	3087	\N	3088	12
+37	3084	\N	3085	3
+38	3085	\N	3086	3
+39	3085	\N	3086	34
+40	3085	\N	3086	2
+41	3085	\N	3086	34
+42	3085	\N	3086	2
+43	3085	\N	3086	34
+44	3085	\N	3086	34
+45	3085	\N	3086	3
+46	3085	\N	3086	2
+47	3085	\N	3086	3
+48	3085	\N	3086	34
+49	3085	\N	3086	2
+50	3086	\N	3087	3
+51	3086	\N	3087	3
+52	3086	\N	3087	3
+53	3086	\N	3087	2
+54	3086	\N	3087	34
+55	3086	\N	3087	3
+56	3086	\N	3087	3
+57	3086	\N	3087	2
+58	3086	\N	3087	34
+59	3086	\N	3087	3
+60	3086	\N	3087	2
+61	3086	\N	3087	2
+62	3087	\N	3088	3
+63	3088	\N	3089	2
+64	3088	\N	3089	3
+65	3087	\N	3088	34
+66	3088	\N	3089	2
+67	3088	\N	3089	3
+68	3088	\N	3089	3
+69	3088	\N	3089	3
+70	3088	\N	3089	332
+71	3085	\N	3086	332
+72	3087	\N	0	40
+73	3083	\N	0	34
+74	3085	\N	0	37
+75	0	\N	0	37
+76	0	\N	0	37
+77	0	\N	0	0
+78	3089	\N	3089	34
+79	3092	\N	3093	3
+80	3088	\N	3089	2
+81	3088	\N	3089	34
+82	3092	\N	0	14
+83	3092	\N	0	14
+84	3092	\N	3093	3
+85	3092	\N	3093	34
+86	3092	\N	3093	3
+87	3092	\N	3093	34
+88	3092	\N	3093	332
+89	3092	\N	3093	2
+90	3092	\N	3093	34
+91	3092	\N	3093	3
+92	3092	\N	3093	3
+93	3093	\N	3094	34
+94	3092	\N	3093	34
+95	3093	\N	3094	2
+96	3093	\N	3094	2
+97	3093	\N	3094	332
+98	3093	\N	3094	34
+99	3093	\N	3094	2
+100	3093	\N	3094	2
+101	3093	\N	3094	0
+102	3093	\N	3094	332
+103	3095	\N	3096	34
+104	3093	\N	3094	34
+105	3093	\N	3094	2
+106	3093	\N	3094	3
+107	3093	\N	3094	3
+108	3093	\N	3094	3
+109	3093	\N	3094	2
+110	3093	\N	3094	34
+111	3093	\N	3094	332
+112	3095	\N	3096	34
+113	3093	\N	3094	34
+114	3093	\N	3094	34
+115	3093	\N	3094	3
+116	3094	\N	3095	34
+117	3094	\N	3095	3
+118	3094	\N	3095	3
+119	3094	\N	3095	332
+120	3094	\N	3095	2
+121	3094	\N	3095	3
+122	3094	\N	3095	3
+123	3094	\N	3095	3
+124	3094	\N	3095	3
+125	3094	\N	3095	34
+126	3094	\N	3095	34
+127	3094	\N	3095	2
+128	3094	\N	3095	2
+129	3094	\N	3095	2
+130	3094	\N	3095	3
+131	3094	\N	3095	34
+132	3094	\N	3095	34
+133	3094	\N	3095	2
+134	3094	\N	3095	34
+135	3094	\N	3095	3
+136	3094	\N	3095	34
+137	3094	\N	3095	34
+138	3095	\N	3096	34
+139	3095	\N	3096	3
+140	3095	\N	3096	3
+141	3095	\N	3096	3
+142	3095	\N	3096	34
+143	3095	\N	3096	2
+144	3095	\N	3096	34
+145	3095	\N	3096	332
+146	3095	\N	3096	332
+147	3095	\N	3096	3
+148	3095	\N	3096	332
+149	3095	\N	3096	3
+150	3095	\N	3096	34
+151	0	\N	0	0
+152	0	\N	0	8
+153	0	\N	0	0
+154	0	\N	0	8
+155	3095	\N	3096	3
+156	0	\N	0	8
+157	3088	\N	3089	2
+158	0	\N	3074	0
+159	3152	\N	0	250
+160	3152	\N	0	0
+161	0	\N	0	0
+162	2599	\N	0	183
+163	3103	\N	0	183
+164	0	\N	0	0
+165	0	\N	0	0
+166	0	\N	0	0
+167	3231	\N	3232	34
+168	3229	\N	3230	34
+169	3229	\N	3230	332
+170	3229	\N	3230	2
+171	3229	\N	3230	332
+172	0	\N	0	32
+173	3253	\N	0	32
+174	3229	\N	3230	2
+175	3231	\N	0	0
+176	3231	\N	0	0
+177	3232	\N	0	0
+178	3231	\N	0	0
+179	3231	\N	0	26
+180	3227	\N	3229	0
+181	3231	\N	0	0
+182	3198	\N	3200	0
+183	3200	\N	0	0
+184	3258	\N	3260	0
+185	3057	\N	0	0
+186	3027	\N	0	0
+187	3027	\N	3029	0
+188	3092	\N	3094	0
+189	3027	\N	3029	0
+190	3027	\N	3029	0
+191	3032	\N	0	0
+192	3014	\N	0	26
+193	3046	\N	0	0
+194	3046	\N	0	0
+195	3118	\N	0	0
+196	3014	\N	0	0
+197	3014	\N	0	26
+198	3013	\N	3014	0
+199	3014	\N	0	0
+200	3014	\N	0	0
+201	3014	\N	0	26
+202	3013	\N	3014	0
+203	3014	\N	0	0
+204	3014	\N	0	0
+205	3014	\N	0	26
+206	3013	\N	3014	0
+207	3014	\N	0	0
+208	3014	\N	0	0
+209	3014	\N	0	26
+210	3013	\N	3014	0
+211	3014	\N	0	0
+212	3014	\N	0	0
+213	3014	\N	0	26
+214	3013	\N	3014	0
+215	3014	\N	0	0
+216	3014	\N	0	0
+217	3014	\N	0	26
+218	3013	\N	3014	0
+219	3014	\N	0	0
+220	3014	\N	0	0
+221	3014	\N	0	26
+222	3013	\N	3014	0
+223	3014	\N	0	0
+224	3014	\N	0	0
+225	3014	\N	0	26
+226	3013	\N	3014	0
+227	3014	\N	0	0
+228	1832	\N	0	0
+229	1832	\N	0	251
+230	1832	\N	0	0
+231	1832	\N	0	251
+232	3087	\N	3088	12
 \.
 
 
 --
--- TOC entry 3176 (class 0 OID 0)
--- Dependencies: 196
+-- TOC entry 3192 (class 0 OID 0)
+-- Dependencies: 195
 -- Name: fact_lab_test_seq; Type: SEQUENCE SET; Schema: warehouse; Owner: postgres
 --
 
-SELECT pg_catalog.setval('fact_lab_test_seq', 1, false);
+SELECT pg_catalog.setval('fact_lab_test_seq', 232, true);
 
 
 SET search_path = warehouse_util, pg_catalog;
 
 --
--- TOC entry 2950 (class 0 OID 26508)
+-- TOC entry 2953 (class 0 OID 26508)
 -- Dependencies: 170
 -- Data for Name: dw_util_data_validation_status; Type: TABLE DATA; Schema: warehouse_util; Owner: postgres
 --
@@ -8624,7 +9325,7 @@ COPY dw_util_data_validation_status (id, status_key, status, update_time, descri
 
 
 --
--- TOC entry 3177 (class 0 OID 0)
+-- TOC entry 3193 (class 0 OID 0)
 -- Dependencies: 169
 -- Name: dw_util_data_validation_status_id_seq; Type: SEQUENCE SET; Schema: warehouse_util; Owner: postgres
 --
@@ -8635,7 +9336,7 @@ SELECT pg_catalog.setval('dw_util_data_validation_status_id_seq', 1, false);
 SET search_path = warehouse, pg_catalog;
 
 --
--- TOC entry 2837 (class 2606 OID 51946)
+-- TOC entry 2839 (class 2606 OID 51946)
 -- Name: dim_junk_lab_test_pkey; Type: CONSTRAINT; Schema: warehouse; Owner: postgres; Tablespace: 
 --
 
@@ -8644,7 +9345,7 @@ ALTER TABLE ONLY dim_junk_lab_test
 
 
 --
--- TOC entry 2839 (class 2606 OID 51957)
+-- TOC entry 2843 (class 2606 OID 51986)
 -- Name: dim_organism_pkey; Type: CONSTRAINT; Schema: warehouse; Owner: postgres; Tablespace: 
 --
 
@@ -8662,7 +9363,7 @@ ALTER TABLE ONLY fact_lab_test
 
 
 --
--- TOC entry 2809 (class 2606 OID 34958)
+-- TOC entry 2811 (class 2606 OID 34958)
 -- Name: pk_dim_addresses; Type: CONSTRAINT; Schema: warehouse; Owner: postgres; Tablespace: 
 --
 
@@ -8671,7 +9372,7 @@ ALTER TABLE ONLY dim_address
 
 
 --
--- TOC entry 2812 (class 2606 OID 34955)
+-- TOC entry 2814 (class 2606 OID 34955)
 -- Name: pk_dim_diagnostic_facility; Type: CONSTRAINT; Schema: warehouse; Owner: postgres; Tablespace: 
 --
 
@@ -8680,7 +9381,7 @@ ALTER TABLE ONLY dim_diagnostic_facility
 
 
 --
--- TOC entry 2827 (class 2606 OID 35117)
+-- TOC entry 2829 (class 2606 OID 35117)
 -- Name: pk_dim_investigator; Type: CONSTRAINT; Schema: warehouse; Owner: pentaho; Tablespace: 
 --
 
@@ -8689,7 +9390,7 @@ ALTER TABLE ONLY dim_investigator
 
 
 --
--- TOC entry 2832 (class 2606 OID 35421)
+-- TOC entry 2834 (class 2606 OID 35421)
 -- Name: pk_dim_junk_status_type; Type: CONSTRAINT; Schema: warehouse; Owner: pentaho; Tablespace: 
 --
 
@@ -8698,7 +9399,7 @@ ALTER TABLE ONLY dim_junk_status_type
 
 
 --
--- TOC entry 2800 (class 2606 OID 34970)
+-- TOC entry 2802 (class 2606 OID 34970)
 -- Name: pk_dim_jurisdiction; Type: CONSTRAINT; Schema: warehouse; Owner: pentaho; Tablespace: 
 --
 
@@ -8707,7 +9408,7 @@ ALTER TABLE ONLY dim_jurisdiction
 
 
 --
--- TOC entry 2806 (class 2606 OID 34973)
+-- TOC entry 2808 (class 2606 OID 34973)
 -- Name: pk_dim_language; Type: CONSTRAINT; Schema: warehouse; Owner: pentaho; Tablespace: 
 --
 
@@ -8716,7 +9417,7 @@ ALTER TABLE ONLY dim_language
 
 
 --
--- TOC entry 2818 (class 2606 OID 34987)
+-- TOC entry 2820 (class 2606 OID 34987)
 -- Name: pk_dim_location; Type: CONSTRAINT; Schema: warehouse; Owner: postgres; Tablespace: 
 --
 
@@ -8725,7 +9426,7 @@ ALTER TABLE ONLY dim_location
 
 
 --
--- TOC entry 2824 (class 2606 OID 35103)
+-- TOC entry 2826 (class 2606 OID 35103)
 -- Name: pk_dim_outbreak; Type: CONSTRAINT; Schema: warehouse; Owner: pentaho; Tablespace: 
 --
 
@@ -8734,7 +9435,7 @@ ALTER TABLE ONLY dim_outbreak
 
 
 --
--- TOC entry 2815 (class 2606 OID 34965)
+-- TOC entry 2817 (class 2606 OID 34965)
 -- Name: pk_dim_time; Type: CONSTRAINT; Schema: warehouse; Owner: postgres; Tablespace: 
 --
 
@@ -8743,7 +9444,7 @@ ALTER TABLE ONLY dim_time
 
 
 --
--- TOC entry 2829 (class 2606 OID 35123)
+-- TOC entry 2831 (class 2606 OID 35123)
 -- Name: pk_dim_workflow; Type: CONSTRAINT; Schema: warehouse; Owner: pentaho; Tablespace: 
 --
 
@@ -8752,7 +9453,7 @@ ALTER TABLE ONLY dim_workflow
 
 
 --
--- TOC entry 2835 (class 2606 OID 35448)
+-- TOC entry 2837 (class 2606 OID 35448)
 -- Name: pk_dw_dim_date; Type: CONSTRAINT; Schema: warehouse; Owner: postgres; Tablespace: 
 --
 
@@ -8761,7 +9462,7 @@ ALTER TABLE ONLY dim_date
 
 
 --
--- TOC entry 2821 (class 2606 OID 35004)
+-- TOC entry 2823 (class 2606 OID 35004)
 -- Name: pk_dw_dim_disease; Type: CONSTRAINT; Schema: warehouse; Owner: postgres; Tablespace: 
 --
 
@@ -8770,7 +9471,7 @@ ALTER TABLE ONLY dim_disease
 
 
 --
--- TOC entry 2797 (class 2606 OID 34748)
+-- TOC entry 2799 (class 2606 OID 34748)
 -- Name: pk_dw_dim_disease_0; Type: CONSTRAINT; Schema: warehouse; Owner: pentaho; Tablespace: 
 --
 
@@ -8779,7 +9480,7 @@ ALTER TABLE ONLY dim_person
 
 
 --
--- TOC entry 2803 (class 2606 OID 34776)
+-- TOC entry 2805 (class 2606 OID 34776)
 -- Name: pk_dw_dim_ethnicity; Type: CONSTRAINT; Schema: warehouse; Owner: pentaho; Tablespace: 
 --
 
@@ -8790,7 +9491,7 @@ ALTER TABLE ONLY dim_ethnicity
 SET search_path = warehouse_util, pg_catalog;
 
 --
--- TOC entry 2792 (class 2606 OID 26513)
+-- TOC entry 2794 (class 2606 OID 26513)
 -- Name: pk_data_validation_id; Type: CONSTRAINT; Schema: warehouse_util; Owner: postgres; Tablespace: 
 --
 
@@ -8799,7 +9500,7 @@ ALTER TABLE ONLY dw_util_data_validation_status
 
 
 --
--- TOC entry 2794 (class 2606 OID 26515)
+-- TOC entry 2796 (class 2606 OID 26515)
 -- Name: uk_data_validation_status_key; Type: CONSTRAINT; Schema: warehouse_util; Owner: postgres; Tablespace: 
 --
 
@@ -8810,7 +9511,7 @@ ALTER TABLE ONLY dw_util_data_validation_status
 SET search_path = warehouse, pg_catalog;
 
 --
--- TOC entry 2807 (class 1259 OID 34902)
+-- TOC entry 2809 (class 1259 OID 34902)
 -- Name: idx_dim_addresses_lookup; Type: INDEX; Schema: warehouse; Owner: postgres; Tablespace: 
 --
 
@@ -8818,7 +9519,7 @@ CREATE INDEX idx_dim_addresses_lookup ON dim_address USING btree (src_address_id
 
 
 --
--- TOC entry 2810 (class 1259 OID 34977)
+-- TOC entry 2812 (class 1259 OID 34977)
 -- Name: idx_dim_diagnostic_facility_lookup; Type: INDEX; Schema: warehouse; Owner: postgres; Tablespace: 
 --
 
@@ -8826,7 +9527,7 @@ CREATE INDEX idx_dim_diagnostic_facility_lookup ON dim_diagnostic_facility USING
 
 
 --
--- TOC entry 2825 (class 1259 OID 35118)
+-- TOC entry 2827 (class 1259 OID 35118)
 -- Name: idx_dim_investigator; Type: INDEX; Schema: warehouse; Owner: pentaho; Tablespace: 
 --
 
@@ -8834,7 +9535,7 @@ CREATE INDEX idx_dim_investigator ON dim_investigator USING btree (hashcode);
 
 
 --
--- TOC entry 2830 (class 1259 OID 35422)
+-- TOC entry 2832 (class 1259 OID 35422)
 -- Name: idx_dim_junk_status_type; Type: INDEX; Schema: warehouse; Owner: pentaho; Tablespace: 
 --
 
@@ -8842,7 +9543,7 @@ CREATE INDEX idx_dim_junk_status_type ON dim_junk_status_type USING btree (hashc
 
 
 --
--- TOC entry 2816 (class 1259 OID 34988)
+-- TOC entry 2818 (class 1259 OID 34988)
 -- Name: idx_dim_location_lookup; Type: INDEX; Schema: warehouse; Owner: postgres; Tablespace: 
 --
 
@@ -8850,7 +9551,15 @@ CREATE INDEX idx_dim_location_lookup ON dim_location USING btree (hashcode);
 
 
 --
--- TOC entry 2822 (class 1259 OID 35104)
+-- TOC entry 2844 (class 1259 OID 51987)
+-- Name: idx_dim_organism_lookup; Type: INDEX; Schema: warehouse; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX idx_dim_organism_lookup ON dim_organism USING btree (hashcode);
+
+
+--
+-- TOC entry 2824 (class 1259 OID 35104)
 -- Name: idx_dim_outbreak; Type: INDEX; Schema: warehouse; Owner: pentaho; Tablespace: 
 --
 
@@ -8858,7 +9567,7 @@ CREATE INDEX idx_dim_outbreak ON dim_outbreak USING btree (hashcode);
 
 
 --
--- TOC entry 2813 (class 1259 OID 34967)
+-- TOC entry 2815 (class 1259 OID 34967)
 -- Name: idx_dim_time_lookup; Type: INDEX; Schema: warehouse; Owner: postgres; Tablespace: 
 --
 
@@ -8866,7 +9575,7 @@ CREATE INDEX idx_dim_time_lookup ON dim_time USING btree (hashcode);
 
 
 --
--- TOC entry 2833 (class 1259 OID 35449)
+-- TOC entry 2835 (class 1259 OID 35449)
 -- Name: idx_dw_dim_date_lookup; Type: INDEX; Schema: warehouse; Owner: postgres; Tablespace: 
 --
 
@@ -8874,7 +9583,7 @@ CREATE INDEX idx_dw_dim_date_lookup ON dim_date USING btree (hashcode);
 
 
 --
--- TOC entry 2819 (class 1259 OID 35005)
+-- TOC entry 2821 (class 1259 OID 35005)
 -- Name: idx_dw_dim_disease_lookup; Type: INDEX; Schema: warehouse; Owner: postgres; Tablespace: 
 --
 
@@ -8882,7 +9591,7 @@ CREATE INDEX idx_dw_dim_disease_lookup ON dim_disease USING btree (hashcode);
 
 
 --
--- TOC entry 2801 (class 1259 OID 34780)
+-- TOC entry 2803 (class 1259 OID 34780)
 -- Name: idx_dw_dim_ethnicity_lookup; Type: INDEX; Schema: warehouse; Owner: pentaho; Tablespace: 
 --
 
@@ -8890,7 +9599,7 @@ CREATE INDEX idx_dw_dim_ethnicity_lookup ON dim_ethnicity USING btree (hashcode)
 
 
 --
--- TOC entry 2798 (class 1259 OID 34765)
+-- TOC entry 2800 (class 1259 OID 34765)
 -- Name: idx_dw_dim_jurisdiction_lookup; Type: INDEX; Schema: warehouse; Owner: pentaho; Tablespace: 
 --
 
@@ -8898,7 +9607,7 @@ CREATE INDEX idx_dw_dim_jurisdiction_lookup ON dim_jurisdiction USING btree (has
 
 
 --
--- TOC entry 2804 (class 1259 OID 34971)
+-- TOC entry 2806 (class 1259 OID 34971)
 -- Name: idx_dw_dim_language_lookup; Type: INDEX; Schema: warehouse; Owner: pentaho; Tablespace: 
 --
 
@@ -8906,7 +9615,7 @@ CREATE INDEX idx_dw_dim_language_lookup ON dim_language USING btree (hashcode);
 
 
 --
--- TOC entry 2795 (class 1259 OID 34779)
+-- TOC entry 2797 (class 1259 OID 34779)
 -- Name: idx_dw_dim_person_lookup; Type: INDEX; Schema: warehouse; Owner: pentaho; Tablespace: 
 --
 
@@ -8916,7 +9625,7 @@ CREATE INDEX idx_dw_dim_person_lookup ON dim_person USING btree (hashcode);
 SET search_path = warehouse_util, pg_catalog;
 
 --
--- TOC entry 2790 (class 1259 OID 26516)
+-- TOC entry 2792 (class 1259 OID 26516)
 -- Name: index_status; Type: INDEX; Schema: warehouse_util; Owner: postgres; Tablespace: 
 --
 
@@ -8924,7 +9633,7 @@ CREATE INDEX index_status ON dw_util_data_validation_status USING btree (status)
 
 
 --
--- TOC entry 2983 (class 0 OID 0)
+-- TOC entry 2987 (class 0 OID 0)
 -- Dependencies: 7
 -- Name: warehouse; Type: ACL; Schema: -; Owner: pentaho
 --
@@ -8935,7 +9644,7 @@ GRANT ALL ON SCHEMA warehouse TO pentaho;
 GRANT ALL ON SCHEMA warehouse TO PUBLIC;
 
 
--- Completed on 2014-04-13 15:27:03 MDT
+-- Completed on 2014-04-13 16:07:52 MDT
 
 --
 -- PostgreSQL database dump complete
