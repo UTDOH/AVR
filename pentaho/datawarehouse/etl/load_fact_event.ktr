@@ -91,9 +91,8 @@
       <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
       <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
-      <attribute><code>SQL_CONNECT</code><attribute>set search_path&#x3d;warehouse, warehouse_util&#x3b;</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
@@ -114,12 +113,10 @@
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
       <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
-      <attribute><code>PREFERRED_SCHEMA_NAME</code><attribute>trisano</attribute></attribute>
       <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
-      <attribute><code>SQL_CONNECT</code><attribute>set search_path to trisano&#x3b;</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
@@ -134,11 +131,7 @@
   <hop> <from>fact_event Mapping</from><to>fact_event</to><enabled>Y</enabled> </hop>
   <hop> <from>dim_date disease onset</from><to>lookup date onset</to><enabled>Y</enabled> </hop>
   <hop> <from>Stream lookup 2</from><to>lookup date onset</to><enabled>Y</enabled> </hop>
-  <hop> <from>dim_outbreak</from><to>lookup outbreak</to><enabled>Y</enabled> </hop>
-  <hop> <from>lookup date onset</from><to>lookup outbreak</to><enabled>Y</enabled> </hop>
-  <hop> <from>dim_date review_completed_by_state_date</from><to>lookup date onset 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>lookup outbreak</from><to>lookup date onset 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>lookup date onset 2</from><to>fact_event Mapping</to><enabled>Y</enabled> </hop>
+  <hop> <from>lookup date onset</from><to>fact_event Mapping</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Calculator</name>
@@ -167,8 +160,8 @@
 </calculation>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>426</xloc>
-      <yloc>182</yloc>
+      <xloc>673</xloc>
+      <yloc>199</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -185,7 +178,7 @@
            <schema_name/>
            </partitioning>
     <connection>Trisano TX DS</connection>
-    <sql>select &#xa;	e.id as src_event_id&#xa;	,e.event_onset_date&#xa;	,de.disease_id&#xa;	,e.created_at as src_created_at&#xa;	,e.updated_at as src_modfied_at&#xa;	,e.investigating_jurisdiction&#xa;	,e.event_name&#xa;	,e.outbreak_associated_id as src_outbreak_associated_id&#xa;	,e.review_completed_by_state_date&#xa;	,e.first_reported_PH_date&#xa;from vw_events e left join vw_disease_events de on de.event_id &#x3d; e.id</sql>
+    <sql>select &#xa;	e.id as src_event_id&#xa;	,e.event_onset_date&#xa;	,de.disease_id&#xa;	,e.created_at as src_created_at&#xa;	,e.updated_at as src_modfied_at&#xa;	,e.investigating_jurisdiction&#xa;from vw_events e left join vw_disease_events de on de.event_id &#x3d; e.id</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -193,8 +186,8 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>281</xloc>
-      <yloc>45</yloc>
+      <xloc>528</xloc>
+      <yloc>62</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -229,8 +222,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>157</xloc>
-      <yloc>179</yloc>
+      <xloc>404</xloc>
+      <yloc>196</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -265,8 +258,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>286</xloc>
-      <yloc>355</yloc>
+      <xloc>535</xloc>
+      <yloc>312</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -283,7 +276,7 @@
            <schema_name/>
            </partitioning>
     <connection>Trisano OLAP DS</connection>
-    <sql>select &#xa;   dw_date_id&#xa;  ,src_date_val&#xa;from dim_date</sql>
+    <sql>select &#xa;   dw_date_id&#xa;  ,src_date_val&#xa;from warehouse.dim_date</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -291,8 +284,8 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>425</xloc>
-      <yloc>276</yloc>
+      <xloc>741</xloc>
+      <yloc>435</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -309,7 +302,7 @@
            <schema_name/>
            </partitioning>
     <connection>Trisano OLAP DS</connection>
-    <sql>SELECT dw_disease_id, src_disease_id&#xa;FROM dim_disease&#xa;</sql>
+    <sql>SELECT dw_disease_id, src_disease_id&#xa;FROM warehouse.dim_disease&#xa;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -317,8 +310,8 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>45</xloc>
-      <yloc>182</yloc>
+      <xloc>292</xloc>
+      <yloc>199</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -335,7 +328,7 @@
            <schema_name/>
            </partitioning>
     <connection>Trisano OLAP DS</connection>
-    <sql>SELECT dw_jurisdiction_id, name&#xa;FROM dim_jurisdiction&#xa;</sql>
+    <sql>SELECT dw_jurisdiction_id, name&#xa;FROM warehouse.dim_jurisdiction&#xa;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -343,8 +336,8 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>174</xloc>
-      <yloc>358</yloc>
+      <xloc>423</xloc>
+      <yloc>315</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -361,13 +354,13 @@
            <schema_name/>
            </partitioning>
     <connection>Trisano OLAP DS</connection>
-    <schema/>
+    <schema>warehouse</schema>
     <table>fact_event</table>
     <commit>1000</commit>
     <truncate>Y</truncate>
     <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>N</specify_fields>
+    <use_batch>N</use_batch>
+    <specify_fields>Y</specify_fields>
     <partitioning_enabled>N</partitioning_enabled>
     <partitioning_field/>
     <partitioning_daily>N</partitioning_daily>
@@ -378,11 +371,35 @@
     <return_keys>N</return_keys>
     <return_field/>
     <fields>
+        <field>
+          <column_name>src_event_id</column_name>
+          <stream_name>src_event_id</stream_name>
+        </field>
+        <field>
+          <column_name>src_created_at</column_name>
+          <stream_name>src_created_at</stream_name>
+        </field>
+        <field>
+          <column_name>src_modifed_at</column_name>
+          <stream_name>src_modifed_at</stream_name>
+        </field>
+        <field>
+          <column_name>dw_jurisdiction_id</column_name>
+          <stream_name>dw_jurisdiction_id</stream_name>
+        </field>
+        <field>
+          <column_name>dw_event_onset_date_id</column_name>
+          <stream_name>dw_event_onset_date_id</stream_name>
+        </field>
+        <field>
+          <column_name>dw_disease_id</column_name>
+          <stream_name>dw_disease_id</stream_name>
+        </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>689</xloc>
-      <yloc>548</yloc>
+      <xloc>541</xloc>
+      <yloc>624</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -399,11 +416,11 @@
            <schema_name/>
            </partitioning>
     <fields>      <field>        <name>src_event_id</name>
-        <rename>src_event_id</rename>
+        <rename/>
         <length>-2</length>
         <precision>-2</precision>
       </field>      <field>        <name>src_created_at</name>
-        <rename>src_created_at</rename>
+        <rename/>
         <length>-2</length>
         <precision>-2</precision>
       </field>      <field>        <name>src_modfied_at</name>
@@ -411,34 +428,37 @@
         <length>-2</length>
         <precision>-2</precision>
       </field>      <field>        <name>dw_jurisdiction_id</name>
-        <rename>dw_jurisdiction_id</rename>
+        <rename/>
         <length>-2</length>
         <precision>-2</precision>
       </field>      <field>        <name>dw_event_onset_date_id</name>
-        <rename>dw_event_onset_date_id</rename>
+        <rename/>
         <length>-2</length>
         <precision>-2</precision>
       </field>      <field>        <name>dw_disease_id</name>
-        <rename>dw_disease_id</rename>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>event_name</name>
-        <rename>event_name</rename>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>dw_outbreak_id</name>
-        <rename>dw_outbreak_id</rename>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>dw_investigation_completed_by_state_date_id</name>
-        <rename>dw_investigation_completed_by_state_id</rename>
+        <rename/>
         <length>-2</length>
         <precision>-2</precision>
       </field>        <select_unspecified>N</select_unspecified>
-    </fields>     <cluster_schema/>
+      <meta>        <name>dw_disease_id</name>
+        <rename>dw_disease_id</rename>
+        <type>Integer</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>687</xloc>
-      <yloc>464</yloc>
+      <xloc>539</xloc>
+      <yloc>540</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -466,8 +486,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>285</xloc>
-      <yloc>183</yloc>
+      <xloc>532</xloc>
+      <yloc>200</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -502,132 +522,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>426</xloc>
-      <yloc>354</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>dim_outbreak</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>Trisano OLAP DS</connection>
-    <sql>select &#xa;   dw_outbreak_id&#xa;  ,src_outbreak_id&#xa;from dim_outbreak</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>555</xloc>
-      <yloc>276</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>lookup outbreak</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <from>dim_outbreak</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>Y</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>src_outbreak_associated_id</name>
-        <field>src_outbreak_id</field>
-      </key>
-      <value>
-        <name>dw_outbreak_id</name>
-        <rename>dw_outbreak_id</rename>
-        <default>0</default>
-        <type>Integer</type>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>553</xloc>
-      <yloc>355</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>dim_date review_completed_by_state_date</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>Trisano OLAP DS</connection>
-    <sql>select &#xa;   dw_date_id&#xa;  ,src_date_val&#xa;from dim_date</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>678</xloc>
-      <yloc>276</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>lookup date onset 2</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <from>dim_date disease onset</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>Y</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>review_completed_by_state_date</name>
-        <field>src_date_val</field>
-      </key>
-      <value>
-        <name>dw_date_id</name>
-        <rename>dw_investigation_completed_by_state_date_id</rename>
-        <default>0</default>
-        <type>Integer</type>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>679</xloc>
-      <yloc>354</yloc>
+      <xloc>540</xloc>
+      <yloc>433</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
