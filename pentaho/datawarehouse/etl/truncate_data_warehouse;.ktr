@@ -141,7 +141,7 @@
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
-    <sql>set search_path &#x3d; warehouse&#x3b;&#xa;&#xa;truncate dim_disease&#x3b;&#xa;&#xa;truncate dim_outbreak&#x3b;&#xa;&#xa;truncate dim_jurisdiction&#x3b;&#xa;&#xa;-- select &#x2a; from dim_disease&#x3b;&#xa;&#xa;truncate dim_disease&#x3b;&#xa;&#xa;truncate dim_location&#x3b;&#xa;&#xa;truncate dim_date&#x3b;&#xa;&#xa;truncate dim_time&#x3b;&#xa;&#xa;truncate fact_disease_event&#x3b;&#xa;&#xa;truncate dim_ethnicity&#x3b;&#xa;&#xa;truncate dim_person&#x3b;&#xa;&#xa;truncate dim_language&#x3b;</sql>
+    <sql>set search_path &#x3d; warehouse&#x3b;&#xa;&#xa;truncate dim_disease&#x3b;&#xa;&#xa;truncate dim_outbreak&#x3b;&#xa;&#xa;truncate dim_jurisdiction&#x3b;&#xa;&#xa;-- select &#x2a; from dim_disease&#x3b;&#xa;&#xa;truncate dim_disease&#x3b;&#xa;&#xa;truncate dim_location&#x3b;&#xa;&#xa;truncate dim_date&#x3b;&#xa;&#xa;truncate dim_time&#x3b;&#xa;&#xa;truncate fact_event&#x3b;&#xa;&#xa;truncate fact_lab_test&#x3b;&#xa;&#xa;truncate dim_ethnicity&#x3b;&#xa;&#xa;truncate dim_person&#x3b;&#xa;&#xa;truncate dim_language&#x3b;&#xa;&#xa;truncate dim_investigator&#x3b;&#xa;&#xa;truncate dim_organism&#x3b;</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>
