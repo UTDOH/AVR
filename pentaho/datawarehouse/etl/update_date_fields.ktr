@@ -92,9 +92,8 @@
       <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
       <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
-      <attribute><code>SQL_CONNECT</code><attribute>set search_path&#x3d;warehouse, warehouse_util&#x3b;</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
@@ -115,12 +114,10 @@
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
       <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
-      <attribute><code>PREFERRED_SCHEMA_NAME</code><attribute>trisano</attribute></attribute>
       <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
-      <attribute><code>SQL_CONNECT</code><attribute>set search_path to trisano&#x3b;</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
@@ -199,7 +196,7 @@
 <currency_symbol/>
 </calculation>
        <calculation><field_name>week_in_year_iso</field_name>
-<calc_type>WEEK_OF_YEAR</calc_type>
+<calc_type>WEEK_OF_YEAR_ISO8601</calc_type>
 <field_a>srcDateVal</field_a>
 <field_b/>
 <field_c/>
@@ -238,6 +235,34 @@
 <conversion_mask>0</conversion_mask>
 <decimal_symbol>.</decimal_symbol>
 <grouping_symbol>,</grouping_symbol>
+<currency_symbol/>
+</calculation>
+       <calculation><field_name>mmwr_week</field_name>
+<calc_type>WEEK_OF_YEAR_ISO8601</calc_type>
+<field_a>srcdateval</field_a>
+<field_b/>
+<field_c/>
+<value_type>Integer</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask>0</conversion_mask>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+       <calculation><field_name>mmwr_year</field_name>
+<calc_type>YEAR_OF_DATE_ISO8601</calc_type>
+<field_a>srcdateval</field_a>
+<field_b/>
+<field_c/>
+<value_type>Integer</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask>0</conversion_mask>
+<decimal_symbol/>
+<grouping_symbol/>
 <currency_symbol/>
 </calculation>
      <cluster_schema/>
@@ -587,6 +612,14 @@
         <rename>ytd_ly_week</rename>
         <length>-2</length>
         <precision>-2</precision>
+      </field>      <field>        <name>mmwr_week</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>mmwr_year</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
       </field>        <select_unspecified>N</select_unspecified>
       <remove>        <name>dateFull_1</name>
       </remove>      <remove>        <name>dateLong_1</name>
@@ -612,7 +645,7 @@
       </remove>      <remove>        <name>weekYear_1</name>
       </remove>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>669</xloc>
+      <xloc>682</xloc>
       <yloc>72</yloc>
       <draw>Y</draw>
       </GUI>
@@ -1108,7 +1141,7 @@
     <name>Update dimdate</name>
     <type>Update</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
          <partitioning>
@@ -1122,7 +1155,7 @@
     <error_ignored>N</error_ignored>
     <ignore_flag_field/>
     <lookup>
-      <schema/>
+      <schema>warehouse</schema>
       <table>dim_date</table>
       <key>
         <name>dw_date_id</name>
@@ -1350,10 +1383,18 @@
         <name>last_year</name>
         <rename>last_year</rename>
         </value>
+      <value>
+        <name>mmwr_week</name>
+        <rename>mmwr_week</rename>
+        </value>
+      <value>
+        <name>mmwr_year</name>
+        <rename>mmwr_year</rename>
+        </value>
       </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>806</xloc>
+      <xloc>819</xloc>
       <yloc>71</yloc>
       <draw>Y</draw>
       </GUI>
@@ -1371,7 +1412,7 @@
            <schema_name/>
            </partitioning>
     <connection>Trisano OLAP DS</connection>
-    <sql>SELECT&#xa;  dw_date_id&#xa;, src_date_val as srcDateVal&#xa;FROM dim_date&#xa;where src_date_val is not null</sql>
+    <sql>SELECT&#xa;  dw_date_id&#xa;, src_date_val as srcDateVal&#xa;FROM warehouse.dim_date&#xa;where src_date_val is not null</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
