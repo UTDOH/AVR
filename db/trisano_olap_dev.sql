@@ -105,3 +105,7 @@ CREATE TABLE warehouse.fact_lab_test
 ;
 alter table warehouse.fact_lab_test add primary key (dw_fact_lab_test_id);
 
+alter table warehouse.dim_date add column mmwr_week int not null default 0;
+
+alter table warehouse.dim_date add column mmwr_year int not null default 0;
+
