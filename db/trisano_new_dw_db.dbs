@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project name="PostgreSQL" id="Project2814004" database="PostgreSQL" >
 	<schema name="warehouse" catalogname="trisano_olap_dev" schemaname="warehouse" defo="y" >
+		<table name="deprecated_fact_disease_event" >
+			<column name="dw_disease_id" type="integer" length="10" jt="4" />
+			<column name="dw_location_id" type="integer" length="10" jt="4" />
+			<column name="dw_diagnosed_date_id" type="integer" length="10" jt="4" />
+			<column name="dw_onset_date_id" type="integer" length="10" jt="4" />
+			<column name="dw_jurisdiction_id" type="integer" jt="4" >
+				<comment><![CDATA[TK of the dim_jurisdction of this disease event.]]></comment>
+			</column>
+			<column name="src_event_id" type="integer" jt="4" >
+				<comment><![CDATA[The OLTP src_event_id (also links to fact_event.src_event_id)]]></comment>
+			</column>
+		</table>
 		<table name="dim_address" >
-			<column name="dw_address_id" type="bigserial" length="19" jt="-5" mandatory="y" >
+			<column name="dw_address_id" type="bigint" length="19" decimal="0" jt="-5" mandatory="y" >
 				<comment><![CDATA[Technical key of the address dimension]]></comment>
+			</column>
+			<column name="hashcode" type="bigint" jt="-5" >
+				<comment><![CDATA[The type I hashcode value]]></comment>
 			</column>
 			<column name="src_address_id" type="integer" length="10" jt="4" >
 				<comment><![CDATA[Source address id (OLTP)]]></comment>
@@ -33,6 +48,9 @@
 			</index>
 			<index name="pk_dim_addresses" unique="PRIMARY_KEY" >
 				<column name="dw_address_id" />
+			</index>
+			<index name="idx_dim_address_lookup2" unique="NORMAL" >
+				<column name="hashcode" />
 			</index>
 		</table>
 		<table name="dim_date" >
@@ -692,18 +710,6 @@
 				<column name="dw_workflow_id" />
 			</index>
 		</table>
-		<table name="fact_disease_event" >
-			<column name="dw_disease_id" type="integer" length="10" jt="4" />
-			<column name="dw_location_id" type="integer" length="10" jt="4" />
-			<column name="dw_diagnosed_date_id" type="integer" length="10" jt="4" />
-			<column name="dw_onset_date_id" type="integer" length="10" jt="4" />
-			<column name="dw_jurisdiction_id" type="integer" jt="4" >
-				<comment><![CDATA[TK of the dim_jurisdction of this disease event.]]></comment>
-			</column>
-			<column name="src_event_id" type="integer" jt="4" >
-				<comment><![CDATA[The OLTP src_event_id (also links to fact_event.src_event_id)]]></comment>
-			</column>
-		</table>
 		<table name="fact_event" >
 			<comment>Contact and Morbidity Events</comment>
 			<column name="src_event_id" type="integer" jt="4" >
@@ -712,7 +718,7 @@
 			<column name="src_created_at" type="timestamp" jt="93" >
 				<comment><![CDATA[The date / time the event was created]]></comment>
 			</column>
-			<column name="src_modifed_at" type="timestamp" jt="93" >
+			<column name="src_updated_at" type="timestamp" jt="93" >
 				<comment><![CDATA[The date / time the event was last modified]]></comment>
 			</column>
 			<column name="dw_event_onset_date_id" type="integer" jt="4" >
@@ -760,15 +766,62 @@
 			<column name="dw_disease_id" type="integer" jt="4" >
 				<comment><![CDATA[TK of the disease of this fact]]></comment>
 			</column>
+			<column name="dw_location_id" type="integer" jt="4" >
+				<comment><![CDATA[The TK for for dim_location]]></comment>
+			</column>
+			<column name="dw_diagnosed_date_id" type="integer" jt="4" >
+				<comment><![CDATA[The TK of the dim_date describing when the patient was diagnosed]]></comment>
+			</column>
 		</table>
 		<table name="fact_lab_test" >
+			<column name="src_lab_test_id" type="integer" jt="4" mandatory="y" >
+				<comment><![CDATA[The source (OLTP) id to lab_tests]]></comment>
+			</column>
 			<column name="dw_fact_lab_test_id" type="serial" length="10" decimal="0" jt="4" mandatory="y" />
 			<column name="dw_collection_date_id" type="integer" length="10" decimal="0" jt="4" />
 			<column name="dw_junk_lab_test_id" type="integer" length="10" decimal="0" jt="4" />
 			<column name="dw_lab_test_date_id" type="integer" length="10" decimal="0" jt="4" />
 			<column name="dw_organism_id" type="integer" length="10" decimal="0" jt="4" />
-			<index name="fact_lab_test_pkey" unique="PRIMARY_KEY" >
-				<column name="dw_fact_lab_test_id" />
+			<column name="health_care_worker" type="bool" length="1" decimal="0" jt="-7" />
+			<column name="group_living" type="bool" length="1" decimal="0" jt="-7" />
+			<column name="day_care" type="bool" length="1" decimal="0" jt="-7" />
+			<column name="pregnant" type="bool" jt="-7" >
+				<comment><![CDATA[Flag indicating whether or not the patient is pregnant.]]></comment>
+			</column>
+			<column name="pregnancy_due_date" type="date" length="13" decimal="0" jt="91" />
+			<column name="risk_factors" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="food_handler" type="bool" length="1" decimal="0" jt="-7" />
+			<column name="dw_person_id" type="integer" length="10" decimal="0" jt="4" />
+			<column name="dw_disease_id" type="integer" length="10" decimal="0" jt="4" />
+			<column name="dw_primary_address_id" type="integer" length="100" jt="4" >
+				<comment><![CDATA[Primary dim_address]]></comment>
+			</column>
+			<column name="dw_secondary_address_id" type="integer" length="100" jt="4" >
+				<comment><![CDATA[Secondary dim_address]]></comment>
+			</column>
+			<column name="primary_record_number" type="varchar" length="20" jt="12" >
+				<comment><![CDATA[The primary entity record number]]></comment>
+			</column>
+			<column name="secondary_record_number" type="varchar" length="20" jt="12" >
+				<comment><![CDATA[The secondary entity record number]]></comment>
+			</column>
+			<column name="test_type_id" type="integer" length="10" decimal="0" jt="4" >
+				<comment><![CDATA[lab_result.test_type_id value]]></comment>
+			</column>
+			<column name="test_result_id" type="integer" length="10" decimal="0" jt="4" >
+				<comment><![CDATA[lab_result.test_resut_id value]]></comment>
+			</column>
+			<column name="result_value" type="varchar" length="255" decimal="0" jt="12" >
+				<comment><![CDATA[lab_result.result_value value]]></comment>
+			</column>
+			<column name="src_created_at" type="timestamp" jt="93" >
+				<comment><![CDATA[The source lab_tests.created_at value]]></comment>
+			</column>
+			<column name="src_updated_at" type="timestamp" jt="93" >
+				<comment><![CDATA[The source (OLTP) labl_tests.updated_at value]]></comment>
+			</column>
+			<index name="pk_fact_lab_test" unique="PRIMARY_KEY" >
+				<column name="src_lab_test_id" />
 			</index>
 		</table>
 		<view name="vw_table_row_counts" >
@@ -776,9 +829,9 @@
 			<column name="rowct" type="bigint" />
 			<column name="tbl" type="text" />
 		</view>
-		<sequence name="dim_addresses_dim_address_key_seq" start="1" />
 		<sequence name="dim_diagnostic_facilites_dim_diagnostic_facilities_seq" start="1" />
 		<sequence name="dim_junk_lab_test_seq" start="1" />
+		<sequence name="dim_organism_dw_organism_id_seq" start="1" />
 		<sequence name="dim_organism_seq" start="1" />
 		<sequence name="dw_dim_location_dw_dim_location_id_seq" start="1" />
 		<sequence name="fact_lab_test_seq" start="1" />
@@ -800,61 +853,22 @@
 			<column name="etl_load_date" />
 		</entity>
 		<entity schema="warehouse" name="dim_ethnicity" color="d0def5" x="285" y="495" />
-		<entity schema="warehouse" name="dim_jurisdiction" color="d0def5" x="285" y="270" />
-		<entity schema="warehouse" name="fact_disease_event" color="d0def5" x="675" y="525" />
 		<entity schema="warehouse" name="dim_outbreak" color="d0def5" x="255" y="1050" />
 		<entity schema="warehouse" name="dim_language" color="d0def5" x="480" y="495" />
 		<entity schema="warehouse" name="dim_junk_status_type" color="b2cdf7" x="435" y="1215" />
 		<entity schema="warehouse" name="vw_table_row_counts" color="d0def5" x="75" y="1110" />
 		<entity schema="warehouse" name="dim_date" color="d0def5" x="45" y="45" />
 		<entity schema="warehouse" name="dim_location" color="d0def5" x="285" y="690" />
-		<entity schema="warehouse" name="dim_address" color="d0def5" x="480" y="690" />
 		<entity schema="warehouse" name="dim_diagnostic_facility" color="d0def5" x="690" y="690" />
 		<entity schema="warehouse" name="dim_investigator" color="d0def5" x="480" y="1065" />
 		<entity schema="warehouse" name="dim_workflow" color="d0def5" x="255" y="1215" />
 		<entity schema="warehouse" name="dim_external_code" color="b2cdf7" x="270" y="1350" />
-		<entity schema="warehouse" name="fact_event" color="d0def5" x="675" y="1035" />
-		<entity schema="warehouse" name="fact_lab_test" color="b2cdf7" x="930" y="660" />
 		<entity schema="warehouse" name="dim_person" color="d0def5" x="495" y="60" />
 		<entity schema="warehouse" name="dim_organism" color="b2cdf7" x="930" y="450" />
-		<script name="dim_organism" id="SQL5372944" >
-			<string><![CDATA[CREATE TABLE warehouse.dim_organism ( 
-	dw_organism_id       serial  NOT NULL,
-	hashcode             bigint  ,
-	src_organism_id      integer  ,
-	organism_name        varchar(255)  ,
-	snomed_name          varchar(255)  ,
-	snomed_code          varchar(255)  ,
-	snomed_id            varchar(255)  ,
-	src_created_at       timestamp  ,
-	src_updated_at       timestamp  ,
-	etl_load_date        timestamp  ,
-	CONSTRAINT dim_organism_pkey PRIMARY KEY ( dw_organism_id )
- );
-
-CREATE INDEX idx_dim_organism_lookup ON warehouse.dim_organism ( hashcode );
-
-COMMENT ON COLUMN warehouse.dim_organism.dw_organism_id IS 'OLAP TK of the dim organism entity.';
-
-COMMENT ON COLUMN warehouse.dim_organism.hashcode IS 'Type I dimension hashcode';
-
-COMMENT ON COLUMN warehouse.dim_organism.src_organism_id IS 'The OLTP organisms.id value.';
-
-COMMENT ON COLUMN warehouse.dim_organism.organism_name IS 'The name of the organism.';
-
-COMMENT ON COLUMN warehouse.dim_organism.snomed_name IS 'The source snomed name';
-
-COMMENT ON COLUMN warehouse.dim_organism.snomed_code IS 'The src snomed code';
-
-COMMENT ON COLUMN warehouse.dim_organism.snomed_id IS 'The source snomed id.';
-
-COMMENT ON COLUMN warehouse.dim_organism.src_created_at IS 'The source created_at time.';
-
-COMMENT ON COLUMN warehouse.dim_organism.src_updated_at IS 'The source updated at timestamp';
-
-COMMENT ON COLUMN warehouse.dim_organism.etl_load_date IS 'The timestamp of when this organism dim record was last updated.';
-
-]]></string>
-		</script>
+		<entity schema="warehouse" name="dim_address" color="d0def5" x="480" y="690" />
+		<entity schema="warehouse" name="dim_jurisdiction" color="d0def5" x="285" y="270" />
+		<entity schema="warehouse" name="deprecated_fact_disease_event" color="d0def5" x="690" y="1380" />
+		<entity schema="warehouse" name="fact_event" color="d0def5" x="630" y="1020" />
+		<entity schema="warehouse" name="fact_lab_test" color="b2cdf7" x="930" y="660" />
 	</layout>
 </project>
