@@ -840,6 +840,7 @@ alter table warehouse.dim_workflow owner to pentaho;
 alter table warehouse.fact_disease_event owner to pentaho;
 alter table warehouse.fact_event owner to pentaho;
 alter table warehouse.dim_organism owner to pentaho;
+alter table warehouse.fact_lab_test owner to pentaho;
 alter schema warehouse owner to pentaho;
 
 
