@@ -844,6 +844,8 @@ alter schema warehouse owner to pentaho;
 
 -- Table: warehouse_util.dw_util_data_validation_status
 
+CREATE SCHEMA warehouse_util;
+
 DROP TABLE warehouse_util.dw_util_data_validation_status;
 
 CREATE TABLE warehouse_util.dw_util_data_validation_status
