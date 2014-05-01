@@ -817,3 +817,7 @@ COMMENT ON COLUMN warehouse.fact_lab_test.src_updated_at IS 'The source (OLTP) l
 CREATE VIEW warehouse.vw_table_row_counts AS ((((((((SELECT 'dim_date'::text AS tbl, count(1) AS rowct FROM warehouse.dim_date UNION SELECT 'dim_time'::text AS tbl, count(1) AS rowct FROM warehouse.dim_time) UNION SELECT 'dim_disease'::text AS tbl, count(1) AS rowct FROM warehouse.dim_disease) UNION SELECT 'dim_outbreak'::text AS tbl, count(1) AS rowct FROM warehouse.dim_outbreak) UNION SELECT 'dim_jurisdction'::text AS tbl, count(1) AS rowct FROM warehouse.dim_jurisdiction) UNION SELECT 'dim_location'::text AS tbl, count(1) AS rowct FROM warehouse.dim_location) UNION SELECT 'dim_language'::text AS tbl, count(1) AS rowct FROM warehouse.dim_language) UNION SELECT 'dim_ethnicity'::text AS tbl, count(1) AS rowct FROM warehouse.dim_ethnicity) UNION SELECT 'dim_person'::text AS tbl, count(1) AS rowct FROM warehouse.dim_person) UNION SELECT 'fact_disease_event'::text AS tbl, count(1) AS rowct FROM warehouse.fact_disease_event;;
 
 
+alter table warehouse.dim_date add column mmwr_week int not null default 0;
+
+alter table warehouse.dim_date add column mmwr_year int not null default 0;
+

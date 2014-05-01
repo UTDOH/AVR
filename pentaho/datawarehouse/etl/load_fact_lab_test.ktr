@@ -91,9 +91,8 @@
       <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
       <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
-      <attribute><code>SQL_CONNECT</code><attribute>set search_path&#x3d;warehouse, warehouse_util&#x3b;</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
@@ -114,12 +113,10 @@
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
       <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
-      <attribute><code>PREFERRED_SCHEMA_NAME</code><attribute>trisano</attribute></attribute>
       <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
-      <attribute><code>SQL_CONNECT</code><attribute>set search_path to trisano&#x3b;</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
@@ -131,15 +128,13 @@
   <hop> <from>dw_dim_date 4</from><to>Lab Test Date</to><enabled>Y</enabled> </hop>
   <hop> <from>dim_organism</from><to>Organism</to><enabled>Y</enabled> </hop>
   <hop> <from>Lab Test Date</from><to>Organism</to><enabled>Y</enabled> </hop>
+  <hop> <from>Select values</from><to>fact_lab_test</to><enabled>Y</enabled> </hop>
+  <hop> <from>lab_results</from><to>Get person</to><enabled>Y</enabled> </hop>
   <hop> <from>Get person</from><to>Collection date</to><enabled>Y</enabled> </hop>
   <hop> <from>dim_people</from><to>Get person</to><enabled>Y</enabled> </hop>
   <hop> <from>Organism</from><to>Disease</to><enabled>Y</enabled> </hop>
   <hop> <from>Disease</from><to>Select values</to><enabled>Y</enabled> </hop>
   <hop> <from>dim_disease</from><to>Disease</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get Max End Date</from><to>Get Lab Result Facts</to><enabled>Y</enabled> </hop>
-  <hop> <from>Start</from><to>Get Max End Date</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get Lab Result Facts</from><to>Get person</to><enabled>Y</enabled> </hop>
-  <hop> <from>Select values</from><to>upsert fact_lab_test</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Collection date</name>
@@ -171,8 +166,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>353</xloc>
-      <yloc>173</yloc>
+      <xloc>348</xloc>
+      <yloc>170</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -207,64 +202,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>358</xloc>
-      <yloc>502</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Get Lab Result Facts</name>
-    <type>DBJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>Trisano TX DS</connection>
-    <rowlimit>0</rowlimit>
-    <sql>select  &#xa;   coalesce&#x28;p.primary_entity_id,p.secondary_entity_id,0&#x29; as entity_id&#xa;  ,l.id as src_lab_test_id&#xa;  ,l.participation_id&#xa;  ,l.collection_date&#xa;  ,l.lab_test_date&#xa;  ,l.created_at as src_created_at&#xa;  ,l.updated_at as src_updated_at&#xa;  ,coalesce&#x28;l.test_type_id,0&#x29;   as src_lab_test_type_id&#xa;  ,coalesce&#x28;l.test_result_id,0&#x29; as src_lab_test_result_id&#xa;  ,coalesce&#x28;l.test_status_id,0&#x29; as src_lab_test_status_id&#xa;  ,coalesce&#x28;l.organism_id,0&#x29;    as src_organism_id&#xa;  ,case when r.food_handler_id         is not null then true else false end as food_handler &#xa;  ,case when r.healthcare_worker_id    is not null then true else false end as health_care_worker&#xa;  ,case when r.group_living_id         is not null then true else false end as group_living&#xa;  ,case when r.day_care_association_id is not null then true else false end as day_care&#xa;  ,case when r.pregnant_id is not null then true else false end as pregnant&#xa;  ,r.pregnancy_due_date&#xa;  ,r.risk_factors&#xa;  ,de.disease_id as src_disease_id&#xa;  ,l.test_type_id&#xa;  ,l.test_result_id&#xa;  ,l.result_value&#xa;from lab_results l left outer join participations p&#xa;on l.participation_id &#x3d; p.id&#xa;left outer join participations_risk_factors r&#xa;on l.participation_id &#x3d; r.participation_id&#xa;left outer join disease_events de&#xa;on p.event_id &#x3d; de.event_id&#xa;where l.updated_at &#x3e; &#x3f;</sql>
-    <outer_join>N</outer_join>
-    <replace_vars>N</replace_vars>
-    <parameter>
-      <field>
-        <name>max_event_date</name>
-        <type>Date</type>
-      </field>
-    </parameter>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>347</xloc>
-      <yloc>22</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Get Max End Date</name>
-    <type>DBJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>Trisano OLAP DS</connection>
-    <rowlimit>0</rowlimit>
-    <sql>select &#xa;	case when max&#x28;src_updated_at&#x29; is not null &#xa;		then max&#x28;src_updated_at&#x29; &#xa;		else &#x27;1900-01-01&#x27; &#xa;	end as max_event_date &#xa;from fact_lab_test&#x3b;</sql>
-    <outer_join>N</outer_join>
-    <replace_vars>N</replace_vars>
-    <parameter>
-    </parameter>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>194</xloc>
-      <yloc>21</yloc>
+      <xloc>344</xloc>
+      <yloc>460</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -299,8 +238,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>349</xloc>
-      <yloc>97</yloc>
+      <xloc>347</xloc>
+      <yloc>95</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -335,8 +274,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>354</xloc>
-      <yloc>332</yloc>
+      <xloc>347</xloc>
+      <yloc>323</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -371,8 +310,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>355</xloc>
-      <yloc>417</yloc>
+      <xloc>345</xloc>
+      <yloc>392</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -391,6 +330,8 @@
     <fields>        <select_unspecified>N</select_unspecified>
       <remove>        <name>collection_date</name>
       </remove>      <remove>        <name>lab_test_date</name>
+      </remove>      <remove>        <name>src_created_at</name>
+      </remove>      <remove>        <name>src_updated_at</name>
       </remove>      <remove>        <name>src_lab_test_type_id</name>
       </remove>      <remove>        <name>src_lab_test_result_id</name>
       </remove>      <remove>        <name>src_lab_test_status_id</name>
@@ -400,29 +341,8 @@
       </remove>      <remove>        <name>src_disease_id</name>
       </remove>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>355</xloc>
-      <yloc>570</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Start</name>
-    <type>GetVariable</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>62</xloc>
-      <yloc>21</yloc>
+      <xloc>342</xloc>
+      <yloc>530</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -447,8 +367,8 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>478</xloc>
-      <yloc>500</yloc>
+      <xloc>433</xloc>
+      <yloc>463</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -473,8 +393,8 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>496</xloc>
-      <yloc>257</yloc>
+      <xloc>443</xloc>
+      <yloc>245</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -499,8 +419,8 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>230</xloc>
-      <yloc>418</yloc>
+      <xloc>254</xloc>
+      <yloc>393</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -525,8 +445,8 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>467</xloc>
-      <yloc>97</yloc>
+      <xloc>450</xloc>
+      <yloc>98</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -551,8 +471,8 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>240</xloc>
-      <yloc>174</yloc>
+      <xloc>247</xloc>
+      <yloc>167</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -577,8 +497,8 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>230</xloc>
-      <yloc>331</yloc>
+      <xloc>256</xloc>
+      <yloc>324</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -660,28 +580,12 @@
           <column_name>dw_disease_id</column_name>
           <stream_name>dw_disease_id</stream_name>
         </field>
-        <field>
-          <column_name>pregnant</column_name>
-          <stream_name>pregnant</stream_name>
-        </field>
-        <field>
-          <column_name>test_type_id</column_name>
-          <stream_name>test_type_id</stream_name>
-        </field>
-        <field>
-          <column_name>test_result_id</column_name>
-          <stream_name>test_result_id</stream_name>
-        </field>
-        <field>
-          <column_name>result_value</column_name>
-          <stream_name>result_value</stream_name>
-        </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>85</xloc>
-      <yloc>568</yloc>
-      <draw>N</draw>
+      <xloc>343</xloc>
+      <yloc>601</yloc>
+      <draw>Y</draw>
       </GUI>
     </step>
 
@@ -723,15 +627,15 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>353</xloc>
-      <yloc>258</yloc>
+      <xloc>348</xloc>
+      <yloc>246</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>upsert fact_lab_test</name>
-    <type>InsertUpdate</type>
+    <name>lab_results</name>
+    <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -740,118 +644,17 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>Trisano OLAP DS</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema/>
-      <table>fact_lab_test</table>
-      <key>
-        <name>src_lab_test_id</name>
-        <field>src_lab_test_id</field>
-        <condition>&#x3d;</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>src_lab_test_id</name>
-        <rename>src_lab_test_id</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>food_handler</name>
-        <rename>food_handler</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>health_care_worker</name>
-        <rename>health_care_worker</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>group_living</name>
-        <rename>group_living</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>day_care</name>
-        <rename>day_care</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>pregnant</name>
-        <rename>pregnant</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>pregnancy_due_date</name>
-        <rename>pregnancy_due_date</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>risk_factors</name>
-        <rename>risk_factors</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>test_type_id</name>
-        <rename>test_type_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>test_result_id</name>
-        <rename>test_result_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>result_value</name>
-        <rename>result_value</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>dw_person_id</name>
-        <rename>dw_person_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>dw_collection_date_id</name>
-        <rename>dw_collection_date_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>dw_junk_lab_test_id</name>
-        <rename>dw_junk_lab_test_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>dw_lab_test_date_id</name>
-        <rename>dw_lab_test_date_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>dw_organism_id</name>
-        <rename>dw_organism_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>dw_disease_id</name>
-        <rename>dw_disease_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>src_created_at</name>
-        <rename>src_created_at</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>src_updated_at</name>
-        <rename>src_updated_at</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
+    <connection>Trisano TX DS</connection>
+    <sql>select  &#xa;   coalesce&#x28;p.primary_entity_id,p.secondary_entity_id,0&#x29; as entity_id&#xa;  ,l.participation_id&#xa;  ,l.collection_date&#xa;  ,l.lab_test_date&#xa;  ,l.created_at as src_created_at&#xa;  ,l.updated_at as src_updated_at&#xa;  ,coalesce&#x28;l.test_type_id,0&#x29;   as src_lab_test_type_id&#xa;  ,coalesce&#x28;l.test_result_id,0&#x29; as src_lab_test_result_id&#xa;  ,coalesce&#x28;l.test_status_id,0&#x29; as src_lab_test_status_id&#xa;  ,coalesce&#x28;l.organism_id,0&#x29;    as src_organism_id&#xa;  ,case when r.food_handler_id         is not null then true else false end as food_handler &#xa;  ,case when r.healthcare_worker_id    is not null then true else false end as health_care_worker&#xa;  ,case when r.group_living_id         is not null then true else false end as group_living&#xa;  ,case when r.day_care_association_id is not null then true else false end as day_care&#xa;  ,r.pregnancy_due_date&#xa;  ,r.risk_factors&#xa;  ,de.disease_id as src_disease_id&#xa;from lab_results l left outer join participations p&#xa;on l.participation_id &#x3d; p.id&#xa;left outer join participations_risk_factors r&#xa;on l.participation_id &#x3d; r.participation_id&#xa;left outer join disease_events de&#xa;on p.event_id &#x3d; de.event_id&#x3b;</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>355</xloc>
-      <yloc>664</yloc>
+      <xloc>348</xloc>
+      <yloc>17</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
