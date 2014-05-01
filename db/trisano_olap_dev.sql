@@ -821,3 +821,55 @@ alter table warehouse.dim_date add column mmwr_week int not null default 0;
 
 alter table warehouse.dim_date add column mmwr_year int not null default 0;
 
+alter table warehouse.dim_address owner to pentaho;
+alter table warehouse.dim_date owner to pentaho;
+alter table warehouse.dim_diagnostic_facility owner to pentaho;
+alter table warehouse.dim_disease owner to pentaho;
+alter table warehouse.dim_ethnicity owner to pentaho;
+alter table warehouse.dim_external_code owner to pentaho;
+alter table warehouse.dim_investigator owner to pentaho;
+alter table warehouse.dim_junk_lab_test owner to pentaho;
+alter table warehouse.dim_junk_status_type owner to pentaho;
+alter table warehouse.dim_jurisdiction owner to pentaho;
+alter table warehouse.dim_language owner to pentaho;
+alter table warehouse.dim_location owner to pentaho;
+alter table warehouse.dim_outbreak owner to pentaho;
+alter table warehouse.dim_person owner to pentaho;
+alter table warehouse.dim_time owner to pentaho;
+alter table warehouse.dim_workflow owner to pentaho;
+alter table warehouse.fact_disease_event owner to pentaho;
+alter table warehouse.fact_event owner to pentaho;
+alter schema warehouse owner to pentaho;
+
+
+-- Table: warehouse_util.dw_util_data_validation_status
+
+DROP TABLE warehouse_util.dw_util_data_validation_status;
+
+CREATE TABLE warehouse_util.dw_util_data_validation_status
+(
+  status boolean, -- Flag indicating the true / false status of the data validationş
+  validation_test character varying(18),
+  description character varying(250)
+)
+WITH (
+  OIDS=FALSE
+);
+
+COMMENT ON COLUMN warehouse_util.dw_util_data_validation_status.status IS 'Flag indicating the true / false status of the data validationş';
+
+
+-- Index: warehouse_util.index_status
+
+-- DROP INDEX warehouse_util.index_status;
+
+CREATE INDEX index_status
+  ON warehouse_util.dw_util_data_validation_status
+  USING btree
+  (status);
+
+
+alter table warehouse_util.dw_util_data_validation_status owner to pentaho;
+alter schema warehouse_util owner to pentaho;
+
+
