@@ -97,8 +97,894 @@ sudo vi sudo vi proxy.conf
 
 Add the following proxy definition:
 <Location /pentaho/>
+        ProxyPass ajp://localupload database backups
+hibernate.backup  jackrabbit.backup  pentaho.backup  quartz.backup  trisano_olap_dev.backup
+
+upload pentaho.tgz
+untar / gunzip pentaho.tgz to /var/local/
+
+groupadd pentaho
+useradd pentaho -g pentaho
+- do not set passwd (no login)
+sudo chown -R pentaho /var/local/pentaho
+sudo chgrp -R pentaho /var/local/pentaho
+
+Login to postgres
+postgres=# create user pentaho with password '*****'; 
+postgres=# create database hibernate;
+CREATE DATABASE
+postgres=# grant all privileges on database hibernate to pentaho;
+postgres=# \c hibernate
+postgres=# grant all on all tables in schema public to pentaho;
+GRANT
+postgres=# create database jackrabbit;
+CREATE DATABASE
+postgres=# create user jcr_user with password 'pentaho';
+postgres=# grant all privileges on database jackrabbit to jcr_user;
+postgres=# alter database jackrabbit owner to jcr_user;
+postgres=# \c jackrabbit
+postgres=# grant all on all tables in schema public to jcr_user;
+GRANT
+postgres=# create database pentaho;
+CREATE DATABASE
+postgres=# grant all privileges on database pentaho to pentaho;
+postgres=# grant all on all tables in schema public to pentaho;
+GRANT
+postgres=# create database quartz;
+CREATE DATABASE
+postgres=# grant all privileges on database quartz to pentaho;
+postgres=# \c quartz
+postgres=# grant all on all tables in schema public to pentaho;
+GRANT
+postgres=# create database trisano_olap_dev;
+CREATE DATABASE
+postgres=# grant all privileges on database trisano_olap_dev to pentaho;
+postgres=# \c trisano_olap_dev 
+postgres=# grant all on all tables in schema public to pentaho;
+postgres=# grant all on all tables in schema warehouse to pentaho;
+postgres=# grant all on all tables in schema warehouse_util to pentaho;
+GRANT
+\q
+
+tmacduff@uniphi:~/pentaho$ sudo -u postgres psql -d hibernate < hibernate.backup
+tmacduff@uniphi:~/pentaho$ sudo -u postgres psql -d jackrabbt < jackrabbit.backup
+tmacduff@uniphi:~/pentaho$ sudo -u postgres psql -d pentaho < pentaho.backup
+tmacduff@uniphi:~/pentaho$ sudo -u postgres psql -d quartz < quartz.backup
+tmacduff@uniphi:~/pentaho$ sudo -u postgres psql -d trisano_olap_dev < trisano_olap_dev.backupogin
+
+
+cd /var/log
+sudo mkdir pentaho
+sudo chown -R pentaho pentaho
+sudo chgrp -R pentaho pentahoupload database backups
+hibernate.backup  jackrabbit.backup  pentaho.backup  quartz.backup  trisano_olap_dev.backup
+
+upload pentaho.tgz
+untar / gunzip pentaho.tgz to /var/local/
+
+groupadd pentaho
+useradd pentaho -g pentaho
+- do not set passwd (no login)
+sudo chown -R pentaho /var/local/pentaho
+sudo chgrp -R pentaho /var/local/pentaho
+
+Login to postgres
+postgres=# create user pentaho with password '*****'; 
+postgres=# create database hibernate;
+CREATE DATABASE
+postgres=# grant all privileges on database hibernate to pentaho;
+postgres=# \c hibernate
+postgres=# grant all on all taupload database backups
+hibernate.backup  jackrabbit.backup  pentaho.backup  quartz.backup  trisano_olap_dev.backup
+
+upload pentaho.tgz
+untar / gunzip pentaho.tgz to /var/local/
+
+groupadd pentaho
+useradd pentaho -g pentaho
+- do not set passwd (no login)
+sudo chown -R pentaho /var/local/pentaho
+sudo chgrp -R pentaho /var/local/pentaho
+
+Login to postgres
+postgres=# create user pentaho with password '*****'; 
+postgres=# create database hibernate;
+CREATE DATABASE
+postgres=# grant all privileges on database hibernate to pentaho;
+postgres=# \c hibernate
+postgres=# grant all on all tables in schema public to pentaho;
+GRANTupload database backups
+hibernate.backup  jackrabbit.backup  pentaho.backup  quartz.backup  trisano_olap_dev.backup
+
+upload pentaho.tgz
+untar / gunzip pentaho.tgz to /var/local/
+
+groupadd pentaho
+useradd pentaho -g pentaho
+- do not set passwd (no login)
+sudo chown -R pentaho /var/local/pentaho
+sudo chgrp -R pentaho /var/local/pentaho
+
+Login to postgres
+postgres=# create user pentaho with password '*****'; 
+postgres=# create database hibernate;
+CREATE DATABASE
+postgres=# grant all privileges on database hibernate to pentaho;
+postgres=# \c hibernate
+postgres=# grant all on all tables in schema public to pentaho;
+GRANT
+postgres=# create database jackrabbit;
+CREATE DATABASE
+postgres=# create user jcr_user with password 'pentaho';
+postgres=# grant all privileges on database jackrabbit to jcr_user;
+postgres=# alter database jackrabbit owner to jcr_user;
+postgres=# \c jackrabbit
+postgres=# grant all on all tables in schema public to jcr_user;
+GRANT
+postgres=# create database pentaho;
+CREATE DATABASE
+postgres=# grant all privileges upload database backups
+hibernate.backup  jackrabbit.backup  pentaho.backup  quartz.backup  trisano_olap_dev.backup
+
+upload pentaho.tgz
+untar / gunzip pentaho.tgz to /var/local/
+
+groupadd pentaho
+useradd pentaho -g pentaho
+- do not set passwd (no login)upload database backups
+hibernate.backup  jackrabbit.backup  pentaho.backup  quartz.backup  trisano_olap_dev.backup
+
+upload pentaho.tgz
+untar / gunzip pentaho.tgz to /var/local/
+
+groupadd pentaho
+useradd pentaho -g pentaho
+- do not set passwd (no login)
+sudo chown -R pentaho /var/local/pentaho
+sudo chgrp -R pentaho /var/local/pentaho
+
+Login to postgres
+postgres=# create user pentaho with password '*****'; 
+postgres=# create database hibernate;
+CREATE DATABASE
+postgres=# grant all privileges on database hibernate to pentaho;
+postgres=# \c hibernate
+postgres=# grant all on all tables in schema public to pentaho;
+GRANT
+postgres=# create database jackrabbit;
+CREATE DATABASE
+postgres=# create user jcr_user with password 'pentaho';
+postgres=# grant all privileges on database jackrabbit to jcr_user;
+postgres=# alter database jackrabbit owner to jcr_user;
+postgres=# \c jackrabbit
+postgres=# grant all on all tables in schema public to jcr_user;
+GRANT
+postgres=# create database pentaho;
+CREATE DATABASE
+postgres=# grant all privileges on database pentaho to pentaho;
+postgres=# grant all on all tables in schema public to pentaho;
+GRANT
+postgres=# create database quartz;
+CREATE DATABASE
+postgres=# grant all privileges on database quartz to pentaho;
+postgres=# \c quartz
+postgres=# grant all on all tables in schema public to pentaho;
+GRANT
+postgres=# create database trisano_olap_dev;
+CREATE DATABASE
+postgres=# grant all privileges on database trisano_olap_dev to pentaho;
+postgres=# \c trisano_olap_dev 
+postgres=# grant all on all tables in schema public to pentaho;
+postgres=# grant all on all tables in schema warehouse to pentaho;
+postgres=# grant all on all tables in schema warehouse_util to pentaho;
+GRANT
+\q
+
+tmacduff@uniphi:~/pentaho$ sudo -u postgres psql -d hibernate < hibernate.backup
+tmacduff@uniphi:~/pentaho$ sudo -u postgres psql -d jackrabbt < jackrabbit.backup
+tmacduff@uniphi:~/pentaho$ sudo -u postgres psql -d pentaho < pentaho.backup
+tmacduff@uniphi:~/pentaho$ sudo -u postgres psql -d quartz < quartz.backup
+tmacduff@uniphi:~/pentaho$ sudo -u postgres psql -d trisano_olap_dev < trisano_olap_dev.backupogin
+
+
+cd /var/log
+sudo mkdir pentaho
+sudo chown -R pentaho pentaho
+sudo chgrp -R pentaho pentaho
+
+cd /var/local/pentaho/tomcat/
+sudo mv logs logs_prev
+sudo ln -s /var/log/pentaho/ logs
+
+Update the ports as necessary in /var/local/pentaho/tomcat/conf/server.xml
+
+
+ProxyPass (Apache) config
+in proxy.conf, add the following:
+
+<Location /pentaho/>
+        ProxyPass http://localhost:8181/pentaho/
+        ProxyPassReverse http://localhost:8181/pentaho/
+</Location>
+
+Update the Tomcat connector to work with the proxy (<tomcat home>/conf/server.xml)
+ <Connector URIEncoding="UTF-8" port="8181" protocol="HTTP/1.1" 
+               connectionTimeout="20000" 
+               redirectPort="8543" proxyName="uniphi.chpc.utah.edu" proxyPort="80" />
+
+Restart Tomcat (wait for it to come up completely)
+Restart Apache
+
+Alternate Apache Config (using AJP):
+
+cd /var/local/pentaho/tomcat/conf/
+sudo vi server.xml
+
+Ensure the AJP connector is configured properly:
+e.g. <Connector URIEncoding="UTF-8" port="8010" protocol="AJP/1.3" redirectPort="8543" />
+Save server.xml
+
+cd /etc/apache2/mods-enabled
+sudo ln -s ../mods-available/proxy_ajp.load proxy_ajp.load
+sudo vi sudo vi proxy.conf
+
+Add the following proxy definition:
+<Location /pentaho/>
         ProxyPass ajp://localhost:8010/pentaho/
 </Location>
 
 ** Update the AJP port to match the AJP port specified in the tomcat server.xml
+
+
+PDI Installation
+- Copy pdi.tar.gz to target server /var/local
+- cd /var/local
+- tar -xzvf pdi.tgz
+- sudo ln -s pdi-ce-5.0.1-stable/ pdi
+- cd /var/local/pdi/simple-jndi
+- vi jdbc.properties
+  - update to reflect the location of the OLAP and OLTP database schemasc
+
+Project installation
+- cd /var/local
+- sudo mkdir project
+- sudo chown pentaho project
+- sudo chgrp pentaho project
+- cd project
+- git clone https://github.com/UTDOH/AVR.git
+
+Kettle / PDI config
+- sudo su pentaho
+- cd ~
+- (if .kettle doesn't exist, create it)
+- cd .kettle
+- vi kettle.properties
+- add the line: pentaho.solutions.root=/var/local/project/AVR/pentaho/datawarehouse
+- (replace /var/local/project with the absolute path for the installtion environment)
+- cd /var/log
+- sudo mkdir pdi
+- sudo chown pentaho pdi
+- sudo chgrp pentaho pdi
+
+
+Data warehouse rebuild config
+- sudo -u pentaho chrontab -e
+- 0 */1 * * * /var/local/pdi/kitchen.sh -file /var/local/project/AVR/pentaho/datawarehouse/etl/load_data_warehouse_main.kjb > /var/log/pdi/load_data_warehouse_main.log 2>&1
+
+
+sudo chown -R pentaho /var/local/pentaho
+sudo chgrp -R pentaho /var/local/pentaho
+
+Login to postgres
+postgres=# create user pentaho with password '*****'; 
+postgres=# create database hibernate;
+CREATE DATABASE
+postgres=# grant all privileges on database hibernate to pentaho;
+postgres=# \c hibernate
+postgres=# grant all on all tables in schema public to pentaho;
+GRANT
+postgres=# create database jackrabbit;
+CREATE DATABASE
+postgres=# create user jcr_user with password 'pentaho';
+postgres=# grant all privileges on database jackrabbit to jcr_user;
+postgres=# alter database jackrabbit owner to jcr_user;
+postgres=# \c jackrabbit
+postgres=# grant all on all tables in schema public to jcr_user;
+GRANT
+postgres=# create database pentaho;
+CREATE DATABASE
+postgres=# grant all privileges on database pentaho to pentaho;
+postgres=# grant all on all tables in schema public to pentaho;
+GRANT
+postgres=# create database quartz;
+CREATE DATABASE
+postgres=# grant all privileges on database quartz to pentaho;
+postgres=# \c quartz
+postgres=# grant all on all tables in schema public to pentaho;
+GRANT
+postgres=# create database trisano_olap_dev;
+CREATE DATABASE
+postgres=# grant all privileges on database trisano_olap_dev to pentaho;
+postgres=# \c trisano_olap_dev 
+postgres=# grant all on all tables in schema public to pentaho;
+postgres=# grant all on all tables in schema warehouse to pentaho;
+postgres=# grant all on all tables in schema warehouse_util to pentaho;
+GRANT
+\q
+
+tmacduff@uniphi:~/pentaho$ sudo -u postgres psql -d hibernate < hibernate.backup
+tmacduff@uniphi:~/pentaho$ sudo -u postgres psql -d jackrabbt < jackrabbit.backup
+tmacduff@uniphi:~/pentaho$ sudo -u postgres psql -d pentaho < pentaho.backup
+tmacduff@uniphi:~/pentaho$ sudo -u postgres psql -d quartz < quartz.backup
+tmacduff@uniphi:~/pentaho$ sudo -u postgres psql -d trisano_olap_dev < trisano_olap_dev.backupogin
+
+
+cd /var/log
+sudo mkdir pentaho
+sudo chown -R pentaho pentaho
+sudo chgrp -R pentaho pentaho
+
+cd /var/local/pentaho/tomcat/
+sudo mv logs logs_prev
+sudo ln -s /var/log/pentaho/ logs
+
+Update the ports as necessary in /var/local/pentaho/tomcat/conf/server.xml
+
+
+ProxyPass (Apache) config
+in proxy.conf, add the following:
+
+<Location /pentaho/>
+        ProxyPass http://localhost:8181/pentaho/
+        ProxyPassReverse http://localhost:8181/pentaho/
+</Location>
+
+Update the Tomcat connector to work with the proxy (<tomcat home>/conf/server.xml)
+ <Connector URIEncoding="UTF-8" port="8181" protocol="HTTP/1.1" 
+               connectionTimeout="20000" 
+               redirectPort="8543" proxyName="uniphi.chpc.utah.edu" proxyPort="80" />
+
+Restart Tomcat (wait for it to come up completely)
+Restart Apache
+
+Alternate Apache Config (using AJP):
+
+cd /var/local/pentaho/tomcat/conf/
+sudo vi server.xml
+
+Ensure the AJP connector is configured properly:
+e.g. <Connector URIEncoding="UTF-8" port="8010" protocol="AJP/1.3" redirectPort="8543" />
+Save server.xml
+
+cd /etc/apache2/mods-enabled
+sudo ln -s ../mods-available/proxy_ajp.load proxy_ajp.load
+sudo vi sudo vi proxy.conf
+
+Add the following proxy definition:
+<Location /pentaho/>
+        ProxyPass ajp://localhost:8010/pentaho/
+</Location>
+
+** Update the AJP port to match the AJP port specified in the tomcat server.xml
+
+
+PDI Installation
+- Copy pdi.tar.gz to target server /var/local
+- cd /var/local
+- tar -xzvf pdi.tgz
+- sudo ln -s pdi-ce-5.0.1-stable/ pdi
+- cd /var/local/pdi/simple-jndi
+- vi jdbc.properties
+  - update to reflect the location of the OLAP and OLTP database schemasc
+
+Project installation
+- cd /var/local
+- sudo mkdir project
+- sudo chown pentaho project
+- sudo chgrp pentaho project
+- cd project
+- git clone https://github.com/UTDOH/AVR.git
+
+Kettle / PDI config
+- sudo su pentaho
+- cd ~
+- (if .kettle doesn't exist, create it)
+- cd .kettle
+- vi kettle.properties
+- add the line: pentaho.solutions.root=/var/local/project/AVR/pentaho/datawarehouse
+- (replace /var/local/project with the absolute path for the installtion environment)
+- cd /var/log
+- sudo mkdir pdi
+- sudo chown pentaho pdi
+- sudo chgrp pentaho pdi
+
+
+Data warehouse rebuild config
+- sudo -u pentaho chrontab -e
+- 0 */1 * * * /var/local/pdi/kitchen.sh -file /var/local/project/AVR/pentaho/datawarehouse/etl/load_data_warehouse_main.kjb > /var/log/pdi/load_data_warehouse_main.log 2>&1
+
+on database pentaho to pentaho;
+postgres=# grant all on all tables in schema public to pentaho;
+GRANT
+postgres=# create database quartz;
+CREATE DATABASE
+postgres=# grant all privileges on database quartz to pentaho;
+postgres=# \c quartz
+postgres=# grant all on all tables in schema public to pentaho;
+GRANT
+postgres=# create database trisano_olap_dev;
+CREATE DATABASE
+postgres=# grant all privileges on database trisano_olap_dev to pentaho;
+postgres=# \c trisano_olap_dev 
+postgres=# grant all on all tables in schema public to pentaho;
+postgres=# grant all on all tables in schema warehouse to pentaho;
+postgres=# grant all on all tables in schema warehouse_util to pentaho;
+GRANT
+\q
+
+tmacduff@uniphi:~/pentaho$ sudo -u postgres psql -d hibernate < hibernate.backup
+tmacduff@uniphi:~/pentaho$ sudo -u postgres psql -d jackrabbt < jackrabbit.backup
+tmacduff@uniphi:~/pentaho$ sudo -u postgres psql -d pentaho < pentaho.backup
+tmacduff@uniphi:~/pentaho$ sudo -u postgres psql -d quartz < quartz.backup
+tmacduff@uniphi:~/pentaho$ sudo -u postgres psql -d trisano_olap_dev < trisano_olap_dev.backupogin
+
+
+cd /var/log
+sudo mkdir pentaho
+sudo chown -R pentaho pentaho
+sudo chgrp -R pentaho pentaho
+
+cd /var/local/pentaho/tomcat/
+sudo mv logs logs_prev
+sudo ln -s /var/log/pentaho/ logs
+
+Update the ports as necessary in /var/local/pentaho/tomcat/conf/server.xml
+
+
+ProxyPass (Apache) config
+in proxy.conf, add the following:
+
+<Location /pentaho/>
+        ProxyPass http://localhost:8181/pentaho/
+        ProxyPassReverse http://localhost:8181/pentaho/
+</Location>
+
+Update the Tomcat connector to work with the proxy (<tomcat home>/conf/server.xml)
+ <Connector URIEncoding="UTF-8" port="8181" protocol="HTTP/1.1" 
+               connectionTimeout="20000" 
+               redirectPort="8543" proxyName="uniphi.chpc.utah.edu" proxyPort="80" />
+
+Restart Tomcat (wait for it to come up completely)
+Restart Apache
+
+Alternate Apache Config (using AJP):
+
+cd /var/local/pentaho/tomcat/conf/
+sudo vi server.xml
+
+Ensure the AJP connector is configured properly:
+e.g. <Connector URIEncoding="UTF-8" port="8010" protocol="AJP/1.3" redirectPort="8543" />
+Save server.xml
+
+cd /etc/apache2/mods-enabled
+sudo ln -s ../mods-available/proxy_ajp.load proxy_ajp.load
+sudo vi sudo vi proxy.conf
+
+Add the following proxy definition:
+<Location /pentaho/>
+        ProxyPass ajp://localhost:8010/pentaho/
+</Location>
+
+** Update the AJP port to match the AJP port specified in the tomcat server.xml
+
+
+PDI Installation
+- Copy pdi.tar.gz to target server /var/local
+- cd /var/local
+- tar -xzvf pdi.tgz
+- sudo ln -s pdi-ce-5.0.1-stable/ pdi
+- cd /var/local/pdi/simple-jndi
+- vi jdbc.properties
+  - update to reflect the location of the OLAP and OLTP database schemasc
+
+Project installation
+- cd /var/local
+- sudo mkdir project
+- sudo chown pentaho project
+- sudo chgrp pentaho project
+- cd project
+- git clone https://github.com/UTDOH/AVR.git
+
+Kettle / PDI config
+- sudo su pentaho
+- cd ~
+- (if .kettle doesn't exist, create it)
+- cd .kettle
+- vi kettle.properties
+- add the line: pentaho.solutions.root=/var/local/project/AVR/pentaho/datawarehouse
+- (replace /var/local/project with the absolute path for the installtion environment)
+- cd /var/log
+- sudo mkdir pdi
+- sudo chown pentaho pdi
+- sudo chgrp pentaho pdi
+
+
+Data warehouse rebuild config
+- sudo -u pentaho chrontab -e
+- 0 */1 * * * /var/local/pdi/kitchen.sh -file /var/local/project/AVR/pentaho/datawarehouse/etl/load_data_warehouse_main.kjb > /var/log/pdi/load_data_warehouse_main.log 2>&1
+
+
+postgres=# create database jackrabbit;
+CREATE DATABASE
+postgres=# create user jcr_user with password 'pentaho';
+postgres=# grant all privileges on database jackrabbit to jcr_user;
+postgres=# alter database jackrabbit owner to jcr_user;
+postgres=# \c jackrabbit
+postgres=# grant all on all tables in schema public to jcr_user;
+GRANT
+postgres=# create database pentaho;
+CREATE DATABASE
+postgres=# grant all privileges on database pentaho to pentaho;
+postgres=# grant all on all tables in schema public to pentaho;
+GRANT
+postgres=# create database quartz;
+CREATE DATABASE
+postgres=# grant all privileges on database quartz to pentaho;
+postgres=# \c quartz
+postgres=# grant all on all tables in schema public to pentaho;
+GRANT
+postgres=# create database trisano_olap_dev;
+CREATE DATABASE
+postgres=# grant all privileges on database trisano_olap_dev to pentaho;
+postgres=# \c trisano_olap_dev 
+postgres=# grant all on all tables in schema public to pentaho;
+postgres=# grant all on all tables in schema warehouse to pentaho;
+postgres=# grant all on all tables in schema warehouse_util to pentaho;
+GRANT
+\q
+
+tmacduff@uniphi:~/pentaho$ sudo -u postgres psql -d hibernate < hibernate.backup
+tmacduff@uniphi:~/pentaho$ sudo -u postgres psql -d jackrabbt < jackrabbit.backup
+tmacduff@uniphi:~/pentaho$ sudo -u postgres psql -d pentaho < pentaho.backup
+tmacduff@uniphi:~/pentaho$ sudo -u postgres psql -d quartz < quartz.backup
+tmacduff@uniphi:~/pentaho$ sudo -u postgres psql -d trisano_olap_dev < trisano_olap_dev.backupogin
+
+
+cd /var/log
+sudo mkdir pentaho
+sudo chown -R pentaho pentaho
+sudo chgrp -R pentaho pentaho
+
+cd /var/local/pentaho/tomcat/
+sudo mv logs logs_prev
+sudo ln -s /var/log/pentaho/ logs
+
+Update the ports as necessary in /var/local/pentaho/tomcat/conf/server.xml
+
+
+ProxyPass (Apache) config
+in proxy.conf, add the following:
+
+<Location /pentaho/>
+        ProxyPass http://localhost:8181/pentaho/
+        ProxyPassReverse http://localhost:8181/pentaho/
+</Location>
+
+Update the Tomcat connector to work with the proxy (<tomcat home>/conf/server.xml)
+ <Connector URIEncoding="UTF-8" port="8181" protocol="HTTP/1.1" 
+               connectionTimeout="20000" 
+               redirectPort="8543" proxyName="uniphi.chpc.utah.edu" proxyPort="80" />
+
+Restart Tomcat (wait for it to come up completely)
+Restart Apache
+
+Alternate Apache Config (using AJP):
+
+cd /var/local/pentaho/tomcat/conf/
+sudo vi server.xml
+
+Ensure the AJP connector is configured properly:
+e.g. <Connector URIEncoding="UTF-8" port="8010" protocol="AJP/1.3" redirectPort="8543" />
+Save server.xml
+
+cd /etc/apache2/mods-enabled
+sudo ln -s ../mods-available/proxy_ajp.load proxy_ajp.load
+sudo vi sudo vi proxy.conf
+
+Add the following proxy definition:
+<Location /pentaho/>
+        ProxyPass ajp://localhost:8010/pentaho/
+</Location>
+
+** Update the AJP port to match the AJP port specified in the tomcat server.xml
+
+
+PDI Installation
+- Copy pdi.tar.gz to target server /var/local
+- cd /var/local
+- tar -xzvf pdi.tgz
+- sudo ln -s pdi-ce-5.0.1-stable/ pdi
+- cd /var/local/pdi/simple-jndi
+- vi jdbc.properties
+  - update to reflect the location of the OLAP and OLTP database schemasc
+
+Project installation
+- cd /var/local
+- sudo mkdir project
+- sudo chown pentaho project
+- sudo chgrp pentaho project
+- cd project
+- git clone https://github.com/UTDOH/AVR.git
+
+Kettle / PDI config
+- sudo su pentaho
+- cd ~
+- (if .kettle doesn't exist, create it)
+- cd .kettle
+- vi kettle.properties
+- add the line: pentaho.solutions.root=/var/local/project/AVR/pentaho/datawarehouse
+- (replace /var/local/project with the absolute path for the installtion environment)
+- cd /var/log
+- sudo mkdir pdi
+- sudo chown pentaho pdi
+- sudo chgrp pentaho pdi
+
+
+Data warehouse rebuild config
+- sudo -u pentaho chrontab -e
+- 0 */1 * * * /var/local/pdi/kitchen.sh -file /var/local/project/AVR/pentaho/datawarehouse/etl/load_data_warehouse_main.kjb > /var/log/pdi/load_data_warehouse_main.log 2>&1
+
+bles in schema public to pentaho;
+GRANT
+postgres=# create database jackrabbit;
+CREATE DATABASE
+postgres=# create user jcr_user with password 'pentaho';
+postgres=# grant all privileges on database jackrabbit to jcr_user;
+postgres=# alter database jackrabbit owner to jcr_user;
+postgres=# \c jackrabbit
+postgres=# grant all on all tables in schema public to jcr_user;
+GRANT
+postgres=# create database pentaho;
+CREATE DATABASE
+postgres=# grant all privileges on database pentaho to pentaho;
+postgres=# grant all on all tables in schema public to pentaho;
+GRANT
+postgres=# create database quartz;
+CREATE DATABASE
+postgres=# grant all privileges on database quartz to pentaho;
+postgres=# \c quartz
+postgres=# grant all on all tables in schema public to pentaho;
+GRANT
+postgres=# create database trisano_olap_dev;
+CREATE DATABASE
+postgres=# grant all privileges on database trisano_olap_dev to pentaho;
+postgres=# \c trisano_olap_dev 
+postgres=# grant all on all tables in schema public to pentaho;
+postgres=# grant all on all tables in schema warehouse to pentaho;
+postgres=# grant all on all tables in schema warehouse_util to pentaho;
+GRANT
+\q
+
+tmacduff@uniphi:~/pentaho$ sudo -u postgres psql -d hibernate < hibernate.backup
+tmacduff@uniphi:~/pentaho$ sudo -u postgres psql -d jackrabbt < jackrabbit.backup
+tmacduff@uniphi:~/pentaho$ sudo -u postgres psql -d pentaho < pentaho.backup
+tmacduff@uniphi:~/pentaho$ sudo -u postgres psql -d quartz < quartz.backup
+tmacduff@uniphi:~/pentaho$ sudo -u postgres psql -d trisano_olap_dev < trisano_olap_dev.backupogin
+
+
+cd /var/log
+sudo mkdir pentaho
+sudo chown -R pentaho pentaho
+sudo chgrp -R pentaho pentaho
+
+cd /var/local/pentaho/tomcat/
+sudo mv logs logs_prev
+sudo ln -s /var/log/pentaho/ logs
+
+Update the ports as necessary in /var/local/pentaho/tomcat/conf/server.xml
+
+
+ProxyPass (Apache) config
+in proxy.conf, add the following:
+
+<Location /pentaho/>
+        ProxyPass http://localhost:8181/pentaho/
+        ProxyPassReverse http://localhost:8181/pentaho/
+</Location>
+
+Update the Tomcat connector to work with the proxy (<tomcat home>/conf/server.xml)
+ <Connector URIEncoding="UTF-8" port="8181" protocol="HTTP/1.1" 
+               connectionTimeout="20000" 
+               redirectPort="8543" proxyName="uniphi.chpc.utah.edu" proxyPort="80" />
+
+Restart Tomcat (wait for it to come up completely)
+Restart Apache
+
+Alternate Apache Config (using AJP):
+
+cd /var/local/pentaho/tomcat/conf/
+sudo vi server.xml
+
+Ensure the AJP connector is configured properly:
+e.g. <Connector URIEncoding="UTF-8" port="8010" protocol="AJP/1.3" redirectPort="8543" />
+Save server.xml
+
+cd /etc/apache2/mods-enabled
+sudo ln -s ../mods-available/proxy_ajp.load proxy_ajp.load
+sudo vi sudo vi proxy.conf
+
+Add the following proxy definition:
+<Location /pentaho/>
+        ProxyPass ajp://localhost:8010/pentaho/
+</Location>
+
+** Update the AJP port to match the AJP port specified in the tomcat server.xml
+
+
+PDI Installation
+- Copy pdi.tar.gz to target server /var/local
+- cd /var/local
+- tar -xzvf pdi.tgz
+- sudo ln -s pdi-ce-5.0.1-stable/ pdi
+- cd /var/local/pdi/simple-jndi
+- vi jdbc.properties
+  - update to reflect the location of the OLAP and OLTP database schemasc
+
+Project installation
+- cd /var/local
+- sudo mkdir project
+- sudo chown pentaho project
+- sudo chgrp pentaho project
+- cd project
+- git clone https://github.com/UTDOH/AVR.git
+
+Kettle / PDI config
+- sudo su pentaho
+- cd ~
+- (if .kettle doesn't exist, create it)
+- cd .kettle
+- vi kettle.properties
+- add the line: pentaho.solutions.root=/var/local/project/AVR/pentaho/datawarehouse
+- (replace /var/local/project with the absolute path for the installtion environment)
+- cd /var/log
+- sudo mkdir pdi
+- sudo chown pentaho pdi
+- sudo chgrp pentaho pdi
+
+
+Data warehouse rebuild config
+- sudo -u pentaho chrontab -e
+- 0 */1 * * * /var/local/pdi/kitchen.sh -file /var/local/project/AVR/pentaho/datawarehouse/etl/load_data_warehouse_main.kjb > /var/log/pdi/load_data_warehouse_main.log 2>&1
+
+
+
+cd /var/local/pentaho/tomcat/
+sudo mv logs logs_prev
+sudo ln -s /var/log/pentaho/ logs
+
+Update the ports as necessary in /var/local/pentaho/tomcat/conf/server.xml
+
+
+ProxyPass (Apache) config
+in proxy.conf, add the following:
+
+<Location /pentaho/>
+        ProxyPass http://localhost:8181/pentaho/
+        ProxyPassReverse http://localhost:8181/pentaho/
+</Location>
+
+Update the Tomcat connector to work with the proxy (<tomcat home>/conf/server.xml)
+ <Connector URIEncoding="UTF-8" port="8181" protocol="HTTP/1.1" 
+               connectionTimeout="20000" 
+               redirectPort="8543" proxyName="uniphi.chpc.utah.edu" proxyPort="80" />
+
+Restart Tomcat (wait for it to come up completely)
+Restart Apache
+
+Alternate Apache Config (using AJP):
+
+cd /var/local/pentaho/tomcat/conf/
+sudo vi server.xml
+
+Ensure the AJP connector is configured properly:
+e.g. <Connector URIEncoding="UTF-8" port="8010" protocol="AJP/1.3" redirectPort="8543" />
+Save server.xml
+
+cd /etc/apache2/mods-enabled
+sudo ln -s ../mods-available/proxy_ajp.load proxy_ajp.load
+sudo vi sudo vi proxy.conf
+
+Add the following proxy definition:
+<Location /pentaho/>
+        ProxyPass ajp://localhost:8010/pentaho/
+</Location>
+
+** Update the AJP port to match the AJP port specified in the tomcat server.xml
+
+
+
+
+PDI Installation
+- Copy pdi.tar.gz to target server /var/local
+- cd /var/local
+- tar -xzvf pdi.tgz
+- sudo ln -s pdi-ce-5.0.1-stable/ pdi
+- cd /var/local/pdi/simple-jndi
+- vi jdbc.properties
+  - update to reflect the location of the OLAP and OLTP database schemasc
+
+Project installation
+- cd /var/local
+- sudo mkdir project
+- sudo chown pentaho project
+- sudo chgrp pentaho project
+- cd project
+- git clone https://github.com/UTDOH/AVR.git
+
+Create OLAP Database
+- Login to postgres
+- postgres# create database trisano_olap
+- postgres# \q
+- cd /var/local/project/AVR/db
+
+
+Kettle / PDI config
+- sudo su pentaho
+- cd ~
+- (if .kettle doesn't exist, create it)
+- cd .kettle
+- vi kettle.properties
+- add the line: pentaho.solutions.root=/var/local/project/AVR/pentaho/datawarehouse
+- (replace /var/local/project with the absolute path for the installtion environment)
+- cd /var/log
+- sudo mkdir pdi
+- sudo chown pentaho pdi
+- sudo chgrp pentaho pdi
+
+
+Data warehouse rebuild config
+- sudo -u pentaho chrontab -e
+- 0 */1 * * * /var/local/pdi/kitchen.sh -file /var/local/project/AVR/pentaho/datawarehouse/etl/load_data_warehouse_main.kjb > /var/log/pdi/load_data_warehouse_main.log 2>&1
+
+host:8010/pentaho/
+</Location>
+
+** Update the AJP port to match the AJP port specified in the tomcat server.xml
+
+
+PDI Installation
+- Copy pdi.tar.gz to target server /var/local
+- cd /var/local
+- tar -xzvf pdi.tgz
+- sudo ln -s pdi-ce-5.0.1-stable/ pdi
+- cd /var/local/pdi/simple-jndi
+- vi jdbc.properties
+  - update to reflect the location of the OLAP and OLTP database schemasc
+
+Project installation
+- cd /var/local
+- sudo mkdir project
+- sudo chown pentaho project
+- sudo chgrp pentaho project
+- cd project
+- git clone https://github.com/UTDOH/AVR.git
+
+Kettle / PDI config
+- sudo su pentaho
+- cd ~
+- (if .kettle doesn't exist, create it)
+- cd .kettle
+- vi kettle.properties
+- add the line: pentaho.solutions.root=/var/local/project/AVR/pentaho/datawarehouse
+- (replace /var/local/project with the absolute path for the installtion environment)
+- cd /var/log
+- sudo mkdir pdi
+- sudo chown pentaho pdi
+- sudo chgrp pentaho pdi
+
+
+Data warehouse rebuild config
+- sudo -u pentaho chrontab -e
+- 0 */1 * * * /var/local/pdi/kitchen.sh -file /var/local/project/AVR/pentaho/datawarehouse/etl/load_data_warehouse_main.kjb > /var/log/pdi/load_data_warehouse_main.log 2>&1
+
 
