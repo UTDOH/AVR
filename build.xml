@@ -9,6 +9,9 @@
 		<fileset dir="${lib.dir}">
 			<include name="**/*.jar"/>
 		</fileset>
+		<fileset dir="${pentaho.root}/tomcat/webapps/pentaho/WEB-INF/lib">
+			<include name="**/*.jar"/>
+		</fileset>
 	</path>
 		
 	<target name="udoh.plugin.dist" depends="clean, init, compile">
@@ -17,7 +20,7 @@
 	</target>
 		
 	<target name="compile">
-		<javac srcdir="${src.dir}" destdir="${build.dir}" classpathref="build.classpath">
+		<javac srcdir="${src.dir}" destdir="${build.dir}" classpathref="build.classpath" debug="true" debuglevel="lines,var,source">
 		</javac>
 	</target>
 	

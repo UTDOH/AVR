@@ -1,20 +1,12 @@
 package gov.utah.health.avr2.spring.security;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
 
 import org.springframework.security.Authentication;
 import org.springframework.security.AuthenticationException;
-import org.springframework.security.GrantedAuthority;
 import org.springframework.security.context.HttpSessionContextIntegrationFilter;
 import org.springframework.security.context.SecurityContext;
 import org.springframework.security.providers.UsernamePasswordAuthenticationToken;
@@ -56,15 +48,7 @@ public class SiteMinderSpringAuthenticationProcessingFilter extends
 	 */
 	private String formUsernameParamKey = BLANK;
 	
-	/**
-	 * The JNDI database connection 
-	 */
-	private DataSource trisanoDataSource;
-	
-	/**
-	 * The SQL Query to get the jurisdictions from Trisano
-	 */
-	private String jurisdictionsByUserQuery = BLANK;
+	private boolean devMode;
 	
 	/**
 	 * Default Constructor
@@ -97,18 +81,19 @@ public class SiteMinderSpringAuthenticationProcessingFilter extends
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request)
 			throws AuthenticationException {
-		boolean isSiteMinderLogin = false;
 		String userName = BLANK;
 		String password = BLANK;
 		
 		logger.info("attemptAuthentication() start..");
 		
 		if (!isEmptyString(siteMinderPasswordHeaderKey) && !isEmptyString(siteMinderUsernameHeaderKey)) {
-//			userName = request.getHeader(siteMinderUsernameHeaderKey);
-//			password = request.getHeader(siteMinderPasswordHeaderKey);trisanoJNDIConnectionName
-			 
-			userName = request.getParameter(siteMinderUsernameHeaderKey);
-			password = request.getParameter(siteMinderPasswordHeaderKey);
+			if (!devMode) {
+				userName = request.getHeader(siteMinderUsernameHeaderKey);
+				password = request.getHeader(siteMinderPasswordHeaderKey);
+			} else {
+				userName = request.getParameter(siteMinderUsernameHeaderKey);
+				password = request.getParameter(siteMinderPasswordHeaderKey);
+			}
 			
 			logger.info("SiteMinder HTTPServletRequest header values: [username=(" + userName + "), password=(" + password + ")");
 		}
@@ -130,8 +115,6 @@ public class SiteMinderSpringAuthenticationProcessingFilter extends
 			} else {
 				password = request.getParameter(SPRING_SECURITY_FORM_PASSWORD_KEY);
 			}
-		} else {
-			isSiteMinderLogin = true;
 		}
 		
 		if (isEmptyString(userName)) {
@@ -145,19 +128,9 @@ public class SiteMinderSpringAuthenticationProcessingFilter extends
 		UsernamePasswordAuthenticationToken authToken 
 			= new UsernamePasswordAuthenticationToken(userName, password);
 		
-		if (isSiteMinderLogin) {
-			List<GrantedAuthority> authorities = getUserJurisdictions(userName);
-			if (authorities != null) {
-				for (GrantedAuthority auth : authorities) {
-					logger.info("GrantedAuthority -> " + auth.getAuthority());
-				}
-			}
-		}
-		
 		setDetails(request, authToken);
 		
 		request.getSession().setAttribute(SPRING_SECURITY_LAST_USERNAME_KEY, userName);
-		
 		
 		logger.info("attemptAuthentication() end..");
 		
@@ -167,66 +140,7 @@ public class SiteMinderSpringAuthenticationProcessingFilter extends
 		return auth;
 	}
 	
-	/**
-	 * Get the <code>GrantedAuthority</code> objects for each trisano jurisdiction of the logged in user
-	 * 
-	 * @param uid
-	 * 			The Trisano user UID to lookup
-	 * @return
-	 * 			The List of <code>GrantedAuthority</code> objects, one for each jurisdiction
-	 */
-	private List<GrantedAuthority> getUserJurisdictions(String uid) {
-		List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
-		Connection c = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		int iUID = new Integer(uid);
-		
-		try {
-			c = trisanoDataSource.getConnection();
-			ps = c.prepareStatement(jurisdictionsByUserQuery);
-			ps.setInt(1, iUID);
-			
-			rs = ps.executeQuery();
-			GrantedAuthority grantedAuthority = null;
-			while(rs.next()) {
-				final String authority = rs.getString(1);
-				grantedAuthority = new GrantedAuthority() {
-					
-					@Override
-					public int compareTo(Object arg0) {
-						return 0;
-					}
-					
-					@Override
-					public String getAuthority() {
-						return authority;
-					}
-				};
-				
-				grantedAuthorities.add(grantedAuthority);
-			}
-			
-			
-		} catch (SQLException e) {
-			logger.severe("Error building Trisano user roles: " + e.getMessage());
-			e.printStackTrace();
-		} finally {
-			try {
-				rs.close();
-			} catch (Exception e1) {e1.printStackTrace();}
-			
-			try {
-				ps.close();
-			} catch (Exception e1) {e1.printStackTrace();}
-			
-			try {
-				c.close();
-			} catch (Exception e1) {e1.printStackTrace();}
-		}
-		
-		return grantedAuthorities;
-	}
+
 
 	/**
 	 * Overridden to check authentication against URLs other than /Login
@@ -297,19 +211,11 @@ public class SiteMinderSpringAuthenticationProcessingFilter extends
 		this.formUsernameParamKey = formUsernameParamKey;
 	}
 
-	public DataSource getTrisanoDataSource() {
-		return trisanoDataSource;
+	public boolean isDevMode() {
+		return devMode;
 	}
 
-	public void setTrisanoDataSource(DataSource trisanoDataSource) {
-		this.trisanoDataSource = trisanoDataSource;
-	}
-
-	public String getJurisdictionsByUserQuery() {
-		return jurisdictionsByUserQuery;
-	}
-
-	public void setJurisdictionsByUserQuery(String jurisdictionsByUserQuery) {
-		this.jurisdictionsByUserQuery = jurisdictionsByUserQuery;
+	public void setDevMode(boolean devMode) {
+		this.devMode = devMode;
 	}
 }

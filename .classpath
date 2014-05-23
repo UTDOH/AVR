@@ -6,5 +6,10 @@
 	<classpathentry kind="lib" path="/var/local/pentaho/tomcat/webapps/pentaho/WEB-INF/lib/spring-beans-2.5.6.jar"/>
 	<classpathentry kind="lib" path="/var/local/pentaho/tomcat/webapps/pentaho/WEB-INF/lib/spring-security-core-2.0.5.RELEASE.jar"/>
 	<classpathentry kind="lib" path="/var/local/pentaho/tomcat/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="/var/local/pentaho/tomcat/webapps/pentaho/WEB-INF/lib/pentaho-platform-repository-5.0.1-stable.jar"/>
+	<classpathentry kind="lib" path="/var/local/pentaho/tomcat/webapps/pentaho/WEB-INF/lib/pentaho-platform-api-5.0.1-stable.jar"/>
+	<classpathentry kind="lib" path="/var/local/pentaho/tomcat/webapps/pentaho/WEB-INF/lib/se-jcr-0.9.jar"/>
+	<classpathentry kind="lib" path="/var/local/pentaho/tomcat/webapps/pentaho/WEB-INF/lib/jcr-2.0.jar"/>
+	<classpathentry kind="lib" path="/var/local/pentaho/tomcat/webapps/pentaho/WEB-INF/lib/pentaho-platform-core-5.0.1-stable.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
