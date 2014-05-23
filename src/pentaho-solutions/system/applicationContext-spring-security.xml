@@ -149,14 +149,6 @@
     </property>
   </bean>
   
-  <bean id="trisanoDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-	<property name="resourceRef" value="true"/>
-    <property name="jndiName" value="java:comp/env/jdbc/WebTrisanoTXDS" />
-    <property name="lookupOnStartup" value="false"/>
-	<property name="cache" value="true"/>
-	<property name="proxyInterface" value="javax.sql.DataSource"/>
-  </bean>
-
 
   <bean id="authenticationProcessingFilter"
         class="gov.utah.health.avr2.spring.security.SiteMinderSpringAuthenticationProcessingFilter">
@@ -176,16 +168,8 @@
     
     <property name="siteMinderUsernameHeaderKey" value="UID" />
     <property name="siteMinderPasswordHeaderKey" value="UID" />
-    <property name="trisanoDataSource">
-    	<ref local="trisanoDataSource"/>
-    </property>
-    
-    <property name="jurisdictionsByUserQuery">
-		<value>
-			<![CDATA[select pl.short_name from trisano.places pl inner join trisano.role_memberships rm on rm.jurisdiction_id = pl.id where user_id = ? group by short_name]]>
-		</value>
-	</property>
-    
+   
+    <property name="devMode" value="true"/>
   </bean>
   <bean id="authenticationProcessingFilterEntryPoint"
         class="org.springframework.security.ui.webapp.AuthenticationProcessingFilterEntryPoint">
@@ -322,7 +306,7 @@ CONVERT_URL_TO_LOWERCASE_BEFORE_COMPARISON
   <bean id="anonymousRole" class="java.lang.String">
     <constructor-arg value="Anonymous" />
   </bean>
-
+  
   <!-- used by ExtraRolesUserRoleListServiceDecorator beans -->
   <bean id="extraRoles" class="org.springframework.beans.factory.config.ListFactoryBean">
     <property name="sourceList">
