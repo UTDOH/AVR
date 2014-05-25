@@ -109,6 +109,17 @@
       </Level>
     </Hierarchy>
   </Dimension>
+  <Dimension type="StandardDimension" visible="true" name="NonSecureDisease" caption="Non Secure Disease">
+    <Hierarchy name="Disease" visible="true" hasAll="true" primaryKey="dw_disease_id">
+      <View alias="vw_non_secure_disease">
+        <SQL dialect="generic">
+          <![CDATA[select * from warehouse.dim_disease where sensitive = false]]>
+        </SQL>
+      </View>
+      <Level approxRowCount="500" name="Name" visible="true" column="disease_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
   <Cube name="disease events" visible="true" cache="true" enabled="true">
     <Table name="fact_event" schema="warehouse">
     </Table>
@@ -123,6 +134,8 @@
     <DimensionUsage source="Date" name="Date of Onset Filter" caption="Onset Date Filter" visible="true" foreignKey="dw_event_onset_date_id" highCardinality="false">
     </DimensionUsage>
     <DimensionUsage source="Jurisdiction" name="Jurisdiction" caption="Jurisdiction" visible="true" foreignKey="dw_jurisdiction_id" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="NonSecureDisease" name="NonSecureDisease" visible="true" foreignKey="dw_disease_id">
     </DimensionUsage>
     <Measure name="Disease Count" column="dw_disease_id" datatype="Integer" aggregator="count" visible="true">
     </Measure>
@@ -346,6 +359,26 @@
           <MemberGrant member="[Jurisdiction].[Utah State]" access="all">
           </MemberGrant>
         </HierarchyGrant>
+      </CubeGrant>
+    </SchemaGrant>
+  </Role>
+  <Role name="DISEASE-SECURE">
+    <SchemaGrant access="none">
+      <CubeGrant cube="disease events" access="all">
+        <DimensionGrant dimension="Disease" access="all">
+        </DimensionGrant>
+        <DimensionGrant dimension="NonSecureDisease" access="none">
+        </DimensionGrant>
+      </CubeGrant>
+    </SchemaGrant>
+  </Role>
+  <Role name="DISEASE-NONSECURE">
+    <SchemaGrant access="all">
+      <CubeGrant cube="disease events" access="all">
+        <DimensionGrant dimension="Disease" access="none">
+        </DimensionGrant>
+        <DimensionGrant dimension="NonSecureDisease" access="all">
+        </DimensionGrant>
       </CubeGrant>
     </SchemaGrant>
   </Role>
