@@ -360,10 +360,18 @@
   
   	<property name="jurisdictionsByUserQuery">
 	  	<value>
-			<![CDATA[select pl.short_name from trisano.places pl inner join trisano.role_memberships rm on rm.jurisdiction_id = pl.id where user_id = ? group by short_name]]>
+			<![CDATA[select pl.short_name from trisano.places pl inner join trisano.role_memberships rm on rm.jurisdiction_id = pl.id inner join trisano.users u on u.id = rm.user_id  where u.uid = ? group by short_name]]>
+		</value>
+	</property>
+	
+	<property name="sensitiveRoleCountQuery">
+		<value>
+			<![CDATA[select count(1) as ct from trisano.role_memberships rm inner join trisano.roles r on r.id = rm.role_id inner join trisano.users u on u.id = rm.user_id where r.id = 11 and uid = ?]]>
 		</value>
 	</property>
   </bean>
+  
+  
 
   <!-- 
     This bean defines how jcr transactions are propogated, when methods in IUserRoleDao are called.

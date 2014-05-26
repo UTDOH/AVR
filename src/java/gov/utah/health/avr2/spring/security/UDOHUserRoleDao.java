@@ -41,6 +41,8 @@ public class UDOHUserRoleDao extends JcrUserRoleDao implements IUserRoleDao {
 	
 	private String jurisdictionsByUserQuery = BLANK;
 	
+	private String sensitiveRoleCountQuery = BLANK;
+	
 	
 	public  UDOHUserRoleDao(JcrTemplate adminJcrTemplate, ITenantedPrincipleNameResolver userNameUtils,
 			       ITenantedPrincipleNameResolver roleNameUtils, String authenticatedRoleName, String tenantAdminRoleName,
@@ -48,7 +50,7 @@ public class UDOHUserRoleDao extends JcrUserRoleDao implements IUserRoleDao {
 			       ILockHelper  lockHelper, IRepositoryDefaultAclHandler  defaultAclHandler, final List<String> systemRoles, final List<String> extraRoles, UserCache userCache,
 			       DataSource trisanoDataSource) throws NamespaceException {
 		
-		super(adminJcrTemplate, userNameUtils, roleNameUtils, authenticatedRoleName, tenantAdminRoleName, repositoryAdminUsername, repositoryFileAclDao, repositoryFileDao, pathConversionHelper, lockHelper, defaultAclHandler, systemRoles, extraRoles, null);
+		super(adminJcrTemplate, userNameUtils, roleNameUtils, authenticatedRoleName, tenantAdminRoleName, repositoryAdminUsername, repositoryFileAclDao, repositoryFileDao, pathConversionHelper, lockHelper, defaultAclHandler, systemRoles, extraRoles, userCache);
 		this.trisanoDataSource = trisanoDataSource;
 	}
 	
@@ -71,7 +73,7 @@ public class UDOHUserRoleDao extends JcrUserRoleDao implements IUserRoleDao {
 			} 
 		}
 		
-		List<IPentahoRole> avrRoles = convertRolesToIPentahoRoles(tenant, getUserJurisdictionsAsRoles(parsedUserName));
+		List<IPentahoRole> avrRoles = convertRolesToIPentahoRoles(tenant, getUDOHTrisanoRoles(parsedUserName));
 		pentahoRoles.addAll(avrRoles);
 		debugRoles(username, pentahoRoles);
 		
@@ -253,31 +255,38 @@ public class UDOHUserRoleDao extends JcrUserRoleDao implements IUserRoleDao {
 	 * @return
 	 * 			The List of <code>GrantedAuthority</code> objects, one for each jurisdiction
 	 */
-	public List<String> getUserJurisdictionsAsRoles(String uid) {
+	public List<String> getUDOHTrisanoRoles(String uid) {
 		List<String> udohJurisdictionRoles = new ArrayList<String>();
 		Connection c = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		int iUID = 0;
 		boolean loadUserRoles = true;
-		
-		try {
-			iUID = new Integer(uid);
-		} catch (NumberFormatException nfe) {
-			logger.info("Username: [" + uid + "] is not numeric.  Not loading Jurisdiction roles.");
-			loadUserRoles = false;
-		}
 		
 		if (loadUserRoles) {
 			try {
 				c = trisanoDataSource.getConnection();
 				ps = c.prepareStatement(jurisdictionsByUserQuery);
-				ps.setInt(1, iUID);
+				ps.setString(1, uid);
 				
 				rs = ps.executeQuery();
 				while(rs.next()) {
 					final String authority = rs.getString(1);
 					udohJurisdictionRoles.add("JURISDICTION-" + authority);
+				}
+				
+				ps.close();
+				
+				ps = c.prepareStatement(sensitiveRoleCountQuery);
+				ps.setString(1, uid);
+				rs = ps.executeQuery();
+				
+				if(rs.next()) {
+					int secureDiseaseRoleCount = rs.getInt(1);
+					if (secureDiseaseRoleCount > 0) {
+						udohJurisdictionRoles.add("DISEASE-SECURE");
+					} else {
+						udohJurisdictionRoles.add("DISEASE-NONSECURE");
+					}
 				}
 				
 			} catch (SQLException e) {
@@ -337,5 +346,13 @@ public class UDOHUserRoleDao extends JcrUserRoleDao implements IUserRoleDao {
 
 	public void setJurisdictionsByUserQuery(String jurisdictionsByUserQuery) {
 		this.jurisdictionsByUserQuery = jurisdictionsByUserQuery;
+	}
+
+	public String getSensitiveRoleCountQuery() {
+		return sensitiveRoleCountQuery;
+	}
+
+	public void setSensitiveRoleCountQuery(String sensitiveRoleCountQuery) {
+		this.sensitiveRoleCountQuery = sensitiveRoleCountQuery;
 	}
 }
