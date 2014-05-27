@@ -197,7 +197,7 @@
     <Measure name="Disease Count" column="dw_disease_id" datatype="Integer" aggregator="count" visible="true">
     </Measure>
   </Cube>
-  <Cube name="Lab_Test_v1b" visible="true" cache="true" enabled="true">
+  <Cube name="Lab_Test" visible="true" cache="true" enabled="true">
     <Table name="fact_lab_test" schema="warehouse">
     </Table>
     <Dimension type="StandardDimension" visible="true" foreignKey="dw_person_id" highCardinality="false" name="Group Living">
