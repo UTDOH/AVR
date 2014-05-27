@@ -216,7 +216,7 @@
   </Role>
   <Role name="JURISDICTION-Southwest Utah">
     <SchemaGrant access="none">
-      <CubeGrant cube="disease events" access="all">
+      <CubeGrant cube="disease events" access="custom">
         <HierarchyGrant hierarchy="[Jurisdiction.Jurisdiction]" access="custom">
           <MemberGrant member="[Jurisdiction].[All Jurisdictions]" access="none">
           </MemberGrant>
@@ -227,8 +227,8 @@
     </SchemaGrant>
   </Role>
   <Role name="JURISDICTION-Bear River">
-    <SchemaGrant access="none">
-      <CubeGrant cube="disease events" access="all">
+    <SchemaGrant access="custom">
+      <CubeGrant cube="disease events" access="custom">
         <HierarchyGrant hierarchy="[Jurisdiction.Jurisdiction]" access="custom">
           <MemberGrant member="[Jurisdiction].[All Jurisdictions]" access="none">
           </MemberGrant>
@@ -240,7 +240,7 @@
   </Role>
   <Role name="JURISDICTION-Weber-Morgan">
     <SchemaGrant access="none">
-      <CubeGrant cube="disease events" access="all">
+      <CubeGrant cube="disease events" access="custom">
         <HierarchyGrant hierarchy="[Jurisdiction.Jurisdiction]" access="custom">
           <MemberGrant member="[Jurisdiction].[All Jurisdictions]" access="none">
           </MemberGrant>
@@ -252,7 +252,7 @@
   </Role>
   <Role name="JURISDICTION-Tooele County">
     <SchemaGrant access="none">
-      <CubeGrant cube="disease events" access="all">
+      <CubeGrant cube="disease events" access="custom">
         <HierarchyGrant hierarchy="[Jurisdiction.Jurisdiction]" access="custom">
           <MemberGrant member="[Jurisdiction].[All Jurisdictions]" access="none">
           </MemberGrant>
@@ -264,7 +264,7 @@
   </Role>
   <Role name="JURISDICTION-Salt Lake Valley">
     <SchemaGrant access="none">
-      <CubeGrant cube="disease events" access="all">
+      <CubeGrant cube="disease events" access="custom">
         <HierarchyGrant hierarchy="[Jurisdiction.Jurisdiction]" access="custom">
           <MemberGrant member="[Jurisdiction].[All Jurisdictions]" access="none">
           </MemberGrant>
@@ -276,7 +276,7 @@
   </Role>
   <Role name="JURISDICTION-Central Utah">
     <SchemaGrant access="none">
-      <CubeGrant cube="disease events" access="all">
+      <CubeGrant cube="disease events" access="custom">
         <HierarchyGrant hierarchy="[Jurisdiction.Jurisdiction]" access="custom">
           <MemberGrant member="[Jurisdiction].[All Jurisdictions]" access="none">
           </MemberGrant>
@@ -288,7 +288,7 @@
   </Role>
   <Role name="JURISDICTION-TriCounty">
     <SchemaGrant access="none">
-      <CubeGrant cube="disease events" access="all">
+      <CubeGrant cube="disease events" access="custom">
         <HierarchyGrant hierarchy="[Jurisdiction.Jurisdiction]" access="custom">
           <MemberGrant member="[Jurisdiction].[All Jurisdictions]" access="none">
           </MemberGrant>
@@ -300,7 +300,7 @@
   </Role>
   <Role name="JURISDICTION-Utah County">
     <SchemaGrant access="none">
-      <CubeGrant cube="disease events" access="all">
+      <CubeGrant cube="disease events" access="custom">
         <HierarchyGrant hierarchy="[Jurisdiction.Jurisdiction]" access="custom">
           <MemberGrant member="[Jurisdiction].[All Jurisdictions]" access="none">
           </MemberGrant>
@@ -312,7 +312,7 @@
   </Role>
   <Role name="JURISDICTION-Davis County">
     <SchemaGrant access="none">
-      <CubeGrant cube="disease events" access="all">
+      <CubeGrant cube="disease events" access="custom">
         <HierarchyGrant hierarchy="[Jurisdiction.Jurisdiction]" access="custom">
           <MemberGrant member="[Jurisdiction].[All Jurisdictions]" access="none">
           </MemberGrant>
@@ -324,7 +324,7 @@
   </Role>
   <Role name="JURISDICTION-Wasatch County">
     <SchemaGrant access="none">
-      <CubeGrant cube="disease events" access="all">
+      <CubeGrant cube="disease events" access="custom">
         <HierarchyGrant hierarchy="[Jurisdiction.Jurisdiction]" access="custom">
           <MemberGrant member="[Jurisdiction].[All Jurisdictions]" access="none">
           </MemberGrant>
@@ -336,7 +336,7 @@
   </Role>
   <Role name="JURISDICTION-Summit County">
     <SchemaGrant access="none">
-      <CubeGrant cube="disease events" access="all">
+      <CubeGrant cube="disease events" access="custom">
         <HierarchyGrant hierarchy="[Jurisdiction.Jurisdiction]" access="custom">
           <MemberGrant member="[Jurisdiction].[All Jurisdictions]" access="none">
           </MemberGrant>
@@ -348,7 +348,7 @@
   </Role>
   <Role name="JURISDICTION-Out of State">
     <SchemaGrant access="none">
-      <CubeGrant cube="disease events" access="all">
+      <CubeGrant cube="disease events" access="custom">
         <HierarchyGrant hierarchy="[Jurisdiction.Jurisdiction]" access="custom">
           <MemberGrant member="[Jurisdiction].[All Jurisdictions]" access="none">
           </MemberGrant>
@@ -360,7 +360,7 @@
   </Role>
   <Role name="JURISDICTION-Southeastern Utah">
     <SchemaGrant access="none">
-      <CubeGrant cube="disease events" access="all">
+      <CubeGrant cube="disease events" access="custom">
         <HierarchyGrant hierarchy="[Jurisdiction.Jurisdiction]" access="custom">
           <MemberGrant member="[Jurisdiction].[All Jurisdictions]" access="none">
           </MemberGrant>
@@ -372,7 +372,7 @@
   </Role>
   <Role name="JURISDICTION-Utah State">
     <SchemaGrant access="none">
-      <CubeGrant cube="disease events" access="all">
+      <CubeGrant cube="disease events" access="custom">
         <HierarchyGrant hierarchy="[Jurisdiction.Jurisdiction]" access="custom">
           <MemberGrant member="[Jurisdiction].[All Jurisdictions]" access="none">
           </MemberGrant>
