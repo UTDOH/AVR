@@ -1,6 +1,6 @@
 <Schema name="UTDOH - SECURE">
   <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Disease">
-    <Hierarchy name="Disease" visible="true" hasAll="true" primaryKey="dw_disease_id">
+    <Hierarchy name="Disease" visible="true" hasAll="true" allMemberName="All Diseases" primaryKey="dw_disease_id">
       <Table name="dim_disease" schema="warehouse">
       </Table>
       <Level approxRowCount="500" name="Name" visible="true" column="disease_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
@@ -109,14 +109,14 @@
       </Level>
     </Hierarchy>
   </Dimension>
-  <Dimension type="StandardDimension" visible="true" name="NonSecureDisease" caption="Non Secure Disease">
-    <Hierarchy name="Disease" visible="true" hasAll="true" primaryKey="dw_disease_id">
-      <View alias="vw_non_secure_disease">
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Non Sensitive Disease">
+    <Hierarchy name="Disease" visible="true" hasAll="true" allMemberName="All Diseases" primaryKey="dw_disease_id">
+      <View alias="vw_">
         <SQL dialect="generic">
           <![CDATA[select * from warehouse.dim_disease where sensitive = false]]>
         </SQL>
       </View>
-      <Level approxRowCount="500" name="Name" visible="true" column="disease_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      <Level approxRowCount="100" name="Name" visible="true" column="disease_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
       </Level>
     </Hierarchy>
   </Dimension>
@@ -135,7 +135,7 @@
     </DimensionUsage>
     <DimensionUsage source="Jurisdiction" name="Jurisdiction" caption="Jurisdiction" visible="true" foreignKey="dw_jurisdiction_id" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="NonSecureDisease" name="NonSecureDisease" visible="true" foreignKey="dw_disease_id">
+    <DimensionUsage source="Non Sensitive Disease" name="Non Sensitive Disease" visible="true" foreignKey="dw_disease_id" highCardinality="false">
     </DimensionUsage>
     <Measure name="Disease Count" column="dw_disease_id" datatype="Integer" aggregator="count" visible="true">
     </Measure>
@@ -194,6 +194,26 @@
     <Measure name="Count of Lab Test" column="dw_fact_lab_test_id" aggregator="count" visible="true">
     </Measure>
   </Cube>
+  <Role name="DISEASE-NONSECURE">
+    <SchemaGrant access="none">
+      <CubeGrant cube="disease events" access="all">
+        <DimensionGrant dimension="Jurisdiction" access="none">
+        </DimensionGrant>
+        <DimensionGrant dimension="Disease" access="none">
+        </DimensionGrant>
+      </CubeGrant>
+    </SchemaGrant>
+  </Role>
+  <Role name="DISEASE-SECURE">
+    <SchemaGrant access="none">
+      <CubeGrant cube="disease events" access="all">
+        <DimensionGrant dimension="Jurisdiction" access="none">
+        </DimensionGrant>
+        <DimensionGrant dimension="Non Sensitive Disease" access="none">
+        </DimensionGrant>
+      </CubeGrant>
+    </SchemaGrant>
+  </Role>
   <Role name="JURISDICTION-Southwest Utah">
     <SchemaGrant access="none">
       <CubeGrant cube="disease events" access="all">
@@ -359,26 +379,6 @@
           <MemberGrant member="[Jurisdiction].[Utah State]" access="all">
           </MemberGrant>
         </HierarchyGrant>
-      </CubeGrant>
-    </SchemaGrant>
-  </Role>
-  <Role name="DISEASE-SECURE">
-    <SchemaGrant access="none">
-      <CubeGrant cube="disease events" access="all">
-        <DimensionGrant dimension="Disease" access="all">
-        </DimensionGrant>
-        <DimensionGrant dimension="NonSecureDisease" access="none">
-        </DimensionGrant>
-      </CubeGrant>
-    </SchemaGrant>
-  </Role>
-  <Role name="DISEASE-NONSECURE">
-    <SchemaGrant access="all">
-      <CubeGrant cube="disease events" access="all">
-        <DimensionGrant dimension="Disease" access="none">
-        </DimensionGrant>
-        <DimensionGrant dimension="NonSecureDisease" access="all">
-        </DimensionGrant>
       </CubeGrant>
     </SchemaGrant>
   </Role>
