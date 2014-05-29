@@ -18,12 +18,10 @@ public class UDOHPentahoSessionStartupSuccessListener implements
 	private static final Logger logger = Logger
 			.getLogger(UDOHPentahoSessionStartupSuccessListener.class.getName());
 
-	@Override
 	public int getOrder() {
 		return 200;
 	}
 
-	@Override
 	public void onApplicationEvent(ApplicationEvent event) {
 		if (event instanceof AuthenticationSuccessEvent) {
 			logger.info("received " + event.getClass().getSimpleName()); //$NON-NLS-1$

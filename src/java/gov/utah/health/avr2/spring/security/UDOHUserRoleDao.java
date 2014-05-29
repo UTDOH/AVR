@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import javax.jcr.NamespaceException;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
 import javax.sql.DataSource;
 
 import org.pentaho.platform.api.engine.security.userroledao.IPentahoRole;
@@ -218,22 +216,18 @@ public class UDOHUserRoleDao extends JcrUserRoleDao implements IUserRoleDao {
 				pentahoRole = new IPentahoRole() {
 					private static final long serialVersionUID = 1L;
 					private String roleName = role;
-					@Override
 					public String getDescription() {
 						return roleName;
 					}
 					
-					@Override
 					public void setDescription(String roleName) {
 						this.roleName = roleName;
 					}
 					
-					@Override
 					public ITenant getTenant() {
 						return tenant;
 					}
 					
-					@Override
 					public String getName() {
 						// TODO Auto-generated method stub
 						return role;
