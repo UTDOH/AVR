@@ -102,6 +102,8 @@ public class SiteMinderSpringAuthenticationProcessingFilter extends
 			logger.info("SiteMinder HTTPServletRequest header values: [username=(" + userName + "), password=(" + password + ")");
 		}
 		
+		logger.info("isSiteMinderLogin = " + isSiteMinderLogin);
+		
 		if (isSiteMinderLogin) {
 			authToken = new UsernamePasswordAuthenticationToken(userName, password);
 			auth = this.getAuthenticationManager().authenticate(authToken);
