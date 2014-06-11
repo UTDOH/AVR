@@ -106,15 +106,19 @@ public class SiteMinderSpringAuthenticationProcessingFilter extends
 		
 		if (isSiteMinderLogin) {
 			authToken = new UsernamePasswordAuthenticationToken(userName, password);
-			auth = this.getAuthenticationManager().authenticate(authToken);
+			try {
+				auth = this.getAuthenticationManager().authenticate(authToken);
+			} catch (AuthenticationException ae) {
+				logger.info("SiteMinder authentication not successful.. trying form based login");
+			}
 			
-			logger.info("SiteMinder login successful? " + auth.isAuthenticated());
+			logger.info("SiteMinder login successful? " + (auth != null ? auth.isAuthenticated() : "false-auth is null"));
 		}
 		
 		logger.info("After SiteMinder Authentication Check: auth=" + auth);
 		
 		// Check username / password values and use form parameters instead
-		if (auth == null || !auth.isAuthenticated()) {		
+		if (auth == null || !auth.isAuthenticated()) {
 			logger.info("SiteMinder authenication not found on HTTPRequest headers, Searching form parameters instead");
 			
 			// Username
