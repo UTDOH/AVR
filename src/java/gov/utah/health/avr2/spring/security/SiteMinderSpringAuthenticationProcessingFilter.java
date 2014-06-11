@@ -140,7 +140,7 @@ public class SiteMinderSpringAuthenticationProcessingFilter extends
 			// Authenticate
 			auth = this.getAuthenticationManager().authenticate(authToken);
 			request.getSession().setAttribute(SPRING_SECURITY_LAST_USERNAME_KEY, userName);
-			logger.info("After form based authentication");
+			logger.info("After form based authentication - auth=" + auth + ", isAuthenticated=" + (auth != null ? auth.isAuthenticated() : "false"));
 		}
 		
 		setDetails(request, authToken);
