@@ -83,10 +83,14 @@ public class SiteMinderSpringAuthenticationProcessingFilter extends
 			throws AuthenticationException {
 		String userName = BLANK;
 		String password = BLANK;
+		UsernamePasswordAuthenticationToken authToken = null;
+		Authentication auth = null;
+		boolean isSiteMinderLogin = false;
 		
 		logger.info("attemptAuthentication() start..");
 		
 		if (!isEmptyString(siteMinderPasswordHeaderKey) && !isEmptyString(siteMinderUsernameHeaderKey)) {
+			isSiteMinderLogin = true;
 			if (!devMode) {
 				userName = request.getHeader(siteMinderUsernameHeaderKey);
 				password = request.getHeader(siteMinderPasswordHeaderKey);
@@ -98,8 +102,13 @@ public class SiteMinderSpringAuthenticationProcessingFilter extends
 			logger.info("SiteMinder HTTPServletRequest header values: [username=(" + userName + "), password=(" + password + ")");
 		}
 		
+		if (isSiteMinderLogin) {
+			authToken = new UsernamePasswordAuthenticationToken(userName, password);
+			auth = this.getAuthenticationManager().authenticate(authToken);
+		}
+		
 		// Check username / password values and use form parameters instead
-		if (isEmptyString(userName) || isEmptyString(password)) {
+		if (auth == null || !auth.isAuthenticated()) {		
 			logger.info("SiteMinder authenication not found on HTTPRequest headers, Searching form parameters instead");
 			
 			// Username
@@ -115,18 +124,13 @@ public class SiteMinderSpringAuthenticationProcessingFilter extends
 			} else {
 				password = request.getParameter(SPRING_SECURITY_FORM_PASSWORD_KEY);
 			}
+			
+			authToken = new UsernamePasswordAuthenticationToken(userName, password);
+			auth = this.getAuthenticationManager().authenticate(authToken);
 		}
 		
-		if (isEmptyString(userName)) {
-			userName = BLANK;
-		}
-		
-		if (isEmptyString(password)) {
-			password = BLANK;
-		}
-		
-		UsernamePasswordAuthenticationToken authToken 
-			= new UsernamePasswordAuthenticationToken(userName, password);
+		authToken = new UsernamePasswordAuthenticationToken(userName, password);
+		auth = this.getAuthenticationManager().authenticate(authToken);
 		
 		setDetails(request, authToken);
 		
@@ -135,7 +139,11 @@ public class SiteMinderSpringAuthenticationProcessingFilter extends
 		logger.info("attemptAuthentication() end..");
 		
 		// Authenticate
-		Authentication auth = this.getAuthenticationManager().authenticate(authToken);
+		
+		
+		if (!auth.isAuthenticated()) {
+			
+		}
 		
 		return auth;
 	}
