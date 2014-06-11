@@ -105,6 +105,8 @@ public class SiteMinderSpringAuthenticationProcessingFilter extends
 		if (isSiteMinderLogin) {
 			authToken = new UsernamePasswordAuthenticationToken(userName, password);
 			auth = this.getAuthenticationManager().authenticate(authToken);
+			
+			logger.info("SiteMinder login successful? " + auth.isAuthenticated());
 		}
 		
 		// Check username / password values and use form parameters instead
