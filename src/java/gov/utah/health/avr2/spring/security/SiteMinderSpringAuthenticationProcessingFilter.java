@@ -136,24 +136,15 @@ public class SiteMinderSpringAuthenticationProcessingFilter extends
 			}
 			
 			authToken = new UsernamePasswordAuthenticationToken(userName, password);
+			
+			// Authenticate
 			auth = this.getAuthenticationManager().authenticate(authToken);
+			request.getSession().setAttribute(SPRING_SECURITY_LAST_USERNAME_KEY, userName);
+			logger.info("After form based authentication");
 		}
-		
-		authToken = new UsernamePasswordAuthenticationToken(userName, password);
-		auth = this.getAuthenticationManager().authenticate(authToken);
 		
 		setDetails(request, authToken);
-		
-		request.getSession().setAttribute(SPRING_SECURITY_LAST_USERNAME_KEY, userName);
-		
 		logger.info("attemptAuthentication() end..");
-		
-		// Authenticate
-		
-		
-		if (!auth.isAuthenticated()) {
-			
-		}
 		
 		return auth;
 	}
