@@ -111,6 +111,8 @@ public class SiteMinderSpringAuthenticationProcessingFilter extends
 			logger.info("SiteMinder login successful? " + auth.isAuthenticated());
 		}
 		
+		logger.info("After SiteMinder Authentication Check: auth=" + auth);
+		
 		// Check username / password values and use form parameters instead
 		if (auth == null || !auth.isAuthenticated()) {		
 			logger.info("SiteMinder authenication not found on HTTPRequest headers, Searching form parameters instead");
