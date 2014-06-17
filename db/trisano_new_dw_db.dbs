@@ -229,6 +229,12 @@
 			<column name="etl_load_date" type="timestamp" jt="93" >
 				<comment><![CDATA[The date this dimension record was loaded into the data warehouse.]]></comment>
 			</column>
+			<column name="mmwr_week" type="integer" length="10" decimal="0" jt="4" mandatory="y" >
+				<defo>0</defo>
+			</column>
+			<column name="mmwr_year" type="integer" length="10" decimal="0" jt="4" mandatory="y" >
+				<defo>0</defo>
+			</column>
 			<index name="pk_dw_dim_date" unique="PRIMARY_KEY" >
 				<column name="dw_date_id" />
 			</index>
@@ -603,6 +609,12 @@
 			<column name="src_parent_outbreak_id" type="integer" jt="4" >
 				<comment><![CDATA[The parent outbreak id]]></comment>
 			</column>
+			<column name="src_created_at" type="timestamp" jt="93" >
+				<comment><![CDATA[Source created_at timestamp from trisano.]]></comment>
+			</column>
+			<column name="src_updated_at" type="timestamp" jt="93" >
+				<comment><![CDATA[Source modfied_at from trisano.]]></comment>
+			</column>
 			<column name="etl_load_date" type="timestamp" jt="93" >
 				<comment><![CDATA[The date / time this outbreak dim record was loaded,]]></comment>
 			</column>
@@ -825,7 +837,7 @@
 			</index>
 		</table>
 		<view name="vw_table_row_counts" >
-			<view_script><![CDATA[((((((((SELECT 'dim_date'::text AS tbl, count(1) AS rowct FROM warehouse.dim_date UNION SELECT 'dim_time'::text AS tbl, count(1) AS rowct FROM warehouse.dim_time) UNION SELECT 'dim_disease'::text AS tbl, count(1) AS rowct FROM warehouse.dim_disease) UNION SELECT 'dim_outbreak'::text AS tbl, count(1) AS rowct FROM warehouse.dim_outbreak) UNION SELECT 'dim_jurisdction'::text AS tbl, count(1) AS rowct FROM warehouse.dim_jurisdiction) UNION SELECT 'dim_location'::text AS tbl, count(1) AS rowct FROM warehouse.dim_location) UNION SELECT 'dim_language'::text AS tbl, count(1) AS rowct FROM warehouse.dim_language) UNION SELECT 'dim_ethnicity'::text AS tbl, count(1) AS rowct FROM warehouse.dim_ethnicity) UNION SELECT 'dim_person'::text AS tbl, count(1) AS rowct FROM warehouse.dim_person) UNION SELECT 'fact_disease_event'::text AS tbl, count(1) AS rowct FROM warehouse.fact_disease_event;]]></view_script>
+			<view_script><![CDATA[((((((((SELECT 'dim_date'::text AS tbl, count(1) AS rowct FROM warehouse.dim_date UNION SELECT 'dim_time'::text AS tbl, count(1) AS rowct FROM warehouse.dim_time) UNION SELECT 'dim_disease'::text AS tbl, count(1) AS rowct FROM warehouse.dim_disease) UNION SELECT 'dim_outbreak'::text AS tbl, count(1) AS rowct FROM warehouse.dim_outbreak) UNION SELECT 'dim_jurisdction'::text AS tbl, count(1) AS rowct FROM warehouse.dim_jurisdiction) UNION SELECT 'dim_location'::text AS tbl, count(1) AS rowct FROM warehouse.dim_location) UNION SELECT 'dim_language'::text AS tbl, count(1) AS rowct FROM warehouse.dim_language) UNION SELECT 'dim_ethnicity'::text AS tbl, count(1) AS rowct FROM warehouse.dim_ethnicity) UNION SELECT 'dim_person'::text AS tbl, count(1) AS rowct FROM warehouse.dim_person) UNION SELECT 'fact_disease_event'::text AS tbl, count(1) AS rowct FROM warehouse.deprecated_fact_disease_event fact_disease_event;]]></view_script>
 			<column name="rowct" type="bigint" />
 			<column name="tbl" type="text" />
 		</view>

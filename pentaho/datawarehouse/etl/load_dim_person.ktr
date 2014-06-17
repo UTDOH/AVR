@@ -91,8 +91,9 @@
       <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
       <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SQL_CONNECT</code><attribute>set search_path&#x3d;warehouse, warehouse_util&#x3b;</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
@@ -113,20 +114,23 @@
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
       <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
+      <attribute><code>PREFERRED_SCHEMA_NAME</code><attribute>trisano</attribute></attribute>
       <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SQL_CONNECT</code><attribute>set search_path to trisano&#x3b;</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
   <order>
-  <hop> <from>people</from><to>Stream lookup language id</to><enabled>Y</enabled> </hop>
   <hop> <from>dim_language</from><to>Stream lookup language id</to><enabled>Y</enabled> </hop>
   <hop> <from>Stream lookup language id</from><to>Stream lookup ethnicity</to><enabled>Y</enabled> </hop>
   <hop> <from>dim_ethnicity</from><to>Stream lookup ethnicity</to><enabled>Y</enabled> </hop>
   <hop> <from>Stream lookup ethnicity</from><to>dim_person 2</to><enabled>Y</enabled> </hop>
   <hop> <from>dim_person 2</from><to>update dim_person</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Max Update Date</from><to>people 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>people 2</from><to>Stream lookup language id</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Stream lookup ethnicity</name>
@@ -158,8 +162,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>418</xloc>
-      <yloc>275</yloc>
+      <xloc>428</xloc>
+      <yloc>406</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -194,8 +198,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>416</xloc>
-      <yloc>178</yloc>
+      <xloc>426</xloc>
+      <yloc>309</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -220,8 +224,8 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>217</xloc>
-      <yloc>279</yloc>
+      <xloc>227</xloc>
+      <yloc>410</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -246,8 +250,8 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>216</xloc>
-      <yloc>175</yloc>
+      <xloc>226</xloc>
+      <yloc>306</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -332,8 +336,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>176</xloc>
-      <yloc>452</yloc>
+      <xloc>186</xloc>
+      <yloc>583</yloc>
       <draw>N</draw>
       </GUI>
     </step>
@@ -372,34 +376,8 @@
       <last_update_field>etl_load_date</last_update_field>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>416</xloc>
-      <yloc>377</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>people</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>Trisano TX DS</connection>
-    <sql>select &#xa;  id as src_people_id&#xa; ,entity_id as src_entity_id&#xa; ,coalesce&#x28;birth_gender_id,0&#x29; as birth_gender_id&#xa; ,first_name&#xa; ,middle_name&#xa; ,last_name&#xa; ,birth_date&#xa; ,date_of_death&#xa; ,primary_language_id&#xa; ,ethnicity_id&#xa;from people</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>415</xloc>
-      <yloc>68</yloc>
+      <xloc>426</xloc>
+      <yloc>508</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -470,11 +448,75 @@
         <name>dw_person_id</name>
         <rename>dw_person_id</rename>
         </value>
+      <value>
+        <name>src_created_at</name>
+        <rename>src_created_at</rename>
+        </value>
+      <value>
+        <name>src_updated_at</name>
+        <rename>src_updated_at</rename>
+        </value>
       </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>418</xloc>
-      <yloc>493</yloc>
+      <xloc>428</xloc>
+      <yloc>624</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get Max Update Date</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Trisano OLAP DS</connection>
+    <sql>select &#xa;	case when max&#x28;src_updated_at&#x29; is not null then max&#x28;src_updated_at&#x29;&#xa;	else &#x27;01&#x2f;01&#x2f;1900&#x27;&#xa;	end as max_update_date&#xa;from dim_person&#x3b;</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>429</xloc>
+      <yloc>51</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>people 2</name>
+    <type>DBJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Trisano TX DS</connection>
+    <rowlimit>0</rowlimit>
+    <sql>select &#xa;  id as src_people_id&#xa; ,entity_id as src_entity_id&#xa; ,coalesce&#x28;birth_gender_id,0&#x29; as birth_gender_id&#xa; ,first_name&#xa; ,middle_name&#xa; ,last_name&#xa; ,birth_date&#xa; ,date_of_death&#xa; ,primary_language_id&#xa; ,ethnicity_id&#xa; ,created_at as src_created_at&#xa; ,updated_at as src_updated_at&#xa;from people where updated_at &#x3e; &#x3f;</sql>
+    <outer_join>N</outer_join>
+    <replace_vars>N</replace_vars>
+    <parameter>
+      <field>
+        <name>max_update_date</name>
+        <type>Timestamp</type>
+      </field>
+    </parameter>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>427</xloc>
+      <yloc>159</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
