@@ -30,8 +30,9 @@
       <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
       <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SQL_CONNECT</code><attribute>set search_path&#x3d;warehouse, warehouse_util&#x3b;</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
@@ -52,10 +53,12 @@
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
       <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
+      <attribute><code>PREFERRED_SCHEMA_NAME</code><attribute>trisano</attribute></attribute>
       <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SQL_CONNECT</code><attribute>set search_path to trisano&#x3b;</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
@@ -98,8 +101,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>194</xloc>
-      <yloc>148</yloc>
+      <xloc>200</xloc>
+      <yloc>140</yloc>
       </entry>
     <entry>
       <name>load_date_time_dims</name>
@@ -130,8 +133,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>316</xloc>
-      <yloc>148</yloc>
+      <xloc>320</xloc>
+      <yloc>140</yloc>
       </entry>
     <entry>
       <name>load_location_disease_dims</name>
@@ -162,8 +165,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>483</xloc>
-      <yloc>148</yloc>
+      <xloc>480</xloc>
+      <yloc>140</yloc>
       </entry>
     <entry>
       <name>load_person_related_dims</name>
@@ -194,8 +197,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>681</xloc>
-      <yloc>149</yloc>
+      <xloc>680</xloc>
+      <yloc>140</yloc>
       </entry>
     <entry>
       <name>Success</name>
@@ -204,8 +207,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>844</xloc>
-      <yloc>437</yloc>
+      <xloc>840</xloc>
+      <yloc>520</yloc>
       </entry>
     <entry>
       <name>Abort job</name>
@@ -215,8 +218,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>494</xloc>
-      <yloc>306</yloc>
+      <xloc>520</xloc>
+      <yloc>420</yloc>
       </entry>
     <entry>
       <name>load_fact_disease_event</name>
@@ -248,8 +251,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>845</xloc>
-      <yloc>230</yloc>
+      <xloc>840</xloc>
+      <yloc>220</yloc>
       </entry>
     <entry>
       <name>upsert_id_0_dim_records2</name>
@@ -281,8 +284,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>843</xloc>
-      <yloc>148</yloc>
+      <xloc>840</xloc>
+      <yloc>140</yloc>
       </entry>
     <entry>
       <name>load_fact_lab_test</name>
@@ -314,8 +317,98 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>845</xloc>
-      <yloc>326</yloc>
+      <xloc>840</xloc>
+      <yloc>320</yloc>
+      </entry>
+    <entry>
+      <name>Success Mail</name>
+      <description/>
+      <type>MAIL</type>
+      <server>smtp.gmail.com</server>
+      <port>587</port>
+      <destination>tmacduff&#x40;gmail.com</destination>
+      <destinationCc/>
+      <destinationBCc/>
+      <replyto>udohnotifications&#x40;gmail.com</replyto>
+      <replytoname>UDOH - PDI Script Response</replytoname>
+      <subject>Success&#x3a; Incremental UDOH AVR2 ETL Jobs</subject>
+      <include_date>Y</include_date>
+      <contact_person/>
+      <contact_phone/>
+      <comment>The daily datawarehouse  ETL jobs for UDOH AVR2 completed successfully.</comment>
+      <include_files>Y</include_files>
+      <zip_files>N</zip_files>
+      <zip_name/>
+      <use_auth>Y</use_auth>
+      <use_secure_auth>Y</use_secure_auth>
+      <auth_user>udohnotifications&#x40;gmail.com</auth_user>
+      <auth_password>Encrypted 2be98afc81fc39d8cff09ab7eca93a7d5</auth_password>
+      <only_comment>N</only_comment>
+      <use_HTML>N</use_HTML>
+      <use_Priority>N</use_Priority>
+      <encoding>UTF-8</encoding>
+      <priority>normal</priority>
+      <importance>normal</importance>
+      <sensitivity>normal</sensitivity>
+      <secureconnectiontype>TLS</secureconnectiontype>
+      <replyToAddresses/>
+      <filetypes>        <filetype>GENERAL</filetype>
+        <filetype>LOG</filetype>
+        <filetype>ERRORLINE</filetype>
+        <filetype>ERROR</filetype>
+        <filetype>WARNING</filetype>
+      </filetypes>      <embeddedimages>
+      </embeddedimages>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>840</xloc>
+      <yloc>440</yloc>
+      </entry>
+    <entry>
+      <name>Fail Mail</name>
+      <description/>
+      <type>MAIL</type>
+      <server>smtp.gmail.com</server>
+      <port>587</port>
+      <destination>tmacduff&#x40;gmail.com</destination>
+      <destinationCc/>
+      <destinationBCc/>
+      <replyto>udohnotifications&#x40;gmail.com</replyto>
+      <replytoname>UDOH - PDI Script Response</replytoname>
+      <subject>Failure&#x3a; Incremental UDOH AVR2 ETL Jobs</subject>
+      <include_date>Y</include_date>
+      <contact_person/>
+      <contact_phone/>
+      <comment>The daily datawarehouse  ETL jobs for UDOH AVR2 did not complete successfully.</comment>
+      <include_files>Y</include_files>
+      <zip_files>N</zip_files>
+      <zip_name/>
+      <use_auth>Y</use_auth>
+      <use_secure_auth>Y</use_secure_auth>
+      <auth_user>udohnotifications&#x40;gmail.com</auth_user>
+      <auth_password>Encrypted 2be98afc81fc39d8cff09ab7eca93a7d5</auth_password>
+      <only_comment>N</only_comment>
+      <use_HTML>N</use_HTML>
+      <use_Priority>N</use_Priority>
+      <encoding>UTF-8</encoding>
+      <priority>normal</priority>
+      <importance>normal</importance>
+      <sensitivity>normal</sensitivity>
+      <secureconnectiontype>TLS</secureconnectiontype>
+      <replyToAddresses/>
+      <filetypes>        <filetype>GENERAL</filetype>
+        <filetype>LOG</filetype>
+        <filetype>ERRORLINE</filetype>
+        <filetype>ERROR</filetype>
+        <filetype>WARNING</filetype>
+      </filetypes>      <embeddedimages>
+      </embeddedimages>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>520</xloc>
+      <yloc>320</yloc>
       </entry>
   </entries>
   <hops>
@@ -347,33 +440,6 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>load_date_time_dims</from>
-      <to>Abort job</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>load_location_disease_dims</from>
-      <to>Abort job</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>load_person_related_dims</from>
-      <to>Abort job</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>load_person_related_dims</from>
       <to>upsert_id_0_dim_records2</to>
       <from_nr>0</from_nr>
@@ -392,24 +458,6 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>upsert_id_0_dim_records2</from>
-      <to>Abort job</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>load_fact_disease_event</from>
-      <to>Abort job</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>load_fact_disease_event</from>
       <to>load_fact_lab_test</to>
       <from_nr>0</from_nr>
@@ -420,6 +468,15 @@
     </hop>
     <hop>
       <from>load_fact_lab_test</from>
+      <to>Success Mail</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Success Mail</from>
       <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -428,12 +485,75 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
+      <from>load_date_time_dims</from>
+      <to>Fail Mail</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>load_location_disease_dims</from>
+      <to>Fail Mail</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>load_person_related_dims</from>
+      <to>Fail Mail</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>upsert_id_0_dim_records2</from>
+      <to>Fail Mail</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>load_fact_disease_event</from>
+      <to>Fail Mail</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
       <from>load_fact_lab_test</from>
+      <to>Fail Mail</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Success Mail</from>
       <to>Abort job</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Fail Mail</from>
+      <to>Abort job</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
   </hops>
