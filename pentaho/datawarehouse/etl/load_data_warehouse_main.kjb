@@ -335,7 +335,7 @@
       <include_date>Y</include_date>
       <contact_person/>
       <contact_phone/>
-      <comment>The daily datawarehouse  ETL jobs for UDOH AVR2 completed successfully.</comment>
+      <comment>The incremental datawarehouse  ETL jobs for UDOH AVR2 completed successfully.</comment>
       <include_files>Y</include_files>
       <zip_files>N</zip_files>
       <zip_name/>
@@ -380,7 +380,7 @@
       <include_date>Y</include_date>
       <contact_person/>
       <contact_phone/>
-      <comment>The daily datawarehouse  ETL jobs for UDOH AVR2 did not complete successfully.</comment>
+      <comment>The incremental datawarehouse  ETL jobs for UDOH AVR2 did not complete successfully.</comment>
       <include_files>Y</include_files>
       <zip_files>N</zip_files>
       <zip_name/>
