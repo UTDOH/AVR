@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin title="Corp Output Plugin">
+    <!-- lifecycle-listener/>
+    <menu-items/>
+    <overlays/>
+    <content-types/>
+    <content-generator/>
+    <bean/-->
+
+    <static-paths>
+       <static-path url="/extcontent/web" localFolder="web"/>
+    </static-paths>  
+
+</plugin>
+

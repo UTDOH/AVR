@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+  <!-- set this to true for production, and false for development/localization -->
+  <cache-messages>false</cache-messages>
+
+  <amd-root-path>content/extcontent/web</amd-root-path>
+  <amd-root-namespace>extcontent</amd-root-namespace>
+</settings>
+
