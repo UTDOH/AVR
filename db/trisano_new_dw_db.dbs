@@ -32,8 +32,8 @@
 			<column name="street_name" type="varchar" length="250" jt="12" />
 			<column name="unit_number" type="varchar" length="10" jt="12" />
 			<column name="postal_code" type="varchar" length="10" jt="12" />
-			<column name="created_at" type="timestamp" length="29" decimal="6" jt="93" />
-			<column name="updated_at" type="timestamp" length="29" decimal="6" jt="93" />
+			<column name="src_created_at" type="timestamp" length="29" decimal="6" jt="93" />
+			<column name="src_updated_at" type="timestamp" length="29" decimal="6" jt="93" />
 			<column name="city" type="varchar" length="255" jt="12" />
 			<column name="entity_id" type="integer" length="10" jt="4" />
 			<column name="entity_location_type_id" type="integer" length="10" jt="4" />
@@ -51,6 +51,9 @@
 			</index>
 			<index name="idx_dim_address_lookup2" unique="NORMAL" >
 				<column name="hashcode" />
+			</index>
+			<index name="idx_address_updated_at" unique="NORMAL" >
+				<column name="src_updated_at" />
 			</index>
 		</table>
 		<table name="dim_date" >
@@ -467,7 +470,7 @@
 			<column name="src_created_at" type="timestamp" jt="93" >
 				<comment><![CDATA[Source created time]]></comment>
 			</column>
-			<column name="src_modified_at" type="timestamp" jt="93" >
+			<column name="src_updated_at" type="timestamp" jt="93" >
 				<comment><![CDATA[Source modified timestamp]]></comment>
 			</column>
 			<column name="etl_load_date" type="timestamp" jt="93" >
@@ -550,6 +553,9 @@
 			<index name="idx_dim_location_lookup" unique="NORMAL" >
 				<column name="hashcode" />
 			</index>
+			<index name="idx_updated_at" unique="NORMAL" >
+				<column name="updated_at" />
+			</index>
 		</table>
 		<table name="dim_organism" >
 			<column name="dw_organism_id" type="serial" length="10" decimal="0" jt="4" mandatory="y" >
@@ -624,6 +630,9 @@
 			<index name="idx_dim_outbreak" unique="NORMAL" >
 				<column name="hashcode" />
 			</index>
+			<index name="idx_src_updated_at" unique="NORMAL" >
+				<column name="src_updated_at" />
+			</index>
 		</table>
 		<table name="dim_person" >
 			<comment>Person dimension</comment>
@@ -663,6 +672,12 @@
 			<column name="dw_ethnicity_id" type="integer" jt="4" >
 				<comment><![CDATA[The ethnicity of this person (dw_dim_ethnicity.dw_ethnicity_id)]]></comment>
 			</column>
+			<column name="src_created_at" type="timestamp" jt="93" >
+				<comment><![CDATA[Source created_at timestamp from trisano]]></comment>
+			</column>
+			<column name="src_updated_at" type="timestamp" jt="93" >
+				<comment><![CDATA[Source updated timestamp from trisano]]></comment>
+			</column>
 			<column name="etl_load_date" type="timestamp" jt="93" >
 				<comment><![CDATA[date time of when this dim_person record was loaded]]></comment>
 			</column>
@@ -671,6 +686,9 @@
 			</index>
 			<index name="idx_dw_dim_person_lookup" unique="NORMAL" >
 				<column name="hashcode" />
+			</index>
+			<index name="idx_person_updated_at" unique="NORMAL" >
+				<column name="src_updated_at" />
 			</index>
 		</table>
 		<table name="dim_time" >
