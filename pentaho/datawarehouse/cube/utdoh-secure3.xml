@@ -1,0 +1,184 @@
+<Schema name="UTDOH2">
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Disease">
+    <Hierarchy name="Disease" visible="true" hasAll="true" allMemberName="All Diseases" primaryKey="dw_disease_id">
+      <Table name="dim_disease" schema="warehouse">
+      </Table>
+      <Level approxRowCount="500" name="Name" visible="true" column="disease_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Location">
+    <Hierarchy name="Location" visible="true" hasAll="true" primaryKey="dw_location_id">
+      <Table name="dim_location" schema="warehouse">
+      </Table>
+      <Level approxRowCount="100" name="State" visible="true" column="state" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level approxRowCount="500" name="City" visible="true" column="city" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="TimeDimension" visible="true" highCardinality="false" name="Date">
+    <Hierarchy name="Date" visible="true" hasAll="true" primaryKey="dw_date_id">
+      <Table name="dim_date" schema="warehouse">
+      </Table>
+      <Level name="Year" visible="true" column="year4" ordinalColumn="year_week_int" type="String" internalType="int" uniqueMembers="false" levelType="TimeYears" hideMemberIf="Never">
+      </Level>
+      <Level name="Quarter" visible="true" column="quarter_name" ordinalColumn="quarter_number" type="String" uniqueMembers="false" levelType="TimeQuarters" hideMemberIf="Never">
+      </Level>
+      <Level name="Month" visible="true" column="month_abbreviation_year2" ordinalColumn="month_number" type="String" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never">
+      </Level>
+      <Level name="Week" visible="true" column="week_in_year" ordinalColumn="week_sequence" type="String" uniqueMembers="false" levelType="TimeWeeks" hideMemberIf="Never">
+      </Level>
+      <Level name="Day" visible="true" column="day_name" ordinalColumn="day_sequence" type="String" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Date Sequence" visible="true" hasAll="true" primaryKey="dw_date_id">
+      <Table name="dim_date" schema="warehouse">
+      </Table>
+      <Level approxRowCount="500" name="Month Sequence" visible="true" column="month_sequence" type="Numeric" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never" description="# of Months From the Current Year">
+      </Level>
+      <Level approxRowCount="500" name="Week Sequence" visible="true" column="week_sequence" type="Numeric" uniqueMembers="false" levelType="TimeWeeks" hideMemberIf="Never" description="# of Weeks From the Current Week">
+      </Level>
+      <Level approxRowCount="500" name="Day Sequence" visible="true" column="day_sequence" type="Numeric" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Organism">
+    <Hierarchy name="Organism" visible="true" hasAll="true" primaryKey="dw_organism_id">
+      <Table name="dim_organism" schema="warehouse">
+      </Table>
+      <Level name="Organism" visible="true" table="dim_organism" column="organism_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        <Property name="snomed name" column="snomed_name" type="String">
+        </Property>
+        <Property name="snomed code" column="snomed_code" type="String">
+        </Property>
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Lab Test Name">
+    <Hierarchy name="Test Name" visible="true" hasAll="true" primaryKey="dw_junk_lab_test_id">
+      <Table name="dim_junk_lab_test" schema="warehouse">
+      </Table>
+      <Level name="Test Name" visible="true" column="test_name" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="Test Status" visible="true" column="lab_test_status_description" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="Test Result" visible="true" column="lab_test_result_description" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Lab Test Result">
+    <Hierarchy name="Test Result" visible="true" hasAll="true" primaryKey="dw_junk_lab_test_id">
+      <Table name="dim_junk_lab_test" schema="warehouse">
+      </Table>
+      <Level name="Result Description" visible="true" table="dim_junk_lab_test" column="lab_test_result_description" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        <Property name="Result Code" column="lab_test_result_code" type="String">
+        </Property>
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Lab Test Status">
+    <Hierarchy name="Test Status" visible="true" hasAll="true" primaryKey="dw_junk_lab_test_id">
+      <Table name="dim_junk_lab_test" schema="warehouse">
+      </Table>
+      <Level name="Status Description" visible="true" table="dim_junk_lab_test" column="lab_test_status_description" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        <Property name="Status Code" column="lab_test_status_code" type="String">
+        </Property>
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Person">
+    <Hierarchy name="Person" visible="true" hasAll="true" primaryKey="dw_person_id">
+      <Table name="dim_person" schema="warehouse">
+      </Table>
+      <Level name="First Name" visible="true" column="first_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="Last Name" visible="true" column="last_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="Birth Date" visible="true" column="birth_date" type="Date" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="Gender" visible="true" column="birth_gender_id" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Jurisdiction">
+    <Hierarchy name="Jurisdiction" visible="true" hasAll="true" primaryKey="dw_jurisdiction_id">
+      <Table name="dim_jurisdiction" schema="warehouse">
+      </Table>
+      <Level approxRowCount="100" name="Name" visible="true" column="short_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Cube name="disease events" visible="true" cache="true" enabled="true">
+    <Table name="fact_event" schema="warehouse">
+    </Table>
+    <DimensionUsage source="Disease" name="Disease" visible="true" foreignKey="dw_disease_id" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Date" name="Date Diagnosed" caption="Diagnosed Date" visible="true" foreignKey="dw_diagnosed_date_id" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Location" name="Location" visible="true" foreignKey="dw_location_id" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Date" name="Date of Onset" caption="Onset Date" visible="true" foreignKey="dw_event_onset_date_id" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Date" name="Date of Onset Filter" caption="Onset Date Filter" visible="true" foreignKey="dw_event_onset_date_id" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Jurisdiction" name="Jurisdiction" caption="Jurisdiction" visible="true" foreignKey="dw_jurisdiction_id" highCardinality="false">
+    </DimensionUsage>
+    <Measure name="Disease Count" column="dw_disease_id" datatype="Integer" aggregator="count" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="lab test" visible="true" cache="true" enabled="true">
+    <Table name="fact_lab_test" schema="warehouse">
+    </Table>
+    <DimensionUsage source="Date" name="Date of Collection" caption="Collection Date" visible="true" foreignKey="dw_collection_date_id" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Date" name="Date of Lab Test" caption="Lab Test Date" visible="true" foreignKey="dw_lab_test_date_id" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Organism" name="Organism" visible="true" foreignKey="dw_organism_id" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Lab Test Name" name="Lab Test Name" visible="true" foreignKey="dw_junk_lab_test_id" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Lab Test Result" name="Lab Test Result" visible="true" foreignKey="dw_junk_lab_test_id" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Lab Test Status" name="Lab Test Status" visible="true" foreignKey="dw_junk_lab_test_id" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Disease" name="Disease" visible="true" foreignKey="dw_disease_id" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Person" name="Person" visible="true" foreignKey="dw_person_id" highCardinality="false">
+    </DimensionUsage>
+    <Dimension type="StandardDimension" visible="true" foreignKey="dw_person_id" highCardinality="false" name="Group Living">
+      <Hierarchy name="Group Living" visible="true" hasAll="true">
+        <Table name="fact_lab_test" schema="warehouse">
+        </Table>
+        <Level name="Group Living" visible="true" column="group_living" type="Boolean" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="dw_person_id" highCardinality="false" name="Food Handler">
+      <Hierarchy name="Food Handler" visible="true" hasAll="true">
+        <Table name="fact_lab_test" schema="warehouse">
+        </Table>
+        <Level name="Food Handler" visible="true" column="food_handler" type="Boolean" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="dw_person_id" highCardinality="false" name="Health Care Worker">
+      <Hierarchy name="Health Care Worker" visible="true" hasAll="true">
+        <Table name="fact_lab_test" schema="warehouse">
+        </Table>
+        <Level name="Health Care Worker" visible="true" column="health_care_worker" type="Boolean" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="dw_person_id" highCardinality="false" name="Risk Factor">
+      <Hierarchy name="Risk Factor" visible="true" hasAll="true">
+        <Table name="fact_lab_test" schema="warehouse">
+        </Table>
+        <Level name="Risk Factor" visible="true" column="risk_factors" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Count of Lab Test" column="dw_fact_lab_test_id" aggregator="count" visible="true">
+    </Measure>
+  </Cube>
+</Schema>

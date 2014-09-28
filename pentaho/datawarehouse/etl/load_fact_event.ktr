@@ -142,7 +142,9 @@
   <hop> <from>lookup location</from><to>lookup state_case_status</to><enabled>Y</enabled> </hop>
   <hop> <from>dim_external_code &#x28;lhd_case_status&#x29;</from><to>lookup lhd_case_status</to><enabled>Y</enabled> </hop>
   <hop> <from>lookup state_case_status</from><to>lookup lhd_case_status</to><enabled>Y</enabled> </hop>
-  <hop> <from>lookup lhd_case_status</from><to>fact_event Mapping</to><enabled>Y</enabled> </hop>
+  <hop> <from>lookup lhd_case_status</from><to>lookup event_type</to><enabled>Y</enabled> </hop>
+  <hop> <from>lookup event_type</from><to>fact_event Mapping</to><enabled>Y</enabled> </hop>
+  <hop> <from>dim_event_type</from><to>lookup event_type</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Get Event Facts</name>
@@ -157,7 +159,7 @@
            </partitioning>
     <connection>Trisano TX DS</connection>
     <rowlimit>0</rowlimit>
-    <sql>select &#xa;	 e.id as src_event_id&#xa;	,e.event_onset_date&#xa;	,de.disease_id&#xa;	,e.created_at as src_created_at&#xa;	,e.updated_at as src_updated_at&#xa;	,e.investigating_jurisdiction&#xa;    ,date&#x28;de.created_at&#x29; as date_diagnosed&#xa;    ,date&#x28;de.created_at&#x29; as disease_onset_date&#xa;    ,addr.id as location_id&#xa;	,e.state_case_status_id&#xa;	,e.lhd_case_status_id&#xa;from vw_events e left join vw_disease_events de on de.event_id &#x3d; e.id&#xa;left join vw_addresses addr on de.event_id &#x3d; addr.event_id&#xa;where e.updated_at &#x3e; &#x3f; </sql>
+    <sql>select &#xa;	 e.id as src_event_id&#xa;	,e.event_onset_date&#xa;	,de.disease_id&#xa;	,e.created_at as src_created_at&#xa;	,e.updated_at as src_updated_at&#xa;	,e.investigating_jurisdiction&#xa;    ,date&#x28;de.created_at&#x29; as date_diagnosed&#xa;    ,date&#x28;de.created_at&#x29; as disease_onset_date&#xa;    ,addr.id as location_id&#xa;	,e.state_case_status_id&#xa;	,e.lhd_case_status_id&#xa;	,date&#x28;e.deleted_at&#x29; as src_deleted_at&#xa;	,e.type as event_type&#xa;from vw_events e left join vw_disease_events de on de.event_id &#x3d; e.id&#xa;left join vw_addresses addr on de.event_id &#x3d; addr.event_id&#xa;where e.updated_at &#x3e; &#x3f; </sql>
     <outer_join>N</outer_join>
     <replace_vars>N</replace_vars>
     <parameter>
@@ -168,8 +170,8 @@
     </parameter>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>561</xloc>
-      <yloc>33</yloc>
+      <xloc>559</xloc>
+      <yloc>32</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -372,6 +374,58 @@
     </step>
 
   <step>
+    <name>dim_external_code &#x28;lhd_case_status&#x29;</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Trisano OLAP DS</connection>
+    <sql>select &#xa;   dw_external_code_id as dw_lhd_case_status_id&#xa;  ,src_external_code_id as src_lhd_case_status_id&#xa;from warehouse.dim_external_code</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>344</xloc>
+      <yloc>674</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>dim_external_code &#x28;state_case_status&#x29;</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Trisano OLAP DS</connection>
+    <sql>select &#xa;   dw_external_code_id as dw_state_case_status_id&#xa;  ,src_external_code_id as src_state_case_status_id&#xa;from warehouse.dim_external_code</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>781</xloc>
+      <yloc>571</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>dim_jurisdiction</name>
     <type>TableInput</type>
     <description/>
@@ -536,6 +590,14 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
+      </field>      <field>        <name>src_deleted_at</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>dw_event_type_id</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
       </field>        <select_unspecified>N</select_unspecified>
       <meta>        <name>dw_disease_id</name>
         <rename>dw_disease_id</rename>
@@ -584,8 +646,8 @@
         <storage_type/>
       </meta>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>561</xloc>
-      <yloc>809</yloc>
+      <xloc>570</xloc>
+      <yloc>854</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -663,6 +725,42 @@
     </step>
 
   <step>
+    <name>lookup lhd_case_status</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <from>dim_external_code &#x28;lhd_case_status&#x29;</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>lhd_case_status_id</name>
+        <field>src_lhd_case_status_id</field>
+      </key>
+      <value>
+        <name>dw_lhd_case_status_id</name>
+        <rename>dw_lhd_case_status_id</rename>
+        <default>98</default>
+        <type>Integer</type>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>564</xloc>
+      <yloc>675</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>lookup location</name>
     <type>StreamLookup</type>
     <description/>
@@ -694,6 +792,42 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>562</xloc>
       <yloc>491</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>lookup state_case_status</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <from>dim_external_code &#x28;state_case_status&#x29;</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>state_case_status_id</name>
+        <field>src_state_case_status_id</field>
+      </key>
+      <value>
+        <name>dw_state_case_status_id</name>
+        <rename>dw_state_case_status_id</rename>
+        <default>98</default>
+        <type>Integer</type>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>565</xloc>
+      <yloc>572</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -771,17 +905,63 @@
         <rename>dw_state_case_status_id</rename>
         <update>Y</update>
       </value>
+      <value>
+        <name>src_deleted_at</name>
+        <rename>src_deleted_at</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>dw_event_type</name>
+        <rename>dw_event_type_id</rename>
+        <update>Y</update>
+      </value>
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>562</xloc>
-      <yloc>896</yloc>
+      <xloc>571</xloc>
+      <yloc>941</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>dim_external_code &#x28;state_case_status&#x29;</name>
+    <name>lookup event_type</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <from>dim_event_type</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>event_type</name>
+        <field>event_type</field>
+      </key>
+      <value>
+        <name>dw_event_type_id</name>
+        <rename>dw_event_type_id</rename>
+        <default>0</default>
+        <type>Integer</type>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>566</xloc>
+      <yloc>767</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>dim_event_type</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -792,7 +972,7 @@
            <schema_name/>
            </partitioning>
     <connection>Trisano OLAP DS</connection>
-    <sql>select &#xa;   dw_external_code_id as dw_state_case_status_id&#xa;  ,src_external_code_id as src_state_case_status_id&#xa;from warehouse.dim_external_code</sql>
+    <sql>select &#xa;   dw_event_type_id&#xa;   ,event_type&#xa;from warehouse.dim_event_type</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -800,106 +980,8 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>781</xloc>
-      <yloc>571</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>lookup state_case_status</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <from>dim_external_code &#x28;state_case_status&#x29;</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>Y</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>state_case_status_id</name>
-        <field>src_state_case_status_id</field>
-      </key>
-      <value>
-        <name>dw_state_case_status_id</name>
-        <rename>dw_state_case_status_id</rename>
-        <default>98</default>
-        <type>Integer</type>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>565</xloc>
-      <yloc>572</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>dim_external_code &#x28;lhd_case_status&#x29;</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>Trisano OLAP DS</connection>
-    <sql>select &#xa;   dw_external_code_id as dw_lhd_case_status_id&#xa;  ,src_external_code_id as src_lhd_case_status_id&#xa;from warehouse.dim_external_code</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>344</xloc>
-      <yloc>674</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>lookup lhd_case_status</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <from>dim_external_code &#x28;lhd_case_status&#x29;</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>Y</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>lhd_case_status_id</name>
-        <field>src_lhd_case_status_id</field>
-      </key>
-      <value>
-        <name>dw_lhd_case_status_id</name>
-        <rename>dw_lhd_case_status_id</rename>
-        <default>98</default>
-        <type>Integer</type>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>564</xloc>
-      <yloc>675</yloc>
+      <xloc>809</xloc>
+      <yloc>763</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

@@ -133,6 +133,7 @@
   <hop> <from>Get Outbreaks</from><to>dim_outbreak</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Max Jurisdiction Update Date</from><to>Get Jurisdction Places</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Jurisdction Places</from><to>dim_jurisdiction 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Event Types</from><to>dim_event_type</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Diseases</name>
@@ -156,6 +157,118 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>113</xloc>
       <yloc>60</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get Jurisdction Places</name>
+    <type>DBJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Trisano TX DS</connection>
+    <rowlimit>0</rowlimit>
+    <sql>select &#xa; pl.id as src_places_id&#xa; ,pl.entity_id as src_entity_id&#xa; ,pl.name&#xa; ,coalesce&#x28;pl.short_name,&#x27;unassigned&#x27;&#x29; as short_name&#xa; ,pl.&#x22;primary&#x22; as is_primary&#xa; ,pl.created_at as src_created_at&#xa; ,pl.updated_at as src_updated_at&#xa;from participations p&#xa;inner JOIN places pl ON pl.entity_id &#x3d; p.secondary_entity_id&#xa;where p.type&#x3a;&#x3a;text &#x3d; &#x27;Jurisdiction&#x27;&#x3a;&#x3a;text&#xa;and pl.updated_at &#x3e; &#x3f;</sql>
+    <outer_join>N</outer_join>
+    <replace_vars>N</replace_vars>
+    <parameter>
+      <field>
+        <name>max_update_date</name>
+        <type>Date</type>
+      </field>
+    </parameter>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>531</xloc>
+      <yloc>173</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get Max Jurisdiction Update Date</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Trisano OLAP DS</connection>
+    <sql>select &#xa;	case when max&#x28;src_updated_at&#x29; is not null then max&#x28;src_updated_at&#x29;&#xa;	else &#x27;01&#x2f;01&#x2f;1900&#x27;&#xa;	end as max_update_date&#xa;from dim_jurisdiction&#x3b;</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>531</xloc>
+      <yloc>61</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get Max Outbreak Update Date</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Trisano OLAP DS</connection>
+    <sql>select &#xa;	case when max&#x28;src_updated_at&#x29; is not null then max&#x28;src_updated_at&#x29;&#xa;	else &#x27;01&#x2f;01&#x2f;1900&#x27;&#xa;	end as max_update_date&#xa;from dim_outbreak&#x3b;</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>325</xloc>
+      <yloc>60</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get Outbreaks</name>
+    <type>DBJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Trisano TX DS</connection>
+    <rowlimit>0</rowlimit>
+    <sql>select &#xa;	id as src_outbreak_id&#xa;	,name as outbreak_name &#xa;	,number as outbreak_number&#xa;	,parent_id as src_parent_outbreak_id&#xa;	,updated_at as src_updated_at&#xa;	,created_at as src_created_at&#xa;from outbreaks&#xa;where updated_at &#x3e; &#x3f;</sql>
+    <outer_join>N</outer_join>
+    <replace_vars>N</replace_vars>
+    <parameter>
+      <field>
+        <name>max_update_date</name>
+        <type>Date</type>
+      </field>
+    </parameter>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>326</xloc>
+      <yloc>183</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -516,37 +629,7 @@
     </step>
 
   <step>
-    <name>Get Outbreaks</name>
-    <type>DBJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>Trisano TX DS</connection>
-    <rowlimit>0</rowlimit>
-    <sql>select &#xa;	id as src_outbreak_id&#xa;	,name as outbreak_name &#xa;	,number as outbreak_number&#xa;	,parent_id as src_parent_outbreak_id&#xa;	,updated_at as src_updated_at&#xa;	,created_at as src_created_at&#xa;from outbreaks&#xa;where updated_at &#x3e; &#x3f;</sql>
-    <outer_join>N</outer_join>
-    <replace_vars>N</replace_vars>
-    <parameter>
-      <field>
-        <name>max_update_date</name>
-        <type>Date</type>
-      </field>
-    </parameter>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>326</xloc>
-      <yloc>183</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Get Max Outbreak Update Date</name>
+    <name>Get Event Types</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -556,73 +639,57 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>Trisano OLAP DS</connection>
-    <sql>select &#xa;	case when max&#x28;src_updated_at&#x29; is not null then max&#x28;src_updated_at&#x29;&#xa;	else &#x27;01&#x2f;01&#x2f;1900&#x27;&#xa;	end as max_update_date&#xa;from dim_outbreak&#x3b;</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>325</xloc>
-      <yloc>60</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Get Max Jurisdiction Update Date</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>Trisano OLAP DS</connection>
-    <sql>select &#xa;	case when max&#x28;src_updated_at&#x29; is not null then max&#x28;src_updated_at&#x29;&#xa;	else &#x27;01&#x2f;01&#x2f;1900&#x27;&#xa;	end as max_update_date&#xa;from dim_jurisdiction&#x3b;</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>531</xloc>
-      <yloc>61</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Get Jurisdction Places</name>
-    <type>DBJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
     <connection>Trisano TX DS</connection>
-    <rowlimit>0</rowlimit>
-    <sql>select &#xa; pl.id as src_places_id&#xa; ,pl.entity_id as src_entity_id&#xa; ,pl.name&#xa; ,coalesce&#x28;pl.short_name,&#x27;unassigned&#x27;&#x29; as short_name&#xa; ,pl.&#x22;primary&#x22; as is_primary&#xa; ,pl.created_at as src_created_at&#xa; ,pl.updated_at as src_updated_at&#xa;from participations p&#xa;inner JOIN places pl ON pl.entity_id &#x3d; p.secondary_entity_id&#xa;where p.type&#x3a;&#x3a;text &#x3d; &#x27;Jurisdiction&#x27;&#x3a;&#x3a;text&#xa;and pl.updated_at &#x3e; &#x3f;</sql>
-    <outer_join>N</outer_join>
-    <replace_vars>N</replace_vars>
-    <parameter>
-      <field>
-        <name>max_update_date</name>
-        <type>Date</type>
-      </field>
-    </parameter>
+    <sql>select&#xa;	type&#xa;from events e&#xa;group by type&#x3b;</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>531</xloc>
-      <yloc>173</yloc>
+      <xloc>741</xloc>
+      <yloc>56</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>dim_event_type</name>
+    <type>CombinationLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <schema/>
+      <table>dim_event_type</table>
+      <connection>Trisano OLAP DS</connection>
+      <commit>100</commit>
+      <cache_size>9999</cache_size>
+      <replace>N</replace>
+      <crc>Y</crc>
+      <crcfield>hashcode</crcfield>
+      <fields>
+        <key>
+          <name>type</name>
+          <lookup>event_type</lookup>
+        </key>
+        <return>
+          <name>dw_event_type_id</name>
+          <creation_method>tablemax</creation_method>
+          <use_autoinc>N</use_autoinc>
+        </return>
+      </fields>
+      <sequence/>
+      <last_update_field/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>741</xloc>
+      <yloc>170</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
