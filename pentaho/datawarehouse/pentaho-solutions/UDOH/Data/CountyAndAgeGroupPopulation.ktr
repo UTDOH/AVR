@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<transformation>
+  <info>
+    <name>CountyAndAgeGroupPopulation</name>
+    <description/>
+    <extended_description/>
+    <trans_version/>
+    <trans_type>Normal</trans_type>
+    <directory>&#x2f;</directory>
+    <parameters>
+    </parameters>
+    <log>
+<trans-log-table><connection/>
+<schema/>
+<table/>
+<size_limit_lines/>
+<interval/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STATUS</id><enabled>Y</enabled><name>STATUS</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name><subject/></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name><subject/></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name><subject/></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name><subject/></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name><subject/></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name><subject/></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>STARTDATE</id><enabled>Y</enabled><name>STARTDATE</name></field><field><id>ENDDATE</id><enabled>Y</enabled><name>ENDDATE</name></field><field><id>LOGDATE</id><enabled>Y</enabled><name>LOGDATE</name></field><field><id>DEPDATE</id><enabled>Y</enabled><name>DEPDATE</name></field><field><id>REPLAYDATE</id><enabled>Y</enabled><name>REPLAYDATE</name></field><field><id>LOG_FIELD</id><enabled>Y</enabled><name>LOG_FIELD</name></field><field><id>EXECUTING_SERVER</id><enabled>N</enabled><name>EXECUTING_SERVER</name></field><field><id>EXECUTING_USER</id><enabled>N</enabled><name>EXECUTING_USER</name></field><field><id>CLIENT</id><enabled>N</enabled><name>CLIENT</name></field></trans-log-table>
+<perf-log-table><connection/>
+<schema/>
+<table/>
+<interval/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>SEQ_NR</id><enabled>Y</enabled><name>SEQ_NR</name></field><field><id>LOGDATE</id><enabled>Y</enabled><name>LOGDATE</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STEPNAME</id><enabled>Y</enabled><name>STEPNAME</name></field><field><id>STEP_COPY</id><enabled>Y</enabled><name>STEP_COPY</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>INPUT_BUFFER_ROWS</id><enabled>Y</enabled><name>INPUT_BUFFER_ROWS</name></field><field><id>OUTPUT_BUFFER_ROWS</id><enabled>Y</enabled><name>OUTPUT_BUFFER_ROWS</name></field></perf-log-table>
+<channel-log-table><connection/>
+<schema/>
+<table/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>LOG_DATE</id><enabled>Y</enabled><name>LOG_DATE</name></field><field><id>LOGGING_OBJECT_TYPE</id><enabled>Y</enabled><name>LOGGING_OBJECT_TYPE</name></field><field><id>OBJECT_NAME</id><enabled>Y</enabled><name>OBJECT_NAME</name></field><field><id>OBJECT_COPY</id><enabled>Y</enabled><name>OBJECT_COPY</name></field><field><id>REPOSITORY_DIRECTORY</id><enabled>Y</enabled><name>REPOSITORY_DIRECTORY</name></field><field><id>FILENAME</id><enabled>Y</enabled><name>FILENAME</name></field><field><id>OBJECT_ID</id><enabled>Y</enabled><name>OBJECT_ID</name></field><field><id>OBJECT_REVISION</id><enabled>Y</enabled><name>OBJECT_REVISION</name></field><field><id>PARENT_CHANNEL_ID</id><enabled>Y</enabled><name>PARENT_CHANNEL_ID</name></field><field><id>ROOT_CHANNEL_ID</id><enabled>Y</enabled><name>ROOT_CHANNEL_ID</name></field></channel-log-table>
+<step-log-table><connection/>
+<schema/>
+<table/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>LOG_DATE</id><enabled>Y</enabled><name>LOG_DATE</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STEPNAME</id><enabled>Y</enabled><name>STEPNAME</name></field><field><id>STEP_COPY</id><enabled>Y</enabled><name>STEP_COPY</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>LOG_FIELD</id><enabled>N</enabled><name>LOG_FIELD</name></field></step-log-table>
+<metrics-log-table><connection/>
+<schema/>
+<table/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>LOG_DATE</id><enabled>Y</enabled><name>LOG_DATE</name></field><field><id>METRICS_DATE</id><enabled>Y</enabled><name>METRICS_DATE</name></field><field><id>METRICS_CODE</id><enabled>Y</enabled><name>METRICS_CODE</name></field><field><id>METRICS_DESCRIPTION</id><enabled>Y</enabled><name>METRICS_DESCRIPTION</name></field><field><id>METRICS_SUBJECT</id><enabled>Y</enabled><name>METRICS_SUBJECT</name></field><field><id>METRICS_TYPE</id><enabled>Y</enabled><name>METRICS_TYPE</name></field><field><id>METRICS_VALUE</id><enabled>Y</enabled><name>METRICS_VALUE</name></field></metrics-log-table>
+    </log>
+    <maxdate>
+      <connection/>
+      <table/>
+      <field/>
+      <offset>0.0</offset>
+      <maxdiff>0.0</maxdiff>
+    </maxdate>
+    <size_rowset>10000</size_rowset>
+    <sleep_time_empty>50</sleep_time_empty>
+    <sleep_time_full>50</sleep_time_full>
+    <unique_connections>N</unique_connections>
+    <feedback_shown>Y</feedback_shown>
+    <feedback_size>50000</feedback_size>
+    <using_thread_priorities>Y</using_thread_priorities>
+    <shared_objects_file/>
+    <capture_step_performance>N</capture_step_performance>
+    <step_performance_capturing_delay>1000</step_performance_capturing_delay>
+    <step_performance_capturing_size_limit>100</step_performance_capturing_size_limit>
+    <dependencies>
+    </dependencies>
+    <partitionschemas>
+    </partitionschemas>
+    <slaveservers>
+    </slaveservers>
+    <clusterschemas>
+    </clusterschemas>
+  <created_user>-</created_user>
+  <created_date>2014&#x2f;10&#x2f;19 12&#x3a;37&#x3a;02.552</created_date>
+  <modified_user>-</modified_user>
+  <modified_date>2014&#x2f;10&#x2f;19 12&#x3a;37&#x3a;02.552</modified_date>
+  </info>
+  <notepads>
+  </notepads>
+  <connection>
+    <name>Trisano OLAP DS</name>
+    <server/>
+    <type>POSTGRESQL</type>
+    <access>, </access>
+    <database>TrisanoOLAPDS</database>
+    <port>1521</port>
+    <username/>
+    <password>Encrypted </password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SQL_CONNECT</code><attribute>set search_path&#x3d;warehouse, warehouse_util&#x3b;</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>Trisano TX DS</name>
+    <server/>
+    <type>POSTGRESQL</type>
+    <access>, </access>
+    <database>WebTrisanoTXDS</database>
+    <port>1521</port>
+    <username/>
+    <password>Encrypted </password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
+      <attribute><code>PREFERRED_SCHEMA_NAME</code><attribute>trisano</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SQL_CONNECT</code><attribute>set search_path to trisano&#x3b;</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <order>
+  <hop> <from>Start</from><to>Execute SQL script</to><enabled>Y</enabled> </hop>
+  <hop> <from>Execute SQL script</from><to>County Population</to><enabled>Y</enabled> </hop>
+  <hop> <from>County Population</from><to>rpt_county_population</to><enabled>Y</enabled> </hop>
+  <hop> <from>Execute SQL script</from><to>Age Group Population</to><enabled>Y</enabled> </hop>
+  <hop> <from>Age Group Population</from><to>rpt_age_group_population</to><enabled>Y</enabled> </hop>
+  </order>
+  <step>
+    <name>Execute SQL script</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Trisano OLAP DS</connection>
+    <execute_each_row>N</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>DROP TABLE IF EXISTS warehouse.rpt_age_group_population&#x3b;&#xa;&#xa;CREATE TABLE warehouse.rpt_age_group_population&#xa;&#x28;&#xa;  age_group_label varchar&#x28;7&#x29;,&#xa;  min_age integer,&#xa;  max_age integer,&#xa;  gender char&#x28;1&#x29;,&#xa;  population integer,&#xa;  CONSTRAINT pk_rpt_group_population PRIMARY KEY &#x28;min_age, max_age,gender&#x29;&#xa;&#x29;&#xa;WITH &#x28;&#xa;  OIDS&#x3d;FALSE&#xa;&#x29;&#x3b;&#xa;ALTER TABLE warehouse.rpt_age_group_population&#xa;  OWNER TO pentaho&#x3b;&#xa;&#xa;&#xa;CREATE INDEX idx_population_min_age&#xa;  ON warehouse.rpt_age_group_population&#xa;  USING btree&#xa;  &#x28;min_age&#x29;&#x3b;	&#xa;&#xa;CREATE INDEX idx_population_max_age&#xa;  ON warehouse.rpt_age_group_population&#xa;  USING btree&#xa;  &#x28;max_age&#x29;&#x3b;&#xa;&#xa;DROP TABLE IF EXISTS warehouse.rpt_county_population&#x3b;&#xa;&#xa;CREATE TABLE warehouse.rpt_county_population&#xa;&#x28;&#xa;  src_county_id integer,&#xa;  county_name varchar&#x28;100&#x29;,&#xa;  population integer,&#xa;  CONSTRAINT pk_rpt_county_population PRIMARY KEY &#x28;src_county_id&#x29;&#xa;&#x29;&#xa;WITH &#x28;&#xa;  OIDS&#x3d;FALSE&#xa;&#x29;&#x3b;&#xa;ALTER TABLE warehouse.rpt_county_population&#xa;  OWNER TO pentaho&#x3b;</sql>
+    <set_params>N</set_params>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+    </arguments>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>254</xloc>
+      <yloc>210</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Start</name>
+    <type>GetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>93</xloc>
+      <yloc>209</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>County Population</name>
+    <type>DataGrid</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>src_county_id</name>
+        <type>Integer</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>county_name</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>population</name>
+        <type>Integer</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <data>
+      <line> <item>103</item><item>Box Elder </item><item>51030</item> </line>
+      <line> <item>104</item><item>Cache </item><item>117526</item> </line>
+      <line> <item>195</item><item>Carbon </item><item>21639</item> </line>
+      <line> <item>105</item><item>Daggett </item><item>1106</item> </line>
+      <line> <item>106</item><item>Davis </item><item>321263</item> </line>
+      <line> <item>107</item><item>Duchesne </item><item>19579</item> </line>
+      <line> <item>108</item><item>Emery </item><item>11125</item> </line>
+      <line> <item>109</item><item>Garfield </item><item>5234</item> </line>
+      <line> <item>110</item><item>Grand </item><item>9482</item> </line>
+      <line> <item>111</item><item>Iron </item><item>47546</item> </line>
+      <line> <item>112</item><item>Juab </item><item>10514</item> </line>
+      <line> <item>113</item><item>Kane </item><item>7400</item> </line>
+      <line> <item>114</item><item>Millard </item><item>12805</item> </line>
+      <line> <item>115</item><item>Morgan </item><item>10000</item> </line>
+      <line> <item>204</item><item>Piute </item><item>1497</item> </line>
+      <line> <item>117</item><item>Rich </item><item>2304</item> </line>
+      <line> <item>118</item><item>Salt Lake </item><item>1082240</item> </line>
+      <line> <item>119</item><item>San Juan </item><item>15227</item> </line>
+      <line> <item>120</item><item>Sanpete </item><item>28396</item> </line>
+      <line> <item>121</item><item>Sevier </item><item>21141</item> </line>
+      <line> <item>122</item><item>Summit </item><item>38660</item> </line>
+      <line> <item>123</item><item>Tooele </item><item>60899</item> </line>
+      <line> <item>124</item><item>Uintah </item><item>35112</item> </line>
+      <line> <item>125</item><item>Utah </item><item>549844</item> </line>
+      <line> <item>126</item><item>Wasatch </item><item>25709</item> </line>
+      <line> <item>127</item><item>Washington </item><item>147318</item> </line>
+      <line> <item>128</item><item>Wayne </item><item>2741</item> </line>
+      <line> <item>129</item><item>Weber </item><item>240730</item> </line>
+    </data>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>368</xloc>
+      <yloc>117</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>rpt_county_population</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Trisano OLAP DS</connection>
+    <schema>warehouse</schema>
+    <table>rpt_county_population</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>N</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>554</xloc>
+      <yloc>117</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Age Group Population</name>
+    <type>DataGrid</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>age_group_label</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>min_age</name>
+        <type>Integer</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>max_age</name>
+        <type>Integer</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>gender</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>population</name>
+        <type>Integer</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <data>
+      <line> <item>5-9</item><item>5</item><item>9</item><item>M</item><item>134731</item> </line>
+      <line> <item>10-14</item><item>10</item><item>14</item><item>M</item><item>124669</item> </line>
+      <line> <item>15-19</item><item>15</item><item>19</item><item>M</item><item>113649</item> </line>
+      <line> <item>20-24</item><item>20</item><item>24</item><item>M</item><item>124647</item> </line>
+      <line> <item>25-29</item><item>25</item><item>29</item><item>M</item><item>112738</item> </line>
+      <line> <item>30-34</item><item>30</item><item>34</item><item>M</item><item>117865</item> </line>
+      <line> <item>35-39</item><item>35</item><item>39</item><item>M</item><item>99271</item> </line>
+      <line> <item>40-44</item><item>40</item><item>44</item><item>M</item><item>85899</item> </line>
+      <line> <item>45-49</item><item>45</item><item>49</item><item>M</item><item>77044</item> </line>
+      <line> <item>50-54</item><item>50</item><item>54</item><item>M</item><item>78601</item> </line>
+      <line> <item>55-59</item><item>55</item><item>59</item><item>M</item><item>72403</item> </line>
+      <line> <item>60-64</item><item>60</item><item>64</item><item>M</item><item>58629</item> </line>
+      <line> <item>65-69</item><item>65</item><item>69</item><item>M</item><item>43928</item> </line>
+      <line> <item>70-74</item><item>70</item><item>74</item><item>M</item><item>30866</item> </line>
+      <line> <item>75-79</item><item>75</item><item>79</item><item>M</item><item>22466</item> </line>
+      <line> <item>80-84</item><item>80</item><item>84</item><item>M</item><item>16136</item> </line>
+      <line> <item>85&#x2b;</item><item>85</item><item>200</item><item>M</item><item>12787</item> </line>
+      <line> <item>0-4</item><item>0</item><item>4</item><item>F</item><item>127946</item> </line>
+      <line> <item>5-9</item><item>5</item><item>9</item><item>F</item><item>127690</item> </line>
+      <line> <item>10-14</item><item>10</item><item>14</item><item>F</item><item>118026</item> </line>
+      <line> <item>15-19</item><item>15</item><item>19</item><item>F</item><item>109126</item> </line>
+      <line> <item>20-24</item><item>20</item><item>24</item><item>F</item><item>121164</item> </line>
+      <line> <item>25-29</item><item>25</item><item>29</item><item>F</item><item>108960</item> </line>
+      <line> <item>30-34</item><item>30</item><item>34</item><item>F</item><item>113191</item> </line>
+      <line> <item>35-39</item><item>35</item><item>39</item><item>F</item><item>95268</item> </line>
+      <line> <item>40-44</item><item>40</item><item>44</item><item>F</item><item>82437</item> </line>
+      <line> <item>45-49</item><item>45</item><item>49</item><item>F</item><item>75761</item> </line>
+      <line> <item>50-54</item><item>50</item><item>54</item><item>F</item><item>79681</item> </line>
+      <line> <item>55-59</item><item>55</item><item>59</item><item>F</item><item>73744</item> </line>
+      <line> <item>60-64</item><item>60</item><item>64</item><item>F</item><item>61113</item> </line>
+      <line> <item>65-69</item><item>65</item><item>69</item><item>F</item><item>47680</item> </line>
+      <line> <item>70-74</item><item>70</item><item>74</item><item>F</item><item>34450</item> </line>
+      <line> <item>75-79</item><item>75</item><item>79</item><item>F</item><item>26515</item> </line>
+      <line> <item>80-84</item><item>80</item><item>84</item><item>F</item><item>20009</item> </line>
+      <line> <item>85&#x2b;</item><item>85</item><item>200</item><item>F</item><item>21251</item> </line>
+    </data>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>363</xloc>
+      <yloc>293</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>rpt_age_group_population</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Trisano OLAP DS</connection>
+    <schema>warehouse</schema>
+    <table>rpt_age_group_population</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>N</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>550</xloc>
+      <yloc>293</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step_error_handling>
+  </step_error_handling>
+   <slave-step-copy-partition-distribution>
+</slave-step-copy-partition-distribution>
+   <slave_transformation>N</slave_transformation>
+
+</transformation>
