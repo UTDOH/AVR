@@ -359,6 +359,20 @@
 				<column name="hashcode" />
 			</index>
 		</table>
+		<table name="dim_event_type" >
+			<column name="dw_event_type_id" type="integer" jt="4" >
+				<comment><![CDATA[TK of the event_type dimension]]></comment>
+			</column>
+			<column name="hashcode" type="bigint" jt="-5" >
+				<comment><![CDATA[Type I dimension hashcode]]></comment>
+			</column>
+			<column name="event_type" type="varchar" length="255" jt="12" >
+				<comment><![CDATA[from event.type]]></comment>
+			</column>
+			<index name="idx_dw_event_type_lookup" unique="NORMAL" >
+				<column name="hashcode" />
+			</index>
+		</table>
 		<table name="dim_external_code" >
 			<column name="dw_external_code_id" type="integer" length="10" decimal="0" jt="4" >
 				<comment><![CDATA[The dim_external_code TK]]></comment>
@@ -900,6 +914,7 @@
 		<entity schema="warehouse" name="deprecated_fact_disease_event" color="d0def5" x="690" y="1380" />
 		<entity schema="warehouse" name="fact_event" color="d0def5" x="630" y="1020" />
 		<entity schema="warehouse" name="fact_lab_test" color="b2cdf7" x="930" y="660" />
+		<entity schema="warehouse" name="dim_event_type" color="b2cdf7" x="75" y="1350" />
 		<script name="Sql" id="SQL2564778" >
 			<string><![CDATA[CREATE SCHEMA warehouse;
 
@@ -1718,6 +1733,23 @@ COMMENT ON COLUMN warehouse.fact_lab_test.src_created_at IS 'The source lab_test
 COMMENT ON COLUMN warehouse.fact_lab_test.src_updated_at IS 'The source (OLTP) labl_tests.updated_at value';
 
 CREATE VIEW warehouse.vw_table_row_counts AS ((((((((SELECT 'dim_date'::text AS tbl, count(1) AS rowct FROM warehouse.dim_date UNION SELECT 'dim_time'::text AS tbl, count(1) AS rowct FROM warehouse.dim_time) UNION SELECT 'dim_disease'::text AS tbl, count(1) AS rowct FROM warehouse.dim_disease) UNION SELECT 'dim_outbreak'::text AS tbl, count(1) AS rowct FROM warehouse.dim_outbreak) UNION SELECT 'dim_jurisdction'::text AS tbl, count(1) AS rowct FROM warehouse.dim_jurisdiction) UNION SELECT 'dim_location'::text AS tbl, count(1) AS rowct FROM warehouse.dim_location) UNION SELECT 'dim_language'::text AS tbl, count(1) AS rowct FROM warehouse.dim_language) UNION SELECT 'dim_ethnicity'::text AS tbl, count(1) AS rowct FROM warehouse.dim_ethnicity) UNION SELECT 'dim_person'::text AS tbl, count(1) AS rowct FROM warehouse.dim_person) UNION SELECT 'fact_disease_event'::text AS tbl, count(1) AS rowct FROM warehouse.fact_disease_event;;
+
+]]></string>
+		</script>
+		<script name="dim_event_type" id="SQL5506700" >
+			<string><![CDATA[CREATE TABLE warehouse.dim_event_type ( 
+	dw_event_type_id     integer  ,
+	hashcode             bigint  ,
+	event_type           varchar(255)  
+ );
+
+CREATE INDEX idx_dw_event_type_lookup ON warehouse.dim_event_type ( hashcode );
+
+COMMENT ON COLUMN warehouse.dim_event_type.dw_event_type_id IS 'TK of the event_type dimension';
+
+COMMENT ON COLUMN warehouse.dim_event_type.hashcode IS 'Type I dimension hashcode';
+
+COMMENT ON COLUMN warehouse.dim_event_type.event_type IS 'from event.type';
 
 ]]></string>
 		</script>

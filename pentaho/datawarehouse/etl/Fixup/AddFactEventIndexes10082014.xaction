@@ -32,15 +32,7 @@
       </action-outputs>
       <component-definition>
         <jndi><![CDATA[TrisanoOLAPDS]]></jndi>
-        <query><![CDATA[CREATE INDEX idx_fe_src_deleted_at
-  ON warehouse.fact_event
-  USING btree
-  (src_deleted_at);
-
-CREATE INDEX idx_fe_event_type
-  ON warehouse.fact_event
-  USING btree
-  (dw_event_type);]]></query>
+        <query><![CDATA[insert into warehouse.rpt_age_group_population values ('0-4', 0, 4, 'M', 262314);]]></query>
       </component-definition>
     </action-definition>
 
