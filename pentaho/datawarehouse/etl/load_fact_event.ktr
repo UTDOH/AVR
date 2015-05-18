@@ -133,7 +133,6 @@
   <hop> <from>Start</from><to>Get Max End Date</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Max End Date</from><to>Get Event Facts</to><enabled>Y</enabled> </hop>
   <hop> <from>fact_event Mapping</from><to>upsert fact_event</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get Event Facts</from><to>Stream lookup</to><enabled>Y</enabled> </hop>
   <hop> <from>dim_date disease diagnosed</from><to>lookup date_diagnosed</to><enabled>Y</enabled> </hop>
   <hop> <from>lookup date onset</from><to>lookup date_diagnosed</to><enabled>Y</enabled> </hop>
   <hop> <from>lookup date_diagnosed</from><to>lookup location</to><enabled>Y</enabled> </hop>
@@ -145,6 +144,9 @@
   <hop> <from>lookup lhd_case_status</from><to>lookup event_type</to><enabled>Y</enabled> </hop>
   <hop> <from>lookup event_type</from><to>fact_event Mapping</to><enabled>Y</enabled> </hop>
   <hop> <from>dim_event_type</from><to>lookup event_type</to><enabled>Y</enabled> </hop>
+  <hop> <from>dim_people</from><to>Get person</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Event Facts</from><to>Get person</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get person</from><to>Stream lookup</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Get Event Facts</name>
@@ -159,7 +161,7 @@
            </partitioning>
     <connection>Trisano TX DS</connection>
     <rowlimit>0</rowlimit>
-    <sql>select &#xa;	 e.id as src_event_id&#xa;	,e.event_onset_date&#xa;	,de.disease_id&#xa;	,e.created_at as src_created_at&#xa;	,e.updated_at as src_updated_at&#xa;	,e.investigating_jurisdiction&#xa;    ,date&#x28;de.created_at&#x29; as date_diagnosed&#xa;    ,date&#x28;de.created_at&#x29; as disease_onset_date&#xa;    ,addr.id as location_id&#xa;	,e.state_case_status_id&#xa;	,e.lhd_case_status_id&#xa;	,date&#x28;e.deleted_at&#x29; as src_deleted_at&#xa;	,e.type as event_type&#xa;from vw_events e left join vw_disease_events de on de.event_id &#x3d; e.id&#xa;left join vw_addresses addr on de.event_id &#x3d; addr.event_id&#xa;where e.updated_at &#x3e; &#x3f; </sql>
+    <sql>select &#xa;	 e.id as src_event_id&#xa;	,e.event_onset_date&#xa;	,de.disease_id&#xa;	,e.created_at as src_created_at&#xa;	,e.updated_at as src_updated_at&#xa;	,e.investigating_jurisdiction&#xa;    ,date&#x28;de.created_at&#x29; as date_diagnosed&#xa;    ,date&#x28;de.created_at&#x29; as disease_onset_date&#xa;    ,addr.id as location_id&#xa;	,e.state_case_status_id&#xa;	,e.lhd_case_status_id&#xa;	,date&#x28;e.deleted_at&#x29; as src_deleted_at&#xa;	,e.type as event_type&#xa;    ,coalesce&#x28;p.primary_entity_id,p.secondary_entity_id,0&#x29; as entity_id&#xa;from vw_events e left join vw_disease_events de on de.event_id &#x3d; e.id&#xa;left join vw_addresses addr on de.event_id &#x3d; addr.event_id&#xa;left join participations p on p.event_id &#x3d; e.id&#xa;where e.updated_at &#x3e; &#x3f;</sql>
     <outer_join>N</outer_join>
     <replace_vars>N</replace_vars>
     <parameter>
@@ -253,8 +255,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>558</xloc>
-      <yloc>125</yloc>
+      <xloc>560</xloc>
+      <yloc>210</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -289,8 +291,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>559</xloc>
-      <yloc>215</yloc>
+      <xloc>560</xloc>
+      <yloc>300</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -315,8 +317,8 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>395</xloc>
-      <yloc>397</yloc>
+      <xloc>390</xloc>
+      <yloc>480</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -342,7 +344,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>760</xloc>
-      <yloc>310</yloc>
+      <yloc>400</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -367,8 +369,8 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>446</xloc>
-      <yloc>128</yloc>
+      <xloc>440</xloc>
+      <yloc>210</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -393,8 +395,8 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>809</xloc>
-      <yloc>763</yloc>
+      <xloc>810</xloc>
+      <yloc>850</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -445,8 +447,8 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>781</xloc>
-      <yloc>571</yloc>
+      <xloc>780</xloc>
+      <yloc>660</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -471,8 +473,8 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>447</xloc>
-      <yloc>218</yloc>
+      <xloc>440</xloc>
+      <yloc>300</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -497,8 +499,8 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>398</xloc>
-      <yloc>487</yloc>
+      <xloc>400</xloc>
+      <yloc>570</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -673,7 +675,7 @@
       </meta>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>570</xloc>
-      <yloc>854</yloc>
+      <yloc>940</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -708,8 +710,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>559</xloc>
-      <yloc>308</yloc>
+      <xloc>560</xloc>
+      <yloc>390</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -744,8 +746,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>561</xloc>
-      <yloc>398</yloc>
+      <xloc>560</xloc>
+      <yloc>480</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -780,8 +782,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>566</xloc>
-      <yloc>767</yloc>
+      <xloc>560</xloc>
+      <yloc>850</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -816,8 +818,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>564</xloc>
-      <yloc>675</yloc>
+      <xloc>560</xloc>
+      <yloc>760</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -852,8 +854,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>562</xloc>
-      <yloc>491</yloc>
+      <xloc>560</xloc>
+      <yloc>580</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -888,8 +890,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>565</xloc>
-      <yloc>572</yloc>
+      <xloc>560</xloc>
+      <yloc>660</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -980,8 +982,70 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>571</xloc>
-      <yloc>941</yloc>
+      <xloc>570</xloc>
+      <yloc>1030</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get person</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <from>dim_people</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>entity_id</name>
+        <field>src_entity_id</field>
+      </key>
+      <value>
+        <name>dw_person_id</name>
+        <rename>dw_person_id</rename>
+        <default>0</default>
+        <type>Integer</type>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>560</xloc>
+      <yloc>110</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>dim_people</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Trisano OLAP DS</connection>
+    <sql>SELECT src_entity_id,dw_person_id from warehouse.dim_person</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>670</xloc>
+      <yloc>110</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

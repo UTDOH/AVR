@@ -6,6 +6,7 @@
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
     <directory>&#x2f;</directory>
     <parameters>
     </parameters>
@@ -117,7 +118,6 @@
       <attribute><code>PREFERRED_SCHEMA_NAME</code><attribute>trisano</attribute></attribute>
       <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
-      <attribute><code>SQL_CONNECT</code><attribute>set search_path to trisano&#x3b;</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
       <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
@@ -125,35 +125,10 @@
   </connection>
   <order>
   <hop> <from>dim_people</from><to>Get person</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get entity_id</from><to>Get person</to><enabled>Y</enabled> </hop>
   <hop> <from>Get person</from><to>Update fact_event</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Events with Null &#x2f; 0 Dw_Person_id</from><to>Database join</to><enabled>Y</enabled> </hop>
+  <hop> <from>Database join</from><to>Get person</to><enabled>Y</enabled> </hop>
   </order>
-  <step>
-    <name>Get entity_id</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>Trisano TX DS</connection>
-    <sql>select&#xa;	 coalesce&#x28;p.primary_entity_id,p.secondary_entity_id,0&#x29; as entity_id &#xa;    ,e.id as src_event_id&#xa;from vw_events e left join vw_disease_events de on de.event_id &#x3d; e.id&#xa;left join participations p on p.event_id &#x3d; e.id</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>238</xloc>
-      <yloc>177</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
   <step>
     <name>Get person</name>
     <type>StreamLookup</type>
@@ -184,8 +159,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>358</xloc>
-      <yloc>177</yloc>
+      <xloc>350</xloc>
+      <yloc>180</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -223,8 +198,8 @@
       </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>502</xloc>
-      <yloc>177</yloc>
+      <xloc>500</xloc>
+      <yloc>180</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -249,8 +224,64 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>357</xloc>
-      <yloc>78</yloc>
+      <xloc>350</xloc>
+      <yloc>80</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get Events with Null &#x2f; 0 Dw_Person_id</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Trisano OLAP DS</connection>
+    <sql>select &#xa;	src_event_id&#xa;from fact_event&#xa;where dw_person_id is null or dw_person_id &#x3d; 0&#x3b;</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>70</xloc>
+      <yloc>180</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Database join</name>
+    <type>DBJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Trisano TX DS</connection>
+    <rowlimit>0</rowlimit>
+    <sql>select&#xa;	 coalesce&#x28;p.primary_entity_id,p.secondary_entity_id,0&#x29; as entity_id&#xa;from vw_events e left join vw_disease_events de on de.event_id &#x3d; e.id&#xa;left join participations p on p.event_id &#x3d; e.id&#xa;where e.id &#x3d; &#x3f;</sql>
+    <outer_join>N</outer_join>
+    <replace_vars>N</replace_vars>
+    <parameter>
+      <field>
+        <name>src_event_id</name>
+        <type>None</type>
+      </field>
+    </parameter>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>230</xloc>
+      <yloc>180</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

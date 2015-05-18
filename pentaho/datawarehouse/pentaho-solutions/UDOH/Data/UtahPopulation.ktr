@@ -124,80 +124,8 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Drop &#x2f; Create Population Table</from><to>Data Grid</to><enabled>Y</enabled> </hop>
   <hop> <from>Start</from><to>Drop &#x2f; Create Population Table</to><enabled>Y</enabled> </hop>
-  <hop> <from>Data Grid</from><to>rpt_utah_population_rates Mapping</to><enabled>Y</enabled> </hop>
-  <hop> <from>rpt_utah_population_rates Mapping</from><to>rpt_utah_population_rates</to><enabled>Y</enabled> </hop>
   </order>
-  <step>
-    <name>Data Grid</name>
-    <type>DataGrid</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <name>Year</name>
-        <type>Integer</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>Population</name>
-        <type>Integer</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-    <data>
-      <line> <item>1991</item><item>1780870</item> </line>
-      <line> <item>1992</item><item>1838149</item> </line>
-      <line> <item>1993</item><item>1889393</item> </line>
-      <line> <item>1994</item><item>1946721</item> </line>
-      <line> <item>1995</item><item>1995228</item> </line>
-      <line> <item>1996</item><item>2042893</item> </line>
-      <line> <item>1997</item><item>2099409</item> </line>
-      <line> <item>1998</item><item>2141632</item> </line>
-      <line> <item>1999</item><item>2193014</item> </line>
-      <line> <item>2000</item><item>2246467</item> </line>
-      <line> <item>2001</item><item>2290632</item> </line>
-      <line> <item>2002</item><item>2331826</item> </line>
-      <line> <item>2003</item><item>2372457</item> </line>
-      <line> <item>2004</item><item>2430224</item> </line>
-      <line> <item>2005</item><item>2505844</item> </line>
-      <line> <item>2006</item><item>2576228</item> </line>
-      <line> <item>2007</item><item>2636077</item> </line>
-      <line> <item>2008</item><item>2691122</item> </line>
-      <line> <item>2009</item><item>2731558</item> </line>
-      <line> <item>2010</item><item>2774663</item> </line>
-      <line> <item>2011</item><item>2813923</item> </line>
-      <line> <item>2012</item><item>2852589</item> </line>
-      <line> <item>2013</item><item>2897200</item> </line>
-      <line> <item>2014</item><item>2946100</item> </line>
-    </data>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>508</xloc>
-      <yloc>155</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
   <step>
     <name>Drop &#x2f; Create Population Table</name>
     <type>ExecSQL</type>
@@ -210,11 +138,11 @@
            <schema_name/>
            </partitioning>
     <connection>Trisano OLAP DS</connection>
-    <execute_each_row>N</execute_each_row>
+    <execute_each_row>Y</execute_each_row>
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
-    <sql>drop table if exists warehouse.rpt_utah_population_rates&#x3b;&#xa;&#xa;create table warehouse.rpt_utah_population_rates&#x28;&#xa;year4 integer,&#xa;population integer&#xa;&#x29;&#x3b;&#xa;&#xa;CREATE INDEX idx_ut_population_year&#xa;  ON warehouse.rpt_utah_population_rates&#xa;  USING btree&#xa;  &#x28;year4&#x29;&#x3b;</sql>
+    <sql>drop table if exists warehouse.rpt_utah_population_rates&#x3b;&#xa;&#xa;create table warehouse.rpt_utah_population_rates&#x28;&#xa;year4 integer,&#xa;population integer&#xa;&#x29;&#x3b;&#xa;&#xa;CREATE INDEX idx_ut_population_year&#xa;  ON warehouse.rpt_utah_population_rates&#xa;  USING btree&#xa;  &#x28;year4&#x29;&#x3b;&#xa;&#xa;INSERT INTO warehouse.rpt_utah_population_rates &#x28;year4, population&#x29; VALUES &#x28;1991,1780870&#x29;&#x3b;&#xa;INSERT INTO warehouse.rpt_utah_population_rates &#x28;year4, population&#x29; VALUES &#x28;1992,1838149&#x29;&#x3b;&#xa;INSERT INTO warehouse.rpt_utah_population_rates &#x28;year4, population&#x29; VALUES &#x28;1993,1889393&#x29;&#x3b;&#xa;INSERT INTO warehouse.rpt_utah_population_rates &#x28;year4, population&#x29; VALUES &#x28;1994,1946721&#x29;&#x3b;&#xa;INSERT INTO warehouse.rpt_utah_population_rates &#x28;year4, population&#x29; VALUES &#x28;1995,1995228&#x29;&#x3b;&#xa;INSERT INTO warehouse.rpt_utah_population_rates &#x28;year4, population&#x29; VALUES &#x28;1996,2042893&#x29;&#x3b;&#xa;INSERT INTO warehouse.rpt_utah_population_rates &#x28;year4, population&#x29; VALUES &#x28;1997,2099409&#x29;&#x3b;&#xa;INSERT INTO warehouse.rpt_utah_population_rates &#x28;year4, population&#x29; VALUES &#x28;1998,2141632&#x29;&#x3b;&#xa;INSERT INTO warehouse.rpt_utah_population_rates &#x28;year4, population&#x29; VALUES &#x28;1999,2193014&#x29;&#x3b;&#xa;INSERT INTO warehouse.rpt_utah_population_rates &#x28;year4, population&#x29; VALUES &#x28;2000,2246467&#x29;&#x3b;&#xa;INSERT INTO warehouse.rpt_utah_population_rates &#x28;year4, population&#x29; VALUES &#x28;2001,2290632&#x29;&#x3b;&#xa;INSERT INTO warehouse.rpt_utah_population_rates &#x28;year4, population&#x29; VALUES &#x28;2002,2331826&#x29;&#x3b;&#xa;INSERT INTO warehouse.rpt_utah_population_rates &#x28;year4, population&#x29; VALUES &#x28;2003,2372457&#x29;&#x3b;&#xa;INSERT INTO warehouse.rpt_utah_population_rates &#x28;year4, population&#x29; VALUES &#x28;2004,2430224&#x29;&#x3b;&#xa;INSERT INTO warehouse.rpt_utah_population_rates &#x28;year4, population&#x29; VALUES &#x28;2005,2457719&#x29;&#x3b;&#xa;INSERT INTO warehouse.rpt_utah_population_rates &#x28;year4, population&#x29; VALUES &#x28;2006,2525507&#x29;&#x3b;&#xa;INSERT INTO warehouse.rpt_utah_population_rates &#x28;year4, population&#x29; VALUES &#x28;2007,2597746&#x29;&#x3b;&#xa;INSERT INTO warehouse.rpt_utah_population_rates &#x28;year4, population&#x29; VALUES &#x28;2008,2663029&#x29;&#x3b;&#xa;INSERT INTO warehouse.rpt_utah_population_rates &#x28;year4, population&#x29; VALUES &#x28;2009,2723421&#x29;&#x3b;&#xa;INSERT INTO warehouse.rpt_utah_population_rates &#x28;year4, population&#x29; VALUES &#x28;2010,2774424&#x29;&#x3b;&#xa;INSERT INTO warehouse.rpt_utah_population_rates &#x28;year4, population&#x29; VALUES &#x28;2011,2814784&#x29;&#x3b;&#xa;INSERT INTO warehouse.rpt_utah_population_rates &#x28;year4, population&#x29; VALUES &#x28;2012,2854871&#x29;&#x3b;&#xa;INSERT INTO warehouse.rpt_utah_population_rates &#x28;year4, population&#x29; VALUES &#x28;2013,2900872&#x29;&#x3b;&#xa;INSERT INTO warehouse.rpt_utah_population_rates &#x28;year4, population&#x29; VALUES &#x28;2014,2949058&#x29;&#x3b;&#xa;INSERT INTO warehouse.rpt_utah_population_rates &#x28;year4, population&#x29; VALUES &#x28;2015,2987653&#x29;&#x3b;</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>
@@ -224,8 +152,8 @@
     </arguments>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>301</xloc>
-      <yloc>155</yloc>
+      <xloc>300</xloc>
+      <yloc>150</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -245,74 +173,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>111</xloc>
-      <yloc>155</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>rpt_utah_population_rates</name>
-    <type>TableOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>Trisano OLAP DS</connection>
-    <schema>warehouse</schema>
-    <table>rpt_utah_population_rates</table>
-    <commit>1000</commit>
-    <truncate>N</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>N</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
-    <fields>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>893</xloc>
-      <yloc>155</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>rpt_utah_population_rates Mapping</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>      <field>        <name>Year</name>
-        <rename>year4</rename>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>Population</name>
-        <rename>population</rename>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>        <select_unspecified>N</select_unspecified>
-    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>710</xloc>
-      <yloc>154</yloc>
+      <xloc>110</xloc>
+      <yloc>150</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
