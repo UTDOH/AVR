@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>PDI Launcher</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>Trevor MacDuff</author>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <tagIds type="string-list"> 
+      <sources> 
+        <request>tagIds</request> 
+      </sources>  
+      <default-value/> 
+    </tagIds>  
+    <destEmailAddy type="string"> 
+      <sources> 
+        <request>destEmailAddy</request> 
+      </sources>  
+      <default-value/> 
+    </destEmailAddy>  
+    <tagIdsCSV type="string"> 
+      <sources> 
+        <request>tagIdsCSV</request> 
+      </sources>  
+      <default-value/> 
+    </tagIdsCSV> 
+  </inputs>
+
+  <outputs/>
+
+  <resources> 
+    <transformation-file> 
+      <solution-file> 
+        <location>/public/UDOH/etl/load_data_warehouse_main.ktr</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </transformation-file>  
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>KettleComponent</component-name>
+      <action-type>Pentaho Data Integration</action-type>
+      <action-inputs/>
+      <action-resources> 
+        <transformation-file type="resource"/> 
+      </action-resources>
+      <action-outputs> 
+        <kettle-execution-log type="string" mapping="outLog"/>  
+        <kettle-execution-status type="string" mapping="outExecStatus"/>  
+        <transformation-output-rows type="result-set" mapping="outRows"/>  
+        <transformation-output-rows-count type="integer" mapping="outRowsCount"/>  
+        <transformation-output-error-rows type="result-set" mapping="outErrorRows"/>  
+        <transformation-output-error-rows-count type="integer" mapping="outErrorRowsCount"/> 
+      </action-outputs>
+      <component-definition> 
+        <monitor-step><![CDATA[Start]]></monitor-step>  
+        <kettle-logging-level><![CDATA[minimal]]></kettle-logging-level> 
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>

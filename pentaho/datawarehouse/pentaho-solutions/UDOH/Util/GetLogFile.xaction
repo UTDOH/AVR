@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title/>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author/>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <logFile type="string"> 
+      <sources> 
+        <request>logFile</request> 
+      </sources>  
+      <default-value><![CDATA[pentaho.log]]></default-value>
+    </logFile>  
+    <emailAddress type="string"> 
+      <sources> 
+        <request>emailAddress</request> 
+      </sources>  
+      <default-value><![CDATA[tmacduff@gmail.com]]></default-value>
+    </emailAddress> 
+  </inputs>
+
+  <outputs/>
+
+  <resources> 
+    <transformation-file> 
+      <solution-file> 
+        <location>/public/UDOH/Util/GetLogFile.ktr</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </transformation-file> 
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SecureFilterComponent</component-name>
+      <action-type>Prompt Params</action-type>
+      <action-inputs> 
+        <logFile type="string"/>  
+        <emailAddress type="string"/>
+      </action-inputs>
+      <component-definition> 
+        <selections> 
+          <logFile filter="none" style="text-box"> 
+            <title>Log File</title> 
+          </logFile>  
+          <emailAddress filter="none" style="text-box">
+            <title>Email Address</title>
+          </emailAddress>
+        </selections> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>KettleComponent</component-name>
+      <action-type>Pentaho Data Integration</action-type>
+      <action-inputs> 
+        <logFile type="string"/>  
+        <emailAddress type="string"/>
+      </action-inputs>
+      <action-resources> 
+        <transformation-file type="resource"/> 
+      </action-resources>
+      <component-definition>
+        <kettle-logging-level><![CDATA[minimal]]></kettle-logging-level>
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>
