@@ -876,4 +876,46 @@ CREATE INDEX index_status
 alter table warehouse_util.dw_util_data_validation_status owner to pentaho;
 alter schema warehouse_util owner to pentaho;
 
+-- Report Tables
+
+DROP TABLE IF EXISTS warehouse.rpt_disease_group; 
+CREATE TABLE warehouse.rpt_disease_group ( 
+	disease_group_id       integer  NOT NULL,
+	disease_group_name     varchar(200) NOT NULL
+ );
+
+CREATE INDEX idx_disease_group_id ON warehouse.rpt_disease_group ( disease_group_id );
+
+COMMENT ON COLUMN warehouse.rpt_disease_group.disease_group_id IS 'primary key for disease group';
+
+COMMENT ON COLUMN warehouse.rpt_disease_group.disease_group_name IS 'The name of the disease group';
+
+
+DROP TABLE IF EXISTS warehouse.rpt_disease_group_status; 
+CREATE TABLE warehouse.rpt_disease_group_status (
+	disease_group_id	integer NOT NULL,
+	dw_case_status_id	integer NOT NULL
+);
+
+CREATE INDEX idx_disease_group_status ON warehouse.rpt_disease_group_status ( disease_group_id, dw_case_status_id );
+
+COMMENT ON COLUMN warehouse.rpt_disease_group_status.disease_group_id IS 'FK to rpt_disease_group';
+
+COMMENT ON COLUMN warehouse.rpt_disease_group_status.dw_case_status_id IS 'FK to dim_external_code';
+
+DROP TABLE IF EXISTS warehouse.rpt_disease_group_disease; 
+CREATE TABLE warehouse.rpt_disease_group_disease (
+	disease_group_id	integer NOT NULL,
+	dw_disease_id		integer NOT NULL
+);
+
+create index idx_disease_group_disease ON warehouse.rpt_disease_group_disease ( disease_group_id, dw_disease_id );
+
+COMMENT ON COLUMN warehouse.rpt_disease_group_disease.disease_group_id IS 'FK to rpt_disease_group_disease';
+
+COMMENT ON COLUMN warehouse.rpt_disease_group_disease.dw_disease_id IS 'FK to dim_disease';
+
+
+
+	
 
