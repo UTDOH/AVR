@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title/>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author/>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+  </inputs>
+
+  <outputs/>
+
+  <resources> 
+    <transformation-file> 
+      <solution-file> 
+        <location>/home/100999050/Fixup/PopulateDiseaseGroupRptTables.ktr</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </transformation-file> 
+  </resources>
+  
+  <actions> 
+    
+    <action-definition> 
+      <component-name>KettleComponent</component-name>
+      <action-type>Pentaho Data Integration</action-type>
+      <action-inputs> 
+        <logFile type="string"/>  
+        <emailAddress type="string"/>
+      </action-inputs>
+      <action-resources> 
+        <transformation-file type="resource"/> 
+      </action-resources>
+      <component-definition>
+        <kettle-logging-level><![CDATA[minimal]]></kettle-logging-level>
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>

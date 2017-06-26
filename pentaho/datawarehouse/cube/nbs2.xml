@@ -1,0 +1,158 @@
+<Schema name="Newborn Screening">
+  <Dimension type="TimeDimension" visible="true" highCardinality="false" name="Date">
+    <Hierarchy name="Year" visible="true" hasAll="true" primaryKey="dw_date_id">
+      <Table name="dim_date" schema="warehouse">
+      </Table>
+      <Level approxRowCount="50" name="Year" visible="true" column="year4" ordinalColumn="year4" type="Integer" internalType="int" uniqueMembers="true" levelType="TimeYears" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Date Sequence" visible="true" hasAll="true" primaryKey="dw_date_id">
+      <Table name="dim_date" schema="warehouse">
+      </Table>
+      <Level approxRowCount="500" name="Month Sequence" visible="true" column="month_sequence" type="Numeric" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never" description="# of Months From the Current Year">
+      </Level>
+      <Level approxRowCount="500" name="Week Sequence" visible="true" column="week_sequence" type="Numeric" uniqueMembers="false" levelType="TimeWeeks" hideMemberIf="Never" description="# of Weeks From the Current Week">
+      </Level>
+      <Level approxRowCount="500" name="Day Sequence" visible="true" column="day_sequence" type="Numeric" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Quarter" visible="true" hasAll="true" primaryKey="dw_date_id">
+      <Table name="dim_date" schema="warehouse">
+      </Table>
+      <Level name="Quarter" visible="true" column="quarter_number" nameColumn="quarter_name" ordinalColumn="quarter_number" type="Integer" uniqueMembers="true" levelType="TimeQuarters" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="Month" visible="true" hasAll="true" primaryKey="dw_date_id">
+      <Table name="dim_date" schema="warehouse">
+      </Table>
+      <Level name="Month" visible="true" column="month_number" nameColumn="month_abbreviation" type="Integer" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Birthplace">
+    <Hierarchy name="Birthplace" visible="true" hasAll="true" primaryKey="dw_birthplace_id">
+      <Table name="dim_nbs_birthplace" schema="warehouse">
+      </Table>
+      <Level name="Birth Country" visible="true" column="birth_country" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="Birth State" visible="true" column="birth_state" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="Birth City" visible="true" column="birth_city" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="Birth Zip" visible="true" column="birth_zip" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Physician">
+    <Hierarchy name="Physician" visible="true" hasAll="true" primaryKey="dw_physician_id">
+      <Table name="dim_nbs_physician" schema="warehouse">
+      </Table>
+      <Level name="Physician Country" visible="true" column="physician_country" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="Physician State" visible="true" column="physician_state" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="Physician City" visible="true" column="physician_city" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="Physician Zip" visible="true" column="physician_zip" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Cube name="NbsCard" visible="true" cache="true" enabled="true">
+    <Table name="fact_nbs_card" schema="warehouse">
+    </Table>
+    <DimensionUsage source="Date" name="Baby Birthdate" caption="Baby Birthdate" visible="true" foreignKey="dw_birth_date_id" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Birthplace" name="Baby Birthplace" visible="true" foreignKey="dw_birthplace_id" highCardinality="false">
+    </DimensionUsage>
+    <Dimension type="StandardDimension" visible="true" foreignKey="babys_sex" highCardinality="false" name="Baby Gender">
+      <Hierarchy name="Baby Gender" visible="true" hasAll="true">
+        <Table name="fact_nbs_card" schema="warehouse">
+        </Table>
+        <Level name="Baby Gender" visible="true" column="babys_sex" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="birthplace_type" highCardinality="false" name="Birthplace Type">
+      <Hierarchy name="Birthplace Type" visible="true" hasAll="true">
+        <Table name="fact_nbs_card" schema="warehouse">
+        </Table>
+        <Level name="Birthplace Type" visible="true" column="birthplace_type" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="hospital_code" highCardinality="false" name="Hospital">
+      <Hierarchy name="Hospital Code" visible="true" hasAll="true">
+        <Table name="fact_nbs_card" schema="warehouse">
+        </Table>
+        <Level name="Hospital Code" visible="true" column="hospital_code" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="kit_series" highCardinality="false" name="Kit Series">
+      <Hierarchy name="Kit Series" visible="true" hasAll="true">
+        <Table name="fact_nbs_card" schema="warehouse">
+        </Table>
+        <Level name="Kit Series" visible="true" column="kit_series" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <DimensionUsage source="Date" name="Mothers Birthdate" caption="Mothers Birthdate" visible="true" foreignKey="dw_mothers_birth_date_id" highCardinality="false">
+    </DimensionUsage>
+    <Dimension type="StandardDimension" visible="true" foreignKey="mothers_zip" highCardinality="false" name="Mothers Zip">
+      <Hierarchy name="Mothers Zip" visible="true" hasAll="true">
+        <Table name="fact_nbs_card" schema="warehouse">
+        </Table>
+        <Level name="Mothers Zip" visible="true" column="mothers_zip" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <DimensionUsage source="Physician" name="Physician" visible="true" foreignKey="dw_physician_id" highCardinality="false">
+    </DimensionUsage>
+    <Dimension type="StandardDimension" visible="true" foreignKey="recall_reason" highCardinality="false" name="Recall Reason">
+      <Hierarchy name="Recall Reason" visible="true" hasAll="true">
+        <Table name="fact_nbs_card" schema="warehouse">
+        </Table>
+        <Level name="Recall Reason" visible="true" column="recall_reason" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="reject_reason" highCardinality="false" name="Reject Reason">
+      <Hierarchy name="Reject Reason" visible="true" hasAll="true">
+        <Table name="fact_nbs_card" schema="warehouse">
+        </Table>
+        <Level name="Reject Reason" visible="true" column="reject_reason" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="specimen_type" highCardinality="false" name="Specimen Type">
+      <Hierarchy name="Specimen Type" visible="true" hasAll="true">
+        <Table name="fact_nbs_card" schema="warehouse">
+        </Table>
+        <Level name="Specimen Type" visible="true" column="specimen_type" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Avg Birth Weight" column="birth_weight" aggregator="avg" visible="true">
+    </Measure>
+    <Measure name="Count of NBS Cards" column="name" datatype="Integer" aggregator="distinct-count" visible="true">
+    </Measure>
+    <Measure name="Sum of Adopted" column="adoption" datatype="Integer" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Sum of Bottle Fed" column="bottle" datatype="Integer" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Sum of Breast Fed" column="breast" datatype="Integer" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Sum of Home Birth" column="home_birth" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Sum of Meconium Ileus" column="meconium_ileus" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Sum of Multiple Birth" column="multiple_birth" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Sum of Steroids" column="steroids" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Sum of TPN" column="tpn" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Sum of Transfusion" column="transfusion" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+</Schema>

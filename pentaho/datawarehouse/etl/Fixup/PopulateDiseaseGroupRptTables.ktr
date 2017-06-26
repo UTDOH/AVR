@@ -1,0 +1,639 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<transformation>
+  <info>
+    <name>PopulateDiseaseGroupRptTables</name>
+    <description/>
+    <extended_description/>
+    <trans_version/>
+    <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
+    <directory>&#x2f;</directory>
+    <parameters>
+    </parameters>
+    <log>
+<trans-log-table><connection/>
+<schema/>
+<table/>
+<size_limit_lines/>
+<interval/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STATUS</id><enabled>Y</enabled><name>STATUS</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name><subject/></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name><subject/></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name><subject/></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name><subject/></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name><subject/></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name><subject/></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>STARTDATE</id><enabled>Y</enabled><name>STARTDATE</name></field><field><id>ENDDATE</id><enabled>Y</enabled><name>ENDDATE</name></field><field><id>LOGDATE</id><enabled>Y</enabled><name>LOGDATE</name></field><field><id>DEPDATE</id><enabled>Y</enabled><name>DEPDATE</name></field><field><id>REPLAYDATE</id><enabled>Y</enabled><name>REPLAYDATE</name></field><field><id>LOG_FIELD</id><enabled>Y</enabled><name>LOG_FIELD</name></field><field><id>EXECUTING_SERVER</id><enabled>N</enabled><name>EXECUTING_SERVER</name></field><field><id>EXECUTING_USER</id><enabled>N</enabled><name>EXECUTING_USER</name></field><field><id>CLIENT</id><enabled>N</enabled><name>CLIENT</name></field></trans-log-table>
+<perf-log-table><connection/>
+<schema/>
+<table/>
+<interval/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>SEQ_NR</id><enabled>Y</enabled><name>SEQ_NR</name></field><field><id>LOGDATE</id><enabled>Y</enabled><name>LOGDATE</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STEPNAME</id><enabled>Y</enabled><name>STEPNAME</name></field><field><id>STEP_COPY</id><enabled>Y</enabled><name>STEP_COPY</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>INPUT_BUFFER_ROWS</id><enabled>Y</enabled><name>INPUT_BUFFER_ROWS</name></field><field><id>OUTPUT_BUFFER_ROWS</id><enabled>Y</enabled><name>OUTPUT_BUFFER_ROWS</name></field></perf-log-table>
+<channel-log-table><connection/>
+<schema/>
+<table/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>LOG_DATE</id><enabled>Y</enabled><name>LOG_DATE</name></field><field><id>LOGGING_OBJECT_TYPE</id><enabled>Y</enabled><name>LOGGING_OBJECT_TYPE</name></field><field><id>OBJECT_NAME</id><enabled>Y</enabled><name>OBJECT_NAME</name></field><field><id>OBJECT_COPY</id><enabled>Y</enabled><name>OBJECT_COPY</name></field><field><id>REPOSITORY_DIRECTORY</id><enabled>Y</enabled><name>REPOSITORY_DIRECTORY</name></field><field><id>FILENAME</id><enabled>Y</enabled><name>FILENAME</name></field><field><id>OBJECT_ID</id><enabled>Y</enabled><name>OBJECT_ID</name></field><field><id>OBJECT_REVISION</id><enabled>Y</enabled><name>OBJECT_REVISION</name></field><field><id>PARENT_CHANNEL_ID</id><enabled>Y</enabled><name>PARENT_CHANNEL_ID</name></field><field><id>ROOT_CHANNEL_ID</id><enabled>Y</enabled><name>ROOT_CHANNEL_ID</name></field></channel-log-table>
+<step-log-table><connection/>
+<schema/>
+<table/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>LOG_DATE</id><enabled>Y</enabled><name>LOG_DATE</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STEPNAME</id><enabled>Y</enabled><name>STEPNAME</name></field><field><id>STEP_COPY</id><enabled>Y</enabled><name>STEP_COPY</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>LOG_FIELD</id><enabled>N</enabled><name>LOG_FIELD</name></field></step-log-table>
+<metrics-log-table><connection/>
+<schema/>
+<table/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>LOG_DATE</id><enabled>Y</enabled><name>LOG_DATE</name></field><field><id>METRICS_DATE</id><enabled>Y</enabled><name>METRICS_DATE</name></field><field><id>METRICS_CODE</id><enabled>Y</enabled><name>METRICS_CODE</name></field><field><id>METRICS_DESCRIPTION</id><enabled>Y</enabled><name>METRICS_DESCRIPTION</name></field><field><id>METRICS_SUBJECT</id><enabled>Y</enabled><name>METRICS_SUBJECT</name></field><field><id>METRICS_TYPE</id><enabled>Y</enabled><name>METRICS_TYPE</name></field><field><id>METRICS_VALUE</id><enabled>Y</enabled><name>METRICS_VALUE</name></field></metrics-log-table>
+    </log>
+    <maxdate>
+      <connection/>
+      <table/>
+      <field/>
+      <offset>0.0</offset>
+      <maxdiff>0.0</maxdiff>
+    </maxdate>
+    <size_rowset>10000</size_rowset>
+    <sleep_time_empty>50</sleep_time_empty>
+    <sleep_time_full>50</sleep_time_full>
+    <unique_connections>N</unique_connections>
+    <feedback_shown>Y</feedback_shown>
+    <feedback_size>50000</feedback_size>
+    <using_thread_priorities>Y</using_thread_priorities>
+    <shared_objects_file/>
+    <capture_step_performance>N</capture_step_performance>
+    <step_performance_capturing_delay>1000</step_performance_capturing_delay>
+    <step_performance_capturing_size_limit>100</step_performance_capturing_size_limit>
+    <dependencies>
+    </dependencies>
+    <partitionschemas>
+    </partitionschemas>
+    <slaveservers>
+    </slaveservers>
+    <clusterschemas>
+    </clusterschemas>
+  <created_user>-</created_user>
+  <created_date>2015&#x2f;05&#x2f;25 16&#x3a;23&#x3a;37.882</created_date>
+  <modified_user>-</modified_user>
+  <modified_date>2015&#x2f;05&#x2f;25 16&#x3a;23&#x3a;37.882</modified_date>
+  </info>
+  <notepads>
+  </notepads>
+  <connection>
+    <name>Trisano OLAP DS</name>
+    <server/>
+    <type>POSTGRESQL</type>
+    <access>, </access>
+    <database>TrisanoOLAPDS</database>
+    <port>1521</port>
+    <username/>
+    <password>Encrypted </password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SQL_CONNECT</code><attribute>set search_path&#x3d;warehouse, warehouse_util&#x3b;</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>Trisano TX DS</name>
+    <server/>
+    <type>POSTGRESQL</type>
+    <access>, </access>
+    <database>WebTrisanoTXDS</database>
+    <port>1521</port>
+    <username/>
+    <password>Encrypted </password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
+      <attribute><code>PREFERRED_SCHEMA_NAME</code><attribute>trisano</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <order>
+  <hop> <from>Data Grid</from><to>Select values</to><enabled>Y</enabled> </hop>
+  <hop> <from>Select values</from><to>rpt_disease_group</to><enabled>Y</enabled> </hop>
+  <hop> <from>Data Grid</from><to>Split field to rows</to><enabled>Y</enabled> </hop>
+  <hop> <from>Select values 2</from><to>rpt_disease_group_status</to><enabled>Y</enabled> </hop>
+  <hop> <from>Split field to rows</from><to>str2Num Case status</to><enabled>Y</enabled> </hop>
+  <hop> <from>str2Num Case status</from><to>Select values 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Split field to rows 2</from><to>str2Num Case status 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Select values 2 2</from><to>rpt_disease_group_disease</to><enabled>Y</enabled> </hop>
+  <hop> <from>str2Num Case status 2</from><to>Select values 2 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Data Grid</from><to>Split field to rows 2</to><enabled>Y</enabled> </hop>
+  </order>
+  <step>
+    <name>Data Grid</name>
+    <type>DataGrid</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>disease_group_id</name>
+        <type>Integer</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>disease_group_name</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>parent_disease_group_id</name>
+        <type>Integer</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>dw_case_status_ids</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>dw_disease_ids</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <data>
+      <line> <item>2</item><item>Adverse event resulting from smallpox vaccination</item><item/><item>99</item><item>163</item> </line>
+      <line> <item>3</item><item>Amebiasis</item><item/><item>99</item><item>33</item> </line>
+      <line> <item>4</item><item>Anthrax</item><item/><item>99,100</item><item>182</item> </line>
+      <line> <item>5</item><item>Arbovirus infection &#x28;not including West Nile, Dengue, or Yellow Fever&#x29;</item><item/><item>99,100</item><item>189,190,191,192,193,180,181</item> </line>
+      <line> <item>6</item><item>Babesiosis</item><item/><item>99,100</item><item>135</item> </line>
+      <line> <item>7</item><item>Botulism, total</item><item/><item>99</item><item>34,22,21,19</item> </line>
+      <line> <item>8</item><item>Botulism, foodborne</item><item>7</item><item>99</item><item>34</item> </line>
+      <line> <item>9</item><item>Botulism, infant</item><item>7</item><item>99</item><item>22</item> </line>
+      <line> <item>10</item><item>Botulism, other &#x28;wound&#x2f;unspecified&#x29;</item><item>7</item><item>99</item><item>21,19</item> </line>
+      <line> <item>11</item><item>Brucellosis</item><item/><item>99,100</item><item>137</item> </line>
+      <line> <item>12</item><item>Campylobacteriosis</item><item/><item>99,100</item><item>101</item> </line>
+      <line> <item>13</item><item>Chickenpox</item><item/><item>99,100</item><item>88</item> </line>
+      <line> <item>14</item><item>Chlamydia</item><item/><item>99</item><item>65</item> </line>
+      <line> <item>15</item><item>Cholera</item><item/><item>99</item><item>122</item> </line>
+      <line> <item>16</item><item>Coccidioidomycosis</item><item/><item>99</item><item>144</item> </line>
+      <line> <item>17</item><item>Colorado tick fever</item><item/><item>99,100</item><item>2</item> </line>
+      <line> <item>18</item><item>Creutzfeldt-Jakob disease and other transmissible human spongiform encephalopathies</item><item/><item>99,100</item><item>96</item> </line>
+      <line> <item>19</item><item>Cryptosporidiosis</item><item/><item>99,100</item><item>118</item> </line>
+      <line> <item>20</item><item>Cyclosporiasis</item><item/><item>99,100</item><item>24</item> </line>
+      <line> <item>21</item><item>Dengue</item><item/><item>99,100</item><item>66,82</item> </line>
+      <line> <item>22</item><item>Diptheria </item><item/><item>98,99,100</item><item>35</item> </line>
+      <line> <item>23</item><item>Echinococcosis</item><item/><item>99</item><item>75</item> </line>
+      <line> <item>24</item><item>Ehrlichiosis&#x2f;Anaplasmosis</item><item/><item>99,100</item><item>32,87,45,20</item> </line>
+      <line> <item>25</item><item>Encephalitis</item><item/><item>99</item><item>147</item> </line>
+      <line> <item>26</item><item>Escherichia coli with resistance or intermediate resistance to carbapenems</item><item/><item>99</item><item>6</item> </line>
+      <line> <item>27</item><item>Giardiasis</item><item/><item>99,100</item><item>25</item> </line>
+      <line> <item>28</item><item>Gonorrhea</item><item/><item>99</item><item>43</item> </line>
+      <line> <item>29</item><item>Haemophilus influenzae, all ages, invasive disease </item><item/><item>98,99,100</item><item>38</item> </line>
+      <line> <item>30</item><item>Hansen&#x27;s disease &#x28;Leprosy&#x29;</item><item/><item>99</item><item>150</item> </line>
+      <line> <item>31</item><item>Hantavirus pulmonary syndrome</item><item/><item>99</item><item>69</item> </line>
+      <line> <item>32</item><item>Hemolytic Uremic Syndrome, post-diarrheal</item><item/><item>99,100</item><item>126</item> </line>
+      <line> <item>33</item><item>Hepatitis A </item><item/><item>99</item><item>23</item> </line>
+      <line> <item>34</item><item>Hepatitis B, acute </item><item/><item>99</item><item>120</item> </line>
+      <line> <item>35</item><item>Hepatitis B, chronic </item><item/><item>99,100</item><item>121</item> </line>
+      <line> <item>36</item><item>Hepatitis C, acute </item><item/><item>99</item><item>26</item> </line>
+      <line> <item>37</item><item>Hepatitis C, chronic </item><item/><item>99,100</item><item>30</item> </line>
+      <line> <item>38</item><item>Hepatitis, other viral </item><item/><item>99</item><item>37,152</item> </line>
+      <line> <item>39</item><item>HIV infection &#x28;regardless of AIDS diagnosis&#x29;</item><item/><item>99,100</item><item>108,107</item> </line>
+      <line> <item>40</item><item>Influenza-associated hospitalization</item><item/><item>99</item><item>103</item> </line>
+      <line> <item>41</item><item>Influenza-associated pediatric mortality</item><item/><item>99</item><item>53</item> </line>
+      <line> <item>42</item><item>Klebsiella species with resistance or intermediate resistance to carbapenems</item><item/><item>99</item><item>5</item> </line>
+      <line> <item>43</item><item>Legionellosis</item><item/><item>99</item><item>104</item> </line>
+      <line> <item>44</item><item>Leptospirosis</item><item/><item>99,100</item><item>11</item> </line>
+      <line> <item>45</item><item>Listeriosis</item><item/><item>99</item><item>27</item> </line>
+      <line> <item>46</item><item>Lyme disease</item><item/><item>99,100</item><item>41</item> </line>
+      <line> <item>47</item><item>Malaria</item><item/><item>99</item><item>42</item> </line>
+      <line> <item>48</item><item>Measles </item><item/><item>98,99</item><item>39</item> </line>
+      <line> <item>49</item><item>Meningitis, aseptic </item><item/><item>99</item><item>156</item> </line>
+      <line> <item>50</item><item>Meningitis, bacterial, other </item><item/><item>99</item><item>157</item> </line>
+      <line> <item>51</item><item>Meningitis, viral </item><item/><item>99</item><item>158</item> </line>
+      <line> <item>52</item><item>Meningococcal Disease &#x28;Neisseria meningitidis&#x29; </item><item/><item>99,100</item><item>40</item> </line>
+      <line> <item>53</item><item>Mumps </item><item/><item>99,100,98</item><item>105</item> </line>
+      <line> <item>54</item><item>Pertussis </item><item/><item>99,100,98</item><item>102</item> </line>
+      <line> <item>55</item><item>Plague</item><item/><item>99,100,101</item><item>31</item> </line>
+      <line> <item>56</item><item>Poliomyelitis, paralytic and nonparalytic</item><item/><item>99</item><item>110,67</item> </line>
+      <line> <item>57</item><item>Psittacosis</item><item/><item>99,100</item><item>80</item> </line>
+      <line> <item>58</item><item>Q fever</item><item/><item>99,100</item><item>15,46</item> </line>
+      <line> <item>59</item><item>Rabies, animal</item><item/><item>99</item><item>55</item> </line>
+      <line> <item>60</item><item>Rabies, human</item><item/><item>99,98</item><item>76</item> </line>
+      <line> <item>61</item><item>Relapsing fever, tick-borne and louse-borne</item><item/><item>99,100</item><item>59</item> </line>
+      <line> <item>62</item><item>Rubella </item><item/><item>99,98</item><item>109</item> </line>
+      <line> <item>63</item><item>Rubella, congenital syndrome </item><item/><item>99,100,98</item><item>99</item> </line>
+      <line> <item>64</item><item>Salmonellosis</item><item/><item>99,100</item><item>54</item> </line>
+      <line> <item>65</item><item>Severe Acute Respiratory Syndrome &#x28;SARS&#x29;</item><item/><item>99,100</item><item>162</item> </line>
+      <line> <item>66</item><item>Shiga toxin-producing Escherichia coli &#x28;STEC&#x29; infection</item><item/><item>99,100</item><item>77</item> </line>
+      <line> <item>67</item><item>Shigellosis</item><item/><item>99,100</item><item>90</item> </line>
+      <line> <item>68</item><item>Smallpox </item><item/><item>99,100</item><item>28</item> </line>
+      <line> <item>69</item><item>Spotted fever rickettsiosis &#x28;including Rocky Mountain Spotted Fever&#x29; </item><item/><item>99,100</item><item>112</item> </line>
+      <line> <item>70</item><item>Streptococcal disease, invasive, group A </item><item/><item>99</item><item>166</item> </line>
+      <line> <item>71</item><item>Streptococcal disease, invasive, group B </item><item/><item>99</item><item>167</item> </line>
+      <line> <item>72</item><item>Streptococcal disease, invasive, other </item><item/><item>99</item><item>169</item> </line>
+      <line> <item>73</item><item>Streptococcus pneumoniae, invasive disease </item><item/><item>99</item><item>183,170,78</item> </line>
+      <line> <item>74</item><item>Syphilis, early &#x28;infection &#x3c; 12 months&#x29;</item><item/><item>99,100</item><item>57,68,91</item> </line>
+      <line> <item>75</item><item>Syphilis, primary and secondary</item><item>74</item><item>99,100</item><item>57,68</item> </line>
+      <line> <item>76</item><item>Syphilis, early latent</item><item>74</item><item>99,100</item><item>91</item> </line>
+      <line> <item>77</item><item>Syphilis, latent &#x28;infection &#x3e; 12 months&#x29;</item><item/><item>99,100</item><item>47,186,48</item> </line>
+      <line> <item>78</item><item>Syphilis, congenital</item><item/><item>99</item><item>81</item> </line>
+      <line> <item>79</item><item>Tetanus </item><item/><item>100</item><item>111</item> </line>
+      <line> <item>80</item><item>Toxic shock syndrome &#x28;staphylococcal or streptococcal&#x29;</item><item/><item>99,100</item><item>100,29</item> </line>
+      <line> <item>81</item><item>Trichinellosis</item><item/><item>99</item><item>114</item> </line>
+      <line> <item>82</item><item>Tuberculosis, active</item><item/><item>99</item><item>70</item> </line>
+      <line> <item>83</item><item>Tularemia</item><item/><item>99,100</item><item>44</item> </line>
+      <line> <item>84</item><item>Typhoid fever</item><item/><item>99,100</item><item>52</item> </line>
+      <line> <item>85</item><item>Vancomycin-intermediate Staphylococcus aureus &#x28;VISA&#x29; </item><item/><item>99</item><item>175</item> </line>
+      <line> <item>86</item><item>Vancomycin-resistant Staphylococcus aureus &#x28;VRSA&#x29; </item><item/><item>99</item><item>176</item> </line>
+      <line> <item>87</item><item>Vibriosis</item><item/><item>99,100</item><item>95</item> </line>
+      <line> <item>88</item><item>Viral hemorrhagic fevers</item><item/><item>99</item><item>132</item> </line>
+      <line> <item>89</item><item>West Nile virus, total</item><item/><item>99,100</item><item>49,58</item> </line>
+      <line> <item>90</item><item>West Nile virus, neuroinvasive disease </item><item>89</item><item>99,100</item><item>49</item> </line>
+      <line> <item>91</item><item>West Nile virus, nonneuroinvasive disease </item><item>89</item><item>99,100</item><item>58</item> </line>
+      <line> <item>92</item><item>Yellow fever </item><item/><item>99,100</item><item>94</item> </line>
+    </data>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>360</xloc>
+      <yloc>190</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>rpt_disease_group</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Trisano OLAP DS</connection>
+    <schema/>
+    <table>rpt_disease_group</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+        <field>
+          <column_name>disease_group_id</column_name>
+          <stream_name>disease_group_id</stream_name>
+        </field>
+        <field>
+          <column_name>disease_group_name</column_name>
+          <stream_name>disease_group_name</stream_name>
+        </field>
+        <field>
+          <column_name>parent_disease_group_id</column_name>
+          <stream_name>parent_disease_group_id</stream_name>
+        </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>930</xloc>
+      <yloc>100</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Select values</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>        <select_unspecified>N</select_unspecified>
+      <remove>        <name>dw_disease_ids</name>
+      </remove>      <remove>        <name>dw_case_status_ids</name>
+      </remove>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>730</xloc>
+      <yloc>100</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Split field to rows</name>
+    <type>SplitFieldToRows3</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+   <splitfield>dw_case_status_ids</splitfield>
+   <delimiter>,</delimiter>
+   <newfield>dw_case_status_id_str</newfield>
+   <rownum>N</rownum>
+   <rownum_field/>
+   <resetrownumber>Y</resetrownumber>
+   <delimiter_is_regex>N</delimiter_is_regex>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>730</xloc>
+      <yloc>190</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Select values 2</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>        <select_unspecified>N</select_unspecified>
+      <remove>        <name>dw_case_status_ids</name>
+      </remove>      <remove>        <name>dw_disease_ids</name>
+      </remove>      <remove>        <name>disease_group_name</name>
+      </remove>      <remove>        <name>parent_disease_group_id</name>
+      </remove>      <remove>        <name>dw_case_status_id_str</name>
+      </remove>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1010</xloc>
+      <yloc>190</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>rpt_disease_group_status</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Trisano OLAP DS</connection>
+    <schema/>
+    <table>rpt_disease_group_status</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+        <field>
+          <column_name>disease_group_id</column_name>
+          <stream_name>disease_group_id</stream_name>
+        </field>
+        <field>
+          <column_name>dw_case_status_id</column_name>
+          <stream_name>dw_case_status_id</stream_name>
+        </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1190</xloc>
+      <yloc>190</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>str2Num Case status</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>var dw_case_status_id &#x3d; str2num&#x28;dw_case_status_id_str&#x29;&#x3b;&#xa;&#xa;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>dw_case_status_id</name>
+        <rename>dw_case_status_id</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>860</xloc>
+      <yloc>190</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Split field to rows 2</name>
+    <type>SplitFieldToRows3</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+   <splitfield>dw_disease_ids</splitfield>
+   <delimiter>,</delimiter>
+   <newfield>dw_disease_id_str</newfield>
+   <rownum>N</rownum>
+   <rownum_field/>
+   <resetrownumber>Y</resetrownumber>
+   <delimiter_is_regex>N</delimiter_is_regex>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>730</xloc>
+      <yloc>290</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Select values 2 2</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>        <select_unspecified>N</select_unspecified>
+      <remove>        <name>dw_case_status_ids</name>
+      </remove>      <remove>        <name>dw_disease_ids</name>
+      </remove>      <remove>        <name>disease_group_name</name>
+      </remove>      <remove>        <name>parent_disease_group_id</name>
+      </remove>      <remove>        <name>dw_disease_id_str</name>
+      </remove>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1010</xloc>
+      <yloc>290</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>rpt_disease_group_disease</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Trisano OLAP DS</connection>
+    <schema/>
+    <table>rpt_disease_group_disease</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+        <field>
+          <column_name>disease_group_id</column_name>
+          <stream_name>disease_group_id</stream_name>
+        </field>
+        <field>
+          <column_name>dw_disease_id</column_name>
+          <stream_name>dw_disease_id</stream_name>
+        </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1190</xloc>
+      <yloc>290</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>str2Num Case status 2</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>var dw_disease_id &#x3d; str2num&#x28;dw_disease_id_str&#x29;&#x3b;&#xa;&#xa;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>dw_disease_id</name>
+        <rename>dw_disease_id</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>860</xloc>
+      <yloc>290</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step_error_handling>
+  </step_error_handling>
+   <slave-step-copy-partition-distribution>
+</slave-step-copy-partition-distribution>
+   <slave_transformation>N</slave_transformation>
+
+</transformation>

@@ -1,0 +1,1127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<transformation>
+  <info>
+    <name>exec_nbs_card_fact_main</name>
+    <description/>
+    <extended_description/>
+    <trans_version/>
+    <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
+    <directory>&#x2f;</directory>
+    <parameters>
+        <parameter>
+            <name>nbsoltp_schema</name>
+            <default_value>NBSPROD</default_value>
+            <description>NBSPROD&#x7c;NBS_USER</description>
+        </parameter>
+        <parameter>
+            <name>nbsoltp_schemaz</name>
+            <default_value>NBS_USER</default_value>
+            <description>NBSPROD&#x7c;NBS_USER</description>
+        </parameter>
+    </parameters>
+    <log>
+<trans-log-table><connection/>
+<schema/>
+<table/>
+<size_limit_lines/>
+<interval/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STATUS</id><enabled>Y</enabled><name>STATUS</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name><subject/></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name><subject/></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name><subject/></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name><subject/></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name><subject/></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name><subject/></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>STARTDATE</id><enabled>Y</enabled><name>STARTDATE</name></field><field><id>ENDDATE</id><enabled>Y</enabled><name>ENDDATE</name></field><field><id>LOGDATE</id><enabled>Y</enabled><name>LOGDATE</name></field><field><id>DEPDATE</id><enabled>Y</enabled><name>DEPDATE</name></field><field><id>REPLAYDATE</id><enabled>Y</enabled><name>REPLAYDATE</name></field><field><id>LOG_FIELD</id><enabled>Y</enabled><name>LOG_FIELD</name></field><field><id>EXECUTING_SERVER</id><enabled>N</enabled><name>EXECUTING_SERVER</name></field><field><id>EXECUTING_USER</id><enabled>N</enabled><name>EXECUTING_USER</name></field><field><id>CLIENT</id><enabled>N</enabled><name>CLIENT</name></field></trans-log-table>
+<perf-log-table><connection/>
+<schema/>
+<table/>
+<interval/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>SEQ_NR</id><enabled>Y</enabled><name>SEQ_NR</name></field><field><id>LOGDATE</id><enabled>Y</enabled><name>LOGDATE</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STEPNAME</id><enabled>Y</enabled><name>STEPNAME</name></field><field><id>STEP_COPY</id><enabled>Y</enabled><name>STEP_COPY</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>INPUT_BUFFER_ROWS</id><enabled>Y</enabled><name>INPUT_BUFFER_ROWS</name></field><field><id>OUTPUT_BUFFER_ROWS</id><enabled>Y</enabled><name>OUTPUT_BUFFER_ROWS</name></field></perf-log-table>
+<channel-log-table><connection/>
+<schema/>
+<table/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>LOG_DATE</id><enabled>Y</enabled><name>LOG_DATE</name></field><field><id>LOGGING_OBJECT_TYPE</id><enabled>Y</enabled><name>LOGGING_OBJECT_TYPE</name></field><field><id>OBJECT_NAME</id><enabled>Y</enabled><name>OBJECT_NAME</name></field><field><id>OBJECT_COPY</id><enabled>Y</enabled><name>OBJECT_COPY</name></field><field><id>REPOSITORY_DIRECTORY</id><enabled>Y</enabled><name>REPOSITORY_DIRECTORY</name></field><field><id>FILENAME</id><enabled>Y</enabled><name>FILENAME</name></field><field><id>OBJECT_ID</id><enabled>Y</enabled><name>OBJECT_ID</name></field><field><id>OBJECT_REVISION</id><enabled>Y</enabled><name>OBJECT_REVISION</name></field><field><id>PARENT_CHANNEL_ID</id><enabled>Y</enabled><name>PARENT_CHANNEL_ID</name></field><field><id>ROOT_CHANNEL_ID</id><enabled>Y</enabled><name>ROOT_CHANNEL_ID</name></field></channel-log-table>
+<step-log-table><connection/>
+<schema/>
+<table/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>LOG_DATE</id><enabled>Y</enabled><name>LOG_DATE</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STEPNAME</id><enabled>Y</enabled><name>STEPNAME</name></field><field><id>STEP_COPY</id><enabled>Y</enabled><name>STEP_COPY</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>LOG_FIELD</id><enabled>N</enabled><name>LOG_FIELD</name></field></step-log-table>
+<metrics-log-table><connection/>
+<schema/>
+<table/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>LOG_DATE</id><enabled>Y</enabled><name>LOG_DATE</name></field><field><id>METRICS_DATE</id><enabled>Y</enabled><name>METRICS_DATE</name></field><field><id>METRICS_CODE</id><enabled>Y</enabled><name>METRICS_CODE</name></field><field><id>METRICS_DESCRIPTION</id><enabled>Y</enabled><name>METRICS_DESCRIPTION</name></field><field><id>METRICS_SUBJECT</id><enabled>Y</enabled><name>METRICS_SUBJECT</name></field><field><id>METRICS_TYPE</id><enabled>Y</enabled><name>METRICS_TYPE</name></field><field><id>METRICS_VALUE</id><enabled>Y</enabled><name>METRICS_VALUE</name></field></metrics-log-table>
+    </log>
+    <maxdate>
+      <connection/>
+      <table/>
+      <field/>
+      <offset>0.0</offset>
+      <maxdiff>0.0</maxdiff>
+    </maxdate>
+    <size_rowset>10000</size_rowset>
+    <sleep_time_empty>50</sleep_time_empty>
+    <sleep_time_full>50</sleep_time_full>
+    <unique_connections>N</unique_connections>
+    <feedback_shown>Y</feedback_shown>
+    <feedback_size>50000</feedback_size>
+    <using_thread_priorities>Y</using_thread_priorities>
+    <shared_objects_file/>
+    <capture_step_performance>N</capture_step_performance>
+    <step_performance_capturing_delay>1000</step_performance_capturing_delay>
+    <step_performance_capturing_size_limit>100</step_performance_capturing_size_limit>
+    <dependencies>
+    </dependencies>
+    <partitionschemas>
+    </partitionschemas>
+    <slaveservers>
+    </slaveservers>
+    <clusterschemas>
+    </clusterschemas>
+  <created_user>-</created_user>
+  <created_date>2017&#x2f;06&#x2f;16 19&#x3a;44&#x3a;08.869</created_date>
+  <modified_user>-</modified_user>
+  <modified_date>2017&#x2f;06&#x2f;16 19&#x3a;44&#x3a;08.869</modified_date>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA&#x3d;</key_for_session_key>
+    <is_key_private>N</is_key_private>
+  </info>
+  <notepads>
+    <notepad>
+      <note>  WHERE CARD.CHANGED_ON BETWEEN TO_DATE&#x28;&#x27;2017-01-01 00&#x3a;00&#x3a;00&#x27;, &#xa;  &#x27;yyyy&#x2f;mm&#x2f;dd HH24&#x3a;MI&#x3a;SS&#x27;&#x29; AND TO_DATE&#x28;&#x27;2017-01-31 00&#x3a;00&#x3a;00&#x27;, &#xa;  &#x27;yyyy&#x2f;mm&#x2f;dd HH24&#x3a;MI&#x3a;SS&#x27;&#x29;</note>
+      <xloc>300</xloc>
+      <yloc>800</yloc>
+      <width>482</width>
+      <heigth>58</heigth>
+      <fontname>Arial</fontname>
+      <fontsize>10</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>,case CARD2.BREAST when &#x27;T&#x27; then 1 else 0 end as BREAST</note>
+      <xloc>436</xloc>
+      <yloc>91</yloc>
+      <width>383</width>
+      <heigth>26</heigth>
+      <fontname>Arial</fontname>
+      <fontsize>10</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+  </notepads>
+  <connection>
+    <name>NBSOLTP</name>
+    <server/>
+    <type>ORACLE</type>
+    <access>JNDI</access>
+    <database>NBSOLTP</database>
+    <port>1521</port>
+    <username/>
+    <password>Encrypted </password>
+    <servername/>
+    <data_tablespace>&#x24;&#x7b;nbsoltp_schema&#x7d;</data_tablespace>
+    <index_tablespace>&#x24;&#x7b;nbsoltp_schema&#x7d;</index_tablespace>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>Trisano OLAP DS</name>
+    <server/>
+    <type>POSTGRESQL</type>
+    <access>JNDI</access>
+    <database>TrisanoOLAPDS</database>
+    <port>1521</port>
+    <username/>
+    <password>Encrypted </password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SQL_CONNECT</code><attribute>set search_path&#x3d;warehouse, warehouse_util&#x3b;</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>Trisano TX DS</name>
+    <server/>
+    <type>POSTGRESQL</type>
+    <access>JNDI</access>
+    <database>WebTrisanoTXDS</database>
+    <port>1521</port>
+    <username/>
+    <password>Encrypted </password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
+      <attribute><code>PREFERRED_SCHEMA_NAME</code><attribute>&#x24;&#x7b;trisano.oltp.schema.name&#x7d;</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <order>
+  <hop> <from>dim_date</from><to>lookup changed_date</to><enabled>Y</enabled> </hop>
+  <hop> <from>dim_nbs_physician</from><to>lookup changed_date</to><enabled>Y</enabled> </hop>
+  <hop> <from>lookup changed_date</from><to>lookup collecte_date</to><enabled>Y</enabled> </hop>
+  <hop> <from>dim_date</from><to>lookup collecte_date</to><enabled>Y</enabled> </hop>
+  <hop> <from>lookup collecte_date</from><to>lookup date sr accessioned</to><enabled>Y</enabled> </hop>
+  <hop> <from>dim_date</from><to>lookup date sr accessioned</to><enabled>Y</enabled> </hop>
+  <hop> <from>lookup date sr accessioned</from><to>lookup birth date</to><enabled>Y</enabled> </hop>
+  <hop> <from>dim_date</from><to>lookup birth date</to><enabled>Y</enabled> </hop>
+  <hop> <from>lookup birth date</from><to>lookup birth date 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>dim_date</from><to>lookup birth date 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Table input</from><to>Birthplace not null</to><enabled>Y</enabled> </hop>
+  <hop> <from>Birthplace not null</from><to>dim_nbs_birthplace</to><enabled>Y</enabled> </hop>
+  <hop> <from>Birthplace not null</from><to>Calculator</to><enabled>Y</enabled> </hop>
+  <hop> <from>dim_nbs_birthplace</from><to>physician not null</to><enabled>Y</enabled> </hop>
+  <hop> <from>Calculator</from><to>physician not null</to><enabled>Y</enabled> </hop>
+  <hop> <from>physician not null</from><to>dim_nbs_physician</to><enabled>Y</enabled> </hop>
+  <hop> <from>physician not null</from><to>Calculator 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Calculator 2</from><to>lookup changed_date</to><enabled>Y</enabled> </hop>
+  <hop> <from>lookup birth date 2</from><to>upsert fact_nbs_card</to><enabled>Y</enabled> </hop>
+  </order>
+  <step>
+    <name>Birthplace not null</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>dim_nbs_birthplace</send_true_to>
+<send_false_to>Calculator</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>SRC_BIRTHPLACE_PERSON_NUMBER</leftvalue>
+ <function>IS NOT NULL</function>
+ <rightvalue/>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>290</xloc>
+      <yloc>290</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Calculator</name>
+    <type>Calculator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+       <calculation><field_name>dw_birthplace_id</field_name>
+<calc_type>CONSTANT</calc_type>
+<field_a>0</field_a>
+<field_b/>
+<field_c/>
+<value_type>Integer</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>430</xloc>
+      <yloc>330</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Calculator 2</name>
+    <type>Calculator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+       <calculation><field_name>dw_physician_id</field_name>
+<calc_type>CONSTANT</calc_type>
+<field_a>0</field_a>
+<field_b/>
+<field_c/>
+<value_type>Integer</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>700</xloc>
+      <yloc>320</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Modified Java Script Value</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>writeToLog&#x28;&#x27;m&#x27;, &#x27;name&#x3a; &#x28;&#x27; &#x2b; NAME &#x2b; &#x27;&#x29;, order_number&#x3a; &#x28;&#x27;  &#x2b; ORDER_NUMBER &#x2b; &#x27;&#x29;&#x27;&#x29;&#x3b;&#xa;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1300</xloc>
+      <yloc>470</yloc>
+      <draw>N</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Table input</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>NBSOLTP</connection>
+    <sql>SELECT &#xa;   CARD2.NBS_KIT_NO&#xa;  ,A.NAME&#xa;  ,A.CARD_DATE_FIRST_RECEIVED&#xa;  ,A.MAX_ORDER_NUMBER AS &#x22;ORDER_NUMBER&#x22;&#xa;  ,CARD2.SPECIMEN_TYPE&#xa;  ,CARD2.TEXT_ID as &#x22;ACCESSION_NUMBER&#x22;&#xa;  ,case CARD2.CARD_OK when &#x27;T&#x27; then 1 else 0 end as CARD_OK&#xa;  ,CARD2.KIT_SERIES&#xa;  ,CARD2.REJECT_REASON&#xa;  ,CARD2.BABYS_SEX&#xa;  &#xa;  ,case CARD2.BREAST when &#x27;T&#x27; then 1 else 0 end as BREAST&#xa;  ,case CARD2.BOTTLE when &#x27;T&#x27; then 1 else 0 end as BOTTLE&#xa;  ,case CARD2.ADOPTION when &#x27;T&#x27; then 1 else 0 end as ADOPTION&#xa;  ,case CARD2.PREMATURE_SICK when &#x27;T&#x27; then 1 else 0 end as PREMATURE_SICK  &#xa;  ,case CARD2.MULTIPLE_BIRTH when &#x27;T&#x27; then 1 else 0 end as MULTIPLE_BIRTH&#xa;  ,case CARD2.HOME_BIRTH when &#x27;T&#x27; then 1 else 0 end as HOME_BIRTH&#xa;  ,case CARD2.TRANSFUSION when &#x27;T&#x27; then 1 else 0 end as TRANSFUSION&#xa;  ,CARD2.TRANSFUSION_DATE&#xa;  ,CARD2.BIRTH_WEIGHT&#xa;  ,CARD2.MOTHERS_ZIP&#xa;  ,CARD2.HOSPITAL_CODE&#xa;  ,CARD2.RECALL_REASON&#xa;  ,case CARD2.X_MISSING_DATA when &#x27;T&#x27; then 1 else 0 end as X_MISSING_DATA &#xa;  ,case CARD2.MECONIUM_ILEUS when &#x27;T&#x27; then 1 else 0 end as MECONIUM_ILEUS&#xa;  ,case CARD2.STEROIDS when &#x27;T&#x27; then 1 else 0 end as STEROIDS&#xa;  ,case CARD2.TPN when &#x27;T&#x27; then 1 else 0 end as TPN&#xa; &#xa;  ,CARD2.BIRTHPLACE_TYPE&#xa;  ,CARD2.CARD_STATUS&#xa;  ,CARD2.UNSAT_CLOSE_REASON&#xa;&#xa;  ,BIRTHPLACE.PERSON_NUMBER AS SRC_BIRTHPLACE_PERSON_NUMBER&#xa;  ,BIRTHPLACE.CITY AS BIRTH_CITY&#xa;  ,BIRTHPLACE.STATE AS BIRTH_STATE&#xa;  ,BIRTHPLACE.COUNTRY AS BIRTH_COUNTRY&#xa;  ,BIRTHPLACE.ZIP AS BIRTH_ZIP&#xa; &#xa;  ,PHYSICIAN.PERSON_NUMBER AS SRC_PHYSICIAN_PERSON_NUMBER&#xa;  ,PHYSICIAN.CITY AS PHYSICIAN_CITY&#xa;  ,PHYSICIAN.STATE AS PHYSICIAN_STATE&#xa;  ,PHYSICIAN.COUNTRY AS PHYSICIAN_COUNTRY&#xa;  ,PHYSICIAN.ZIP AS PHYSICIAN_ZIP&#xa;&#xa;  ,TO_DATE&#x28;CARD2.CHANGED_ON&#x29; as CHANGED_ON_DT&#xa;  ,CARD2.CHANGED_ON AS CHANGED_ON&#xa;  ,CARD2.DATE_COLLECTED&#xa;  ,TO_DATE&#x28;CARD2.DATE_RECEIVED&#x29; AS DATE_SR_ACCESSIONED_DT&#xa;  ,CARD2.DATE_RECEIVED as SR_ACCESSIONED&#xa;  ,CARD2.BIRTHDATE&#xa;  ,TO_DATE&#x28;CARD2.MOTHERS_BIRTHDATE&#x29; AS MOTHERS_BIRTHDATE_DT&#xa;  ,CARD2.BLIND_ENTRY_ON&#xa;  ,CARD2.SECOND_ENTRY_ON&#xa;  FROM &#x28;&#xa;  SELECT&#xa;      CARD.NAME&#xa;     ,MAX&#x28;CARD.ORDER_NUMBER&#x29; AS &#x22;MAX_ORDER_NUMBER&#x22;&#xa;     ,MIN&#x28;CARD.DATE_RECEIVED&#x29; AS &#x22;CARD_DATE_FIRST_RECEIVED&#x22;&#xa;  FROM &#x24;&#x7b;nbsoltp_schema&#x7d;.NBS_CARD CARD &#xa;  GROUP BY&#xa;      CARD.NAME&#xa;&#x29; A INNER JOIN &#x24;&#x7b;nbsoltp_schema&#x7d;.NBS_CARD CARD2 ON CARD2.NAME &#x3d; A.NAME AND CARD2.ORDER_NUMBER &#x3d; A.MAX_ORDER_NUMBER&#xa;LEFT JOIN &#x24;&#x7b;nbsoltp_schema&#x7d;.PERSON BIRTHPLACE ON BIRTHPLACE.PERSON_NUMBER &#x3d; CARD2.BIRTHPLACE&#xa;LEFT JOIN &#x24;&#x7b;nbsoltp_schema&#x7d;.PERSON PHYSICIAN ON PHYSICIAN.PERSON_NUMBER &#x3d; CARD2.PHYSICIAN</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>Y</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>130</xloc>
+      <yloc>290</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>dim_date</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Trisano OLAP DS</connection>
+    <sql>select &#xa;   dw_date_id&#xa;  ,src_date_val&#xa;from dim_date</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1080</xloc>
+      <yloc>290</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>dim_nbs_birthplace</name>
+    <type>DimensionLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <schema/>
+      <table>dim_nbs_birthplace</table>
+      <connection>Trisano OLAP DS</connection>
+      <commit>100</commit>
+      <update>Y</update>
+      <fields>
+        <key>
+          <name>SRC_BIRTHPLACE_PERSON_NUMBER</name>
+          <lookup>person_number</lookup>
+        </key>
+        <date>
+          <name/>
+          <from>start_date</from>
+          <to>end_date</to>
+        </date>
+        <field>
+          <name>BIRTH_CITY</name>
+          <lookup>birth_city</lookup>
+          <update>Punch through</update>
+        </field>
+        <field>
+          <name>BIRTH_STATE</name>
+          <lookup>birth_state</lookup>
+          <update>Punch through</update>
+        </field>
+        <field>
+          <name>BIRTH_COUNTRY</name>
+          <lookup>birth_country</lookup>
+          <update>Punch through</update>
+        </field>
+        <field>
+          <name>BIRTH_ZIP</name>
+          <lookup>birth_zip</lookup>
+          <update>Punch through</update>
+        </field>
+        <return>
+          <name>dw_birthplace_id</name>
+          <rename/>
+          <creation_method>tablemax</creation_method>
+          <use_autoinc>N</use_autoinc>
+          <version>version</version>
+        </return>
+      </fields>
+      <sequence/>
+      <min_year>1900</min_year>
+      <max_year>2199</max_year>
+      <cache_size>5000</cache_size>
+      <preload_cache>N</preload_cache>
+      <use_start_date_alternative>N</use_start_date_alternative>
+      <start_date_alternative>none</start_date_alternative>
+      <start_date_field_name/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>420</xloc>
+      <yloc>260</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>dim_nbs_physician</name>
+    <type>DimensionLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <schema/>
+      <table>dim_nbs_physician</table>
+      <connection>Trisano OLAP DS</connection>
+      <commit>100</commit>
+      <update>Y</update>
+      <fields>
+        <key>
+          <name>SRC_BIRTHPLACE_PERSON_NUMBER</name>
+          <lookup>person_number</lookup>
+        </key>
+        <date>
+          <name/>
+          <from>start_date</from>
+          <to>end_date</to>
+        </date>
+        <field>
+          <name>PHYSICIAN_CITY</name>
+          <lookup>physician_city</lookup>
+          <update>Punch through</update>
+        </field>
+        <field>
+          <name>PHYSICIAN_STATE</name>
+          <lookup>physician_state</lookup>
+          <update>Punch through</update>
+        </field>
+        <field>
+          <name>PHYSICIAN_ZIP</name>
+          <lookup>physician_zip</lookup>
+          <update>Punch through</update>
+        </field>
+        <field>
+          <name>PHYSICIAN_COUNTRY</name>
+          <lookup>physician_country</lookup>
+          <update>Punch through</update>
+        </field>
+        <return>
+          <name>dw_physician_id</name>
+          <rename/>
+          <creation_method>tablemax</creation_method>
+          <use_autoinc>N</use_autoinc>
+          <version>version</version>
+        </return>
+      </fields>
+      <sequence/>
+      <min_year>1900</min_year>
+      <max_year>2199</max_year>
+      <cache_size>5000</cache_size>
+      <preload_cache>N</preload_cache>
+      <use_start_date_alternative>N</use_start_date_alternative>
+      <start_date_alternative>none</start_date_alternative>
+      <start_date_field_name/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>700</xloc>
+      <yloc>250</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>fact_nbs_card</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Trisano OLAP DS</connection>
+    <schema/>
+    <table>fact_nbs_card</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+        <field>
+          <column_name>dw_birthplace_id</column_name>
+          <stream_name>dw_birthplace_id</stream_name>
+        </field>
+        <field>
+          <column_name>dw_physician_id</column_name>
+          <stream_name>dw_physician_id</stream_name>
+        </field>
+        <field>
+          <column_name>KIT_NBR</column_name>
+          <stream_name>KIT_NBR</stream_name>
+        </field>
+        <field>
+          <column_name>CARD_DATE_FIRST_RECEIVED</column_name>
+          <stream_name>CARD_DATE_FIRST_RECEIVED</stream_name>
+        </field>
+        <field>
+          <column_name>SPECIMEN_TYPE</column_name>
+          <stream_name>SPECIMEN_TYPE</stream_name>
+        </field>
+        <field>
+          <column_name>ACCESSION_NBR</column_name>
+          <stream_name>ACCESSION_NBR</stream_name>
+        </field>
+        <field>
+          <column_name>KIT_SERIES</column_name>
+          <stream_name>KIT_SERIES</stream_name>
+        </field>
+        <field>
+          <column_name>REJECT_REASON</column_name>
+          <stream_name>REJECT_REASON</stream_name>
+        </field>
+        <field>
+          <column_name>BABYS_SEX</column_name>
+          <stream_name>BABYS_SEX</stream_name>
+        </field>
+        <field>
+          <column_name>BREAST</column_name>
+          <stream_name>BREAST</stream_name>
+        </field>
+        <field>
+          <column_name>BOTTLE</column_name>
+          <stream_name>BOTTLE</stream_name>
+        </field>
+        <field>
+          <column_name>ADOPTION</column_name>
+          <stream_name>ADOPTION</stream_name>
+        </field>
+        <field>
+          <column_name>PREMATURE_SICK</column_name>
+          <stream_name>PREMATURE_SICK</stream_name>
+        </field>
+        <field>
+          <column_name>MULTIPLE_BIRTH</column_name>
+          <stream_name>MULTIPLE_BIRTH</stream_name>
+        </field>
+        <field>
+          <column_name>HOME_BIRTH</column_name>
+          <stream_name>HOME_BIRTH</stream_name>
+        </field>
+        <field>
+          <column_name>TRANSFUSION</column_name>
+          <stream_name>TRANSFUSION</stream_name>
+        </field>
+        <field>
+          <column_name>TRANSFUSION_DATE</column_name>
+          <stream_name>TRANSFUSION_DATE</stream_name>
+        </field>
+        <field>
+          <column_name>BIRTH_WEIGHT</column_name>
+          <stream_name>BIRTH_WEIGHT</stream_name>
+        </field>
+        <field>
+          <column_name>MOTHERS_ZIP</column_name>
+          <stream_name>MOTHERS_ZIP</stream_name>
+        </field>
+        <field>
+          <column_name>HOSPITAL_CODE</column_name>
+          <stream_name>HOSPITAL_CODE</stream_name>
+        </field>
+        <field>
+          <column_name>RECALL_REASON</column_name>
+          <stream_name>RECALL_REASON</stream_name>
+        </field>
+        <field>
+          <column_name>MECONIUM_ILEUS</column_name>
+          <stream_name>MECONIUM_ILEUS</stream_name>
+        </field>
+        <field>
+          <column_name>STEROIDS</column_name>
+          <stream_name>STEROIDS</stream_name>
+        </field>
+        <field>
+          <column_name>TPN</column_name>
+          <stream_name>TPN</stream_name>
+        </field>
+        <field>
+          <column_name>BIRTHPLACE_TYPE</column_name>
+          <stream_name>BIRTHPLACE_TYPE</stream_name>
+        </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>380</xloc>
+      <yloc>500</yloc>
+      <draw>N</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>lookup birth date</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <from>dim_date</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>N</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>BIRTHDATE</name>
+        <field>src_date_val</field>
+      </key>
+      <value>
+        <name>dw_date_id</name>
+        <rename>dw_birth_date_id</rename>
+        <default>0</default>
+        <type>Integer</type>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1250</xloc>
+      <yloc>320</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>lookup birth date 2</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <from>dim_date</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>N</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>MOTHERS_BIRTHDATE_DT</name>
+        <field>src_date_val</field>
+      </key>
+      <value>
+        <name>dw_date_id</name>
+        <rename>dw_mothers_birth_date_id</rename>
+        <default>0</default>
+        <type>Integer</type>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1080</xloc>
+      <yloc>400</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>lookup changed_date</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <from>dim_date</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>N</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>CHANGED_ON_DT</name>
+        <field>src_date_val</field>
+      </key>
+      <value>
+        <name>dw_date_id</name>
+        <rename>dw_changed_on_date_id</rename>
+        <default>0</default>
+        <type>Integer</type>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>860</xloc>
+      <yloc>280</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>lookup collecte_date</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <from>dim_date</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>N</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>DATE_COLLECTED</name>
+        <field>src_date_val</field>
+      </key>
+      <value>
+        <name>dw_date_id</name>
+        <rename>dw_date_collected_date_id</rename>
+        <default>0</default>
+        <type>Integer</type>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1080</xloc>
+      <yloc>130</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>lookup date sr accessioned</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <from>dim_date</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>N</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>DATE_SR_ACCESSIONED_DT</name>
+        <field>src_date_val</field>
+      </key>
+      <value>
+        <name>dw_date_id</name>
+        <rename>dw_sr_accessioned_date_id</rename>
+        <default>0</default>
+        <type>Integer</type>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1250</xloc>
+      <yloc>220</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>physician not null</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>dim_nbs_physician</send_true_to>
+<send_false_to>Calculator 2</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>SRC_PHYSICIAN_PERSON_NUMBER</leftvalue>
+ <function>IS NOT NULL</function>
+ <rightvalue/>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>570</xloc>
+      <yloc>290</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>upsert fact_nbs_card</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Trisano OLAP DS</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema/>
+      <table>fact_nbs_card</table>
+      <key>
+        <name>NAME</name>
+        <field>name</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>ORDER_NUMBER</name>
+        <field>order_number</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>unsat_close_reason</name>
+        <rename>UNSAT_CLOSE_REASON</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>transfusion_date</name>
+        <rename>TRANSFUSION_DATE</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>transfusion</name>
+        <rename>TRANSFUSION</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>tpn</name>
+        <rename>TPN</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>steroids</name>
+        <rename>STEROIDS</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>specimen_type</name>
+        <rename>SPECIMEN_TYPE</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>reject_reason</name>
+        <rename>REJECT_REASON</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>recall_reason</name>
+        <rename>RECALL_REASON</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>premature_sick</name>
+        <rename>PREMATURE_SICK</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>order_number</name>
+        <rename>ORDER_NUMBER</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>name</name>
+        <rename>NAME</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>multiple_birth</name>
+        <rename>MULTIPLE_BIRTH</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>mothers_zip</name>
+        <rename>MOTHERS_ZIP</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>meconium_ileus</name>
+        <rename>MECONIUM_ILEUS</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>kit_series</name>
+        <rename>KIT_SERIES</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>hospital_code</name>
+        <rename>HOSPITAL_CODE</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>home_birth</name>
+        <rename>HOME_BIRTH</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>dw_physician_id</name>
+        <rename>dw_physician_id</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>dw_mothers_birth_date_id</name>
+        <rename>dw_mothers_birth_date_id</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>dw_date_collected_date_id</name>
+        <rename>dw_date_collected_date_id</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>dw_changed_on_date_id</name>
+        <rename>dw_changed_on_date_id</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>dw_birthplace_id</name>
+        <rename>dw_birthplace_id</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>dw_birth_date_id</name>
+        <rename>dw_birth_date_id</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>card_status</name>
+        <rename>CARD_STATUS</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>breast</name>
+        <rename>BREAST</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>bottle</name>
+        <rename>BOTTLE</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>birthplace_type</name>
+        <rename>BIRTHPLACE_TYPE</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>birth_weight</name>
+        <rename>BIRTH_WEIGHT</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>babys_sex</name>
+        <rename>BABYS_SEX</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>adoption</name>
+        <rename>ADOPTION</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>nbs_kit_no</name>
+        <rename>NBS_KIT_NO</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>accession_number</name>
+        <rename>ACCESSION_NUMBER</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>changed_on</name>
+        <rename>CHANGED_ON</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>date_collected</name>
+        <rename>DATE_COLLECTED</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>blind_entry_on</name>
+        <rename>BLIND_ENTRY_ON</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>second_entry_on</name>
+        <rename>SECOND_ENTRY_ON</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>card_ok</name>
+        <rename>CARD_OK</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>x_missing_data</name>
+        <rename>X_MISSING_DATA</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>dw_sr_accessioned_date_id</name>
+        <rename>dw_sr_accessioned_date_id</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>sr_accessioned</name>
+        <rename>SR_ACCESSIONED</rename>
+        <update>N</update>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1080</xloc>
+      <yloc>520</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step_error_handling>
+  </step_error_handling>
+   <slave-step-copy-partition-distribution>
+</slave-step-copy-partition-distribution>
+   <slave_transformation>N</slave_transformation>
+
+</transformation>

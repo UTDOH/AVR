@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title/>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author/>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <userName type="string"> 
+      <sources> 
+        <request>userName</request> 
+      </sources>  
+      <default-value></default-value>
+    </userName>  
+  </inputs>
+
+  <outputs/>
+
+  <resources> 
+    <transformation-file> 
+      <solution-file> 
+        <location>/public/UDOH/Util/CreateUserREST.ktr</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </transformation-file> 
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SecureFilterComponent</component-name>
+      <action-type>Prompt Params</action-type>
+      <action-inputs> 
+        <userName type="string"/>  
+      </action-inputs>
+      <component-definition> 
+        <selections> 
+          <userName filter="none" style="text-box"> 
+            <title>User Name</title> 
+          </userName>  
+        </selections> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>KettleComponent</component-name>
+      <action-type>Pentaho Data Integration</action-type>
+      <action-inputs> 
+        <userName type="string"/>  
+      </action-inputs>
+      <action-resources> 
+        <transformation-file type="resource"/> 
+      </action-resources>
+      <component-definition>
+        <kettle-logging-level><![CDATA[minimal]]></kettle-logging-level>
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>
