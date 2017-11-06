@@ -86,8 +86,8 @@
   <notepads>
     <notepad>
       <note>  WHERE CARD.CHANGED_ON BETWEEN TO_DATE&#x28;&#x27;2017-01-01 00&#x3a;00&#x3a;00&#x27;, &#xa;  &#x27;yyyy&#x2f;mm&#x2f;dd HH24&#x3a;MI&#x3a;SS&#x27;&#x29; AND TO_DATE&#x28;&#x27;2017-01-31 00&#x3a;00&#x3a;00&#x27;, &#xa;  &#x27;yyyy&#x2f;mm&#x2f;dd HH24&#x3a;MI&#x3a;SS&#x27;&#x29;</note>
-      <xloc>300</xloc>
-      <yloc>800</yloc>
+      <xloc>580</xloc>
+      <yloc>810</yloc>
       <width>482</width>
       <heigth>58</heigth>
       <fontname>Arial</fontname>
@@ -107,8 +107,8 @@
     </notepad>
     <notepad>
       <note>,case CARD2.BREAST when &#x27;T&#x27; then 1 else 0 end as BREAST</note>
-      <xloc>436</xloc>
-      <yloc>91</yloc>
+      <xloc>710</xloc>
+      <yloc>100</yloc>
       <width>383</width>
       <heigth>26</heigth>
       <fontname>Arial</fontname>
@@ -212,7 +212,6 @@
   <hop> <from>dim_date</from><to>lookup birth date</to><enabled>Y</enabled> </hop>
   <hop> <from>lookup birth date</from><to>lookup birth date 2</to><enabled>Y</enabled> </hop>
   <hop> <from>dim_date</from><to>lookup birth date 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Table input</from><to>Birthplace not null</to><enabled>Y</enabled> </hop>
   <hop> <from>Birthplace not null</from><to>dim_nbs_birthplace</to><enabled>Y</enabled> </hop>
   <hop> <from>Birthplace not null</from><to>Calculator</to><enabled>Y</enabled> </hop>
   <hop> <from>dim_nbs_birthplace</from><to>physician not null</to><enabled>Y</enabled> </hop>
@@ -221,6 +220,10 @@
   <hop> <from>physician not null</from><to>Calculator 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Calculator 2</from><to>lookup changed_date</to><enabled>Y</enabled> </hop>
   <hop> <from>lookup birth date 2</from><to>upsert fact_nbs_card</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Variables</from><to>get max changed_on</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Card Data</from><to>Birthplace not null</to><enabled>Y</enabled> </hop>
+  <hop> <from>get max changed_on</from><to>log dates</to><enabled>Y</enabled> </hop>
+  <hop> <from>log dates</from><to>Get Card Data</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Birthplace not null</name>
@@ -245,8 +248,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>290</xloc>
-      <yloc>290</yloc>
+      <xloc>570</xloc>
+      <yloc>300</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -278,8 +281,8 @@
 </calculation>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>430</xloc>
-      <yloc>330</yloc>
+      <xloc>710</xloc>
+      <yloc>340</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -311,8 +314,59 @@
 </calculation>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>700</xloc>
-      <yloc>320</yloc>
+      <xloc>980</xloc>
+      <yloc>330</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get Card Data</name>
+    <type>DBJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>NBSOLTP</connection>
+    <rowlimit>0</rowlimit>
+    <sql>SELECT &#xa;   CARD2.NBS_KIT_NO&#xa;  ,A.NAME&#xa;  ,A.CARD_DATE_FIRST_RECEIVED&#xa;  ,A.MAX_ORDER_NUMBER AS &#x22;ORDER_NUMBER&#x22;&#xa;  ,CARD2.SPECIMEN_TYPE&#xa;  ,CARD2.TEXT_ID as &#x22;ACCESSION_NUMBER&#x22;&#xa;  ,case CARD2.CARD_OK when &#x27;T&#x27; then 1 else 0 end as CARD_OK&#xa;  ,CARD2.KIT_SERIES&#xa;  ,CARD2.REJECT_REASON&#xa;  ,CARD2.BABYS_SEX&#xa;  &#xa;  ,case CARD2.BREAST when &#x27;T&#x27; then 1 else 0 end as BREAST&#xa;  ,case CARD2.BOTTLE when &#x27;T&#x27; then 1 else 0 end as BOTTLE&#xa;  ,case CARD2.ADOPTION when &#x27;T&#x27; then 1 else 0 end as ADOPTION&#xa;  ,case CARD2.PREMATURE_SICK when &#x27;T&#x27; then 1 else 0 end as PREMATURE_SICK  &#xa;  ,case CARD2.MULTIPLE_BIRTH when &#x27;T&#x27; then 1 else 0 end as MULTIPLE_BIRTH&#xa;  ,case CARD2.HOME_BIRTH when &#x27;T&#x27; then 1 else 0 end as HOME_BIRTH&#xa;  ,case CARD2.TRANSFUSION when &#x27;T&#x27; then 1 else 0 end as TRANSFUSION&#xa;  ,CARD2.TRANSFUSION_DATE&#xa;  ,CARD2.BIRTH_WEIGHT&#xa;  ,CARD2.MOTHERS_ZIP&#xa;  ,CARD2.HOSPITAL_CODE&#xa;  ,CARD2.RECALL_REASON&#xa;  ,case CARD2.X_MISSING_DATA when &#x27;T&#x27; then 1 else 0 end as X_MISSING_DATA &#xa;  ,case CARD2.MECONIUM_ILEUS when &#x27;T&#x27; then 1 else 0 end as MECONIUM_ILEUS&#xa;  ,case CARD2.STEROIDS when &#x27;T&#x27; then 1 else 0 end as STEROIDS&#xa;  ,case CARD2.TPN when &#x27;T&#x27; then 1 else 0 end as TPN&#xa; &#xa;  ,CARD2.BIRTHPLACE_TYPE&#xa;  ,CARD2.CARD_STATUS&#xa;  ,CARD2.UNSAT_CLOSE_REASON&#xa;&#xa;  ,BIRTHPLACE.PERSON_NUMBER AS SRC_BIRTHPLACE_PERSON_NUMBER&#xa;  ,BIRTHPLACE.CITY AS BIRTH_CITY&#xa;  ,BIRTHPLACE.STATE AS BIRTH_STATE&#xa;  ,BIRTHPLACE.COUNTRY AS BIRTH_COUNTRY&#xa;  ,BIRTHPLACE.ZIP AS BIRTH_ZIP&#xa; &#xa;  ,PHYSICIAN.PERSON_NUMBER AS SRC_PHYSICIAN_PERSON_NUMBER&#xa;  ,PHYSICIAN.CITY AS PHYSICIAN_CITY&#xa;  ,PHYSICIAN.STATE AS PHYSICIAN_STATE&#xa;  ,PHYSICIAN.COUNTRY AS PHYSICIAN_COUNTRY&#xa;  ,PHYSICIAN.ZIP AS PHYSICIAN_ZIP&#xa;&#xa;  ,TO_DATE&#x28;CARD2.CHANGED_ON&#x29; as CHANGED_ON_DT&#xa;  ,CARD2.CHANGED_ON AS CHANGED_ON&#xa;  ,CARD2.DATE_COLLECTED&#xa;  ,TO_DATE&#x28;CARD2.DATE_RECEIVED&#x29; AS DATE_SR_ACCESSIONED_DT&#xa;  ,CARD2.DATE_RECEIVED as SR_ACCESSIONED&#xa;  ,CARD2.BIRTHDATE&#xa;  ,TO_DATE&#x28;CARD2.MOTHERS_BIRTHDATE&#x29; AS MOTHERS_BIRTHDATE_DT&#xa;  ,CARD2.BLIND_ENTRY_ON&#xa;  ,CARD2.SECOND_ENTRY_ON&#xa;  FROM &#x28;&#xa;  SELECT&#xa;      CARD.NAME&#xa;     ,MAX&#x28;CARD.ORDER_NUMBER&#x29; AS &#x22;MAX_ORDER_NUMBER&#x22;&#xa;     ,MIN&#x28;CARD.DATE_RECEIVED&#x29; AS &#x22;CARD_DATE_FIRST_RECEIVED&#x22;&#xa;  FROM &#x24;&#x7b;nbsoltp_schema&#x7d;.NBS_CARD CARD &#xa;  &#xa;  GROUP BY&#xa;      CARD.NAME&#xa;&#x29; A INNER JOIN &#x24;&#x7b;nbsoltp_schema&#x7d;.NBS_CARD CARD2 ON CARD2.NAME &#x3d; A.NAME AND CARD2.ORDER_NUMBER &#x3d; A.MAX_ORDER_NUMBER&#xa;LEFT JOIN &#x24;&#x7b;nbsoltp_schema&#x7d;.PERSON BIRTHPLACE ON BIRTHPLACE.PERSON_NUMBER &#x3d; CARD2.BIRTHPLACE&#xa;LEFT JOIN &#x24;&#x7b;nbsoltp_schema&#x7d;.PERSON PHYSICIAN ON PHYSICIAN.PERSON_NUMBER &#x3d; CARD2.PHYSICIAN&#xa;WHERE CARD2.changed_on &#x3e; &#x3f;</sql>
+    <outer_join>N</outer_join>
+    <replace_vars>Y</replace_vars>
+    <parameter>
+      <field>
+        <name>maxchangedon</name>
+        <type>Date</type>
+      </field>
+    </parameter>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>440</xloc>
+      <yloc>300</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get Variables</name>
+    <type>GetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>70</xloc>
+      <yloc>300</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -335,8 +389,8 @@
         <jsScript_script>writeToLog&#x28;&#x27;m&#x27;, &#x27;name&#x3a; &#x28;&#x27; &#x2b; NAME &#x2b; &#x27;&#x29;, order_number&#x3a; &#x28;&#x27;  &#x2b; ORDER_NUMBER &#x2b; &#x27;&#x29;&#x27;&#x29;&#x3b;&#xa;</jsScript_script>
       </jsScript>    </jsScripts>    <fields>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1300</xloc>
-      <yloc>470</yloc>
+      <xloc>1580</xloc>
+      <yloc>480</yloc>
       <draw>N</draw>
       </GUI>
     </step>
@@ -361,9 +415,9 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>130</xloc>
-      <yloc>290</yloc>
-      <draw>Y</draw>
+      <xloc>470</xloc>
+      <yloc>450</yloc>
+      <draw>N</draw>
       </GUI>
     </step>
 
@@ -387,8 +441,8 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1080</xloc>
-      <yloc>290</yloc>
+      <xloc>1360</xloc>
+      <yloc>300</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -457,8 +511,8 @@
       <start_date_field_name/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>420</xloc>
-      <yloc>260</yloc>
+      <xloc>700</xloc>
+      <yloc>270</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -527,8 +581,8 @@
       <start_date_field_name/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>700</xloc>
-      <yloc>250</yloc>
+      <xloc>980</xloc>
+      <yloc>260</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -665,9 +719,59 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>380</xloc>
-      <yloc>500</yloc>
+      <xloc>660</xloc>
+      <yloc>510</yloc>
       <draw>N</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>get max changed_on</name>
+    <type>DBJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Trisano OLAP DS</connection>
+    <rowlimit>0</rowlimit>
+    <sql>select max&#x28;changed_on&#x29; as maxChangedOn from fact_nbs_card</sql>
+    <outer_join>N</outer_join>
+    <replace_vars>N</replace_vars>
+    <parameter>
+    </parameter>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>190</xloc>
+      <yloc>300</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>log dates</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>writeToLog&#x28;&#x27;m&#x27;, &#x27;maxchangedon&#x3a; &#x27; &#x2b; maxchangedon&#x29;&#x3b;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>320</xloc>
+      <yloc>300</yloc>
+      <draw>Y</draw>
       </GUI>
     </step>
 
@@ -701,8 +805,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1250</xloc>
-      <yloc>320</yloc>
+      <xloc>1530</xloc>
+      <yloc>330</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -737,8 +841,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1080</xloc>
-      <yloc>400</yloc>
+      <xloc>1360</xloc>
+      <yloc>410</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -773,8 +877,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>860</xloc>
-      <yloc>280</yloc>
+      <xloc>1140</xloc>
+      <yloc>290</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -809,8 +913,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1080</xloc>
-      <yloc>130</yloc>
+      <xloc>1360</xloc>
+      <yloc>140</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -845,8 +949,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1250</xloc>
-      <yloc>220</yloc>
+      <xloc>1530</xloc>
+      <yloc>230</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -874,8 +978,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>570</xloc>
-      <yloc>290</yloc>
+      <xloc>850</xloc>
+      <yloc>300</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1112,8 +1216,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1080</xloc>
-      <yloc>520</yloc>
+      <xloc>1360</xloc>
+      <yloc>530</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

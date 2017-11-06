@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <job>
-  <name>load_nbs_data_warehouse_main</name>
+  <name>curl_executor</name>
     <description/>
     <extended_description/>
     <job_version/>
     <job_status>0</job_status>
   <directory>&#x2f;</directory>
   <created_user>-</created_user>
-  <created_date>2017&#x2f;06&#x2f;17 13&#x3a;24&#x3a;23.928</created_date>
+  <created_date>2015&#x2f;11&#x2f;24 20&#x3a;54&#x3a;03.157</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2017&#x2f;06&#x2f;17 13&#x3a;24&#x3a;23.928</modified_date>
+  <modified_date>2015&#x2f;11&#x2f;24 20&#x3a;54&#x3a;03.157</modified_date>
     <parameters>
     </parameters>
   <connection>
@@ -109,6 +109,29 @@
    <shared_objects_file/>
   <entries>
     <entry>
+      <name>Shell</name>
+      <description/>
+      <type>SHELL</type>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>cat &#x2f;var&#x2f;lib&#x2f;pgsql&#x2f;ExecDBBackup.sh&#xa;&#xa;&#x23;printf &#x22;&#x5c;x23&#x5c;x21&#x2f;bin&#x2f;sh&#x5c;n&#x5c;ntouch &#x2f;tmp&#x2f;dbbackup&#x5c;npg_dump -i -w -F c -b -v -f &#x2f;var&#x2f;local&#x2f;pentaho&#x2f;dbbackup&#x2f;trisano_olap_&#x5c;x24&#x5c;x28date &#x5c;x2B&#x5c;x22&#x5c;x25Y&#x5c;x25m&#x5c;x25d&#x5c;x22&#x5c;x29.backup trisano_olap &#x3e; &#x2f;tmp&#x2f;backup.log 2&#x3e;&#x26;1&#x22; &#x3e; &#x2f;var&#x2f;lib&#x2f;pgsql&#x2f;ExecDBBackup.sh&#xa;&#x23;printt &#x2f;tmp&#x2f;tableowner.logf &#x22;&#x5c;x23&#x5c;x21&#x2f;bin&#x2f;sh&#x5c;n&#x5c;ntouch &#x2f;tmp&#x2f;dbbackup&#x5c;npg_dump -i -w -F c -b -v -f &#x2f;var&#x2f;local&#x2f;pentaho&#x2f;dbbackup&#x2f;fact_nbs_result --table warehouse.fact_nbs_result  trisano_olap &#x3e; &#x2f;tmp&#x2f;backup.log 2&#x3e;&#x26;1&#x22; &#x3e; &#x2f;var&#x2f;lib&#x2f;pgsql&#x2f;ExecDBBackup.sh&#xa;&#x23;printf &#x22;&#x5c;x23&#x5c;x21&#x2f;bin&#x2f;sh&#x5c;n&#x5c;n psql -h localhost -c &#x5c;x22alter table warehouse.dim_date owner to pentaho&#x5c;x22  trisano_olap postgres &#x3e; &#x2f;tmp&#x2f;tableowner.log 2&#x3e;&#x26;1&#x22; &#x3e; &#x2f;var&#x2f;lib&#x2f;pgsql&#x2f;ExecDBBackup.sh&#xa;&#xa;&#x23;cat &#x2f;var&#x2f;lib&#x2f;pgsql&#x2f;ExecDBBackup.sh&#xa;&#xa;&#xa;&#x23;mkdir &#x2f;var&#x2f;local&#x2f;pentaho&#x2f;dbbackup&#xa;&#x23;chown postgres&#x3a;postgres &#x2f;var&#x2f;local&#x2f;pentaho&#x2f;dbbackup&#xa;&#xa;&#x23;ls -alt &#x2f;var&#x2f;local&#x2f;pentaho&#x2f;dbbackup&#xa;&#xa;&#xa;&#x23;echo &#x22;0 6 &#x2a; &#x2a; &#x2a; &#x2f;var&#x2f;lib&#x2f;pgsql&#x2f;ExecDBBackup.sh&#x22; &#x3e; &#x2f;var&#x2f;spool&#x2f;cron&#x2f;postgres&#xa;echo &#x22;07 16 &#x2a; &#x2a; &#x2a; &#x2f;var&#x2f;lib&#x2f;pgsql&#x2f;ExecDBBackup.sh&#x22; &#x3e; &#x2f;var&#x2f;spool&#x2f;cron&#x2f;postgres &#xa;&#xa;&#x23;rm tmp&#x2f;test.txt&#xa;&#x23;echo &#x22;08 07 &#x2a; &#x2a; &#x2a; echo &#x22;testme&#x22; &#x3e; &#x2f;tmp&#x2f;test.txt&#x22; &#x3e; &#x2f;var&#x2f;spool&#x2f;cron&#x2f;postgres&#xa;&#xa;ls -alt &#x2f;var&#x2f;spool&#x2f;cron&#x2f;postgres&#xa;&#xa;cat &#x2f;var&#x2f;spool&#x2f;cron&#x2f;postgres&#xa;&#xa;ls -alt &#x2f;tmp&#x2f;tableowner.log&#xa;cat &#x2f;tmp&#x2f;tableowner.log&#xa;&#xa;date&#xa;&#xa;&#x23;ls -alt &#x2f;var&#x2f;local&#x2f;pentaho&#x2f;dbbackup&#xa;&#xa;&#x23;cat &#x2f;tmp&#x2f;backup.log&#xa;&#xa;&#x23;mv &#x2f;var&#x2f;local&#x2f;pentaho&#x2f;dbbackup&#x2f;fact_nbs_result &#x2f;var&#x2f;local&#x2f;pentaho&#x2f;pentaho-solutions&#x2f;system&#x2f;extcontent&#x2f;web&#x2f;fact_nbs_result.backup&#xa;&#xa;&#x23;chown pentaho&#x3a;pentaho &#x2f;var&#x2f;local&#x2f;pentaho&#x2f;pentaho-solutions&#x2f;system&#x2f;extcontent&#x2f;web&#x2f;trisano_olap_20170716.backup&#xa;&#xa;&#x23;gzip pentaho&#x3a;pentaho &#x2f;var&#x2f;local&#x2f;pentaho&#x2f;pentaho-solutions&#x2f;system&#x2f;extcontent&#x2f;web&#x2f;trisano_olap_20170716.backup&#xa;&#xa;&#x23;ls -alt &#x2f;var&#x2f;local&#x2f;pentaho&#x2f;pentaho-solutions&#x2f;system&#x2f;extcontent&#x2f;web&#xa;&#xa;&#x23;ps -ef &#x7c; grep pentaho&#xa;&#xa;&#x23; cat &#x2f;tmp&#x2f;backup.log&#xa;&#xa;&#x23;ifconfig&#xa;&#x23;cat &#x2f;var&#x2f;local&#x2f;pentaho&#x2f;tomcat&#x2f;conf&#x2f;Catalina&#x2f;localhost&#x2f;pentaho.xml&#xa;&#xa; &#x23; sudo crontab -u postgres -l&#xa;&#x23;cat &#x2f;tmp&#x2f;tableowner.log</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>390</xloc>
+      <yloc>150</yloc>
+      </entry>
+    <entry>
       <name>START</name>
       <description/>
       <type>SPECIAL</type>
@@ -125,217 +148,19 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>290</xloc>
-      <yloc>210</yloc>
-      </entry>
-    <entry>
-      <name>exec_nbs_card_fact_main</name>
-      <description/>
-      <type>TRANS</type>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_nbs_card_fact_main.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>500</xloc>
-      <yloc>210</yloc>
-      </entry>
-    <entry>
-      <name>Success</name>
-      <description/>
-      <type>SUCCESS</type>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>1100</xloc>
-      <yloc>210</yloc>
-      </entry>
-    <entry>
-      <name>exec_nbs_result_fact_main</name>
-      <description/>
-      <type>TRANS</type>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_nbs_result_fact_main.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>800</xloc>
-      <yloc>210</yloc>
-      </entry>
-    <entry>
-      <name>load_nbs_result_all_years_main</name>
-      <description/>
-      <type>JOB</type>
-      <specification_method>filename</specification_method>
-      <job_object_id/>
-      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;load_nbs_result_all_years_main.kjb</filename>
-      <jobname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <expand_remote_job>N</expand_remote_job>
-      <create_parent_folder>N</create_parent_folder>
-      <pass_export>N</pass_export>
-      <force_separate_logging>N</force_separate_logging>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>510</xloc>
-      <yloc>390</yloc>
-      </entry>
-    <entry>
-      <name>Success Mail</name>
-      <description/>
-      <type>MAIL</type>
-      <server>smtp.gmail.com</server>
-      <port>587</port>
-      <destination>tmacduff&#x40;gmail.com</destination>
-      <destinationCc/>
-      <destinationBCc/>
-      <replyto>udohnotifications&#x40;gmail.com</replyto>
-      <replytoname>UDOH - PDI Script Response</replytoname>
-      <subject>Success&#x3a; Incremental UDOH NBS ETL Jobs</subject>
-      <include_date>Y</include_date>
-      <contact_person/>
-      <contact_phone/>
-      <comment>The incremental datawarehouse  ETL jobs for UDOH NBS completed successfully.</comment>
-      <include_files>Y</include_files>
-      <zip_files>N</zip_files>
-      <zip_name/>
-      <use_auth>Y</use_auth>
-      <use_secure_auth>Y</use_secure_auth>
-      <auth_user>udohnotifications&#x40;gmail.com</auth_user>
-      <auth_password>Encrypted 2be98afc81fc39d8cff09ab7eca93a7d5</auth_password>
-      <only_comment>N</only_comment>
-      <use_HTML>N</use_HTML>
-      <use_Priority>N</use_Priority>
-      <encoding>UTF-8</encoding>
-      <priority>normal</priority>
-      <importance>normal</importance>
-      <sensitivity>normal</sensitivity>
-      <secureconnectiontype>TLS</secureconnectiontype>
-      <replyToAddresses/>
-      <filetypes>        <filetype>GENERAL</filetype>
-        <filetype>LOG</filetype>
-        <filetype>ERRORLINE</filetype>
-        <filetype>ERROR</filetype>
-        <filetype>WARNING</filetype>
-      </filetypes>      <embeddedimages>
-      </embeddedimages>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>990</xloc>
-      <yloc>210</yloc>
+      <xloc>180</xloc>
+      <yloc>160</yloc>
       </entry>
   </entries>
   <hops>
     <hop>
       <from>START</from>
-      <to>exec_nbs_card_fact_main</to>
+      <to>Shell</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>exec_nbs_card_fact_main</from>
-      <to>exec_nbs_result_fact_main</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>START</from>
-      <to>load_nbs_result_all_years_main</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>load_nbs_result_all_years_main</from>
-      <to>exec_nbs_result_fact_main</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>exec_nbs_result_fact_main</from>
-      <to>Success Mail</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Success Mail</from>
-      <to>Success</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
     </hop>
   </hops>
   <notepads>

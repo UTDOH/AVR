@@ -28,20 +28,12 @@
       <Level name="Month" visible="true" column="month_number" nameColumn="month_abbreviation" type="Integer" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never">
       </Level>
     </Hierarchy>
-    <Hierarchy name="Year-Month-Day" visible="true" hasAll="true" allMemberName="All Years" primaryKey="dw_date_id">
+    <Hierarchy name="Year-Month" visible="true" hasAll="true" allMemberName="All Years" primaryKey="dw_date_id">
       <Table name="dim_date" schema="warehouse">
       </Table>
-      <Level name="Year" visible="true" column="year4" type="Integer" uniqueMembers="true" levelType="TimeYears" hideMemberIf="Never">
+      <Level name="Year" visible="true" column="year4" type="Integer" uniqueMembers="false" levelType="TimeYears" hideMemberIf="Never">
       </Level>
-      <Level name="Month" visible="true" column="month_sequence" nameColumn="month_abbreviation_year2" type="Integer" uniqueMembers="true" levelType="TimeMonths" hideMemberIf="Never">
-      </Level>
-      <Level name="Day" visible="true" column="src_date_val" type="Date" uniqueMembers="true" levelType="TimeDays" hideMemberIf="Never">
-      </Level>
-    </Hierarchy>
-    <Hierarchy name="Day" visible="true" hasAll="true" primaryKey="dw_date_id">
-      <Table name="dim_date" schema="warehouse" alias="">
-      </Table>
-      <Level name="Day" visible="true" column="src_date_val" type="Date" uniqueMembers="true" levelType="TimeDays" hideMemberIf="Never">
+      <Level name="Month" visible="true" column="month_sequence" nameColumn="month_abbreviation_year2" type="Integer" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never">
       </Level>
     </Hierarchy>
   </Dimension>
@@ -70,14 +62,6 @@
       <Level name="Physician City" visible="true" column="physician_city" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
       </Level>
       <Level name="Physician Zip" visible="true" column="physician_zip" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
-      </Level>
-    </Hierarchy>
-  </Dimension>
-  <Dimension type="StandardDimension" visible="true" name="Date2">
-    <Hierarchy name="Date Hier" visible="true" hasAll="true" primaryKey="dw_date_id">
-      <Table name="dim_date" schema="warehouse" alias="">
-      </Table>
-      <Level name="Date_Id" visible="true" column="dw_date_id" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
       </Level>
     </Hierarchy>
   </Dimension>
@@ -251,12 +235,56 @@
   </Cube>
   <Cube name="NbsResult" visible="true" cache="true" enabled="true">
     <Table name="fact_nbs_result" schema="warehouse">
+      <AggName name="agg_nbs_yr_mo_entrd_analysis" ignorecase="true">
+        <AggFactCount column="fact_nbs_result_fact_count">
+        </AggFactCount>
+        <AggMeasure column="fact_nbs_result_Result_Count" name="[Measures].[Result Count]">
+        </AggMeasure>
+        <AggLevel column="dim_date_Year" name="[Date Entered On.Year-Month].[Year]" collapsed="true">
+        </AggLevel>
+        <AggLevel column="dim_date_Month_(Key)" name="[Date Entered On.Year-Month].[Month]" collapsed="true">
+        </AggLevel>
+        <AggLevel column="dim_nbs_analysis_Analysis" name="[Analysis].[Analysis]" collapsed="true">
+        </AggLevel>
+      </AggName>
+      <AggName name="agg_nbs_yr_entrd_analysis" ignorecase="true">
+        <AggFactCount column="fact_nbs_result_fact_count">
+        </AggFactCount>
+        <AggMeasure column="fact_nbs_result_Result_Count" name="[Measures].[Result Count]">
+        </AggMeasure>
+        <AggLevel column="dim_date_Year" name="[Date Entered On.Year-Month].[Year]" collapsed="true">
+        </AggLevel>
+        <AggLevel column="dim_nbs_analysis_Analysis" name="[Analysis].[Analysis]" collapsed="true">
+        </AggLevel>
+      </AggName>
+      <AggName name="agg_nbs_yr_mo_entrd_analysis" ignorecase="true">
+        <AggFactCount column="fact_nbs_result_fact_count">
+        </AggFactCount>
+        <AggMeasure column="fact_nbs_result_Result_Count" name="[Measures].[Result Count]">
+        </AggMeasure>
+        <AggLevel column="dim_date_Year" name="[Date Entered On.Year].[Year]" collapsed="true">
+        </AggLevel>
+        <AggLevel column="dim_date_Month_(Key)" name="[Date Entered On.Month].[Month]" collapsed="true">
+        </AggLevel>
+        <AggLevel column="dim_nbs_analysis_Analysis" name="[Analysis].[Analysis]" collapsed="true">
+        </AggLevel>
+      </AggName>
+      <AggName name="agg_nbs_yr_entrd_analysis" ignorecase="true">
+        <AggFactCount column="fact_nbs_result_fact_count">
+        </AggFactCount>
+        <AggMeasure column="fact_nbs_result_Result_Count" name="[Measures].[Result Count]">
+        </AggMeasure>
+        <AggLevel column="dim_date_Year" name="[Date Entered On.Year].[Year]" collapsed="true">
+        </AggLevel>
+        <AggLevel column="dim_nbs_analysis_Analysis" name="[Analysis].[Analysis]" collapsed="true">
+        </AggLevel>
+      </AggName>
     </Table>
-    <DimensionUsage source="Date2" name="Date Entered On" caption="Date Entered On" visible="true" foreignKey="dw_entered_on_date_id" highCardinality="false">
+    <DimensionUsage source="Date" name="Date Entered On" visible="true" foreignKey="dw_entered_on_date_id" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="Date" name="Date of Treatment" caption="Date of Treatment" visible="true" foreignKey="dw_dx_treatment_date_id" highCardinality="false">
+    <DimensionUsage source="Date" name="Date of Treatment" visible="true" foreignKey="dw_dx_treatment_date_id" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="Date2" name="Date Reviewed" caption="Date Reviewed" visible="true" foreignKey="dw_reviewed_date_id" highCardinality="false">
+    <DimensionUsage source="Date" name="Date Reviewed" visible="true" foreignKey="dw_reviewed_date_id" highCardinality="false">
     </DimensionUsage>
     <Dimension type="StandardDimension" visible="true" foreignKey="dw_nbs_result_dx_id" highCardinality="false" name="Result Diagnosis">
       <Hierarchy name="Result Diagnosis" visible="true" hasAll="true" primaryKey="dw_nbs_result_dx_id">
@@ -300,6 +328,14 @@
         </Level>
       </Hierarchy>
     </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="dw_nbs_units_id" highCardinality="false" name="Units">
+      <Hierarchy name="Units" visible="true" hasAll="true" primaryKey="dw_nbs_units_id">
+        <Table name="dim_nbs_units" schema="warehouse">
+        </Table>
+        <Level name="Units" visible="true" column="units" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
     <Dimension type="StandardDimension" visible="true" foreignKey="dw_nbs_analysis_id" highCardinality="false" name="Analysis">
       <Hierarchy name="Analysis" visible="true" hasAll="true" primaryKey="dw_nbs_analysis_id">
         <Table name="dim_nbs_analysis" schema="warehouse">
@@ -308,12 +344,8 @@
         </Level>
       </Hierarchy>
     </Dimension>
-    <Dimension type="StandardDimension" visible="true" foreignKey="dw_nbs_result_status_id" name="Result Status" description="Result Status (Formatted Entry)">
-      <Hierarchy name="Result Status" visible="true" hasAll="true" allMemberName="All Formatted Entries" primaryKey="dw_nbs_result_status_id">
-        <Table name="dim_nbs_result_status" schema="warehouse" alias="">
-        </Table>
-        <Level name="Result Status" visible="true" column="formatted_entry" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
-        </Level>
+    <Dimension type="StandardDimension" visible="true" name="Result Status">
+      <Hierarchy name="New Hierarchy 0" visible="true" hasAll="true">
       </Hierarchy>
     </Dimension>
     <Measure name="Result Count" column="result_number" aggregator="count" visible="true">

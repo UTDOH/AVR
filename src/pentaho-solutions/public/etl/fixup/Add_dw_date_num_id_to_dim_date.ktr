@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<transformation>
+  <info>
+    <name>Add_dw_date_num_id_to_dim_date</name>
+    <description/>
+    <extended_description/>
+    <trans_version/>
+    <trans_type>Normal</trans_type>
+    <directory>&#x2f;</directory>
+    <parameters>
+    </parameters>
+    <log>
+<trans-log-table><connection/>
+<schema/>
+<table/>
+<size_limit_lines/>
+<interval/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STATUS</id><enabled>Y</enabled><name>STATUS</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name><subject/></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name><subject/></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name><subject/></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name><subject/></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name><subject/></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name><subject/></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>STARTDATE</id><enabled>Y</enabled><name>STARTDATE</name></field><field><id>ENDDATE</id><enabled>Y</enabled><name>ENDDATE</name></field><field><id>LOGDATE</id><enabled>Y</enabled><name>LOGDATE</name></field><field><id>DEPDATE</id><enabled>Y</enabled><name>DEPDATE</name></field><field><id>REPLAYDATE</id><enabled>Y</enabled><name>REPLAYDATE</name></field><field><id>LOG_FIELD</id><enabled>Y</enabled><name>LOG_FIELD</name></field><field><id>EXECUTING_SERVER</id><enabled>N</enabled><name>EXECUTING_SERVER</name></field><field><id>EXECUTING_USER</id><enabled>N</enabled><name>EXECUTING_USER</name></field><field><id>CLIENT</id><enabled>N</enabled><name>CLIENT</name></field></trans-log-table>
+<perf-log-table><connection/>
+<schema/>
+<table/>
+<interval/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>SEQ_NR</id><enabled>Y</enabled><name>SEQ_NR</name></field><field><id>LOGDATE</id><enabled>Y</enabled><name>LOGDATE</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STEPNAME</id><enabled>Y</enabled><name>STEPNAME</name></field><field><id>STEP_COPY</id><enabled>Y</enabled><name>STEP_COPY</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>INPUT_BUFFER_ROWS</id><enabled>Y</enabled><name>INPUT_BUFFER_ROWS</name></field><field><id>OUTPUT_BUFFER_ROWS</id><enabled>Y</enabled><name>OUTPUT_BUFFER_ROWS</name></field></perf-log-table>
+<channel-log-table><connection/>
+<schema/>
+<table/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>LOG_DATE</id><enabled>Y</enabled><name>LOG_DATE</name></field><field><id>LOGGING_OBJECT_TYPE</id><enabled>Y</enabled><name>LOGGING_OBJECT_TYPE</name></field><field><id>OBJECT_NAME</id><enabled>Y</enabled><name>OBJECT_NAME</name></field><field><id>OBJECT_COPY</id><enabled>Y</enabled><name>OBJECT_COPY</name></field><field><id>REPOSITORY_DIRECTORY</id><enabled>Y</enabled><name>REPOSITORY_DIRECTORY</name></field><field><id>FILENAME</id><enabled>Y</enabled><name>FILENAME</name></field><field><id>OBJECT_ID</id><enabled>Y</enabled><name>OBJECT_ID</name></field><field><id>OBJECT_REVISION</id><enabled>Y</enabled><name>OBJECT_REVISION</name></field><field><id>PARENT_CHANNEL_ID</id><enabled>Y</enabled><name>PARENT_CHANNEL_ID</name></field><field><id>ROOT_CHANNEL_ID</id><enabled>Y</enabled><name>ROOT_CHANNEL_ID</name></field></channel-log-table>
+<step-log-table><connection/>
+<schema/>
+<table/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>LOG_DATE</id><enabled>Y</enabled><name>LOG_DATE</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STEPNAME</id><enabled>Y</enabled><name>STEPNAME</name></field><field><id>STEP_COPY</id><enabled>Y</enabled><name>STEP_COPY</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>LOG_FIELD</id><enabled>N</enabled><name>LOG_FIELD</name></field></step-log-table>
+<metrics-log-table><connection/>
+<schema/>
+<table/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>LOG_DATE</id><enabled>Y</enabled><name>LOG_DATE</name></field><field><id>METRICS_DATE</id><enabled>Y</enabled><name>METRICS_DATE</name></field><field><id>METRICS_CODE</id><enabled>Y</enabled><name>METRICS_CODE</name></field><field><id>METRICS_DESCRIPTION</id><enabled>Y</enabled><name>METRICS_DESCRIPTION</name></field><field><id>METRICS_SUBJECT</id><enabled>Y</enabled><name>METRICS_SUBJECT</name></field><field><id>METRICS_TYPE</id><enabled>Y</enabled><name>METRICS_TYPE</name></field><field><id>METRICS_VALUE</id><enabled>Y</enabled><name>METRICS_VALUE</name></field></metrics-log-table>
+    </log>
+    <maxdate>
+      <connection/>
+      <table/>
+      <field/>
+      <offset>0.0</offset>
+      <maxdiff>0.0</maxdiff>
+    </maxdate>
+    <size_rowset>10000</size_rowset>
+    <sleep_time_empty>50</sleep_time_empty>
+    <sleep_time_full>50</sleep_time_full>
+    <unique_connections>N</unique_connections>
+    <feedback_shown>Y</feedback_shown>
+    <feedback_size>50000</feedback_size>
+    <using_thread_priorities>Y</using_thread_priorities>
+    <shared_objects_file/>
+    <capture_step_performance>N</capture_step_performance>
+    <step_performance_capturing_delay>1000</step_performance_capturing_delay>
+    <step_performance_capturing_size_limit>100</step_performance_capturing_size_limit>
+    <dependencies>
+    </dependencies>
+    <partitionschemas>
+    </partitionschemas>
+    <slaveservers>
+    </slaveservers>
+    <clusterschemas>
+    </clusterschemas>
+  <created_user>-</created_user>
+  <created_date>2017&#x2f;07&#x2f;24 17&#x3a;40&#x3a;31.614</created_date>
+  <modified_user>-</modified_user>
+  <modified_date>2017&#x2f;07&#x2f;24 17&#x3a;40&#x3a;31.614</modified_date>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA&#x3d;</key_for_session_key>
+    <is_key_private>N</is_key_private>
+  </info>
+  <notepads>
+  </notepads>
+  <connection>
+    <name>NBSOLTP</name>
+    <server/>
+    <type>ORACLE</type>
+    <access>JNDI</access>
+    <database>NBSOLTP</database>
+    <port>1521</port>
+    <username/>
+    <password>Encrypted </password>
+    <servername/>
+    <data_tablespace>&#x24;&#x7b;nbsoltp_schema&#x7d;</data_tablespace>
+    <index_tablespace>&#x24;&#x7b;nbsoltp_schema&#x7d;</index_tablespace>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>Trisano OLAP DS</name>
+    <server/>
+    <type>POSTGRESQL</type>
+    <access>JNDI</access>
+    <database>TrisanoOLAPDS</database>
+    <port>1521</port>
+    <username/>
+    <password>Encrypted </password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SQL_CONNECT</code><attribute>set search_path&#x3d;warehouse, warehouse_util&#x3b;</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>Trisano TX DS</name>
+    <server/>
+    <type>POSTGRESQL</type>
+    <access>JNDI</access>
+    <database>WebTrisanoTXDS</database>
+    <port>1521</port>
+    <username/>
+    <password>Encrypted </password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
+      <attribute><code>PREFERRED_SCHEMA_NAME</code><attribute>&#x24;&#x7b;trisano.oltp.schema.name&#x7d;</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <order>
+  </order>
+  <step>
+    <name>Add dw_date_num_id to dim_date</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Trisano OLAP DS</connection>
+    <execute_each_row>N</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>drop table if exists warehouse.dim_date_new&#x3b;&#xa;&#xa;CREATE TABLE warehouse.dim_date_new&#xa;&#x28;&#xa;  dw_date_id integer NOT NULL, -- Technical key of the date dimension&#xa;  dw_date_num_id integer NOT NULL, -- Alternate TK of the date dimension in the format YYYYMMDD&#xa;  hashcode integer, -- Type I dimension hashcode&#xa;  src_date_val date, -- Source date value&#xa;  date_short character&#x28;12&#x29;, -- Short date&#xa;  date_medium character&#x28;16&#x29;, -- Medium date&#xa;  date_long character varying&#x28;24&#x29;, -- Long form date&#xa;  date_full character varying&#x28;32&#x29;, -- Full form date&#xa;  day_in_week integer, -- day of the week&#xa;  day_in_month integer, -- Day number within the month&#xa;  day_in_year integer, -- Day number within the year&#xa;  is_first_day_in_month smallint, -- Flag indicating whether the date is the first day in the month&#xa;  is_first_day_in_week smallint, -- Flag indicating whether the date is the first day in the week.&#xa;  is_last_day_in_month smallint, -- Flag indicating whether the date is the last day in the month.&#xa;  is_last_day_in_week smallint, -- Flag indicating whether the date is the last day of the week&#xa;  day_name character varying&#x28;12&#x29;, -- textual name of the day of week&#xa;  day_abbreviation character&#x28;3&#x29;, -- Abbreviated day of week&#xa;  week_in_year integer, -- Numeric week of the year&#xa;  week_in_month integer, -- Week number within the month.&#xa;  week_in_year_iso integer, -- ISO standard week in year&#xa;  week_start_date date, -- The date representing the first day of the week.&#xa;  is_weekend smallint, -- Flag indicating wheter or not the day Is a Saturday or Sunday&#x3f;&#xa;  is_weekday smallint, -- Flag indicating whether or not the date is a weekday&#xa;  month_number integer, -- Month number &#x28;1..12&#x29;&#xa;  month_name_val character varying&#x28;12&#x29;, -- Name of the month&#xa;  month_abbreviation character&#x28;3&#x29;, -- Abbreviated month name&#xa;  month_abbreviation_year2 character&#x28;6&#x29;, -- Month abbreviation with digit year&#xa;  year2 integer, -- Two digit year&#xa;  year4 integer, -- Four digit year&#xa;  year2_iso integer, -- ISO two digit year&#xa;  year4_iso integer, -- ISO four digit year&#xa;  quarter_number integer, -- Numeric representation of the quarter &#x28;1..4&#x29;&#xa;  quarter_name character&#x28;2&#x29;, -- Name of the quarter &#x28;Q1..Q4&#x29;&#xa;  quarter_year character&#x28;7&#x29;, -- Quarter name &#x2b; year&#xa;  month_year character&#x28;7&#x29;, -- Month number - year4&#xa;  week_year character&#x28;7&#x29;, -- Week number - year4&#xa;  week_year_iso character&#x28;7&#x29;, -- week number - year4 ISO standard&#xa;  year_week_int integer, -- Year4 and week number as numeric value for sorting and comparison&#xa;  current_week_cy smallint, -- Is this the current week of the current year&#xa;  current_month_cy smallint, -- Is this the current month of the current year&#xa;  last_week_cy smallint, -- Is this the previous week of the current year&#xa;  last_month_cy smallint, -- Flag indicating whether this date in the previous month of the current year&#xa;  current_week_ly smallint, -- Is this date in the previous year, but the same week as the current week&#x3f;&#xa;  current_month_ly smallint, -- Is this date in the previous year, but the same month of the current year&#x3f;&#xa;  last_week_ly smallint, -- Is this date in the previous week the year prior&#x3f;&#xa;  last_month_ly smallint, -- Is this date in the previous month the year prior&#xa;  ytd_cy_day smallint, -- Is the day portion of the date in the current year&#x3f;&#xa;  ytd_cy_week smallint, -- Is the week portion of the date in the current year&#x3f;&#xa;  ytd_cy_month smallint, -- Is the month of the date in the current year&#x3f;&#xa;  ytd_ly_day smallint, -- Is this day part of the year to date last year &#x28;for current year &#x2f; previous YTD comparison calculations&#x29;&#xa;  ytd_ly_week smallint, -- Is the date in the week last year which spilled into this year&#x3f;&#xa;  ytd_ly_month smallint, -- Is this month part of the year to date last year &#x28;for current year &#x2f; previous YTD comparison calculations&#x29;&#xa;  current_year smallint, -- Is the date in the current year&#x3f;&#xa;  last_year smallint, -- Is the date in the previous year&#x3f;&#xa;  day_sequence integer, -- How many days back is this day from the current day&#x3f;&#xa;  week_sequence integer, -- How many weeks back from the current week is the week this date is in&#x3f;&#xa;  month_sequence integer, -- How many monts back from the current month is the month this date is in&#x3f;&#xa;  year_of_weekend_date integer, -- What year does the last day of the week fall in&#x3f;&#xa;  etl_load_date timestamp without time zone, -- The date this dimension record was loaded into the data warehouse.&#xa;  mmwr_week integer NOT NULL DEFAULT 0,&#xa;  mmwr_year integer NOT NULL DEFAULT 0,&#xa;  CONSTRAINT pk_dw_dim_date_new PRIMARY KEY &#x28;dw_date_id&#x29;&#xa;&#x29;&#xa;WITH &#x28;&#xa;  OIDS&#x3d;FALSE&#xa;&#x29;&#x3b;&#xa;&#xa;COMMENT ON TABLE warehouse.dim_date_new&#xa;  IS &#x27;Date dimension&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.dw_date_id IS &#x27;Technical key of the date dimension&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.dw_date_num_id IS &#x27;Alternate TK of the date dimension in the format YYYYMMDD&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.hashcode IS &#x27;Type I dimension hashcode&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.src_date_val IS &#x27;Source date value&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.date_short IS &#x27;Short date&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.date_medium IS &#x27;Medium date&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.date_long IS &#x27;Long form date&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.date_full IS &#x27;Full form date&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.day_in_week IS &#x27;day of the week&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.day_in_month IS &#x27;Day number within the month&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.day_in_year IS &#x27;Day number within the year&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.is_first_day_in_month IS &#x27;Flag indicating whether the date is the first day in the month&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.is_first_day_in_week IS &#x27;Flag indicating whether the date is the first day in the week.&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.is_last_day_in_month IS &#x27;Flag indicating whether the date is the last day in the month.&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.is_last_day_in_week IS &#x27;Flag indicating whether the date is the last day of the week&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.day_name IS &#x27;textual name of the day of week&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.day_abbreviation IS &#x27;Abbreviated day of week&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.week_in_year IS &#x27;Numeric week of the year&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.week_in_month IS &#x27;Week number within the month.&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.week_in_year_iso IS &#x27;ISO standard week in year&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.week_start_date IS &#x27;The date representing the first day of the week.&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.is_weekend IS &#x27;Flag indicating wAdd dw_date_num_id to dim_dateheter or not the day Is a Saturday or Sunday&#x3f;&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.is_weekday IS &#x27;Flag indicating whether or not the date is a weekday&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.month_number IS &#x27;Month number &#x28;1..12&#x29;&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.month_name_val IS &#x27;Name of the month&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.month_abbreviation IS &#x27;Abbreviated month name&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.month_abbreviation_year2 IS &#x27;Month abbreviation with digit year&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.year2 IS &#x27;Two digit year&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.year4 IS &#x27;Four digit year&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.year2_iso IS &#x27;ISO two digit year&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.year4_iso IS &#x27;ISO four digit year&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.quarter_number IS &#x27;Numeric representation of the quarter &#x28;1..4&#x29;&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.quarter_name IS &#x27;Name of the quarter &#x28;Q1..Q4&#x29;&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.quarter_year IS &#x27;Quarter name &#x2b; year&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.month_year IS &#x27;Month number - year4&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.week_year IS &#x27;Week number - year4&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.week_year_iso IS &#x27;week number - year4 ISO standard&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.year_week_int IS &#x27;Year4 and weekAdd dw_date_num_id to dim_date number as numeric value for sorting and comparison&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.current_week_cy IS &#x27;Is this the current week of the current year&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.current_month_cy IS &#x27;Is this the current month of the current year&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.last_week_cy IS &#x27;Is this the previous week of the current year&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.last_month_cy IS &#x27;Flag indicating whether this date in the previous month of the current year&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.current_week_ly IS &#x27;Is this date in the previous year, but the same week as the current week&#x3f;&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.current_month_ly IS &#x27;Is this date in the previous year, but the same month of the current year&#x3f;&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.last_week_ly IS &#x27;Is this date in the previous week the year prior&#x3f;&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.last_month_ly IS &#x27;Is this date in the previous month the year prior&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.ytd_cy_day IS &#x27;Is the day portion of the date in the current year&#x3f;&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.ytd_cy_week IS &#x27;Is the week portion of the date in the current year&#x3f;&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.ytd_cy_month IS &#x27;Is the month of the date in the current year&#x3f;&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.ytd_ly_day IS &#x27;Is this day part of the year to date last year &#x28;for current year &#x2f; previous YTD comparison calculations&#x29;&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.ytd_ly_week IS &#x27;Is the date in the week last year which spilled into this year&#x3f;&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.ytd_ly_month IS &#x27;Is this month part of the year to date last year &#x28;for current year &#x2f; previous YTD comparison calculations&#x29;&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.current_year IS &#x27;Is the date in the current year&#x3f;&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.last_year IS &#x27;Is the date in the previous year&#x3f;&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.day_sequence IS &#x27;How many days back is this day from the current day&#x3f;&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.week_sequence IS &#x27;How many weeks back from the current week is the week this date is in&#x3f;&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.month_sequence IS &#x27;How many monts back from the current month is the month this date is in&#x3f;&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.year_of_weekend_date IS &#x27;What year does the last day of the week fall in&#x3f;&#x27;&#x3b;&#xa;COMMENT ON COLUMN warehouse.dim_date_new.etl_load_date IS &#x27;The date this dimension record was loaded into the data warehouse.&#x27;&#x3b;&#xa;&#xa;&#xa;-- Index&#x3a; warehouse.idx_dw_date_num_id&#xa;&#xa;DROP INDEX if exists warehouse.idx_dw_date_num_id&#x3b;&#xa;&#xa;CREATE INDEX idx_dw_date_num_id&#xa;  ON warehouse.dim_date_new&#xa;  USING btree&#xa;  &#x28;dw_date_num_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_dw_dim_date_lookup_new&#xa;&#xa;DROP INDEX if exists warehouse.idx_dw_dim_date_lookup_new&#x3b;&#xa;&#xa;CREATE INDEX idx_dw_dim_date_lookup_new&#xa;  ON warehouse.dim_date_new&#xa;  USING btree&#xa;  &#x28;hashcode&#x29;&#x3b;&#xa;&#xa;  insert into warehouse.dim_date_new&#xa;select &#xa;dw_date_id,&#xa;0 as dw_date_num_id,&#xa;hashcode,&#xa;src_date_val,&#xa;date_short,&#xa;date_medium,&#xa;date_long,&#xa;date_full,&#xa;day_in_week,&#xa;day_in_month,&#xa;day_in_year,&#xa;is_first_day_in_month,&#xa;is_first_day_in_week,&#xa;is_last_day_in_month,&#xa;is_last_day_in_week,&#xa;day_name,&#xa;day_abbreviation,&#xa;week_in_year,&#xa;week_in_month,&#xa;week_in_year_iso,&#xa;week_start_date,&#xa;is_weekend,&#xa;is_weekday,&#xa;month_number,&#xa;month_name_val,&#xa;month_abbreviation,&#xa;month_abbreviation_year2,&#xa;year2,&#xa;year4,&#xa;year2_iso,&#xa;year4_iso,&#xa;quarter_number,&#xa;quarter_name,&#xa;quarter_year,&#xa;month_year,&#xa;week_year,&#xa;week_year_iso,&#xa;year_week_int,&#xa;current_week_cy,&#xa;current_month_cy,&#xa;last_week_cy,&#xa;last_month_cy,&#xa;current_week_ly,&#xa;current_month_ly,&#xa;last_week_ly,&#xa;last_month_ly,&#xa;ytd_cy_day,&#xa;ytd_cy_week,&#xa;ytd_cy_month,&#xa;ytd_ly_day,&#xa;ytd_ly_week,&#xa;ytd_ly_month,&#xa;current_year,&#xa;last_year,&#xa;day_sequence,&#xa;week_sequence,&#xa;month_sequence,&#xa;year_of_weekend_date,&#xa;etl_load_date,&#xa;mmwr_week,&#xa;mmwr_year&#xa;from warehouse.dim_date&#xa;&#x3b;&#xa;</sql>
+    <set_params>N</set_params>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+    </arguments>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>480</xloc>
+      <yloc>170</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step_error_handling>
+  </step_error_handling>
+   <slave-step-copy-partition-distribution>
+</slave-step-copy-partition-distribution>
+   <slave_transformation>N</slave_transformation>
+
+</transformation>
