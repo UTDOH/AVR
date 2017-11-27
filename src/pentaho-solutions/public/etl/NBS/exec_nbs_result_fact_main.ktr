@@ -16,12 +16,12 @@
         </parameter>
         <parameter>
             <name>nbsoltp_schema</name>
-            <default_value>NBS_USER</default_value>
+            <default_value>NBSPROD</default_value>
             <description>NBSPROD&#x7c;NBS_USER</description>
         </parameter>
         <parameter>
-            <name>nbsoltp_schemab</name>
-            <default_value>NBSPROD</default_value>
+            <name>nbsoltp_schemas</name>
+            <default_value>NBS_USER</default_value>
             <description>NBSPROD&#x7c;NBS_USER</description>
         </parameter>
         <parameter>
@@ -196,7 +196,6 @@
   <hop> <from>nbs card type not null</from><to>set dw_nbs_card_type_id 0</to><enabled>Y</enabled> </hop>
   <hop> <from>nbs card type not null</from><to>dim_nbs_card_type</to><enabled>Y</enabled> </hop>
   <hop> <from>Select values</from><to>fact_nbs_result</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get Results - Range</from><to>treatment date not null</to><enabled>Y</enabled> </hop>
   <hop> <from>start</from><to>log dates</to><enabled>Y</enabled> </hop>
   <hop> <from>set 0 dt 2</from><to>date entered not null</to><enabled>Y</enabled> </hop>
   <hop> <from>set 0 dt 3</from><to>dx code not null</to><enabled>Y</enabled> </hop>
@@ -227,7 +226,30 @@
   <hop> <from>log dates 2</from><to>Get Results Incremental</to><enabled>Y</enabled> </hop>
   <hop> <from>lookup entered_date</from><to>set 0 dt 3</to><enabled>Y</enabled> </hop>
   <hop> <from>date entered not null</from><to>Abort</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Results - Range</from><to>treatment date not null</to><enabled>Y</enabled> </hop>
   </order>
+  <step>
+    <name>Abort</name>
+    <type>Abort</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <row_threshold>0</row_threshold>
+      <message/>
+      <always_log_rows>Y</always_log_rows>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>900</xloc>
+      <yloc>10</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
   <step>
     <name>Filter rows</name>
     <type>FilterRows</type>
@@ -404,15 +426,15 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <fields>      <field>        <name>dw_dx_treatment_date_id</name>
+    <fields>      <field>        <name>dw_dx_treatment_date_num_id</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>dw_reviewed_date_id</name>
+      </field>      <field>        <name>dw_reviewed_date_num_id</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>dw_entered_on_date_id</name>
+      </field>      <field>        <name>dw_entered_on_date_num_id</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -630,7 +652,7 @@
            <schema_name/>
            </partitioning>
     <connection>Trisano OLAP DS</connection>
-    <sql>select &#xa;   dw_date_id&#xa;  ,dw_date_num_id&#xa;  ,year4&#xa;  ,src_date_val&#xa;from dim_date</sql>
+    <sql>select &#xa;   dw_date_id&#xa;  ,dw_date_num_id&#xa;  ,year4&#xa;  ,src_date_val&#xa;from dim_date_new</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1030,7 +1052,7 @@
     <partitioning_monthly>Y</partitioning_monthly>
     <tablename_in_field>Y</tablename_in_field>
     <tablename_field>fact_table_name</tablename_field>
-    <tablename_in_table>Y</tablename_in_table>
+    <tablename_in_table>N</tablename_in_table>
     <return_keys>N</return_keys>
     <return_field/>
     <fields>
@@ -1213,8 +1235,8 @@
         <field>src_date_val</field>
       </key>
       <value>
-        <name>dw_date_id</name>
-        <rename>dw_reviewed_date_id</rename>
+        <name>dw_date_num_id</name>
+        <rename>dw_reviewed_date_num_id</rename>
         <default>0</default>
         <type>Integer</type>
       </value>
@@ -1249,8 +1271,8 @@
         <field>src_date_val</field>
       </key>
       <value>
-        <name>dw_date_id</name>
-        <rename>dw_dx_treatment_date_id</rename>
+        <name>dw_date_num_id</name>
+        <rename>dw_dx_treatment_date_num_id</rename>
         <default>0</default>
         <type>Integer</type>
       </value>
@@ -1332,7 +1354,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-       <calculation><field_name>dw_dx_treatment_date_id</field_name>
+       <calculation><field_name>dw_dx_treatment_date_num_id</field_name>
 <calc_type>CONSTANT</calc_type>
 <field_a>0</field_a>
 <field_b/>
@@ -1365,7 +1387,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-       <calculation><field_name>dw_reviewed_date_id</field_name>
+       <calculation><field_name>dw_reviewed_date_num_id</field_name>
 <calc_type>CONSTANT</calc_type>
 <field_a>0</field_a>
 <field_b/>
@@ -1398,20 +1420,6 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-       <calculation><field_name>dw_entered_on_date_id</field_name>
-<calc_type>CONSTANT</calc_type>
-<field_a>0</field_a>
-<field_b/>
-<field_c/>
-<value_type>Integer</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<remove>N</remove>
-<conversion_mask/>
-<decimal_symbol/>
-<grouping_symbol/>
-<currency_symbol/>
-</calculation>
        <calculation><field_name>fact_table_name_part</field_name>
 <calc_type>CONSTANT</calc_type>
 <field_a>fact_nbs_result_</field_a>
@@ -1840,28 +1848,6 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>520</xloc>
       <yloc>640</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Abort</name>
-    <type>Abort</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <row_threshold>0</row_threshold>
-      <message/>
-      <always_log_rows>Y</always_log_rows>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>900</xloc>
-      <yloc>10</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

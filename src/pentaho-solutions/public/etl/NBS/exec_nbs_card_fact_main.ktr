@@ -11,12 +11,12 @@
     <parameters>
         <parameter>
             <name>nbsoltp_schema</name>
-            <default_value>NBSPROD</default_value>
+            <default_value>NBS_USER</default_value>
             <description>NBSPROD&#x7c;NBS_USER</description>
         </parameter>
         <parameter>
-            <name>nbsoltp_schemaz</name>
-            <default_value>NBS_USER</default_value>
+            <name>nbsoltp_schemaZ</name>
+            <default_value>NBSPROD</default_value>
             <description>NBSPROD&#x7c;NBS_USER</description>
         </parameter>
     </parameters>
@@ -107,8 +107,8 @@
     </notepad>
     <notepad>
       <note>,case CARD2.BREAST when &#x27;T&#x27; then 1 else 0 end as BREAST</note>
-      <xloc>710</xloc>
-      <yloc>100</yloc>
+      <xloc>720</xloc>
+      <yloc>700</yloc>
       <width>383</width>
       <heigth>26</heigth>
       <fontname>Arial</fontname>
@@ -219,11 +219,12 @@
   <hop> <from>physician not null</from><to>dim_nbs_physician</to><enabled>Y</enabled> </hop>
   <hop> <from>physician not null</from><to>Calculator 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Calculator 2</from><to>lookup changed_date</to><enabled>Y</enabled> </hop>
-  <hop> <from>lookup birth date 2</from><to>upsert fact_nbs_card</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Variables</from><to>get max changed_on</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get Card Data</from><to>Birthplace not null</to><enabled>Y</enabled> </hop>
   <hop> <from>get max changed_on</from><to>log dates</to><enabled>Y</enabled> </hop>
   <hop> <from>log dates</from><to>Get Card Data</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Card Data</from><to>Get Message_Sent_On</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Message_Sent_On</from><to>Birthplace not null</to><enabled>Y</enabled> </hop>
+  <hop> <from>lookup birth date 2</from><to>upsert fact_nbs_card</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Birthplace not null</name>
@@ -248,7 +249,7 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>570</xloc>
+      <xloc>690</xloc>
       <yloc>300</yloc>
       <draw>Y</draw>
       </GUI>
@@ -281,7 +282,7 @@
 </calculation>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>710</xloc>
+      <xloc>830</xloc>
       <yloc>340</yloc>
       <draw>Y</draw>
       </GUI>
@@ -314,7 +315,7 @@
 </calculation>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>980</xloc>
+      <xloc>1100</xloc>
       <yloc>330</yloc>
       <draw>Y</draw>
       </GUI>
@@ -389,7 +390,7 @@
         <jsScript_script>writeToLog&#x28;&#x27;m&#x27;, &#x27;name&#x3a; &#x28;&#x27; &#x2b; NAME &#x2b; &#x27;&#x29;, order_number&#x3a; &#x28;&#x27;  &#x2b; ORDER_NUMBER &#x2b; &#x27;&#x29;&#x27;&#x29;&#x3b;&#xa;</jsScript_script>
       </jsScript>    </jsScripts>    <fields>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1580</xloc>
+      <xloc>1700</xloc>
       <yloc>480</yloc>
       <draw>N</draw>
       </GUI>
@@ -433,7 +434,7 @@
            <schema_name/>
            </partitioning>
     <connection>Trisano OLAP DS</connection>
-    <sql>select &#xa;   dw_date_id&#xa;  ,src_date_val&#xa;from dim_date</sql>
+    <sql>select &#xa;   dw_date_id&#xa;  ,dw_date_num_id&#xa;  ,year4&#xa;  ,src_date_val&#xa;from dim_date_new</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -441,7 +442,7 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1360</xloc>
+      <xloc>1480</xloc>
       <yloc>300</yloc>
       <draw>Y</draw>
       </GUI>
@@ -511,7 +512,7 @@
       <start_date_field_name/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>700</xloc>
+      <xloc>820</xloc>
       <yloc>270</yloc>
       <draw>Y</draw>
       </GUI>
@@ -581,7 +582,7 @@
       <start_date_field_name/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>980</xloc>
+      <xloc>1100</xloc>
       <yloc>260</yloc>
       <draw>Y</draw>
       </GUI>
@@ -719,7 +720,7 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>660</xloc>
+      <xloc>780</xloc>
       <yloc>510</yloc>
       <draw>N</draw>
       </GUI>
@@ -797,15 +798,15 @@
         <field>src_date_val</field>
       </key>
       <value>
-        <name>dw_date_id</name>
-        <rename>dw_birth_date_id</rename>
+        <name>dw_date_num_id</name>
+        <rename>dw_birth_date_num_id</rename>
         <default>0</default>
         <type>Integer</type>
       </value>
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1530</xloc>
+      <xloc>1650</xloc>
       <yloc>330</yloc>
       <draw>Y</draw>
       </GUI>
@@ -833,15 +834,15 @@
         <field>src_date_val</field>
       </key>
       <value>
-        <name>dw_date_id</name>
-        <rename>dw_mothers_birth_date_id</rename>
+        <name>dw_date_num_id</name>
+        <rename>dw_mothers_birth_date_num_id</rename>
         <default>0</default>
         <type>Integer</type>
       </value>
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1360</xloc>
+      <xloc>1480</xloc>
       <yloc>410</yloc>
       <draw>Y</draw>
       </GUI>
@@ -869,15 +870,15 @@
         <field>src_date_val</field>
       </key>
       <value>
-        <name>dw_date_id</name>
-        <rename>dw_changed_on_date_id</rename>
+        <name>dw_date_num_id</name>
+        <rename>dw_changed_on_date_num_id</rename>
         <default>0</default>
         <type>Integer</type>
       </value>
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1140</xloc>
+      <xloc>1260</xloc>
       <yloc>290</yloc>
       <draw>Y</draw>
       </GUI>
@@ -905,15 +906,15 @@
         <field>src_date_val</field>
       </key>
       <value>
-        <name>dw_date_id</name>
-        <rename>dw_date_collected_date_id</rename>
+        <name>dw_date_num_id</name>
+        <rename>dw_date_collected_date_num_id</rename>
         <default>0</default>
         <type>Integer</type>
       </value>
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1360</xloc>
+      <xloc>1480</xloc>
       <yloc>140</yloc>
       <draw>Y</draw>
       </GUI>
@@ -941,15 +942,15 @@
         <field>src_date_val</field>
       </key>
       <value>
-        <name>dw_date_id</name>
-        <rename>dw_sr_accessioned_date_id</rename>
+        <name>dw_date_num_id</name>
+        <rename>dw_sr_accessioned_date_num_id</rename>
         <default>0</default>
         <type>Integer</type>
       </value>
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1530</xloc>
+      <xloc>1650</xloc>
       <yloc>230</yloc>
       <draw>Y</draw>
       </GUI>
@@ -978,7 +979,7 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>850</xloc>
+      <xloc>970</xloc>
       <yloc>300</yloc>
       <draw>Y</draw>
       </GUI>
@@ -1104,28 +1105,8 @@
         <update>N</update>
       </value>
       <value>
-        <name>dw_mothers_birth_date_id</name>
-        <rename>dw_mothers_birth_date_id</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>dw_date_collected_date_id</name>
-        <rename>dw_date_collected_date_id</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>dw_changed_on_date_id</name>
-        <rename>dw_changed_on_date_id</rename>
-        <update>N</update>
-      </value>
-      <value>
         <name>dw_birthplace_id</name>
         <rename>dw_birthplace_id</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>dw_birth_date_id</name>
-        <rename>dw_birth_date_id</rename>
         <update>N</update>
       </value>
       <value>
@@ -1204,20 +1185,70 @@
         <update>N</update>
       </value>
       <value>
-        <name>dw_sr_accessioned_date_id</name>
-        <rename>dw_sr_accessioned_date_id</rename>
+        <name>sr_accessioned</name>
+        <rename>SR_ACCESSIONED</rename>
         <update>N</update>
       </value>
       <value>
-        <name>sr_accessioned</name>
-        <rename>SR_ACCESSIONED</rename>
+        <name>dw_changed_on_date_num_id</name>
+        <rename>dw_changed_on_date_num_id</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>dw_date_collected_date_num_id</name>
+        <rename>dw_date_collected_date_num_id</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>dw_sr_accessioned_date_num_id</name>
+        <rename>dw_sr_accessioned_date_num_id</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>dw_birth_date_num_id</name>
+        <rename>dw_birth_date_num_id</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>dw_mothers_birth_date_num_id</name>
+        <rename>dw_mothers_birth_date_num_id</rename>
         <update>N</update>
       </value>
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1360</xloc>
-      <yloc>530</yloc>
+      <xloc>1480</xloc>
+      <yloc>490</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get Message_Sent_On</name>
+    <type>DBJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>NBSOLTP</connection>
+    <rowlimit>0</rowlimit>
+    <sql>select&#xa;	max&#x28;MESSAGE_SENT_ON&#x29; as SRC_MESSAGE_SENT_ON&#xa;FROM &#x24;&#x7b;nbsoltp_schema&#x7d;.NBS_ARUP_MESSAGE_OUT&#xa;WHERE TEXT_ID &#x3d; &#x3f;</sql>
+    <outer_join>N</outer_join>
+    <replace_vars>N</replace_vars>
+    <parameter>
+      <field>
+        <name>ACCESSION_NUMBER</name>
+        <type>String</type>
+      </field>
+    </parameter>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>570</xloc>
+      <yloc>300</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

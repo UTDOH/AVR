@@ -18,7 +18,7 @@
   <resources>
     <job-file>
       <solution-file>
-        <location>/public/etl/NBS/load_nbs_data_warehouse_main.kjb</location>
+        <location>/public/etl/NBS/load_nbs_result_all_years_main.kjb</location>
         <mime-type>text/plain</mime-type>
       </solution-file>
     </job-file>

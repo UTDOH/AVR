@@ -1,13 +1,13 @@
 <Schema name="Newborn Screening">
   <Dimension type="TimeDimension" visible="true" highCardinality="false" name="Date">
-    <Hierarchy name="Year" visible="true" hasAll="true" primaryKey="dw_date_id">
-      <Table name="dim_date" schema="warehouse">
+    <Hierarchy name="Year" visible="true" hasAll="true" primaryKey="dw_date_num_id">
+      <Table name="dim_date_new" schema="warehouse">
       </Table>
       <Level approxRowCount="50" name="Year" visible="true" column="year4" ordinalColumn="year4" type="Integer" internalType="int" uniqueMembers="true" levelType="TimeYears" hideMemberIf="Never">
       </Level>
     </Hierarchy>
-    <Hierarchy name="Date Sequence" visible="true" hasAll="true" primaryKey="dw_date_id">
-      <Table name="dim_date" schema="warehouse">
+    <Hierarchy name="Date Sequence" visible="true" hasAll="true" primaryKey="dw_date_num_id">
+      <Table name="dim_date_new" schema="warehouse">
       </Table>
       <Level approxRowCount="500" name="Month Sequence" visible="true" column="month_sequence" type="Numeric" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never" description="# of Months From the Current Year">
       </Level>
@@ -16,20 +16,20 @@
       <Level approxRowCount="500" name="Day Sequence" visible="true" column="day_sequence" type="Numeric" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
       </Level>
     </Hierarchy>
-    <Hierarchy name="Quarter" visible="true" hasAll="true" primaryKey="dw_date_id">
-      <Table name="dim_date" schema="warehouse">
+    <Hierarchy name="Quarter" visible="true" hasAll="true" primaryKey="dw_date_num_id">
+      <Table name="dim_date_new" schema="warehouse">
       </Table>
       <Level name="Quarter" visible="true" column="quarter_number" nameColumn="quarter_name" ordinalColumn="quarter_number" type="Integer" uniqueMembers="true" levelType="TimeQuarters" hideMemberIf="Never">
       </Level>
     </Hierarchy>
-    <Hierarchy name="Month" visible="true" hasAll="true" primaryKey="dw_date_id">
-      <Table name="dim_date" schema="warehouse">
+    <Hierarchy name="Month" visible="true" hasAll="true" primaryKey="dw_date_num_id">
+      <Table name="dim_date_new" schema="warehouse">
       </Table>
       <Level name="Month" visible="true" column="month_number" nameColumn="month_abbreviation" type="Integer" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never">
       </Level>
     </Hierarchy>
-    <Hierarchy name="Year-Month-Day" visible="true" hasAll="true" allMemberName="All Years" primaryKey="dw_date_id">
-      <Table name="dim_date" schema="warehouse">
+    <Hierarchy name="Year-Month-Day" visible="true" hasAll="true" allMemberName="All Years" primaryKey="dw_date_num_id">
+      <Table name="dim_date_new" schema="warehouse">
       </Table>
       <Level name="Year" visible="true" column="year4" type="Integer" uniqueMembers="true" levelType="TimeYears" hideMemberIf="Never">
       </Level>
@@ -38,8 +38,8 @@
       <Level name="Day" visible="true" column="src_date_val" type="Date" uniqueMembers="true" levelType="TimeDays" hideMemberIf="Never">
       </Level>
     </Hierarchy>
-    <Hierarchy name="Day" visible="true" hasAll="true" primaryKey="dw_date_id">
-      <Table name="dim_date" schema="warehouse" alias="">
+    <Hierarchy name="Day" visible="true" hasAll="true" primaryKey="dw_date_num_id">
+      <Table name="dim_date_new" schema="warehouse">
       </Table>
       <Level name="Day" visible="true" column="src_date_val" type="Date" uniqueMembers="true" levelType="TimeDays" hideMemberIf="Never">
       </Level>
@@ -73,18 +73,10 @@
       </Level>
     </Hierarchy>
   </Dimension>
-  <Dimension type="StandardDimension" visible="true" name="Date2">
-    <Hierarchy name="Date Hier" visible="true" hasAll="true" primaryKey="dw_date_id">
-      <Table name="dim_date" schema="warehouse" alias="">
-      </Table>
-      <Level name="Date_Id" visible="true" column="dw_date_id" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
-      </Level>
-    </Hierarchy>
-  </Dimension>
   <Cube name="NbsCard" visible="true" cache="true" enabled="true">
     <Table name="fact_nbs_card" schema="warehouse">
     </Table>
-    <DimensionUsage source="Date" name="Baby Birthdate" caption="Baby Birthdate" visible="true" foreignKey="dw_birth_date_id" highCardinality="false">
+    <DimensionUsage source="Date" name="Baby Birthdate" caption="Baby Birthdate" visible="true" foreignKey="dw_birth_date_num_id" highCardinality="false">
     </DimensionUsage>
     <DimensionUsage source="Birthplace" name="Baby Birthplace" visible="true" foreignKey="dw_birthplace_id" highCardinality="false">
     </DimensionUsage>
@@ -112,9 +104,9 @@
         </Level>
       </Hierarchy>
     </Dimension>
-    <DimensionUsage source="Date" name="Date Collected" caption="Date Collected" visible="true" foreignKey="dw_date_collected_date_id" highCardinality="false">
+    <DimensionUsage source="Date" name="Date Collected" caption="Date Collected" visible="true" foreignKey="dw_date_collected_date_num_id" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="Date" name="Date Sr Accessioned" caption="Date Sr Accessioned" visible="true" foreignKey="dw_sr_accessioned_date_id" highCardinality="false">
+    <DimensionUsage source="Date" name="Date Sr Accessioned" caption="Date Sr Accessioned" visible="true" foreignKey="dw_sr_accessioned_date_num_id" highCardinality="false">
     </DimensionUsage>
     <Dimension type="StandardDimension" visible="true" foreignKey="hospital_code" highCardinality="false" name="Hospital">
       <Hierarchy name="Hospital Code" visible="true" hasAll="true">
@@ -132,7 +124,7 @@
         </Level>
       </Hierarchy>
     </Dimension>
-    <DimensionUsage source="Date" name="Mothers Birthdate" caption="Mothers Birthdate" visible="true" foreignKey="dw_mothers_birth_date_id" highCardinality="false">
+    <DimensionUsage source="Date" name="Mothers Birthdate" caption="Mothers Birthdate" visible="true" foreignKey="dw_mothers_birth_date_num_id" highCardinality="false">
     </DimensionUsage>
     <Dimension type="StandardDimension" visible="true" foreignKey="mothers_zip" highCardinality="false" name="Mothers Zip">
       <Hierarchy name="Mothers Zip" visible="true" hasAll="true">
@@ -252,11 +244,11 @@
   <Cube name="NbsResult" visible="true" cache="true" enabled="true">
     <Table name="fact_nbs_result" schema="warehouse">
     </Table>
-    <DimensionUsage source="Date2" name="Date Entered On" caption="Date Entered On" visible="true" foreignKey="dw_entered_on_date_id" highCardinality="false">
+    <DimensionUsage source="Date" name="Date Entered On" caption="Date Entered On" visible="true" foreignKey="dw_entered_on_date_num_id" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="Date" name="Date of Treatment" caption="Date of Treatment" visible="true" foreignKey="dw_dx_treatment_date_id" highCardinality="false">
+    <DimensionUsage source="Date" name="Date of Treatment" caption="Date of Treatment" visible="true" foreignKey="dw_dx_treatment_date_num_id" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="Date2" name="Date Reviewed" caption="Date Reviewed" visible="true" foreignKey="dw_reviewed_date_id" highCardinality="false">
+    <DimensionUsage source="Date" name="Date Reviewed" caption="Date Reviewed" visible="true" foreignKey="dw_reviewed_date_num_id" highCardinality="false">
     </DimensionUsage>
     <Dimension type="StandardDimension" visible="true" foreignKey="dw_nbs_result_dx_id" highCardinality="false" name="Result Diagnosis">
       <Hierarchy name="Result Diagnosis" visible="true" hasAll="true" primaryKey="dw_nbs_result_dx_id">
@@ -308,9 +300,9 @@
         </Level>
       </Hierarchy>
     </Dimension>
-    <Dimension type="StandardDimension" visible="true" foreignKey="dw_nbs_result_status_id" name="Result Status" description="Result Status (Formatted Entry)">
+    <Dimension type="StandardDimension" visible="true" foreignKey="dw_nbs_result_status_id" highCardinality="false" name="Result Status" description="Result Status (Formatted Entry)">
       <Hierarchy name="Result Status" visible="true" hasAll="true" allMemberName="All Formatted Entries" primaryKey="dw_nbs_result_status_id">
-        <Table name="dim_nbs_result_status" schema="warehouse" alias="">
+        <Table name="dim_nbs_result_status" schema="warehouse">
         </Table>
         <Level name="Result Status" visible="true" column="formatted_entry" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
         </Level>

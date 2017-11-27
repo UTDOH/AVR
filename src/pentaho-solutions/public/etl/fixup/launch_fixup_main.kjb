@@ -139,12 +139,44 @@
       <yloc>180</yloc>
       </entry>
     <entry>
-      <name>Add_dwRace_to_dimuser</name>
+      <name>Create nbs result agg tables</name>
+      <description/>
+      <type>SQL</type>
+      <sql>CREATE TABLE &#x22;agg_nbs_yr_mo_entrd_analysis&#x22; &#x28;&#xa;    &#x22;dim_date_Year&#x22; int4,&#xa;    &#x22;dim_date_Month_&#x28;Key&#x29;&#x22; int4,&#xa;    &#x22;dim_nbs_analysis_Analysis&#x22; varchar&#x28;20&#x29;,&#xa;    &#x22;fact_nbs_result_Result_Count&#x22; INT8,&#xa;    &#x22;fact_nbs_result_fact_count&#x22; INT8&#x29;&#x3b;&#xa;&#xa;CREATE TABLE &#x22;agg_nbs_yr_entrd_analysis&#x22; &#x28;&#xa;    &#x22;dim_date_Year&#x22; int4,&#xa;    &#x22;dim_nbs_analysis_Analysis&#x22; varchar&#x28;20&#x29;,&#xa;    &#x22;fact_nbs_result_Result_Count&#x22; INT8,&#xa;    &#x22;fact_nbs_result_fact_count&#x22; INT8&#x29;&#x3b;&#xa;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>Trisano OLAP DS</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>600</xloc>
+      <yloc>490</yloc>
+      </entry>
+    <entry>
+      <name>Populate nbs result agg tables</name>
+      <description/>
+      <type>SQL</type>
+      <sql>INSERT INTO &#x22;agg_nbs_yr_mo_entrd_analysis&#x22; &#x28;&#xa;    &#x22;dim_date_Year&#x22;,&#xa;    &#x22;dim_date_Month_&#x28;Key&#x29;&#x22;,&#xa;    &#x22;dim_nbs_analysis_Analysis&#x22;,&#xa;    &#x22;fact_nbs_result_Result_Count&#x22;,&#xa;    &#x22;fact_nbs_result_fact_count&#x22;&#x29;&#xa;select&#xa;    &#x22;dim_date&#x22;.&#x22;year4&#x22; as &#x22;dim_date_Year&#x22;,&#xa;    &#x22;dim_date&#x22;.&#x22;month_number&#x22; as &#x22;dim_date_Month_&#x28;Key&#x29;&#x22;,&#xa;    &#x22;dim_nbs_analysis&#x22;.&#x22;analysis&#x22; as &#x22;dim_nbs_analysis_Analysis&#x22;,&#xa;    count&#x28;&#x22;fact_nbs_result&#x22;.&#x22;result_number&#x22;&#x29; as &#x22;fact_nbs_result_Result_Count&#x22;,&#xa;    count&#x28;&#x2a;&#x29; as &#x22;fact_nbs_result_fact_count&#x22;&#xa;from&#xa;    &#x22;warehouse&#x22;.&#x22;fact_nbs_result&#x22; as &#x22;fact_nbs_result&#x22;,&#xa;    &#x22;warehouse&#x22;.&#x22;dim_date&#x22; as &#x22;dim_date&#x22;,&#xa;    &#x22;warehouse&#x22;.&#x22;dim_nbs_analysis&#x22; as &#x22;dim_nbs_analysis&#x22;&#xa;where&#xa;    &#x22;fact_nbs_result&#x22;.&#x22;dw_entered_on_date_id&#x22; &#x3d; &#x22;dim_date&#x22;.&#x22;dw_date_id&#x22;&#xa;and&#xa;    &#x22;fact_nbs_result&#x22;.&#x22;dw_nbs_analysis_id&#x22; &#x3d; &#x22;dim_nbs_analysis&#x22;.&#x22;dw_nbs_analysis_id&#x22;&#xa;group by&#xa;    &#x22;dim_date&#x22;.&#x22;year4&#x22;,&#xa;    &#x22;dim_date&#x22;.&#x22;month_number&#x22;,&#xa;    &#x22;dim_nbs_analysis&#x22;.&#x22;analysis&#x22;&#x3b;&#xa;&#xa;INSERT INTO &#x22;agg_nbs_yr_entrd_analysis&#x22; &#x28;&#xa;    &#x22;dim_date_Year&#x22;,&#xa;    &#x22;dim_nbs_analysis_Analysis&#x22;,&#xa;    &#x22;fact_nbs_result_Result_Count&#x22;,&#xa;    &#x22;fact_nbs_result_fact_count&#x22;&#x29;&#xa;select&#xa;    &#x22;dim_date&#x22;.&#x22;year4&#x22; as &#x22;dim_date_Year&#x22;,&#xa;    &#x22;dim_nbs_analysis&#x22;.&#x22;analysis&#x22; as &#x22;dim_nbs_analysis_Analysis&#x22;,&#xa;    count&#x28;&#x22;fact_nbs_result&#x22;.&#x22;result_number&#x22;&#x29; as &#x22;fact_nbs_result_Result_Count&#x22;,&#xa;    count&#x28;&#x2a;&#x29; as &#x22;fact_nbs_result_fact_count&#x22;&#xa;from&#xa;    &#x22;warehouse&#x22;.&#x22;fact_nbs_result&#x22; as &#x22;fact_nbs_result&#x22;,&#xa;    &#x22;warehouse&#x22;.&#x22;dim_date&#x22; as &#x22;dim_date&#x22;,&#xa;    &#x22;warehouse&#x22;.&#x22;dim_nbs_analysis&#x22; as &#x22;dim_nbs_analysis&#x22;&#xa;where&#xa;    &#x22;fact_nbs_result&#x22;.&#x22;dw_entered_on_date_id&#x22; &#x3d; &#x22;dim_date&#x22;.&#x22;dw_date_id&#x22;&#xa;and&#xa;    &#x22;fact_nbs_result&#x22;.&#x22;dw_nbs_analysis_id&#x22; &#x3d; &#x22;dim_nbs_analysis&#x22;.&#x22;dw_nbs_analysis_id&#x22;&#xa;group by&#xa;    &#x22;dim_date&#x22;.&#x22;year4&#x22;,&#xa;    &#x22;dim_nbs_analysis&#x22;.&#x22;analysis&#x22;&#x3b;&#xa;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>Trisano OLAP DS</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>610</xloc>
+      <yloc>610</yloc>
+      </entry>
+    <entry>
+      <name>seed_0_date</name>
       <description/>
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;fixup&#x2f;Add_dwRace_to_dimuser.ktr</filename>
+      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;fixup&#x2f;seed_0_date.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -168,40 +200,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1160</xloc>
-      <yloc>360</yloc>
-      </entry>
-    <entry>
-      <name>Create nbs result agg tables</name>
-      <description/>
-      <type>SQL</type>
-      <sql>CREATE TABLE &#x22;agg_nbs_yr_mo_entrd_analysis&#x22; &#x28;&#xa;    &#x22;dim_date_Year&#x22; int4,&#xa;    &#x22;dim_date_Month_&#x28;Key&#x29;&#x22; int4,&#xa;    &#x22;dim_nbs_analysis_Analysis&#x22; varchar&#x28;20&#x29;,&#xa;    &#x22;fact_nbs_result_Result_Count&#x22; INT8,&#xa;    &#x22;fact_nbs_result_fact_count&#x22; INT8&#x29;&#x3b;&#xa;&#xa;CREATE TABLE &#x22;agg_nbs_yr_entrd_analysis&#x22; &#x28;&#xa;    &#x22;dim_date_Year&#x22; int4,&#xa;    &#x22;dim_nbs_analysis_Analysis&#x22; varchar&#x28;20&#x29;,&#xa;    &#x22;fact_nbs_result_Result_Count&#x22; INT8,&#xa;    &#x22;fact_nbs_result_fact_count&#x22; INT8&#x29;&#x3b;&#xa;</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename/>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>Trisano OLAP DS</connection>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>400</xloc>
-      <yloc>610</yloc>
-      </entry>
-    <entry>
-      <name>Populate nbs result agg tables</name>
-      <description/>
-      <type>SQL</type>
-      <sql>INSERT INTO &#x22;agg_nbs_yr_mo_entrd_analysis&#x22; &#x28;&#xa;    &#x22;dim_date_Year&#x22;,&#xa;    &#x22;dim_date_Month_&#x28;Key&#x29;&#x22;,&#xa;    &#x22;dim_nbs_analysis_Analysis&#x22;,&#xa;    &#x22;fact_nbs_result_Result_Count&#x22;,&#xa;    &#x22;fact_nbs_result_fact_count&#x22;&#x29;&#xa;select&#xa;    &#x22;dim_date&#x22;.&#x22;year4&#x22; as &#x22;dim_date_Year&#x22;,&#xa;    &#x22;dim_date&#x22;.&#x22;month_number&#x22; as &#x22;dim_date_Month_&#x28;Key&#x29;&#x22;,&#xa;    &#x22;dim_nbs_analysis&#x22;.&#x22;analysis&#x22; as &#x22;dim_nbs_analysis_Analysis&#x22;,&#xa;    count&#x28;&#x22;fact_nbs_result&#x22;.&#x22;result_number&#x22;&#x29; as &#x22;fact_nbs_result_Result_Count&#x22;,&#xa;    count&#x28;&#x2a;&#x29; as &#x22;fact_nbs_result_fact_count&#x22;&#xa;from&#xa;    &#x22;warehouse&#x22;.&#x22;fact_nbs_result&#x22; as &#x22;fact_nbs_result&#x22;,&#xa;    &#x22;warehouse&#x22;.&#x22;dim_date&#x22; as &#x22;dim_date&#x22;,&#xa;    &#x22;warehouse&#x22;.&#x22;dim_nbs_analysis&#x22; as &#x22;dim_nbs_analysis&#x22;&#xa;where&#xa;    &#x22;fact_nbs_result&#x22;.&#x22;dw_entered_on_date_id&#x22; &#x3d; &#x22;dim_date&#x22;.&#x22;dw_date_id&#x22;&#xa;and&#xa;    &#x22;fact_nbs_result&#x22;.&#x22;dw_nbs_analysis_id&#x22; &#x3d; &#x22;dim_nbs_analysis&#x22;.&#x22;dw_nbs_analysis_id&#x22;&#xa;group by&#xa;    &#x22;dim_date&#x22;.&#x22;year4&#x22;,&#xa;    &#x22;dim_date&#x22;.&#x22;month_number&#x22;,&#xa;    &#x22;dim_nbs_analysis&#x22;.&#x22;analysis&#x22;&#x3b;&#xa;&#xa;INSERT INTO &#x22;agg_nbs_yr_entrd_analysis&#x22; &#x28;&#xa;    &#x22;dim_date_Year&#x22;,&#xa;    &#x22;dim_nbs_analysis_Analysis&#x22;,&#xa;    &#x22;fact_nbs_result_Result_Count&#x22;,&#xa;    &#x22;fact_nbs_result_fact_count&#x22;&#x29;&#xa;select&#xa;    &#x22;dim_date&#x22;.&#x22;year4&#x22; as &#x22;dim_date_Year&#x22;,&#xa;    &#x22;dim_nbs_analysis&#x22;.&#x22;analysis&#x22; as &#x22;dim_nbs_analysis_Analysis&#x22;,&#xa;    count&#x28;&#x22;fact_nbs_result&#x22;.&#x22;result_number&#x22;&#x29; as &#x22;fact_nbs_result_Result_Count&#x22;,&#xa;    count&#x28;&#x2a;&#x29; as &#x22;fact_nbs_result_fact_count&#x22;&#xa;from&#xa;    &#x22;warehouse&#x22;.&#x22;fact_nbs_result&#x22; as &#x22;fact_nbs_result&#x22;,&#xa;    &#x22;warehouse&#x22;.&#x22;dim_date&#x22; as &#x22;dim_date&#x22;,&#xa;    &#x22;warehouse&#x22;.&#x22;dim_nbs_analysis&#x22; as &#x22;dim_nbs_analysis&#x22;&#xa;where&#xa;    &#x22;fact_nbs_result&#x22;.&#x22;dw_entered_on_date_id&#x22; &#x3d; &#x22;dim_date&#x22;.&#x22;dw_date_id&#x22;&#xa;and&#xa;    &#x22;fact_nbs_result&#x22;.&#x22;dw_nbs_analysis_id&#x22; &#x3d; &#x22;dim_nbs_analysis&#x22;.&#x22;dw_nbs_analysis_id&#x22;&#xa;group by&#xa;    &#x22;dim_date&#x22;.&#x22;year4&#x22;,&#xa;    &#x22;dim_nbs_analysis&#x22;.&#x22;analysis&#x22;&#x3b;&#xa;</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename/>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>Trisano OLAP DS</connection>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>610</xloc>
-      <yloc>610</yloc>
+      <xloc>180</xloc>
+      <yloc>110</yloc>
       </entry>
     <entry>
       <name>update_date_fields</name>
@@ -233,16 +233,126 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>640</xloc>
-      <yloc>30</yloc>
+      <xloc>500</xloc>
+      <yloc>50</yloc>
       </entry>
     <entry>
-      <name>Add_dw_date_num_id_to_dim_date</name>
+      <name>fact_nbs_card</name>
+      <description/>
+      <type>SQL</type>
+      <sql>update warehouse.fact_nbs_card&#xa;set dw_sr_accessioned_date_id &#x3d; dd.dw_date_num_id&#xa;from warehouse.dim_date_new dd &#xa;where dd.dw_date_id &#x3d; dw_sr_accessioned_date_id&#x3b;&#xa;&#xa;alter table warehouse.fact_nbs_card&#xa;rename column dw_sr_accessioned_date_id to dw_sr_accessioned_date_num_id&#x3b;&#xa;&#xa;update warehouse.fact_nbs_card&#xa;set dw_date_collected_date_id &#x3d; dd.dw_date_num_id&#xa;from warehouse.dim_date_new dd &#xa;where dd.dw_date_id &#x3d; dw_date_collected_date_id&#x3b;&#xa;&#xa;alter table warehouse.fact_nbs_card&#xa;rename column dw_date_collected_date_id to dw_date_collected_date_num_id&#x3b;&#xa;&#xa;update warehouse.fact_nbs_card&#xa;set dw_birth_date_id &#x3d; dd.dw_date_num_id&#xa;from warehouse.dim_date_new dd &#xa;where dd.dw_date_id &#x3d; dw_birth_date_id&#x3b;&#xa;&#xa;alter table warehouse.fact_nbs_card&#xa;rename column dw_birth_date_id to dw_birth_date_num_id&#x3b;&#xa;&#xa;update warehouse.fact_nbs_card&#xa;set dw_mothers_birth_date_id &#x3d; dd.dw_date_num_id&#xa;from warehouse.dim_date_new dd &#xa;where dd.dw_date_id &#x3d; dw_mothers_birth_date_id&#x3b;&#xa;&#xa;alter table warehouse.fact_nbs_card&#xa;rename column dw_mothers_birth_date_id to dw_mothers_birth_date_num_id&#x3b;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>Trisano OLAP DS</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>320</xloc>
+      <yloc>140</yloc>
+      </entry>
+    <entry>
+      <name>fact_nbs_result</name>
+      <description/>
+      <type>SQL</type>
+      <sql>update warehouse.fact_nbs_result_2006&#xa;set dw_dx_treatment_date_id &#x3d; dd.dw_date_num_id&#xa;from warehouse.dim_date_new dd &#xa;where dd.dw_date_id &#x3d; dw_dx_treatment_date_id&#x3b;&#xa;&#xa;update warehouse.fact_nbs_result_2007&#xa;set dw_dx_treatment_date_id &#x3d; dd.dw_date_num_id&#xa;from warehouse.dim_date_new dd &#xa;where dd.dw_date_id &#x3d; dw_dx_treatment_date_id&#x3b;&#xa;&#xa;update warehouse.fact_nbs_result_2008&#xa;set dw_dx_treatment_date_id &#x3d; dd.dw_date_num_id&#xa;from warehouse.dim_date_new dd &#xa;where dd.dw_date_id &#x3d; dw_dx_treatment_date_id&#x3b;&#xa;&#xa;update warehouse.fact_nbs_result_2009&#xa;set dw_dx_treatment_date_id &#x3d; dd.dw_date_num_id&#xa;from warehouse.dim_date_new dd &#xa;where dd.dw_date_id &#x3d; dw_dx_treatment_date_id&#x3b;&#xa;&#xa;update warehouse.fact_nbs_result_2010&#xa;set dw_dx_treatment_date_id &#x3d; dd.dw_date_num_id&#xa;from warehouse.dim_date_new dd &#xa;where dd.dw_date_id &#x3d; dw_dx_treatment_date_id&#x3b;&#xa;&#xa;update warehouse.fact_nbs_result_2011&#xa;set dw_dx_treatment_date_id &#x3d; dd.dw_date_num_id&#xa;from warehouse.dim_date_new dd &#xa;where dd.dw_date_id &#x3d; dw_dx_treatment_date_id&#x3b;&#xa;&#xa;update warehouse.fact_nbs_result_2012&#xa;set dw_dx_treatment_date_id &#x3d; dd.dw_date_num_id&#xa;from warehouse.dim_date_new dd &#xa;where dd.dw_date_id &#x3d; dw_dx_treatment_date_id&#x3b;&#xa;&#xa;update warehouse.fact_nbs_result_2013&#xa;set dw_dx_treatment_date_id &#x3d; dd.dw_date_num_id&#xa;from warehouse.dim_date_new dd &#xa;where dd.dw_date_id &#x3d; dw_dx_treatment_date_id&#x3b;&#xa;&#xa;update warehouse.fact_nbs_result_2014&#xa;set dw_dx_treatment_date_id &#x3d; dd.dw_date_num_id&#xa;from warehouse.dim_date_new dd &#xa;where dd.dw_date_id &#x3d; dw_dx_treatment_date_id&#x3b;&#xa;&#xa;update warehouse.fact_nbs_result_2015&#xa;set dw_dx_treatment_date_id &#x3d; dd.dw_date_num_id&#xa;from warehouse.dim_date_new dd &#xa;where dd.dw_date_id &#x3d; dw_dx_treatment_date_id&#x3b;&#xa;&#xa;alter table warehouse.fact_nbs_result&#xa;rename column dw_dx_treatment_date_id to dw_dx_treatment_date_num_id&#x3b;&#xa;&#xa;&#xa;&#xa;update warehouse.fact_nbs_result_2006&#xa;set dw_reviewed_date_id &#x3d; dd.dw_date_num_id&#xa;from warehouse.dim_date_new dd &#xa;where dd.dw_date_id &#x3d; dw_reviewed_date_id&#x3b;&#xa;&#xa;update warehouse.fact_nbs_result_2007&#xa;set dw_reviewed_date_id &#x3d; dd.dw_date_num_id&#xa;from warehouse.dim_date_new dd &#xa;where dd.dw_date_id &#x3d; dw_reviewed_date_id&#x3b;&#xa;&#xa;update warehouse.fact_nbs_result_2008&#xa;set dw_reviewed_date_id &#x3d; dd.dw_date_num_id&#xa;from warehouse.dim_date_new dd &#xa;where dd.dw_date_id &#x3d; dw_reviewed_date_id&#x3b;&#xa;&#xa;update warehouse.fact_nbs_result_2009&#xa;set dw_reviewed_date_id &#x3d; dd.dw_date_num_id&#xa;from warehouse.dim_date_new dd &#xa;where dd.dw_date_id &#x3d; dw_reviewed_date_id&#x3b;&#xa;&#xa;update warehouse.fact_nbs_result_2010&#xa;set dw_reviewed_date_id &#x3d; dd.dw_date_num_id&#xa;from warehouse.dim_date_new dd &#xa;where dd.dw_date_id &#x3d; dw_reviewed_date_id&#x3b;&#xa;&#xa;update warehouse.fact_nbs_result_2011&#xa;set dw_reviewed_date_id &#x3d; dd.dw_date_num_id&#xa;from warehouse.dim_date_new dd &#xa;where dd.dw_date_id &#x3d; dw_reviewed_date_id&#x3b;&#xa;&#xa;update warehouse.fact_nbs_result_2012&#xa;set dw_reviewed_date_id &#x3d; dd.dw_date_num_id&#xa;from warehouse.dim_date_new dd &#xa;where dd.dw_date_id &#x3d; dw_reviewed_date_id&#x3b;&#xa;&#xa;update warehouse.fact_nbs_result_2013&#xa;set dw_reviewed_date_id &#x3d; dd.dw_date_num_id&#xa;from warehouse.dim_date_new dd &#xa;where dd.dw_date_id &#x3d; dw_reviewed_date_id&#x3b;&#xa;&#xa;update warehouse.fact_nbs_result_2014&#xa;set dw_reviewed_date_id &#x3d; dd.dw_date_num_id&#xa;from warehouse.dim_date_new dd &#xa;where dd.dw_date_id &#x3d; dw_reviewed_date_id&#x3b;&#xa;&#xa;update warehouse.fact_nbs_result_2015&#xa;set dw_reviewed_date_id &#x3d; dd.dw_date_num_id&#xa;from warehouse.dim_date_new dd &#xa;where dd.dw_date_id &#x3d; dw_reviewed_date_id&#x3b;&#xa;&#xa;&#xa;alter table warehouse.fact_nbs_result&#xa;rename column dw_reviewed_date_id to dw_reviewed_date_num_id&#x3b;&#xa;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>Trisano OLAP DS</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>520</xloc>
+      <yloc>190</yloc>
+      </entry>
+    <entry>
+      <name>check disk space</name>
+      <description/>
+      <type>SHELL</type>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>df -h</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>100</xloc>
+      <yloc>310</yloc>
+      </entry>
+    <entry>
+      <name>vacuum</name>
+      <description/>
+      <type>SQL</type>
+      <sql>vacuum full&#x3b;&#xa;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>Trisano OLAP DS</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>450</xloc>
+      <yloc>310</yloc>
+      </entry>
+    <entry>
+      <name>check disk space 2</name>
+      <description/>
+      <type>SHELL</type>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>df -h</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>660</xloc>
+      <yloc>270</yloc>
+      </entry>
+    <entry>
+      <name>Add arup date columns to fact_nbs_card</name>
+      <description/>
+      <type>SQL</type>
+      <sql>alter table warehouse.fact_nbs_card add column dw_message_sent_on_date_num_id integer&#x3b;&#xa;&#xa;alter table warehouse.fact_nbs_card add column src_message_sent_on timestamp&#x3b;&#xa;&#xa;CREATE INDEX idx_fact_nbs_card_src_msg_sent_on&#xa;  ON warehouse.fact_nbs_card&#xa;  USING btree&#xa;  &#x28;src_message_sent_on&#x29;&#x3b;&#xa;&#xa;&#xa;CREATE INDEX idx_fact_nbs_card_dw_msg_sent_on&#xa;  ON warehouse.fact_nbs_card&#xa;  USING btree&#xa;  &#x28;dw_message_sent_on_date_num_id&#x29;&#x3b;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>Trisano OLAP DS</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>200</xloc>
+      <yloc>240</yloc>
+      </entry>
+    <entry>
+      <name>exec_update_nbs_card_fact_w_arup_msg_in_main</name>
       <description/>
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;fixup&#x2f;Add_dw_date_num_id_to_dim_date.ktr</filename>
+      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_update_nbs_card_fact_w_arup_msg_in_main.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -266,14 +376,14 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>420</xloc>
-      <yloc>30</yloc>
+      <xloc>290</xloc>
+      <yloc>350</yloc>
       </entry>
     <entry>
-      <name>fnr_2017</name>
+      <name>drop fact_nbs_sample</name>
       <description/>
       <type>SQL</type>
-      <sql>DROP TABLE IF EXISTS warehouse.fact_nbs_result_2017&#x3b;&#xa;&#xa;CREATE TABLE warehouse.fact_nbs_result_2017 &#x28;&#xa;    CHECK &#x28; dw_entered_on_date_num_id &#x3e;&#x3d; 20170101 AND dw_entered_on_date_num_id &#x3c;&#x3d; 20171231 &#x29;&#xa;&#x29; INHERITS &#x28;warehouse.fact_nbs_result&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_date_reviewed&#xa;&#xa;-- DROP INDEX warehouse.idx_date_reviewed&#x3b;&#xa;&#xa;CREATE INDEX idx_date_reviewed_2017&#xa;  ON warehouse.fact_nbs_result_2017&#xa;  USING btree&#xa;  &#x28;date_reviewed&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_dw_dx_treatment_date_id&#xa;&#xa;-- DROP INDEX warehouse.idx_dw_dx_treatment_date_id&#x3b;&#xa;&#xa;CREATE INDEX idx_dw_dx_treatment_date_id_2017&#xa;  ON warehouse.fact_nbs_result_2017&#xa;  USING btree&#xa;  &#x28;dw_dx_treatment_date_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_dw_entered_on_date_num_id&#xa;&#xa;-- DROP INDEX warehouse.idx_dw_entered_on_date_num_id&#x3b;&#xa;&#xa;CREATE INDEX idx_dw_entered_on_date_num_id_2017&#xa;  ON warehouse.fact_nbs_result_2017&#xa;  USING btree&#xa;  &#x28;dw_entered_on_date_num_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_dw_nbs_analysis_id&#xa;&#xa;-- DROP INDEX warehouse.idx_dw_nbs_analysis_id&#x3b;&#xa;&#xa;CREATE INDEX idx_dw_nbs_analysis_id_2017&#xa;  ON warehouse.fact_nbs_result_2017&#xa;  USING btree&#xa;  &#x28;dw_nbs_analysis_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_dw_nbs_card_type_id&#xa;&#xa;-- DROP INDEX warehouse.idx_dw_nbs_card_type_id&#x3b;&#xa;&#xa;CREATE INDEX idx_dw_nbs_card_type_id_2017&#xa;  ON warehouse.fact_nbs_result_2017&#xa;  USING btree&#xa;  &#x28;dw_nbs_card_type_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_dw_nbs_loinc_id&#xa;&#xa;-- DROP INDEX warehouse.idx_dw_nbs_loinc_id&#x3b;&#xa;&#xa;CREATE INDEX idx_dw_nbs_loinc_id_2017&#xa;  ON warehouse.fact_nbs_result_2017&#xa;  USING btree&#xa;  &#x28;dw_nbs_loinc_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_dw_nbs_result_dx_id&#xa;&#xa;-- DROP INDEX warehouse.idx_dw_nbs_result_dx_id&#x3b;&#xa;&#xa;CREATE INDEX idx_dw_nbs_result_dx_id_2017&#xa;  ON warehouse.fact_nbs_result_2017&#xa;  USING btree&#xa;  &#x28;dw_nbs_result_dx_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_dw_nbs_result_id&#xa;&#xa;-- DROP INDEX warehouse.idx_dw_nbs_result_id&#x3b;&#xa;&#xa;CREATE INDEX idx_dw_nbs_result_id_2017&#xa;  ON warehouse.fact_nbs_result_2017&#xa;  USING btree&#xa;  &#x28;dw_nbs_result_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_dw_nbs_result_status_id&#xa;&#xa;-- DROP INDEX warehouse.idx_dw_nbs_result_status_id&#x3b;&#xa;&#xa;CREATE INDEX idx_dw_nbs_result_status_id_2017&#xa;  ON warehouse.fact_nbs_result_2017&#xa;  USING btree&#xa;  &#x28;dw_nbs_result_status_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_dw_nbs_snomed_code_id&#xa;&#xa;-- DROP INDEX warehouse.idx_dw_nbs_snomed_code_id&#x3b;&#xa;&#xa;CREATE INDEX idx_dw_nbs_snomed_code_id_2017&#xa;  ON warehouse.fact_nbs_result_2017&#xa;  USING btree&#xa;  &#x28;dw_nbs_snomed_code_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_dw_reviewed_date_id&#xa;&#xa;-- DROP INDEX warehouse.idx_dw_reviewed_date_id&#x3b;&#xa;&#xa;CREATE INDEX idx_dw_reviewed_date_id_2017&#xa;  ON warehouse.fact_nbs_result_2017&#xa;  USING btree&#xa;  &#x28;dw_reviewed_date_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_entered_on&#xa;&#xa;-- DROP INDEX warehouse.idx_entered_on&#x3b;&#xa;&#xa;CREATE INDEX idx_entered_on_2017&#xa;  ON warehouse.fact_nbs_result_2017&#xa;  USING btree&#xa;  &#x28;entered_on&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_full_date_reviewed&#xa;&#xa;-- DROP INDEX warehouse.idx_full_date_reviewed&#x3b;&#xa;&#xa;CREATE INDEX idx_full_date_reviewed_2017&#xa;  ON warehouse.fact_nbs_result_2017&#xa;  USING btree&#xa;  &#x28;date_reviewed&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_full_dw_dx_treatment_date_id&#xa;&#xa;-- DROP INDEX warehouse.idx_full_dw_dx_treatment_date_id&#x3b;&#xa;&#xa;CREATE INDEX idx_full_dw_dx_treatment_date_id_2017&#xa;  ON warehouse.fact_nbs_result_2017&#xa;  USING btree&#xa;  &#x28;dw_dx_treatment_date_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_full_dw_entered_on_date_num_id&#xa;&#xa;-- DROP INDEX warehouse.idx_full_dw_entered_on_date_num_id&#x3b;&#xa;&#xa;CREATE INDEX idx_full_dw_entered_on_date_num_id_2017&#xa;  ON warehouse.fact_nbs_result_2017&#xa;  USING btree&#xa;  &#x28;dw_entered_on_date_num_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_full_dw_nbs_analysis_id&#xa;&#xa;-- DROP INDEX warehouse.idx_full_dw_nbs_analysis_id&#x3b;&#xa;&#xa;CREATE INDEX idx_full_dw_nbs_analysis_id_2017&#xa;  ON warehouse.fact_nbs_result_2017&#xa;  USING btree&#xa;  &#x28;dw_nbs_analysis_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_full_dw_nbs_card_type_id&#xa;&#xa;-- DROP INDEX warehouse.idx_full_dw_nbs_card_type_id&#x3b;&#xa;&#xa;CREATE INDEX idx_full_dw_nbs_card_type_id_2017&#xa;  ON warehouse.fact_nbs_result_2017&#xa;  USING btree&#xa;  &#x28;dw_nbs_card_type_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_full_dw_nbs_loinc_id&#xa;&#xa;-- DROP INDEX warehouse.idx_full_dw_nbs_loinc_id&#x3b;&#xa;&#xa;CREATE INDEX idx_full_dw_nbs_loinc_id_2017&#xa;  ON warehouse.fact_nbs_result_2017&#xa;  USING btree&#xa;  &#x28;dw_nbs_loinc_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_full_dw_nbs_result_dx_id&#xa;&#xa;-- DROP INDEX warehouse.idx_full_dw_nbs_result_dx_id&#x3b;&#xa;&#xa;CREATE INDEX idx_full_dw_nbs_result_dx_id_2017&#xa;  ON warehouse.fact_nbs_result_2017&#xa;  USING btree&#xa;  &#x28;dw_nbs_result_dx_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_full_dw_nbs_result_id&#xa;&#xa;-- DROP INDEX warehouse.idx_full_dw_nbs_result_id&#x3b;&#xa;&#xa;CREATE INDEX idx_full_dw_nbs_result_id_2017&#xa;  ON warehouse.fact_nbs_result_2017&#xa;  USING btree&#xa;  &#x28;dw_nbs_result_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_full_dw_nbs_result_status_id&#xa;&#xa;-- DROP INDEX warehouse.idx_full_dw_nbs_result_status_id&#x3b;&#xa;&#xa;CREATE INDEX idx_full_dw_nbs_result_status_id_2017&#xa;  ON warehouse.fact_nbs_result_2017&#xa;  USING btree&#xa;  &#x28;dw_nbs_result_status_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_full_dw_nbs_snomed_code_id&#xa;&#xa;-- DROP INDEX warehouse.idx_full_dw_nbs_snomed_code_id&#x3b;&#xa;&#xa;CREATE INDEX idx_full_dw_nbs_snomed_code_id_2017&#xa;  ON warehouse.fact_nbs_result_2017&#xa;  USING btree&#xa;  &#x28;dw_nbs_snomed_code_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_full_dw_reviewed_date_id&#xa;&#xa;-- DROP INDEX warehouse.idx_full_dw_reviewed_date_id&#x3b;&#xa;&#xa;CREATE INDEX idx_full_dw_reviewed_date_id_2017&#xa;  ON warehouse.fact_nbs_result_2017&#xa;  USING btree&#xa;  &#x28;dw_reviewed_date_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_full_entered_on&#xa;&#xa;-- DROP INDEX warehouse.idx_full_entered_on&#x3b;&#xa;&#xa;CREATE INDEX idx_full_entered_on_2017&#xa;  ON warehouse.fact_nbs_result_2017&#xa;  USING btree&#xa;  &#x28;entered_on&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_full_nbs_units_id&#xa;&#xa;-- DROP INDEX warehouse.idx_full_nbs_units_id&#x3b;&#xa;&#xa;CREATE INDEX idx_full_nbs_units_id_2017&#xa;  ON warehouse.fact_nbs_result_2017&#xa;  USING btree&#xa;  &#x28;dw_nbs_units_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_full_result_number&#xa;&#xa;-- DROP INDEX warehouse.idx_full_result_number&#x3b;&#xa;&#xa;CREATE INDEX idx_full_result_number_2017&#xa;  ON warehouse.fact_nbs_result_2017&#xa;  USING btree&#xa;  &#x28;result_number&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_full_text_id&#xa;&#xa;-- DROP INDEX warehouse.idx_full_text_id&#x3b;&#xa;&#xa;CREATE INDEX idx_full_text_id_2017&#xa;  ON warehouse.fact_nbs_result_2017&#xa;  USING btree&#xa;  &#x28;text_id COLLATE pg_catalog.&#x22;default&#x22;&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_full_x_dx_treatment_date&#xa;&#xa;-- DROP INDEX warehouse.idx_full_x_dx_treatment_date&#x3b;&#xa;&#xa;CREATE INDEX idx_full_x_dx_treatment_date_2017&#xa;  ON warehouse.fact_nbs_result_2017&#xa;  USING btree&#xa;  &#x28;x_dx_treatment_date&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_nbs_units_id&#xa;&#xa;-- DROP INDEX warehouse.idx_nbs_units_id&#x3b;&#xa;&#xa;CREATE INDEX idx_nbs_units_id_2017&#xa;  ON warehouse.fact_nbs_result_2017&#xa;  USING btree&#xa;  &#x28;dw_nbs_units_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_result_number&#xa;&#xa;-- DROP INDEX warehouse.idx_result_number&#x3b;&#xa;&#xa;CREATE INDEX idx_result_number_2017&#xa;  ON warehouse.fact_nbs_result_2017&#xa;  USING btree&#xa;  &#x28;result_number&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_text_id&#xa;&#xa;-- DROP INDEX warehouse.idx_text_id&#x3b;&#xa;&#xa;CREATE INDEX idx_text_id_2017&#xa;  ON warehouse.fact_nbs_result_2017&#xa;  USING btree&#xa;  &#x28;text_id COLLATE pg_catalog.&#x22;default&#x22;&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_x_dx_treatment_date&#xa;&#xa;-- DROP INDEX warehouse.idx_x_dx_treatment_date&#x3b;&#xa;&#xa;CREATE INDEX idx_x_dx_treatment_date_2017&#xa;  ON warehouse.fact_nbs_result_2017&#xa;  USING btree&#xa;  &#x28;x_dx_treatment_date&#x29;&#x3b;&#xa;&#xa;insert into fact_nbs_result_2017&#xa;&#x28;&#xa;   select &#x2a; from warehouse.fact_nbs_result_current where dw_entered_on_date_num_id between 20170101 and 20171231&#xa;&#x29;&#x3b;</sql>
+      <sql>drop table if exists warehouse.fact_nbs_sample&#x3b;</sql>
       <useVariableSubstitution>F</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
@@ -282,84 +392,14 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>850</xloc>
-      <yloc>250</yloc>
+      <xloc>230</xloc>
+      <yloc>180</yloc>
       </entry>
     <entry>
-      <name>fnr_2011</name>
-      <description/>
-      <type>JOB</type>
-      <specification_method>filename</specification_method>
-      <job_object_id/>
-      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;create_fact_nbs_result_partition_table.kjb</filename>
-      <jobname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <expand_remote_job>N</expand_remote_job>
-      <create_parent_folder>N</create_parent_folder>
-      <pass_export>N</pass_export>
-      <force_separate_logging>N</force_separate_logging>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-            <parameter>            <name>YYYY</name>
-            <stream_name/>
-            <value>2011</value>
-            </parameter>      </parameters>      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>170</xloc>
-      <yloc>200</yloc>
-      </entry>
-    <entry>
-      <name>fnr_2012</name>
-      <description/>
-      <type>JOB</type>
-      <specification_method>filename</specification_method>
-      <job_object_id/>
-      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;create_fact_nbs_result_partition_table.kjb</filename>
-      <jobname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <expand_remote_job>N</expand_remote_job>
-      <create_parent_folder>N</create_parent_folder>
-      <pass_export>N</pass_export>
-      <force_separate_logging>N</force_separate_logging>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-            <parameter>            <name>YYYY</name>
-            <stream_name/>
-            <value>2012</value>
-            </parameter>      </parameters>      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>270</xloc>
-      <yloc>250</yloc>
-      </entry>
-    <entry>
-      <name>truncate</name>
+      <name>Add arup date columns to fact_nbs_card 2</name>
       <description/>
       <type>SQL</type>
-      <sql>vacuum verbose&#x3b;</sql>
+      <sql>update warehouse.fact_nbs_card set dw_message_sent_on_date_num_id &#x3d; 19000101&#x3b;&#xa;&#xa;update warehouse.fact_nbs_card set src_message_sent_on &#x3d; &#x27;1900-01-01&#x27;&#x3b;&#xa;</sql>
       <useVariableSubstitution>F</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
@@ -368,222 +408,11 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>160</xloc>
-      <yloc>330</yloc>
-      </entry>
-    <entry>
-      <name>fnr_2013</name>
-      <description/>
-      <type>JOB</type>
-      <specification_method>filename</specification_method>
-      <job_object_id/>
-      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;create_fact_nbs_result_partition_table.kjb</filename>
-      <jobname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <expand_remote_job>N</expand_remote_job>
-      <create_parent_folder>N</create_parent_folder>
-      <pass_export>N</pass_export>
-      <force_separate_logging>N</force_separate_logging>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-            <parameter>            <name>YYYY</name>
-            <stream_name/>
-            <value>2013</value>
-            </parameter>      </parameters>      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>390</xloc>
-      <yloc>250</yloc>
-      </entry>
-    <entry>
-      <name>fnr_2014</name>
-      <description/>
-      <type>JOB</type>
-      <specification_method>filename</specification_method>
-      <job_object_id/>
-      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;create_fact_nbs_result_partition_table.kjb</filename>
-      <jobname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <expand_remote_job>N</expand_remote_job>
-      <create_parent_folder>N</create_parent_folder>
-      <pass_export>N</pass_export>
-      <force_separate_logging>N</force_separate_logging>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-            <parameter>            <name>YYYY</name>
-            <stream_name/>
-            <value>2014</value>
-            </parameter>      </parameters>      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>480</xloc>
-      <yloc>250</yloc>
-      </entry>
-    <entry>
-      <name>fnr_2015</name>
-      <description/>
-      <type>JOB</type>
-      <specification_method>filename</specification_method>
-      <job_object_id/>
-      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;create_fact_nbs_result_partition_table.kjb</filename>
-      <jobname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <expand_remote_job>N</expand_remote_job>
-      <create_parent_folder>N</create_parent_folder>
-      <pass_export>N</pass_export>
-      <force_separate_logging>N</force_separate_logging>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-            <parameter>            <name>YYYY</name>
-            <stream_name/>
-            <value>2015</value>
-            </parameter>      </parameters>      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>590</xloc>
-      <yloc>250</yloc>
-      </entry>
-    <entry>
-      <name>fnr_2016</name>
-      <description/>
-      <type>JOB</type>
-      <specification_method>filename</specification_method>
-      <job_object_id/>
-      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;create_fact_nbs_result_partition_table.kjb</filename>
-      <jobname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <expand_remote_job>N</expand_remote_job>
-      <create_parent_folder>N</create_parent_folder>
-      <pass_export>N</pass_export>
-      <force_separate_logging>N</force_separate_logging>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-            <parameter>            <name>YYYY</name>
-            <stream_name/>
-            <value>2016</value>
-            </parameter>      </parameters>      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>700</xloc>
-      <yloc>250</yloc>
-      </entry>
-    <entry>
-      <name>fnr_2017 2</name>
-      <description/>
-      <type>SQL</type>
-      <sql>insert into fact_nbs_result_2008&#xa;&#x28;&#xa;   select &#x2a; from warehouse.fact_nbs_result_current where dw_entered_on_date_num_id between 20080101 and 20081231&#xa;&#x29;&#x3b;</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename/>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>Trisano OLAP DS</connection>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>310</xloc>
-      <yloc>170</yloc>
-      </entry>
-    <entry>
-      <name>df</name>
-      <description/>
-      <type>SHELL</type>
-      <filename/>
-      <work_directory/>
-      <arg_from_previous>N</arg_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <set_append_logfile>N</set_append_logfile>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <insertScript>Y</insertScript>
-      <script>df -h&#xa;pwd&#xa;ls -alt &#x2f;var&#x2f;local&#xa;&#xa;rm -r -f &#x2f;var&#x2f;local&#x2f;pdi-ce-5.0.1-stable&#xa;&#xa;df</script>
-      <loglevel>Basic</loglevel>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>50</xloc>
-      <yloc>330</yloc>
-      </entry>
-    <entry>
-      <name>df 2</name>
-      <description/>
-      <type>SHELL</type>
-      <filename/>
-      <work_directory/>
-      <arg_from_previous>N</arg_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <set_append_logfile>N</set_append_logfile>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <insertScript>Y</insertScript>
-      <script>df -h</script>
-      <loglevel>Basic</loglevel>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>270</xloc>
-      <yloc>330</yloc>
+      <xloc>130</xloc>
+      <yloc>240</yloc>
       </entry>
   </entries>
   <hops>
-    <hop>
-      <from>Add_dwRace_to_dimuser</from>
-      <to>Success</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
     <hop>
       <from>Create nbs result agg tables</from>
       <to>Populate nbs result agg tables</to>
@@ -604,21 +433,12 @@
     </hop>
     <hop>
       <from>START</from>
-      <to>Add_dw_date_num_id_to_dim_date</to>
+      <to>seed_0_date</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>Add_dw_date_num_id_to_dim_date</from>
-      <to>update_date_fields</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
     </hop>
     <hop>
       <from>update_date_fields</from>
@@ -630,71 +450,26 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>START</from>
+      <from>seed_0_date</from>
+      <to>fact_nbs_card</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>fact_nbs_card</from>
       <to>update_date_fields</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>N</enabled>
-      <evaluation>Y</evaluation>
+      <evaluation>N</evaluation>
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>fnr_2017</from>
-      <to>Success</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>fnr_2011</from>
-      <to>fnr_2012</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>fnr_2012</from>
-      <to>fnr_2013</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>fnr_2013</from>
-      <to>fnr_2014</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>fnr_2014</from>
-      <to>fnr_2015</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>fnr_2015</from>
-      <to>fnr_2016</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>fnr_2016</from>
-      <to>fnr_2017</to>
+      <from>START</from>
+      <to>fact_nbs_card</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>N</enabled>
@@ -702,7 +477,16 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>fnr_2017 2</from>
+      <from>fact_nbs_card</from>
+      <to>fact_nbs_result</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>fact_nbs_result</from>
       <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -712,16 +496,61 @@
     </hop>
     <hop>
       <from>START</from>
-      <to>df</to>
+      <to>check disk space</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>df</from>
-      <to>truncate</to>
+      <from>check disk space</from>
+      <to>fact_nbs_result</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>START</from>
+      <to>drop fact_nbs_sample</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>drop fact_nbs_sample</from>
+      <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>START</from>
+      <to>Add arup date columns to fact_nbs_card</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Add arup date columns to fact_nbs_card</from>
+      <to>exec_update_nbs_card_fact_w_arup_msg_in_main</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>exec_update_nbs_card_fact_w_arup_msg_in_main</from>
+      <to>vacuum</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -729,8 +558,17 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>truncate</from>
-      <to>df 2</to>
+      <from>check disk space</from>
+      <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>vacuum</from>
+      <to>check disk space 2</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -738,7 +576,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>df 2</from>
+      <from>check disk space 2</from>
       <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -748,36 +586,33 @@
     </hop>
     <hop>
       <from>START</from>
-      <to>fnr_2011</to>
+      <to>Add arup date columns to fact_nbs_card 2</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Add arup date columns to fact_nbs_card 2</from>
+      <to>exec_update_nbs_card_fact_w_arup_msg_in_main</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>START</from>
+      <to>exec_update_nbs_card_fact_w_arup_msg_in_main</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
     </hop>
   </hops>
   <notepads>
-    <notepad>
-      <note>&#xa;delete from warehouse.fact_nbs_result_full where dw_entered_on_date_num_id &#x3c;&#x3d; 20101231&#x3b; &#xa;&#xa;vaccum full&#x3b;</note>
-      <xloc>167</xloc>
-      <yloc>448</yloc>
-      <width>559</width>
-      <heigth>74</heigth>
-      <fontname/>
-      <fontsize>-1</fontsize>
-      <fontbold>N</fontbold>
-      <fontitalic>N</fontitalic>
-      <fontcolorred>0</fontcolorred>
-      <fontcolorgreen>0</fontcolorgreen>
-      <fontcolorblue>0</fontcolorblue>
-      <backgroundcolorred>255</backgroundcolorred>
-      <backgroundcolorgreen>205</backgroundcolorgreen>
-      <backgroundcolorblue>112</backgroundcolorblue>
-      <bordercolorred>100</bordercolorred>
-      <bordercolorgreen>100</bordercolorgreen>
-      <bordercolorblue>100</bordercolorblue>
-      <drawshadow>Y</drawshadow>
-    </notepad>
   </notepads>
 
 </job>

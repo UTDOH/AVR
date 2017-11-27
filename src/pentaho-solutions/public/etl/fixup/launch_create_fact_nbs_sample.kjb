@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <job>
-  <name>load_nbs_data_warehouse_main</name>
+  <name>launch_create_fact_nbs_sample</name>
     <description/>
     <extended_description/>
     <job_version/>
     <job_status>0</job_status>
   <directory>&#x2f;</directory>
   <created_user>-</created_user>
-  <created_date>2017&#x2f;06&#x2f;17 13&#x3a;24&#x3a;23.928</created_date>
+  <created_date>2015&#x2f;11&#x2f;22 15&#x3a;44&#x3a;02.308</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2017&#x2f;06&#x2f;17 13&#x3a;24&#x3a;23.928</modified_date>
+  <modified_date>2015&#x2f;11&#x2f;22 15&#x3a;44&#x3a;02.308</modified_date>
     <parameters>
     </parameters>
   <connection>
@@ -125,41 +125,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>140</xloc>
-      <yloc>210</yloc>
-      </entry>
-    <entry>
-      <name>exec_nbs_card_fact_main</name>
-      <description/>
-      <type>TRANS</type>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_nbs_card_fact_main.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>520</xloc>
-      <yloc>210</yloc>
+      <xloc>20</xloc>
+      <yloc>190</yloc>
       </entry>
     <entry>
       <name>Success</name>
@@ -168,150 +135,63 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1370</xloc>
-      <yloc>530</yloc>
+      <xloc>1160</xloc>
+      <yloc>180</yloc>
       </entry>
     <entry>
-      <name>exec_nbs_result_fact_main</name>
+      <name>vacuum</name>
       <description/>
-      <type>TRANS</type>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_nbs_result_fact_main.ktr</filename>
-      <transname/>
+      <type>SQL</type>
+      <sql>vacuum full&#x3b;&#xa;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>Trisano OLAP DS</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>500</xloc>
+      <yloc>190</yloc>
+      </entry>
+    <entry>
+      <name>check disk space 2</name>
+      <description/>
+      <type>SHELL</type>
+      <filename/>
+      <work_directory/>
       <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
       <set_logfile>N</set_logfile>
       <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
       <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>800</xloc>
-      <yloc>210</yloc>
-      </entry>
-    <entry>
-      <name>load_nbs_result_all_years_main</name>
-      <description/>
-      <type>JOB</type>
-      <specification_method>filename</specification_method>
-      <job_object_id/>
-      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;load_nbs_result_all_years_main.kjb</filename>
-      <jobname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
       <logext/>
       <add_date>N</add_date>
       <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <expand_remote_job>N</expand_remote_job>
-      <create_parent_folder>N</create_parent_folder>
-      <pass_export>N</pass_export>
-      <force_separate_logging>N</force_separate_logging>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <set_append_logfile>N</set_append_logfile>
+      <insertScript>Y</insertScript>
+      <script>df -h</script>
+      <loglevel>Basic</loglevel>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>510</xloc>
-      <yloc>390</yloc>
+      <xloc>670</xloc>
+      <yloc>190</yloc>
       </entry>
     <entry>
-      <name>Success Mail</name>
+      <name>fact_nbs_sample</name>
       <description/>
-      <type>MAIL</type>
-      <server>smtp.gmail.com</server>
-      <port>587</port>
-      <destination>tmacduff&#x40;gmail.com</destination>
-      <destinationCc/>
-      <destinationBCc/>
-      <replyto>udohnotifications&#x40;gmail.com</replyto>
-      <replytoname>UDOH - PDI Script Response</replytoname>
-      <subject>Success&#x3a; Incremental UDOH NBS ETL Jobs</subject>
-      <include_date>Y</include_date>
-      <contact_person/>
-      <contact_phone/>
-      <comment>The incremental datawarehouse  ETL jobs for UDOH NBS completed successfully.</comment>
-      <include_files>Y</include_files>
-      <zip_files>N</zip_files>
-      <zip_name/>
-      <use_auth>Y</use_auth>
-      <use_secure_auth>Y</use_secure_auth>
-      <auth_user>udohnotifications&#x40;gmail.com</auth_user>
-      <auth_password>Encrypted 2be98afc81fc39d8cff09ab7eca93a7d5</auth_password>
-      <only_comment>N</only_comment>
-      <use_HTML>N</use_HTML>
-      <use_Priority>N</use_Priority>
-      <encoding>UTF-8</encoding>
-      <priority>normal</priority>
-      <importance>normal</importance>
-      <sensitivity>normal</sensitivity>
-      <secureconnectiontype>TLS</secureconnectiontype>
-      <replyToAddresses/>
-      <filetypes>        <filetype>GENERAL</filetype>
-        <filetype>LOG</filetype>
-        <filetype>ERRORLINE</filetype>
-        <filetype>ERROR</filetype>
-        <filetype>WARNING</filetype>
-      </filetypes>      <embeddedimages>
-      </embeddedimages>
+      <type>SQL</type>
+      <sql>-- Table&#x3a; warehouse.fact_nbs_sample&#xa;&#xa;DROP TABLE warehouse.fact_nbs_sample&#x3b;&#xa;&#xa;CREATE TABLE warehouse.fact_nbs_sample&#xa;&#x28;&#xa;  dw_login_date_num_id integer,&#xa;  dw_recd_date_num_id integer,&#xa;  dw_completed_date_num_id integer,&#xa;  dw_reviewed_date_num_id integer,&#xa;  changed_on timestamp without time zone,&#xa;  sample_number bigint,&#xa;  accession_number character varying&#x28;30&#x29;,&#xa;  is_normal character&#x28;1&#x29;,&#xa;  status character&#x28;1&#x29;,&#xa;  product character varying&#x28;128&#x29;&#xa;&#x29;&#xa;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_fact_nbs_sample_changed_on&#xa;&#xa;-- DROP INDEX warehouse.idx_fact_nbs_sample_changed_on&#x3b;&#xa;&#xa;CREATE INDEX idx_fact_nbs_sample_changed_on&#xa;  ON warehouse.fact_nbs_sample&#xa;  USING btree&#xa;  &#x28;changed_on&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_fact_nbs_sample_completed_date&#xa;&#xa;-- DROP INDEX warehouse.idx_fact_nbs_sample_completed_date&#x3b;&#xa;&#xa;CREATE INDEX idx_fact_nbs_sample_completed_date&#xa;  ON warehouse.fact_nbs_sample&#xa;  USING btree&#xa;  &#x28;dw_completed_date_num_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_fact_nbs_sample_is_normal&#xa;&#xa;-- DROP INDEX warehouse.idx_fact_nbs_sample_is_normal&#x3b;&#xa;&#xa;CREATE INDEX idx_fact_nbs_sample_is_normal&#xa;  ON warehouse.fact_nbs_sample&#xa;  USING btree&#xa;  &#x28;is_normal COLLATE pg_catalog.&#x22;default&#x22;&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_fact_nbs_sample_login_date&#xa;&#xa;-- DROP INDEX warehouse.idx_fact_nbs_sample_login_date&#x3b;&#xa;&#xa;CREATE INDEX idx_fact_nbs_sample_login_date&#xa;  ON warehouse.fact_nbs_sample&#xa;  USING btree&#xa;  &#x28;dw_login_date_num_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_fact_nbs_sample_product&#xa;&#xa;-- DROP INDEX warehouse.idx_fact_nbs_sample_product&#x3b;&#xa;&#xa;CREATE INDEX idx_fact_nbs_sample_product&#xa;  ON warehouse.fact_nbs_sample&#xa;  USING btree&#xa;  &#x28;product COLLATE pg_catalog.&#x22;default&#x22;&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_fact_nbs_sample_recd_date&#xa;&#xa;-- DROP INDEX warehouse.idx_fact_nbs_sample_recd_date&#x3b;&#xa;&#xa;CREATE INDEX idx_fact_nbs_sample_recd_date&#xa;  ON warehouse.fact_nbs_sample&#xa;  USING btree&#xa;  &#x28;dw_recd_date_num_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_fact_nbs_sample_reviewed_date&#xa;&#xa;-- DROP INDEX warehouse.idx_fact_nbs_sample_reviewed_date&#x3b;&#xa;&#xa;CREATE INDEX idx_fact_nbs_sample_reviewed_date&#xa;  ON warehouse.fact_nbs_sample&#xa;  USING btree&#xa;  &#x28;dw_reviewed_date_num_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_fact_nbs_sample_status&#xa;&#xa;-- DROP INDEX warehouse.idx_fact_nbs_sample_status&#x3b;&#xa;&#xa;CREATE INDEX idx_fact_nbs_sample_status&#xa;  ON warehouse.fact_nbs_sample&#xa;  USING btree&#xa;  &#x28;status COLLATE pg_catalog.&#x22;default&#x22;&#x29;&#x3b;&#xa;&#xa;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>Trisano OLAP DS</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1230</xloc>
-      <yloc>530</yloc>
-      </entry>
-    <entry>
-      <name>load_date_time_dims</name>
-      <description/>
-      <type>JOB</type>
-      <specification_method>filename</specification_method>
-      <job_object_id/>
-      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;load_date_time_dims.kjb</filename>
-      <jobname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <expand_remote_job>N</expand_remote_job>
-      <create_parent_folder>N</create_parent_folder>
-      <pass_export>N</pass_export>
-      <force_separate_logging>N</force_separate_logging>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>360</xloc>
-      <yloc>210</yloc>
+      <xloc>190</xloc>
+      <yloc>190</yloc>
       </entry>
     <entry>
       <name>exec_nbs_sample_main</name>
@@ -343,132 +223,14 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1020</xloc>
-      <yloc>210</yloc>
-      </entry>
-    <entry>
-      <name>exec_nbs_card_log_main</name>
-      <description/>
-      <type>TRANS</type>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_nbs_card_log_main.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>1020</xloc>
-      <yloc>320</yloc>
-      </entry>
-    <entry>
-      <name>update null fact_nbs_card.msg_sent_on</name>
-      <description/>
-      <type>SQL</type>
-      <sql>update warehouse.fact_nbs_card set dw_message_sent_on_date_num_id &#x3d; 19000101, src_message_sent_on &#x3d; &#x27;1900&#x2f;01&#x2f;01&#x27; where dw_message_sent_on_date_num_id is null&#x3b;</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename/>
-      <sendOneStatement>F</sendOneStatement>
-      <connection/>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>1020</xloc>
-      <yloc>530</yloc>
-      </entry>
-    <entry>
-      <name>exec_update_nbs_card_fact_w_arup_msg_in_main</name>
-      <description/>
-      <type>TRANS</type>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_update_nbs_card_fact_w_arup_msg_in_main.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>1020</xloc>
-      <yloc>430</yloc>
+      <xloc>340</xloc>
+      <yloc>190</yloc>
       </entry>
   </entries>
   <hops>
     <hop>
-      <from>exec_nbs_card_fact_main</from>
-      <to>exec_nbs_result_fact_main</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>START</from>
-      <to>load_nbs_result_all_years_main</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>load_nbs_result_all_years_main</from>
-      <to>exec_nbs_result_fact_main</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Success Mail</from>
-      <to>Success</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>START</from>
-      <to>load_date_time_dims</to>
+      <to>fact_nbs_sample</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -476,58 +238,40 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>load_date_time_dims</from>
-      <to>exec_nbs_card_fact_main</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>exec_nbs_result_fact_main</from>
+      <from>fact_nbs_sample</from>
       <to>exec_nbs_sample_main</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
+      <unconditional>Y</unconditional>
     </hop>
     <hop>
       <from>exec_nbs_sample_main</from>
-      <to>exec_nbs_card_log_main</to>
+      <to>vacuum</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
+      <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>exec_nbs_card_log_main</from>
-      <to>exec_update_nbs_card_fact_w_arup_msg_in_main</to>
+      <from>vacuum</from>
+      <to>check disk space 2</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
+      <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>exec_update_nbs_card_fact_w_arup_msg_in_main</from>
-      <to>update null fact_nbs_card.msg_sent_on</to>
+      <from>check disk space 2</from>
+      <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>update null fact_nbs_card.msg_sent_on</from>
-      <to>Success Mail</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
+      <unconditional>Y</unconditional>
     </hop>
   </hops>
   <notepads>

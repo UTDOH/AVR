@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>seed_date</name>
+    <name>seed_0_date</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
     <directory>&#x2f;</directory>
     <parameters>
     </parameters>
@@ -149,10 +150,8 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Get date val</from><to>dim_date</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add sequence 2</from><to>Get Variables</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get Variables</from><to>Get date val</to><enabled>Y</enabled> </hop>
-  <hop> <from>Generate Rows</from><to>Add sequence 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Generate Rows</from><to>Add addtl fields</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add addtl fields</from><to>dim_date</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add sequence</name>
@@ -184,35 +183,6 @@
     </step>
 
   <step>
-    <name>Add sequence 2</name>
-    <type>Sequence</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <valuename>day_counter</valuename>
-      <use_database>N</use_database>
-      <connection/>
-      <schema/>
-      <seqname>SEQ_</seqname>
-      <use_counter>Y</use_counter>
-      <counter_name/>
-      <start_at>0</start_at>
-      <increment_by>1</increment_by>
-      <max_value>&#x24;&#x7b;num_days_between&#x7d;</max_value>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>470</xloc>
-      <yloc>130</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
     <name>Generate Rows</name>
     <type>RowGenerator</type>
     <description/>
@@ -225,19 +195,19 @@
            </partitioning>
     <fields>
       <field>
-        <name>r</name>
-        <type>Integer</type>
-        <format/>
+        <name>default_date_val</name>
+        <type>Date</type>
+        <format>yyyy&#x2f;MM&#x2f;dd</format>
         <currency/>
         <decimal/>
         <group/>
-        <nullif/>
+        <nullif>1900&#x2f;01&#x2f;01</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
       </field>
     </fields>
-    <limit>&#x24;&#x7b;num_days_between&#x7d;</limit>
+    <limit>1</limit>
     <never_ending>N</never_ending>
     <interval_in_ms>5000</interval_in_ms>
     <row_time_field>now</row_time_field>
@@ -245,96 +215,6 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>310</xloc>
-      <yloc>130</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Get Variables</name>
-    <type>GetVariable</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <name>max_dw_date</name>
-        <variable>&#x24;&#x7b;max_dw_date&#x7d;</variable>
-        <type>Date</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>num_days_between</name>
-        <variable>&#x24;&#x7b;num_days_between&#x7d;</variable>
-        <type>Integer</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>610</xloc>
-      <yloc>130</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Get date val</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>&#xa;&#xa;&#xa;&#x2f;&#x2f;var seed_date&#x3d;str2date&#x28;&#x22;01.01.2005&#x22;,&#x22;dd.MM.yyyy&#x22;&#x29;&#x3b;&#xa;&#x2f;&#x2f; var max_dw_date &#x3d; getVariable&#x28;max_dw_date, &#x22;&#x22;&#x29;&#x3b;&#xa;&#x2f;&#x2f;writeToLog&#x28;&#x27;m&#x27;, &#x27;max_dw_date&#x3a; &#x27; &#x2b; max_dw_date&#x29;&#x3b;&#xa;&#xa;var src_date&#x3d;dateAdd&#x28;max_dw_date,&#x22;d&#x22;,day_counter&#x29;&#x3b;&#xa;var dwDateNumId &#x3d; str2num&#x28;date2str&#x28;src_date, &#x27;yyyyMMdd&#x27;&#x29;&#x29;&#x3b;</jsScript_script>
-      </jsScript>      <jsScript>        <jsScript_type>-1</jsScript_type>
-        <jsScript_name>dateAdd_Sample</jsScript_name>
-        <jsScript_script>&#x2f;&#x2f; Add&#x27;s the given number to  the given date Value.&#xa;&#x2f;&#x2f;&#xa;&#x2f;&#x2f; Usage&#x3a;&#xa;&#x2f;&#x2f; dateAdd&#x28;var,var,var&#x29;&#x3b;&#xa;&#x2f;&#x2f; 1&#x3a; Date - The Variable with the Date.&#xa;&#x2f;&#x2f; 2&#x3a; String - The Type which represents the value&#xa;&#x2f;&#x2f; to add.&#xa;&#x2f;&#x2f; y - Years&#xa;&#x2f;&#x2f; m - Months&#xa;&#x2f;&#x2f; d - Days&#xa;&#x2f;&#x2f; w - Weeks&#xa;&#x2f;&#x2f; wd - Workingdays&#xa;&#x2f;&#x2f; hh - Hours&#xa;&#x2f;&#x2f; mi - Minutes&#xa;&#x2f;&#x2f; ss - Seconds&#xa;&#x2f;&#x2f; 3&#x3a; Numeric - The Value to add.&#xa;&#x2f;&#x2f; &#xa;&#x2f;&#x2f; 2006-11-15&#xa;&#x2f;&#x2f;&#xa;var d1 &#x3d; new Date&#x28;&#x29;&#x3b;&#xa;Alert&#x28;dateAdd&#x28;d1, &#x22;y&#x22;, 1&#x29;&#x29;&#x3b;&#xa;Alert&#x28;dateAdd&#x28;d1, &#x22;m&#x22;, 4&#x29;&#x29;&#x3b;&#xa;Alert&#x28;dateAdd&#x28;d1, &#x22;d&#x22;, 5&#x29;&#x29;&#x3b;&#xa;Alert&#x28;dateAdd&#x28;d1, &#x22;wd&#x22;, 5&#x29;&#x29;&#x3b;</jsScript_script>
-      </jsScript>      <jsScript>        <jsScript_type>-1</jsScript_type>
-        <jsScript_name>str2date_Sample</jsScript_name>
-        <jsScript_script>&#x2f;&#x2f; Converts the given String to a date Value.&#xa;&#x2f;&#x2f;&#xa;&#x2f;&#x2f; Usage&#x3a;&#xa;&#x2f;&#x2f; str2date&#x28;var&#x29;&#x3b;&#xa;&#x2f;&#x2f; 1&#x3a; String - The Variable with the String to convert.&#xa;&#x2f;&#x2f; This call uses your localized format.&#xa;&#x2f;&#x2f;&#xa;&#x2f;&#x2f; str2date&#x28;var, var&#x29;&#x3b;&#xa;&#x2f;&#x2f; 1&#x3a; String - The Variable with the String to convert.&#xa;&#x2f;&#x2f; 2&#x3a; String - The Format&#x3a;&#xa;&#x2f;&#x2f;        yy &#x2f; yyyy - 06 &#x2f; 2006&#xa;&#x2f;&#x2f;        MM &#x2f; MMM &#x2f; MMMMM - 11 &#x2f; Nov &#x2f; November&#xa;&#x2f;&#x2f;        d &#x2f; dd  - 1 &#x2f; 01&#xa;&#x2f;&#x2f;        E &#x2f; EEEE - Tue &#x2f; Tuesday&#xa;&#x2f;&#x2f;        hh &#x2f; HH - 11 &#x2f; 23&#xa;&#x2f;&#x2f;        m &#x2f; mm - 5 &#x2f; 05&#xa;&#x2f;&#x2f;        s &#x2f; ss - 8 &#x2f; 08&#xa;&#x2f;&#x2f;&#xa;&#x2f;&#x2f; str2date&#x28;var, var, var&#x29;&#x3b;&#xa;&#x2f;&#x2f; 1&#x3a; String - The Variable with the String to convert.&#xa;&#x2f;&#x2f; 2&#x3a; String - The Format&#x3a;&#xa;&#x2f;&#x2f; 3&#x3a; String - The Locale Parameter&#xa;&#x2f;&#x2f;    An valid ISO Language Code. &#x28;DE &#x3d; German, EN &#x3d; English, FR &#x3d; France, ...&#x29;&#xa;&#x2f;&#x2f;&#xa;&#x2f;&#x2f; str2date&#x28;var, var, var, var&#x29;&#x3b;&#xa;&#x2f;&#x2f; 1&#x3a; String - The Variable with the String to convert.&#xa;&#x2f;&#x2f; 2&#x3a; String - The Format&#x3a;&#xa;&#x2f;&#x2f; 3&#x3a; String - The Locale Parameter&#xa;&#x2f;&#x2f;    An valid ISO Language Code. &#x28;DE &#x3d; German, EN &#x3d; English, FR &#x3d; France, ...&#x29;&#xa;&#x2f;&#x2f; 4&#x3a; String - The Timezone Parameter.&#xa;&#x2f;&#x2f;    A valid timezone&#x3a; EST, GMT, ... &#x28;if invalid GMT will be selected as default&#x29;&#xa;&#x2f;&#x2f; &#xa;&#x2f;&#x2f; 2006-11-15&#xa;&#x2f;&#x2f;&#xa;Alert&#x28;str2date&#x28;&#x22;01.12.2006&#x22;,&#x22;dd.MM.yyyy&#x22;&#x29;&#x29;&#x3b;&#xa;Alert&#x28;str2date&#x28;&#x22;01.12.2006 23&#x3a;23&#x3a;01&#x22;,&#x22;dd.MM.yyyy HH&#x3a;mm&#x3a;ss&#x22;&#x29;&#x29;&#x3b;&#xa;Alert&#x28;str2date&#x28;&#x22;Tue.May.2006&#x22;,&#x22;E.MMM.yyyy&#x22;,&#x22;EN&#x22;&#x29;&#x29;&#x3b;&#xa;Alert&#x28;str2date&#x28;&#x22;22.02.2008 23&#x3a;23&#x3a;01&#x22;,&#x22;dd.MM.yyyy HH&#x3a;mm&#x3a;ss&#x22;,&#x22;DE&#x22;&#x29;&#x29;&#x3b;&#xa;Alert&#x28;str2date&#x28;&#x22;22.02.2008 23&#x3a;23&#x3a;01&#x22;,&#x22;dd.MM.yyyy HH&#x3a;mm&#x3a;ss&#x22;,&#x22;DE&#x22;, &#x22;EST&#x22;&#x29;&#x29;&#x3b;</jsScript_script>
-      </jsScript>      <jsScript>        <jsScript_type>-1</jsScript_type>
-        <jsScript_name>getVariable_Sample</jsScript_name>
-        <jsScript_script>&#x2f;&#x2f; Retrieves the value of a given Kettle&#x2f;Pentaho Variable&#xa;&#x2f;&#x2f; &#xa;&#x2f;&#x2f; Usage&#x3a;&#xa;&#x2f;&#x2f; getVariable&#x28;var, var&#x29;&#x3b;&#xa;&#x2f;&#x2f; 1&#x3a; String - The name of the variable to retrieve.&#xa;&#x2f;&#x2f; 2&#x3a; String - The default if the variable doesn&#x27;t exist.&#xa;&#x2f;&#x2f;&#xa;&#x2f;&#x2f; 2007-07-27&#xa;&#x2f;&#x2f;&#xa;var strVarName&#x3d;&#x22;getVariableTest&#x22;&#x3b;&#xa;var strVarValue&#x3d;&#x22;123456&#x22;&#x3b;&#xa;Alert&#x28;getVariable&#x28;strVarName, &#x22;&#x22;&#x29;&#x29;&#x3b;&#xa;setVariable&#x28;strVarName,strVarValue, &#x22;r&#x22;&#x29;&#x3b;&#xa;Alert&#x28;getVariable&#x28;strVarName, &#x22;&#x22;&#x29;&#x29;&#x3b;&#xa;strVarValue&#x3d;&#x22;654321&#x22;&#x3b;&#xa;setVariable&#x28;strVarName,strVarValue, &#x22;r&#x22;&#x29;&#x3b;&#xa;Alert&#x28;getVariable&#x28;strVarName, &#x22;&#x22;&#x29;&#x29;&#x3b;</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>src_date</name>
-        <rename>src_date</rename>
-        <type>Date</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>dwDateNumId</name>
-        <rename>dwDateNumId</rename>
-        <type>Integer</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>760</xloc>
       <yloc>130</yloc>
       <draw>Y</draw>
       </GUI>
@@ -365,6 +245,36 @@
     </step>
 
   <step>
+    <name>Add addtl fields</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>Y</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>&#x2f;&#x2f;Script here&#xa;&#xa;var dwDateNumId &#x3d; str2num&#x28;date2str&#x28;default_date_val.getDate&#x28;&#x29;, &#x27;yyyyMMdd&#x27;&#x29;&#x29;&#x3b;&#xa;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>dwDateNumId</name>
+        <rename>dwDateNumId</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>470</xloc>
+      <yloc>130</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>dim_date</name>
     <type>CombinationLookup</type>
     <description/>
@@ -386,7 +296,7 @@
       <crcfield>hashcode</crcfield>
       <fields>
         <key>
-          <name>src_date</name>
+          <name>default_date_val</name>
           <lookup>src_date_val</lookup>
         </key>
         <key>
@@ -403,7 +313,7 @@
       <last_update_field>etl_load_date</last_update_field>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>900</xloc>
+      <xloc>620</xloc>
       <yloc>130</yloc>
       <draw>Y</draw>
       </GUI>
