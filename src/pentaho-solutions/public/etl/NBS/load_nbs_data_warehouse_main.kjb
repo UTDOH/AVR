@@ -388,7 +388,7 @@
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
       <sendOneStatement>F</sendOneStatement>
-      <connection/>
+      <connection>Trisano OLAP DS</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>

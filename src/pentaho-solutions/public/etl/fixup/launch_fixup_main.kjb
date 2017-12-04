@@ -304,8 +304,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>450</xloc>
-      <yloc>310</yloc>
+      <xloc>490</xloc>
+      <yloc>350</yloc>
       </entry>
     <entry>
       <name>check disk space 2</name>
@@ -327,8 +327,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>660</xloc>
-      <yloc>270</yloc>
+      <xloc>670</xloc>
+      <yloc>280</yloc>
       </entry>
     <entry>
       <name>Add arup date columns to fact_nbs_card</name>
@@ -347,12 +347,12 @@
       <yloc>240</yloc>
       </entry>
     <entry>
-      <name>exec_update_nbs_card_fact_w_arup_msg_in_main</name>
+      <name>exec_update_nbs_card_w_msg_sent_on</name>
       <description/>
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_update_nbs_card_fact_w_arup_msg_in_main.ktr</filename>
+      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_update_nbs_card_w_msg_sent_on.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -376,8 +376,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>290</xloc>
-      <yloc>350</yloc>
+      <xloc>320</xloc>
+      <yloc>420</yloc>
       </entry>
     <entry>
       <name>drop fact_nbs_sample</name>
@@ -396,10 +396,10 @@
       <yloc>180</yloc>
       </entry>
     <entry>
-      <name>Add arup date columns to fact_nbs_card 2</name>
+      <name>idx_fact_nbs_card_accession_number</name>
       <description/>
       <type>SQL</type>
-      <sql>update warehouse.fact_nbs_card set dw_message_sent_on_date_num_id &#x3d; 19000101&#x3b;&#xa;&#xa;update warehouse.fact_nbs_card set src_message_sent_on &#x3d; &#x27;1900-01-01&#x27;&#x3b;&#xa;</sql>
+      <sql>CREATE INDEX idx_fact_nbs_card_accession_number&#xa;  ON warehouse.fact_nbs_card&#xa;  USING btree&#xa;  &#x28;accession_number&#x29;&#x3b;</sql>
       <useVariableSubstitution>F</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
@@ -408,8 +408,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>130</xloc>
-      <yloc>240</yloc>
+      <xloc>290</xloc>
+      <yloc>290</yloc>
       </entry>
   </entries>
   <hops>
@@ -541,7 +541,7 @@
     </hop>
     <hop>
       <from>Add arup date columns to fact_nbs_card</from>
-      <to>exec_update_nbs_card_fact_w_arup_msg_in_main</to>
+      <to>exec_update_nbs_card_w_msg_sent_on</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>N</enabled>
@@ -549,7 +549,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>exec_update_nbs_card_fact_w_arup_msg_in_main</from>
+      <from>exec_update_nbs_card_w_msg_sent_on</from>
       <to>vacuum</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -586,7 +586,7 @@
     </hop>
     <hop>
       <from>START</from>
-      <to>Add arup date columns to fact_nbs_card 2</to>
+      <to>idx_fact_nbs_card_accession_number</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>N</enabled>
@@ -594,8 +594,8 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>Add arup date columns to fact_nbs_card 2</from>
-      <to>exec_update_nbs_card_fact_w_arup_msg_in_main</to>
+      <from>idx_fact_nbs_card_accession_number</from>
+      <to>exec_update_nbs_card_w_msg_sent_on</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>N</enabled>
@@ -604,7 +604,7 @@
     </hop>
     <hop>
       <from>START</from>
-      <to>exec_update_nbs_card_fact_w_arup_msg_in_main</to>
+      <to>exec_update_nbs_card_w_msg_sent_on</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

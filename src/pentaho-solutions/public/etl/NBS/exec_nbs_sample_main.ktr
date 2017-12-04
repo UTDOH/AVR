@@ -16,12 +16,12 @@
         </parameter>
         <parameter>
             <name>nbsoltp_schema</name>
-            <default_value>NBS_USER</default_value>
+            <default_value>NBSPROD</default_value>
             <description>NBSPROD&#x7c;NBS_USER</description>
         </parameter>
         <parameter>
-            <name>nbsoltp_schemaz</name>
-            <default_value>NBSPROD</default_value>
+            <name>nbsoltp_schemas</name>
+            <default_value>NBS_USER</default_value>
             <description>NBSPROD&#x7c;NBS_USER</description>
         </parameter>
         <parameter>
