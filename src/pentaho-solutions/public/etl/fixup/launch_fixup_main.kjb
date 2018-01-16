@@ -135,8 +135,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1160</xloc>
-      <yloc>180</yloc>
+      <xloc>1150</xloc>
+      <yloc>130</yloc>
       </entry>
     <entry>
       <name>Create nbs result agg tables</name>
@@ -288,8 +288,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>100</xloc>
-      <yloc>310</yloc>
+      <xloc>410</xloc>
+      <yloc>280</yloc>
       </entry>
     <entry>
       <name>vacuum</name>
@@ -304,8 +304,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>490</xloc>
-      <yloc>350</yloc>
+      <xloc>480</xloc>
+      <yloc>370</yloc>
       </entry>
     <entry>
       <name>check disk space 2</name>
@@ -327,14 +327,14 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>670</xloc>
-      <yloc>280</yloc>
+      <xloc>640</xloc>
+      <yloc>270</yloc>
       </entry>
     <entry>
-      <name>Add arup date columns to fact_nbs_card</name>
+      <name>Update fnr partition tables</name>
       <description/>
       <type>SQL</type>
-      <sql>alter table warehouse.fact_nbs_card add column dw_message_sent_on_date_num_id integer&#x3b;&#xa;&#xa;alter table warehouse.fact_nbs_card add column src_message_sent_on timestamp&#x3b;&#xa;&#xa;CREATE INDEX idx_fact_nbs_card_src_msg_sent_on&#xa;  ON warehouse.fact_nbs_card&#xa;  USING btree&#xa;  &#x28;src_message_sent_on&#x29;&#x3b;&#xa;&#xa;&#xa;CREATE INDEX idx_fact_nbs_card_dw_msg_sent_on&#xa;  ON warehouse.fact_nbs_card&#xa;  USING btree&#xa;  &#x28;dw_message_sent_on_date_num_id&#x29;&#x3b;</sql>
+      <sql>DROP INDEX warehouse.idx_fact_nbs_result_src_msg_processed_on&#x3b;&#xa;&#xa;DROP INDEX warehouse.idx_fact_nbs_result_dw_msg_processed_on&#x3b;&#xa;&#xa;&#xa;CREATE INDEX idx_x_dx_sample_number_2006&#xa;  ON warehouse.fact_nbs_result_2006&#xa;  USING btree&#xa;  &#x28;sample_number&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fact_nbs_result_dw_msg_processed_on_2006&#xa;  ON warehouse.fact_nbs_result_2006&#xa;  USING btree&#xa;  &#x28;dw_message_processed_on_date_num_id&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fact_nbs_result_src_msg_processed_on_2006&#xa;  ON warehouse.fact_nbs_result_2006&#xa;  USING btree&#xa;  &#x28;src_message_processed_on&#x29;&#x3b;&#xa;&#xa;&#xa;CREATE INDEX idx_x_dx_sample_number_2007&#xa;  ON warehouse.fact_nbs_result_2007&#xa;  USING btree&#xa;  &#x28;sample_number&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fact_nbs_result_dw_msg_processed_on_2007&#xa;  ON warehouse.fact_nbs_result_2007&#xa;  USING btree&#xa;  &#x28;dw_message_processed_on_date_num_id&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fact_nbs_result_src_msg_processed_on_2007&#xa;  ON warehouse.fact_nbs_result_2007&#xa;  USING btree&#xa;  &#x28;src_message_processed_on&#x29;&#x3b;  &#xa;  &#xa;&#xa;CREATE INDEX idx_x_dx_sample_number_2008&#xa;  ON warehouse.fact_nbs_result_2008&#xa;  USING btree&#xa;  &#x28;sample_number&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fact_nbs_result_dw_msg_processed_on_2008&#xa;  ON warehouse.fact_nbs_result_2008&#xa;  USING btree&#xa;  &#x28;dw_message_processed_on_date_num_id&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fact_nbs_result_src_msg_processed_on_2008&#xa;  ON warehouse.fact_nbs_result_2008&#xa;  USING btree&#xa;  &#x28;src_message_processed_on&#x29;&#x3b;  &#xa;  &#xa;&#xa;CREATE INDEX idx_x_dx_sample_number_2009&#xa;  ON warehouse.fact_nbs_result_2009&#xa;  USING btree&#xa;  &#x28;sample_number&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fact_nbs_result_dw_msg_processed_on_2009&#xa;  ON warehouse.fact_nbs_result_2009&#xa;  USING btree&#xa;  &#x28;dw_message_processed_on_date_num_id&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fact_nbs_result_src_msg_processed_on_2009&#xa;  ON warehouse.fact_nbs_result_2009&#xa;  USING btree&#xa;  &#x28;src_message_processed_on&#x29;&#x3b;&#xa;  &#xa;&#xa;CREATE INDEX idx_x_dx_sample_number_2010&#xa;  ON warehouse.fact_nbs_result_2010&#xa;  USING btree&#xa;  &#x28;sample_number&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fact_nbs_result_dw_msg_processed_on_2010&#xa;  ON warehouse.fact_nbs_result_2010&#xa;  USING btree&#xa;  &#x28;dw_message_processed_on_date_num_id&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fact_nbs_result_src_msg_processed_on_2010&#xa;  ON warehouse.fact_nbs_result_2010&#xa;  USING btree&#xa;  &#x28;src_message_processed_on&#x29;&#x3b;&#xa;  &#xa;&#xa;CREATE INDEX idx_x_dx_sample_number_2011&#xa;  ON warehouse.fact_nbs_result_2011&#xa;  USING btree&#xa;  &#x28;sample_number&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fact_nbs_result_dw_msg_processed_on_2011&#xa;  ON warehouse.fact_nbs_result_2011&#xa;  USING btree&#xa;  &#x28;dw_message_processed_on_date_num_id&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fact_nbs_result_src_msg_processed_on_2011&#xa;  ON warehouse.fact_nbs_result_2011&#xa;  USING btree&#xa;  &#x28;src_message_processed_on&#x29;&#x3b;&#xa;  &#xa;  &#xa;CREATE INDEX idx_x_dx_sample_number_2012&#xa;  ON warehouse.fact_nbs_result_2012&#xa;  USING btree&#xa;  &#x28;sample_number&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fact_nbs_result_dw_msg_processed_on_2012&#xa;  ON warehouse.fact_nbs_result_2012&#xa;  USING btree&#xa;  &#x28;dw_message_processed_on_date_num_id&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fact_nbs_result_src_msg_processed_on_2012&#xa;  ON warehouse.fact_nbs_result_2012&#xa;  USING btree&#xa;  &#x28;src_message_processed_on&#x29;&#x3b;&#xa;  &#xa;  &#xa;CREATE INDEX idx_x_dx_sample_number_2013&#xa;  ON warehouse.fact_nbs_result_2013&#xa;  USING btree&#xa;  &#x28;sample_number&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fact_nbs_result_dw_msg_processed_on_2013&#xa;  ON warehouse.fact_nbs_result_2013&#xa;  USING btree&#xa;  &#x28;dw_message_processed_on_date_num_id&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fact_nbs_result_src_msg_processed_on_2013&#xa;  ON warehouse.fact_nbs_result_2013&#xa;  USING btree&#xa;  &#x28;src_message_processed_on&#x29;&#x3b;&#xa;  &#xa;&#xa;CREATE INDEX idx_x_dx_sample_number_2014&#xa;  ON warehouse.fact_nbs_result_2014&#xa;  USING btree&#xa;  &#x28;sample_number&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fact_nbs_result_dw_msg_processed_on_2014&#xa;  ON warehouse.fact_nbs_result_2014&#xa;  USING btree&#xa;  &#x28;dw_message_processed_on_date_num_id&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fact_nbs_result_src_msg_processed_on_2014&#xa;  ON warehouse.fact_nbs_result_2014  &#xa;  USING btree&#xa;  &#x28;src_message_processed_on&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_x_dx_sample_number_2015&#xa;  ON warehouse.fact_nbs_result_2015&#xa;  USING btree&#xa;  &#x28;sample_number&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fact_nbs_result_dw_msg_processed_on_2015&#xa;  ON warehouse.fact_nbs_result_2015&#xa;  USING btree&#xa;  &#x28;dw_message_processed_on_date_num_id&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fact_nbs_result_src_msg_processed_on_2015&#xa;  ON warehouse.fact_nbs_result_2015&#xa;  USING btree&#xa;  &#x28;src_message_processed_on&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_x_dx_sample_number_2016&#xa;  ON warehouse.fact_nbs_result_2016&#xa;  USING btree&#xa;  &#x28;sample_number&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fact_nbs_result_dw_msg_processed_on_2016&#xa;  ON warehouse.fact_nbs_result_2016&#xa;  USING btree&#xa;  &#x28;dw_message_processed_on_date_num_id&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fact_nbs_result_src_msg_processed_on_2016&#xa;  ON warehouse.fact_nbs_result_2016&#xa;  USING btree&#xa;  &#x28;src_message_processed_on&#x29;&#x3b;&#xa;  &#xa; &#xa;CREATE INDEX idx_x_dx_sample_number_2017&#xa;  ON warehouse.fact_nbs_result_2017&#xa;  USING btree&#xa;  &#x28;sample_number&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fact_nbs_result_dw_msg_processed_on_2017&#xa;  ON warehouse.fact_nbs_result_2017&#xa;  USING btree&#xa;  &#x28;dw_message_processed_on_date_num_id&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fact_nbs_result_src_msg_processed_on_2017&#xa;  ON warehouse.fact_nbs_result_2017&#xa;  USING btree&#xa;  &#x28;src_message_processed_on&#x29;&#x3b; &#xa;  &#xa;  &#xa;-- Table&#x3a; warehouse.fact_nbs_result_2018&#xa;&#xa;-- DROP TABLE warehouse.fact_nbs_result_2018&#x3b;&#xa;&#xa;CREATE TABLE warehouse.fact_nbs_result_2018&#xa;&#x28;&#xa;-- Inherited from table warehouse.fact_nbs_result&#x3a;  dw_dx_treatment_date_num_id integer,&#xa;-- Inherited from table warehouse.fact_nbs_result&#x3a;  dw_reviewed_date_num_id integer,&#xa;-- Inherited from table warehouse.fact_nbs_result&#x3a;  dw_entered_on_date_num_id integer,&#xa;-- Inherited from table warehouse.fact_nbs_result&#x3a;  dw_nbs_result_dx_id integer,&#xa;-- Inherited from table warehouse.fact_nbs_result&#x3a;  dw_nbs_loinc_id integer,&#xa;-- Inherited from table warehouse.fact_nbs_result&#x3a;  dw_nbs_snomed_code_id integer,&#xa;-- Inherited from table warehouse.fact_nbs_result&#x3a;  dw_nbs_card_type_id integer,&#xa;-- Inherited from table warehouse.fact_nbs_result&#x3a;  dw_nbs_result_id integer,&#xa;-- Inherited from table warehouse.fact_nbs_result&#x3a;  dw_nbs_units_id integer,&#xa;-- Inherited from table warehouse.fact_nbs_result&#x3a;  dw_nbs_analysis_id integer,&#xa;-- Inherited from table warehouse.fact_nbs_result&#x3a;  dw_nbs_result_status_id integer,&#xa;-- Inherited from table warehouse.fact_nbs_result&#x3a;  text_id character varying&#x28;30&#x29;,&#xa;-- Inherited from table warehouse.fact_nbs_result&#x3a;  result_number bigint,&#xa;-- Inherited from table warehouse.fact_nbs_result&#x3a;  test_number bigint,&#xa;-- Inherited from table warehouse.fact_nbs_result&#x3a;  replicate_count integer,&#xa;-- Inherited from table warehouse.fact_nbs_result&#x3a;  formatted_entry numeric&#x28;10,2&#x29;,&#xa;-- Inherited from table warehouse.fact_nbs_result&#x3a;  entry character varying&#x28;254&#x29;,&#xa;-- Inherited from table warehouse.fact_nbs_result&#x3a;  entered_on timestamp without time zone,&#xa;-- Inherited from table warehouse.fact_nbs_result&#x3a;  date_reviewed timestamp without time zone,&#xa;-- Inherited from table warehouse.fact_nbs_result&#x3a;  sample_number integer,&#xa;-- Inherited from table warehouse.fact_nbs_result&#x3a;  x_dx_date timestamp without time zone,&#xa;-- Inherited from table warehouse.fact_nbs_result&#x3a;  x_dx_treatment_date timestamp without time zone,&#xa;-- Inherited from table warehouse.fact_nbs_result&#x3a;  dw_message_processed_on_date_num_id integer,&#xa;-- Inherited from table warehouse.fact_nbs_result&#x3a;  src_message_processed_on timestamp without time zone,&#xa;  CONSTRAINT fact_nbs_result_2018_dw_entered_on_date_num_id_check CHECK &#x28;dw_entered_on_date_num_id &#x3e;&#x3d; 20180101 AND dw_entered_on_date_num_id &#x3c; 20181231&#x29;&#xa;&#x29;&#xa;INHERITS &#x28;warehouse.fact_nbs_result&#x29;&#xa;WITH &#x28;&#xa;  OIDS&#x3d;FALSE&#xa;&#x29;&#x3b;&#xa;ALTER TABLE warehouse.fact_nbs_result_2018&#xa;  OWNER TO pentaho&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_date_reviewed_2018&#xa;&#xa;-- DROP INDEX warehouse.idx_date_reviewed_2018&#x3b;&#xa;&#xa;CREATE INDEX idx_date_reviewed_2018&#xa;  ON warehouse.fact_nbs_result_2018&#xa;  USING btree&#xa;  &#x28;date_reviewed&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_dw_dx_treatment_date_id_2018&#xa;&#xa;-- DROP INDEX warehouse.idx_dw_dx_treatment_date_id_2018&#x3b;&#xa;&#xa;CREATE INDEX idx_dw_dx_treatment_date_id_2018&#xa;  ON warehouse.fact_nbs_result_2018&#xa;  USING btree&#xa;  &#x28;dw_dx_treatment_date_num_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_dw_entered_on_date_num_id_2018&#xa;&#xa;-- DROP INDEX warehouse.idx_dw_entered_on_date_num_id_2018&#x3b;&#xa;&#xa;CREATE INDEX idx_dw_entered_on_date_num_id_2018&#xa;  ON warehouse.fact_nbs_result_2018&#xa;  USING btree&#xa;  &#x28;dw_entered_on_date_num_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_dw_nbs_analysis_id_2018&#xa;&#xa;-- DROP INDEX warehouse.idx_dw_nbs_analysis_id_2018&#x3b;&#xa;&#xa;CREATE INDEX idx_dw_nbs_analysis_id_2018&#xa;  ON warehouse.fact_nbs_result_2018&#xa;  USING btree&#xa;  &#x28;dw_nbs_analysis_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_dw_nbs_card_type_id_2018&#xa;&#xa;-- DROP INDEX warehouse.idx_dw_nbs_card_type_id_2018&#x3b;&#xa;&#xa;CREATE INDEX idx_dw_nbs_card_type_id_2018&#xa;  ON warehouse.fact_nbs_result_2018&#xa;  USING btree&#xa;  &#x28;dw_nbs_card_type_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_dw_nbs_loinc_id_2018&#xa;&#xa;-- DROP INDEX warehouse.idx_dw_nbs_loinc_id_2018&#x3b;&#xa;&#xa;CREATE INDEX idx_dw_nbs_loinc_id_2018&#xa;  ON warehouse.fact_nbs_result_2018&#xa;  USING btree&#xa;  &#x28;dw_nbs_loinc_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_dw_nbs_result_dx_id_2018&#xa;&#xa;-- DROP INDEX warehouse.idx_dw_nbs_result_dx_id_2018&#x3b;&#xa;&#xa;CREATE INDEX idx_dw_nbs_result_dx_id_2018&#xa;  ON warehouse.fact_nbs_result_2018&#xa;  USING btree&#xa;  &#x28;dw_nbs_result_dx_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_dw_nbs_result_id_2018&#xa;&#xa;-- DROP INDEX warehouse.idx_dw_nbs_result_id_2018&#x3b;&#xa;&#xa;CREATE INDEX idx_dw_nbs_result_id_2018&#xa;  ON warehouse.fact_nbs_result_2018&#xa;  USING btree&#xa;  &#x28;dw_nbs_result_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_dw_nbs_result_status_id_2018&#xa;&#xa;-- DROP INDEX warehouse.idx_dw_nbs_result_status_id_2018&#x3b;&#xa;&#xa;CREATE INDEX idx_dw_nbs_result_status_id_2018&#xa;  ON warehouse.fact_nbs_result_2018&#xa;  USING btree&#xa;  &#x28;dw_nbs_result_status_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_dw_nbs_snomed_code_id_2018&#xa;&#xa;-- DROP INDEX warehouse.idx_dw_nbs_snomed_code_id_2018&#x3b;&#xa;&#xa;CREATE INDEX idx_dw_nbs_snomed_code_id_2018&#xa;  ON warehouse.fact_nbs_result_2018&#xa;  USING btree&#xa;  &#x28;dw_nbs_snomed_code_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_dw_reviewed_date_id_2018&#xa;&#xa;-- DROP INDEX warehouse.idx_dw_reviewed_date_id_2018&#x3b;&#xa;&#xa;CREATE INDEX idx_dw_reviewed_date_id_2018&#xa;  ON warehouse.fact_nbs_result_2018&#xa;  USING btree&#xa;  &#x28;dw_reviewed_date_num_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_entered_on_2018&#xa;&#xa;-- DROP INDEX warehouse.idx_entered_on_2018&#x3b;&#xa;&#xa;CREATE INDEX idx_entered_on_2018&#xa;  ON warehouse.fact_nbs_result_2018&#xa;  USING btree&#xa;  &#x28;entered_on&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_full_date_reviewed_2018&#xa;&#xa;-- DROP INDEX warehouse.idx_full_date_reviewed_2018&#x3b;&#xa;&#xa;CREATE INDEX idx_full_date_reviewed_2018&#xa;  ON warehouse.fact_nbs_result_2018&#xa;  USING btree&#xa;  &#x28;date_reviewed&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_full_dw_dx_treatment_date_id_2018&#xa;&#xa;-- DROP INDEX warehouse.idx_full_dw_dx_treatment_date_id_2018&#x3b;&#xa;&#xa;CREATE INDEX idx_full_dw_dx_treatment_date_id_2018&#xa;  ON warehouse.fact_nbs_result_2018&#xa;  USING btree&#xa;  &#x28;dw_dx_treatment_date_num_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_full_dw_entered_on_date_num_id_2018&#xa;&#xa;-- DROP INDEX warehouse.idx_full_dw_entered_on_date_num_id_2018&#x3b;&#xa;&#xa;CREATE INDEX idx_full_dw_entered_on_date_num_id_2018&#xa;  ON warehouse.fact_nbs_result_2018&#xa;  USING btree&#xa;  &#x28;dw_entered_on_date_num_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_full_dw_nbs_analysis_id_2018&#xa;&#xa;-- DROP INDEX warehouse.idx_full_dw_nbs_analysis_id_2018&#x3b;&#xa;&#xa;CREATE INDEX idx_full_dw_nbs_analysis_id_2018&#xa;  ON warehouse.fact_nbs_result_2018&#xa;  USING btree&#xa;  &#x28;dw_nbs_analysis_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_full_dw_nbs_card_type_id_2018&#xa;&#xa;-- DROP INDEX warehouse.idx_full_dw_nbs_card_type_id_2018&#x3b;&#xa;&#xa;CREATE INDEX idx_full_dw_nbs_card_type_id_2018&#xa;  ON warehouse.fact_nbs_result_2018&#xa;  USING btree&#xa;  &#x28;dw_nbs_card_type_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_full_dw_nbs_loinc_id_2018&#xa;&#xa;-- DROP INDEX warehouse.idx_full_dw_nbs_loinc_id_2018&#x3b;&#xa;&#xa;CREATE INDEX idx_full_dw_nbs_loinc_id_2018&#xa;  ON warehouse.fact_nbs_result_2018&#xa;  USING btree&#xa;  &#x28;dw_nbs_loinc_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_full_dw_nbs_result_dx_id_2018&#xa;&#xa;-- DROP INDEX warehouse.idx_full_dw_nbs_result_dx_id_2018&#x3b;&#xa;&#xa;CREATE INDEX idx_full_dw_nbs_result_dx_id_2018&#xa;  ON warehouse.fact_nbs_result_2018&#xa;  USING btree&#xa;  &#x28;dw_nbs_result_dx_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_full_dw_nbs_result_id_2018&#xa;&#xa;-- DROP INDEX warehouse.idx_full_dw_nbs_result_id_2018&#x3b;&#xa;&#xa;CREATE INDEX idx_full_dw_nbs_result_id_2018&#xa;  ON warehouse.fact_nbs_result_2018&#xa;  USING btree&#xa;  &#x28;dw_nbs_result_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_full_dw_nbs_result_status_id_2018&#xa;&#xa;-- DROP INDEX warehouse.idx_full_dw_nbs_result_status_id_2018&#x3b;&#xa;&#xa;CREATE INDEX idx_full_dw_nbs_result_status_id_2018&#xa;  ON warehouse.fact_nbs_result_2018&#xa;  USING btree&#xa;  &#x28;dw_nbs_result_status_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_full_dw_nbs_snomed_code_id_2018&#xa;&#xa;-- DROP INDEX warehouse.idx_full_dw_nbs_snomed_code_id_2018&#x3b;&#xa;&#xa;CREATE INDEX idx_full_dw_nbs_snomed_code_id_2018&#xa;  ON warehouse.fact_nbs_result_2018&#xa;  USING btree&#xa;  &#x28;dw_nbs_snomed_code_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_full_dw_reviewed_date_id_2018&#xa;&#xa;-- DROP INDEX warehouse.idx_full_dw_reviewed_date_id_2018&#x3b;&#xa;&#xa;CREATE INDEX idx_full_dw_reviewed_date_id_2018&#xa;  ON warehouse.fact_nbs_result_2018&#xa;  USING btree&#xa;  &#x28;dw_reviewed_date_num_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_full_entered_on_2018&#xa;&#xa;-- DROP INDEX warehouse.idx_full_entered_on_2018&#x3b;&#xa;&#xa;CREATE INDEX idx_full_entered_on_2018&#xa;  ON warehouse.fact_nbs_result_2018&#xa;  USING btree&#xa;  &#x28;entered_on&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_full_nbs_units_id_2018&#xa;&#xa;-- DROP INDEX warehouse.idx_full_nbs_units_id_2018&#x3b;&#xa;&#xa;CREATE INDEX idx_full_nbs_units_id_2018&#xa;  ON warehouse.fact_nbs_result_2018&#xa;  USING btree&#xa;  &#x28;dw_nbs_units_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_full_result_number_2018&#xa;&#xa;-- DROP INDEX warehouse.idx_full_result_number_2018&#x3b;&#xa;&#xa;CREATE INDEX idx_full_result_number_2018&#xa;  ON warehouse.fact_nbs_result_2018&#xa;  USING btree&#xa;  &#x28;result_number&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_full_text_id_2018&#xa;&#xa;-- DROP INDEX warehouse.idx_full_text_id_2018&#x3b;&#xa;&#xa;CREATE INDEX idx_full_text_id_2018&#xa;  ON warehouse.fact_nbs_result_2018&#xa;  USING btree&#xa;  &#x28;text_id COLLATE pg_catalog.&#x22;default&#x22;&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_full_x_dx_treatment_date_2018&#xa;&#xa;-- DROP INDEX warehouse.idx_full_x_dx_treatment_date_2018&#x3b;&#xa;&#xa;CREATE INDEX idx_full_x_dx_treatment_date_2018&#xa;  ON warehouse.fact_nbs_result_2018&#xa;  USING btree&#xa;  &#x28;x_dx_treatment_date&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_nbs_units_id_2018&#xa;&#xa;-- DROP INDEX warehouse.idx_nbs_units_id_2018&#x3b;&#xa;&#xa;CREATE INDEX idx_nbs_units_id_2018&#xa;  ON warehouse.fact_nbs_result_2018&#xa;  USING btree&#xa;  &#x28;dw_nbs_units_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_result_number_2018&#xa;&#xa;-- DROP INDEX warehouse.idx_result_number_2018&#x3b;&#xa;&#xa;CREATE INDEX idx_result_number_2018&#xa;  ON warehouse.fact_nbs_result_2018&#xa;  USING btree&#xa;  &#x28;result_number&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_text_id_2018&#xa;&#xa;-- DROP INDEX warehouse.idx_text_id_2018&#x3b;&#xa;&#xa;CREATE INDEX idx_text_id_2018&#xa;  ON warehouse.fact_nbs_result_2018&#xa;  USING btree&#xa;  &#x28;text_id COLLATE pg_catalog.&#x22;default&#x22;&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_x_dx_treatment_date_2018&#xa;&#xa;-- DROP INDEX warehouse.idx_x_dx_treatment_date_2018&#x3b;&#xa;&#xa;CREATE INDEX idx_x_dx_treatment_date_2018&#xa;  ON warehouse.fact_nbs_result_2018&#xa;  USING btree&#xa;  &#x28;x_dx_treatment_date&#x29;&#x3b;&#xa;&#xa;CREATE INDEX idx_x_dx_sample_number_2018&#xa;  ON warehouse.fact_nbs_result_2018&#xa;  USING btree&#xa;  &#x28;sample_number&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fact_nbs_result_dw_msg_processed_on_2018&#xa;  ON warehouse.fact_nbs_result_2018&#xa;  USING btree&#xa;  &#x28;dw_message_processed_on_date_num_id&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fact_nbs_result_src_msg_processed_on_2018&#xa;  ON warehouse.fact_nbs_result_2018&#xa;  USING btree&#xa;  &#x28;src_message_processed_on&#x29;&#x3b; </sql>
       <useVariableSubstitution>F</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
@@ -343,16 +343,16 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>200</xloc>
-      <yloc>240</yloc>
+      <xloc>370</xloc>
+      <yloc>220</yloc>
       </entry>
     <entry>
-      <name>exec_update_nbs_card_w_msg_sent_on</name>
+      <name>exec_update_nbs_result_w_msg_processed_on</name>
       <description/>
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_update_nbs_card_w_msg_sent_on.ktr</filename>
+      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_update_nbs_result_w_msg_processed_on.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -376,14 +376,14 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>320</xloc>
-      <yloc>420</yloc>
+      <xloc>300</xloc>
+      <yloc>600</yloc>
       </entry>
     <entry>
-      <name>drop fact_nbs_sample</name>
+      <name>add accession_number index</name>
       <description/>
       <type>SQL</type>
-      <sql>drop table if exists warehouse.fact_nbs_sample&#x3b;</sql>
+      <sql>drop table if exists warehouse.fact_nbs_processing_dates&#x3b;&#xa;&#xa;create table warehouse.fact_nbs_processing_dates as&#xa;&#x28;&#xa;select&#xa;	 fnc.accession_number&#xa;	,fnc.dw_changed_on_date_num_id&#xa;	,fnc.dw_sr_accessioned_date_num_id&#xa;	,fnc.dw_date_collected_date_num_id&#xa;	,fnc.dw_message_sent_on_date_num_id&#xa;	,fnc.dw_report_out_date_num_id&#xa;	,max&#x28;fns.dw_login_date_num_id&#x29; as dw_login_date_num_id_max&#xa;	,max&#x28;fns.dw_recd_date_num_id&#x29; as dw_recd_date_num_id_max	&#xa;	,max&#x28;fns.dw_completed_date_num_id&#x29; as dw_completed_date_num_id_max&#xa;	,max&#x28;fns.dw_reviewed_date_num_id&#x29; as dw_reviewed_date_num_id_sample_max&#xa;	,max&#x28;fns.dw_message_processed_on_date_num_id&#x29; as dw_message_processed_on_date_num_id_sample_max&#xa;	,max&#x28;fns.dw_result_entry_date_num_id&#x29; as dw_result_entry_date_num_id_max&#xa;	,max&#x28;fnr.dw_dx_treatment_date_num_id&#x29; as dw_dx_treatment_date_num_id_max&#xa;	,max&#x28;fnr.dw_reviewed_date_num_id&#x29; as dw_reviewed_date_num_id_result_max&#xa;	,max&#x28;fnr.dw_entered_on_date_num_id&#x29; as dw_entered_on_date_num_id_max&#xa;	,max&#x28;fnr.dw_message_processed_on_date_num_id&#x29; as dw_message_processed_on_date_num_id_result_max&#xa; 	,max&#x28;fncl.dw_sr_received_date_num_id&#x29; as dw_sr_received_date_num_id_max&#xa;from warehouse.fact_nbs_card fnc left join warehouse.fact_nbs_card_log fncl on fncl.kit_number &#x3d; fnc.kit_number&#xa;left join warehouse.fact_nbs_sample fns on fns.accession_number &#x3d; fnc.accession_number&#xa;left join warehouse.fact_nbs_result fnr on fnr.sample_number &#x3d; fns.sample_number&#xa;group by 1,2,3,4,5,6&#xa;&#x29;&#x3b;&#xa;&#xa;CREATE INDEX idx_fnpd_accession_number&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;accession_number&#x29;&#x3b;&#xa;&#xa;CREATE INDEX idx_fnpd_dw_changed_on_date_num_id&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_changed_on_date_num_id&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_sr_accessioned_date_num_id&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_sr_accessioned_date_num_id&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_date_collected_date_num_id&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_date_collected_date_num_id&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_message_sent_on_date_num_id&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_message_sent_on_date_num_id&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_report_out_date_num_id&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_report_out_date_num_id&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_login_date_num_id_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_login_date_num_id_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_recd_date_num_id_max	&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_recd_date_num_id_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_completed_date_num_id_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_completed_date_num_id_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_reviewed_date_num_id_result_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_reviewed_date_num_id_result_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_message_processed_on_date_num_id_result_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_message_processed_on_date_num_id_result_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_result_entry_date_num_id_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_result_entry_date_num_id_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_dx_treatment_date_num_id_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_dx_treatment_date_num_id_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_reviewed_date_num_id_sample_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_reviewed_date_num_id_sample_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_entered_on_date_num_id_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_entered_on_date_num_id_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_message_processed_on_date_num_id_sample_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_message_processed_on_date_num_id_sample_max&#x29;&#x3b;</sql>
       <useVariableSubstitution>F</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
@@ -392,24 +392,168 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>230</xloc>
-      <yloc>180</yloc>
-      </entry>
-    <entry>
-      <name>idx_fact_nbs_card_accession_number</name>
-      <description/>
-      <type>SQL</type>
-      <sql>CREATE INDEX idx_fact_nbs_card_accession_number&#xa;  ON warehouse.fact_nbs_card&#xa;  USING btree&#xa;  &#x28;accession_number&#x29;&#x3b;</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename/>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>Trisano OLAP DS</connection>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>290</xloc>
+      <xloc>280</xloc>
       <yloc>290</yloc>
+      </entry>
+    <entry>
+      <name>Kill Postgres query</name>
+      <description/>
+      <type>SQL</type>
+      <sql>select pg_cancel_backend&#x28;12885&#x29;&#x3b;&#xa;select pg_terminate_backend&#x28;12885&#x29;&#x3b;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>Trisano OLAP DS</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>90</xloc>
+      <yloc>560</yloc>
+      </entry>
+    <entry>
+      <name>truncate logs</name>
+      <description/>
+      <type>SHELL</type>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>pwd&#xa;truncate -s 100 &#x2f;var&#x2f;local&#x2f;pentaho&#x2f;tomcat&#x2f;logs&#x2f;catalina.out&#xa;truncate -s 100 &#x2f;var&#x2f;local&#x2f;pentaho&#x2f;tomcat&#x2f;logs&#x2f;pentaho.log</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>30</xloc>
+      <yloc>450</yloc>
+      </entry>
+    <entry>
+      <name>rebuild msg processed on cols</name>
+      <description/>
+      <type>SQL</type>
+      <sql>alter table warehouse.fact_nbs_card alter column dw_message_sent_on_date_num_id set default 19000101&#x3b;&#xa;&#xa;alter table warehouse.fact_nbs_card alter column src_message_sent_on set default &#x27;1900&#x2f;01&#x2f;01 00&#x3a;00&#x3a;00&#x27;&#x3b;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>Trisano OLAP DS</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>210</xloc>
+      <yloc>210</yloc>
+      </entry>
+    <entry>
+      <name>exec_update_action_item_log</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_update_action_item_log.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>180</xloc>
+      <yloc>400</yloc>
+      </entry>
+    <entry>
+      <name>check disk space 2 2</name>
+      <description/>
+      <type>SHELL</type>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>df -h</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>90</xloc>
+      <yloc>290</yloc>
+      </entry>
+    <entry>
+      <name>exec_nbs_card_log_main</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_nbs_card_log_main.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>180</xloc>
+      <yloc>270</yloc>
+      </entry>
+    <entry>
+      <name>truncate fact_nbs_card_log</name>
+      <description/>
+      <type>SQL</type>
+      <sql>delete from warehouse.fact_nbs_card_log&#x3b;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>Trisano OLAP DS</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>120</xloc>
+      <yloc>240</yloc>
       </entry>
   </entries>
   <hops>
@@ -496,7 +640,7 @@
     </hop>
     <hop>
       <from>START</from>
-      <to>check disk space</to>
+      <to>Update fnr partition tables</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>N</enabled>
@@ -504,8 +648,8 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>check disk space</from>
-      <to>fact_nbs_result</to>
+      <from>Update fnr partition tables</from>
+      <to>exec_update_nbs_result_w_msg_processed_on</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>N</enabled>
@@ -514,7 +658,7 @@
     </hop>
     <hop>
       <from>START</from>
-      <to>drop fact_nbs_sample</to>
+      <to>Kill Postgres query</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>N</enabled>
@@ -522,7 +666,43 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>drop fact_nbs_sample</from>
+      <from>Kill Postgres query</from>
+      <to>exec_update_nbs_result_w_msg_processed_on</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Kill Postgres query</from>
+      <to>vacuum</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>START</from>
+      <to>truncate logs</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>truncate logs</from>
+      <to>exec_update_nbs_result_w_msg_processed_on</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Kill Postgres query</from>
       <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -531,34 +711,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>START</from>
-      <to>Add arup date columns to fact_nbs_card</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>Add arup date columns to fact_nbs_card</from>
-      <to>exec_update_nbs_card_w_msg_sent_on</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>exec_update_nbs_card_w_msg_sent_on</from>
-      <to>vacuum</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>check disk space</from>
+      <from>Update fnr partition tables</from>
       <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -568,15 +721,6 @@
     </hop>
     <hop>
       <from>vacuum</from>
-      <to>check disk space 2</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>check disk space 2</from>
       <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -585,17 +729,17 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>START</from>
-      <to>idx_fact_nbs_card_accession_number</to>
+      <from>vacuum</from>
+      <to>check disk space 2</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>N</enabled>
       <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
+      <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>idx_fact_nbs_card_accession_number</from>
-      <to>exec_update_nbs_card_w_msg_sent_on</to>
+      <from>check disk space 2</from>
+      <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>N</enabled>
@@ -604,12 +748,102 @@
     </hop>
     <hop>
       <from>START</from>
-      <to>exec_update_nbs_card_w_msg_sent_on</to>
+      <to>fact_nbs_result</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>START</from>
+      <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>START</from>
+      <to>rebuild msg processed on cols</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>exec_update_action_item_log</from>
+      <to>vacuum</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>START</from>
+      <to>check disk space 2 2</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>check disk space 2 2</from>
+      <to>exec_update_action_item_log</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>add accession_number index</from>
+      <to>check disk space</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>check disk space</from>
+      <to>vacuum</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>exec_nbs_card_log_main</from>
+      <to>add accession_number index</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>START</from>
+      <to>truncate fact_nbs_card_log</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>truncate fact_nbs_card_log</from>
+      <to>exec_nbs_card_log_main</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
     </hop>
   </hops>
   <notepads>

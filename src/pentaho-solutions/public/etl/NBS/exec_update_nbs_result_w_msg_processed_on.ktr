@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>exec_update_nbs_card_w_msg_sent_on</name>
+    <name>exec_update_nbs_result_w_msg_processed_on</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -160,10 +160,10 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Get Variables</from><to>Get Max SRC_MESSAGE_SENT_ON</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get Max SRC_MESSAGE_SENT_ON</from><to>Log Date</to><enabled>Y</enabled> </hop>
   <hop> <from>Log Date</from><to>Get ARUP Message Out Date 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get ARUP Message Out Date 2</from><to>Update fnc.src_message_sent_on</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get ARUP Message Out Date 2</from><to>Calculator</to><enabled>Y</enabled> </hop>
+  <hop> <from>Calculator</from><to>Update fns.src_message_processed_on</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Max SRC_MESSAGE_PROCESSED_ON</from><to>Log Date</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Get ARUP Message Out Date 2</name>
@@ -178,66 +178,19 @@
            </partitioning>
     <connection>NBSOLTP</connection>
     <rowlimit>0</rowlimit>
-    <sql>select &#xa;	 TEXT_ID&#xa;	,MAX&#x28;MESSAGE_SENT_ON&#x29; as SRC_MESSAGE_SENT_ON&#xa;    ,TO_NUMBER&#x28;TO_CHAR&#x28;MAX&#x28;MESSAGE_SENT_ON&#x29;, &#x27;YYYYMMDD&#x27;&#x29;&#x29; AS DW_MESSAGE_SENT_ON&#xa;FROM &#x24;&#x7b;nbsoltp_schema&#x7d;.NBS_ARUP_MESSAGE_OUT&#xa;WHERE MESSAGE_SENT_ON &#x3e;&#x3d; &#x3f;&#xa;group by TEXT_ID&#xa;</sql>
-    <outer_join>Y</outer_join>
+    <sql>select &#xa;	 SAMPLE_NUMBER&#xa;	,MAX&#x28;MESSAGE_PROCESSED_ON&#x29; as SRC_MESSAGE_PROCESSED_ON&#xa;    ,TO_NUMBER&#x28;TO_CHAR&#x28;MAX&#x28;MESSAGE_PROCESSED_ON&#x29;, &#x27;YYYYMMDD&#x27;&#x29;&#x29; AS DW_MESSAGE_PROCESSED_ON&#xa;FROM &#x24;&#x7b;nbsoltp_schema&#x7d;.NBS_ARUP_MESSAGE_IN&#xa;WHERE MESSAGE_PROCESSED_ON &#x3e;&#x3d; &#x3f;&#xa;group by SAMPLE_NUMBER&#xa;</sql>
+    <outer_join>N</outer_join>
     <replace_vars>Y</replace_vars>
     <parameter>
       <field>
-        <name>max_src_message_sent_on</name>
-        <type>Timestamp</type>
+        <name>max_src_message_processed_on</name>
+        <type>Date</type>
       </field>
     </parameter>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>740</xloc>
-      <yloc>190</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Get Max SRC_MESSAGE_SENT_ON</name>
-    <type>DBJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>Trisano OLAP DS</connection>
-    <rowlimit>0</rowlimit>
-    <sql>select &#xa;	case when max&#x28;SRC_MESSAGE_SENT_ON&#x29; is not null then max&#x28;SRC_MESSAGE_SENT_ON&#x29; else date &#x27;2006-01-01&#x27; end as max_SRC_MESSAGE_SENT_ON &#xa;from warehouse.fact_nbs_card</sql>
-    <outer_join>N</outer_join>
-    <replace_vars>N</replace_vars>
-    <parameter>
-    </parameter>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>340</xloc>
-      <yloc>190</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Get Variables</name>
-    <type>GetVariable</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>140</xloc>
-      <yloc>190</yloc>
+      <xloc>590</xloc>
+      <yloc>200</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -257,17 +210,17 @@
     <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>writeToLog&#x28;&#x27;m&#x27;, &#x27;max_src_message_sent_on&#x3a; &#x27; &#x2b; max_src_message_sent_on&#x29;</jsScript_script>
+        <jsScript_script>writeToLog&#x28;&#x27;m&#x27;, &#x27;max_src_message_processed_on&#x3a; &#x27; &#x2b; max_src_message_processed_on&#x29;</jsScript_script>
       </jsScript>    </jsScripts>    <fields>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>570</xloc>
-      <yloc>190</yloc>
+      <xloc>420</xloc>
+      <yloc>200</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Update fnc.src_message_sent_on</name>
+    <name>Update fns.src_message_processed_on</name>
     <type>Update</type>
     <description/>
     <distribute>Y</distribute>
@@ -285,27 +238,212 @@
     <ignore_flag_field/>
     <lookup>
       <schema/>
-      <table>fact_nbs_card</table>
+      <table>fact_nbs_result</table>
       <key>
-        <name>TEXT_ID</name>
-        <field>accession_number</field>
+        <name>SAMPLE_NUMBER_AS_INT</name>
+        <field>sample_number</field>
         <condition>&#x3d;</condition>
         <name2/>
         </key>
       <value>
-        <name>src_message_sent_on</name>
-        <rename>SRC_MESSAGE_SENT_ON</rename>
+        <name>dw_message_processed_on_date_num_id</name>
+        <rename>DW_MESSAGE_PROCESSED_ON</rename>
         </value>
       <value>
-        <name>dw_message_sent_on_date_num_id</name>
-        <rename>DW_MESSAGE_SENT_ON</rename>
+        <name>src_message_processed_on</name>
+        <rename>SRC_MESSAGE_PROCESSED_ON</rename>
         </value>
       </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>970</xloc>
-      <yloc>190</yloc>
+      <yloc>200</yloc>
       <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Update fns.src_message_processed_on 2</name>
+    <type>Update</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Trisano OLAP DS</connection>
+    <skip_lookup>Y</skip_lookup>
+    <commit>100</commit>
+    <use_batch>Y</use_batch>
+    <error_ignored>N</error_ignored>
+    <ignore_flag_field/>
+    <lookup>
+      <schema/>
+      <table>fact_nbs_result</table>
+      <key>
+        <name>SAMPLE_NUMBER</name>
+        <field>sample_number</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+        </key>
+      <value>
+        <name>src_message_processed_on</name>
+        <rename>SRC_MESSAGE_PROCESSED_ON</rename>
+        </value>
+      <value>
+        <name>dw_message_processed_on_date_num_id</name>
+        <rename>DW_MESSAGE_PROCESSED_ON</rename>
+        </value>
+      </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1002</xloc>
+      <yloc>304</yloc>
+      <draw>N</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get Max SRC_MESSAGE_PROCESSED_ON</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Trisano OLAP DS</connection>
+    <sql>select &#xa;	case when max&#x28;SRC_MESSAGE_PROCESSED_ON&#x29; is not null then max&#x28;SRC_MESSAGE_PROCESSED_ON&#x29; else date &#x27;2006-01-01&#x27; end as max_SRC_MESSAGE_PROCESSED_ON &#xa;from warehouse.fact_nbs_result&#x3b;</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>190</xloc>
+      <yloc>200</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Data Grid</name>
+    <type>DataGrid</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>DW_MESSAGE_PROCESSED_ON</name>
+        <type>Integer</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>sample_number</name>
+        <type>BigNumber</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>SRC_MESSAGE_PROCESSED_ON</name>
+        <type>Timestamp</type>
+        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <data>
+      <line> <item>20171011</item><item>3082829</item><item>2017&#x2f;10&#x2f;11 13&#x3a;27&#x3a;01</item> </line>
+    </data>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>730</xloc>
+      <yloc>190</yloc>
+      <draw>N</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Calculator</name>
+    <type>Calculator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+       <calculation><field_name>SAMPLE_NUMBER_AS_INT</field_name>
+<calc_type>COPY_FIELD</calc_type>
+<field_a>SAMPLE_NUMBER</field_a>
+<field_b/>
+<field_c/>
+<value_type>Integer</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>780</xloc>
+      <yloc>200</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get Max SRC_MESSAGE_PROCESSED_ON ALL</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Trisano OLAP DS</connection>
+    <sql>select &#xa;	 date &#x27;2006-01-01&#x27; as max_SRC_MESSAGE_PROCESSED_ON&#x3b;</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>210</xloc>
+      <yloc>200</yloc>
+      <draw>N</draw>
       </GUI>
     </step>
 
