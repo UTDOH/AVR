@@ -44,6 +44,12 @@
       <Level name="Day" visible="true" column="src_date_val" type="Date" uniqueMembers="true" levelType="TimeDays" hideMemberIf="Never">
       </Level>
     </Hierarchy>
+    <Hierarchy name="Date Comparison" visible="true" hasAll="true">
+      <Table name="dim_date_new" schema="warehouse" alias="">
+      </Table>
+      <Level name="Numeric Date" visible="true" column="dw_date_num_id" type="Integer" uniqueMembers="true" levelType="TimeDays" hideMemberIf="Never" description="Numeric Date">
+      </Level>
+    </Hierarchy>
   </Dimension>
   <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Birthplace">
     <Hierarchy name="Birthplace" visible="true" hasAll="true" primaryKey="dw_birthplace_id">
@@ -312,23 +318,23 @@
     </Measure>
   </Cube>
   <Cube name="NbsCardLog" caption="NBS Card Log" visible="true" cache="true" enabled="true">
-    <Table name="fact_nbs_card_log" schema="warehouse" alias="">
+    <Table name="fact_nbs_card_log" schema="warehouse">
     </Table>
-    <DimensionUsage source="Date" name="Date of SR Received" caption="Date of SR Recieved" visible="true" foreignKey="dw_sr_received_date_num_id">
+    <DimensionUsage source="Date" name="Date of SR Received" caption="Date of SR Recieved" visible="true" foreignKey="dw_sr_received_date_num_id" highCardinality="false">
     </DimensionUsage>
-    <Dimension type="StandardDimension" visible="true" foreignKey="card_type" name="Card Type">
+    <Dimension type="StandardDimension" visible="true" foreignKey="card_type" highCardinality="false" name="Card Type">
       <Hierarchy name="Card Type" visible="true" hasAll="true">
-        <Table name="fact_nbs_card_log" schema="warehouse" alias="">
+        <Table name="fact_nbs_card_log" schema="warehouse">
         </Table>
-        <Level name="New Level 0" visible="true" column="card_type" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+        <Level name="New Level 0" visible="true" column="card_type" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
         </Level>
       </Hierarchy>
     </Dimension>
-    <Dimension type="StandardDimension" visible="true" foreignKey="log_delayed" name="Log Delayed">
+    <Dimension type="StandardDimension" visible="true" foreignKey="log_delayed" highCardinality="false" name="Log Delayed">
       <Hierarchy name="Log Delayed" visible="true" hasAll="true">
-        <Table name="fact_nbs_card_log" schema="warehouse" alias="">
+        <Table name="fact_nbs_card_log" schema="warehouse">
         </Table>
-        <Level name="Log Delayed" visible="true" column="log_delayed" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+        <Level name="Log Delayed" visible="true" column="log_delayed" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
         </Level>
       </Hierarchy>
     </Dimension>
@@ -338,35 +344,39 @@
   <Cube name="NbsProcessingDates" caption="NBS Processing Dates" visible="true" cache="true" enabled="true">
     <Table name="fact_nbs_processing_dates" schema="warehouse">
     </Table>
-    <DimensionUsage source="Date" name="Sample - Completed Date" visible="true" foreignKey="dw_completed_date_num_id_max">
+    <DimensionUsage source="Date" name="Sample - Completed Date" caption="Sample - Completed Date" visible="true" foreignKey="dw_completed_date_num_id_max" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="Date" name="Card - Date Specimen Collected" visible="true" foreignKey="dw_date_collected_date_num_id">
+    <DimensionUsage source="Date" name="Card - Date Specimen Collected" caption="Card - Date Specimen Collected" visible="true" foreignKey="dw_date_collected_date_num_id" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="Date" name="Result - Treatment for X_DX_CODE Administered Date" visible="true" foreignKey="dw_dx_treatment_date_num_id_max">
+    <DimensionUsage source="Date" name="Result - Treatment for X_DX_CODE Administered Date" caption="Result - Treatment for X_DX_CODE Administered Date" visible="true" foreignKey="dw_dx_treatment_date_num_id_max" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="Date" name="Result - Screening Assay Result Entered On Date" visible="true" foreignKey="dw_entered_on_date_num_id_max">
+    <DimensionUsage source="Date" name="Result - Screening Assay Result Entered On Date" caption="Result - Screening Assay Result Entered On Date" visible="true" foreignKey="dw_entered_on_date_num_id_max" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="Date" name="Sample - Login Date" visible="true" foreignKey="dw_login_date_num_id_max">
+    <DimensionUsage source="Date" name="Sample - Login Date" caption="Sample - Login Date" visible="true" foreignKey="dw_login_date_num_id_max" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="Date" name="Result - ARUP Message In Processed Date" visible="true" foreignKey="dw_message_processed_on_date_num_id_result_max">
+    <DimensionUsage source="Date" name="Result - ARUP Message In Processed Date" caption="Result - ARUP Message In Processed Date" visible="true" foreignKey="dw_message_processed_on_date_num_id_result_max" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="Date" name="Sample - ARUP Message In Date" visible="true" foreignKey="dw_message_processed_on_date_num_id_sample_max">
+    <DimensionUsage source="Date" name="Sample - ARUP Message In Date" caption="Sample - ARUP Message In Date" visible="true" foreignKey="dw_message_processed_on_date_num_id_sample_max" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="Date" name="Card - ARUP Message Out Date" visible="true" foreignKey="dw_message_sent_on_date_num_id">
+    <DimensionUsage source="Date" name="Card - ARUP Message Out Date" caption="Card - ARUP Message Out Date" visible="true" foreignKey="dw_message_sent_on_date_num_id" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="Date" name="Sample - Received Date" visible="true" foreignKey="dw_recd_date_num_id_max">
+    <DimensionUsage source="Date" name="Sample - Received Date" caption="Sample - Received Date" visible="true" foreignKey="dw_recd_date_num_id_max" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="Date" name="Attachment Report Out Date" visible="true" foreignKey="dw_report_out_date_num_id">
+    <DimensionUsage source="Date" name="Attachment Report Out Date" caption="Attachment Report Out Date" visible="true" foreignKey="dw_report_out_date_num_id" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="Date" name="Plate Position Result Entry Date" visible="true" foreignKey="dw_result_entry_date_num_id_max">
+    <DimensionUsage source="Date" name="Plate Position Result Entry Date" caption="Plate Position Result Entry Date" visible="true" foreignKey="dw_result_entry_date_num_id_max" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="Date" name="Screening Assay Review Date" visible="true" foreignKey="dw_reviewed_date_num_id_result_max">
+    <DimensionUsage source="Date" name="Screening Assay Review Date" caption="Screening Assay Review Date" visible="true" foreignKey="dw_reviewed_date_num_id_result_max" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="Date" name="Card Accessioned by Utah Pub Health Lab Date" visible="true" foreignKey="dw_sr_accessioned_date_num_id">
+    <DimensionUsage source="Date" name="Card Accessioned by Utah Pub Health Lab Date" caption="Card Accessioned by Utah Pub Health Lab Date" visible="true" foreignKey="dw_sr_accessioned_date_num_id" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="Date" name="Card Received by Utah Pub Health Lab Date" visible="true" foreignKey="dw_sr_received_date_num_id_max">
+    <DimensionUsage source="Date" name="Card Received by Utah Pub Health Lab Date" caption="Card Received by Utah Pub Health Lab Date" visible="true" foreignKey="dw_sr_received_date_num_id_max" highCardinality="false">
     </DimensionUsage>
     <Measure name="Count of Accession Number" column="accession_number" aggregator="count" visible="true">
+    </Measure>
+    <Measure name="Sample - Completed Date" column="dw_completed_date_num_id_max" aggregator="avg" visible="true">
+    </Measure>
+    <Measure name="Sample - Recieved Date" column="dw_recd_date_num_id_max" aggregator="avg" visible="true">
     </Measure>
   </Cube>
 </Schema>
