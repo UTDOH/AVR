@@ -15,7 +15,7 @@
             <description>NBSPROD&#x7c;NBS_USER</description>
         </parameter>
         <parameter>
-            <name>nbsoltp_schemas</name>
+            <name>nbsoltp_schemaz</name>
             <default_value>NBS_USER</default_value>
             <description>NBSPROD&#x7c;NBS_USER</description>
         </parameter>
@@ -88,7 +88,7 @@
       <note>  WHERE CARD.CHANGED_ON BETWEEN TO_DATE&#x28;&#x27;2017-01-01 00&#x3a;00&#x3a;00&#x27;, &#xa;  &#x27;yyyy&#x2f;mm&#x2f;dd HH24&#x3a;MI&#x3a;SS&#x27;&#x29; AND TO_DATE&#x28;&#x27;2017-01-31 00&#x3a;00&#x3a;00&#x27;, &#xa;  &#x27;yyyy&#x2f;mm&#x2f;dd HH24&#x3a;MI&#x3a;SS&#x27;&#x29;</note>
       <xloc>460</xloc>
       <yloc>820</yloc>
-      <width>482</width>
+      <width>498</width>
       <heigth>58</heigth>
       <fontname>Arial</fontname>
       <fontsize>10</fontsize>
@@ -109,7 +109,7 @@
       <note>,case CARD2.BREAST when &#x27;T&#x27; then 1 else 0 end as BREAST</note>
       <xloc>540</xloc>
       <yloc>510</yloc>
-      <width>383</width>
+      <width>400</width>
       <heigth>26</heigth>
       <fontname>Arial</fontname>
       <fontsize>10</fontsize>
@@ -332,7 +332,7 @@
            </partitioning>
     <connection>NBSOLTP</connection>
     <rowlimit>0</rowlimit>
-    <sql>SELECT &#xa;   CARD2.NBS_KIT_NO&#xa;  ,A.NAME&#xa;  ,A.CARD_DATE_FIRST_RECEIVED&#xa;  ,A.MAX_ORDER_NUMBER AS &#x22;ORDER_NUMBER&#x22;&#xa;  ,CARD2.SPECIMEN_TYPE&#xa;  ,CARD2.TEXT_ID as &#x22;ACCESSION_NUMBER&#x22;&#xa;  ,case CARD2.CARD_OK when &#x27;T&#x27; then 1 else 0 end as CARD_OK&#xa;  ,CARD2.KIT_SERIES&#xa;  ,CARD2.REJECT_REASON&#xa;  ,CARD2.BABYS_SEX&#xa;  &#xa;  ,case CARD2.BREAST when &#x27;T&#x27; then 1 else 0 end as BREAST&#xa;  ,case CARD2.BOTTLE when &#x27;T&#x27; then 1 else 0 end as BOTTLE&#xa;  ,case CARD2.ADOPTION when &#x27;T&#x27; then 1 else 0 end as ADOPTION&#xa;  ,case CARD2.PREMATURE_SICK when &#x27;T&#x27; then 1 else 0 end as PREMATURE_SICK  &#xa;  ,case CARD2.MULTIPLE_BIRTH when &#x27;T&#x27; then 1 else 0 end as MULTIPLE_BIRTH&#xa;  ,case CARD2.HOME_BIRTH when &#x27;T&#x27; then 1 else 0 end as HOME_BIRTH&#xa;  ,case CARD2.TRANSFUSION when &#x27;T&#x27; then 1 else 0 end as TRANSFUSION&#xa;  ,CARD2.TRANSFUSION_DATE&#xa;  ,CARD2.BIRTH_WEIGHT&#xa;  ,CARD2.MOTHERS_ZIP&#xa;  ,CARD2.HOSPITAL_CODE&#xa;  ,CARD2.RECALL_REASON&#xa;  ,case CARD2.X_MISSING_DATA when &#x27;T&#x27; then 1 else 0 end as X_MISSING_DATA &#xa;  ,case CARD2.MECONIUM_ILEUS when &#x27;T&#x27; then 1 else 0 end as MECONIUM_ILEUS&#xa;  ,case CARD2.STEROIDS when &#x27;T&#x27; then 1 else 0 end as STEROIDS&#xa;  ,case CARD2.TPN when &#x27;T&#x27; then 1 else 0 end as TPN&#xa; &#xa;  ,CARD2.BIRTHPLACE_TYPE&#xa;  ,CARD2.CARD_STATUS&#xa;  ,CARD2.UNSAT_CLOSE_REASON&#xa;&#xa;  ,BIRTHPLACE.PERSON_NUMBER AS SRC_BIRTHPLACE_PERSON_NUMBER&#xa;  ,BIRTHPLACE.CITY AS BIRTH_CITY&#xa;  ,BIRTHPLACE.STATE AS BIRTH_STATE&#xa;  ,BIRTHPLACE.COUNTRY AS BIRTH_COUNTRY&#xa;  ,BIRTHPLACE.ZIP AS BIRTH_ZIP&#xa; &#xa;  ,PHYSICIAN.PERSON_NUMBER AS SRC_PHYSICIAN_PERSON_NUMBER&#xa;  ,PHYSICIAN.CITY AS PHYSICIAN_CITY&#xa;  ,PHYSICIAN.STATE AS PHYSICIAN_STATE&#xa;  ,PHYSICIAN.COUNTRY AS PHYSICIAN_COUNTRY&#xa;  ,PHYSICIAN.ZIP AS PHYSICIAN_ZIP&#xa;&#xa;  ,TO_DATE&#x28;CARD2.CHANGED_ON&#x29; as CHANGED_ON_DT&#xa;  ,CARD2.CHANGED_ON AS CHANGED_ON&#xa;  ,CARD2.DATE_COLLECTED&#xa;  ,TO_DATE&#x28;CARD2.DATE_RECEIVED&#x29; AS DATE_SR_ACCESSIONED_DT&#xa;  ,CARD2.DATE_RECEIVED as SR_ACCESSIONED&#xa;  ,CARD2.BIRTHDATE&#xa;  ,TO_DATE&#x28;CARD2.MOTHERS_BIRTHDATE&#x29; AS MOTHERS_BIRTHDATE_DT&#xa;  ,CARD2.BLIND_ENTRY_ON&#xa;  ,CARD2.SECOND_ENTRY_ON&#xa;  FROM &#x28;&#xa;  SELECT&#xa;      CARD.NAME&#xa;     ,MAX&#x28;CARD.ORDER_NUMBER&#x29; AS &#x22;MAX_ORDER_NUMBER&#x22;&#xa;     ,MIN&#x28;CARD.DATE_RECEIVED&#x29; AS &#x22;CARD_DATE_FIRST_RECEIVED&#x22;&#xa;  FROM &#x24;&#x7b;nbsoltp_schema&#x7d;.NBS_CARD CARD &#xa;  &#xa;  GROUP BY&#xa;      CARD.NAME&#xa;&#x29; A INNER JOIN &#x24;&#x7b;nbsoltp_schema&#x7d;.NBS_CARD CARD2 ON CARD2.NAME &#x3d; A.NAME AND CARD2.ORDER_NUMBER &#x3d; A.MAX_ORDER_NUMBER&#xa;LEFT JOIN &#x24;&#x7b;nbsoltp_schema&#x7d;.PERSON BIRTHPLACE ON BIRTHPLACE.PERSON_NUMBER &#x3d; CARD2.BIRTHPLACE&#xa;LEFT JOIN &#x24;&#x7b;nbsoltp_schema&#x7d;.PERSON PHYSICIAN ON PHYSICIAN.PERSON_NUMBER &#x3d; CARD2.PHYSICIAN&#xa;WHERE CARD2.changed_on &#x3e; &#x3f;</sql>
+    <sql>SELECT &#xa;   CARD2.NBS_KIT_NO&#xa;  ,A.NAME as KIT_NUMBER&#xa;  ,A.CARD_DATE_FIRST_RECEIVED&#xa;  ,A.MAX_ORDER_NUMBER AS &#x22;ORDER_NUMBER&#x22;&#xa;  ,CARD2.SPECIMEN_TYPE&#xa;  ,CARD2.TEXT_ID as &#x22;ACCESSION_NUMBER&#x22;&#xa;  ,case CARD2.CARD_OK when &#x27;T&#x27; then 1 else 0 end as CARD_OK&#xa;  ,CARD2.REJECT_REASON&#xa;  ,CARD2.BABYS_SEX&#xa;  &#xa;  ,case CARD2.BREAST when &#x27;T&#x27; then 1 else 0 end as BREAST&#xa;  ,case CARD2.BOTTLE when &#x27;T&#x27; then 1 else 0 end as BOTTLE&#xa;  ,case CARD2.ADOPTION when &#x27;T&#x27; then 1 else 0 end as ADOPTION&#xa;  ,case CARD2.PREMATURE_SICK when &#x27;T&#x27; then 1 else 0 end as PREMATURE_SICK  &#xa;  ,case CARD2.MULTIPLE_BIRTH when &#x27;T&#x27; then 1 else 0 end as MULTIPLE_BIRTH&#xa;  ,case CARD2.HOME_BIRTH when &#x27;T&#x27; then 1 else 0 end as HOME_BIRTH&#xa;  ,case CARD2.TRANSFUSION when &#x27;T&#x27; then 1 else 0 end as TRANSFUSION&#xa;  ,CARD2.TRANSFUSION_DATE&#xa;  ,CARD2.BIRTH_WEIGHT&#xa;  ,CARD2.MOTHERS_ZIP&#xa;  ,CARD2.HOSPITAL_CODE&#xa;  ,CARD2.RECALL_REASON&#xa;  ,case CARD2.X_MISSING_DATA when &#x27;T&#x27; then 1 else 0 end as X_MISSING_DATA &#xa;  ,case CARD2.MECONIUM_ILEUS when &#x27;T&#x27; then 1 else 0 end as MECONIUM_ILEUS&#xa;  ,case CARD2.STEROIDS when &#x27;T&#x27; then 1 else 0 end as STEROIDS&#xa;  ,case CARD2.TPN when &#x27;T&#x27; then 1 else 0 end as TPN&#xa; &#xa;  ,CARD2.BIRTHPLACE_TYPE&#xa;  ,CARD2.CARD_STATUS&#xa;  ,CARD2.UNSAT_CLOSE_REASON&#xa;&#xa;  ,BIRTHPLACE.PERSON_NUMBER AS SRC_BIRTHPLACE_PERSON_NUMBER&#xa;  ,BIRTHPLACE.CITY AS BIRTH_CITY&#xa;  ,BIRTHPLACE.STATE AS BIRTH_STATE&#xa;  ,BIRTHPLACE.COUNTRY AS BIRTH_COUNTRY&#xa;  ,BIRTHPLACE.ZIP AS BIRTH_ZIP&#xa; &#xa;  ,PHYSICIAN.PERSON_NUMBER AS SRC_PHYSICIAN_PERSON_NUMBER&#xa;  ,PHYSICIAN.CITY AS PHYSICIAN_CITY&#xa;  ,PHYSICIAN.STATE AS PHYSICIAN_STATE&#xa;  ,PHYSICIAN.COUNTRY AS PHYSICIAN_COUNTRY&#xa;  ,PHYSICIAN.ZIP AS PHYSICIAN_ZIP&#xa;&#xa;  ,TO_DATE&#x28;CARD2.CHANGED_ON&#x29; as CHANGED_ON_DT&#xa;  ,CARD2.CHANGED_ON AS CHANGED_ON&#xa;  ,CARD2.DATE_COLLECTED&#xa;  ,TO_DATE&#x28;CARD2.DATE_RECEIVED&#x29; AS DATE_SR_ACCESSIONED_DT&#xa;  ,CARD2.DATE_RECEIVED as SR_ACCESSIONED&#xa;  ,CARD2.BIRTHDATE&#xa;  ,TO_DATE&#x28;CARD2.MOTHERS_BIRTHDATE&#x29; AS MOTHERS_BIRTHDATE_DT&#xa;  ,CARD2.BLIND_ENTRY_ON&#xa;  ,CARD2.SECOND_ENTRY_ON&#xa;  FROM &#x28;&#xa;  SELECT&#xa;      CARD.NAME&#xa;     ,MAX&#x28;CARD.ORDER_NUMBER&#x29; AS &#x22;MAX_ORDER_NUMBER&#x22;&#xa;     ,MIN&#x28;CARD.DATE_RECEIVED&#x29; AS &#x22;CARD_DATE_FIRST_RECEIVED&#x22;&#xa;  FROM &#x24;&#x7b;nbsoltp_schema&#x7d;.NBS_CARD CARD &#xa;  &#xa;  GROUP BY&#xa;      CARD.NAME&#xa;&#x29; A INNER JOIN &#x24;&#x7b;nbsoltp_schema&#x7d;.NBS_CARD CARD2 ON CARD2.NAME &#x3d; A.NAME AND CARD2.ORDER_NUMBER &#x3d; A.MAX_ORDER_NUMBER&#xa;LEFT JOIN &#x24;&#x7b;nbsoltp_schema&#x7d;.PERSON BIRTHPLACE ON BIRTHPLACE.PERSON_NUMBER &#x3d; CARD2.BIRTHPLACE&#xa;LEFT JOIN &#x24;&#x7b;nbsoltp_schema&#x7d;.PERSON PHYSICIAN ON PHYSICIAN.PERSON_NUMBER &#x3d; CARD2.PHYSICIAN&#xa;WHERE CARD2.changed_on &#x3e; &#x3f;</sql>
     <outer_join>N</outer_join>
     <replace_vars>Y</replace_vars>
     <parameter>
@@ -343,7 +343,7 @@
     </parameter>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>300</xloc>
+      <xloc>320</xloc>
       <yloc>310</yloc>
       <draw>Y</draw>
       </GUI>
@@ -511,6 +511,32 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>860</xloc>
       <yloc>270</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>get max changed_on</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Trisano OLAP DS</connection>
+    <sql>select max&#x28;changed_on&#x29; as maxChangedOn from fact_nbs_card</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>60</xloc>
+      <yloc>310</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -766,8 +792,8 @@
       <schema/>
       <table>fact_nbs_card</table>
       <key>
-        <name>NAME</name>
-        <field>name</field>
+        <name>KIT_NUMBER</name>
+        <field>kit_number</field>
         <condition>&#x3d;</condition>
         <name2/>
       </key>
@@ -778,128 +804,8 @@
         <name2/>
       </key>
       <value>
-        <name>unsat_close_reason</name>
-        <rename>UNSAT_CLOSE_REASON</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>transfusion_date</name>
-        <rename>TRANSFUSION_DATE</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>transfusion</name>
-        <rename>TRANSFUSION</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>tpn</name>
-        <rename>TPN</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>steroids</name>
-        <rename>STEROIDS</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>specimen_type</name>
-        <rename>SPECIMEN_TYPE</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>reject_reason</name>
-        <rename>REJECT_REASON</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>recall_reason</name>
-        <rename>RECALL_REASON</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>premature_sick</name>
-        <rename>PREMATURE_SICK</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>order_number</name>
-        <rename>ORDER_NUMBER</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>name</name>
-        <rename>NAME</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>multiple_birth</name>
-        <rename>MULTIPLE_BIRTH</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>mothers_zip</name>
-        <rename>MOTHERS_ZIP</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>meconium_ileus</name>
-        <rename>MECONIUM_ILEUS</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>kit_series</name>
-        <rename>KIT_SERIES</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>hospital_code</name>
-        <rename>HOSPITAL_CODE</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>home_birth</name>
-        <rename>HOME_BIRTH</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>dw_physician_id</name>
-        <rename>dw_physician_id</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>dw_birthplace_id</name>
-        <rename>dw_birthplace_id</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>card_status</name>
-        <rename>CARD_STATUS</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>breast</name>
-        <rename>BREAST</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>bottle</name>
-        <rename>BOTTLE</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>birthplace_type</name>
-        <rename>BIRTHPLACE_TYPE</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>birth_weight</name>
-        <rename>BIRTH_WEIGHT</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>babys_sex</name>
-        <rename>BABYS_SEX</rename>
+        <name>accession_number</name>
+        <rename>ACCESSION_NUMBER</rename>
         <update>N</update>
       </value>
       <value>
@@ -908,13 +814,38 @@
         <update>N</update>
       </value>
       <value>
-        <name>nbs_kit_no</name>
-        <rename>NBS_KIT_NO</rename>
+        <name>babys_sex</name>
+        <rename>BABYS_SEX</rename>
         <update>N</update>
       </value>
       <value>
-        <name>accession_number</name>
-        <rename>ACCESSION_NUMBER</rename>
+        <name>birth_weight</name>
+        <rename>BIRTH_WEIGHT</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>birthplace_type</name>
+        <rename>BIRTHPLACE_TYPE</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>blind_entry_on</name>
+        <rename>BLIND_ENTRY_ON</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>bottle</name>
+        <rename>BOTTLE</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>breast</name>
+        <rename>BREAST</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>card_ok</name>
+        <rename>CARD_OK</rename>
         <update>N</update>
       </value>
       <value>
@@ -928,28 +859,13 @@
         <update>N</update>
       </value>
       <value>
-        <name>blind_entry_on</name>
-        <rename>BLIND_ENTRY_ON</rename>
+        <name>dw_birth_date_num_id</name>
+        <rename>dw_birth_date_num_id</rename>
         <update>N</update>
       </value>
       <value>
-        <name>second_entry_on</name>
-        <rename>SECOND_ENTRY_ON</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>card_ok</name>
-        <rename>CARD_OK</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>x_missing_data</name>
-        <rename>X_MISSING_DATA</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>sr_accessioned</name>
-        <rename>SR_ACCESSIONED</rename>
+        <name>dw_birthplace_id</name>
+        <rename>dw_birthplace_id</rename>
         <update>N</update>
       </value>
       <value>
@@ -963,51 +879,125 @@
         <update>N</update>
       </value>
       <value>
+        <name>dw_mothers_birth_date_num_id</name>
+        <rename>dw_mothers_birth_date_num_id</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>dw_physician_id</name>
+        <rename>dw_physician_id</rename>
+        <update>N</update>
+      </value>
+      <value>
         <name>dw_sr_accessioned_date_num_id</name>
         <rename>dw_sr_accessioned_date_num_id</rename>
         <update>N</update>
       </value>
       <value>
-        <name>dw_birth_date_num_id</name>
-        <rename>dw_birth_date_num_id</rename>
+        <name>home_birth</name>
+        <rename>HOME_BIRTH</rename>
         <update>N</update>
       </value>
       <value>
-        <name>dw_mothers_birth_date_num_id</name>
-        <rename>dw_mothers_birth_date_num_id</rename>
+        <name>hospital_code</name>
+        <rename>HOSPITAL_CODE</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>kit_number</name>
+        <rename>KIT_NUMBER</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>meconium_ileus</name>
+        <rename>MECONIUM_ILEUS</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>mothers_zip</name>
+        <rename>MOTHERS_ZIP</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>multiple_birth</name>
+        <rename>MULTIPLE_BIRTH</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>nbs_kit_no</name>
+        <rename>NBS_KIT_NO</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>order_number</name>
+        <rename>ORDER_NUMBER</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>premature_sick</name>
+        <rename>PREMATURE_SICK</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>recall_reason</name>
+        <rename>RECALL_REASON</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>reject_reason</name>
+        <rename>REJECT_REASON</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>second_entry_on</name>
+        <rename>SECOND_ENTRY_ON</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>specimen_type</name>
+        <rename>SPECIMEN_TYPE</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>sr_accessioned</name>
+        <rename>SR_ACCESSIONED</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>steroids</name>
+        <rename>STEROIDS</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>tpn</name>
+        <rename>TPN</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>transfusion</name>
+        <rename>TRANSFUSION</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>transfusion_date</name>
+        <rename>TRANSFUSION_DATE</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>unsat_close_reason</name>
+        <rename>UNSAT_CLOSE_REASON</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>x_missing_data</name>
+        <rename>X_MISSING_DATA</rename>
         <update>N</update>
       </value>
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1240</xloc>
-      <yloc>510</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>get max changed_on</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>Trisano OLAP DS</connection>
-    <sql>select max&#x28;changed_on&#x29; as maxChangedOn from fact_nbs_card</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>60</xloc>
-      <yloc>310</yloc>
+      <yloc>500</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

@@ -168,8 +168,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1520</xloc>
-      <yloc>600</yloc>
+      <xloc>670</xloc>
+      <yloc>590</yloc>
       </entry>
     <entry>
       <name>exec_nbs_result_fact_main</name>
@@ -278,8 +278,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1400</xloc>
-      <yloc>600</yloc>
+      <xloc>550</xloc>
+      <yloc>590</yloc>
       </entry>
     <entry>
       <name>load_date_time_dims</name>
@@ -590,8 +590,63 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1260</xloc>
-      <yloc>600</yloc>
+      <xloc>1010</xloc>
+      <yloc>490</yloc>
+      </entry>
+    <entry>
+      <name>check disk space</name>
+      <description/>
+      <type>SHELL</type>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>df -h</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>660</xloc>
+      <yloc>490</yloc>
+      </entry>
+    <entry>
+      <name>vacuum</name>
+      <description/>
+      <type>SQL</type>
+      <sql>vacuum full&#x3b;&#xa;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>Trisano OLAP DS</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>550</xloc>
+      <yloc>490</yloc>
+      </entry>
+    <entry>
+      <name>update fact_nbs_processing_dates</name>
+      <description/>
+      <type>SQL</type>
+      <sql>drop table if exists warehouse.fact_nbs_processing_dates&#x3b;&#xa;&#xa;create table warehouse.fact_nbs_processing_dates as&#xa;&#x28;&#xa;select&#xa;	 fnc.accession_number&#xa;	,fnc.dw_changed_on_date_num_id&#xa;	,fnc.dw_sr_accessioned_date_num_id&#xa;	,fnc.dw_date_collected_date_num_id&#xa;	,fnc.dw_message_sent_on_date_num_id&#xa;	,fnc.dw_report_out_date_num_id&#xa;	,max&#x28;fns.dw_login_date_num_id&#x29; as dw_login_date_num_id_max&#xa;	,max&#x28;fns.dw_recd_date_num_id&#x29; as dw_recd_date_num_id_max	&#xa;	,max&#x28;fns.dw_completed_date_num_id&#x29; as dw_completed_date_num_id_max&#xa;	,max&#x28;fns.dw_reviewed_date_num_id&#x29; as dw_reviewed_date_num_id_sample_max&#xa;	,max&#x28;fns.dw_message_processed_on_date_num_id&#x29; as dw_message_processed_on_date_num_id_sample_max&#xa;	,max&#x28;fns.dw_result_entry_date_num_id&#x29; as dw_result_entry_date_num_id_max&#xa;	,max&#x28;fnr.dw_dx_treatment_date_num_id&#x29; as dw_dx_treatment_date_num_id_max&#xa;	,max&#x28;fnr.dw_reviewed_date_num_id&#x29; as dw_reviewed_date_num_id_result_max&#xa;	,max&#x28;fnr.dw_entered_on_date_num_id&#x29; as dw_entered_on_date_num_id_max&#xa;	,max&#x28;fnr.dw_message_processed_on_date_num_id&#x29; as dw_message_processed_on_date_num_id_result_max&#xa; 	,max&#x28;fncl.dw_sr_received_date_num_id&#x29; as dw_sr_received_date_num_id_max&#xa;from warehouse.fact_nbs_card fnc left join warehouse.fact_nbs_card_log fncl on fncl.kit_number &#x3d; fnc.kit_number&#xa;left join warehouse.fact_nbs_sample fns on fns.accession_number &#x3d; fnc.accession_number&#xa;left join warehouse.fact_nbs_result fnr on fnr.sample_number &#x3d; fns.sample_number&#xa;group by 1,2,3,4,5,6&#xa;&#x29;&#x3b;&#xa;&#xa;CREATE INDEX idx_fnpd_accession_number&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;accession_number&#x29;&#x3b;&#xa;&#xa;CREATE INDEX idx_fnpd_dw_changed_on_date_num_id&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_changed_on_date_num_id&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_sr_accessioned_date_num_id&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_sr_accessioned_date_num_id&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_date_collected_date_num_id&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_date_collected_date_num_id&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_message_sent_on_date_num_id&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_message_sent_on_date_num_id&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_report_out_date_num_id&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_report_out_date_num_id&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_login_date_num_id_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_login_date_num_id_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_recd_date_num_id_max	&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_recd_date_num_id_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_completed_date_num_id_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_completed_date_num_id_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_reviewed_date_num_id_result_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_reviewed_date_num_id_result_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_message_processed_on_date_num_id_result_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_message_processed_on_date_num_id_result_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_result_entry_date_num_id_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_result_entry_date_num_id_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_dx_treatment_date_num_id_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_dx_treatment_date_num_id_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_reviewed_date_num_id_sample_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_reviewed_date_num_id_sample_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_entered_on_date_num_id_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_entered_on_date_num_id_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_message_processed_on_date_num_id_sample_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_message_processed_on_date_num_id_sample_max&#x29;&#x3b;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>Trisano OLAP DS</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>810</xloc>
+      <yloc>490</yloc>
       </entry>
   </entries>
   <hops>
@@ -741,6 +796,33 @@
     </hop>
     <hop>
       <from>exec_update_action_item_log</from>
+      <to>update fact_nbs_processing_dates</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>update fact_nbs_processing_dates</from>
+      <to>check disk space</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>check disk space</from>
+      <to>vacuum</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>vacuum</from>
       <to>Success Mail</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>

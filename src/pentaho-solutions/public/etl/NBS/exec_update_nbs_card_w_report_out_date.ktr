@@ -15,7 +15,7 @@
             <description>NBSPROD&#x7c;NBS_USER</description>
         </parameter>
         <parameter>
-            <name>nbsoltp_schemax</name>
+            <name>nbsoltp_schemaz</name>
             <default_value>NBS_USER</default_value>
             <description>NBSPROD&#x7c;NBS_USER</description>
         </parameter>
@@ -233,7 +233,7 @@
            </partitioning>
     <connection>Trisano OLAP DS</connection>
     <rowlimit>0</rowlimit>
-    <sql>select &#xa;	name as lookup_fnc_name&#xa;	,accession_number as lookup_fnc_accession_number&#xa;from warehouse.fact_nbs_card fnc &#xa;where &#x28;fnc.name &#x3d; &#x3f; or fnc.name&#x3d;&#x3f;&#x29; or &#x28;fnc.accession_number &#x3d; &#x3f; or fnc.accession_number &#x3d; &#x3f; or fnc.accession_number &#x3d; &#x3f;&#x29;</sql>
+    <sql>select &#xa;	kit_number as lookup_kit_number&#xa;	,accession_number as lookup_fnc_accession_number&#xa;from warehouse.fact_nbs_card fnc &#xa;where &#x28;fnc.kit_number &#x3d; &#x3f; or fnc.kit_number&#x3d;&#x3f;&#x29; or &#x28;fnc.accession_number &#x3d; &#x3f; or fnc.accession_number &#x3d; &#x3f; or fnc.accession_number &#x3d; &#x3f;&#x29;</sql>
     <outer_join>N</outer_join>
     <replace_vars>N</replace_vars>
     <parameter>
@@ -287,8 +287,8 @@
       <schema/>
       <table>fact_nbs_card</table>
       <key>
-        <name>lookup_fnc_name</name>
-        <field>name</field>
+        <name>lookup_kit_number</name>
+        <field>kit_number</field>
         <condition>&#x3d;</condition>
         <name2/>
         </key>
