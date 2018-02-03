@@ -376,7 +376,7 @@
            <schema_name/>
            </partitioning>
       <schema>warehouse</schema>
-      <table>dim_date_new</table>
+      <table>dim_nbs_date</table>
       <connection>Trisano OLAP DS</connection>
       <commit>100</commit>
       <cache_size>9999</cache_size>

@@ -540,10 +540,10 @@
       <yloc>270</yloc>
       </entry>
     <entry>
-      <name>truncate fact_nbs_card_log</name>
+      <name>fact_nbs_processing_dates</name>
       <description/>
       <type>SQL</type>
-      <sql>delete from warehouse.fact_nbs_card where changed_on &#x3e;&#x3d; &#x27;2018-01-14 15&#x3a;31&#x3a;46.0&#x27;&#x3b;</sql>
+      <sql>drop table if exists warehouse.fact_nbs_processing_dates&#x3b;&#xa;&#xa;create table warehouse.fact_nbs_processing_dates as&#xa;&#x28;&#xa;select&#xa;     fnc.nbs_kit_no&#xa;    ,fnc.kit_number&#xa;	,fnc.accession_number&#xa;    ,fnc.dw_birth_date_num_id&#xa;	,fnc.dw_changed_on_date_num_id&#xa;	,fnc.dw_sr_accessioned_date_num_id&#xa;	,fnc.dw_date_collected_date_num_id&#xa;	,fnc.dw_message_sent_on_date_num_id&#xa;	,fnc.dw_report_out_date_num_id&#xa;    ,max&#x28;fncl.dw_sr_received_date_num_id&#x29; as dw_sr_received_date_num_id_max&#xa;	,max&#x28;fns.dw_login_date_num_id&#x29; as dw_login_date_num_id_max&#xa;	,max&#x28;fns.dw_recd_date_num_id&#x29; as dw_recd_date_num_id_max	&#xa;	,max&#x28;fns.dw_completed_date_num_id&#x29; as dw_completed_date_num_id_max&#xa;	,max&#x28;fns.dw_reviewed_date_num_id&#x29; as dw_reviewed_date_num_id_sample_max&#xa;	,max&#x28;fns.dw_message_processed_on_date_num_id&#x29; as dw_message_processed_on_date_num_id_sample_max&#xa;	,max&#x28;fns.dw_result_entry_date_num_id&#x29; as dw_result_entry_date_num_id_max&#xa;	,max&#x28;fnr.dw_dx_treatment_date_num_id&#x29; as dw_dx_treatment_date_num_id_max&#xa;	,max&#x28;fnr.dw_reviewed_date_num_id&#x29; as dw_reviewed_date_num_id_result_max&#xa;	,max&#x28;fnr.dw_entered_on_date_num_id&#x29; as dw_entered_on_date_num_id_max&#xa;	,max&#x28;fnr.dw_message_processed_on_date_num_id&#x29; as dw_message_processed_on_date_num_id_result_max&#xa;from warehouse.fact_nbs_card fnc left join warehouse.fact_nbs_card_log fncl on fncl.kit_number &#x3d; fnc.kit_number&#xa;left join warehouse.fact_nbs_sample fns on fns.accession_number &#x3d; fnc.accession_number&#xa;left join warehouse.fact_nbs_result fnr on fnr.sample_number &#x3d; fns.sample_number&#xa;group by 1,2,3,4,5,6,7,8,9&#xa;&#x29;&#x3b;&#xa;&#xa;CREATE INDEX idx_fnpd_nbs_kit_no&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;nbs_kit_no&#x29;&#x3b;&#xa;&#xa;CREATE INDEX idx_fnpd_kit_number&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;kit_number&#x29;&#x3b;&#xa;&#xa;CREATE INDEX idx_fnpd_accession_number&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;accession_number&#x29;&#x3b;&#xa;&#xa;CREATE INDEX idx_fnpd_dw_changed_on_date_num_id&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_changed_on_date_num_id&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_date_collected_date_num_id&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_date_collected_date_num_id&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_message_sent_on_date_num_id&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_message_sent_on_date_num_id&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_report_out_date_num_id&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_report_out_date_num_id&#x29;&#x3b;&#xa;&#xa;CREATE INDEX idx_fnpd_dw_sr_accessioned_date_num_id&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_sr_accessioned_date_num_id&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_login_date_num_id_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_login_date_num_id_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_recd_date_num_id_max	&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_recd_date_num_id_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_completed_date_num_id_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_completed_date_num_id_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_reviewed_date_num_id_result_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_reviewed_date_num_id_result_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_message_processed_on_date_num_id_result_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_message_processed_on_date_num_id_result_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_result_entry_date_num_id_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_result_entry_date_num_id_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_dx_treatment_date_num_id_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_dx_treatment_date_num_id_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_reviewed_date_num_id_sample_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_reviewed_date_num_id_sample_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_entered_on_date_num_id_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_entered_on_date_num_id_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_message_processed_on_date_num_id_sample_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_message_processed_on_date_num_id_sample_max&#x29;&#x3b;</sql>
       <useVariableSubstitution>F</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
@@ -553,7 +553,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>100</xloc>
-      <yloc>230</yloc>
+      <yloc>220</yloc>
       </entry>
   </entries>
   <hops>
@@ -711,15 +711,6 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Update fnr partition tables</from>
-      <to>Success</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>vacuum</from>
       <to>Success</to>
       <from_nr>0</from_nr>
@@ -829,7 +820,7 @@
     </hop>
     <hop>
       <from>START</from>
-      <to>truncate fact_nbs_card_log</to>
+      <to>fact_nbs_processing_dates</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -837,7 +828,7 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>truncate fact_nbs_card_log</from>
+      <from>fact_nbs_processing_dates</from>
       <to>exec_nbs_card_log_main</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -846,7 +837,16 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>truncate fact_nbs_card_log</from>
+      <from>Update fnr partition tables</from>
+      <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>fact_nbs_processing_dates</from>
       <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>

@@ -1184,7 +1184,7 @@
     <ignore_flag_field/>
     <lookup>
       <schema>warehouse</schema>
-      <table>dim_date_new</table>
+      <table>dim_nbs_date</table>
       <key>
         <name>dw_date_id</name>
         <field>dw_date_id</field>
@@ -1440,7 +1440,7 @@
            <schema_name/>
            </partitioning>
     <connection>Trisano OLAP DS</connection>
-    <sql>SELECT&#xa;  dw_date_id&#xa;, src_date_val as srcDateVal&#xa;FROM warehouse.dim_date_new&#xa;where src_date_val is not null</sql>
+    <sql>SELECT&#xa;  dw_date_id&#xa;, src_date_val as srcDateVal&#xa;FROM warehouse.dim_nbs_date&#xa;where src_date_val is not null</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>

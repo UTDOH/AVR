@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>exec_nbs_result_fact_main</name>
+    <name>exec_nbs_result_fact_main2</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -20,7 +20,7 @@
             <description>NBSPROD&#x7c;NBS_USER</description>
         </parameter>
         <parameter>
-            <name>nbsoltp_schemas</name>
+            <name>nbsoltp_schemaz</name>
             <default_value>NBS_USER</default_value>
             <description>NBSPROD&#x7c;NBS_USER</description>
         </parameter>
@@ -176,7 +176,6 @@
   <hop> <from>treatment date not null</from><to>lookup treatment_date</to><enabled>Y</enabled> </hop>
   <hop> <from>treatment date not null</from><to>set 0 dt</to><enabled>Y</enabled> </hop>
   <hop> <from>set 0 dt</from><to>date reviewed not null</to><enabled>Y</enabled> </hop>
-  <hop> <from>lookup treatment_date</from><to>date reviewed not null</to><enabled>Y</enabled> </hop>
   <hop> <from>date reviewed not null</from><to>lookup reviewed_date</to><enabled>Y</enabled> </hop>
   <hop> <from>date reviewed not null</from><to>set 0 dt 2</to><enabled>Y</enabled> </hop>
   <hop> <from>lookup reviewed_date</from><to>date entered not null</to><enabled>Y</enabled> </hop>
@@ -201,10 +200,9 @@
   <hop> <from>set 0 dt 3</from><to>dx code not null</to><enabled>Y</enabled> </hop>
   <hop> <from>dim_nbs_card_type</from><to>nbs result not null</to><enabled>Y</enabled> </hop>
   <hop> <from>set dw_nbs_card_type_id 0</from><to>nbs result not null</to><enabled>Y</enabled> </hop>
-  <hop> <from>nbs result not null</from><to>dim_nbs_result</to><enabled>Y</enabled> </hop>
-  <hop> <from>nbs result not null</from><to>set dw_nbs_result_id 0</to><enabled>Y</enabled> </hop>
-  <hop> <from>set dw_nbs_result_id 0</from><to>units not null</to><enabled>Y</enabled> </hop>
-  <hop> <from>dim_nbs_result</from><to>units not null</to><enabled>Y</enabled> </hop>
+  <hop> <from>nbs result not null</from><to>dim_nbs_analysis_subcomponent</to><enabled>Y</enabled> </hop>
+  <hop> <from>nbs result not null</from><to>dw_nbs_analysis_subcomponent_id to 0</to><enabled>Y</enabled> </hop>
+  <hop> <from>dim_nbs_analysis_subcomponent</from><to>units not null</to><enabled>Y</enabled> </hop>
   <hop> <from>units not null</from><to>dim_nbs_units</to><enabled>Y</enabled> </hop>
   <hop> <from>units not null</from><to>set dw_nbs_units_id 0</to><enabled>Y</enabled> </hop>
   <hop> <from>dim_nbs_units</from><to>analysis not null</to><enabled>Y</enabled> </hop>
@@ -214,19 +212,22 @@
   <hop> <from>dim_nbs_analysis</from><to>Prep Formatted Entry</to><enabled>Y</enabled> </hop>
   <hop> <from>set dw_nbs_analysis_id 0</from><to>Prep Formatted Entry</to><enabled>Y</enabled> </hop>
   <hop> <from>Prep Formatted Entry</from><to>has formatted entry&#x3f;</to><enabled>Y</enabled> </hop>
-  <hop> <from>has formatted entry&#x3f;</from><to>dim_nbs_result_status</to><enabled>Y</enabled> </hop>
-  <hop> <from>has formatted entry&#x3f;</from><to>set dw_nbs_result_status_id 0</to><enabled>Y</enabled> </hop>
-  <hop> <from>set dw_nbs_result_status_id 0</from><to>Select values</to><enabled>Y</enabled> </hop>
-  <hop> <from>dim_nbs_result_status</from><to>Select values</to><enabled>Y</enabled> </hop>
+  <hop> <from>has formatted entry&#x3f;</from><to>dim_nbs_formatted_result</to><enabled>Y</enabled> </hop>
+  <hop> <from>has formatted entry&#x3f;</from><to>set dw_nbs_formatted_result_id 0</to><enabled>Y</enabled> </hop>
+  <hop> <from>set dw_nbs_formatted_result_id 0</from><to>Select values</to><enabled>Y</enabled> </hop>
+  <hop> <from>dim_nbs_formatted_result</from><to>Select values</to><enabled>Y</enabled> </hop>
   <hop> <from>log dates</from><to>Filter rows</to><enabled>Y</enabled> </hop>
   <hop> <from>Filter rows</from><to>Get Results - Range</to><enabled>Y</enabled> </hop>
   <hop> <from>Filter rows</from><to>Get Max Date</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get Results Incremental</from><to>treatment date not null</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Max Date</from><to>log dates 2</to><enabled>Y</enabled> </hop>
   <hop> <from>log dates 2</from><to>Get Results Incremental</to><enabled>Y</enabled> </hop>
   <hop> <from>lookup entered_date</from><to>set 0 dt 3</to><enabled>Y</enabled> </hop>
   <hop> <from>date entered not null</from><to>Abort</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Results - Range</from><to>treatment date not null</to><enabled>Y</enabled> </hop>
+  <hop> <from>dw_nbs_analysis_subcomponent_id to 0</from><to>units not null</to><enabled>Y</enabled> </hop>
+  <hop> <from>lookup treatment_date</from><to>date reviewed not null</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Results Incremental</from><to>remove maxresultenteredon</to><enabled>Y</enabled> </hop>
+  <hop> <from>remove maxresultenteredon</from><to>treatment date not null</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Abort</name>
@@ -312,7 +313,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>210</xloc>
-      <yloc>210</yloc>
+      <yloc>190</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -368,7 +369,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>380</xloc>
-      <yloc>210</yloc>
+      <yloc>270</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -454,24 +455,12 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>dw_nbs_result_id</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
       </field>      <field>        <name>dw_nbs_units_id</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
       </field>      <field>        <name>dw_nbs_analysis_id</name>
         <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>dw_nbs_result_status_id</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>TEXT_ID</name>
-        <rename>text_id</rename>
         <length>-2</length>
         <precision>-2</precision>
       </field>      <field>        <name>RESULT_NUMBER</name>
@@ -484,14 +473,6 @@
         <precision>-2</precision>
       </field>      <field>        <name>REPLICATE_COUNT</name>
         <rename>replicate_count</rename>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>numericEntry</name>
-        <rename>formatted_entry</rename>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>ENTRY</name>
-        <rename>entry</rename>
         <length>-2</length>
         <precision>-2</precision>
       </field>      <field>        <name>ENTERED_ON</name>
@@ -512,6 +493,22 @@
         <precision>-2</precision>
       </field>      <field>        <name>X_DX_TREATMENT_DATE</name>
         <rename>x_dx_treatment_date</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>dw_nbs_analysis_subcomponent_id</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>ENTRY</name>
+        <rename>raw_result</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>TEXT_ID</name>
+        <rename>accession_number</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>dw_nbs_formatted_result_id</name>
+        <rename/>
         <length>-2</length>
         <precision>-2</precision>
       </field>      <field>        <name>fact_table_name</name>
@@ -652,7 +649,7 @@
            <schema_name/>
            </partitioning>
     <connection>Trisano OLAP DS</connection>
-    <sql>select &#xa;   dw_date_id&#xa;  ,dw_date_num_id&#xa;  ,year4&#xa;  ,src_date_val&#xa;from dim_date_new</sql>
+    <sql>select &#xa;   dw_date_id&#xa;  ,dw_date_num_id&#xa;  ,year4&#xa;  ,src_date_val&#xa;from dim_nbs_date</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -660,8 +657,8 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>690</xloc>
-      <yloc>340</yloc>
+      <xloc>680</xloc>
+      <yloc>320</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -749,7 +746,7 @@
     </step>
 
   <step>
-    <name>dim_nbs_result</name>
+    <name>dim_nbs_analysis_subcomponent</name>
     <type>CombinationLookup</type>
     <description/>
     <distribute>Y</distribute>
@@ -760,7 +757,7 @@
            <schema_name/>
            </partitioning>
       <schema/>
-      <table>dim_nbs_result</table>
+      <table>dim_nbs_analysis_subcomponent</table>
       <connection>Trisano OLAP DS</connection>
       <commit>100</commit>
       <cache_size>500</cache_size>
@@ -771,10 +768,10 @@
       <fields>
         <key>
           <name>NAME</name>
-          <lookup>result_name</lookup>
+          <lookup>analysis_subcomponent</lookup>
         </key>
         <return>
-          <name>dw_nbs_result_id</name>
+          <name>dw_nbs_analysis_subcomponent_id</name>
           <creation_method>tablemax</creation_method>
           <use_autoinc>N</use_autoinc>
         </return>
@@ -876,7 +873,7 @@
     </step>
 
   <step>
-    <name>dim_nbs_result_status</name>
+    <name>dim_nbs_formatted_result</name>
     <type>CombinationLookup</type>
     <description/>
     <distribute>Y</distribute>
@@ -887,7 +884,7 @@
            <schema_name/>
            </partitioning>
       <schema/>
-      <table>dim_nbs_result_status</table>
+      <table>dim_nbs_formatted_result</table>
       <connection>Trisano OLAP DS</connection>
       <commit>100</commit>
       <cache_size>500</cache_size>
@@ -898,10 +895,10 @@
       <fields>
         <key>
           <name>FORMATTED_ENTRY</name>
-          <lookup>formatted_entry</lookup>
+          <lookup>formatted_result</lookup>
         </key>
         <return>
-          <name>dw_nbs_result_status_id</name>
+          <name>dw_nbs_formatted_result_id</name>
           <creation_method>tablemax</creation_method>
           <use_autoinc>N</use_autoinc>
         </return>
@@ -1076,8 +1073,8 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-<send_true_to>dim_nbs_result_status</send_true_to>
-<send_false_to>set dw_nbs_result_status_id 0</send_false_to>
+<send_true_to>dim_nbs_formatted_result</send_true_to>
+<send_false_to>set dw_nbs_formatted_result_id 0</send_false_to>
     <compare>
 <condition>
  <negated>N</negated>
@@ -1136,8 +1133,8 @@
         <jsScript_script>writeToLog&#x28;&#x27;m&#x27;, &#x27;maxresultenteredon&#x3a; &#x27; &#x2b; maxresultenteredon&#x29;&#x3b;</jsScript_script>
       </jsScript>    </jsScripts>    <fields>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>290</xloc>
-      <yloc>210</yloc>
+      <xloc>210</xloc>
+      <yloc>270</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1325,8 +1322,8 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-<send_true_to>dim_nbs_result</send_true_to>
-<send_false_to>set dw_nbs_result_id 0</send_false_to>
+<send_true_to>dim_nbs_analysis_subcomponent</send_true_to>
+<send_false_to>dw_nbs_analysis_subcomponent_id to 0</send_false_to>
     <compare>
 <condition>
  <negated>N</negated>
@@ -1589,7 +1586,7 @@
     </step>
 
   <step>
-    <name>set dw_nbs_result_id 0</name>
+    <name>dw_nbs_analysis_subcomponent_id to 0</name>
     <type>Calculator</type>
     <description/>
     <distribute>Y</distribute>
@@ -1599,7 +1596,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-       <calculation><field_name>dw_nbs_result_id</field_name>
+       <calculation><field_name>dw_nbs_analysis_subcomponent_id</field_name>
 <calc_type>CONSTANT</calc_type>
 <field_a>0</field_a>
 <field_b/>
@@ -1622,7 +1619,7 @@
     </step>
 
   <step>
-    <name>set dw_nbs_result_status_id 0</name>
+    <name>set dw_nbs_formatted_result_id 0</name>
     <type>Calculator</type>
     <description/>
     <distribute>Y</distribute>
@@ -1632,7 +1629,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-       <calculation><field_name>dw_nbs_result_status_id</field_name>
+       <calculation><field_name>dw_nbs_formatted_result_id</field_name>
 <calc_type>CONSTANT</calc_type>
 <field_a>0</field_a>
 <field_b/>
@@ -1848,6 +1845,27 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>520</xloc>
       <yloc>640</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>remove maxresultenteredon</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>        <select_unspecified>N</select_unspecified>
+      <remove>        <name>maxresultenteredon</name>
+      </remove>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>380</xloc>
+      <yloc>190</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

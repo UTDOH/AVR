@@ -15,7 +15,7 @@
             <description>NBSPROD&#x7c;NBS_USER</description>
         </parameter>
         <parameter>
-            <name>nbsoltp_schemaz</name>
+            <name>nbsoltp_schemaa</name>
             <default_value>NBS_USER</default_value>
             <description>NBSPROD&#x7c;NBS_USER</description>
         </parameter>
@@ -332,7 +332,7 @@
            </partitioning>
     <connection>NBSOLTP</connection>
     <rowlimit>0</rowlimit>
-    <sql>SELECT &#xa;   CARD2.NBS_KIT_NO&#xa;  ,A.NAME as KIT_NUMBER&#xa;  ,A.CARD_DATE_FIRST_RECEIVED&#xa;  ,A.MAX_ORDER_NUMBER AS &#x22;ORDER_NUMBER&#x22;&#xa;  ,CARD2.SPECIMEN_TYPE&#xa;  ,CARD2.TEXT_ID as &#x22;ACCESSION_NUMBER&#x22;&#xa;  ,case CARD2.CARD_OK when &#x27;T&#x27; then 1 else 0 end as CARD_OK&#xa;  ,CARD2.REJECT_REASON&#xa;  ,CARD2.BABYS_SEX&#xa;  &#xa;  ,case CARD2.BREAST when &#x27;T&#x27; then 1 else 0 end as BREAST&#xa;  ,case CARD2.BOTTLE when &#x27;T&#x27; then 1 else 0 end as BOTTLE&#xa;  ,case CARD2.ADOPTION when &#x27;T&#x27; then 1 else 0 end as ADOPTION&#xa;  ,case CARD2.PREMATURE_SICK when &#x27;T&#x27; then 1 else 0 end as PREMATURE_SICK  &#xa;  ,case CARD2.MULTIPLE_BIRTH when &#x27;T&#x27; then 1 else 0 end as MULTIPLE_BIRTH&#xa;  ,case CARD2.HOME_BIRTH when &#x27;T&#x27; then 1 else 0 end as HOME_BIRTH&#xa;  ,case CARD2.TRANSFUSION when &#x27;T&#x27; then 1 else 0 end as TRANSFUSION&#xa;  ,CARD2.TRANSFUSION_DATE&#xa;  ,CARD2.BIRTH_WEIGHT&#xa;  ,CARD2.MOTHERS_ZIP&#xa;  ,CARD2.HOSPITAL_CODE&#xa;  ,CARD2.RECALL_REASON&#xa;  ,case CARD2.X_MISSING_DATA when &#x27;T&#x27; then 1 else 0 end as X_MISSING_DATA &#xa;  ,case CARD2.MECONIUM_ILEUS when &#x27;T&#x27; then 1 else 0 end as MECONIUM_ILEUS&#xa;  ,case CARD2.STEROIDS when &#x27;T&#x27; then 1 else 0 end as STEROIDS&#xa;  ,case CARD2.TPN when &#x27;T&#x27; then 1 else 0 end as TPN&#xa; &#xa;  ,CARD2.BIRTHPLACE_TYPE&#xa;  ,CARD2.CARD_STATUS&#xa;  ,CARD2.UNSAT_CLOSE_REASON&#xa;&#xa;  ,BIRTHPLACE.PERSON_NUMBER AS SRC_BIRTHPLACE_PERSON_NUMBER&#xa;  ,BIRTHPLACE.CITY AS BIRTH_CITY&#xa;  ,BIRTHPLACE.STATE AS BIRTH_STATE&#xa;  ,BIRTHPLACE.COUNTRY AS BIRTH_COUNTRY&#xa;  ,BIRTHPLACE.ZIP AS BIRTH_ZIP&#xa; &#xa;  ,PHYSICIAN.PERSON_NUMBER AS SRC_PHYSICIAN_PERSON_NUMBER&#xa;  ,PHYSICIAN.CITY AS PHYSICIAN_CITY&#xa;  ,PHYSICIAN.STATE AS PHYSICIAN_STATE&#xa;  ,PHYSICIAN.COUNTRY AS PHYSICIAN_COUNTRY&#xa;  ,PHYSICIAN.ZIP AS PHYSICIAN_ZIP&#xa;&#xa;  ,TO_DATE&#x28;CARD2.CHANGED_ON&#x29; as CHANGED_ON_DT&#xa;  ,CARD2.CHANGED_ON AS CHANGED_ON&#xa;  ,CARD2.DATE_COLLECTED&#xa;  ,TO_DATE&#x28;CARD2.DATE_RECEIVED&#x29; AS DATE_SR_ACCESSIONED_DT&#xa;  ,CARD2.DATE_RECEIVED as SR_ACCESSIONED&#xa;  ,CARD2.BIRTHDATE&#xa;  ,TO_DATE&#x28;CARD2.MOTHERS_BIRTHDATE&#x29; AS MOTHERS_BIRTHDATE_DT&#xa;  ,CARD2.BLIND_ENTRY_ON&#xa;  ,CARD2.SECOND_ENTRY_ON&#xa;  FROM &#x28;&#xa;  SELECT&#xa;      CARD.NAME&#xa;     ,MAX&#x28;CARD.ORDER_NUMBER&#x29; AS &#x22;MAX_ORDER_NUMBER&#x22;&#xa;     ,MIN&#x28;CARD.DATE_RECEIVED&#x29; AS &#x22;CARD_DATE_FIRST_RECEIVED&#x22;&#xa;  FROM &#x24;&#x7b;nbsoltp_schema&#x7d;.NBS_CARD CARD &#xa;  &#xa;  GROUP BY&#xa;      CARD.NAME&#xa;&#x29; A INNER JOIN &#x24;&#x7b;nbsoltp_schema&#x7d;.NBS_CARD CARD2 ON CARD2.NAME &#x3d; A.NAME AND CARD2.ORDER_NUMBER &#x3d; A.MAX_ORDER_NUMBER&#xa;LEFT JOIN &#x24;&#x7b;nbsoltp_schema&#x7d;.PERSON BIRTHPLACE ON BIRTHPLACE.PERSON_NUMBER &#x3d; CARD2.BIRTHPLACE&#xa;LEFT JOIN &#x24;&#x7b;nbsoltp_schema&#x7d;.PERSON PHYSICIAN ON PHYSICIAN.PERSON_NUMBER &#x3d; CARD2.PHYSICIAN&#xa;WHERE CARD2.changed_on &#x3e; &#x3f;</sql>
+    <sql>SELECT &#xa;   CARD2.NBS_KIT_NO&#xa;  ,A.NAME as KIT_NUMBER&#xa;  ,A.CARD_DATE_FIRST_RECEIVED&#xa;  ,A.MAX_ORDER_NUMBER AS &#x22;ORDER_NUMBER&#x22;&#xa;  ,CARD2.SPECIMEN_TYPE&#xa;  ,CARD2.TEXT_ID as &#x22;ACCESSION_NUMBER&#x22;&#xa;  ,case CARD2.CARD_OK when &#x27;T&#x27; then 1 else 0 end as CARD_OK&#xa;  ,CARD2.REJECT_REASON&#xa;  ,CARD2.BABYS_SEX&#xa;  &#xa;  ,case CARD2.BREAST when &#x27;T&#x27; then 1 else 0 end as BREAST&#xa;  ,case CARD2.BOTTLE when &#x27;T&#x27; then 1 else 0 end as BOTTLE&#xa;  ,case CARD2.ADOPTION when &#x27;T&#x27; then 1 else 0 end as ADOPTION&#xa;  ,case CARD2.PREMATURE_SICK when &#x27;T&#x27; then 1 else 0 end as PREMATURE_SICK  &#xa;  ,case CARD2.MULTIPLE_BIRTH when &#x27;T&#x27; then 1 else 0 end as MULTIPLE_BIRTH&#xa;  ,case CARD2.HOME_BIRTH when &#x27;T&#x27; then 1 else 0 end as HOME_BIRTH&#xa;  ,case CARD2.TRANSFUSION when &#x27;T&#x27; then 1 else 0 end as TRANSFUSION&#xa;  ,CARD2.TRANSFUSION_DATE&#xa;  ,CARD2.BIRTH_WEIGHT&#xa;  ,CARD2.MOTHERS_ZIP&#xa;  ,CARD2.HOSPITAL_CODE&#xa;  ,CARD2.RECALL_REASON&#xa;  ,case CARD2.X_MISSING_DATA when &#x27;T&#x27; then 1 else 0 end as X_MISSING_DATA &#xa;  ,case CARD2.MECONIUM_ILEUS when &#x27;T&#x27; then 1 else 0 end as MECONIUM_ILEUS&#xa;  ,case CARD2.STEROIDS when &#x27;T&#x27; then 1 else 0 end as STEROIDS&#xa;  ,case CARD2.TPN when &#x27;T&#x27; then 1 else 0 end as TPN&#xa;  ,CARD2.BIRTHPLACE_TYPE&#xa;  ,BIRTHPLACE.PERSON_NUMBER AS SRC_BIRTHPLACE_PERSON_NUMBER&#xa;  ,BIRTHPLACE.CITY AS BIRTH_CITY&#xa;  ,BIRTHPLACE.STATE AS BIRTH_STATE&#xa;  ,BIRTHPLACE.COUNTRY AS BIRTH_COUNTRY&#xa;  ,BIRTHPLACE.ZIP AS BIRTH_ZIP&#xa; &#xa;  ,PHYSICIAN.PERSON_NUMBER AS SRC_PHYSICIAN_PERSON_NUMBER&#xa;  ,PHYSICIAN.CITY AS PHYSICIAN_CITY&#xa;  ,PHYSICIAN.STATE AS PHYSICIAN_STATE&#xa;  ,PHYSICIAN.COUNTRY AS PHYSICIAN_COUNTRY&#xa;  ,PHYSICIAN.ZIP AS PHYSICIAN_ZIP&#xa;&#xa;  ,TO_DATE&#x28;CARD2.CHANGED_ON&#x29; as CHANGED_ON_DT&#xa;  ,CARD2.CHANGED_ON AS CHANGED_ON&#xa;  ,CARD2.DATE_COLLECTED&#xa;  ,TO_DATE&#x28;CARD2.DATE_RECEIVED&#x29; AS DATE_SR_ACCESSIONED_DT&#xa;  ,CARD2.DATE_RECEIVED as SR_ACCESSIONED&#xa;  ,CARD2.BIRTHDATE&#xa;  ,TO_DATE&#x28;CARD2.MOTHERS_BIRTHDATE&#x29; AS MOTHERS_BIRTHDATE_DT&#xa;  ,CARD2.BLIND_ENTRY_ON&#xa;  ,CARD2.SECOND_ENTRY_ON&#xa;  FROM &#x28;&#xa;  SELECT&#xa;      CARD.NAME&#xa;     ,MAX&#x28;CARD.ORDER_NUMBER&#x29; AS &#x22;MAX_ORDER_NUMBER&#x22;&#xa;     ,MIN&#x28;CARD.DATE_RECEIVED&#x29; AS &#x22;CARD_DATE_FIRST_RECEIVED&#x22;&#xa;  FROM &#x24;&#x7b;nbsoltp_schema&#x7d;.NBS_CARD CARD &#xa;  &#xa;  GROUP BY&#xa;      CARD.NAME&#xa;&#x29; A INNER JOIN &#x24;&#x7b;nbsoltp_schema&#x7d;.NBS_CARD CARD2 ON CARD2.NAME &#x3d; A.NAME AND CARD2.ORDER_NUMBER &#x3d; A.MAX_ORDER_NUMBER&#xa;LEFT JOIN &#x24;&#x7b;nbsoltp_schema&#x7d;.PERSON BIRTHPLACE ON BIRTHPLACE.PERSON_NUMBER &#x3d; CARD2.BIRTHPLACE&#xa;LEFT JOIN &#x24;&#x7b;nbsoltp_schema&#x7d;.PERSON PHYSICIAN ON PHYSICIAN.PERSON_NUMBER &#x3d; CARD2.PHYSICIAN&#xa;WHERE CARD2.changed_on &#x3e; &#x3f;</sql>
     <outer_join>N</outer_join>
     <replace_vars>Y</replace_vars>
     <parameter>
@@ -361,7 +361,7 @@
            <schema_name/>
            </partitioning>
     <connection>Trisano OLAP DS</connection>
-    <sql>select &#xa;   dw_date_id&#xa;  ,dw_date_num_id&#xa;  ,year4&#xa;  ,src_date_val&#xa;from dim_date_new</sql>
+    <sql>select &#xa;   dw_date_id&#xa;  ,dw_date_num_id&#xa;  ,year4&#xa;  ,src_date_val&#xa;from dim_nbs_date</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -829,11 +829,6 @@
         <update>N</update>
       </value>
       <value>
-        <name>blind_entry_on</name>
-        <rename>BLIND_ENTRY_ON</rename>
-        <update>N</update>
-      </value>
-      <value>
         <name>bottle</name>
         <rename>BOTTLE</rename>
         <update>N</update>
@@ -984,13 +979,13 @@
         <update>N</update>
       </value>
       <value>
-        <name>unsat_close_reason</name>
-        <rename>UNSAT_CLOSE_REASON</rename>
+        <name>x_missing_data</name>
+        <rename>X_MISSING_DATA</rename>
         <update>N</update>
       </value>
       <value>
-        <name>x_missing_data</name>
-        <rename>X_MISSING_DATA</rename>
+        <name>first_entry_on</name>
+        <rename>BLIND_ENTRY_ON</rename>
         <update>N</update>
       </value>
     </lookup>
