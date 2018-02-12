@@ -15,7 +15,7 @@
             <description>NBSPROD&#x7c;NBS_USER</description>
         </parameter>
         <parameter>
-            <name>nbsoltp_schemaa</name>
+            <name>nbsoltp_schemaz</name>
             <default_value>NBS_USER</default_value>
             <description>NBSPROD&#x7c;NBS_USER</description>
         </parameter>
@@ -203,7 +203,6 @@
   </connection>
   <order>
   <hop> <from>dim_date</from><to>lookup changed_date</to><enabled>Y</enabled> </hop>
-  <hop> <from>dim_nbs_physician</from><to>lookup changed_date</to><enabled>Y</enabled> </hop>
   <hop> <from>lookup changed_date</from><to>lookup collecte_date</to><enabled>Y</enabled> </hop>
   <hop> <from>dim_date</from><to>lookup collecte_date</to><enabled>Y</enabled> </hop>
   <hop> <from>lookup collecte_date</from><to>lookup date sr accessioned</to><enabled>Y</enabled> </hop>
@@ -218,11 +217,16 @@
   <hop> <from>Calculator</from><to>physician not null</to><enabled>Y</enabled> </hop>
   <hop> <from>physician not null</from><to>dim_nbs_physician</to><enabled>Y</enabled> </hop>
   <hop> <from>physician not null</from><to>Calculator 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Calculator 2</from><to>lookup changed_date</to><enabled>Y</enabled> </hop>
   <hop> <from>log dates</from><to>Get Card Data</to><enabled>Y</enabled> </hop>
   <hop> <from>lookup birth date 2</from><to>upsert fact_nbs_card</to><enabled>Y</enabled> </hop>
   <hop> <from>get max changed_on</from><to>log dates</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Card Data</from><to>Birthplace not null</to><enabled>Y</enabled> </hop>
+  <hop> <from>Calculator 2</from><to>hospital not null</to><enabled>Y</enabled> </hop>
+  <hop> <from>dim_nbs_physician</from><to>hospital not null</to><enabled>Y</enabled> </hop>
+  <hop> <from>hospital not null</from><to>dim_nbs_hospital</to><enabled>Y</enabled> </hop>
+  <hop> <from>hospital not null</from><to>Calculator 2 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>dim_nbs_hospital</from><to>lookup changed_date</to><enabled>Y</enabled> </hop>
+  <hop> <from>Calculator 2 2</from><to>lookup changed_date</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Birthplace not null</name>
@@ -369,7 +373,7 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1240</xloc>
+      <xloc>1520</xloc>
       <yloc>310</yloc>
       <draw>Y</draw>
       </GUI>
@@ -527,7 +531,7 @@
            <schema_name/>
            </partitioning>
     <connection>Trisano OLAP DS</connection>
-    <sql>select max&#x28;changed_on&#x29; as maxChangedOn from fact_nbs_card</sql>
+    <sql>select CASE WHEN max&#x28;changed_on&#x29; is not null then max&#x28;changed_on&#x29; else to_date&#x28;&#x27;1900&#x2f;01&#x2f;01&#x27;, &#x27;YYYY&#x2f;DD&#x2f;mm&#x27;&#x29; end as maxChangedOn from fact_nbs_card</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -595,7 +599,7 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1410</xloc>
+      <xloc>1690</xloc>
       <yloc>340</yloc>
       <draw>Y</draw>
       </GUI>
@@ -631,7 +635,7 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1240</xloc>
+      <xloc>1520</xloc>
       <yloc>420</yloc>
       <draw>Y</draw>
       </GUI>
@@ -667,7 +671,7 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1020</xloc>
+      <xloc>1300</xloc>
       <yloc>300</yloc>
       <draw>Y</draw>
       </GUI>
@@ -703,7 +707,7 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1240</xloc>
+      <xloc>1520</xloc>
       <yloc>150</yloc>
       <draw>Y</draw>
       </GUI>
@@ -739,7 +743,7 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1410</xloc>
+      <xloc>1690</xloc>
       <yloc>240</yloc>
       <draw>Y</draw>
       </GUI>
@@ -894,11 +898,6 @@
         <update>N</update>
       </value>
       <value>
-        <name>hospital_code</name>
-        <rename>HOSPITAL_CODE</rename>
-        <update>N</update>
-      </value>
-      <value>
         <name>kit_number</name>
         <rename>KIT_NUMBER</rename>
         <update>N</update>
@@ -988,11 +987,148 @@
         <rename>BLIND_ENTRY_ON</rename>
         <update>N</update>
       </value>
+      <value>
+        <name>dw_hospital_id</name>
+        <rename>dw_hospital_id</rename>
+        <update>N</update>
+      </value>
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1240</xloc>
+      <xloc>1520</xloc>
       <yloc>500</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>hospital not null</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>dim_nbs_hospital</send_true_to>
+<send_false_to>Calculator 2 2</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>HOSPITAL_CODE</leftvalue>
+ <function>IS NOT NULL</function>
+ <rightvalue/>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1020</xloc>
+      <yloc>310</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Calculator 2 2</name>
+    <type>Calculator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+       <calculation><field_name>dw_hospital_id</field_name>
+<calc_type>CONSTANT</calc_type>
+<field_a>0</field_a>
+<field_b/>
+<field_c/>
+<value_type>Integer</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1140</xloc>
+      <yloc>340</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>dim_nbs_hospital</name>
+    <type>DimensionLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <schema/>
+      <table>dim_nbs_hospital</table>
+      <connection>Trisano OLAP DS</connection>
+      <commit>100</commit>
+      <update>Y</update>
+      <fields>
+        <key>
+          <name>HOSPITAL_CODE</name>
+          <lookup>hospital_code</lookup>
+        </key>
+        <date>
+          <name/>
+          <from>start_date</from>
+          <to>end_date</to>
+        </date>
+        <field>
+          <name>BIRTH_CITY</name>
+          <lookup>hospital_city</lookup>
+          <update>Punch through</update>
+        </field>
+        <field>
+          <name>BIRTH_STATE</name>
+          <lookup>hospital_state</lookup>
+          <update>Punch through</update>
+        </field>
+        <field>
+          <name>BIRTH_COUNTRY</name>
+          <lookup>hospital_country</lookup>
+          <update>Punch through</update>
+        </field>
+        <field>
+          <name>BIRTH_ZIP</name>
+          <lookup>hospital_zip</lookup>
+          <update>Punch through</update>
+        </field>
+        <return>
+          <name>dw_hospital_id</name>
+          <rename/>
+          <creation_method>tablemax</creation_method>
+          <use_autoinc>N</use_autoinc>
+          <version>version</version>
+        </return>
+      </fields>
+      <sequence/>
+      <min_year>1900</min_year>
+      <max_year>2199</max_year>
+      <cache_size>5000</cache_size>
+      <preload_cache>N</preload_cache>
+      <use_start_date_alternative>N</use_start_date_alternative>
+      <start_date_alternative>none</start_date_alternative>
+      <start_date_field_name/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1140</xloc>
+      <yloc>270</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

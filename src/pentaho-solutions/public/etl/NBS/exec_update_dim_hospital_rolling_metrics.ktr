@@ -1,34 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>exec_nbs_card_log_main</name>
+    <name>exec_update_dim_hospital_rolling_metrics</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
-    <trans_status>0</trans_status>
     <directory>&#x2f;</directory>
     <parameters>
-        <parameter>
-            <name>endDate</name>
-            <default_value>NULL</default_value>
-            <description/>
-        </parameter>
-        <parameter>
-            <name>nbsoltp_schema</name>
-            <default_value>NBSPROD</default_value>
-            <description>NBSPROD&#x7c;NBS_USER</description>
-        </parameter>
-        <parameter>
-            <name>nbsoltp_schemaz</name>
-            <default_value>NBS_USER</default_value>
-            <description>NBSPROD&#x7c;NBS_USER</description>
-        </parameter>
-        <parameter>
-            <name>startDate</name>
-            <default_value>NULL</default_value>
-            <description/>
-        </parameter>
     </parameters>
     <log>
 <trans-log-table><connection/>
@@ -87,9 +66,9 @@
     <clusterschemas>
     </clusterschemas>
   <created_user>-</created_user>
-  <created_date>2017&#x2f;11&#x2f;24 15&#x3a;51&#x3a;32.694</created_date>
+  <created_date>2018&#x2f;02&#x2f;11 18&#x3a;03&#x3a;16.601</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2017&#x2f;11&#x2f;24 15&#x3a;51&#x3a;32.694</modified_date>
+  <modified_date>2018&#x2f;02&#x2f;11 18&#x3a;03&#x3a;16.601</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA&#x3d;</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -170,18 +149,12 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Get Max Date</from><to>log dates 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>log dates 2</from><to>Get Results Incremental</to><enabled>Y</enabled> </hop>
-  <hop> <from>start</from><to>Get Max Date</to><enabled>Y</enabled> </hop>
-  <hop> <from>dim_date</from><to>lookup sr_received_date</to><enabled>Y</enabled> </hop>
-  <hop> <from>sr_received not null</from><to>set 0 dt</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get Results Incremental</from><to>sr_received not null</to><enabled>Y</enabled> </hop>
-  <hop> <from>sr_received not null</from><to>lookup sr_received_date</to><enabled>Y</enabled> </hop>
-  <hop> <from>set 0 dt</from><to>fact_nbs_card_log</to><enabled>Y</enabled> </hop>
-  <hop> <from>lookup sr_received_date</from><to>fact_nbs_card_log</to><enabled>Y</enabled> </hop>
+  <hop> <from>Start</from><to>zero out stats</to><enabled>Y</enabled> </hop>
+  <hop> <from>zero out stats</from><to>Get Rolling 12 mo Births by Hospital</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Rolling 12 mo Births by Hospital</from><to>Update dim_nbs_hospital_stats</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>Get Max Date</name>
+    <name>Get Rolling 12 mo Births by Hospital</name>
     <type>DBJoin</type>
     <description/>
     <distribute>Y</distribute>
@@ -193,265 +166,21 @@
            </partitioning>
     <connection>Trisano OLAP DS</connection>
     <rowlimit>0</rowlimit>
-    <sql>select CASE WHEN max&#x28;SR_RECEIVED&#x29; is not null then max&#x28;SR_RECEIVED&#x29; else to_date&#x28;&#x27;1900&#x2f;01&#x2f;01&#x27;, &#x27;YYYY&#x2f;DD&#x2f;mm&#x27;&#x29; end as maxSrReceived from fact_nbs_card_log</sql>
+    <sql>select&#xa;	 fnc.dw_hospital_id&#xa;	,count&#x28;1&#x29; as num_hospital_births&#xa;    ,rolling_12_month_births.ct as rolling_num_births&#xa;	,cast&#x28;count&#x28;1&#x29; &#x2f; rolling_12_month_births.ct&#x3a;&#x3a;float as decimal&#x28;9,8&#x29;&#x29; as rolling_pct_of_births	&#xa;from warehouse.fact_nbs_card fnc,	&#xa;&#x28;&#xa;select &#xa;	count&#x28;distinct kit_number&#x29; as ct&#xa;from warehouse.fact_nbs_card where dw_birth_date_num_id &#x3e;&#x3d; to_number&#x28;to_char&#x28;now&#x28;&#x29;, &#x27;YYYYMMDD&#x27;&#x29;, &#x27;99999999&#x27;&#x29; - 10000&#xa;&#x29; rolling_12_month_births&#xa;where fnc.dw_birth_date_num_id &#x3e;&#x3d; to_number&#x28;to_char&#x28;now&#x28;&#x29;, &#x27;YYYYMMDD&#x27;&#x29;, &#x27;99999999&#x27;&#x29; - 10000&#xa;group by dw_hospital_id, rolling_12_month_births.ct</sql>
     <outer_join>N</outer_join>
     <replace_vars>N</replace_vars>
     <parameter>
     </parameter>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>150</xloc>
-      <yloc>180</yloc>
+      <xloc>390</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Get Results Incremental</name>
-    <type>DBJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>NBSOLTP</connection>
-    <rowlimit>0</rowlimit>
-    <sql>select &#xa;	NAME AS KIT_NUMBER&#xa;    ,TO_DATE&#x28;LOGGED_ON&#x29; AS SR_RECEIVED&#xa;    ,ID AS SRC_ID&#xa;    ,CARD_TYPE&#xa;	,LOG_DELAYED&#xa;    ,ORDER_NUMBER&#xa;from &#x24;&#x7b;nbsoltp_schema&#x7d;.NBS_CARD_LOG&#xa;WHERE LOGGED_ON &#x3e; &#x3f;</sql>
-    <outer_join>N</outer_join>
-    <replace_vars>Y</replace_vars>
-    <parameter>
-      <field>
-        <name>maxsrreceived</name>
-        <type>Date</type>
-      </field>
-    </parameter>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>400</xloc>
-      <yloc>180</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>dim_date</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>Trisano OLAP DS</connection>
-    <sql>select &#xa;   dw_date_id&#xa;  ,dw_date_num_id&#xa;  ,year4&#xa;  ,src_date_val&#xa;from dim_nbs_date</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>570</xloc>
-      <yloc>380</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>fact_nbs_card_log</name>
-    <type>TableOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>Trisano OLAP DS</connection>
-    <schema/>
-    <table>fact_nbs_card_log</table>
-    <commit>1000</commit>
-    <truncate>N</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
-    <fields>
-        <field>
-          <column_name>kit_number</column_name>
-          <stream_name>KIT_NUMBER</stream_name>
-        </field>
-        <field>
-          <column_name>sr_received</column_name>
-          <stream_name>SR_RECEIVED</stream_name>
-        </field>
-        <field>
-          <column_name>src_id</column_name>
-          <stream_name>SRC_ID</stream_name>
-        </field>
-        <field>
-          <column_name>card_type</column_name>
-          <stream_name>CARD_TYPE</stream_name>
-        </field>
-        <field>
-          <column_name>log_delayed</column_name>
-          <stream_name>LOG_DELAYED</stream_name>
-        </field>
-        <field>
-          <column_name>dw_sr_received_date_num_id</column_name>
-          <stream_name>dw_sr_received_date_num_id</stream_name>
-        </field>
-        <field>
-          <column_name>order_number</column_name>
-          <stream_name>ORDER_NUMBER</stream_name>
-        </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>840</xloc>
-      <yloc>180</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>log dates 2</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>writeToLog&#x28;&#x27;m&#x27;, &#x27;maxsrreceived&#x3a; &#x27; &#x2b; maxsrreceived&#x29;&#x3b;</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>270</xloc>
-      <yloc>180</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>lookup sr_received_date</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <from>dim_date</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>N</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>SR_RECEIVED</name>
-        <field>src_date_val</field>
-      </key>
-      <value>
-        <name>dw_date_num_id</name>
-        <rename>dw_sr_received_date_num_id</rename>
-        <default>0</default>
-        <type>Integer</type>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>570</xloc>
-      <yloc>280</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>set 0 dt</name>
-    <type>Calculator</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-       <calculation><field_name>dw_sr_received_date_num_id</field_name>
-<calc_type>CONSTANT</calc_type>
-<field_a>19000101</field_a>
-<field_b/>
-<field_c/>
-<value_type>Integer</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<remove>N</remove>
-<conversion_mask/>
-<decimal_symbol/>
-<grouping_symbol/>
-<currency_symbol/>
-</calculation>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>670</xloc>
-      <yloc>180</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>sr_received not null</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to>lookup sr_received_date</send_true_to>
-<send_false_to>set 0 dt</send_false_to>
-    <compare>
-<condition>
- <negated>N</negated>
- <leftvalue>SR_RECEIVED</leftvalue>
- <function>IS NOT NULL</function>
- <rightvalue/>
- </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>570</xloc>
-      <yloc>180</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>start</name>
+    <name>Start</name>
     <type>GetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -463,21 +192,9 @@
            </partitioning>
     <fields>
       <field>
-        <name>startDate</name>
-        <variable>&#x24;&#x7b;startDate&#x7d;</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>endDate</name>
-        <variable>&#x24;&#x7b;endDate&#x7d;</variable>
-        <type>String</type>
+        <name>start_date</name>
+        <variable>&#x24;&#x7b;start_date&#x7d;</variable>
+        <type>None</type>
         <format/>
         <currency/>
         <decimal/>
@@ -489,8 +206,83 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>30</xloc>
-      <yloc>180</yloc>
+      <xloc>70</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Update dim_nbs_hospital_stats</name>
+    <type>Update</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Trisano OLAP DS</connection>
+    <skip_lookup>N</skip_lookup>
+    <commit>100</commit>
+    <use_batch>Y</use_batch>
+    <error_ignored>N</error_ignored>
+    <ignore_flag_field/>
+    <lookup>
+      <schema>warehouse</schema>
+      <table>dim_nbs_hospital</table>
+      <key>
+        <name>dw_hospital_id</name>
+        <field>dw_hospital_id</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+        </key>
+      <value>
+        <name>rolling_pct_of_births</name>
+        <rename>rolling_pct_of_births</rename>
+        </value>
+      <value>
+        <name>rolling_num_births</name>
+        <rename>rolling_num_births</rename>
+        </value>
+      </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>620</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>zero out stats</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Trisano OLAP DS</connection>
+    <execute_each_row>Y</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>update warehouse.dim_nbs_hospital set rolling_pct_of_births &#x3d; 0&#x3b;&#xa;update warehouse.dim_nbs_hospital set rolling_num_births &#x3d; 0&#x3b;</sql>
+    <set_params>N</set_params>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+    </arguments>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>190</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

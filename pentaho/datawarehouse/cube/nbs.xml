@@ -106,10 +106,14 @@
     </DimensionUsage>
     <DimensionUsage source="Date" name="Date Sr Accessioned" caption="Date Sr Accessioned" visible="true" foreignKey="dw_sr_accessioned_date_num_id" highCardinality="false">
     </DimensionUsage>
-    <Dimension type="StandardDimension" visible="true" foreignKey="hospital_code" highCardinality="false" name="Hospital">
-      <Hierarchy name="Hospital Code" visible="true" hasAll="true">
-        <Table name="fact_nbs_card" schema="warehouse">
+    <Dimension type="StandardDimension" visible="true" foreignKey="dw_hospital_id" highCardinality="false" name="Hospital">
+      <Hierarchy name="Hospital Code" visible="true" hasAll="true" primaryKey="dw_hospital_id">
+        <Table name="dim_nbs_hospital" schema="warehouse">
         </Table>
+        <Level name="12 Mo Rolling Num Births" visible="true" column="rolling_num_births" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="12 Month Rolling Pct of Births" visible="true" column="rolling_pct_of_births" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
         <Level name="Hospital Code" visible="true" column="hospital_code" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
         </Level>
       </Hierarchy>

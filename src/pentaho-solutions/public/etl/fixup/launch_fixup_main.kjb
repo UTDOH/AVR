@@ -126,7 +126,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>20</xloc>
-      <yloc>190</yloc>
+      <yloc>160</yloc>
       </entry>
     <entry>
       <name>Success</name>
@@ -135,24 +135,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1150</xloc>
-      <yloc>130</yloc>
-      </entry>
-    <entry>
-      <name>Create nbs result agg tables</name>
-      <description/>
-      <type>SQL</type>
-      <sql>CREATE TABLE &#x22;agg_nbs_yr_mo_entrd_analysis&#x22; &#x28;&#xa;    &#x22;dim_date_Year&#x22; int4,&#xa;    &#x22;dim_date_Month_&#x28;Key&#x29;&#x22; int4,&#xa;    &#x22;dim_nbs_analysis_Analysis&#x22; varchar&#x28;20&#x29;,&#xa;    &#x22;fact_nbs_result_Result_Count&#x22; INT8,&#xa;    &#x22;fact_nbs_result_fact_count&#x22; INT8&#x29;&#x3b;&#xa;&#xa;CREATE TABLE &#x22;agg_nbs_yr_entrd_analysis&#x22; &#x28;&#xa;    &#x22;dim_date_Year&#x22; int4,&#xa;    &#x22;dim_nbs_analysis_Analysis&#x22; varchar&#x28;20&#x29;,&#xa;    &#x22;fact_nbs_result_Result_Count&#x22; INT8,&#xa;    &#x22;fact_nbs_result_fact_count&#x22; INT8&#x29;&#x3b;&#xa;</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename/>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>Trisano OLAP DS</connection>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>600</xloc>
-      <yloc>490</yloc>
+      <xloc>1090</xloc>
+      <yloc>250</yloc>
       </entry>
     <entry>
       <name>Populate nbs result agg tables</name>
@@ -165,92 +149,10 @@
       <sendOneStatement>F</sendOneStatement>
       <connection>Trisano OLAP DS</connection>
       <parallel>N</parallel>
-      <draw>Y</draw>
+      <draw>N</draw>
       <nr>0</nr>
       <xloc>610</xloc>
       <yloc>610</yloc>
-      </entry>
-    <entry>
-      <name>seed_0_date</name>
-      <description/>
-      <type>TRANS</type>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;fixup&#x2f;seed_0_date.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>180</xloc>
-      <yloc>110</yloc>
-      </entry>
-    <entry>
-      <name>update_date_fields</name>
-      <description/>
-      <type>TRANS</type>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;update_date_fields.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>500</xloc>
-      <yloc>50</yloc>
-      </entry>
-    <entry>
-      <name>fact_nbs_card</name>
-      <description/>
-      <type>SQL</type>
-      <sql>update warehouse.fact_nbs_card&#xa;set dw_sr_accessioned_date_id &#x3d; dd.dw_date_num_id&#xa;from warehouse.dim_date_new dd &#xa;where dd.dw_date_id &#x3d; dw_sr_accessioned_date_id&#x3b;&#xa;&#xa;alter table warehouse.fact_nbs_card&#xa;rename column dw_sr_accessioned_date_id to dw_sr_accessioned_date_num_id&#x3b;&#xa;&#xa;update warehouse.fact_nbs_card&#xa;set dw_date_collected_date_id &#x3d; dd.dw_date_num_id&#xa;from warehouse.dim_date_new dd &#xa;where dd.dw_date_id &#x3d; dw_date_collected_date_id&#x3b;&#xa;&#xa;alter table warehouse.fact_nbs_card&#xa;rename column dw_date_collected_date_id to dw_date_collected_date_num_id&#x3b;&#xa;&#xa;update warehouse.fact_nbs_card&#xa;set dw_birth_date_id &#x3d; dd.dw_date_num_id&#xa;from warehouse.dim_date_new dd &#xa;where dd.dw_date_id &#x3d; dw_birth_date_id&#x3b;&#xa;&#xa;alter table warehouse.fact_nbs_card&#xa;rename column dw_birth_date_id to dw_birth_date_num_id&#x3b;&#xa;&#xa;update warehouse.fact_nbs_card&#xa;set dw_mothers_birth_date_id &#x3d; dd.dw_date_num_id&#xa;from warehouse.dim_date_new dd &#xa;where dd.dw_date_id &#x3d; dw_mothers_birth_date_id&#x3b;&#xa;&#xa;alter table warehouse.fact_nbs_card&#xa;rename column dw_mothers_birth_date_id to dw_mothers_birth_date_num_id&#x3b;</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename/>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>Trisano OLAP DS</connection>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>320</xloc>
-      <yloc>140</yloc>
       </entry>
     <entry>
       <name>fact_nbs_result</name>
@@ -263,10 +165,10 @@
       <sendOneStatement>F</sendOneStatement>
       <connection>Trisano OLAP DS</connection>
       <parallel>N</parallel>
-      <draw>Y</draw>
+      <draw>N</draw>
       <nr>0</nr>
-      <xloc>520</xloc>
-      <yloc>190</yloc>
+      <xloc>480</xloc>
+      <yloc>490</yloc>
       </entry>
     <entry>
       <name>check disk space</name>
@@ -288,8 +190,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>410</xloc>
-      <yloc>280</yloc>
+      <xloc>1090</xloc>
+      <yloc>40</yloc>
       </entry>
     <entry>
       <name>vacuum</name>
@@ -304,31 +206,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>480</xloc>
-      <yloc>370</yloc>
-      </entry>
-    <entry>
-      <name>check disk space 2</name>
-      <description/>
-      <type>SHELL</type>
-      <filename/>
-      <work_directory/>
-      <arg_from_previous>N</arg_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <set_append_logfile>N</set_append_logfile>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <insertScript>Y</insertScript>
-      <script>df -h</script>
-      <loglevel>Basic</loglevel>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>640</xloc>
-      <yloc>270</yloc>
+      <xloc>1090</xloc>
+      <yloc>130</yloc>
       </entry>
     <entry>
       <name>Update fnr partition tables</name>
@@ -341,59 +220,10 @@
       <sendOneStatement>F</sendOneStatement>
       <connection>Trisano OLAP DS</connection>
       <parallel>N</parallel>
-      <draw>Y</draw>
+      <draw>N</draw>
       <nr>0</nr>
-      <xloc>370</xloc>
-      <yloc>220</yloc>
-      </entry>
-    <entry>
-      <name>exec_update_nbs_result_w_msg_processed_on</name>
-      <description/>
-      <type>TRANS</type>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_update_nbs_result_w_msg_processed_on.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>300</xloc>
-      <yloc>600</yloc>
-      </entry>
-    <entry>
-      <name>add accession_number index</name>
-      <description/>
-      <type>SQL</type>
-      <sql>drop table if exists warehouse.fact_nbs_processing_dates&#x3b;&#xa;&#xa;create table warehouse.fact_nbs_processing_dates as&#xa;&#x28;&#xa;select&#xa;	 fnc.accession_number&#xa;	,fnc.dw_changed_on_date_num_id&#xa;	,fnc.dw_sr_accessioned_date_num_id&#xa;	,fnc.dw_date_collected_date_num_id&#xa;	,fnc.dw_message_sent_on_date_num_id&#xa;	,fnc.dw_report_out_date_num_id&#xa;	,max&#x28;fns.dw_login_date_num_id&#x29; as dw_login_date_num_id_max&#xa;	,max&#x28;fns.dw_recd_date_num_id&#x29; as dw_recd_date_num_id_max	&#xa;	,max&#x28;fns.dw_completed_date_num_id&#x29; as dw_completed_date_num_id_max&#xa;	,max&#x28;fns.dw_reviewed_date_num_id&#x29; as dw_reviewed_date_num_id_sample_max&#xa;	,max&#x28;fns.dw_message_processed_on_date_num_id&#x29; as dw_message_processed_on_date_num_id_sample_max&#xa;	,max&#x28;fns.dw_result_entry_date_num_id&#x29; as dw_result_entry_date_num_id_max&#xa;	,max&#x28;fnr.dw_dx_treatment_date_num_id&#x29; as dw_dx_treatment_date_num_id_max&#xa;	,max&#x28;fnr.dw_reviewed_date_num_id&#x29; as dw_reviewed_date_num_id_result_max&#xa;	,max&#x28;fnr.dw_entered_on_date_num_id&#x29; as dw_entered_on_date_num_id_max&#xa;	,max&#x28;fnr.dw_message_processed_on_date_num_id&#x29; as dw_message_processed_on_date_num_id_result_max&#xa; 	,max&#x28;fncl.dw_sr_received_date_num_id&#x29; as dw_sr_received_date_num_id_max&#xa;from warehouse.fact_nbs_card fnc left join warehouse.fact_nbs_card_log fncl on fncl.kit_number &#x3d; fnc.kit_number&#xa;left join warehouse.fact_nbs_sample fns on fns.accession_number &#x3d; fnc.accession_number&#xa;left join warehouse.fact_nbs_result fnr on fnr.sample_number &#x3d; fns.sample_number&#xa;group by 1,2,3,4,5,6&#xa;&#x29;&#x3b;&#xa;&#xa;CREATE INDEX idx_fnpd_accession_number&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;accession_number&#x29;&#x3b;&#xa;&#xa;CREATE INDEX idx_fnpd_dw_changed_on_date_num_id&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_changed_on_date_num_id&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_sr_accessioned_date_num_id&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_sr_accessioned_date_num_id&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_date_collected_date_num_id&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_date_collected_date_num_id&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_message_sent_on_date_num_id&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_message_sent_on_date_num_id&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_report_out_date_num_id&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_report_out_date_num_id&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_login_date_num_id_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_login_date_num_id_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_recd_date_num_id_max	&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_recd_date_num_id_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_completed_date_num_id_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_completed_date_num_id_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_reviewed_date_num_id_result_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_reviewed_date_num_id_result_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_message_processed_on_date_num_id_result_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_message_processed_on_date_num_id_result_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_result_entry_date_num_id_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_result_entry_date_num_id_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_dx_treatment_date_num_id_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_dx_treatment_date_num_id_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_reviewed_date_num_id_sample_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_reviewed_date_num_id_sample_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_entered_on_date_num_id_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_entered_on_date_num_id_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_message_processed_on_date_num_id_sample_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_message_processed_on_date_num_id_sample_max&#x29;&#x3b;</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename/>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>Trisano OLAP DS</connection>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>280</xloc>
-      <yloc>290</yloc>
+      <xloc>180</xloc>
+      <yloc>550</yloc>
       </entry>
     <entry>
       <name>Kill Postgres query</name>
@@ -406,10 +236,10 @@
       <sendOneStatement>F</sendOneStatement>
       <connection>Trisano OLAP DS</connection>
       <parallel>N</parallel>
-      <draw>Y</draw>
+      <draw>N</draw>
       <nr>0</nr>
-      <xloc>90</xloc>
-      <yloc>560</yloc>
+      <xloc>70</xloc>
+      <yloc>570</yloc>
       </entry>
     <entry>
       <name>truncate logs</name>
@@ -429,16 +259,16 @@
       <script>pwd&#xa;truncate -s 100 &#x2f;var&#x2f;local&#x2f;pentaho&#x2f;tomcat&#x2f;logs&#x2f;catalina.out&#xa;truncate -s 100 &#x2f;var&#x2f;local&#x2f;pentaho&#x2f;tomcat&#x2f;logs&#x2f;pentaho.log</script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
-      <draw>Y</draw>
+      <draw>N</draw>
       <nr>0</nr>
       <xloc>30</xloc>
       <yloc>450</yloc>
       </entry>
     <entry>
-      <name>rebuild msg processed on cols</name>
+      <name>vw_fact_nbs_processing_dates</name>
       <description/>
       <type>SQL</type>
-      <sql>alter table warehouse.fact_nbs_card alter column dw_message_sent_on_date_num_id set default 19000101&#x3b;&#xa;&#xa;alter table warehouse.fact_nbs_card alter column src_message_sent_on set default &#x27;1900&#x2f;01&#x2f;01 00&#x3a;00&#x3a;00&#x27;&#x3b;</sql>
+      <sql>drop view if exists warehouse.vw_fact_nbs_processing_dates&#x3b;&#xa;&#xa;create or replace view warehouse.vw_fact_nbs_processing_dates&#xa;   as&#xa;      select&#xa;          fnpd.nbs_kit_no&#xa;         ,fnpd.order_number&#xa;         ,fnpd.kit_number&#xa;         ,fnpd.accession_number&#xa;         ,fnpd.specimen_type&#xa;         ,fnpd.dw_hospital_id&#xa;         ,dnh.rolling_pct_of_births&#xa;         ,dnh.rolling_num_births&#xa;         ,case when fnpd.dw_birth_date_num_id is null or fnpd.dw_birth_date_num_id &#x3d; &#x27;19000101&#x27; then to_number&#x28;to_char&#x28;now&#x28;&#x29;, &#x27;YYYYMMDD&#x27;&#x29;, &#x27;99999999&#x27;&#x29; else dw_birth_date_num_id end as dw_birth_date_num_id&#xa;         ,case when fnpd.dw_changed_on_date_num_id is null or fnpd.dw_changed_on_date_num_id &#x3d; &#x27;19000101&#x27; then to_number&#x28;to_char&#x28;now&#x28;&#x29;, &#x27;YYYYMMDD&#x27;&#x29;, &#x27;99999999&#x27;&#x29; else dw_changed_on_date_num_id end as dw_changed_on_date_num_id&#xa;         ,case when fnpd.dw_sr_accessioned_date_num_id is null or fnpd.dw_sr_accessioned_date_num_id &#x3d; &#x27;19000101&#x27; then to_number&#x28;to_char&#x28;now&#x28;&#x29;, &#x27;YYYYMMDD&#x27;&#x29;, &#x27;99999999&#x27;&#x29; else dw_sr_accessioned_date_num_id end as dw_sr_accessioned_date_num_id&#xa;         ,case when fnpd.dw_date_collected_date_num_id is null or fnpd.dw_date_collected_date_num_id &#x3d; &#x27;19000101&#x27; then to_number&#x28;to_char&#x28;now&#x28;&#x29;, &#x27;YYYYMMDD&#x27;&#x29;, &#x27;99999999&#x27;&#x29; else dw_date_collected_date_num_id end as dw_date_collected_date_num_id&#xa;         ,case when fnpd.dw_message_sent_on_date_num_id is null or fnpd.dw_message_sent_on_date_num_id &#x3d; &#x27;19000101&#x27; then to_number&#x28;to_char&#x28;now&#x28;&#x29;, &#x27;YYYYMMDD&#x27;&#x29;, &#x27;99999999&#x27;&#x29; else dw_message_sent_on_date_num_id end as dw_message_sent_on_date_num_id&#xa;         ,case when fnpd.dw_report_out_date_num_id is null or fnpd.dw_report_out_date_num_id &#x3d; &#x27;19000101&#x27; then to_number&#x28;to_char&#x28;now&#x28;&#x29;, &#x27;YYYYMMDD&#x27;&#x29;, &#x27;99999999&#x27;&#x29; else dw_report_out_date_num_id end as dw_report_out_date_num_id&#xa;         ,case when fnpd.dw_sr_received_date_num_id_max is null or fnpd.dw_sr_received_date_num_id_max &#x3d; &#x27;19000101&#x27; then to_number&#x28;to_char&#x28;now&#x28;&#x29;, &#x27;YYYYMMDD&#x27;&#x29;, &#x27;99999999&#x27;&#x29; else dw_sr_received_date_num_id_max end as dw_sr_received_date_num_id_max&#xa;         ,case when fnpd.dw_login_date_num_id_max is null or fnpd.dw_login_date_num_id_max &#x3d; &#x27;19000101&#x27; then to_number&#x28;to_char&#x28;now&#x28;&#x29;, &#x27;YYYYMMDD&#x27;&#x29;, &#x27;99999999&#x27;&#x29; else dw_login_date_num_id_max end as dw_login_date_num_id_max&#xa;         ,case when fnpd.dw_recd_date_num_id_max is null or fnpd.dw_recd_date_num_id_max &#x3d; &#x27;19000101&#x27; then to_number&#x28;to_char&#x28;now&#x28;&#x29;, &#x27;YYYYMMDD&#x27;&#x29;, &#x27;99999999&#x27;&#x29; else dw_recd_date_num_id_max	 end as dw_recd_date_num_id_max	&#xa;         ,case when fnpd.dw_completed_date_num_id_max is null or fnpd.dw_completed_date_num_id_max &#x3d; &#x27;19000101&#x27; then to_number&#x28;to_char&#x28;now&#x28;&#x29;, &#x27;YYYYMMDD&#x27;&#x29;, &#x27;99999999&#x27;&#x29; else dw_completed_date_num_id_max end as dw_completed_date_num_id_max&#xa;         ,case when fnpd.dw_reviewed_date_num_id_sample_max is null or fnpd.dw_reviewed_date_num_id_sample_max &#x3d; &#x27;19000101&#x27; then to_number&#x28;to_char&#x28;now&#x28;&#x29;, &#x27;YYYYMMDD&#x27;&#x29;, &#x27;99999999&#x27;&#x29; else dw_reviewed_date_num_id_sample_max end as dw_reviewed_date_num_id_sample_max&#xa;         ,case when fnpd.dw_message_processed_on_date_num_id_sample_max is null or fnpd.dw_message_processed_on_date_num_id_sample_max &#x3d; &#x27;19000101&#x27; then to_number&#x28;to_char&#x28;now&#x28;&#x29;, &#x27;YYYYMMDD&#x27;&#x29;, &#x27;99999999&#x27;&#x29; else dw_message_processed_on_date_num_id_sample_max end as dw_message_processed_on_date_num_id_sample_max&#xa;         ,case when fnpd.dw_result_entry_date_num_id_max is null or fnpd.dw_result_entry_date_num_id_max &#x3d; &#x27;19000101&#x27; then to_number&#x28;to_char&#x28;now&#x28;&#x29;, &#x27;YYYYMMDD&#x27;&#x29;, &#x27;99999999&#x27;&#x29; else dw_result_entry_date_num_id_max end as dw_result_entry_date_num_id_max&#xa;         ,case when fnpd.dw_dx_treatment_date_num_id_max is null or fnpd.dw_dx_treatment_date_num_id_max &#x3d; &#x27;19000101&#x27; then to_number&#x28;to_char&#x28;now&#x28;&#x29;, &#x27;YYYYMMDD&#x27;&#x29;, &#x27;99999999&#x27;&#x29; else dw_dx_treatment_date_num_id_max end as dw_dx_treatment_date_num_id_max&#xa;         ,case when fnpd.dw_reviewed_date_num_id_result_max is null or fnpd.dw_reviewed_date_num_id_result_max &#x3d; &#x27;19000101&#x27; then to_number&#x28;to_char&#x28;now&#x28;&#x29;, &#x27;YYYYMMDD&#x27;&#x29;, &#x27;99999999&#x27;&#x29; else dw_reviewed_date_num_id_result_max end as dw_reviewed_date_num_id_result_max&#xa;         ,case when fnpd.dw_entered_on_date_num_id_max is null or fnpd.dw_entered_on_date_num_id_max &#x3d; &#x27;19000101&#x27; then to_number&#x28;to_char&#x28;now&#x28;&#x29;, &#x27;YYYYMMDD&#x27;&#x29;, &#x27;99999999&#x27;&#x29; else dw_entered_on_date_num_id_max end as dw_entered_on_date_num_id_max&#xa;         ,case when fnpd.dw_message_processed_on_date_num_id_result_max is null or fnpd.dw_message_processed_on_date_num_id_result_max &#x3d; &#x27;19000101&#x27; then to_number&#x28;to_char&#x28;now&#x28;&#x29;, &#x27;YYYYMMDD&#x27;&#x29;, &#x27;99999999&#x27;&#x29; else dw_message_processed_on_date_num_id_result_max end as dw_message_processed_on_date_num_id_result_max&#xa;      from warehouse.fact_nbs_processing_dates fnpd&#xa;inner join warehouse.dim_nbs_hospital dnh on dnh.dw_hospital_id &#x3d; fnpd.dw_hospital_id&#xa;</sql>
       <useVariableSubstitution>F</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
@@ -447,16 +277,48 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>210</xloc>
-      <yloc>210</yloc>
+      <xloc>350</xloc>
+      <yloc>160</yloc>
       </entry>
     <entry>
-      <name>exec_update_action_item_log</name>
+      <name>vw_fact_nbs_processing_dates_alt</name>
+      <description/>
+      <type>SQL</type>
+      <sql>drop view if exists warehouse.vw_fact_nbs_processing_dates_alt&#x3b;&#xa;&#xa;create or replace view warehouse.vw_fact_nbs_processing_dates_alt&#xa;   as&#xa;      select&#xa;          fnpd.nbs_kit_no&#xa;         ,fnpd.order_number&#xa;         ,fnpd.kit_number&#xa;         ,fnpd.accession_number&#xa;         ,fnpd.specimen_type&#xa;         ,fnpd.dw_hospital_id&#xa;         ,dnh.rolling_pct_of_births&#xa;         ,dnh.rolling_num_births&#xa;         ,case when fnpd.dw_birth_date_num_id is null or fnpd.dw_birth_date_num_id &#x3d; &#x27;19000101&#x27; then null else dw_birth_date_num_id end as dw_birth_date_num_id&#xa;         ,case when fnpd.dw_changed_on_date_num_id is null or fnpd.dw_changed_on_date_num_id &#x3d; &#x27;19000101&#x27; then null else dw_changed_on_date_num_id end as dw_changed_on_date_num_id&#xa;         ,case when fnpd.dw_sr_accessioned_date_num_id is null or fnpd.dw_sr_accessioned_date_num_id &#x3d; &#x27;19000101&#x27; then null else dw_sr_accessioned_date_num_id end as dw_sr_accessioned_date_num_id&#xa;         ,case when fnpd.dw_date_collected_date_num_id is null or fnpd.dw_date_collected_date_num_id &#x3d; &#x27;19000101&#x27; then null else dw_date_collected_date_num_id end as dw_date_collected_date_num_id&#xa;         ,case when fnpd.dw_message_sent_on_date_num_id is null or fnpd.dw_message_sent_on_date_num_id &#x3d; &#x27;19000101&#x27; then null else dw_message_sent_on_date_num_id end as dw_message_sent_on_date_num_id&#xa;         ,case when fnpd.dw_report_out_date_num_id is null or fnpd.dw_report_out_date_num_id &#x3d; &#x27;19000101&#x27; then null else dw_report_out_date_num_id end as dw_report_out_date_num_id&#xa;         ,case when fnpd.dw_sr_received_date_num_id_max is null or fnpd.dw_sr_received_date_num_id_max &#x3d; &#x27;19000101&#x27; then null else dw_sr_received_date_num_id_max end as dw_sr_received_date_num_id_max&#xa;         ,case when fnpd.dw_login_date_num_id_max is null or fnpd.dw_login_date_num_id_max &#x3d; &#x27;19000101&#x27; then null else dw_login_date_num_id_max end as dw_login_date_num_id_max&#xa;         ,case when fnpd.dw_recd_date_num_id_max is null or fnpd.dw_recd_date_num_id_max &#x3d; &#x27;19000101&#x27; then null else dw_recd_date_num_id_max	 end as dw_recd_date_num_id_max	&#xa;         ,case when fnpd.dw_completed_date_num_id_max is null or fnpd.dw_completed_date_num_id_max &#x3d; &#x27;19000101&#x27; then null else dw_completed_date_num_id_max end as dw_completed_date_num_id_max&#xa;         ,case when fnpd.dw_reviewed_date_num_id_sample_max is null or fnpd.dw_reviewed_date_num_id_sample_max &#x3d; &#x27;19000101&#x27; then null else dw_reviewed_date_num_id_sample_max end as dw_reviewed_date_num_id_sample_max&#xa;         ,case when fnpd.dw_message_processed_on_date_num_id_sample_max is null or fnpd.dw_message_processed_on_date_num_id_sample_max &#x3d; &#x27;19000101&#x27; then null else dw_message_processed_on_date_num_id_sample_max end as dw_message_processed_on_date_num_id_sample_max&#xa;         ,case when fnpd.dw_result_entry_date_num_id_max is null or fnpd.dw_result_entry_date_num_id_max &#x3d; &#x27;19000101&#x27; then null else dw_result_entry_date_num_id_max end as dw_result_entry_date_num_id_max&#xa;         ,case when fnpd.dw_dx_treatment_date_num_id_max is null or fnpd.dw_dx_treatment_date_num_id_max &#x3d; &#x27;19000101&#x27; then null else dw_dx_treatment_date_num_id_max end as dw_dx_treatment_date_num_id_max&#xa;         ,case when fnpd.dw_reviewed_date_num_id_result_max is null or fnpd.dw_reviewed_date_num_id_result_max &#x3d; &#x27;19000101&#x27; then null else dw_reviewed_date_num_id_result_max end as dw_reviewed_date_num_id_result_max&#xa;         ,case when fnpd.dw_entered_on_date_num_id_max is null or fnpd.dw_entered_on_date_num_id_max &#x3d; &#x27;19000101&#x27; then null else dw_entered_on_date_num_id_max end as dw_entered_on_date_num_id_max&#xa;         ,case when fnpd.dw_message_processed_on_date_num_id_result_max is null or fnpd.dw_message_processed_on_date_num_id_result_max &#x3d; &#x27;19000101&#x27; then null else dw_message_processed_on_date_num_id_result_max end as dw_message_processed_on_date_num_id_result_max&#xa;      from warehouse.fact_nbs_processing_dates fnpd&#xa;inner join warehouse.dim_nbs_date dnd on dnd.dw_date_num_id &#x3d; fnpd.dw_birth_date_num_id&#xa;inner join warehouse.dim_nbs_hospital dnh on dnh.dw_hospital_id &#x3d; fnpd.dw_hospital_id&#x3b;&#xa;&#xa;drop view if exists warehouse.vw_fact_nbs_processing_dates_alt2&#x3b;&#xa;&#xa;create or replace view warehouse.vw_fact_nbs_processing_dates_alt2&#xa;   as&#xa;      select&#xa;          fnpd.nbs_kit_no&#xa;         ,fnpd.kit_number&#xa;         ,fnpd.dw_hospital_id&#xa;         ,dnh.rolling_pct_of_births&#xa;         ,dnh.rolling_num_births&#xa;         ,fnpd.dw_birth_date_num_id&#xa;         ,max&#x28;case when fnpd.dw_changed_on_date_num_id is null or fnpd.dw_changed_on_date_num_id &#x3d; &#x27;19000101&#x27; then null else dw_changed_on_date_num_id end&#x29; as dw_changed_on_date_num_id&#xa;         ,max&#x28;case when fnpd.dw_sr_accessioned_date_num_id is null or fnpd.dw_sr_accessioned_date_num_id &#x3d; &#x27;19000101&#x27; then null else dw_sr_accessioned_date_num_id end&#x29; as dw_sr_accessioned_date_num_id&#xa;         ,min&#x28;case when fnpd.dw_date_collected_date_num_id is null or fnpd.dw_date_collected_date_num_id &#x3d; &#x27;19000101&#x27; then null else dw_date_collected_date_num_id end&#x29; as dw_date_collected_date_num_id&#xa;         ,max&#x28;case when fnpd.dw_message_sent_on_date_num_id is null or fnpd.dw_message_sent_on_date_num_id &#x3d; &#x27;19000101&#x27; then null else dw_message_sent_on_date_num_id end&#x29; as dw_message_sent_on_date_num_id&#xa;         ,max&#x28;case when fnpd.dw_report_out_date_num_id is null or fnpd.dw_report_out_date_num_id &#x3d; &#x27;19000101&#x27; then null else dw_report_out_date_num_id end&#x29; as dw_report_out_date_num_id&#xa;         ,max&#x28;case when fnpd.dw_sr_received_date_num_id_max is null or fnpd.dw_sr_received_date_num_id_max &#x3d; &#x27;19000101&#x27; then null else dw_sr_received_date_num_id_max end&#x29; as dw_sr_received_date_num_id_max&#xa;         ,max&#x28;case when fnpd.dw_login_date_num_id_max is null or fnpd.dw_login_date_num_id_max &#x3d; &#x27;19000101&#x27; then null else dw_login_date_num_id_max end&#x29; as dw_login_date_num_id_max&#xa;         ,max&#x28;case when fnpd.dw_recd_date_num_id_max is null or fnpd.dw_recd_date_num_id_max &#x3d; &#x27;19000101&#x27; then null else dw_recd_date_num_id_max	 end&#x29; as dw_recd_date_num_id_max	&#xa;         ,max&#x28;case when fnpd.dw_completed_date_num_id_max is null or fnpd.dw_completed_date_num_id_max &#x3d; &#x27;19000101&#x27; then null else dw_completed_date_num_id_max end&#x29; as dw_completed_date_num_id_max&#xa;         ,max&#x28;case when fnpd.dw_reviewed_date_num_id_sample_max is null or fnpd.dw_reviewed_date_num_id_sample_max &#x3d; &#x27;19000101&#x27; then null else dw_reviewed_date_num_id_sample_max end&#x29; as dw_reviewed_date_num_id_sample_max&#xa;         ,max&#x28;case when fnpd.dw_message_processed_on_date_num_id_sample_max is null or fnpd.dw_message_processed_on_date_num_id_sample_max &#x3d; &#x27;19000101&#x27; then null else dw_message_processed_on_date_num_id_sample_max end&#x29; as dw_message_processed_on_date_num_id_sample_max&#xa;         ,max&#x28;case when fnpd.dw_result_entry_date_num_id_max is null or fnpd.dw_result_entry_date_num_id_max &#x3d; &#x27;19000101&#x27; then null else dw_result_entry_date_num_id_max end&#x29; as dw_result_entry_date_num_id_max&#xa;         ,max&#x28;case when fnpd.dw_dx_treatment_date_num_id_max is null or fnpd.dw_dx_treatment_date_num_id_max &#x3d; &#x27;19000101&#x27; then null else dw_dx_treatment_date_num_id_max end&#x29; as dw_dx_treatment_date_num_id_max&#xa;         ,max&#x28;case when fnpd.dw_reviewed_date_num_id_result_max is null or fnpd.dw_reviewed_date_num_id_result_max &#x3d; &#x27;19000101&#x27; then null else dw_reviewed_date_num_id_result_max end&#x29; as dw_reviewed_date_num_id_result_max&#xa;         ,max&#x28;case when fnpd.dw_entered_on_date_num_id_max is null or fnpd.dw_entered_on_date_num_id_max &#x3d; &#x27;19000101&#x27; then null else dw_entered_on_date_num_id_max end&#x29; as dw_entered_on_date_num_id_max&#xa;         ,max&#x28;case when fnpd.dw_message_processed_on_date_num_id_result_max is null or fnpd.dw_message_processed_on_date_num_id_result_max &#x3d; &#x27;19000101&#x27; then null else dw_message_processed_on_date_num_id_result_max end&#x29; as dw_message_processed_on_date_num_id_result_max&#xa;      from warehouse.fact_nbs_processing_dates fnpd&#xa;inner join warehouse.dim_nbs_date dnd on dnd.dw_date_num_id &#x3d; fnpd.dw_birth_date_num_id&#xa;inner join warehouse.dim_nbs_hospital dnh on dnh.dw_hospital_id &#x3d; fnpd.dw_hospital_id&#xa;group by 1,2,3,4,5,6&#x3b;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>Trisano OLAP DS</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>570</xloc>
+      <yloc>160</yloc>
+      </entry>
+    <entry>
+      <name>add dimhospital and rebuild fnc</name>
+      <description/>
+      <type>SQL</type>
+      <sql>DROP TABLE IF EXISTS warehouse.dim_nbs_hospital&#x3b;&#xa;&#xa;CREATE TABLE warehouse.dim_nbs_hospital&#xa;&#x28;&#xa;  dw_hospital_id INTEGER&#xa;, version INTEGER&#xa;, start_date TIMESTAMP&#xa;, end_date TIMESTAMP&#xa;, hospital_code VARCHAR&#x28;128&#x29;&#xa;, hospital_city VARCHAR&#x28;128&#x29;&#xa;, hospital_state VARCHAR&#x28;3&#x29;&#xa;, hospital_country VARCHAR&#x28;128&#x29;&#xa;, hospital_zip VARCHAR&#x28;10&#x29;&#xa;, pct_of_state_births DECIMAL&#x28;5,2&#x29;&#xa;&#x29;&#xa;&#x3b;CREATE INDEX idx_dim_nbs_hospital_lookup ON warehouse.dim_nbs_hospital&#x28;hospital_code&#x29;&#xa;&#x3b;&#xa;CREATE INDEX idx_dim_nbs_hospital_tk ON warehouse.dim_nbs_hospital&#x28;dw_hospital_id&#x29;&#xa;&#x3b;&#xa;CREATE INDEX idx_dim_nbs_hospital_pct_births ON warehouse.dim_nbs_hospital&#x28;pct_of_state_births&#x29;&#xa;&#x3b;&#xa;&#xa;-- Table&#x3a; warehouse.fact_nbs_card&#xa;&#xa;DROP TABLE IF EXISTS warehouse.fact_nbs_card&#x3b;&#xa;&#xa;CREATE TABLE warehouse.fact_nbs_card&#xa;&#x28;&#xa;  nbs_kit_no integer,&#xa;  kit_number character varying&#x28;15&#x29;,&#xa;  order_number integer,&#xa;  dw_birthplace_id integer,&#xa;  dw_physician_id integer,&#xa;  dw_changed_on_date_num_id integer,&#xa;  dw_sr_accessioned_date_num_id integer,&#xa;  dw_date_collected_date_num_id integer,&#xa;  dw_birth_date_num_id integer,&#xa;  dw_mothers_birth_date_num_id integer,&#xa;  dw_message_sent_on_date_num_id integer DEFAULT 19000101,&#xa;  dw_report_out_date_num_id integer DEFAULT 19000101,&#xa;  dw_hospital_id integer,&#xa;  src_message_sent_on timestamp without time zone DEFAULT &#x27;1900-01-01 00&#x3a;00&#x3a;00&#x27;&#x3a;&#x3a;timestamp without time zone,&#xa;  src_report_out_date timestamp without time zone DEFAULT &#x27;1900-01-01 00&#x3a;00&#x3a;00&#x27;&#x3a;&#x3a;timestamp without time zone,&#xa;  sr_accessioned timestamp without time zone,&#xa;  specimen_type character varying&#x28;255&#x29;,&#xa;  accession_number character varying&#x28;30&#x29;,&#xa;  reject_reason character varying&#x28;128&#x29;,&#xa;  babys_sex character varying&#x28;1&#x29;,&#xa;  breast integer,&#xa;  bottle integer,&#xa;  adoption integer,&#xa;  premature_sick integer,&#xa;  multiple_birth integer,&#xa;  home_birth integer,&#xa;  transfusion integer,&#xa;  card_ok integer,&#xa;  x_missing_data integer,&#xa;  transfusion_date date,&#xa;  birth_weight numeric&#x28;38,0&#x29;,&#xa;  mothers_zip character varying&#x28;10&#x29;,&#xa;  recall_reason character varying&#x28;10&#x29;,&#xa;  meconium_ileus integer,&#xa;  steroids integer,&#xa;  tpn integer,&#xa;  birthplace_type character varying&#x28;255&#x29;,&#xa;  changed_on timestamp without time zone,&#xa;  date_collected timestamp without time zone,&#xa;  first_entry_on timestamp without time zone,&#xa;  second_entry_on timestamp without time zone&#xa;  &#xa;&#x29;&#xa;WITH &#x28;&#xa;  OIDS&#x3d;FALSE&#xa;&#x29;&#x3b;&#xa;ALTER TABLE warehouse.fact_nbs_card&#xa;  OWNER TO pentaho&#x3b;&#xa;GRANT ALL ON TABLE warehouse.fact_nbs_card TO pentaho&#x3b;&#xa;GRANT SELECT ON TABLE warehouse.fact_nbs_card TO bi_nbs_user_role&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_fact_nbs_card_accession_number&#xa;&#xa;-- DROP INDEX warehouse.idx_fact_nbs_card_accession_number&#x3b;&#xa;&#xa;CREATE INDEX idx_fact_nbs_card_accession_number&#xa;  ON warehouse.fact_nbs_card&#xa;  USING btree&#xa;  &#x28;accession_number COLLATE pg_catalog.&#x22;default&#x22;&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_fact_nbs_card_babys_sex&#xa;&#xa;-- DROP INDEX warehouse.idx_fact_nbs_card_babys_sex&#x3b;&#xa;&#xa;CREATE INDEX idx_fact_nbs_card_babys_sex&#xa;  ON warehouse.fact_nbs_card&#xa;  USING btree&#xa;  &#x28;babys_sex COLLATE pg_catalog.&#x22;default&#x22;&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_fact_nbs_card_birth_blind_entry_on&#xa;&#xa;-- DROP INDEX warehouse.idx_fact_nbs_card_birth_blind_entry_on&#x3b;&#xa;&#xa;CREATE INDEX idx_fact_nbs_card_birth_blind_entry_on&#xa;  ON warehouse.fact_nbs_card&#xa;  USING btree&#xa;  &#x28;first_entry_on&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_fact_nbs_card_birth_date&#xa;&#xa;-- DROP INDEX warehouse.idx_fact_nbs_card_birth_date&#x3b;&#xa;&#xa;CREATE INDEX idx_fact_nbs_card_birth_date&#xa;  ON warehouse.fact_nbs_card&#xa;  USING btree&#xa;  &#x28;dw_birth_date_num_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_fact_nbs_card_birth_second_entry_on&#xa;&#xa;-- DROP INDEX warehouse.idx_fact_nbs_card_birth_second_entry_on&#x3b;&#xa;&#xa;CREATE INDEX idx_fact_nbs_card_birth_second_entry_on&#xa;  ON warehouse.fact_nbs_card&#xa;  USING btree&#xa;  &#x28;second_entry_on&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_fact_nbs_card_birthplace&#xa;&#xa;-- DROP INDEX warehouse.idx_fact_nbs_card_birthplace&#x3b;&#xa;&#xa;CREATE INDEX idx_fact_nbs_card_birthplace&#xa;  ON warehouse.fact_nbs_card&#xa;  USING btree&#xa;  &#x28;dw_birthplace_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_fact_nbs_card_changed_on&#xa;&#xa;-- DROP INDEX warehouse.idx_fact_nbs_card_changed_on&#x3b;&#xa;&#xa;CREATE INDEX idx_fact_nbs_card_changed_on&#xa;  ON warehouse.fact_nbs_card&#xa;  USING btree&#xa;  &#x28;dw_changed_on_date_num_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_fact_nbs_card_date_collected&#xa;&#xa;-- DROP INDEX warehouse.idx_fact_nbs_card_date_collected&#x3b;&#xa;&#xa;CREATE INDEX idx_fact_nbs_card_date_collected&#xa;  ON warehouse.fact_nbs_card&#xa;  USING btree&#xa;  &#x28;dw_date_collected_date_num_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_fact_nbs_card_dw_msg_sent_on&#xa;&#xa;-- DROP INDEX warehouse.idx_fact_nbs_card_dw_msg_sent_on&#x3b;&#xa;&#xa;CREATE INDEX idx_fact_nbs_card_dw_msg_sent_on&#xa;  ON warehouse.fact_nbs_card&#xa;  USING btree&#xa;  &#x28;dw_message_sent_on_date_num_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_fact_nbs_card_dw_report_out_date&#xa;&#xa;-- DROP INDEX warehouse.idx_fact_nbs_card_dw_report_out_date&#x3b;&#xa;&#xa;CREATE INDEX idx_fact_nbs_card_dw_report_out_date&#xa;  ON warehouse.fact_nbs_card&#xa;  USING btree&#xa;  &#x28;dw_report_out_date_num_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_fact_nbs_card_hospital_code&#xa;&#xa;-- DROP INDEX warehouse.idx_fact_nbs_card_hospital_code&#x3b;&#xa;&#xa;CREATE INDEX idx_fact_nbs_card_hospital&#xa;  ON warehouse.fact_nbs_card&#xa;  USING btree&#xa;  &#x28;dw_hospital_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_fact_nbs_card_inc_etl&#xa;&#xa;-- DROP INDEX warehouse.idx_fact_nbs_card_inc_etl&#x3b;&#xa;&#xa;CREATE INDEX idx_fact_nbs_card_inc_etl&#xa;  ON warehouse.fact_nbs_card&#xa;  USING btree&#xa;  &#x28;changed_on&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_fact_nbs_card_lookup&#xa;&#xa;-- DROP INDEX warehouse.idx_fact_nbs_card_lookup&#x3b;&#xa;&#xa;CREATE INDEX idx_fact_nbs_card_lookup&#xa;  ON warehouse.fact_nbs_card&#xa;  USING btree&#xa;  &#x28;kit_number COLLATE pg_catalog.&#x22;default&#x22;, order_number&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_fact_nbs_card_mothers_birth_date&#xa;&#xa;-- DROP INDEX warehouse.idx_fact_nbs_card_mothers_birth_date&#x3b;&#xa;&#xa;CREATE INDEX idx_fact_nbs_card_mothers_birth_date&#xa;  ON warehouse.fact_nbs_card&#xa;  USING btree&#xa;  &#x28;dw_mothers_birth_date_num_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_fact_nbs_card_mothers_zip&#xa;&#xa;-- DROP INDEX warehouse.idx_fact_nbs_card_mothers_zip&#x3b;&#xa;&#xa;CREATE INDEX idx_fact_nbs_card_mothers_zip&#xa;  ON warehouse.fact_nbs_card&#xa;  USING btree&#xa;  &#x28;mothers_zip COLLATE pg_catalog.&#x22;default&#x22;&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_fact_nbs_card_name&#xa;&#xa;-- DROP INDEX warehouse.idx_fact_nbs_card_name&#x3b;&#xa;&#xa;CREATE INDEX idx_fact_nbs_card_name&#xa;  ON warehouse.fact_nbs_card&#xa;  USING btree&#xa;  &#x28;kit_number COLLATE pg_catalog.&#x22;default&#x22;&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_fact_nbs_card_physician&#xa;&#xa;-- DROP INDEX warehouse.idx_fact_nbs_card_physician&#x3b;&#xa;&#xa;CREATE INDEX idx_fact_nbs_card_physician&#xa;  ON warehouse.fact_nbs_card&#xa;  USING btree&#xa;  &#x28;dw_physician_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_fact_nbs_card_recall_reason&#xa;&#xa;-- DROP INDEX warehouse.idx_fact_nbs_card_recall_reason&#x3b;&#xa;&#xa;CREATE INDEX idx_fact_nbs_card_recall_reason&#xa;  ON warehouse.fact_nbs_card&#xa;  USING btree&#xa;  &#x28;recall_reason COLLATE pg_catalog.&#x22;default&#x22;&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_fact_nbs_card_reject_reason&#xa;&#xa;-- DROP INDEX warehouse.idx_fact_nbs_card_reject_reason&#x3b;&#xa;&#xa;CREATE INDEX idx_fact_nbs_card_reject_reason&#xa;  ON warehouse.fact_nbs_card&#xa;  USING btree&#xa;  &#x28;reject_reason COLLATE pg_catalog.&#x22;default&#x22;&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_fact_nbs_card_specimen_type&#xa;&#xa;-- DROP INDEX warehouse.idx_fact_nbs_card_specimen_type&#x3b;&#xa;&#xa;CREATE INDEX idx_fact_nbs_card_specimen_type&#xa;  ON warehouse.fact_nbs_card&#xa;  USING btree&#xa;  &#x28;specimen_type COLLATE pg_catalog.&#x22;default&#x22;&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_fact_nbs_card_sr_accessioned_date&#xa;&#xa;-- DROP INDEX warehouse.idx_fact_nbs_card_sr_accessioned_date&#x3b;&#xa;&#xa;CREATE INDEX idx_fact_nbs_card_sr_accessioned_date&#xa;  ON warehouse.fact_nbs_card&#xa;  USING btree&#xa;  &#x28;dw_sr_accessioned_date_num_id&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_fact_nbs_card_src_msg_sent_on&#xa;&#xa;-- DROP INDEX warehouse.idx_fact_nbs_card_src_msg_sent_on&#x3b;&#xa;&#xa;CREATE INDEX idx_fact_nbs_card_src_msg_sent_on&#xa;  ON warehouse.fact_nbs_card&#xa;  USING btree&#xa;  &#x28;src_message_sent_on&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_fact_nbs_card_src_report_out_date&#xa;&#xa;-- DROP INDEX warehouse.idx_fact_nbs_card_src_report_out_date&#x3b;&#xa;&#xa;CREATE INDEX idx_fact_nbs_card_src_report_out_date&#xa;  ON warehouse.fact_nbs_card&#xa;  USING btree&#xa;  &#x28;src_report_out_date&#x29;&#x3b;&#xa;&#xa;-- Index&#x3a; warehouse.idx_fact_nbs_card_src_sr_accessioned_date&#xa;&#xa;-- DROP INDEX warehouse.idx_fact_nbs_card_src_sr_accessioned_date&#x3b;&#xa;&#xa;CREATE INDEX idx_fact_nbs_card_src_sr_accessioned_date&#xa;  ON warehouse.fact_nbs_card&#xa;  USING btree&#xa;  &#x28;sr_accessioned&#x29;&#x3b;&#xa;&#xa;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>Trisano OLAP DS</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>150</xloc>
+      <yloc>40</yloc>
+      </entry>
+    <entry>
+      <name>exec_nbs_card_fact_main</name>
       <description/>
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_update_action_item_log.ktr</filename>
+      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_nbs_card_fact_main.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -480,39 +342,16 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>180</xloc>
-      <yloc>400</yloc>
+      <xloc>370</xloc>
+      <yloc>40</yloc>
       </entry>
     <entry>
-      <name>check disk space 2 2</name>
-      <description/>
-      <type>SHELL</type>
-      <filename/>
-      <work_directory/>
-      <arg_from_previous>N</arg_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <set_append_logfile>N</set_append_logfile>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <insertScript>Y</insertScript>
-      <script>df -h</script>
-      <loglevel>Basic</loglevel>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>90</xloc>
-      <yloc>290</yloc>
-      </entry>
-    <entry>
-      <name>exec_nbs_card_log_main</name>
+      <name>exec_update_nbs_card_fact_w_arup_msg_in_main</name>
       <description/>
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_nbs_card_log_main.ktr</filename>
+      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_update_nbs_card_fact_w_arup_msg_in_main.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -536,14 +375,47 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>180</xloc>
-      <yloc>270</yloc>
+      <xloc>620</xloc>
+      <yloc>40</yloc>
       </entry>
     <entry>
-      <name>fact_nbs_processing_dates</name>
+      <name>exec_update_nbs_card_w_report_out_date</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_update_nbs_card_w_report_out_date.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>900</xloc>
+      <yloc>40</yloc>
+      </entry>
+    <entry>
+      <name>fact_nbs_processing_dates 3</name>
       <description/>
       <type>SQL</type>
-      <sql>drop table if exists warehouse.fact_nbs_processing_dates&#x3b;&#xa;&#xa;create table warehouse.fact_nbs_processing_dates as&#xa;&#x28;&#xa;select&#xa;     fnc.nbs_kit_no&#xa;    ,fnc.kit_number&#xa;	,fnc.accession_number&#xa;    ,fnc.dw_birth_date_num_id&#xa;	,fnc.dw_changed_on_date_num_id&#xa;	,fnc.dw_sr_accessioned_date_num_id&#xa;	,fnc.dw_date_collected_date_num_id&#xa;	,fnc.dw_message_sent_on_date_num_id&#xa;	,fnc.dw_report_out_date_num_id&#xa;    ,max&#x28;fncl.dw_sr_received_date_num_id&#x29; as dw_sr_received_date_num_id_max&#xa;	,max&#x28;fns.dw_login_date_num_id&#x29; as dw_login_date_num_id_max&#xa;	,max&#x28;fns.dw_recd_date_num_id&#x29; as dw_recd_date_num_id_max	&#xa;	,max&#x28;fns.dw_completed_date_num_id&#x29; as dw_completed_date_num_id_max&#xa;	,max&#x28;fns.dw_reviewed_date_num_id&#x29; as dw_reviewed_date_num_id_sample_max&#xa;	,max&#x28;fns.dw_message_processed_on_date_num_id&#x29; as dw_message_processed_on_date_num_id_sample_max&#xa;	,max&#x28;fns.dw_result_entry_date_num_id&#x29; as dw_result_entry_date_num_id_max&#xa;	,max&#x28;fnr.dw_dx_treatment_date_num_id&#x29; as dw_dx_treatment_date_num_id_max&#xa;	,max&#x28;fnr.dw_reviewed_date_num_id&#x29; as dw_reviewed_date_num_id_result_max&#xa;	,max&#x28;fnr.dw_entered_on_date_num_id&#x29; as dw_entered_on_date_num_id_max&#xa;	,max&#x28;fnr.dw_message_processed_on_date_num_id&#x29; as dw_message_processed_on_date_num_id_result_max&#xa;from warehouse.fact_nbs_card fnc left join warehouse.fact_nbs_card_log fncl on fncl.kit_number &#x3d; fnc.kit_number&#xa;left join warehouse.fact_nbs_sample fns on fns.accession_number &#x3d; fnc.accession_number&#xa;left join warehouse.fact_nbs_result fnr on fnr.sample_number &#x3d; fns.sample_number&#xa;group by 1,2,3,4,5,6,7,8,9&#xa;&#x29;&#x3b;&#xa;&#xa;CREATE INDEX idx_fnpd_nbs_kit_no&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;nbs_kit_no&#x29;&#x3b;&#xa;&#xa;CREATE INDEX idx_fnpd_kit_number&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;kit_number&#x29;&#x3b;&#xa;&#xa;CREATE INDEX idx_fnpd_accession_number&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;accession_number&#x29;&#x3b;&#xa;&#xa;CREATE INDEX idx_fnpd_dw_changed_on_date_num_id&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_changed_on_date_num_id&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_date_collected_date_num_id&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_date_collected_date_num_id&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_message_sent_on_date_num_id&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_message_sent_on_date_num_id&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_report_out_date_num_id&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_report_out_date_num_id&#x29;&#x3b;&#xa;&#xa;CREATE INDEX idx_fnpd_dw_sr_accessioned_date_num_id&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_sr_accessioned_date_num_id&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_login_date_num_id_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_login_date_num_id_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_recd_date_num_id_max	&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_recd_date_num_id_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_completed_date_num_id_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_completed_date_num_id_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_reviewed_date_num_id_result_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_reviewed_date_num_id_result_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_message_processed_on_date_num_id_result_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_message_processed_on_date_num_id_result_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_result_entry_date_num_id_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_result_entry_date_num_id_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_dx_treatment_date_num_id_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_dx_treatment_date_num_id_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_reviewed_date_num_id_sample_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_reviewed_date_num_id_sample_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_entered_on_date_num_id_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_entered_on_date_num_id_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_message_processed_on_date_num_id_sample_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_message_processed_on_date_num_id_sample_max&#x29;&#x3b;</sql>
+      <sql>drop view if exists warehouse.vw_fact_nbs_processing_dates&#x3b;&#xa;&#xa;drop view if exists warehouse.vw_fact_nbs_processing_dates_alt&#x3b;&#xa;&#xa;drop view if exists warehouse.vw_fact_nbs_processing_dates_alt2&#x3b;&#xa;&#xa;drop table if exists warehouse.fact_nbs_processing_dates&#x3b;&#xa;&#xa;create table warehouse.fact_nbs_processing_dates as&#xa;&#x28;&#xa;select&#xa;     fnc.nbs_kit_no&#xa;    ,fnc.order_number&#xa;    ,fnc.kit_number&#xa;	,fnc.accession_number&#xa;    ,fnc.specimen_type&#xa;    ,fnc.dw_hospital_id&#xa;    ,fnc.dw_birth_date_num_id&#xa;	,fnc.dw_changed_on_date_num_id&#xa;	,fnc.dw_sr_accessioned_date_num_id&#xa;	,fnc.dw_date_collected_date_num_id&#xa;	,fnc.dw_message_sent_on_date_num_id&#xa;	,fnc.dw_report_out_date_num_id&#xa;    ,max&#x28;fncl.dw_sr_received_date_num_id&#x29; as dw_sr_received_date_num_id_max&#xa;	,max&#x28;fns.dw_login_date_num_id&#x29; as dw_login_date_num_id_max&#xa;	,max&#x28;fns.dw_recd_date_num_id&#x29; as dw_recd_date_num_id_max	&#xa;	,max&#x28;fns.dw_completed_date_num_id&#x29; as dw_completed_date_num_id_max&#xa;	,max&#x28;fns.dw_reviewed_date_num_id&#x29; as dw_reviewed_date_num_id_sample_max&#xa;	,max&#x28;fns.dw_message_processed_on_date_num_id&#x29; as dw_message_processed_on_date_num_id_sample_max&#xa;	,max&#x28;fns.dw_result_entry_date_num_id&#x29; as dw_result_entry_date_num_id_max&#xa;	,max&#x28;fnr.dw_dx_treatment_date_num_id&#x29; as dw_dx_treatment_date_num_id_max&#xa;	,max&#x28;fnr.dw_reviewed_date_num_id&#x29; as dw_reviewed_date_num_id_result_max&#xa;	,max&#x28;fnr.dw_entered_on_date_num_id&#x29; as dw_entered_on_date_num_id_max&#xa;	,max&#x28;fnr.dw_message_processed_on_date_num_id&#x29; as dw_message_processed_on_date_num_id_result_max&#xa;from warehouse.fact_nbs_card fnc left join warehouse.fact_nbs_card_log fncl on fncl.kit_number &#x3d; fnc.kit_number and fncl.order_number &#x3d; fnc.order_number&#xa;left join warehouse.fact_nbs_sample fns on fns.accession_number &#x3d; fnc.accession_number&#xa;left join warehouse.fact_nbs_result fnr on fnr.sample_number &#x3d; fns.sample_number&#xa;group by 1,2,3,4,5,6,7,8,9,10,11,12&#xa;&#x29;&#x3b;&#xa;&#xa;CREATE INDEX idx_fnpd_nbs_kit_no&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;nbs_kit_no&#x29;&#x3b;&#xa;&#xa;CREATE INDEX idx_fnpd_order_number&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;order_number&#x29;&#x3b;&#xa;&#xa;CREATE INDEX idx_fnpd_kit_number&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;kit_number&#x29;&#x3b;&#xa;&#xa;CREATE INDEX idx_fnpd_accession_number&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;accession_number&#x29;&#x3b;&#xa;&#xa;CREATE INDEX idx_fnpd_fnc_dw_birth_date_num_id&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_birth_date_num_id&#x29;&#x3b;&#xa;&#xa;CREATE INDEX idx_fnpd_dw_hospital_id&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_hospital_id&#x29;&#x3b;&#xa;&#xa;CREATE INDEX idx_fnpd_dw_changed_on_date_num_id&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_changed_on_date_num_id&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_date_collected_date_num_id&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_date_collected_date_num_id&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_message_sent_on_date_num_id&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_message_sent_on_date_num_id&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_report_out_date_num_id&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_report_out_date_num_id&#x29;&#x3b;&#xa;&#xa;CREATE INDEX idx_fnpd_dw_sr_accessioned_date_num_id&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_sr_accessioned_date_num_id&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_login_date_num_id_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_login_date_num_id_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_recd_date_num_id_max	&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_recd_date_num_id_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_completed_date_num_id_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_completed_date_num_id_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_reviewed_date_num_id_result_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_reviewed_date_num_id_result_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_message_processed_on_date_num_id_result_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_message_processed_on_date_num_id_result_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_result_entry_date_num_id_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_result_entry_date_num_id_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_dx_treatment_date_num_id_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_dx_treatment_date_num_id_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_reviewed_date_num_id_sample_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_reviewed_date_num_id_sample_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_entered_on_date_num_id_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_entered_on_date_num_id_max&#x29;&#x3b;&#xa;  &#xa;CREATE INDEX idx_fnpd_dw_message_processed_on_date_num_id_sample_max&#xa;  ON warehouse.fact_nbs_processing_dates&#xa;  USING btree&#xa;  &#x28;dw_message_processed_on_date_num_id_sample_max&#x29;&#x3b;</sql>
       <useVariableSubstitution>F</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
@@ -552,32 +424,56 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>100</xloc>
-      <yloc>220</yloc>
+      <xloc>150</xloc>
+      <yloc>160</yloc>
+      </entry>
+    <entry>
+      <name>exec_update_dim_hospital_rolling_metrics</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_update_dim_hospital_rolling_metrics.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>420</xloc>
+      <yloc>280</yloc>
       </entry>
   </entries>
   <hops>
     <hop>
-      <from>Create nbs result agg tables</from>
-      <to>Populate nbs result agg tables</to>
+      <from>vw_fact_nbs_processing_dates</from>
+      <to>vw_fact_nbs_processing_dates_alt</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Populate nbs result agg tables</from>
-      <to>Success</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
     <hop>
       <from>START</from>
-      <to>seed_0_date</to>
+      <to>add dimhospital and rebuild fnc</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>N</enabled>
@@ -585,8 +481,8 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>update_date_fields</from>
-      <to>Success</to>
+      <from>add dimhospital and rebuild fnc</from>
+      <to>exec_nbs_card_fact_main</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>N</enabled>
@@ -594,8 +490,8 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>seed_0_date</from>
-      <to>fact_nbs_card</to>
+      <from>exec_nbs_card_fact_main</from>
+      <to>exec_update_nbs_card_fact_w_arup_msg_in_main</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>N</enabled>
@@ -603,26 +499,8 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>fact_nbs_card</from>
-      <to>update_date_fields</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>START</from>
-      <to>fact_nbs_card</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>fact_nbs_card</from>
-      <to>fact_nbs_result</to>
+      <from>exec_update_nbs_card_fact_w_arup_msg_in_main</from>
+      <to>exec_update_nbs_card_w_report_out_date</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>N</enabled>
@@ -630,175 +508,13 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>fact_nbs_result</from>
-      <to>Success</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>START</from>
-      <to>Update fnr partition tables</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>Update fnr partition tables</from>
-      <to>exec_update_nbs_result_w_msg_processed_on</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>START</from>
-      <to>Kill Postgres query</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>Kill Postgres query</from>
-      <to>exec_update_nbs_result_w_msg_processed_on</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Kill Postgres query</from>
-      <to>vacuum</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>START</from>
-      <to>truncate logs</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>truncate logs</from>
-      <to>exec_update_nbs_result_w_msg_processed_on</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Kill Postgres query</from>
-      <to>Success</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>vacuum</from>
-      <to>Success</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>vacuum</from>
-      <to>check disk space 2</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>check disk space 2</from>
-      <to>Success</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>START</from>
-      <to>fact_nbs_result</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>START</from>
-      <to>Success</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>START</from>
-      <to>rebuild msg processed on cols</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>exec_update_action_item_log</from>
-      <to>vacuum</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>START</from>
-      <to>check disk space 2 2</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>check disk space 2 2</from>
-      <to>exec_update_action_item_log</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>add accession_number index</from>
+      <from>exec_update_nbs_card_w_report_out_date</from>
       <to>check disk space</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>N</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>Y</unconditional>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
     </hop>
     <hop>
       <from>check disk space</from>
@@ -810,8 +526,44 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>exec_nbs_card_log_main</from>
-      <to>add accession_number index</to>
+      <from>vacuum</from>
+      <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>vw_fact_nbs_processing_dates_alt</from>
+      <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>START</from>
+      <to>fact_nbs_processing_dates 3</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>fact_nbs_processing_dates 3</from>
+      <to>vw_fact_nbs_processing_dates</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>exec_update_dim_hospital_rolling_metrics</from>
+      <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>N</enabled>
@@ -820,39 +572,12 @@
     </hop>
     <hop>
       <from>START</from>
-      <to>fact_nbs_processing_dates</to>
+      <to>exec_update_dim_hospital_rolling_metrics</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>fact_nbs_processing_dates</from>
-      <to>exec_nbs_card_log_main</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Update fnr partition tables</from>
-      <to>Success</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>fact_nbs_processing_dates</from>
-      <to>Success</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
     </hop>
   </hops>
   <notepads>
