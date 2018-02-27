@@ -428,12 +428,12 @@
       <yloc>160</yloc>
       </entry>
     <entry>
-      <name>exec_update_dim_hospital_rolling_metrics</name>
+      <name>report_data_discrepency</name>
       <description/>
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_update_dim_hospital_rolling_metrics.ktr</filename>
+      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;fixup&#x2f;report_data_discrepency.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -457,8 +457,47 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>420</xloc>
-      <yloc>280</yloc>
+      <xloc>260</xloc>
+      <yloc>290</yloc>
+      </entry>
+    <entry>
+      <name>create vw_date_month_summary</name>
+      <description/>
+      <type>SQL</type>
+      <sql>drop view if exists vw_date_month_summary&#x3b;&#xa;&#xa;create or replace view vw_date_month_summary as&#xa;select &#xa;   month_abbreviation&#xa;   ,month_number&#xa;   ,year4&#xa;   ,lpad&#x28;month_number&#x3a;&#x3a;text,2,&#x27;0&#x27;&#x29; &#x7c;&#x7c; &#x27; - &#x27; &#x7c;&#x7c; upper&#x28;month_abbreviation&#x29; as month_num_name&#xa;,&#x28;year4&#x3a;&#x3a;text&#x7c;&#x7c;lpad&#x28;month_number&#x3a;&#x3a;text,2,&#x27;0&#x27;&#x29;&#x7c;&#x7c;lpad&#x28;01&#x3a;&#x3a;text,2,&#x27;0&#x27;&#x29;&#x29;&#x3a;&#x3a;integer as dw_start_date_num_id&#xa;   ,case when month_number &#x3c; 12 &#xa;	then &#x28;year4&#x3a;&#x3a;text&#x7c;&#x7c;lpad&#x28;month_number&#x3a;&#x3a;text,2,&#x27;0&#x27;&#x29;&#x7c;&#x7c;lpad&#x28;01&#x3a;&#x3a;text,2,&#x27;0&#x27;&#x29;&#x29;&#x3a;&#x3a;integer&#x2b;100 &#xa;	else &#x28;&#x28;year4&#x2b;1&#x29;&#x3a;&#x3a;text&#x7c;&#x7c;lpad&#x28;01&#x3a;&#x3a;text,2,&#x27;0&#x27;&#x29;&#x7c;&#x7c;lpad&#x28;01&#x3a;&#x3a;text,2,&#x27;0&#x27;&#x29;&#x29;&#x3a;&#x3a;integer&#xa;	end as dw_end_date_num_id&#xa;from warehouse.dim_nbs_date&#xa;group by 1,2,3&#xa;order by 2</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>Trisano OLAP DS</connection>
+      <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>140</xloc>
+      <yloc>370</yloc>
+      </entry>
+    <entry>
+      <name>Shell</name>
+      <description/>
+      <type>SHELL</type>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>pwd&#xa;ls -alt &#x2f;var&#x2f;local&#x2f;pentaho5.4&#x2f;pentaho-solutions&#x2f;system&#x2f;extcontent&#x2f;web&#xa;cat &#x2f;var&#x2f;local&#x2f;pentaho5.4&#x2f;pentaho-solutions&#x2f;system&#x2f;extcontent&#x2f;plugin.xml</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>190</xloc>
+      <yloc>400</yloc>
       </entry>
   </entries>
   <hops>
@@ -467,7 +506,7 @@
       <to>vw_fact_nbs_processing_dates_alt</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -539,7 +578,7 @@
       <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -548,7 +587,7 @@
       <to>fact_nbs_processing_dates 3</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
     </hop>
@@ -557,27 +596,45 @@
       <to>vw_fact_nbs_processing_dates</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>report_data_discrepency</from>
+      <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>exec_update_dim_hospital_rolling_metrics</from>
+      <from>START</from>
+      <to>report_data_discrepency</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>START</from>
+      <to>Shell</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Shell</from>
       <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>START</from>
-      <to>exec_update_dim_hospital_rolling_metrics</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
     </hop>
   </hops>
   <notepads>
