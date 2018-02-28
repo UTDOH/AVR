@@ -460,6 +460,22 @@
       <xloc>420</xloc>
       <yloc>280</yloc>
       </entry>
+    <entry>
+      <name>fact_nbs_processing_dates 3 2</name>
+      <description/>
+      <type>SQL</type>
+      <sql>alter table warehouse.dim_nbs_hospital add column src_person_number numeric&#x28;10&#x29;&#x3b;&#xa;&#xa;alter table warehouse.dim_nbs_hospital add column hospital_name varchar&#x28;255&#x29;&#x3b;&#xa;&#xa;alter table warehouse.dim_nbs_hospital add column birth_street_addr varchar&#x28;510&#x29;&#x3b;&#xa;&#xa;alter table warehouse.dim_nbs_hospital add column latitude numeric&#x28;11,7&#x29;&#x3b;&#xa;&#xa;alter table warehouse.dim_nbs_hospital add column longitude numeric&#x28;11,7&#x29;&#x3b;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>Trisano OLAP DS</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>150</xloc>
+      <yloc>370</yloc>
+      </entry>
   </entries>
   <hops>
     <hop>
@@ -467,7 +483,7 @@
       <to>vw_fact_nbs_processing_dates_alt</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -539,7 +555,7 @@
       <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -548,7 +564,7 @@
       <to>fact_nbs_processing_dates 3</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
     </hop>
@@ -557,7 +573,7 @@
       <to>vw_fact_nbs_processing_dates</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -578,6 +594,24 @@
       <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>START</from>
+      <to>fact_nbs_processing_dates 3 2</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>fact_nbs_processing_dates 3 2</from>
+      <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
     </hop>
   </hops>
   <notepads>
