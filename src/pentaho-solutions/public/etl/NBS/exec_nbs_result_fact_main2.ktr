@@ -184,10 +184,10 @@
   <hop> <from>dx code not null</from><to>dim_nbs_result_dx</to><enabled>Y</enabled> </hop>
   <hop> <from>set dwId 0</from><to>loinc not null</to><enabled>Y</enabled> </hop>
   <hop> <from>dim_nbs_result_dx</from><to>loinc not null</to><enabled>Y</enabled> </hop>
-  <hop> <from>loinc not null</from><to>dim_nbs_result_dx 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>loinc not null</from><to>dim_nbs_loinc</to><enabled>Y</enabled> </hop>
   <hop> <from>loinc not null</from><to>set dw_nbs_loinc_id 0</to><enabled>Y</enabled> </hop>
   <hop> <from>set dw_nbs_loinc_id 0</from><to>snomed cd not null</to><enabled>Y</enabled> </hop>
-  <hop> <from>dim_nbs_result_dx 2</from><to>snomed cd not null</to><enabled>Y</enabled> </hop>
+  <hop> <from>dim_nbs_loinc</from><to>snomed cd not null</to><enabled>Y</enabled> </hop>
   <hop> <from>snomed cd not null</from><to>dim_nbs_snomed_code</to><enabled>Y</enabled> </hop>
   <hop> <from>snomed cd not null</from><to>set dw_nbs_snomed_code_id 0</to><enabled>Y</enabled> </hop>
   <hop> <from>set dw_nbs_snomed_code_id 0</from><to>nbs card type not null</to><enabled>Y</enabled> </hop>
@@ -226,8 +226,8 @@
   <hop> <from>Get Results - Range</from><to>treatment date not null</to><enabled>Y</enabled> </hop>
   <hop> <from>dw_nbs_analysis_subcomponent_id to 0</from><to>units not null</to><enabled>Y</enabled> </hop>
   <hop> <from>lookup treatment_date</from><to>date reviewed not null</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get Results Incremental</from><to>remove maxresultenteredon</to><enabled>Y</enabled> </hop>
   <hop> <from>remove maxresultenteredon</from><to>treatment date not null</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Results Incremental</from><to>remove maxresultenteredon</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Abort</name>
@@ -705,6 +705,47 @@
     </step>
 
   <step>
+    <name>dim_nbs_analysis_subcomponent</name>
+    <type>CombinationLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <schema/>
+      <table>dim_nbs_analysis_subcomponent</table>
+      <connection>Trisano OLAP DS</connection>
+      <commit>100</commit>
+      <cache_size>500</cache_size>
+      <replace>N</replace>
+      <preloadCache>N</preloadCache>
+      <crc>Y</crc>
+      <crcfield>hashcode</crcfield>
+      <fields>
+        <key>
+          <name>NAME</name>
+          <lookup>analysis_subcomponent</lookup>
+        </key>
+        <return>
+          <name>dw_nbs_analysis_subcomponent_id</name>
+          <creation_method>tablemax</creation_method>
+          <use_autoinc>N</use_autoinc>
+        </return>
+      </fields>
+      <sequence/>
+      <last_update_field>last_update_dt</last_update_field>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>680</xloc>
+      <yloc>550</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>dim_nbs_card_type</name>
     <type>CombinationLookup</type>
     <description/>
@@ -746,7 +787,7 @@
     </step>
 
   <step>
-    <name>dim_nbs_analysis_subcomponent</name>
+    <name>dim_nbs_formatted_result</name>
     <type>CombinationLookup</type>
     <description/>
     <distribute>Y</distribute>
@@ -757,7 +798,7 @@
            <schema_name/>
            </partitioning>
       <schema/>
-      <table>dim_nbs_analysis_subcomponent</table>
+      <table>dim_nbs_formatted_result</table>
       <connection>Trisano OLAP DS</connection>
       <commit>100</commit>
       <cache_size>500</cache_size>
@@ -767,11 +808,11 @@
       <crcfield>hashcode</crcfield>
       <fields>
         <key>
-          <name>NAME</name>
-          <lookup>analysis_subcomponent</lookup>
+          <name>FORMATTED_ENTRY</name>
+          <lookup>formatted_result</lookup>
         </key>
         <return>
-          <name>dw_nbs_analysis_subcomponent_id</name>
+          <name>dw_nbs_formatted_result_id</name>
           <creation_method>tablemax</creation_method>
           <use_autoinc>N</use_autoinc>
         </return>
@@ -780,8 +821,49 @@
       <last_update_field>last_update_dt</last_update_field>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>680</xloc>
-      <yloc>550</yloc>
+      <xloc>320</xloc>
+      <yloc>930</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>dim_nbs_loinc</name>
+    <type>CombinationLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <schema/>
+      <table>dim_nbs_loinc</table>
+      <connection>Trisano OLAP DS</connection>
+      <commit>100</commit>
+      <cache_size>500</cache_size>
+      <replace>N</replace>
+      <preloadCache>N</preloadCache>
+      <crc>Y</crc>
+      <crcfield>hashcode</crcfield>
+      <fields>
+        <key>
+          <name>LOINC</name>
+          <lookup>loinc</lookup>
+        </key>
+        <return>
+          <name>dw_nbs_loinc_id</name>
+          <creation_method>tablemax</creation_method>
+          <use_autoinc>N</use_autoinc>
+        </return>
+      </fields>
+      <sequence/>
+      <last_update_field>last_update_dt</last_update_field>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1420</xloc>
+      <yloc>290</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -827,88 +909,6 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1140</xloc>
       <yloc>180</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>dim_nbs_result_dx 2</name>
-    <type>CombinationLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <schema/>
-      <table>dim_nbs_loinc</table>
-      <connection>Trisano OLAP DS</connection>
-      <commit>100</commit>
-      <cache_size>500</cache_size>
-      <replace>N</replace>
-      <preloadCache>N</preloadCache>
-      <crc>Y</crc>
-      <crcfield>hashcode</crcfield>
-      <fields>
-        <key>
-          <name>LOINC</name>
-          <lookup>loinc</lookup>
-        </key>
-        <return>
-          <name>dw_nbs_loinc_id</name>
-          <creation_method>tablemax</creation_method>
-          <use_autoinc>N</use_autoinc>
-        </return>
-      </fields>
-      <sequence/>
-      <last_update_field>last_update_dt</last_update_field>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1420</xloc>
-      <yloc>290</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>dim_nbs_formatted_result</name>
-    <type>CombinationLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <schema/>
-      <table>dim_nbs_formatted_result</table>
-      <connection>Trisano OLAP DS</connection>
-      <commit>100</commit>
-      <cache_size>500</cache_size>
-      <replace>N</replace>
-      <preloadCache>N</preloadCache>
-      <crc>Y</crc>
-      <crcfield>hashcode</crcfield>
-      <fields>
-        <key>
-          <name>FORMATTED_ENTRY</name>
-          <lookup>formatted_result</lookup>
-        </key>
-        <return>
-          <name>dw_nbs_formatted_result_id</name>
-          <creation_method>tablemax</creation_method>
-          <use_autoinc>N</use_autoinc>
-        </return>
-      </fields>
-      <sequence/>
-      <last_update_field>last_update_dt</last_update_field>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>320</xloc>
-      <yloc>930</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -991,6 +991,39 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>350</xloc>
       <yloc>550</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>dw_nbs_analysis_subcomponent_id to 0</name>
+    <type>Calculator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+       <calculation><field_name>dw_nbs_analysis_subcomponent_id</field_name>
+<calc_type>CONSTANT</calc_type>
+<field_a>0</field_a>
+<field_b/>
+<field_c/>
+<value_type>Integer</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>680</xloc>
+      <yloc>640</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1150,7 +1183,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-<send_true_to>dim_nbs_result_dx 2</send_true_to>
+<send_true_to>dim_nbs_loinc</send_true_to>
 <send_false_to>set dw_nbs_loinc_id 0</send_false_to>
     <compare>
 <condition>
@@ -1336,6 +1369,27 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>870</xloc>
       <yloc>640</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>remove maxresultenteredon</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>        <select_unspecified>N</select_unspecified>
+      <remove>        <name>maxresultenteredon</name>
+      </remove>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>380</xloc>
+      <yloc>190</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1553,72 +1607,6 @@
     </step>
 
   <step>
-    <name>set dw_nbs_loinc_id 0</name>
-    <type>Calculator</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-       <calculation><field_name>dw_nbs_loinc_id</field_name>
-<calc_type>CONSTANT</calc_type>
-<field_a>0</field_a>
-<field_b/>
-<field_c/>
-<value_type>Integer</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<remove>N</remove>
-<conversion_mask/>
-<decimal_symbol/>
-<grouping_symbol/>
-<currency_symbol/>
-</calculation>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1260</xloc>
-      <yloc>290</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>dw_nbs_analysis_subcomponent_id to 0</name>
-    <type>Calculator</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-       <calculation><field_name>dw_nbs_analysis_subcomponent_id</field_name>
-<calc_type>CONSTANT</calc_type>
-<field_a>0</field_a>
-<field_b/>
-<field_c/>
-<value_type>Integer</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<remove>N</remove>
-<conversion_mask/>
-<decimal_symbol/>
-<grouping_symbol/>
-<currency_symbol/>
-</calculation>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>680</xloc>
-      <yloc>640</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
     <name>set dw_nbs_formatted_result_id 0</name>
     <type>Calculator</type>
     <description/>
@@ -1647,6 +1635,39 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>480</xloc>
       <yloc>820</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>set dw_nbs_loinc_id 0</name>
+    <type>Calculator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+       <calculation><field_name>dw_nbs_loinc_id</field_name>
+<calc_type>CONSTANT</calc_type>
+<field_a>0</field_a>
+<field_b/>
+<field_c/>
+<value_type>Integer</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1260</xloc>
+      <yloc>290</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1845,27 +1866,6 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>520</xloc>
       <yloc>640</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>remove maxresultenteredon</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>        <select_unspecified>N</select_unspecified>
-      <remove>        <name>maxresultenteredon</name>
-      </remove>    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>380</xloc>
-      <yloc>190</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
