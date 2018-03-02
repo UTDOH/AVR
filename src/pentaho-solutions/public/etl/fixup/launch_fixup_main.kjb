@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <job>
-  <name>launch_fixup_main2</name>
+  <name>launch_fixup_main</name>
     <description/>
     <extended_description/>
     <job_version/>
@@ -461,10 +461,66 @@
       <yloc>280</yloc>
       </entry>
     <entry>
-      <name>fact_nbs_processing_dates 3 2</name>
+      <name>report_data_discrepency</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;fixup&#x2f;report_data_discrepency.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>420</xloc>
+      <yloc>370</yloc>
+      </entry>
+    <entry>
+      <name>Shell</name>
+      <description/>
+      <type>SHELL</type>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>ls -alt &#x2f;var&#x2f;local&#x2f;pentaho&#x2f;pentaho-solutions&#x2f;system&#x2f;extcontent&#x2f;web&#x2f;dim_nbs_hospital.csv.gz&#xa;rm &#x2f;var&#x2f;local&#x2f;pentaho&#x2f;pentaho-solutions&#x2f;system&#x2f;extcontent&#x2f;web&#x2f;dim_nbs_hospital.csv.gz&#xa;ls -alt &#x2f;var&#x2f;local&#x2f;pentaho&#x2f;pentaho-solutions&#x2f;system&#x2f;extcontent&#x2f;web&#x2f;dim_nbs_hospital.csv.gz</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>180</xloc>
+      <yloc>350</yloc>
+      </entry>
+    <entry>
+      <name>SQL</name>
       <description/>
       <type>SQL</type>
-      <sql>alter table warehouse.dim_nbs_hospital add column src_person_number numeric&#x28;10&#x29;&#x3b;&#xa;&#xa;alter table warehouse.dim_nbs_hospital add column hospital_name varchar&#x28;255&#x29;&#x3b;&#xa;&#xa;alter table warehouse.dim_nbs_hospital add column birth_street_addr varchar&#x28;510&#x29;&#x3b;&#xa;&#xa;alter table warehouse.dim_nbs_hospital add column latitude numeric&#x28;11,7&#x29;&#x3b;&#xa;&#xa;alter table warehouse.dim_nbs_hospital add column longitude numeric&#x28;11,7&#x29;&#x3b;</sql>
+      <sql>grant select on warehouse.fact_nbs_processing_dates to bi_nbs_user_role&#x3b;&#xa;&#xa;grant select on warehouse.fact_nbs_processing_dates to bi_nbs_user_role&#x3b;</sql>
       <useVariableSubstitution>F</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
@@ -473,8 +529,24 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>150</xloc>
-      <yloc>370</yloc>
+      <xloc>260</xloc>
+      <yloc>250</yloc>
+      </entry>
+    <entry>
+      <name>Create vw_nbs_report_card</name>
+      <description/>
+      <type>SQL</type>
+      <sql>drop view vw_nbs_report_card&#x3b;&#xa;&#xa;create or replace view vw_nbs_report_card as &#xa;select&#xa;  fnc.dw_hospital_id&#xa;  ,dates.month_num_name&#xa;  ,fnc.specimen_type&#xa;  ,count&#x28;1&#x29; as num_specimens_submitted&#xa;  ,sum&#x28;case when fnc.recall_reason &#x3d; &#x27;UNSAT2&#x27; then 1 else 0 end&#x29; as num_unsat_specimens&#xa;  ,&#x28;sum&#x28;case when fnc.recall_reason &#x3d; &#x27;UNSAT2&#x27; then 1 else 0 end&#x29;&#x3a;&#x3a;decimal &#x2f; count&#x28;1&#x29;&#x3a;&#x3a;decimal&#x29; as pct_unsat_specimens&#xa;  ,min&#x28;case when fnpd.dw_completed_date_num_id_max &#x21;&#x3d; 19000101 then fnpd.dw_completed_date_num_id_max else fill_date.today end - fnpd.dw_birth_date_num_id&#x29; as min_report_tat&#xa;   ,sum&#x28;case when&#xa;&#x28;case when fnpd.dw_completed_date_num_id_max &#x21;&#x3d; 19000101 then fnpd.dw_completed_date_num_id_max else fill_date.today end - fnpd.dw_birth_date_num_id&#x29; &#x3c;&#x3d; 2 &#xa;then 1&#xa;else 0 end&#x29; as num_rec_2_day&#xa;    ,sum&#x28;case when&#xa;&#x28;case when fnpd.dw_completed_date_num_id_max &#x21;&#x3d; 19000101 then fnpd.dw_completed_date_num_id_max else fill_date.today end - fnpd.dw_birth_date_num_id&#x29; between 3 and 4 &#xa;then 1&#xa;else 0 end&#x29; as num_rec_3_to_4_day&#xa;    ,sum&#x28;case when&#xa;&#x28;case when fnpd.dw_completed_date_num_id_max &#x21;&#x3d; 19000101 then fnpd.dw_completed_date_num_id_max else fill_date.today end - fnpd.dw_birth_date_num_id&#x29; between 5 and 6 &#xa;then 1&#xa;else 0 end&#x29; as num_rec_5_to_6_day&#xa;    ,sum&#x28;case when&#xa;&#x28;case when fnpd.dw_completed_date_num_id_max &#x21;&#x3d; 19000101 then fnpd.dw_completed_date_num_id_max else fill_date.today end - fnpd.dw_birth_date_num_id&#x29; &#x3e;&#x3d;7 &#xa;then 1&#xa;else 0 end&#x29; as num_rec_7_or_more_day&#xa;    ,avg&#x28;case when fnpd.dw_completed_date_num_id_max &#x21;&#x3d; 19000101 then fnpd.dw_completed_date_num_id_max else fill_date.today end - fnpd.dw_birth_date_num_id&#x29; as avg_tat&#xa;from warehouse.fact_nbs_card fnc&#xa;inner join warehouse.fact_nbs_processing_dates fnpd on fnpd.nbs_kit_no &#x3d; fnc.nbs_kit_no&#xa;inner join &#x28;&#xa;select month_num_name, dw_start_date_num_id, dw_end_date_num_id&#xa;from warehouse.vw_date_month_summary&#xa;where year4 &#x3d; date_part&#x28;&#x27;year&#x27;, CURRENT_DATE&#x29;-1&#xa;order by month_number&#xa;&#x29; dates on fnc.dw_birth_date_num_id &#x3e;&#x3d; dates.dw_start_date_num_id and fnc.dw_birth_date_num_id &#x3c; dates.dw_end_date_num_id,&#xa;&#x28;select &#x28;date_part&#x28;&#x27;year&#x27;,current_date&#x29; &#x7c;&#x7c; lpad&#x28;date_part&#x28;&#x27;month&#x27;, current_date&#x29;&#x3a;&#x3a;text,2,&#x27;0&#x27;&#x29; &#x7c;&#x7c; lpad&#x28;date_part&#x28;&#x27;day&#x27;, current_date&#x29;&#x3a;&#x3a;text, 2,&#x27;0&#x27;&#x29;&#x29;&#x3a;&#x3a;integer as today&#x29; fill_date&#xa;group by 1,2,3&#xa;order by 1&#xa;&#x3b;&#xa;&#xa;&#xa;grant select on warehouse.vw_nbs_report_card to bi_nbs_user_role&#x3b;&#xa;&#xa;grant select on warehouse.vw_nbs_report_card to bi_nbs_user_role&#x3b;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>Trisano OLAP DS</connection>
+      <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>280</xloc>
+      <yloc>470</yloc>
       </entry>
   </entries>
   <hops>
@@ -596,8 +668,35 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
+      <from>report_data_discrepency</from>
+      <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
       <from>START</from>
-      <to>fact_nbs_processing_dates 3 2</to>
+      <to>Shell</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Shell</from>
+      <to>report_data_discrepency</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>START</from>
+      <to>SQL</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -605,7 +704,16 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>fact_nbs_processing_dates 3 2</from>
+      <from>SQL</from>
+      <to>report_data_discrepency</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>SQL</from>
       <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
