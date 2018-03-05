@@ -301,6 +301,103 @@
     </step>
 
   <step>
+    <name>Dummy &#x28;do nothing&#x29;</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1210</xloc>
+      <yloc>410</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Dummy &#x28;do nothing&#x29; 2</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1120</xloc>
+      <yloc>30</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Filter rows</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Json Input</send_true_to>
+<send_false_to>Modified Java Script Value 2 2</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>status</leftvalue>
+ <function>&#x3d;</function>
+ <rightvalue/>
+ <value><name>constant</name><type>String</type><text>OK</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1120</xloc>
+      <yloc>210</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get nbs_kit_no</name>
+    <type>DBJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Trisano OLAP DS</connection>
+    <rowlimit>0</rowlimit>
+    <sql>select&#xa;   nbs_kit_no&#xa;from warehouse.fact_nbs_card where dw_nbs_hospital_id &#x3d; &#x3f;&#xa;limit 1</sql>
+    <outer_join>N</outer_join>
+    <replace_vars>N</replace_vars>
+    <parameter>
+      <field>
+        <name>dw_hospital_id</name>
+        <type>None</type>
+      </field>
+    </parameter>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>210</xloc>
+      <yloc>210</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>HTTP Client</name>
     <type>HTTP</type>
     <description/>
@@ -346,8 +443,8 @@
     </step>
 
   <step>
-    <name>Modified Java Script Value</name>
-    <type>ScriptValueMod</type>
+    <name>JSON Result</name>
+    <type>JsonInput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -356,57 +453,53 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>&#x2f;&#x2f;Script here&#xa;var address &#x3d; replace&#x28;HOSPITAL_STREET_ADDR, &#x22; &#x22;, &#x22;&#x2b;&#x22;&#x29; &#x2b; &#x22;,&#x22; &#x2b; replace&#x28;hospital_city, &#x22; &#x22;, &#x22;&#x2b;&#x22;&#x29; &#x2b; &#x22;,&#x22; &#x2b; replace&#x28;hospital_state, &#x22; &#x22;, &#x22;&#x2b;&#x22;&#x29;&#xa;&#xa;writeToLog&#x28;&#x27;m&#x27;, &#x27;address&#x3a; &#x27; &#x2b; address&#x29;&#x3b;</jsScript_script>
-      </jsScript>      <jsScript>        <jsScript_type>-1</jsScript_type>
-        <jsScript_name>replace_Sample</jsScript_name>
-        <jsScript_script>&#x2f;&#x2f; Replaces Strings inside the given Variable.&#xa;&#x2f;&#x2f; It is possible to make more replacements inside&#xa;&#x2f;&#x2f; one call. The given variables must be an odd number&#xa;&#x2f;&#x2f;&#xa;&#x2f;&#x2f; Usage&#x3a;&#xa;&#x2f;&#x2f; replace&#x28;var, var, var&#x29;&#x3b;&#xa;&#x2f;&#x2f; 1&#x3a; String - The Variable with the content to replace.&#xa;&#x2f;&#x2f; 2&#x3a; String - The Value to search for.&#xa;&#x2f;&#x2f; 3&#x3a; String - The Value to replace with.&#xa;&#x2f;&#x2f;&#xa;&#x2f;&#x2f; replace&#x28;var, var, var, var,var,...&#x29;&#xa;&#x2f;&#x2f; 1&#x3a; String - The Variable with the content to replace.&#xa;&#x2f;&#x2f; 2&#x3a; String - The First Value to search for.&#xa;&#x2f;&#x2f; 3&#x3a; String - The First Value to replace with.&#xa;&#x2f;&#x2f; 4&#x3a; String - The Second Value to search for.&#xa;&#x2f;&#x2f; 5&#x3a; String - The Second Value to replace with.&#xa;&#x2f;&#x2f; ...&#xa;&#x2f;&#x2f;&#xa;&#x2f;&#x2f; 2006-11-15&#xa;&#x2f;&#x2f;&#xa;var str1 &#x3d; &#x22;Hello World, this is a nice function&#x22;&#x3b;      &#xa;var str2 &#x3d; replace&#x28;str1,&#x22;World&#x22;, &#x22;Folk&#x22;&#x29;&#x3b;&#xa;Alert&#x28;str2&#x29;&#x3b;&#xa;var str2 &#x3d; replace&#x28;str1,&#x22;World&#x22;, &#x22;Folk&#x22;, &#x22;nice&#x22;,&#x22;beautifull&#x22;&#x29;&#x3b;&#xa;Alert&#x28;str2&#x29;&#x3b;</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>address</name>
-        <rename>address</rename>
+    <include>N</include>
+    <include_field/>
+    <rownum>N</rownum>
+    <addresultfile>N</addresultfile>
+    <readurl>N</readurl>
+    <IsIgnoreEmptyFile>N</IsIgnoreEmptyFile>
+    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
+    <ignoreMissingPath>N</ignoreMissingPath>
+    <rownum_field/>
+    <file>
+      <name/>
+      <filemask/>
+      <exclude_filemask/>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <fields>
+      <field>
+        <name>status</name>
+        <path>&#x24;.status</path>
         <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
         <length>-1</length>
         <precision>-1</precision>
-        <replace>N</replace>
-      </field>    </fields>     <cluster_schema/>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+    </fields>
+    <limit>0</limit>
+    <IsInFields>Y</IsInFields>
+    <IsAFile>N</IsAFile>
+    <valueField>result</valueField>
+    <shortFileFieldName/>
+    <pathFieldName/>
+    <hiddenFieldName/>
+    <lastModificationTimeFieldName/>
+    <uriNameFieldName/>
+    <rootUriNameFieldName/>
+    <extensionFieldName/>
+    <sizeFieldName/>
+     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>570</xloc>
+      <xloc>1020</xloc>
       <yloc>210</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Modified Java Script Value 2</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>writeToLog&#x28;&#x27;m&#x27;, &#x27;Error locating lat&#x2f;lon for dw_hospital_id &#x5b;&#x27; &#x2b; dw_hospital_id &#x2b; &#x22;&#x5d;&#x27;&#x29;&#x3b;</jsScript_script>
-      </jsScript>      <jsScript>        <jsScript_type>-1</jsScript_type>
-        <jsScript_name>replace_Sample</jsScript_name>
-        <jsScript_script>&#x2f;&#x2f; Replaces Strings inside the given Variable.&#xa;&#x2f;&#x2f; It is possible to make more replacements inside&#xa;&#x2f;&#x2f; one call. The given variables must be an odd number&#xa;&#x2f;&#x2f;&#xa;&#x2f;&#x2f; Usage&#x3a;&#xa;&#x2f;&#x2f; replace&#x28;var, var, var&#x29;&#x3b;&#xa;&#x2f;&#x2f; 1&#x3a; String - The Variable with the content to replace.&#xa;&#x2f;&#x2f; 2&#x3a; String - The Value to search for.&#xa;&#x2f;&#x2f; 3&#x3a; String - The Value to replace with.&#xa;&#x2f;&#x2f;&#xa;&#x2f;&#x2f; replace&#x28;var, var, var, var,var,...&#x29;&#xa;&#x2f;&#x2f; 1&#x3a; String - The Variable with the content to replace.&#xa;&#x2f;&#x2f; 2&#x3a; String - The First Value to search for.&#xa;&#x2f;&#x2f; 3&#x3a; String - The First Value to replace with.&#xa;&#x2f;&#x2f; 4&#x3a; String - The Second Value to search for.&#xa;&#x2f;&#x2f; 5&#x3a; String - The Second Value to replace with.&#xa;&#x2f;&#x2f; ...&#xa;&#x2f;&#x2f;&#xa;&#x2f;&#x2f; 2006-11-15&#xa;&#x2f;&#x2f;&#xa;var str1 &#x3d; &#x22;Hello World, this is a nice function&#x22;&#x3b;      &#xa;var str2 &#x3d; replace&#x28;str1,&#x22;World&#x22;, &#x22;Folk&#x22;&#x29;&#x3b;&#xa;Alert&#x28;str2&#x29;&#x3b;&#xa;var str2 &#x3d; replace&#x28;str1,&#x22;World&#x22;, &#x22;Folk&#x22;, &#x22;nice&#x22;,&#x22;beautifull&#x22;&#x29;&#x3b;&#xa;Alert&#x28;str2&#x29;&#x3b;</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>address</name>
-        <rename>address</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1210</xloc>
-      <yloc>320</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -487,167 +580,7 @@
     </step>
 
   <step>
-    <name>Dummy &#x28;do nothing&#x29;</name>
-    <type>Dummy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1210</xloc>
-      <yloc>410</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Update</name>
-    <type>Update</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>Trisano OLAP DS</connection>
-    <skip_lookup>N</skip_lookup>
-    <commit>100</commit>
-    <use_batch>N</use_batch>
-    <error_ignored>N</error_ignored>
-    <ignore_flag_field/>
-    <lookup>
-      <schema/>
-      <table>dim_nbs_hospital</table>
-      <key>
-        <name>dw_hospital_id</name>
-        <field>dw_hospital_id</field>
-        <condition>&#x3d;</condition>
-        <name2/>
-        </key>
-      <value>
-        <name>hospital_street_addr</name>
-        <rename>HOSPITAL_STREET_ADDR</rename>
-        </value>
-      <value>
-        <name>src_person_number</name>
-        <rename>PERSON_NUMBER</rename>
-        </value>
-      <value>
-        <name>latitude</name>
-        <rename>latitude</rename>
-        </value>
-      <value>
-        <name>longitude</name>
-        <rename>longitude</rename>
-        </value>
-      <value>
-        <name>hospital_name</name>
-        <rename>HOSPITAL_NAME</rename>
-        </value>
-      </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1460</xloc>
-      <yloc>210</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Table input</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>Trisano OLAP DS</connection>
-    <sql>select&#xa;    dnh.hospital_city&#xa;   ,dnh.hospital_state&#xa;   ,dnh.dw_hospital_id&#xa;   ,&#x27;AIzaSyAEofOXEZM3jXa0g8d8lt59nNF1fYGbWPM&#x27; as apikey&#xa;from warehouse.dim_nbs_hospital dnh</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>70</xloc>
-      <yloc>210</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Get nbs_kit_no</name>
-    <type>DBJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>Trisano OLAP DS</connection>
-    <rowlimit>0</rowlimit>
-    <sql>select&#xa;   nbs_kit_no&#xa;from warehouse.fact_nbs_card where dw_hospital_id &#x3d; &#x3f;&#xa;limit 1</sql>
-    <outer_join>N</outer_join>
-    <replace_vars>N</replace_vars>
-    <parameter>
-      <field>
-        <name>dw_hospital_id</name>
-        <type>None</type>
-      </field>
-    </parameter>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>210</xloc>
-      <yloc>210</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>get hospital details</name>
-    <type>DBJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>NBSOLTP</connection>
-    <rowlimit>1</rowlimit>
-    <sql>select&#xa;    p.organization as hospital_name&#xa;   ,p.street_addr as hospital_street_addr&#xa;   ,p.person_number&#xa;from &#x24;&#x7b;nbsoltp_schema&#x7d;.nbs_card nc inner join &#x24;&#x7b;nbsoltp_schema&#x7d;.person p on p.person_number &#x3d; nc.birthplace&#xa;where nc.nbs_kit_no &#x3d; &#x3f;&#xa;</sql>
-    <outer_join>N</outer_join>
-    <replace_vars>Y</replace_vars>
-    <parameter>
-      <field>
-        <name>nbs_kit_no</name>
-        <type>Number</type>
-      </field>
-    </parameter>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>360</xloc>
-      <yloc>210</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Modified Java Script Value 3</name>
+    <name>Modified Java Script Value</name>
     <type>ScriptValueMod</type>
     <description/>
     <distribute>Y</distribute>
@@ -661,83 +594,27 @@
     <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>writeToLog&#x28;&#x27;m&#x27;, &#x27;JSON result&#x3a; &#x27; &#x2b; result&#x29;&#x3b;</jsScript_script>
+        <jsScript_script>&#x2f;&#x2f;Script here&#xa;var address &#x3d; replace&#x28;HOSPITAL_STREET_ADDR, &#x22; &#x22;, &#x22;&#x2b;&#x22;&#x29; &#x2b; &#x22;,&#x22; &#x2b; replace&#x28;hospital_city, &#x22; &#x22;, &#x22;&#x2b;&#x22;&#x29; &#x2b; &#x22;,&#x22; &#x2b; replace&#x28;hospital_state, &#x22; &#x22;, &#x22;&#x2b;&#x22;&#x29;&#xa;&#xa;writeToLog&#x28;&#x27;m&#x27;, &#x27;address&#x3a; &#x27; &#x2b; address&#x29;&#x3b;</jsScript_script>
       </jsScript>      <jsScript>        <jsScript_type>-1</jsScript_type>
         <jsScript_name>replace_Sample</jsScript_name>
         <jsScript_script>&#x2f;&#x2f; Replaces Strings inside the given Variable.&#xa;&#x2f;&#x2f; It is possible to make more replacements inside&#xa;&#x2f;&#x2f; one call. The given variables must be an odd number&#xa;&#x2f;&#x2f;&#xa;&#x2f;&#x2f; Usage&#x3a;&#xa;&#x2f;&#x2f; replace&#x28;var, var, var&#x29;&#x3b;&#xa;&#x2f;&#x2f; 1&#x3a; String - The Variable with the content to replace.&#xa;&#x2f;&#x2f; 2&#x3a; String - The Value to search for.&#xa;&#x2f;&#x2f; 3&#x3a; String - The Value to replace with.&#xa;&#x2f;&#x2f;&#xa;&#x2f;&#x2f; replace&#x28;var, var, var, var,var,...&#x29;&#xa;&#x2f;&#x2f; 1&#x3a; String - The Variable with the content to replace.&#xa;&#x2f;&#x2f; 2&#x3a; String - The First Value to search for.&#xa;&#x2f;&#x2f; 3&#x3a; String - The First Value to replace with.&#xa;&#x2f;&#x2f; 4&#x3a; String - The Second Value to search for.&#xa;&#x2f;&#x2f; 5&#x3a; String - The Second Value to replace with.&#xa;&#x2f;&#x2f; ...&#xa;&#x2f;&#x2f;&#xa;&#x2f;&#x2f; 2006-11-15&#xa;&#x2f;&#x2f;&#xa;var str1 &#x3d; &#x22;Hello World, this is a nice function&#x22;&#x3b;      &#xa;var str2 &#x3d; replace&#x28;str1,&#x22;World&#x22;, &#x22;Folk&#x22;&#x29;&#x3b;&#xa;Alert&#x28;str2&#x29;&#x3b;&#xa;var str2 &#x3d; replace&#x28;str1,&#x22;World&#x22;, &#x22;Folk&#x22;, &#x22;nice&#x22;,&#x22;beautifull&#x22;&#x29;&#x3b;&#xa;Alert&#x28;str2&#x29;&#x3b;</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>850</xloc>
-      <yloc>90</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>JSON Result</name>
-    <type>JsonInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <include>N</include>
-    <include_field/>
-    <rownum>N</rownum>
-    <addresultfile>N</addresultfile>
-    <readurl>N</readurl>
-    <IsIgnoreEmptyFile>N</IsIgnoreEmptyFile>
-    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
-    <ignoreMissingPath>N</ignoreMissingPath>
-    <rownum_field/>
-    <file>
-      <name/>
-      <filemask/>
-      <exclude_filemask/>
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-    </file>
-    <fields>
-      <field>
-        <name>status</name>
-        <path>&#x24;.status</path>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>address</name>
+        <rename>address</rename>
         <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
         <length>-1</length>
         <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-    </fields>
-    <limit>0</limit>
-    <IsInFields>Y</IsInFields>
-    <IsAFile>N</IsAFile>
-    <valueField>result</valueField>
-    <shortFileFieldName/>
-    <pathFieldName/>
-    <hiddenFieldName/>
-    <lastModificationTimeFieldName/>
-    <uriNameFieldName/>
-    <rootUriNameFieldName/>
-    <extensionFieldName/>
-    <sizeFieldName/>
-     <cluster_schema/>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1020</xloc>
+      <xloc>570</xloc>
       <yloc>210</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Filter rows</name>
-    <type>FilterRows</type>
+    <name>Modified Java Script Value 2</name>
+    <type>ScriptValueMod</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -746,20 +623,24 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-<send_true_to>Json Input</send_true_to>
-<send_false_to>Modified Java Script Value 2 2</send_false_to>
-    <compare>
-<condition>
- <negated>N</negated>
- <leftvalue>status</leftvalue>
- <function>&#x3d;</function>
- <rightvalue/>
- <value><name>constant</name><type>String</type><text>OK</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
-    </compare>
-     <cluster_schema/>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>writeToLog&#x28;&#x27;m&#x27;, &#x27;Error locating lat&#x2f;lon for dw_hospital_id &#x5b;&#x27; &#x2b; dw_hospital_id &#x2b; &#x22;&#x5d;&#x27;&#x29;&#x3b;</jsScript_script>
+      </jsScript>      <jsScript>        <jsScript_type>-1</jsScript_type>
+        <jsScript_name>replace_Sample</jsScript_name>
+        <jsScript_script>&#x2f;&#x2f; Replaces Strings inside the given Variable.&#xa;&#x2f;&#x2f; It is possible to make more replacements inside&#xa;&#x2f;&#x2f; one call. The given variables must be an odd number&#xa;&#x2f;&#x2f;&#xa;&#x2f;&#x2f; Usage&#x3a;&#xa;&#x2f;&#x2f; replace&#x28;var, var, var&#x29;&#x3b;&#xa;&#x2f;&#x2f; 1&#x3a; String - The Variable with the content to replace.&#xa;&#x2f;&#x2f; 2&#x3a; String - The Value to search for.&#xa;&#x2f;&#x2f; 3&#x3a; String - The Value to replace with.&#xa;&#x2f;&#x2f;&#xa;&#x2f;&#x2f; replace&#x28;var, var, var, var,var,...&#x29;&#xa;&#x2f;&#x2f; 1&#x3a; String - The Variable with the content to replace.&#xa;&#x2f;&#x2f; 2&#x3a; String - The First Value to search for.&#xa;&#x2f;&#x2f; 3&#x3a; String - The First Value to replace with.&#xa;&#x2f;&#x2f; 4&#x3a; String - The Second Value to search for.&#xa;&#x2f;&#x2f; 5&#x3a; String - The Second Value to replace with.&#xa;&#x2f;&#x2f; ...&#xa;&#x2f;&#x2f;&#xa;&#x2f;&#x2f; 2006-11-15&#xa;&#x2f;&#x2f;&#xa;var str1 &#x3d; &#x22;Hello World, this is a nice function&#x22;&#x3b;      &#xa;var str2 &#x3d; replace&#x28;str1,&#x22;World&#x22;, &#x22;Folk&#x22;&#x29;&#x3b;&#xa;Alert&#x28;str2&#x29;&#x3b;&#xa;var str2 &#x3d; replace&#x28;str1,&#x22;World&#x22;, &#x22;Folk&#x22;, &#x22;nice&#x22;,&#x22;beautifull&#x22;&#x29;&#x3b;&#xa;Alert&#x28;str2&#x29;&#x3b;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>address</name>
+        <rename>address</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1120</xloc>
-      <yloc>210</yloc>
+      <xloc>1210</xloc>
+      <yloc>320</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -798,8 +679,8 @@
     </step>
 
   <step>
-    <name>Dummy &#x28;do nothing&#x29; 2</name>
-    <type>Dummy</type>
+    <name>Modified Java Script Value 3</name>
+    <type>ScriptValueMod</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -808,10 +689,18 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-     <cluster_schema/>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>writeToLog&#x28;&#x27;m&#x27;, &#x27;JSON result&#x3a; &#x27; &#x2b; result&#x29;&#x3b;</jsScript_script>
+      </jsScript>      <jsScript>        <jsScript_type>-1</jsScript_type>
+        <jsScript_name>replace_Sample</jsScript_name>
+        <jsScript_script>&#x2f;&#x2f; Replaces Strings inside the given Variable.&#xa;&#x2f;&#x2f; It is possible to make more replacements inside&#xa;&#x2f;&#x2f; one call. The given variables must be an odd number&#xa;&#x2f;&#x2f;&#xa;&#x2f;&#x2f; Usage&#x3a;&#xa;&#x2f;&#x2f; replace&#x28;var, var, var&#x29;&#x3b;&#xa;&#x2f;&#x2f; 1&#x3a; String - The Variable with the content to replace.&#xa;&#x2f;&#x2f; 2&#x3a; String - The Value to search for.&#xa;&#x2f;&#x2f; 3&#x3a; String - The Value to replace with.&#xa;&#x2f;&#x2f;&#xa;&#x2f;&#x2f; replace&#x28;var, var, var, var,var,...&#x29;&#xa;&#x2f;&#x2f; 1&#x3a; String - The Variable with the content to replace.&#xa;&#x2f;&#x2f; 2&#x3a; String - The First Value to search for.&#xa;&#x2f;&#x2f; 3&#x3a; String - The First Value to replace with.&#xa;&#x2f;&#x2f; 4&#x3a; String - The Second Value to search for.&#xa;&#x2f;&#x2f; 5&#x3a; String - The Second Value to replace with.&#xa;&#x2f;&#x2f; ...&#xa;&#x2f;&#x2f;&#xa;&#x2f;&#x2f; 2006-11-15&#xa;&#x2f;&#x2f;&#xa;var str1 &#x3d; &#x22;Hello World, this is a nice function&#x22;&#x3b;      &#xa;var str2 &#x3d; replace&#x28;str1,&#x22;World&#x22;, &#x22;Folk&#x22;&#x29;&#x3b;&#xa;Alert&#x28;str2&#x29;&#x3b;&#xa;var str2 &#x3d; replace&#x28;str1,&#x22;World&#x22;, &#x22;Folk&#x22;, &#x22;nice&#x22;,&#x22;beautifull&#x22;&#x29;&#x3b;&#xa;Alert&#x28;str2&#x29;&#x3b;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1120</xloc>
-      <yloc>30</yloc>
+      <xloc>850</xloc>
+      <yloc>90</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -838,6 +727,117 @@
       </jsScript>    </jsScripts>    <fields>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1340</xloc>
+      <yloc>210</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Table input</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Trisano OLAP DS</connection>
+    <sql>select&#xa;    dnh.hospital_city&#xa;   ,dnh.hospital_state&#xa;   ,dnh.dw_nbs_hospital_id&#xa;   ,&#x27;AIzaSyAEofOXEZM3jXa0g8d8lt59nNF1fYGbWPM&#x27; as apikey&#xa;from warehouse.dim_nbs_hospital dnh&#xa;where dnh.latitude is null or dnh.longitude is null</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>50</xloc>
+      <yloc>210</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Update</name>
+    <type>Update</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Trisano OLAP DS</connection>
+    <skip_lookup>N</skip_lookup>
+    <commit>100</commit>
+    <use_batch>N</use_batch>
+    <error_ignored>N</error_ignored>
+    <ignore_flag_field/>
+    <lookup>
+      <schema/>
+      <table>dim_nbs_hospital</table>
+      <key>
+        <name>dw_nbs_hospital_id</name>
+        <field>dw_nbs_hospital_id</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+        </key>
+      <value>
+        <name>hospital_street_addr</name>
+        <rename>HOSPITAL_STREET_ADDR</rename>
+        </value>
+      <value>
+        <name>src_person_number</name>
+        <rename>PERSON_NUMBER</rename>
+        </value>
+      <value>
+        <name>latitude</name>
+        <rename>latitude</rename>
+        </value>
+      <value>
+        <name>longitude</name>
+        <rename>longitude</rename>
+        </value>
+      <value>
+        <name>hospital_name</name>
+        <rename>HOSPITAL_NAME</rename>
+        </value>
+      </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1460</xloc>
+      <yloc>210</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>get hospital details</name>
+    <type>DBJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>NBSOLTP</connection>
+    <rowlimit>1</rowlimit>
+    <sql>select&#xa;    p.organization as hospital_name&#xa;   ,p.street_addr as hospital_street_addr&#xa;   ,p.person_number&#xa;from &#x24;&#x7b;nbsoltp_schema&#x7d;.nbs_card nc inner join &#x24;&#x7b;nbsoltp_schema&#x7d;.person p on p.person_number &#x3d; nc.birthplace&#xa;where nc.nbs_kit_no &#x3d; &#x3f;&#xa;</sql>
+    <outer_join>N</outer_join>
+    <replace_vars>Y</replace_vars>
+    <parameter>
+      <field>
+        <name>nbs_kit_no</name>
+        <type>Number</type>
+      </field>
+    </parameter>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>360</xloc>
       <yloc>210</yloc>
       <draw>Y</draw>
       </GUI>

@@ -214,8 +214,6 @@
   <hop> <from>Prep Formatted Entry</from><to>has formatted entry&#x3f;</to><enabled>Y</enabled> </hop>
   <hop> <from>has formatted entry&#x3f;</from><to>dim_nbs_formatted_result</to><enabled>Y</enabled> </hop>
   <hop> <from>has formatted entry&#x3f;</from><to>set dw_nbs_formatted_result_id 0</to><enabled>Y</enabled> </hop>
-  <hop> <from>set dw_nbs_formatted_result_id 0</from><to>Select values</to><enabled>Y</enabled> </hop>
-  <hop> <from>dim_nbs_formatted_result</from><to>Select values</to><enabled>Y</enabled> </hop>
   <hop> <from>log dates</from><to>Filter rows</to><enabled>Y</enabled> </hop>
   <hop> <from>Filter rows</from><to>Get Results - Range</to><enabled>Y</enabled> </hop>
   <hop> <from>Filter rows</from><to>Get Max Date</to><enabled>Y</enabled> </hop>
@@ -228,6 +226,12 @@
   <hop> <from>lookup treatment_date</from><to>date reviewed not null</to><enabled>Y</enabled> </hop>
   <hop> <from>remove maxresultenteredon</from><to>treatment date not null</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Results Incremental</from><to>remove maxresultenteredon</to><enabled>Y</enabled> </hop>
+  <hop> <from>hospital not null</from><to>Calculator 2 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>hospital not null</from><to>dim_nbs_hospital</to><enabled>Y</enabled> </hop>
+  <hop> <from>set dw_nbs_formatted_result_id 0</from><to>hospital not null</to><enabled>Y</enabled> </hop>
+  <hop> <from>dim_nbs_hospital</from><to>Select values</to><enabled>Y</enabled> </hop>
+  <hop> <from>Calculator 2 2</from><to>Select values</to><enabled>Y</enabled> </hop>
+  <hop> <from>dim_nbs_formatted_result</from><to>hospital not null</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Abort</name>
@@ -247,6 +251,39 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>900</xloc>
       <yloc>10</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Calculator 2 2</name>
+    <type>Calculator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+       <calculation><field_name>dw_nbs_hospital_id</field_name>
+<calc_type>CONSTANT</calc_type>
+<field_a>0</field_a>
+<field_b/>
+<field_c/>
+<value_type>Integer</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>770</xloc>
+      <yloc>850</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -331,14 +368,14 @@
            </partitioning>
     <connection>NBSOLTP</connection>
     <rowlimit>0</rowlimit>
-    <sql>select&#xa;     r.RESULT_NUMBER&#xa;	,r.TEST_NUMBER&#xa;	,r.NAME&#xa;	,r.REPLICATE_COUNT&#xa;    ,r.UNITS&#xa;	,r.FORMATTED_ENTRY&#xa;	,r.ENTRY&#xa;    ,r.ENTERED_ON&#xa;    ,to_date&#x28;r.ENTERED_ON&#x29; as ENTERED_ON_DT&#xa;	,r.DATE_REVIEWED&#xa;    ,to_DATE&#x28;r.DATE_REVIEWED&#x29; AS DATE_REVIEWED_DT&#xa;	,r.ANALYSIS&#xa;	,r.SAMPLE_NUMBER&#xa;	,r.X_DX_CODE&#xa;	,r.X_DX_TEXT&#xa;	,r.X_DX_DATE&#xa;	,r.X_DX_TREATMENT_DATE&#xa;    ,to_date&#x28;r.X_DX_TREATMENT_DATE&#x29; as X_DX_TREATMENT_DATE_DT&#xa;	,r.LOINC&#xa;	,r.SNOMED_CODE&#xa;    ,s.TEXT_ID&#xa;	,SUBSTR&#x28;s.TEXT_ID, 0,1&#x29; as NBS_CARD_TYPE&#xa;from &#x24;&#x7b;nbsoltp_schema&#x7d;.RESULT r inner join &#x24;&#x7b;nbsoltp_schema&#x7d;.SAMPLE s on s.SAMPLE_NUMBER &#x3d; r.SAMPLE_NUMBER &#xa;where r.ENTERED_ON &#x3e;&#x3d; to_date&#x28;&#x27;&#x24;&#x7b;startDate&#x7d;&#x27;, &#x27;yyyy&#x2f;mm&#x2f;dd&#x27;&#x29; AND r.ENTERED_ON &#x3c; to_date&#x28;&#x27;&#x24;&#x7b;endDate&#x7d;&#x27;, &#x27;yyyy&#x2f;mm&#x2f;dd&#x27;&#x29;</sql>
+    <sql>select&#xa;     r.RESULT_NUMBER&#xa;	,r.TEST_NUMBER&#xa;	,r.NAME&#xa;	,r.REPLICATE_COUNT&#xa;    ,r.UNITS&#xa;	,r.FORMATTED_ENTRY&#xa;	,r.ENTRY&#xa;    ,r.ENTERED_ON&#xa;    ,to_date&#x28;r.ENTERED_ON&#x29; as ENTERED_ON_DT&#xa;	,r.DATE_REVIEWED&#xa;    ,to_DATE&#x28;r.DATE_REVIEWED&#x29; AS DATE_REVIEWED_DT&#xa;	,r.ANALYSIS&#xa;	,r.SAMPLE_NUMBER&#xa;	,r.X_DX_CODE&#xa;	,r.X_DX_TEXT&#xa;	,r.X_DX_DATE&#xa;	,r.X_DX_TREATMENT_DATE&#xa;    ,to_date&#x28;r.X_DX_TREATMENT_DATE&#x29; as X_DX_TREATMENT_DATE_DT&#xa;	,r.LOINC&#xa;	,r.SNOMED_CODE&#xa;    ,s.TEXT_ID&#xa;	,SUBSTR&#x28;s.TEXT_ID, 0,1&#x29; as NBS_CARD_TYPE&#xa;    ,nc.HOSPITAL_CODE&#xa;    ,bp.PERSON_NUMBER AS SRC_BIRTHPLACE_PERSON_NUMBER&#xa;    ,bp.CITY AS BIRTH_CITY&#xa;    ,bp.STATE AS BIRTH_STATE&#xa;    ,bp.COUNTRY AS BIRTH_COUNTRY&#xa;    ,bp.ZIP AS BIRTH_ZIP&#xa;    ,bp.STREET_ADDR AS BIRTH_STREET_ADDR&#xa;from &#x24;&#x7b;nbsoltp_schema&#x7d;.RESULT r inner join &#x24;&#x7b;nbsoltp_schema&#x7d;.SAMPLE s on s.SAMPLE_NUMBER &#x3d; r.SAMPLE_NUMBER&#xa;left join &#x24;&#x7b;nbsoltp_schema&#x7d;.NBS_CARD nc on nc.TEXT_ID &#x3d; s.TEXT_ID&#xa;LEFT JOIN &#x24;&#x7b;nbsoltp_schema&#x7d;.PERSON bp ON bp.PERSON_NUMBER &#x3d; nc.BIRTHPLACE&#xa;where r.ENTERED_ON &#x3e;&#x3d; to_date&#x28;&#x27;&#x24;&#x7b;startDate&#x7d;&#x27;, &#x27;yyyy&#x2f;mm&#x2f;dd&#x27;&#x29; AND r.ENTERED_ON &#x3c; to_date&#x28;&#x27;&#x24;&#x7b;endDate&#x7d;&#x27;, &#x27;yyyy&#x2f;mm&#x2f;dd&#x27;&#x29;</sql>
     <outer_join>N</outer_join>
     <replace_vars>Y</replace_vars>
     <parameter>
     </parameter>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>290</xloc>
+      <xloc>270</xloc>
       <yloc>30</yloc>
       <draw>Y</draw>
       </GUI>
@@ -357,7 +394,7 @@
            </partitioning>
     <connection>NBSOLTP</connection>
     <rowlimit>0</rowlimit>
-    <sql>select&#xa;     r.RESULT_NUMBER&#xa;	,r.TEST_NUMBER&#xa;	,r.NAME&#xa;	,r.REPLICATE_COUNT&#xa;    ,r.UNITS&#xa;	,r.FORMATTED_ENTRY&#xa;	,r.ENTRY&#xa;    ,r.ENTERED_ON&#xa;    ,to_date&#x28;r.ENTERED_ON&#x29; as ENTERED_ON_DT&#xa;	,r.DATE_REVIEWED&#xa;    ,to_DATE&#x28;r.DATE_REVIEWED&#x29; AS DATE_REVIEWED_DT&#xa;	,r.ANALYSIS&#xa;	,r.SAMPLE_NUMBER&#xa;	,r.X_DX_CODE&#xa;	,r.X_DX_TEXT&#xa;	,r.X_DX_DATE&#xa;	,r.X_DX_TREATMENT_DATE&#xa;    ,to_date&#x28;r.X_DX_TREATMENT_DATE&#x29; as X_DX_TREATMENT_DATE_DT&#xa;	,r.LOINC&#xa;	,r.SNOMED_CODE&#xa;    ,s.TEXT_ID&#xa;	,SUBSTR&#x28;s.TEXT_ID, 0,1&#x29; as NBS_CARD_TYPE&#xa;from &#x24;&#x7b;nbsoltp_schema&#x7d;.RESULT r inner join &#x24;&#x7b;nbsoltp_schema&#x7d;.SAMPLE s on s.SAMPLE_NUMBER &#x3d; r.SAMPLE_NUMBER &#xa;where r.ENTERED_ON &#x3e; &#x3f;</sql>
+    <sql>select&#xa;     r.RESULT_NUMBER&#xa;	,r.TEST_NUMBER&#xa;	,r.NAME&#xa;	,r.REPLICATE_COUNT&#xa;    ,r.UNITS&#xa;	,r.FORMATTED_ENTRY&#xa;	,r.ENTRY&#xa;    ,r.ENTERED_ON&#xa;    ,to_date&#x28;r.ENTERED_ON&#x29; as ENTERED_ON_DT&#xa;	,r.DATE_REVIEWED&#xa;    ,to_DATE&#x28;r.DATE_REVIEWED&#x29; AS DATE_REVIEWED_DT&#xa;	,r.ANALYSIS&#xa;	,r.SAMPLE_NUMBER&#xa;	,r.X_DX_CODE&#xa;	,r.X_DX_TEXT&#xa;	,r.X_DX_DATE&#xa;	,r.X_DX_TREATMENT_DATE&#xa;    ,to_date&#x28;r.X_DX_TREATMENT_DATE&#x29; as X_DX_TREATMENT_DATE_DT&#xa;	,r.LOINC&#xa;	,r.SNOMED_CODE&#xa;    ,s.TEXT_ID&#xa;	,SUBSTR&#x28;s.TEXT_ID, 0,1&#x29; as NBS_CARD_TYPE&#xa;    ,nc.HOSPITAL_CODE&#xa;    ,bp.PERSON_NUMBER AS SRC_BIRTHPLACE_PERSON_NUMBER&#xa;    ,bp.CITY AS BIRTH_CITY&#xa;    ,bp.STATE AS BIRTH_STATE&#xa;    ,bp.COUNTRY AS BIRTH_COUNTRY&#xa;    ,bp.ZIP AS BIRTH_ZIP&#xa;    ,bp.STREET_ADDR AS BIRTH_STREET_ADDR&#xa;from &#x24;&#x7b;nbsoltp_schema&#x7d;.RESULT r inner join &#x24;&#x7b;nbsoltp_schema&#x7d;.SAMPLE s on s.SAMPLE_NUMBER &#x3d; r.SAMPLE_NUMBER&#xa;left join &#x24;&#x7b;nbsoltp_schema&#x7d;.NBS_CARD nc on nc.TEXT_ID &#x3d; s.TEXT_ID&#xa;LEFT JOIN &#x24;&#x7b;nbsoltp_schema&#x7d;.PERSON bp ON bp.PERSON_NUMBER &#x3d; nc.BIRTHPLACE&#xa;where r.ENTERED_ON &#x3e; &#x3f;</sql>
     <outer_join>N</outer_join>
     <replace_vars>Y</replace_vars>
     <parameter>
@@ -463,6 +500,10 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
+      </field>      <field>        <name>dw_nbs_hospital_id</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
       </field>      <field>        <name>RESULT_NUMBER</name>
         <rename>result_number</rename>
         <length>-2</length>
@@ -518,7 +559,7 @@
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>660</xloc>
+      <xloc>910</xloc>
       <yloc>820</yloc>
       <draw>Y</draw>
       </GUI>
@@ -828,6 +869,86 @@
     </step>
 
   <step>
+    <name>dim_nbs_hospital</name>
+    <type>DimensionLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <schema/>
+      <table>dim_nbs_hospital</table>
+      <connection>Trisano OLAP DS</connection>
+      <commit>100</commit>
+      <update>Y</update>
+      <fields>
+        <key>
+          <name>HOSPITAL_CODE</name>
+          <lookup>hospital_code</lookup>
+        </key>
+        <date>
+          <name/>
+          <from>start_date</from>
+          <to>end_date</to>
+        </date>
+        <field>
+          <name>BIRTH_CITY</name>
+          <lookup>hospital_city</lookup>
+          <update>Punch through</update>
+        </field>
+        <field>
+          <name>BIRTH_STATE</name>
+          <lookup>hospital_state</lookup>
+          <update>Punch through</update>
+        </field>
+        <field>
+          <name>BIRTH_COUNTRY</name>
+          <lookup>hospital_country</lookup>
+          <update>Punch through</update>
+        </field>
+        <field>
+          <name>BIRTH_ZIP</name>
+          <lookup>hospital_zip</lookup>
+          <update>Punch through</update>
+        </field>
+        <field>
+          <name>BIRTH_STREET_ADDR</name>
+          <lookup>hospital_street_addr</lookup>
+          <update>Punch through</update>
+        </field>
+        <field>
+          <name>SRC_BIRTHPLACE_PERSON_NUMBER</name>
+          <lookup>src_person_number</lookup>
+          <update>Punch through</update>
+        </field>
+        <return>
+          <name>dw_nbs_hospital_id</name>
+          <rename/>
+          <creation_method>tablemax</creation_method>
+          <use_autoinc>N</use_autoinc>
+          <version>version</version>
+        </return>
+      </fields>
+      <sequence/>
+      <min_year>1900</min_year>
+      <max_year>2199</max_year>
+      <cache_size>5000</cache_size>
+      <preload_cache>N</preload_cache>
+      <use_start_date_alternative>N</use_start_date_alternative>
+      <start_date_alternative>none</start_date_alternative>
+      <start_date_field_name/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>770</xloc>
+      <yloc>780</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>dim_nbs_loinc</name>
     <type>CombinationLookup</type>
     <description/>
@@ -1089,7 +1210,7 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>820</xloc>
+      <xloc>1070</xloc>
       <yloc>820</yloc>
       <draw>Y</draw>
       </GUI>
@@ -1119,6 +1240,35 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>320</xloc>
+      <yloc>820</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>hospital not null</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>dim_nbs_hospital</send_true_to>
+<send_false_to>Calculator 2 2</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>HOSPITAL_CODE</leftvalue>
+ <function>IS NOT NULL</function>
+ <rightvalue/>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>650</xloc>
       <yloc>820</yloc>
       <draw>Y</draw>
       </GUI>

@@ -134,7 +134,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_nbs_result_fact_main.ktr</filename>
+      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_nbs_result_fact_main2.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -174,8 +174,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>320</xloc>
-      <yloc>440</yloc>
+      <xloc>120</xloc>
+      <yloc>660</yloc>
       </entry>
     <entry>
       <name>Abort job</name>
@@ -186,7 +186,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>730</xloc>
-      <yloc>220</yloc>
+      <yloc>300</yloc>
       </entry>
     <entry>
       <name>exec_nbs_result_fact_main - 2006</name>
@@ -194,7 +194,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_nbs_result_fact_main.ktr</filename>
+      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_nbs_result_fact_main2.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -233,7 +233,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_nbs_result_fact_main.ktr</filename>
+      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_nbs_result_fact_main2.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -272,7 +272,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_nbs_result_fact_main.ktr</filename>
+      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_nbs_result_fact_main2.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -311,7 +311,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_nbs_result_fact_main.ktr</filename>
+      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_nbs_result_fact_main2.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -350,7 +350,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_nbs_result_fact_main.ktr</filename>
+      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_nbs_result_fact_main2.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -389,7 +389,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_nbs_result_fact_main.ktr</filename>
+      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_nbs_result_fact_main2.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -428,7 +428,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_nbs_result_fact_main.ktr</filename>
+      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_nbs_result_fact_main2.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -467,7 +467,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_nbs_result_fact_main.ktr</filename>
+      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_nbs_result_fact_main2.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -497,8 +497,8 @@
             </parameter>      </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>980</xloc>
-      <yloc>340</yloc>
+      <xloc>1220</xloc>
+      <yloc>430</yloc>
       </entry>
     <entry>
       <name>exec_nbs_result_fact_main - 2014</name>
@@ -506,7 +506,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_nbs_result_fact_main.ktr</filename>
+      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_nbs_result_fact_main2.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -536,8 +536,8 @@
             </parameter>      </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>760</xloc>
-      <yloc>340</yloc>
+      <xloc>1230</xloc>
+      <yloc>530</yloc>
       </entry>
     <entry>
       <name>exec_nbs_result_fact_main - 2015</name>
@@ -545,7 +545,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_nbs_result_fact_main.ktr</filename>
+      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_nbs_result_fact_main2.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -575,8 +575,8 @@
             </parameter>      </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>540</xloc>
-      <yloc>340</yloc>
+      <xloc>1020</xloc>
+      <yloc>530</yloc>
       </entry>
     <entry>
       <name>exec_nbs_result_fact_main - 2016</name>
@@ -584,7 +584,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_nbs_result_fact_main.ktr</filename>
+      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_nbs_result_fact_main2.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -614,8 +614,8 @@
             </parameter>      </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>320</xloc>
-      <yloc>340</yloc>
+      <xloc>780</xloc>
+      <yloc>530</yloc>
       </entry>
     <entry>
       <name>exec_nbs_result_fact_main - 2017</name>
@@ -623,7 +623,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_nbs_result_fact_main.ktr</filename>
+      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_nbs_result_fact_main2.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -653,8 +653,8 @@
             </parameter>      </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>100</xloc>
-      <yloc>340</yloc>
+      <xloc>560</xloc>
+      <yloc>530</yloc>
       </entry>
     <entry>
       <name>exec_nbs_result_fact_main - null entered on</name>
@@ -692,8 +692,8 @@
             </parameter>      </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>100</xloc>
-      <yloc>440</yloc>
+      <xloc>120</xloc>
+      <yloc>540</yloc>
       </entry>
     <entry>
       <name>create fnr 2005</name>
@@ -727,8 +727,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>130</xloc>
-      <yloc>80</yloc>
+      <xloc>160</xloc>
+      <yloc>50</yloc>
       </entry>
     <entry>
       <name>create fnr 2006</name>
@@ -763,7 +763,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>410</xloc>
-      <yloc>30</yloc>
+      <yloc>20</yloc>
       </entry>
     <entry>
       <name>create fnr 2007</name>
@@ -797,8 +797,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>640</xloc>
-      <yloc>30</yloc>
+      <xloc>650</xloc>
+      <yloc>20</yloc>
       </entry>
     <entry>
       <name>create fnr 2008</name>
@@ -832,7 +832,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>890</xloc>
+      <xloc>870</xloc>
       <yloc>20</yloc>
       </entry>
     <entry>
@@ -867,8 +867,117 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1130</xloc>
+      <xloc>1120</xloc>
       <yloc>20</yloc>
+      </entry>
+    <entry>
+      <name>create fnr 2017</name>
+      <description/>
+      <type>JOB</type>
+      <specification_method>filename</specification_method>
+      <job_object_id/>
+      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;create_fact_nbs_result_partition_table.kjb</filename>
+      <jobname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <force_separate_logging>N</force_separate_logging>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+            <parameter>            <name>YYYY</name>
+            <stream_name/>
+            <value>2017</value>
+            </parameter>      </parameters>      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>710</xloc>
+      <yloc>600</yloc>
+      </entry>
+    <entry>
+      <name>exec_nbs_result_fact_main 2018</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_nbs_result_fact_main2.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+            <parameter>            <name>startDate</name>
+            <stream_name/>
+            <value>2018&#x2f;01&#x2f;01</value>
+            </parameter>            <parameter>            <name>endDate</name>
+            <stream_name/>
+            <value>2019&#x2f;01&#x2f;01</value>
+            </parameter>      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>330</xloc>
+      <yloc>540</yloc>
+      </entry>
+    <entry>
+      <name>create fnr 2018</name>
+      <description/>
+      <type>JOB</type>
+      <specification_method>filename</specification_method>
+      <job_object_id/>
+      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;create_fact_nbs_result_partition_table.kjb</filename>
+      <jobname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <force_separate_logging>N</force_separate_logging>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+            <parameter>            <name>YYYY</name>
+            <stream_name/>
+            <value>2018</value>
+            </parameter>      </parameters>      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>430</xloc>
+      <yloc>600</yloc>
       </entry>
     <entry>
       <name>create fnr 2010</name>
@@ -901,9 +1010,219 @@
             </parameter>      </parameters>      <set_append_logfile>N</set_append_logfile>
       <parallel>N</parallel>
       <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>1350</xloc>
-      <yloc>120</yloc>
+      <nr>1</nr>
+      <xloc>1360</xloc>
+      <yloc>130</yloc>
+      </entry>
+    <entry>
+      <name>create fnr 2011</name>
+      <description/>
+      <type>JOB</type>
+      <specification_method>filename</specification_method>
+      <job_object_id/>
+      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;create_fact_nbs_result_partition_table.kjb</filename>
+      <jobname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <force_separate_logging>N</force_separate_logging>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+            <parameter>            <name>YYYY</name>
+            <stream_name/>
+            <value>2011</value>
+            </parameter>      </parameters>      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>1</nr>
+      <xloc>1360</xloc>
+      <yloc>210</yloc>
+      </entry>
+    <entry>
+      <name>create fnr 2012</name>
+      <description/>
+      <type>JOB</type>
+      <specification_method>filename</specification_method>
+      <job_object_id/>
+      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;create_fact_nbs_result_partition_table.kjb</filename>
+      <jobname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <force_separate_logging>N</force_separate_logging>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+            <parameter>            <name>YYYY</name>
+            <stream_name/>
+            <value>2012</value>
+            </parameter>      </parameters>      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>1</nr>
+      <xloc>1360</xloc>
+      <yloc>290</yloc>
+      </entry>
+    <entry>
+      <name>create fnr 2013</name>
+      <description/>
+      <type>JOB</type>
+      <specification_method>filename</specification_method>
+      <job_object_id/>
+      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;create_fact_nbs_result_partition_table.kjb</filename>
+      <jobname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <force_separate_logging>N</force_separate_logging>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+            <parameter>            <name>YYYY</name>
+            <stream_name/>
+            <value>2013</value>
+            </parameter>      </parameters>      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>1</nr>
+      <xloc>1370</xloc>
+      <yloc>400</yloc>
+      </entry>
+    <entry>
+      <name>create fnr 2014</name>
+      <description/>
+      <type>JOB</type>
+      <specification_method>filename</specification_method>
+      <job_object_id/>
+      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;create_fact_nbs_result_partition_table.kjb</filename>
+      <jobname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <force_separate_logging>N</force_separate_logging>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+            <parameter>            <name>YYYY</name>
+            <stream_name/>
+            <value>2014</value>
+            </parameter>      </parameters>      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>1</nr>
+      <xloc>1370</xloc>
+      <yloc>500</yloc>
+      </entry>
+    <entry>
+      <name>create fnr 2015</name>
+      <description/>
+      <type>JOB</type>
+      <specification_method>filename</specification_method>
+      <job_object_id/>
+      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;create_fact_nbs_result_partition_table.kjb</filename>
+      <jobname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <force_separate_logging>N</force_separate_logging>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+            <parameter>            <name>YYYY</name>
+            <stream_name/>
+            <value>2015</value>
+            </parameter>      </parameters>      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>1</nr>
+      <xloc>1160</xloc>
+      <yloc>590</yloc>
+      </entry>
+    <entry>
+      <name>create fnr 2016</name>
+      <description/>
+      <type>JOB</type>
+      <specification_method>filename</specification_method>
+      <job_object_id/>
+      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;create_fact_nbs_result_partition_table.kjb</filename>
+      <jobname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <force_separate_logging>N</force_separate_logging>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+            <parameter>            <name>YYYY</name>
+            <stream_name/>
+            <value>2016</value>
+            </parameter>      </parameters>      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>1</nr>
+      <xloc>920</xloc>
+      <yloc>590</yloc>
       </entry>
   </entries>
   <hops>
@@ -912,71 +1231,8 @@
       <to>Abort job</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>exec_nbs_result_fact_main - 2010</from>
-      <to>exec_nbs_result_fact_main - 2011</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>exec_nbs_result_fact_main - 2011</from>
-      <to>exec_nbs_result_fact_main - 2012</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>exec_nbs_result_fact_main - 2012</from>
-      <to>exec_nbs_result_fact_main - 2013</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>exec_nbs_result_fact_main - 2013</from>
-      <to>exec_nbs_result_fact_main - 2014</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>exec_nbs_result_fact_main - 2014</from>
-      <to>exec_nbs_result_fact_main - 2015</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>exec_nbs_result_fact_main - 2015</from>
-      <to>exec_nbs_result_fact_main - 2016</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>exec_nbs_result_fact_main - 2016</from>
-      <to>exec_nbs_result_fact_main - 2017</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
     <hop>
@@ -984,7 +1240,7 @@
       <to>Abort job</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>N</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -993,7 +1249,7 @@
       <to>Abort job</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>N</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1002,7 +1258,7 @@
       <to>Abort job</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>N</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1011,7 +1267,7 @@
       <to>Abort job</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>N</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1020,7 +1276,7 @@
       <to>Abort job</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>N</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1029,7 +1285,7 @@
       <to>Abort job</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>N</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1038,7 +1294,7 @@
       <to>Abort job</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>N</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1047,7 +1303,7 @@
       <to>Abort job</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>N</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1056,7 +1312,7 @@
       <to>Abort job</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>N</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1065,7 +1321,7 @@
       <to>Abort job</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>N</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1074,35 +1330,8 @@
       <to>Abort job</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>exec_nbs_result_fact_main - 2017</from>
-      <to>Abort job</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>exec_nbs_result_fact_main - 2017</from>
-      <to>exec_nbs_result_fact_main - null entered on</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>exec_nbs_result_fact_main - null entered on</from>
-      <to>Success</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
     <hop>
@@ -1110,7 +1339,7 @@
       <to>create fnr 2005</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
     </hop>
@@ -1119,7 +1348,7 @@
       <to>exec_nbs_result_fact_main - 2005</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1128,7 +1357,7 @@
       <to>create fnr 2006</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1137,26 +1366,8 @@
       <to>exec_nbs_result_fact_main - 2006</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>create fnr 2006</from>
-      <to>Abort job</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
       <enabled>N</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>create fnr 2005</from>
-      <to>Abort job</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
+      <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
     <hop>
@@ -1164,7 +1375,7 @@
       <to>create fnr 2007</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1173,25 +1384,7 @@
       <to>exec_nbs_result_fact_main - 2007</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>create fnr 2007</from>
-      <to>Abort job</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>exec_nbs_result_fact_main - 2010</from>
-      <to>Success</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1200,7 +1393,7 @@
       <to>create fnr 2008</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1209,7 +1402,7 @@
       <to>exec_nbs_result_fact_main - 2008</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1218,7 +1411,7 @@
       <to>create fnr 2009</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1227,7 +1420,7 @@
       <to>exec_nbs_result_fact_main - 2009</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1235,19 +1428,208 @@
       <from>exec_nbs_result_fact_main - 2009</from>
       <to>create fnr 2010</to>
       <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <to_nr>1</to_nr>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
     <hop>
       <from>create fnr 2010</from>
       <to>exec_nbs_result_fact_main - 2010</to>
+      <from_nr>1</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>exec_nbs_result_fact_main - 2010</from>
+      <to>create fnr 2011</to>
+      <from_nr>0</from_nr>
+      <to_nr>1</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>create fnr 2011</from>
+      <to>exec_nbs_result_fact_main - 2011</to>
+      <from_nr>1</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>exec_nbs_result_fact_main - 2011</from>
+      <to>create fnr 2012</to>
+      <from_nr>0</from_nr>
+      <to_nr>1</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>create fnr 2012</from>
+      <to>exec_nbs_result_fact_main - 2012</to>
+      <from_nr>1</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>exec_nbs_result_fact_main - 2012</from>
+      <to>create fnr 2013</to>
+      <from_nr>0</from_nr>
+      <to_nr>1</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>create fnr 2013</from>
+      <to>exec_nbs_result_fact_main - 2013</to>
+      <from_nr>1</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>exec_nbs_result_fact_main - 2013</from>
+      <to>create fnr 2014</to>
+      <from_nr>0</from_nr>
+      <to_nr>1</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>create fnr 2014</from>
+      <to>exec_nbs_result_fact_main - 2014</to>
+      <from_nr>1</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>exec_nbs_result_fact_main - 2014</from>
+      <to>create fnr 2015</to>
+      <from_nr>0</from_nr>
+      <to_nr>1</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>create fnr 2015</from>
+      <to>exec_nbs_result_fact_main - 2015</to>
+      <from_nr>1</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>exec_nbs_result_fact_main - 2015</from>
+      <to>create fnr 2016</to>
+      <from_nr>0</from_nr>
+      <to_nr>1</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>create fnr 2016</from>
+      <to>exec_nbs_result_fact_main - 2016</to>
+      <from_nr>1</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>exec_nbs_result_fact_main - 2016</from>
+      <to>create fnr 2017</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>create fnr 2017</from>
+      <to>exec_nbs_result_fact_main - 2017</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>create fnr 2018</from>
+      <to>exec_nbs_result_fact_main 2018</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>exec_nbs_result_fact_main - 2017</from>
+      <to>Abort job</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>exec_nbs_result_fact_main 2018</from>
+      <to>Abort job</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>exec_nbs_result_fact_main - 2017</from>
+      <to>create fnr 2018</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>exec_nbs_result_fact_main 2018</from>
+      <to>exec_nbs_result_fact_main - null entered on</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>exec_nbs_result_fact_main - null entered on</from>
+      <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>START</from>
+      <to>create fnr 2011</to>
+      <from_nr>0</from_nr>
+      <to_nr>1</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
     </hop>
   </hops>
   <notepads>

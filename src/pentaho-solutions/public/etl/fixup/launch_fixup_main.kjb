@@ -125,8 +125,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>20</xloc>
-      <yloc>160</yloc>
+      <xloc>10</xloc>
+      <yloc>190</yloc>
       </entry>
     <entry>
       <name>Success</name>
@@ -135,8 +135,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1090</xloc>
-      <yloc>250</yloc>
+      <xloc>1080</xloc>
+      <yloc>280</yloc>
       </entry>
     <entry>
       <name>Populate nbs result agg tables</name>
@@ -169,45 +169,6 @@
       <nr>0</nr>
       <xloc>480</xloc>
       <yloc>490</yloc>
-      </entry>
-    <entry>
-      <name>check disk space</name>
-      <description/>
-      <type>SHELL</type>
-      <filename/>
-      <work_directory/>
-      <arg_from_previous>N</arg_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <set_append_logfile>N</set_append_logfile>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <insertScript>Y</insertScript>
-      <script>df -h</script>
-      <loglevel>Basic</loglevel>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>1090</xloc>
-      <yloc>40</yloc>
-      </entry>
-    <entry>
-      <name>vacuum</name>
-      <description/>
-      <type>SQL</type>
-      <sql>vacuum full&#x3b;&#xa;</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename/>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>Trisano OLAP DS</connection>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>1090</xloc>
-      <yloc>130</yloc>
       </entry>
     <entry>
       <name>Update fnr partition tables</name>
@@ -259,10 +220,10 @@
       <script>pwd&#xa;truncate -s 100 &#x2f;var&#x2f;local&#x2f;pentaho&#x2f;tomcat&#x2f;logs&#x2f;catalina.out&#xa;truncate -s 100 &#x2f;var&#x2f;local&#x2f;pentaho&#x2f;tomcat&#x2f;logs&#x2f;pentaho.log</script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
-      <draw>N</draw>
+      <draw>Y</draw>
       <nr>0</nr>
-      <xloc>30</xloc>
-      <yloc>450</yloc>
+      <xloc>240</xloc>
+      <yloc>280</yloc>
       </entry>
     <entry>
       <name>vw_fact_nbs_processing_dates</name>
@@ -455,69 +416,13 @@
       <logging_remote_work>N</logging_remote_work>
       <parameters>        <pass_all_parameters>Y</pass_all_parameters>
       </parameters>      <parallel>N</parallel>
-      <draw>Y</draw>
+      <draw>N</draw>
       <nr>0</nr>
-      <xloc>420</xloc>
-      <yloc>280</yloc>
+      <xloc>500</xloc>
+      <yloc>530</yloc>
       </entry>
     <entry>
-      <name>report_data_discrepency</name>
-      <description/>
-      <type>TRANS</type>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;fixup&#x2f;report_data_discrepency.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>420</xloc>
-      <yloc>370</yloc>
-      </entry>
-    <entry>
-      <name>Shell</name>
-      <description/>
-      <type>SHELL</type>
-      <filename/>
-      <work_directory/>
-      <arg_from_previous>N</arg_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <set_append_logfile>N</set_append_logfile>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <insertScript>Y</insertScript>
-      <script>ls -alt &#x2f;var&#x2f;local&#x2f;pentaho&#x2f;pentaho-solutions&#x2f;system&#x2f;extcontent&#x2f;web&#x2f;dim_nbs_hospital.csv.gz&#xa;rm &#x2f;var&#x2f;local&#x2f;pentaho&#x2f;pentaho-solutions&#x2f;system&#x2f;extcontent&#x2f;web&#x2f;dim_nbs_hospital.csv.gz&#xa;ls -alt &#x2f;var&#x2f;local&#x2f;pentaho&#x2f;pentaho-solutions&#x2f;system&#x2f;extcontent&#x2f;web&#x2f;dim_nbs_hospital.csv.gz</script>
-      <loglevel>Basic</loglevel>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>180</xloc>
-      <yloc>350</yloc>
-      </entry>
-    <entry>
-      <name>SQL</name>
+      <name>DOH User Group Grants</name>
       <description/>
       <type>SQL</type>
       <sql>grant select on warehouse.fact_nbs_processing_dates to bi_nbs_user_role&#x3b;&#xa;&#xa;grant select on warehouse.fact_nbs_processing_dates to bi_nbs_user_role&#x3b;</sql>
@@ -527,10 +432,10 @@
       <sendOneStatement>F</sendOneStatement>
       <connection>Trisano OLAP DS</connection>
       <parallel>N</parallel>
-      <draw>Y</draw>
+      <draw>N</draw>
       <nr>0</nr>
-      <xloc>260</xloc>
-      <yloc>250</yloc>
+      <xloc>720</xloc>
+      <yloc>270</yloc>
       </entry>
     <entry>
       <name>Create vw_nbs_report_card</name>
@@ -547,6 +452,116 @@
       <nr>0</nr>
       <xloc>280</xloc>
       <yloc>470</yloc>
+      </entry>
+    <entry>
+      <name>load_nbs_result_all_years_main</name>
+      <description/>
+      <type>JOB</type>
+      <specification_method>filename</specification_method>
+      <job_object_id/>
+      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;load_nbs_result_all_years_main.kjb</filename>
+      <jobname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <force_separate_logging>N</force_separate_logging>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>560</xloc>
+      <yloc>280</yloc>
+      </entry>
+    <entry>
+      <name>check disk space 3</name>
+      <description/>
+      <type>SHELL</type>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>df -h</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>1</nr>
+      <xloc>730</xloc>
+      <yloc>280</yloc>
+      </entry>
+    <entry>
+      <name>vacuum 2</name>
+      <description/>
+      <type>SQL</type>
+      <sql>vacuum full&#x3b;&#xa;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>Trisano OLAP DS</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>1</nr>
+      <xloc>850</xloc>
+      <yloc>280</yloc>
+      </entry>
+    <entry>
+      <name>check disk space 3 2</name>
+      <description/>
+      <type>SHELL</type>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>df -h</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>1</nr>
+      <xloc>950</xloc>
+      <yloc>280</yloc>
+      </entry>
+    <entry>
+      <name>Create fact_nbs_result</name>
+      <description/>
+      <type>SQL</type>
+      <sql>-- Table&#x3a; warehouse.fact_nbs_result&#xa;-- alter table warehouse.dim_nbs_hospital rename column dw_hospital_id to dw_nbs_hospital_id&#x3b;&#xa;&#xa;-- alter table warehouse.fact_nbs_card rename column dw_hospital_id to dw_nbs_hospital_id&#x3b;&#xa;&#xa;-- alter table warehouse.fact_nbs_card drop column dw_birthplace_id&#x3b;&#xa;&#xa;drop table if exists warehouse.fact_nbs_result_2005&#x3b;&#xa;drop table if exists warehouse.fact_nbs_result_2009&#x3b;&#xa;drop table if exists warehouse.fact_nbs_result_2016&#x3b;&#xa;drop table if exists warehouse.fact_nbs_result_2008&#x3b;&#xa;drop table if exists warehouse.fact_nbs_result_2017&#x3b;&#xa;drop table if exists warehouse.fact_nbs_result_2015&#x3b;&#xa;drop table if exists warehouse.fact_nbs_result_2007&#x3b;&#xa;drop table if exists warehouse.fact_nbs_result_2014&#x3b;&#xa;drop table if exists warehouse.fact_nbs_result_2018&#x3b;&#xa;drop table if exists warehouse.fact_nbs_result_2013&#x3b;&#xa;drop table if exists warehouse.fact_nbs_result_2006&#x3b;&#xa;drop table if exists warehouse.fact_nbs_result_2012&#x3b;&#xa;drop table if exists warehouse.fact_nbs_result_2011&#x3b;&#xa;drop table if exists warehouse.fact_nbs_result_2010&#x3b;&#xa;&#xa;DROP TABLE warehouse.fact_nbs_result&#x3b;&#xa;&#xa;CREATE TABLE warehouse.fact_nbs_result&#xa;&#x28;&#xa;  dw_dx_treatment_date_num_id integer,&#xa;  dw_reviewed_date_num_id integer,&#xa;  dw_entered_on_date_num_id integer,&#xa;  dw_nbs_result_dx_id integer,&#xa;  dw_nbs_loinc_id integer,&#xa;  dw_nbs_snomed_code_id integer,&#xa;  dw_nbs_card_type_id integer,&#xa;  dw_nbs_analysis_subcomponent_id integer,&#xa;  dw_nbs_units_id integer,&#xa;  dw_nbs_analysis_id integer,&#xa;  dw_nbs_formatted_result_id integer,&#xa;  dw_nbs_hospital_id integer,&#xa;  accession_number character varying&#x28;30&#x29;,&#xa;  result_number bigint,&#xa;  test_number bigint,&#xa;  replicate_count integer,&#xa;  raw_result character varying&#x28;254&#x29;,&#xa;  entered_on timestamp without time zone,&#xa;  date_reviewed timestamp without time zone,&#xa;  sample_number integer,&#xa;  x_dx_date timestamp without time zone,&#xa;  x_dx_treatment_date timestamp without time zone,&#xa;  dw_message_processed_on_date_num_id integer DEFAULT 19000101,&#xa;  src_message_processed_on timestamp without time zone DEFAULT &#x27;1900-01-01 00&#x3a;00&#x3a;00&#x27;&#x3a;&#x3a;timestamp without time zone&#xa;&#x29;&#xa;WITH &#x28;&#xa;  OIDS&#x3d;FALSE&#xa;&#x29;&#x3b;&#xa;ALTER TABLE warehouse.fact_nbs_result&#xa;  OWNER TO pentaho&#x3b;&#xa;GRANT ALL ON TABLE warehouse.fact_nbs_result TO pentaho&#x3b;&#xa;GRANT SELECT ON TABLE warehouse.fact_nbs_result TO bi_nbs_user_role&#x3b;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>Trisano OLAP DS</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>370</xloc>
+      <yloc>230</yloc>
       </entry>
   </entries>
   <hops>
@@ -596,42 +611,6 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>exec_update_nbs_card_w_report_out_date</from>
-      <to>check disk space</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>check disk space</from>
-      <to>vacuum</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>vacuum</from>
-      <to>Success</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>vw_fact_nbs_processing_dates_alt</from>
-      <to>Success</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>START</from>
       <to>fact_nbs_processing_dates 3</to>
       <from_nr>0</from_nr>
@@ -650,8 +629,44 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>exec_update_dim_hospital_rolling_metrics</from>
+      <from>load_nbs_result_all_years_main</from>
+      <to>check disk space 3</to>
+      <from_nr>0</from_nr>
+      <to_nr>1</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>check disk space 3</from>
+      <to>vacuum 2</to>
+      <from_nr>1</from_nr>
+      <to_nr>1</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>vacuum 2</from>
+      <to>check disk space 3 2</to>
+      <from_nr>1</from_nr>
+      <to_nr>1</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>check disk space 3 2</from>
       <to>Success</to>
+      <from_nr>1</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Create fact_nbs_result</from>
+      <to>load_nbs_result_all_years_main</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>N</enabled>
@@ -660,43 +675,7 @@
     </hop>
     <hop>
       <from>START</from>
-      <to>exec_update_dim_hospital_rolling_metrics</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>report_data_discrepency</from>
-      <to>Success</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>START</from>
-      <to>Shell</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>Shell</from>
-      <to>report_data_discrepency</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>START</from>
-      <to>SQL</to>
+      <to>truncate logs</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -704,17 +683,17 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>SQL</from>
-      <to>report_data_discrepency</to>
+      <from>truncate logs</from>
+      <to>Create fact_nbs_result</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>N</enabled>
       <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
+      <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>SQL</from>
-      <to>Success</to>
+      <from>truncate logs</from>
+      <to>load_nbs_result_all_years_main</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
