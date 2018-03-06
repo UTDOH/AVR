@@ -220,10 +220,10 @@
       <script>pwd&#xa;truncate -s 100 &#x2f;var&#x2f;local&#x2f;pentaho&#x2f;tomcat&#x2f;logs&#x2f;catalina.out&#xa;truncate -s 100 &#x2f;var&#x2f;local&#x2f;pentaho&#x2f;tomcat&#x2f;logs&#x2f;pentaho.log</script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
-      <draw>Y</draw>
+      <draw>N</draw>
       <nr>0</nr>
-      <xloc>240</xloc>
-      <yloc>280</yloc>
+      <xloc>220</xloc>
+      <yloc>340</yloc>
       </entry>
     <entry>
       <name>vw_fact_nbs_processing_dates</name>
@@ -454,38 +454,6 @@
       <yloc>470</yloc>
       </entry>
     <entry>
-      <name>load_nbs_result_all_years_main</name>
-      <description/>
-      <type>JOB</type>
-      <specification_method>filename</specification_method>
-      <job_object_id/>
-      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;load_nbs_result_all_years_main.kjb</filename>
-      <jobname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <expand_remote_job>N</expand_remote_job>
-      <create_parent_folder>N</create_parent_folder>
-      <pass_export>N</pass_export>
-      <force_separate_logging>N</force_separate_logging>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>560</xloc>
-      <yloc>280</yloc>
-      </entry>
-    <entry>
       <name>check disk space 3</name>
       <description/>
       <type>SHELL</type>
@@ -558,10 +526,75 @@
       <sendOneStatement>F</sendOneStatement>
       <connection>Trisano OLAP DS</connection>
       <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>250</xloc>
+      <yloc>400</yloc>
+      </entry>
+    <entry>
+      <name>Alter dim_nbs_hospital columns</name>
+      <description/>
+      <type>SQL</type>
+      <sql>alter table warehouse.dim_nbs_hospital rename column rolling_num_births to rolling_hospital_num_births&#x3b;&#xa;alter table warehouse.dim_nbs_hospital add column rolling_state_num_births integer&#x3b;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>Trisano OLAP DS</connection>
+      <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>340</xloc>
+      <yloc>400</yloc>
+      </entry>
+    <entry>
+      <name>truncate fact_nbs_card</name>
+      <description/>
+      <type>SQL</type>
+      <sql>delete from warehouse.fact_nbs_card</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>Trisano OLAP DS</connection>
+      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>370</xloc>
-      <yloc>230</yloc>
+      <xloc>150</xloc>
+      <yloc>280</yloc>
+      </entry>
+    <entry>
+      <name>exec_nbs_card_fact_main 2</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>&#x24;&#x7b;pentaho.solutions.root.vfs&#x7d;&#x2f;etl&#x2f;NBS&#x2f;exec_nbs_card_fact_main.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>400</xloc>
+      <yloc>280</yloc>
       </entry>
   </entries>
   <hops>
@@ -629,15 +662,6 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>load_nbs_result_all_years_main</from>
-      <to>check disk space 3</to>
-      <from_nr>0</from_nr>
-      <to_nr>1</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>check disk space 3</from>
       <to>vacuum 2</to>
       <from_nr>1</from_nr>
@@ -665,17 +689,8 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Create fact_nbs_result</from>
-      <to>load_nbs_result_all_years_main</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>START</from>
-      <to>truncate logs</to>
+      <to>truncate fact_nbs_card</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -683,19 +698,19 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>truncate logs</from>
-      <to>Create fact_nbs_result</to>
+      <from>truncate fact_nbs_card</from>
+      <to>exec_nbs_card_fact_main 2</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>truncate logs</from>
-      <to>load_nbs_result_all_years_main</to>
+      <from>exec_nbs_card_fact_main 2</from>
+      <to>check disk space 3</to>
       <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
+      <to_nr>1</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>

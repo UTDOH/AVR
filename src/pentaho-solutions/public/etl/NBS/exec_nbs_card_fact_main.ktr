@@ -214,15 +214,15 @@
   <hop> <from>physician not null</from><to>dim_nbs_physician</to><enabled>Y</enabled> </hop>
   <hop> <from>physician not null</from><to>Calculator 2</to><enabled>Y</enabled> </hop>
   <hop> <from>log dates</from><to>Get Card Data</to><enabled>Y</enabled> </hop>
-  <hop> <from>lookup birth date 2</from><to>upsert fact_nbs_card</to><enabled>Y</enabled> </hop>
+  <hop> <from>lookup birth date 2</from><to>upsert fact_nbs_card2</to><enabled>Y</enabled> </hop>
   <hop> <from>get max changed_on</from><to>log dates</to><enabled>Y</enabled> </hop>
   <hop> <from>Calculator 2</from><to>hospital not null</to><enabled>Y</enabled> </hop>
   <hop> <from>dim_nbs_physician</from><to>hospital not null</to><enabled>Y</enabled> </hop>
   <hop> <from>hospital not null</from><to>dim_nbs_hospital</to><enabled>Y</enabled> </hop>
   <hop> <from>hospital not null</from><to>Calculator 2 2</to><enabled>Y</enabled> </hop>
   <hop> <from>dim_nbs_hospital</from><to>lookup changed_date</to><enabled>Y</enabled> </hop>
-  <hop> <from>Calculator 2 2</from><to>lookup changed_date</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Card Data</from><to>physician not null</to><enabled>Y</enabled> </hop>
+  <hop> <from>Calculator 2 2</from><to>lookup changed_date</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Calculator 2</name>
@@ -268,7 +268,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-       <calculation><field_name>dw_hospital_id</field_name>
+       <calculation><field_name>dw_nbs_hospital_id</field_name>
 <calc_type>CONSTANT</calc_type>
 <field_a>0</field_a>
 <field_b/>
@@ -785,7 +785,7 @@
     </step>
 
   <step>
-    <name>upsert fact_nbs_card</name>
+    <name>upsert fact_nbs_card2</name>
     <type>InsertUpdate</type>
     <description/>
     <distribute>Y</distribute>
@@ -881,11 +881,6 @@
       <value>
         <name>dw_mothers_birth_date_num_id</name>
         <rename>dw_mothers_birth_date_num_id</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>dw_nbs_hospital_id</name>
-        <rename>dw_nbs_hospital_id</rename>
         <update>N</update>
       </value>
       <value>
@@ -993,11 +988,16 @@
         <rename>X_MISSING_DATA</rename>
         <update>N</update>
       </value>
+      <value>
+        <name>dw_nbs_hospital_id</name>
+        <rename>dw_nbs_hospital_id</rename>
+        <update>N</update>
+      </value>
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1250</xloc>
-      <yloc>500</yloc>
+      <yloc>550</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

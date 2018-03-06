@@ -166,14 +166,14 @@
            </partitioning>
     <connection>Trisano OLAP DS</connection>
     <rowlimit>0</rowlimit>
-    <sql>select&#xa;	 fnc.dw_hospital_id&#xa;	,count&#x28;1&#x29; as num_hospital_births&#xa;    ,rolling_12_month_births.ct as rolling_num_births&#xa;	,cast&#x28;count&#x28;1&#x29; &#x2f; rolling_12_month_births.ct&#x3a;&#x3a;float as decimal&#x28;9,8&#x29;&#x29; as rolling_pct_of_births	&#xa;from warehouse.fact_nbs_card fnc,	&#xa;&#x28;&#xa;select &#xa;	count&#x28;distinct kit_number&#x29; as ct&#xa;from warehouse.fact_nbs_card where dw_birth_date_num_id &#x3e;&#x3d; to_number&#x28;to_char&#x28;now&#x28;&#x29;, &#x27;YYYYMMDD&#x27;&#x29;, &#x27;99999999&#x27;&#x29; - 10000&#xa;&#x29; rolling_12_month_births&#xa;where fnc.dw_birth_date_num_id &#x3e;&#x3d; to_number&#x28;to_char&#x28;now&#x28;&#x29;, &#x27;YYYYMMDD&#x27;&#x29;, &#x27;99999999&#x27;&#x29; - 10000&#xa;group by dw_hospital_id, rolling_12_month_births.ct</sql>
+    <sql>select&#xa;	 fnc.dw_nbs_hospital_id&#xa;	,count&#x28;1&#x29; as rolling_hospital_num_births&#xa;    ,rolling_12_month_births.ct as rolling_state_num_births&#xa;	,cast&#x28;count&#x28;1&#x29; &#x2f; rolling_12_month_births.ct&#x3a;&#x3a;float as decimal&#x28;9,8&#x29;&#x29; as rolling_pct_of_births	&#xa;from warehouse.fact_nbs_card fnc,	&#xa;&#x28;&#xa;select &#xa;	count&#x28;distinct kit_number&#x29; as ct&#xa;from warehouse.fact_nbs_card where dw_birth_date_num_id &#x3e;&#x3d; to_number&#x28;to_char&#x28;now&#x28;&#x29;, &#x27;YYYYMMDD&#x27;&#x29;, &#x27;99999999&#x27;&#x29; - 10000&#xa;&#x29; rolling_12_month_births&#xa;where fnc.dw_birth_date_num_id &#x3e;&#x3d; to_number&#x28;to_char&#x28;now&#x28;&#x29;, &#x27;YYYYMMDD&#x27;&#x29;, &#x27;99999999&#x27;&#x29; - 10000&#xa;group by dw_nbs_hospital_id, rolling_12_month_births.ct</sql>
     <outer_join>N</outer_join>
     <replace_vars>N</replace_vars>
     <parameter>
     </parameter>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>390</xloc>
+      <xloc>380</xloc>
       <yloc>160</yloc>
       <draw>Y</draw>
       </GUI>
@@ -194,7 +194,7 @@
       <field>
         <name>start_date</name>
         <variable>&#x24;&#x7b;start_date&#x7d;</variable>
-        <type>None</type>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
@@ -233,8 +233,8 @@
       <schema>warehouse</schema>
       <table>dim_nbs_hospital</table>
       <key>
-        <name>dw_hospital_id</name>
-        <field>dw_hospital_id</field>
+        <name>dw_nbs_hospital_id</name>
+        <field>dw_nbs_hospital_id</field>
         <condition>&#x3d;</condition>
         <name2/>
         </key>
@@ -243,13 +243,17 @@
         <rename>rolling_pct_of_births</rename>
         </value>
       <value>
-        <name>rolling_num_births</name>
-        <rename>rolling_num_births</rename>
+        <name>rolling_hospital_num_births</name>
+        <rename>rolling_hospital_num_births</rename>
+        </value>
+      <value>
+        <name>rolling_state_num_births</name>
+        <rename>rolling_state_num_births</rename>
         </value>
       </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>620</xloc>
+      <xloc>610</xloc>
       <yloc>160</yloc>
       <draw>Y</draw>
       </GUI>
@@ -271,7 +275,7 @@
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
-    <sql>update warehouse.dim_nbs_hospital set rolling_pct_of_births &#x3d; 0&#x3b;&#xa;update warehouse.dim_nbs_hospital set rolling_num_births &#x3d; 0&#x3b;</sql>
+    <sql>update warehouse.dim_nbs_hospital set rolling_pct_of_births &#x3d; 0&#x3b;&#xa;update warehouse.dim_nbs_hospital set rolling_state_num_births &#x3d; 0&#x3b;&#xa;update warehouse.dim_nbs_hospital set rolling_hospital_num_births &#x3d; 0&#x3b;</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>
@@ -281,7 +285,7 @@
     </arguments>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>190</xloc>
+      <xloc>180</xloc>
       <yloc>160</yloc>
       <draw>Y</draw>
       </GUI>
