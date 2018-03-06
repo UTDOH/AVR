@@ -11,12 +11,12 @@
     <parameters>
         <parameter>
             <name>nbsoltp_schema</name>
-            <default_value>NBS_USER</default_value>
+            <default_value>NBSPROD</default_value>
             <description>NBSPROD&#x7c;NBS_USER</description>
         </parameter>
         <parameter>
             <name>nbsoltp_schemaz</name>
-            <default_value>NBSPROD</default_value>
+            <default_value>NBS_USER</default_value>
             <description>NBSPROD&#x7c;NBS_USER</description>
         </parameter>
     </parameters>
@@ -869,11 +869,6 @@
         <update>N</update>
       </value>
       <value>
-        <name>dw_birthplace_id</name>
-        <rename>dw_birthplace_id</rename>
-        <update>N</update>
-      </value>
-      <value>
         <name>dw_changed_on_date_num_id</name>
         <rename>dw_changed_on_date_num_id</rename>
         <update>N</update>
@@ -889,6 +884,11 @@
         <update>N</update>
       </value>
       <value>
+        <name>dw_nbs_hospital_id</name>
+        <rename>dw_nbs_hospital_id</rename>
+        <update>N</update>
+      </value>
+      <value>
         <name>dw_physician_id</name>
         <rename>dw_physician_id</rename>
         <update>N</update>
@@ -896,6 +896,11 @@
       <value>
         <name>dw_sr_accessioned_date_num_id</name>
         <rename>dw_sr_accessioned_date_num_id</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>first_entry_on</name>
+        <rename>BLIND_ENTRY_ON</rename>
         <update>N</update>
       </value>
       <value>
@@ -986,16 +991,6 @@
       <value>
         <name>x_missing_data</name>
         <rename>X_MISSING_DATA</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>first_entry_on</name>
-        <rename>BLIND_ENTRY_ON</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>dw_nbs_hospital_id</name>
-        <rename>dw_nbs_hospital_id</rename>
         <update>N</update>
       </value>
     </lookup>
