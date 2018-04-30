@@ -1,7 +1,4 @@
-/**
- * 
- */
-package gov.utah.health.avr2.spring.security;
+package gov.utah.health.dw.spring.security;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -11,14 +8,15 @@ import org.pentaho.platform.api.mt.ITenant;
 import org.pentaho.platform.api.mt.ITenantedPrincipleNameResolver;
 import org.pentaho.platform.security.userroledao.service.UserRoleDaoUserRoleListService;
 import org.springframework.dao.DataAccessException;
-import org.springframework.security.userdetails.UserDetailsService;
-import org.springframework.security.userdetails.UsernameNotFoundException;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 
 /**
  * @author developer
  *
  */
-public class UDOHUserRoleDaoUserRoleListService extends
+public abstract class UDOHUserRoleDaoUserRoleListService extends
 		UserRoleDaoUserRoleListService {
 
 	private static final Logger logger = Logger.getLogger(UDOHUserRoleDaoUserRoleListService.class.getName());

@@ -988,11 +988,3 @@ Data warehouse rebuild config
 - 0 */1 * * * /var/local/pdi/kitchen.sh -file /var/local/project/AVR/pentaho/datawarehouse/etl/load_data_warehouse_main.kjb > /var/log/pdi/load_data_warehouse_main.log 2>&1
 
 
-
-=================================================================== Pentaho 8 =========================================================================================
-sudo cp postgresql-9.2-1004.jdbc4.jar /var/local/pentaho8/tomcat/lib
-sudo cp ojdbc6.jar /var/local/pentaho8/tomcat/lib
-sudo cp udoh-avr2-plugins.jar /var/local/pentaho8/tomcat/webapps/pentaho/WEB-INF/lib
-
-
-

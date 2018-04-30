@@ -385,7 +385,7 @@
     <replace_vars>N</replace_vars>
     <parameter>
       <field>
-        <name>dw_hospital_id</name>
+        <name>dw_nbs_hospital_id</name>
         <type>None</type>
       </field>
     </parameter>
@@ -627,17 +627,11 @@
     <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>writeToLog&#x28;&#x27;m&#x27;, &#x27;Error locating lat&#x2f;lon for dw_hospital_id &#x5b;&#x27; &#x2b; dw_hospital_id &#x2b; &#x22;&#x5d;&#x27;&#x29;&#x3b;</jsScript_script>
+        <jsScript_script>writeToLog&#x28;&#x27;m&#x27;, &#x27;Error locating lat&#x2f;lon for dw_nbs_hospital_id &#x5b;&#x27; &#x2b; dw_nbs_hospital_id &#x2b; &#x22;&#x5d;&#x27;&#x29;&#x3b;</jsScript_script>
       </jsScript>      <jsScript>        <jsScript_type>-1</jsScript_type>
         <jsScript_name>replace_Sample</jsScript_name>
         <jsScript_script>&#x2f;&#x2f; Replaces Strings inside the given Variable.&#xa;&#x2f;&#x2f; It is possible to make more replacements inside&#xa;&#x2f;&#x2f; one call. The given variables must be an odd number&#xa;&#x2f;&#x2f;&#xa;&#x2f;&#x2f; Usage&#x3a;&#xa;&#x2f;&#x2f; replace&#x28;var, var, var&#x29;&#x3b;&#xa;&#x2f;&#x2f; 1&#x3a; String - The Variable with the content to replace.&#xa;&#x2f;&#x2f; 2&#x3a; String - The Value to search for.&#xa;&#x2f;&#x2f; 3&#x3a; String - The Value to replace with.&#xa;&#x2f;&#x2f;&#xa;&#x2f;&#x2f; replace&#x28;var, var, var, var,var,...&#x29;&#xa;&#x2f;&#x2f; 1&#x3a; String - The Variable with the content to replace.&#xa;&#x2f;&#x2f; 2&#x3a; String - The First Value to search for.&#xa;&#x2f;&#x2f; 3&#x3a; String - The First Value to replace with.&#xa;&#x2f;&#x2f; 4&#x3a; String - The Second Value to search for.&#xa;&#x2f;&#x2f; 5&#x3a; String - The Second Value to replace with.&#xa;&#x2f;&#x2f; ...&#xa;&#x2f;&#x2f;&#xa;&#x2f;&#x2f; 2006-11-15&#xa;&#x2f;&#x2f;&#xa;var str1 &#x3d; &#x22;Hello World, this is a nice function&#x22;&#x3b;      &#xa;var str2 &#x3d; replace&#x28;str1,&#x22;World&#x22;, &#x22;Folk&#x22;&#x29;&#x3b;&#xa;Alert&#x28;str2&#x29;&#x3b;&#xa;var str2 &#x3d; replace&#x28;str1,&#x22;World&#x22;, &#x22;Folk&#x22;, &#x22;nice&#x22;,&#x22;beautifull&#x22;&#x29;&#x3b;&#xa;Alert&#x28;str2&#x29;&#x3b;</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>address</name>
-        <rename>address</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>    </fields>     <cluster_schema/>
+      </jsScript>    </jsScripts>    <fields>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1210</xloc>
       <yloc>320</yloc>
@@ -660,17 +654,11 @@
     <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>writeToLog&#x28;&#x27;m&#x27;, &#x27;Error locating lat&#x2f;lon for dw_hospital_id &#x5b;&#x27; &#x2b; dw_hospital_id &#x2b; &#x27;&#x5d;&#x27;&#x29;&#x3b;</jsScript_script>
+        <jsScript_script>writeToLog&#x28;&#x27;m&#x27;, &#x27;Error locating lat&#x2f;lon for dw_hospital_id &#x5b;&#x27; &#x2b; dw_nbs_hospital_id &#x2b; &#x27;&#x5d;&#x27;&#x29;&#x3b;</jsScript_script>
       </jsScript>      <jsScript>        <jsScript_type>-1</jsScript_type>
         <jsScript_name>replace_Sample</jsScript_name>
         <jsScript_script>&#x2f;&#x2f; Replaces Strings inside the given Variable.&#xa;&#x2f;&#x2f; It is possible to make more replacements inside&#xa;&#x2f;&#x2f; one call. The given variables must be an odd number&#xa;&#x2f;&#x2f;&#xa;&#x2f;&#x2f; Usage&#x3a;&#xa;&#x2f;&#x2f; replace&#x28;var, var, var&#x29;&#x3b;&#xa;&#x2f;&#x2f; 1&#x3a; String - The Variable with the content to replace.&#xa;&#x2f;&#x2f; 2&#x3a; String - The Value to search for.&#xa;&#x2f;&#x2f; 3&#x3a; String - The Value to replace with.&#xa;&#x2f;&#x2f;&#xa;&#x2f;&#x2f; replace&#x28;var, var, var, var,var,...&#x29;&#xa;&#x2f;&#x2f; 1&#x3a; String - The Variable with the content to replace.&#xa;&#x2f;&#x2f; 2&#x3a; String - The First Value to search for.&#xa;&#x2f;&#x2f; 3&#x3a; String - The First Value to replace with.&#xa;&#x2f;&#x2f; 4&#x3a; String - The Second Value to search for.&#xa;&#x2f;&#x2f; 5&#x3a; String - The Second Value to replace with.&#xa;&#x2f;&#x2f; ...&#xa;&#x2f;&#x2f;&#xa;&#x2f;&#x2f; 2006-11-15&#xa;&#x2f;&#x2f;&#xa;var str1 &#x3d; &#x22;Hello World, this is a nice function&#x22;&#x3b;      &#xa;var str2 &#x3d; replace&#x28;str1,&#x22;World&#x22;, &#x22;Folk&#x22;&#x29;&#x3b;&#xa;Alert&#x28;str2&#x29;&#x3b;&#xa;var str2 &#x3d; replace&#x28;str1,&#x22;World&#x22;, &#x22;Folk&#x22;, &#x22;nice&#x22;,&#x22;beautifull&#x22;&#x29;&#x3b;&#xa;Alert&#x28;str2&#x29;&#x3b;</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>address</name>
-        <rename>address</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>    </fields>     <cluster_schema/>
+      </jsScript>    </jsScripts>    <fields>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1120</xloc>
       <yloc>120</yloc>
@@ -720,7 +708,7 @@
     <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>&#x2f;&#x2f;Script here&#xa;writeToLog&#x28;&#x27;m&#x27;, &#x27;FOUND LAT&#x2f;LON for dw_hospital_id &#x5b;&#x27; &#x2b; dw_hospital_id &#x2b; &#x27;&#x5d; - &#x28;&#x27; &#x2b; latitude &#x2b; &#x27;,&#x27; &#x2b; longitude &#x2b; &#x27;&#x29;&#x27;&#x29;&#x3b;</jsScript_script>
+        <jsScript_script>&#x2f;&#x2f;Script here&#xa;writeToLog&#x28;&#x27;m&#x27;, &#x27;FOUND LAT&#x2f;LON for dw_hospital_id &#x5b;&#x27; &#x2b; dw_nbs_hospital_id &#x2b; &#x27;&#x5d; - &#x28;&#x27; &#x2b; latitude &#x2b; &#x27;,&#x27; &#x2b; longitude &#x2b; &#x27;&#x29;&#x27;&#x29;&#x3b;</jsScript_script>
       </jsScript>      <jsScript>        <jsScript_type>-1</jsScript_type>
         <jsScript_name>replace_Sample</jsScript_name>
         <jsScript_script>&#x2f;&#x2f; Replaces Strings inside the given Variable.&#xa;&#x2f;&#x2f; It is possible to make more replacements inside&#xa;&#x2f;&#x2f; one call. The given variables must be an odd number&#xa;&#x2f;&#x2f;&#xa;&#x2f;&#x2f; Usage&#x3a;&#xa;&#x2f;&#x2f; replace&#x28;var, var, var&#x29;&#x3b;&#xa;&#x2f;&#x2f; 1&#x3a; String - The Variable with the content to replace.&#xa;&#x2f;&#x2f; 2&#x3a; String - The Value to search for.&#xa;&#x2f;&#x2f; 3&#x3a; String - The Value to replace with.&#xa;&#x2f;&#x2f;&#xa;&#x2f;&#x2f; replace&#x28;var, var, var, var,var,...&#x29;&#xa;&#x2f;&#x2f; 1&#x3a; String - The Variable with the content to replace.&#xa;&#x2f;&#x2f; 2&#x3a; String - The First Value to search for.&#xa;&#x2f;&#x2f; 3&#x3a; String - The First Value to replace with.&#xa;&#x2f;&#x2f; 4&#x3a; String - The Second Value to search for.&#xa;&#x2f;&#x2f; 5&#x3a; String - The Second Value to replace with.&#xa;&#x2f;&#x2f; ...&#xa;&#x2f;&#x2f;&#xa;&#x2f;&#x2f; 2006-11-15&#xa;&#x2f;&#x2f;&#xa;var str1 &#x3d; &#x22;Hello World, this is a nice function&#x22;&#x3b;      &#xa;var str2 &#x3d; replace&#x28;str1,&#x22;World&#x22;, &#x22;Folk&#x22;&#x29;&#x3b;&#xa;Alert&#x28;str2&#x29;&#x3b;&#xa;var str2 &#x3d; replace&#x28;str1,&#x22;World&#x22;, &#x22;Folk&#x22;, &#x22;nice&#x22;,&#x22;beautifull&#x22;&#x29;&#x3b;&#xa;Alert&#x28;str2&#x29;&#x3b;</jsScript_script>

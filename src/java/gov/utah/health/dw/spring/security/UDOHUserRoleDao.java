@@ -1,4 +1,4 @@
-package gov.utah.health.avr2.spring.security;
+package gov.utah.health.dw.spring.security;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,7 +24,7 @@ import org.pentaho.platform.repository2.unified.jcr.ILockHelper;
 import org.pentaho.platform.repository2.unified.jcr.IPathConversionHelper;
 import org.pentaho.platform.security.userroledao.jackrabbit.JcrUserRoleDao;
 import org.springframework.extensions.jcr.JcrTemplate;
-import org.springframework.security.providers.dao.UserCache;
+import org.springframework.security.core.userdetails.UserCache;
 
 public class UDOHUserRoleDao extends JcrUserRoleDao implements IUserRoleDao {
 	

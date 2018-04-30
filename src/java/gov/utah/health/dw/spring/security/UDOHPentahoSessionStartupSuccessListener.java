@@ -1,4 +1,4 @@
-package gov.utah.health.avr2.spring.security;
+package gov.utah.health.dw.spring.security;
 
 import java.util.logging.Logger;
 
@@ -7,9 +7,9 @@ import org.pentaho.platform.engine.core.system.PentahoSessionHolder;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.core.Ordered;
-import org.springframework.security.Authentication;
-import org.springframework.security.event.authentication.AbstractAuthenticationEvent;
-import org.springframework.security.event.authentication.AuthenticationSuccessEvent;
+import org.springframework.security.authentication.event.AbstractAuthenticationEvent;
+import org.springframework.security.authentication.event.AuthenticationSuccessEvent;
+import org.springframework.security.core.Authentication;
 import org.springframework.util.Assert;
 
 public class UDOHPentahoSessionStartupSuccessListener implements

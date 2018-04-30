@@ -1,7 +1,7 @@
 package org.pentaho.mantle.client.admin;
 
-import DockerPanel;
+// import DockerPanel;
 
-public class ContentCleanerPanel extends DockerPanel implements ISysAdminPanel{
+public class ContentCleanerPanel /*extends DockerPanel implements ISysAdminPanel*/ {
 
 }
