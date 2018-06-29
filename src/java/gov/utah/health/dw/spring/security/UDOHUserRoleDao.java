@@ -55,12 +55,12 @@ public class UDOHUserRoleDao extends JcrUserRoleDao implements IUserRoleDao {
 	@Override
 	public List<IPentahoRole> getUserRoles(ITenant tenant, String username)
 			throws UncategorizedUserRoleDaoException {
-		logger.info(">>>>>>>>>>>Entering getUserRoles() - username: " + username);
+		System.out.println(">>>>>>>>>>>Entering getUserRoles() - username: " + username);
 		
 		// TODO Auto-generated method stub
 		List<IPentahoRole> pentahoRoles = super.getUserRoles(tenant, username);
 		if (tenant != null) {
-			logger.info("username: " + username + ", tenant.id=" + tenant.getId() + ", tenant.name=" + tenant.getName());
+			System.out.println("username: " + username + ", tenant.id=" + tenant.getId() + ", tenant.name=" + tenant.getName());
 		}
 		String parsedUserName = username;
 		int usernameIndex = 0;
@@ -79,10 +79,10 @@ public class UDOHUserRoleDao extends JcrUserRoleDao implements IUserRoleDao {
 	}
 	
 	private void debugRoles(String username, List<IPentahoRole> roles) {
-		logger.info("Showing roles for username: " + username);
+		System.out.println("Showing roles for username: " + username);
 		if (roles != null) {
 			for (IPentahoRole role : roles) {
-				logger.info("ROLE: " + role.getName());
+				System.out.println("ROLE: " + role.getName());
 				
 			}
 		}
@@ -91,119 +91,119 @@ public class UDOHUserRoleDao extends JcrUserRoleDao implements IUserRoleDao {
 //	@Override
 //	public IPentahoRole getRole(ITenant arg0, String arg1)
 //			throws UncategorizedUserRoleDaoException {
-//		logger.info("ENTERING getRole(ITenant, String)");
+//		System.out.println("ENTERING getRole(ITenant, String)");
 //		return super.getRole(arg0, arg1);
 //	}
 //	
 //	@Override
 //	public List<IPentahoUser> getRoleMembers(ITenant arg0, String arg1)
 //			throws UncategorizedUserRoleDaoException {
-//		logger.info("ENTERING getRoleMembers(ITenant arg0, String arg1)");
+//		System.out.println("ENTERING getRoleMembers(ITenant arg0, String arg1)");
 //		return super.getRoleMembers(arg0, arg1);
 //	}
 //	
 //	@Override
 //	public List<IPentahoUser> getRoleMembers(Session arg0, ITenant arg1,
 //			String arg2) throws RepositoryException {
-//		logger.info("ENTERING getRoleMembers(Session arg0, ITenant arg1, String arg2)");
+//		System.out.println("ENTERING getRoleMembers(Session arg0, ITenant arg1, String arg2)");
 //		return super.getRoleMembers(arg0, arg1, arg2);
 //	}
 //	
 //	@Override
 //	public List<IPentahoRole> getRoles(Session arg0, ITenant arg1, boolean arg2)
 //			throws RepositoryException {
-//		logger.info("ENTERING getRoles(Session arg0, ITenant arg1, boolean arg2)");
+//		System.out.println("ENTERING getRoles(Session arg0, ITenant arg1, boolean arg2)");
 //		return super.getRoles(arg0, arg1, arg2);
 //	}
 //	
 //	@Override
 //	public List<IPentahoRole> getRoles(Session session)
 //			throws RepositoryException {
-//		logger.info("ENTERING getRoles(Session session)");
+//		System.out.println("ENTERING getRoles(Session session)");
 //		return super.getRoles(session);
 //	}
 //	
 //	@Override
 //	public IPentahoRole getRole(Session session, ITenant tenant, String name)
 //			throws RepositoryException {
-//		logger.info("ENTERING getRole(Session session, ITenant tenant, String name)");
+//		System.out.println("ENTERING getRole(Session session, ITenant tenant, String name)");
 //		return super.getRole(session, tenant, name);
 //	}
 //	
 //	@Override
 //	public List<IPentahoRole> getUserRoles(Session arg0, ITenant arg1,
 //			String arg2) throws RepositoryException {
-//		logger.info("ENTERING getUserRoles(Session arg0, ITenant arg1, String arg2)");
+//		System.out.println("ENTERING getUserRoles(Session arg0, ITenant arg1, String arg2)");
 //		return super.getUserRoles(arg0, arg1, arg2);
 //	}
 //	
 //	@Override
 //	public List<IPentahoRole> getRoles(ITenant arg0, boolean arg1)
 //			throws UncategorizedUserRoleDaoException {
-//		logger.info("ENTERING getRoles(ITenant arg0, boolean arg1)");
+//		System.out.println("ENTERING getRoles(ITenant arg0, boolean arg1)");
 //		return super.getRoles(arg0, arg1);
 //	}
 //	
 //	@Override
 //	public List<IPentahoRole> getRoles()
 //			throws UncategorizedUserRoleDaoException {
-//		logger.info("ENTERING getRoles()");
+//		System.out.println("ENTERING getRoles()");
 //		return super.getRoles();
 //	}
 //	
 //	@Override
 //	public List<IPentahoRole> getRoles(Session session, ITenant tenant)
 //			throws RepositoryException, NamespaceException {
-//		logger.info("ENTERING getRoles(Session session, ITenant tenant)");
+//		System.out.println("ENTERING getRoles(Session session, ITenant tenant)");
 //		return super.getRoles(session, tenant);
 //	}
 //	
 //	@Override
 //	public List<IPentahoUser> getUsers()
 //			throws UncategorizedUserRoleDaoException {
-//		logger.info("ENTERING getUsers()");
+//		System.out.println("ENTERING getUsers()");
 //		return super.getUsers();
 //	}
 //	
 //	@Override
 //	public List<IPentahoUser> getUsers(ITenant tenant)
 //			throws UncategorizedUserRoleDaoException {
-//		logger.info("ENTERING getUsers(ITenant tenant)");
+//		System.out.println("ENTERING getUsers(ITenant tenant)");
 //		return super.getUsers(tenant);
 //	}
 //	
 //	@Override
 //	public List<IPentahoUser> getUsers(ITenant arg0, boolean arg1)
 //			throws UncategorizedUserRoleDaoException {
-//		logger.info("ENTERING getUsers(ITenant arg0, boolean arg1)");
+//		System.out.println("ENTERING getUsers(ITenant arg0, boolean arg1)");
 //		return super.getUsers(arg0, arg1);
 //	}
 //	
 //	@Override
 //	public IPentahoUser getUser(Session session, ITenant tenant, String name)
 //			throws RepositoryException {
-//		logger.info("ENTERING getUser(Session session, ITenant tenant, String name)");
+//		System.out.println("ENTERING getUser(Session session, ITenant tenant, String name)");
 //		return super.getUser(session, tenant, name);
 //	}
 //	
 //	@Override
 //	public List<IPentahoUser> getUsers(Session arg0, ITenant arg1, boolean arg2)
 //			throws RepositoryException {
-//		logger.info("ENTERING getUsers(Session arg0, ITenant arg1, boolean arg2)");
+//		System.out.println("ENTERING getUsers(Session arg0, ITenant arg1, boolean arg2)");
 //		return super.getUsers(arg0, arg1, arg2);
 //	}
 //	
 //	@Override
 //	public List<IPentahoUser> getUsers(Session session)
 //			throws RepositoryException {
-//		logger.info("getUsers(Session session)");
+//		System.out.println("getUsers(Session session)");
 //		return super.getUsers(session);
 //	}
 //	
 //	@Override
 //	public List<IPentahoUser> getUsers(Session session, ITenant tenant)
 //			throws RepositoryException {
-//		logger.info("ENTERING getUsers(Session session, ITenant tenant)");
+//		System.out.println("ENTERING getUsers(Session session, ITenant tenant)");
 //		return super.getUsers(session, tenant);
 //	}
 	
@@ -284,7 +284,7 @@ public class UDOHUserRoleDao extends JcrUserRoleDao implements IUserRoleDao {
 				}
 				
 			} catch (SQLException e) {
-				logger.severe("Error building Trisano user roles: " + e.getMessage());
+				System.err.println("Error building Trisano user roles: " + e.getMessage());
 				e.printStackTrace();
 			} finally {
 				try {
@@ -308,9 +308,9 @@ public class UDOHUserRoleDao extends JcrUserRoleDao implements IUserRoleDao {
 	public List<IPentahoRole> getRoles(ITenant tenant)
 			throws UncategorizedUserRoleDaoException {
 		if (tenant != null) {
-			logger.info("ENTERING: getRoles(), tenant.name=" + tenant.getName() + ", tenant.id=" + tenant.getId());
+			System.out.println("ENTERING: getRoles(), tenant.name=" + tenant.getName() + ", tenant.id=" + tenant.getId());
 		} else {
-			logger.info("ENTERING: getRoles() - null tenant");
+			System.out.println("ENTERING: getRoles() - null tenant");
 		}
 		return super.getRoles(tenant);
 	}
@@ -319,9 +319,9 @@ public class UDOHUserRoleDao extends JcrUserRoleDao implements IUserRoleDao {
 	public IPentahoUser getUser(ITenant tenant, String arg1)
 			throws UncategorizedUserRoleDaoException {
 		if (tenant != null) {
-			logger.info("ENTERING getUser() - tenant.name=" + tenant.getName() + ", tenant.id=" + tenant.getId());
+			System.out.println("ENTERING getUser() - tenant.name=" + tenant.getName() + ", tenant.id=" + tenant.getId());
 		} else {
-			logger.info("ENTERING getUser() - null tenant");
+			System.out.println("ENTERING getUser() - null tenant");
 		}
 		return super.getUser(tenant, arg1);
 	}

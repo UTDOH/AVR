@@ -1,7 +1,8 @@
 package gov.utah.health.dw.spring.security;
 
+
+
 import java.util.Set;
-import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,7 +26,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class UDOHSSOAuthenticationFilter extends
 		UsernamePasswordAuthenticationFilter {
 	
-	private static final Logger logger = Logger.getLogger(UDOHSSOAuthenticationFilter.class.getName());
+//	private static final Logger logger = Logger.getLogger(UDOHSSOAuthenticationFilter.class.getName());
 
 	private static final String BLANK = "";
 	
@@ -90,7 +91,7 @@ public class UDOHSSOAuthenticationFilter extends
 		Authentication auth = null;
 		boolean isSiteMinderLogin = false;
 		
-		logger.info("attemptAuthentication() start..");
+		System.out.println("attemptAuthentication() start..");
 		
 		if (!isEmptyString(openAMPasswordHeaderKey) && !isEmptyString(openAMUsernameHeaderKey)) {
 			isSiteMinderLogin = true;
@@ -102,10 +103,10 @@ public class UDOHSSOAuthenticationFilter extends
 				password = request.getParameter(openAMPasswordHeaderKey);
 			}
 			
-			logger.info("SiteMinder HTTPServletRequest header values: [username=(" + userName + "), password=(" + password + ")");
+			System.out.println("SiteMinder HTTPServletRequest header values: [username=(" + userName + "), password=(" + password + ")");
 		}
 		
-		logger.info("isSiteMinderLogin = " + isSiteMinderLogin);
+		System.out.println("isSiteMinderLogin = " + isSiteMinderLogin);
 		
 		if (isSiteMinderLogin) {
 			authToken = new UsernamePasswordAuthenticationToken(userName, password);
@@ -113,23 +114,23 @@ public class UDOHSSOAuthenticationFilter extends
 			try {
 				auth = this.getAuthenticationManager().authenticate(authToken);
 			} catch (AuthenticationException ae) {
-				logger.info("SiteMinder authentication not successful.. trying form based login");
+				System.out.println("SiteMinder authentication not successful.. trying form based login");
 			}
 			
-			logger.info("SiteMinder login successful? " + (auth != null ? auth.isAuthenticated() : "false-auth is null"));
+			System.out.println("SiteMinder login successful? " + (auth != null ? auth.isAuthenticated() : "false-auth is null"));
 		}
 		
-		logger.info("After SiteMinder Authentication Check: auth=" + auth);
+		System.out.println("After SiteMinder Authentication Check: auth=" + auth);
 		
 		// Check username / password values and use form parameters instead
 		if (auth == null || !auth.isAuthenticated()) {
-			logger.info("SiteMinder authenication not found on HTTPRequest headers, Searching form parameters instead");
+			System.out.println("SiteMinder authenication not found on HTTPRequest headers, Searching form parameters instead");
 			
 			// Username
 			if(!isEmptyString(formUsernameParamKey)) {
 				userName = request.getParameter(formUsernameParamKey);
 			} else {
-				logger.info("searching request parameter [j_username]=" + request.getParameter("j_username"));
+				System.out.println("searching request parameter [j_username]=" + request.getParameter("j_username"));
 				userName = request.getParameter("j_username");
 			}
 			
@@ -137,7 +138,7 @@ public class UDOHSSOAuthenticationFilter extends
 			if(!isEmptyString(formPasswordParamKey)) {
 				password = request.getParameter(formPasswordParamKey);
 			} else {
-				logger.info("searching request parameter [j_password]=" + request.getParameter("j_password"));
+				System.out.println("searching request parameter [j_password]=" + request.getParameter("j_password"));
 
 				password = request.getParameter("j_password");
 			}
@@ -146,23 +147,23 @@ public class UDOHSSOAuthenticationFilter extends
 //			for(Object key : request.getParameterMap().entrySet()) {
 //				keyValues.append(key.toString()).append("=").append("[" + request.getParameter(key.toString()) + "]").append("\n");
 //			}
-//			logger.info("Parameter Map:\n" + keyValues.toString());
+//			System.out.println("Parameter Map:\n" + keyValues.toString());
 			
 			
 			authToken = new UsernamePasswordAuthenticationToken(userName, password);
 			setDetails(request, authToken);
 			
 			// Authenticate
-			logger.info("Authenticating...");
+			System.out.println("Authenticating...");
 			auth = this.getAuthenticationManager().authenticate(authToken);
-			logger.info("Authentication=" + auth);
+			System.out.println("Authentication=" + auth);
 //			request.getSession().setAttribute(SPRING_SECURITY_LAST_USERNAME_KEY, userName);
 			request.getSession().setAttribute("j_username", userName);
-			logger.info("After form based authentication - auth=" + auth + ", isAuthenticated=" + (auth != null ? auth.isAuthenticated() : "false"));
+			System.out.println("After form based authentication - auth=" + auth + ", isAuthenticated=" + (auth != null ? auth.isAuthenticated() : "false"));
 		}
 		
 		setDetails(request, authToken);
-		logger.info("attemptAuthentication() end..");
+		System.out.println("attemptAuthentication() end..");
 		
 		return auth;
 	}
@@ -198,12 +199,13 @@ public class UDOHSSOAuthenticationFilter extends
 		}
 		
 		
+		
 		if (!authenticated && !noAuthURLs.contains(uri)) {
-			logger.info("noAuthURLS does not contain (" + uri  + ")");
+			System.out.println("noAuthURLS does not contain (" + uri  + ")");
 			requiresAuthentication = true;
 		}
 		
-		logger.info("requiresAuthentication() [uri: " + request.getRequestURI() + " = " + requiresAuthentication + "], authenticated=" + authenticated);
+		System.out.println("requiresAuthentication() [uri: " + request.getRequestURI() + " = " + requiresAuthentication + "], authenticated=" + authenticated);
         
 		return requiresAuthentication;
 	}
@@ -247,10 +249,10 @@ public class UDOHSSOAuthenticationFilter extends
 		
 		//|| !authenticated;
 		
-//		logger.info("noAuthURLs.contains(uri): " + noAuthURLs.contains(uri));
-//		logger.info("authenticated: " + authenticated);
+//		System.out.println("noAuthURLs.contains(uri): " + noAuthURLs.contains(uri));
+//		System.out.println("authenticated: " + authenticated);
 		
-		logger.info("URI (" + uri + ") - requires authentication? " + attemptAuthentication);
+		System.out.println("URI (" + uri + ") - requires authentication? " + attemptAuthentication);
 	
 		
 		
@@ -303,14 +305,14 @@ public class UDOHSSOAuthenticationFilter extends
 	}
 
 	public void setNoAuthURLs(Set<String> noAuthURLs) {
-		logger.info(">>>>>>>>>>>>>>>> received noAuthURLs object [class=" + noAuthURLs.getClass().getName() + "]");
-		logger.info("noAuthURLs instance of java.util.Set<String>? " + (noAuthURLs instanceof java.util.Set));
+		System.out.println(">>>>>>>>>>>>>>>> received noAuthURLs object [class=" + noAuthURLs.getClass().getName() + "]");
+		System.out.println("noAuthURLs instance of java.util.Set<String>? " + (noAuthURLs instanceof java.util.Set));
 		
-		logger.info("No Auth URLs:");
+		System.out.println("No Auth URLs:");
 		for (String url : noAuthURLs) {
-			logger.info("[" + url + "]");
+			System.out.println("[" + url + "]");
 		}
-		logger.info("end logging no auth urls");
+		System.out.println("end logging no auth urls");
 		this.noAuthURLs = noAuthURLs;
 	}
 }

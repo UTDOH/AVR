@@ -52,11 +52,11 @@ public abstract class UDOHUserRoleDaoUserRoleListService extends
 		List<String> roles = super.getRolesForUser(tenant, username);
 		
 		// TODO: Append Roles
-		logger.info("Searching UDOH Roles for User: " + username);
+		System.out.println("Searching UDOH Roles for User: " + username);
 		List<String> udohRoles = udohUserRoleDao.getUserJurisdictionsAsRoles(username);
 		
 		if (udohRoles != null && udohRoles.size() > 0) {
-			logger.info("Found UDOH Roles: (count=" + udohRoles.size());
+			System.out.println("Found UDOH Roles: (count=" + udohRoles.size());
 			udohRoles.addAll(udohRoles);
 		}
 		
@@ -65,13 +65,13 @@ public abstract class UDOHUserRoleDaoUserRoleListService extends
 	
 	@Override
 	public List<String> getAllRoles(ITenant tenant) {
-		logger.info("ENTERING getAllRoles(ITenant tenant) - tenant.name:" + tenant.getName() + ", tenant.id:" + tenant.getId());
+		System.out.println("ENTERING getAllRoles(ITenant tenant) - tenant.name:" + tenant.getName() + ", tenant.id:" + tenant.getId());
 		return super.getAllRoles(tenant);
 	}
 	
 	@Override
 	public List<String> getAllUsers() {
-		logger.info("ENTERING getAllRoles(ITenant tenant)");
+		System.out.println("ENTERING getAllRoles(ITenant tenant)");
 		return super.getAllUsers();
 	}
 }

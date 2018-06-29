@@ -24,8 +24,8 @@ public class UDOHPentahoSessionStartupSuccessListener implements
 
 	public void onApplicationEvent(ApplicationEvent event) {
 		if (event instanceof AuthenticationSuccessEvent) {
-			logger.info("received " + event.getClass().getSimpleName()); //$NON-NLS-1$
-			logger.info("synchronizing current IPentahoSession with SecurityContext"); //$NON-NLS-1$
+		    System.out.println("received " + event.getClass().getSimpleName()); //$NON-NLS-1$
+		    System.out.println("synchronizing current IPentahoSession with SecurityContext"); //$NON-NLS-1$
 			try {
 				Authentication authentication = ((AbstractAuthenticationEvent) event)
 						.getAuthentication();
@@ -35,7 +35,7 @@ public class UDOHPentahoSessionStartupSuccessListener implements
 						"PentahoSessionHolder doesn't have a session");
 				pentahoSession.setAuthenticated(authentication.getName());
 			} catch (Exception e) {
-				logger.warning(e.getLocalizedMessage());
+				System.err.println(e.getLocalizedMessage());
 
 			}
 		}

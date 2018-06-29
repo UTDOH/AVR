@@ -22,9 +22,9 @@ public class SpringSecurityDebugServlet extends HttpServlet {
 		UserDetails userDetails =
 			 (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	
-		logger.info("USERNAME: " + userDetails.getUsername());
+		System.out.println("USERNAME: " + userDetails.getUsername());
 		for (GrantedAuthority authority : userDetails.getAuthorities()) {
-			logger.info("Granted Authority: " + authority.getAuthority());
+			System.out.println("Granted Authority: " + authority.getAuthority());
 		}
 		
 		return;
