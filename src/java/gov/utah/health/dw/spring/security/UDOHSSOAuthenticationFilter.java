@@ -2,6 +2,7 @@ package gov.utah.health.dw.spring.security;
 
 
 
+import java.util.Enumeration;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -87,26 +88,29 @@ public class UDOHSSOAuthenticationFilter extends
 			throws AuthenticationException {
 		String userName = BLANK;
 		String password = BLANK;
+		
 		UsernamePasswordAuthenticationToken authToken = null;
 		Authentication auth = null;
 		boolean isSiteMinderLogin = false;
 		
-		System.out.println("attemptAuthentication() start..");
+ 		System.out.println("attemptAuthentication() start..");
 		
 		if (!isEmptyString(openAMPasswordHeaderKey) && !isEmptyString(openAMUsernameHeaderKey)) {
 			isSiteMinderLogin = true;
 			if (!devMode) {
+				System.out.println("Using request header to gather OpenAM user from key [username:" + openAMUsernameHeaderKey + "], [password:" + openAMPasswordHeaderKey + "]");
 				userName = request.getHeader(openAMUsernameHeaderKey);
 				password = request.getHeader(openAMPasswordHeaderKey);
 			} else {
+				System.out.println("Using request parameters to gather OpenAM user from key [username:" + openAMUsernameHeaderKey + "], [password:" + openAMPasswordHeaderKey + "]");
 				userName = request.getParameter(openAMUsernameHeaderKey);
 				password = request.getParameter(openAMPasswordHeaderKey);
 			}
 			
-			System.out.println("SiteMinder HTTPServletRequest header values: [username=(" + userName + "), password=(" + password + ")");
+			System.out.println("OpenAM Credentials: [username=(" + userName + "), password=(" + password + ")");
 		}
 		
-		System.out.println("isSiteMinderLogin = " + isSiteMinderLogin);
+		System.out.println("isOpenAMLogin = " + isSiteMinderLogin);
 		
 		if (isSiteMinderLogin) {
 			authToken = new UsernamePasswordAuthenticationToken(userName, password);
@@ -114,17 +118,17 @@ public class UDOHSSOAuthenticationFilter extends
 			try {
 				auth = this.getAuthenticationManager().authenticate(authToken);
 			} catch (AuthenticationException ae) {
-				System.out.println("SiteMinder authentication not successful.. trying form based login");
+				System.out.println("OpenAM authentication not successful.. trying form based login");
 			}
 			
-			System.out.println("SiteMinder login successful? " + (auth != null ? auth.isAuthenticated() : "false-auth is null"));
+			System.out.println("OpenAM login successful? " + (auth != null ? auth.isAuthenticated() : "false-auth is null"));
 		}
 		
-		System.out.println("After SiteMinder Authentication Check: auth=" + auth);
+		System.out.println("After OpenAM Authentication Check: auth=" + auth);
 		
 		// Check username / password values and use form parameters instead
 		if (auth == null || !auth.isAuthenticated()) {
-			System.out.println("SiteMinder authenication not found on HTTPRequest headers, Searching form parameters instead");
+			System.out.println("OpenAM authenication not found on HTTPRequest headers, Searching form parameters instead");
 			
 			// Username
 			if(!isEmptyString(formUsernameParamKey)) {
@@ -207,6 +211,24 @@ public class UDOHSSOAuthenticationFilter extends
 		
 		System.out.println("requiresAuthentication() [uri: " + request.getRequestURI() + " = " + requiresAuthentication + "], authenticated=" + authenticated);
         
+		String logHeaderValues = BLANK;
+		logHeaderValues = request.getParameter("logHeaderValues");
+		if (logHeaderValues != null && "true".equalsIgnoreCase(logHeaderValues)) {
+			System.out.println("Log Header Values");	
+			Enumeration<String> headerEnum = request.getHeaderNames();
+			StringBuffer headerKVP = new StringBuffer();
+			while (headerEnum.hasMoreElements()) {
+				String name = headerEnum.nextElement();
+				String value = request.getHeader(name);
+				headerKVP.append("key=(").append(name).append("), value=(").append(value).append(")");
+				if (headerEnum.hasMoreElements()) {
+					headerKVP.append("\n");
+				}
+			}
+			
+			System.out.println("Header Key Value Pairs: \n" + headerKVP.toString());
+		}
+		
 		return requiresAuthentication;
 	}
 	
