@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <job>
-  <name>load_date_time_dims</name>
+  <name>truncate_logs</name>
   <description/>
   <extended_description/>
   <job_version/>
   <directory>/</directory>
   <created_user>-</created_user>
-  <created_date>2014/03/16 11:56:25.279</created_date>
+  <created_date>2018/08/19 18:28:07.534</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2014/03/16 11:56:25.279</modified_date>
+  <modified_date>2018/08/19 18:28:07.534</modified_date>
   <parameters>
     </parameters>
   <slaveservers>
@@ -303,80 +303,32 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>151</xloc>
-      <yloc>110</yloc>
+      <xloc>256</xloc>
+      <yloc>256</yloc>
     </entry>
     <entry>
-      <name>set_date_start_sequence</name>
+      <name>Shell</name>
       <description/>
-      <type>TRANS</type>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>${pentaho.solutions.root.vfs}/etl/set_date_start_sequence.ktr</filename>
-      <transname/>
+      <type>SHELL</type>
+      <filename/>
+      <work_directory/>
       <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
       <set_logfile>N</set_logfile>
       <logfile/>
+      <set_append_logfile>N</set_append_logfile>
       <logext/>
       <add_date>N</add_date>
       <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>truncate -s 1000 /var/local/pentaho8/tomcat/logs/catalina.out
+truncate -s 1000 /var/local/pentaho8/tomcat/logs/pentaho.log</script>
       <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <run_configuration/>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>291</xloc>
-      <yloc>106</yloc>
-    </entry>
-    <entry>
-      <name>seed_date</name>
-      <description/>
-      <type>TRANS</type>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>${pentaho.solutions.root.vfs}/etl/seed_date.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <run_configuration/>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>460</xloc>
-      <yloc>106</yloc>
+      <xloc>432</xloc>
+      <yloc>256</yloc>
     </entry>
     <entry>
       <name>Success</name>
@@ -385,91 +337,14 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>750</xloc>
-      <yloc>110</yloc>
-    </entry>
-    <entry>
-      <name>update_date_fields</name>
-      <description/>
-      <type>TRANS</type>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>${pentaho.solutions.root.vfs}/etl/update_date_fields.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <run_configuration/>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>604</xloc>
-      <yloc>106</yloc>
-    </entry>
-    <entry>
-      <name>Set variables 2</name>
-      <description/>
-      <type>SET_VARIABLES</type>
-      <replacevars>Y</replacevars>
-      <filename/>
-      <file_variable_type>JVM</file_variable_type>
-      <fields>
-        <field>
-          <variable_name>validation_test</variable_name>
-          <variable_value>ETL Load Status</variable_value>
-          <variable_type>JVM</variable_type>
-        </field>
-        <field>
-          <variable_name>description</variable_name>
-          <variable_value>Load date / time dims failed</variable_value>
-          <variable_type>JVM</variable_type>
-        </field>
-        <field>
-          <variable_name>status</variable_name>
-          <variable_value>false</variable_value>
-          <variable_type>JVM</variable_type>
-        </field>
-      </fields>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>475</xloc>
+      <xloc>608</xloc>
       <yloc>256</yloc>
-    </entry>
-    <entry>
-      <name>Abort job</name>
-      <description/>
-      <type>ABORT</type>
-      <message/>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>486</xloc>
-      <yloc>443</yloc>
     </entry>
   </entries>
   <hops>
     <hop>
       <from>START</from>
-      <to>set_date_start_sequence</to>
+      <to>Shell</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -477,62 +352,8 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>set_date_start_sequence</from>
-      <to>seed_date</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>seed_date</from>
-      <to>update_date_fields</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>update_date_fields</from>
+      <from>Shell</from>
       <to>Success</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>set_date_start_sequence</from>
-      <to>Set variables 2</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>seed_date</from>
-      <to>Set variables 2</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>update_date_fields</from>
-      <to>Set variables 2</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Set variables 2</from>
-      <to>Abort job</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
