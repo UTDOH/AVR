@@ -4,12 +4,11 @@
   <description/>
   <extended_description/>
   <job_version/>
-  <job_status>0</job_status>
   <directory>/</directory>
   <created_user>-</created_user>
-  <created_date>2015/11/22 15:44:02.308</created_date>
+  <created_date>2018/09/01 15:59:05.779</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015/11/22 15:44:02.308</modified_date>
+  <modified_date>2018/09/01 15:59:05.779</modified_date>
   <parameters>
     </parameters>
   <connection>
@@ -64,11 +63,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>Trisano OLAP DS</name>
+    <name>NEDSSOLAPDS</name>
     <server/>
     <type>POSTGRESQL</type>
     <access>JNDI</access>
-    <database>TrisanoOLAPDS</database>
+    <database>NEDSSOLAPDS</database>
     <port>1521</port>
     <username/>
     <password>Encrypted </password>
@@ -94,15 +93,11 @@
       </attribute>
       <attribute>
         <code>PRESERVE_RESERVED_WORD_CASE</code>
-        <attribute>N</attribute>
+        <attribute>Y</attribute>
       </attribute>
       <attribute>
         <code>QUOTE_ALL_FIELDS</code>
         <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>SQL_CONNECT</code>
-        <attribute>set search_path=public</attribute>
       </attribute>
       <attribute>
         <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
@@ -110,7 +105,7 @@
       </attribute>
       <attribute>
         <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
-        <attribute>N</attribute>
+        <attribute>Y</attribute>
       </attribute>
       <attribute>
         <code>USE_POOLING</code>
@@ -410,8 +405,98 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>10</xloc>
-      <yloc>190</yloc>
+      <xloc>176</xloc>
+      <yloc>176</yloc>
+    </entry>
+    <entry>
+      <name>nedss_fact_outbreak</name>
+      <description/>
+      <type>SQL</type>
+      <sql>-- Table: nedss_olap.dim_outbreak
+
+DROP TABLE if exists nedss_olap.dim_outbreak;
+
+DROP TABLE if exists nedss_olap.fact_outbreak;
+
+CREATE TABLE nedss_olap.fact_outbreak
+(
+    src_outbreak_id integer,
+	dw_first_known_onset_date_num_id integer,
+	dw_date_entered_into_nors_date_num integer,
+	dw_outbreak_date_num_id integer,
+	first_known_onset_date timestamp without time zone,
+	date_entered_into_nors timestamp without time zone,
+	outbreak_date timestamp without time zone,
+    "number" character varying(1024) COLLATE pg_catalog."default",
+    name character varying(1024) COLLATE pg_catalog."default",
+    created_at timestamp without time zone,
+    src_outbreaks_id integer,
+    src_outbreaks_parent_id integer,
+    src_condition_id integer,
+    src_parent_outbreak_id integer,
+    src_location_type integer,
+    src_agency_id integer,
+    src_status integer,
+    report_required boolean,
+    report_approved boolean,
+    report_approved_date timestamp without time zone,
+    link_to_epi_tracker boolean,
+    epi_tracker_name character varying(1024) COLLATE pg_catalog."default",
+    src_investigator_id integer,
+    primary_transmission text COLLATE pg_catalog."default",
+    major_setting text COLLATE pg_catalog."default",
+    etiology_status text COLLATE pg_catalog."default",
+    confirmed_state text COLLATE pg_catalog."default",
+    pfge_cluster text COLLATE pg_catalog."default",
+    nors_id text COLLATE pg_catalog."default",
+    confirmed_cases integer,
+    probable_cases integer,
+    national_outbreak boolean,
+    disease_type text COLLATE pg_catalog."default",
+    etl_load_date timestamp without time zone,
+    CONSTRAINT pk_dw_dim_outbreak PRIMARY KEY (src_outbreak_id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+-- Index: idx_dim_outbreak_dw_date_entered_into_nors_date_num
+
+-- DROP INDEX nedss_olap.idx_dim_outbreak_dw_date_entered_into_nors_date_num;
+
+CREATE INDEX idx_dim_outbreak_dw_date_entered_into_nors_date_num
+    ON nedss_olap.fact_outbreak USING btree
+    (dw_date_entered_into_nors_date_num)
+    TABLESPACE pg_default;
+
+-- Index: idx_dim_outbreak_dw_first_known_onset_date_num_id
+
+-- DROP INDEX nedss_olap.idx_dim_outbreak_dw_first_known_onset_date_num_id;
+
+CREATE INDEX idx_dim_outbreak_dw_first_known_onset_date_num_id
+    ON nedss_olap.fact_outbreak USING btree
+    (dw_first_known_onset_date_num_id)
+    TABLESPACE pg_default;
+
+-- Index: idx_dim_outbreak_dw_outbreak_date_num_id
+
+-- DROP INDEX nedss_olap.idx_dim_outbreak_dw_outbreak_date_num_id;
+
+CREATE INDEX idx_dim_outbreak_dw_outbreak_date_num_id
+    ON nedss_olap.fact_outbreak USING btree
+    (dw_outbreak_date_num_id)
+    TABLESPACE pg_default;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NEDSSOLAPDS</connection>
+      <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>336</xloc>
+      <yloc>272</yloc>
     </entry>
     <entry>
       <name>Success</name>
@@ -420,132 +505,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1210</xloc>
-      <yloc>400</yloc>
-    </entry>
-    <entry>
-      <name>fact_nbs_result</name>
-      <description/>
-      <type>SQL</type>
-      <sql>update warehouse.fact_nbs_result_2006
-set dw_dx_treatment_date_id = dd.dw_date_num_id
-from warehouse.dim_date_new dd 
-where dd.dw_date_id = dw_dx_treatment_date_id;
-
-update warehouse.fact_nbs_result_2007
-set dw_dx_treatment_date_id = dd.dw_date_num_id
-from warehouse.dim_date_new dd 
-where dd.dw_date_id = dw_dx_treatment_date_id;
-
-update warehouse.fact_nbs_result_2008
-set dw_dx_treatment_date_id = dd.dw_date_num_id
-from warehouse.dim_date_new dd 
-where dd.dw_date_id = dw_dx_treatment_date_id;
-
-update warehouse.fact_nbs_result_2009
-set dw_dx_treatment_date_id = dd.dw_date_num_id
-from warehouse.dim_date_new dd 
-where dd.dw_date_id = dw_dx_treatment_date_id;
-
-update warehouse.fact_nbs_result_2010
-set dw_dx_treatment_date_id = dd.dw_date_num_id
-from warehouse.dim_date_new dd 
-where dd.dw_date_id = dw_dx_treatment_date_id;
-
-update warehouse.fact_nbs_result_2011
-set dw_dx_treatment_date_id = dd.dw_date_num_id
-from warehouse.dim_date_new dd 
-where dd.dw_date_id = dw_dx_treatment_date_id;
-
-update warehouse.fact_nbs_result_2012
-set dw_dx_treatment_date_id = dd.dw_date_num_id
-from warehouse.dim_date_new dd 
-where dd.dw_date_id = dw_dx_treatment_date_id;
-
-update warehouse.fact_nbs_result_2013
-set dw_dx_treatment_date_id = dd.dw_date_num_id
-from warehouse.dim_date_new dd 
-where dd.dw_date_id = dw_dx_treatment_date_id;
-
-update warehouse.fact_nbs_result_2014
-set dw_dx_treatment_date_id = dd.dw_date_num_id
-from warehouse.dim_date_new dd 
-where dd.dw_date_id = dw_dx_treatment_date_id;
-
-update warehouse.fact_nbs_result_2015
-set dw_dx_treatment_date_id = dd.dw_date_num_id
-from warehouse.dim_date_new dd 
-where dd.dw_date_id = dw_dx_treatment_date_id;
-
-alter table warehouse.fact_nbs_result
-rename column dw_dx_treatment_date_id to dw_dx_treatment_date_num_id;
-
-
-
-update warehouse.fact_nbs_result_2006
-set dw_reviewed_date_id = dd.dw_date_num_id
-from warehouse.dim_date_new dd 
-where dd.dw_date_id = dw_reviewed_date_id;
-
-update warehouse.fact_nbs_result_2007
-set dw_reviewed_date_id = dd.dw_date_num_id
-from warehouse.dim_date_new dd 
-where dd.dw_date_id = dw_reviewed_date_id;
-
-update warehouse.fact_nbs_result_2008
-set dw_reviewed_date_id = dd.dw_date_num_id
-from warehouse.dim_date_new dd 
-where dd.dw_date_id = dw_reviewed_date_id;
-
-update warehouse.fact_nbs_result_2009
-set dw_reviewed_date_id = dd.dw_date_num_id
-from warehouse.dim_date_new dd 
-where dd.dw_date_id = dw_reviewed_date_id;
-
-update warehouse.fact_nbs_result_2010
-set dw_reviewed_date_id = dd.dw_date_num_id
-from warehouse.dim_date_new dd 
-where dd.dw_date_id = dw_reviewed_date_id;
-
-update warehouse.fact_nbs_result_2011
-set dw_reviewed_date_id = dd.dw_date_num_id
-from warehouse.dim_date_new dd 
-where dd.dw_date_id = dw_reviewed_date_id;
-
-update warehouse.fact_nbs_result_2012
-set dw_reviewed_date_id = dd.dw_date_num_id
-from warehouse.dim_date_new dd 
-where dd.dw_date_id = dw_reviewed_date_id;
-
-update warehouse.fact_nbs_result_2013
-set dw_reviewed_date_id = dd.dw_date_num_id
-from warehouse.dim_date_new dd 
-where dd.dw_date_id = dw_reviewed_date_id;
-
-update warehouse.fact_nbs_result_2014
-set dw_reviewed_date_id = dd.dw_date_num_id
-from warehouse.dim_date_new dd 
-where dd.dw_date_id = dw_reviewed_date_id;
-
-update warehouse.fact_nbs_result_2015
-set dw_reviewed_date_id = dd.dw_date_num_id
-from warehouse.dim_date_new dd 
-where dd.dw_date_id = dw_reviewed_date_id;
-
-
-alter table warehouse.fact_nbs_result
-rename column dw_reviewed_date_id to dw_reviewed_date_num_id;
-</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename/>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>Trisano OLAP DS</connection>
-      <parallel>N</parallel>
-      <draw>N</draw>
-      <nr>0</nr>
-      <xloc>624</xloc>
-      <yloc>480</yloc>
+      <xloc>1136</xloc>
+      <yloc>176</yloc>
     </entry>
     <entry>
       <name>Update fnr partition tables</name>
@@ -1091,743 +1052,12 @@ CREATE INDEX idx_fact_nbs_result_src_msg_processed_on_2018
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
       <sendOneStatement>F</sendOneStatement>
-      <connection>Trisano OLAP DS</connection>
+      <connection/>
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>180</xloc>
-      <yloc>550</yloc>
-    </entry>
-    <entry>
-      <name>truncate logs</name>
-      <description/>
-      <type>SHELL</type>
-      <filename/>
-      <work_directory/>
-      <arg_from_previous>N</arg_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <set_append_logfile>N</set_append_logfile>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <insertScript>Y</insertScript>
-      <script>pwd
-truncate -s 100 /var/local/pentaho/tomcat/logs/catalina.out
-truncate -s 100 /var/local/pentaho/tomcat/logs/pentaho.log</script>
-      <loglevel>Basic</loglevel>
-      <parallel>N</parallel>
-      <draw>N</draw>
-      <nr>0</nr>
-      <xloc>220</xloc>
-      <yloc>340</yloc>
-    </entry>
-    <entry>
-      <name>vw_fact_nbs_processing_dates</name>
-      <description/>
-      <type>SQL</type>
-      <sql>drop view if exists warehouse.vw_fact_nbs_processing_dates;
-
-create or replace view warehouse.vw_fact_nbs_processing_dates
-   as
-      select
-          fnpd.nbs_kit_no
-         ,fnpd.order_number
-         ,fnpd.kit_number
-         ,fnpd.accession_number
-         ,fnpd.specimen_type
-         ,fnpd.dw_hospital_id
-         ,dnh.rolling_pct_of_births
-         ,dnh.rolling_num_births
-         ,case when fnpd.dw_birth_date_num_id is null or fnpd.dw_birth_date_num_id = '19000101' then to_number(to_char(now(), 'YYYYMMDD'), '99999999') else dw_birth_date_num_id end as dw_birth_date_num_id
-         ,case when fnpd.dw_changed_on_date_num_id is null or fnpd.dw_changed_on_date_num_id = '19000101' then to_number(to_char(now(), 'YYYYMMDD'), '99999999') else dw_changed_on_date_num_id end as dw_changed_on_date_num_id
-         ,case when fnpd.dw_sr_accessioned_date_num_id is null or fnpd.dw_sr_accessioned_date_num_id = '19000101' then to_number(to_char(now(), 'YYYYMMDD'), '99999999') else dw_sr_accessioned_date_num_id end as dw_sr_accessioned_date_num_id
-         ,case when fnpd.dw_date_collected_date_num_id is null or fnpd.dw_date_collected_date_num_id = '19000101' then to_number(to_char(now(), 'YYYYMMDD'), '99999999') else dw_date_collected_date_num_id end as dw_date_collected_date_num_id
-         ,case when fnpd.dw_message_sent_on_date_num_id is null or fnpd.dw_message_sent_on_date_num_id = '19000101' then to_number(to_char(now(), 'YYYYMMDD'), '99999999') else dw_message_sent_on_date_num_id end as dw_message_sent_on_date_num_id
-         ,case when fnpd.dw_report_out_date_num_id is null or fnpd.dw_report_out_date_num_id = '19000101' then to_number(to_char(now(), 'YYYYMMDD'), '99999999') else dw_report_out_date_num_id end as dw_report_out_date_num_id
-         ,case when fnpd.dw_sr_received_date_num_id_max is null or fnpd.dw_sr_received_date_num_id_max = '19000101' then to_number(to_char(now(), 'YYYYMMDD'), '99999999') else dw_sr_received_date_num_id_max end as dw_sr_received_date_num_id_max
-         ,case when fnpd.dw_login_date_num_id_max is null or fnpd.dw_login_date_num_id_max = '19000101' then to_number(to_char(now(), 'YYYYMMDD'), '99999999') else dw_login_date_num_id_max end as dw_login_date_num_id_max
-         ,case when fnpd.dw_recd_date_num_id_max is null or fnpd.dw_recd_date_num_id_max = '19000101' then to_number(to_char(now(), 'YYYYMMDD'), '99999999') else dw_recd_date_num_id_max	 end as dw_recd_date_num_id_max	
-         ,case when fnpd.dw_completed_date_num_id_max is null or fnpd.dw_completed_date_num_id_max = '19000101' then to_number(to_char(now(), 'YYYYMMDD'), '99999999') else dw_completed_date_num_id_max end as dw_completed_date_num_id_max
-         ,case when fnpd.dw_reviewed_date_num_id_sample_max is null or fnpd.dw_reviewed_date_num_id_sample_max = '19000101' then to_number(to_char(now(), 'YYYYMMDD'), '99999999') else dw_reviewed_date_num_id_sample_max end as dw_reviewed_date_num_id_sample_max
-         ,case when fnpd.dw_message_processed_on_date_num_id_sample_max is null or fnpd.dw_message_processed_on_date_num_id_sample_max = '19000101' then to_number(to_char(now(), 'YYYYMMDD'), '99999999') else dw_message_processed_on_date_num_id_sample_max end as dw_message_processed_on_date_num_id_sample_max
-         ,case when fnpd.dw_result_entry_date_num_id_max is null or fnpd.dw_result_entry_date_num_id_max = '19000101' then to_number(to_char(now(), 'YYYYMMDD'), '99999999') else dw_result_entry_date_num_id_max end as dw_result_entry_date_num_id_max
-         ,case when fnpd.dw_dx_treatment_date_num_id_max is null or fnpd.dw_dx_treatment_date_num_id_max = '19000101' then to_number(to_char(now(), 'YYYYMMDD'), '99999999') else dw_dx_treatment_date_num_id_max end as dw_dx_treatment_date_num_id_max
-         ,case when fnpd.dw_reviewed_date_num_id_result_max is null or fnpd.dw_reviewed_date_num_id_result_max = '19000101' then to_number(to_char(now(), 'YYYYMMDD'), '99999999') else dw_reviewed_date_num_id_result_max end as dw_reviewed_date_num_id_result_max
-         ,case when fnpd.dw_entered_on_date_num_id_max is null or fnpd.dw_entered_on_date_num_id_max = '19000101' then to_number(to_char(now(), 'YYYYMMDD'), '99999999') else dw_entered_on_date_num_id_max end as dw_entered_on_date_num_id_max
-         ,case when fnpd.dw_message_processed_on_date_num_id_result_max is null or fnpd.dw_message_processed_on_date_num_id_result_max = '19000101' then to_number(to_char(now(), 'YYYYMMDD'), '99999999') else dw_message_processed_on_date_num_id_result_max end as dw_message_processed_on_date_num_id_result_max
-      from warehouse.fact_nbs_processing_dates fnpd
-inner join warehouse.dim_nbs_hospital dnh on dnh.dw_hospital_id = fnpd.dw_hospital_id
-</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename/>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>Trisano OLAP DS</connection>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>350</xloc>
-      <yloc>160</yloc>
-    </entry>
-    <entry>
-      <name>vw_fact_nbs_processing_dates_alt</name>
-      <description/>
-      <type>SQL</type>
-      <sql>drop view if exists warehouse.vw_fact_nbs_processing_dates_alt;
-
-create or replace view warehouse.vw_fact_nbs_processing_dates_alt
-   as
-      select
-          fnpd.nbs_kit_no
-         ,fnpd.order_number
-         ,fnpd.kit_number
-         ,fnpd.accession_number
-         ,fnpd.specimen_type
-         ,fnpd.dw_hospital_id
-         ,dnh.rolling_pct_of_births
-         ,dnh.rolling_num_births
-         ,case when fnpd.dw_birth_date_num_id is null or fnpd.dw_birth_date_num_id = '19000101' then null else dw_birth_date_num_id end as dw_birth_date_num_id
-         ,case when fnpd.dw_changed_on_date_num_id is null or fnpd.dw_changed_on_date_num_id = '19000101' then null else dw_changed_on_date_num_id end as dw_changed_on_date_num_id
-         ,case when fnpd.dw_sr_accessioned_date_num_id is null or fnpd.dw_sr_accessioned_date_num_id = '19000101' then null else dw_sr_accessioned_date_num_id end as dw_sr_accessioned_date_num_id
-         ,case when fnpd.dw_date_collected_date_num_id is null or fnpd.dw_date_collected_date_num_id = '19000101' then null else dw_date_collected_date_num_id end as dw_date_collected_date_num_id
-         ,case when fnpd.dw_message_sent_on_date_num_id is null or fnpd.dw_message_sent_on_date_num_id = '19000101' then null else dw_message_sent_on_date_num_id end as dw_message_sent_on_date_num_id
-         ,case when fnpd.dw_report_out_date_num_id is null or fnpd.dw_report_out_date_num_id = '19000101' then null else dw_report_out_date_num_id end as dw_report_out_date_num_id
-         ,case when fnpd.dw_sr_received_date_num_id_max is null or fnpd.dw_sr_received_date_num_id_max = '19000101' then null else dw_sr_received_date_num_id_max end as dw_sr_received_date_num_id_max
-         ,case when fnpd.dw_login_date_num_id_max is null or fnpd.dw_login_date_num_id_max = '19000101' then null else dw_login_date_num_id_max end as dw_login_date_num_id_max
-         ,case when fnpd.dw_recd_date_num_id_max is null or fnpd.dw_recd_date_num_id_max = '19000101' then null else dw_recd_date_num_id_max	 end as dw_recd_date_num_id_max	
-         ,case when fnpd.dw_completed_date_num_id_max is null or fnpd.dw_completed_date_num_id_max = '19000101' then null else dw_completed_date_num_id_max end as dw_completed_date_num_id_max
-         ,case when fnpd.dw_reviewed_date_num_id_sample_max is null or fnpd.dw_reviewed_date_num_id_sample_max = '19000101' then null else dw_reviewed_date_num_id_sample_max end as dw_reviewed_date_num_id_sample_max
-         ,case when fnpd.dw_message_processed_on_date_num_id_sample_max is null or fnpd.dw_message_processed_on_date_num_id_sample_max = '19000101' then null else dw_message_processed_on_date_num_id_sample_max end as dw_message_processed_on_date_num_id_sample_max
-         ,case when fnpd.dw_result_entry_date_num_id_max is null or fnpd.dw_result_entry_date_num_id_max = '19000101' then null else dw_result_entry_date_num_id_max end as dw_result_entry_date_num_id_max
-         ,case when fnpd.dw_dx_treatment_date_num_id_max is null or fnpd.dw_dx_treatment_date_num_id_max = '19000101' then null else dw_dx_treatment_date_num_id_max end as dw_dx_treatment_date_num_id_max
-         ,case when fnpd.dw_reviewed_date_num_id_result_max is null or fnpd.dw_reviewed_date_num_id_result_max = '19000101' then null else dw_reviewed_date_num_id_result_max end as dw_reviewed_date_num_id_result_max
-         ,case when fnpd.dw_entered_on_date_num_id_max is null or fnpd.dw_entered_on_date_num_id_max = '19000101' then null else dw_entered_on_date_num_id_max end as dw_entered_on_date_num_id_max
-         ,case when fnpd.dw_message_processed_on_date_num_id_result_max is null or fnpd.dw_message_processed_on_date_num_id_result_max = '19000101' then null else dw_message_processed_on_date_num_id_result_max end as dw_message_processed_on_date_num_id_result_max
-      from warehouse.fact_nbs_processing_dates fnpd
-inner join warehouse.dim_nbs_date dnd on dnd.dw_date_num_id = fnpd.dw_birth_date_num_id
-inner join warehouse.dim_nbs_hospital dnh on dnh.dw_hospital_id = fnpd.dw_hospital_id;
-
-drop view if exists warehouse.vw_fact_nbs_processing_dates_alt2;
-
-create or replace view warehouse.vw_fact_nbs_processing_dates_alt2
-   as
-      select
-          fnpd.nbs_kit_no
-         ,fnpd.kit_number
-         ,fnpd.dw_hospital_id
-         ,dnh.rolling_pct_of_births
-         ,dnh.rolling_num_births
-         ,fnpd.dw_birth_date_num_id
-         ,max(case when fnpd.dw_changed_on_date_num_id is null or fnpd.dw_changed_on_date_num_id = '19000101' then null else dw_changed_on_date_num_id end) as dw_changed_on_date_num_id
-         ,max(case when fnpd.dw_sr_accessioned_date_num_id is null or fnpd.dw_sr_accessioned_date_num_id = '19000101' then null else dw_sr_accessioned_date_num_id end) as dw_sr_accessioned_date_num_id
-         ,min(case when fnpd.dw_date_collected_date_num_id is null or fnpd.dw_date_collected_date_num_id = '19000101' then null else dw_date_collected_date_num_id end) as dw_date_collected_date_num_id
-         ,max(case when fnpd.dw_message_sent_on_date_num_id is null or fnpd.dw_message_sent_on_date_num_id = '19000101' then null else dw_message_sent_on_date_num_id end) as dw_message_sent_on_date_num_id
-         ,max(case when fnpd.dw_report_out_date_num_id is null or fnpd.dw_report_out_date_num_id = '19000101' then null else dw_report_out_date_num_id end) as dw_report_out_date_num_id
-         ,max(case when fnpd.dw_sr_received_date_num_id_max is null or fnpd.dw_sr_received_date_num_id_max = '19000101' then null else dw_sr_received_date_num_id_max end) as dw_sr_received_date_num_id_max
-         ,max(case when fnpd.dw_login_date_num_id_max is null or fnpd.dw_login_date_num_id_max = '19000101' then null else dw_login_date_num_id_max end) as dw_login_date_num_id_max
-         ,max(case when fnpd.dw_recd_date_num_id_max is null or fnpd.dw_recd_date_num_id_max = '19000101' then null else dw_recd_date_num_id_max	 end) as dw_recd_date_num_id_max	
-         ,max(case when fnpd.dw_completed_date_num_id_max is null or fnpd.dw_completed_date_num_id_max = '19000101' then null else dw_completed_date_num_id_max end) as dw_completed_date_num_id_max
-         ,max(case when fnpd.dw_reviewed_date_num_id_sample_max is null or fnpd.dw_reviewed_date_num_id_sample_max = '19000101' then null else dw_reviewed_date_num_id_sample_max end) as dw_reviewed_date_num_id_sample_max
-         ,max(case when fnpd.dw_message_processed_on_date_num_id_sample_max is null or fnpd.dw_message_processed_on_date_num_id_sample_max = '19000101' then null else dw_message_processed_on_date_num_id_sample_max end) as dw_message_processed_on_date_num_id_sample_max
-         ,max(case when fnpd.dw_result_entry_date_num_id_max is null or fnpd.dw_result_entry_date_num_id_max = '19000101' then null else dw_result_entry_date_num_id_max end) as dw_result_entry_date_num_id_max
-         ,max(case when fnpd.dw_dx_treatment_date_num_id_max is null or fnpd.dw_dx_treatment_date_num_id_max = '19000101' then null else dw_dx_treatment_date_num_id_max end) as dw_dx_treatment_date_num_id_max
-         ,max(case when fnpd.dw_reviewed_date_num_id_result_max is null or fnpd.dw_reviewed_date_num_id_result_max = '19000101' then null else dw_reviewed_date_num_id_result_max end) as dw_reviewed_date_num_id_result_max
-         ,max(case when fnpd.dw_entered_on_date_num_id_max is null or fnpd.dw_entered_on_date_num_id_max = '19000101' then null else dw_entered_on_date_num_id_max end) as dw_entered_on_date_num_id_max
-         ,max(case when fnpd.dw_message_processed_on_date_num_id_result_max is null or fnpd.dw_message_processed_on_date_num_id_result_max = '19000101' then null else dw_message_processed_on_date_num_id_result_max end) as dw_message_processed_on_date_num_id_result_max
-      from warehouse.fact_nbs_processing_dates fnpd
-inner join warehouse.dim_nbs_date dnd on dnd.dw_date_num_id = fnpd.dw_birth_date_num_id
-inner join warehouse.dim_nbs_hospital dnh on dnh.dw_hospital_id = fnpd.dw_hospital_id
-group by 1,2,3,4,5,6;</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename/>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>Trisano OLAP DS</connection>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>570</xloc>
-      <yloc>160</yloc>
-    </entry>
-    <entry>
-      <name>add dimhospital and rebuild fnc</name>
-      <description/>
-      <type>SQL</type>
-      <sql>DROP TABLE IF EXISTS warehouse.dim_nbs_hospital;
-
-CREATE TABLE warehouse.dim_nbs_hospital
-(
-  dw_hospital_id INTEGER
-, version INTEGER
-, start_date TIMESTAMP
-, end_date TIMESTAMP
-, hospital_code VARCHAR(128)
-, hospital_city VARCHAR(128)
-, hospital_state VARCHAR(3)
-, hospital_country VARCHAR(128)
-, hospital_zip VARCHAR(10)
-, pct_of_state_births DECIMAL(5,2)
-)
-;CREATE INDEX idx_dim_nbs_hospital_lookup ON warehouse.dim_nbs_hospital(hospital_code)
-;
-CREATE INDEX idx_dim_nbs_hospital_tk ON warehouse.dim_nbs_hospital(dw_hospital_id)
-;
-CREATE INDEX idx_dim_nbs_hospital_pct_births ON warehouse.dim_nbs_hospital(pct_of_state_births)
-;
-
--- Table: warehouse.fact_nbs_card
-
-DROP TABLE IF EXISTS warehouse.fact_nbs_card;
-
-CREATE TABLE warehouse.fact_nbs_card
-(
-  nbs_kit_no integer,
-  kit_number character varying(15),
-  order_number integer,
-  dw_birthplace_id integer,
-  dw_physician_id integer,
-  dw_changed_on_date_num_id integer,
-  dw_sr_accessioned_date_num_id integer,
-  dw_date_collected_date_num_id integer,
-  dw_birth_date_num_id integer,
-  dw_mothers_birth_date_num_id integer,
-  dw_message_sent_on_date_num_id integer DEFAULT 19000101,
-  dw_report_out_date_num_id integer DEFAULT 19000101,
-  dw_hospital_id integer,
-  src_message_sent_on timestamp without time zone DEFAULT '1900-01-01 00:00:00'::timestamp without time zone,
-  src_report_out_date timestamp without time zone DEFAULT '1900-01-01 00:00:00'::timestamp without time zone,
-  sr_accessioned timestamp without time zone,
-  specimen_type character varying(255),
-  accession_number character varying(30),
-  reject_reason character varying(128),
-  babys_sex character varying(1),
-  breast integer,
-  bottle integer,
-  adoption integer,
-  premature_sick integer,
-  multiple_birth integer,
-  home_birth integer,
-  transfusion integer,
-  card_ok integer,
-  x_missing_data integer,
-  transfusion_date date,
-  birth_weight numeric(38,0),
-  mothers_zip character varying(10),
-  recall_reason character varying(10),
-  meconium_ileus integer,
-  steroids integer,
-  tpn integer,
-  birthplace_type character varying(255),
-  changed_on timestamp without time zone,
-  date_collected timestamp without time zone,
-  first_entry_on timestamp without time zone,
-  second_entry_on timestamp without time zone
-  
-)
-WITH (
-  OIDS=FALSE
-);
-ALTER TABLE warehouse.fact_nbs_card
-  OWNER TO pentaho;
-GRANT ALL ON TABLE warehouse.fact_nbs_card TO pentaho;
-GRANT SELECT ON TABLE warehouse.fact_nbs_card TO bi_nbs_user_role;
-
--- Index: warehouse.idx_fact_nbs_card_accession_number
-
--- DROP INDEX warehouse.idx_fact_nbs_card_accession_number;
-
-CREATE INDEX idx_fact_nbs_card_accession_number
-  ON warehouse.fact_nbs_card
-  USING btree
-  (accession_number COLLATE pg_catalog."default");
-
--- Index: warehouse.idx_fact_nbs_card_babys_sex
-
--- DROP INDEX warehouse.idx_fact_nbs_card_babys_sex;
-
-CREATE INDEX idx_fact_nbs_card_babys_sex
-  ON warehouse.fact_nbs_card
-  USING btree
-  (babys_sex COLLATE pg_catalog."default");
-
--- Index: warehouse.idx_fact_nbs_card_birth_blind_entry_on
-
--- DROP INDEX warehouse.idx_fact_nbs_card_birth_blind_entry_on;
-
-CREATE INDEX idx_fact_nbs_card_birth_blind_entry_on
-  ON warehouse.fact_nbs_card
-  USING btree
-  (first_entry_on);
-
--- Index: warehouse.idx_fact_nbs_card_birth_date
-
--- DROP INDEX warehouse.idx_fact_nbs_card_birth_date;
-
-CREATE INDEX idx_fact_nbs_card_birth_date
-  ON warehouse.fact_nbs_card
-  USING btree
-  (dw_birth_date_num_id);
-
--- Index: warehouse.idx_fact_nbs_card_birth_second_entry_on
-
--- DROP INDEX warehouse.idx_fact_nbs_card_birth_second_entry_on;
-
-CREATE INDEX idx_fact_nbs_card_birth_second_entry_on
-  ON warehouse.fact_nbs_card
-  USING btree
-  (second_entry_on);
-
--- Index: warehouse.idx_fact_nbs_card_birthplace
-
--- DROP INDEX warehouse.idx_fact_nbs_card_birthplace;
-
-CREATE INDEX idx_fact_nbs_card_birthplace
-  ON warehouse.fact_nbs_card
-  USING btree
-  (dw_birthplace_id);
-
--- Index: warehouse.idx_fact_nbs_card_changed_on
-
--- DROP INDEX warehouse.idx_fact_nbs_card_changed_on;
-
-CREATE INDEX idx_fact_nbs_card_changed_on
-  ON warehouse.fact_nbs_card
-  USING btree
-  (dw_changed_on_date_num_id);
-
--- Index: warehouse.idx_fact_nbs_card_date_collected
-
--- DROP INDEX warehouse.idx_fact_nbs_card_date_collected;
-
-CREATE INDEX idx_fact_nbs_card_date_collected
-  ON warehouse.fact_nbs_card
-  USING btree
-  (dw_date_collected_date_num_id);
-
--- Index: warehouse.idx_fact_nbs_card_dw_msg_sent_on
-
--- DROP INDEX warehouse.idx_fact_nbs_card_dw_msg_sent_on;
-
-CREATE INDEX idx_fact_nbs_card_dw_msg_sent_on
-  ON warehouse.fact_nbs_card
-  USING btree
-  (dw_message_sent_on_date_num_id);
-
--- Index: warehouse.idx_fact_nbs_card_dw_report_out_date
-
--- DROP INDEX warehouse.idx_fact_nbs_card_dw_report_out_date;
-
-CREATE INDEX idx_fact_nbs_card_dw_report_out_date
-  ON warehouse.fact_nbs_card
-  USING btree
-  (dw_report_out_date_num_id);
-
--- Index: warehouse.idx_fact_nbs_card_hospital_code
-
--- DROP INDEX warehouse.idx_fact_nbs_card_hospital_code;
-
-CREATE INDEX idx_fact_nbs_card_hospital
-  ON warehouse.fact_nbs_card
-  USING btree
-  (dw_hospital_id);
-
--- Index: warehouse.idx_fact_nbs_card_inc_etl
-
--- DROP INDEX warehouse.idx_fact_nbs_card_inc_etl;
-
-CREATE INDEX idx_fact_nbs_card_inc_etl
-  ON warehouse.fact_nbs_card
-  USING btree
-  (changed_on);
-
--- Index: warehouse.idx_fact_nbs_card_lookup
-
--- DROP INDEX warehouse.idx_fact_nbs_card_lookup;
-
-CREATE INDEX idx_fact_nbs_card_lookup
-  ON warehouse.fact_nbs_card
-  USING btree
-  (kit_number COLLATE pg_catalog."default", order_number);
-
--- Index: warehouse.idx_fact_nbs_card_mothers_birth_date
-
--- DROP INDEX warehouse.idx_fact_nbs_card_mothers_birth_date;
-
-CREATE INDEX idx_fact_nbs_card_mothers_birth_date
-  ON warehouse.fact_nbs_card
-  USING btree
-  (dw_mothers_birth_date_num_id);
-
--- Index: warehouse.idx_fact_nbs_card_mothers_zip
-
--- DROP INDEX warehouse.idx_fact_nbs_card_mothers_zip;
-
-CREATE INDEX idx_fact_nbs_card_mothers_zip
-  ON warehouse.fact_nbs_card
-  USING btree
-  (mothers_zip COLLATE pg_catalog."default");
-
--- Index: warehouse.idx_fact_nbs_card_name
-
--- DROP INDEX warehouse.idx_fact_nbs_card_name;
-
-CREATE INDEX idx_fact_nbs_card_name
-  ON warehouse.fact_nbs_card
-  USING btree
-  (kit_number COLLATE pg_catalog."default");
-
--- Index: warehouse.idx_fact_nbs_card_physician
-
--- DROP INDEX warehouse.idx_fact_nbs_card_physician;
-
-CREATE INDEX idx_fact_nbs_card_physician
-  ON warehouse.fact_nbs_card
-  USING btree
-  (dw_physician_id);
-
--- Index: warehouse.idx_fact_nbs_card_recall_reason
-
--- DROP INDEX warehouse.idx_fact_nbs_card_recall_reason;
-
-CREATE INDEX idx_fact_nbs_card_recall_reason
-  ON warehouse.fact_nbs_card
-  USING btree
-  (recall_reason COLLATE pg_catalog."default");
-
--- Index: warehouse.idx_fact_nbs_card_reject_reason
-
--- DROP INDEX warehouse.idx_fact_nbs_card_reject_reason;
-
-CREATE INDEX idx_fact_nbs_card_reject_reason
-  ON warehouse.fact_nbs_card
-  USING btree
-  (reject_reason COLLATE pg_catalog."default");
-
--- Index: warehouse.idx_fact_nbs_card_specimen_type
-
--- DROP INDEX warehouse.idx_fact_nbs_card_specimen_type;
-
-CREATE INDEX idx_fact_nbs_card_specimen_type
-  ON warehouse.fact_nbs_card
-  USING btree
-  (specimen_type COLLATE pg_catalog."default");
-
--- Index: warehouse.idx_fact_nbs_card_sr_accessioned_date
-
--- DROP INDEX warehouse.idx_fact_nbs_card_sr_accessioned_date;
-
-CREATE INDEX idx_fact_nbs_card_sr_accessioned_date
-  ON warehouse.fact_nbs_card
-  USING btree
-  (dw_sr_accessioned_date_num_id);
-
--- Index: warehouse.idx_fact_nbs_card_src_msg_sent_on
-
--- DROP INDEX warehouse.idx_fact_nbs_card_src_msg_sent_on;
-
-CREATE INDEX idx_fact_nbs_card_src_msg_sent_on
-  ON warehouse.fact_nbs_card
-  USING btree
-  (src_message_sent_on);
-
--- Index: warehouse.idx_fact_nbs_card_src_report_out_date
-
--- DROP INDEX warehouse.idx_fact_nbs_card_src_report_out_date;
-
-CREATE INDEX idx_fact_nbs_card_src_report_out_date
-  ON warehouse.fact_nbs_card
-  USING btree
-  (src_report_out_date);
-
--- Index: warehouse.idx_fact_nbs_card_src_sr_accessioned_date
-
--- DROP INDEX warehouse.idx_fact_nbs_card_src_sr_accessioned_date;
-
-CREATE INDEX idx_fact_nbs_card_src_sr_accessioned_date
-  ON warehouse.fact_nbs_card
-  USING btree
-  (sr_accessioned);
-
-</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename/>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>Trisano OLAP DS</connection>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>150</xloc>
-      <yloc>40</yloc>
-    </entry>
-    <entry>
-      <name>exec_nbs_card_fact_main</name>
-      <description/>
-      <type>TRANS</type>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>${pentaho.solutions.root.vfs}/etl/NBS/exec_nbs_card_fact_main.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <run_configuration/>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>370</xloc>
-      <yloc>40</yloc>
-    </entry>
-    <entry>
-      <name>exec_update_nbs_card_fact_w_arup_msg_in_main</name>
-      <description/>
-      <type>TRANS</type>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>${pentaho.solutions.root.vfs}/etl/NBS/exec_update_nbs_card_fact_w_arup_msg_in_main.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <run_configuration/>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>620</xloc>
-      <yloc>40</yloc>
-    </entry>
-    <entry>
-      <name>exec_update_nbs_card_w_report_out_date</name>
-      <description/>
-      <type>TRANS</type>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>${pentaho.solutions.root.vfs}/etl/NBS/exec_update_nbs_card_w_report_out_date.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <run_configuration/>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>900</xloc>
-      <yloc>40</yloc>
-    </entry>
-    <entry>
-      <name>fact_nbs_processing_dates 3</name>
-      <description/>
-      <type>SQL</type>
-      <sql>drop view if exists warehouse.vw_fact_nbs_processing_dates;
-
-drop view if exists warehouse.vw_fact_nbs_processing_dates_alt;
-
-drop view if exists warehouse.vw_fact_nbs_processing_dates_alt2;
-
-drop table if exists warehouse.fact_nbs_processing_dates;
-
-create table warehouse.fact_nbs_processing_dates as
-(
-select
-     fnc.nbs_kit_no
-    ,fnc.order_number
-    ,fnc.kit_number
-	,fnc.accession_number
-    ,fnc.specimen_type
-    ,fnc.dw_hospital_id
-    ,fnc.dw_birth_date_num_id
-	,fnc.dw_changed_on_date_num_id
-	,fnc.dw_sr_accessioned_date_num_id
-	,fnc.dw_date_collected_date_num_id
-	,fnc.dw_message_sent_on_date_num_id
-	,fnc.dw_report_out_date_num_id
-    ,max(fncl.dw_sr_received_date_num_id) as dw_sr_received_date_num_id_max
-	,max(fns.dw_login_date_num_id) as dw_login_date_num_id_max
-	,max(fns.dw_recd_date_num_id) as dw_recd_date_num_id_max	
-	,max(fns.dw_completed_date_num_id) as dw_completed_date_num_id_max
-	,max(fns.dw_reviewed_date_num_id) as dw_reviewed_date_num_id_sample_max
-	,max(fns.dw_message_processed_on_date_num_id) as dw_message_processed_on_date_num_id_sample_max
-	,max(fns.dw_result_entry_date_num_id) as dw_result_entry_date_num_id_max
-	,max(fnr.dw_dx_treatment_date_num_id) as dw_dx_treatment_date_num_id_max
-	,max(fnr.dw_reviewed_date_num_id) as dw_reviewed_date_num_id_result_max
-	,max(fnr.dw_entered_on_date_num_id) as dw_entered_on_date_num_id_max
-	,max(fnr.dw_message_processed_on_date_num_id) as dw_message_processed_on_date_num_id_result_max
-from warehouse.fact_nbs_card fnc left join warehouse.fact_nbs_card_log fncl on fncl.kit_number = fnc.kit_number and fncl.order_number = fnc.order_number
-left join warehouse.fact_nbs_sample fns on fns.accession_number = fnc.accession_number
-left join warehouse.fact_nbs_result fnr on fnr.sample_number = fns.sample_number
-group by 1,2,3,4,5,6,7,8,9,10,11,12
-);
-
-CREATE INDEX idx_fnpd_nbs_kit_no
-  ON warehouse.fact_nbs_processing_dates
-  USING btree
-  (nbs_kit_no);
-
-CREATE INDEX idx_fnpd_order_number
-  ON warehouse.fact_nbs_processing_dates
-  USING btree
-  (order_number);
-
-CREATE INDEX idx_fnpd_kit_number
-  ON warehouse.fact_nbs_processing_dates
-  USING btree
-  (kit_number);
-
-CREATE INDEX idx_fnpd_accession_number
-  ON warehouse.fact_nbs_processing_dates
-  USING btree
-  (accession_number);
-
-CREATE INDEX idx_fnpd_fnc_dw_birth_date_num_id
-  ON warehouse.fact_nbs_processing_dates
-  USING btree
-  (dw_birth_date_num_id);
-
-CREATE INDEX idx_fnpd_dw_hospital_id
-  ON warehouse.fact_nbs_processing_dates
-  USING btree
-  (dw_hospital_id);
-
-CREATE INDEX idx_fnpd_dw_changed_on_date_num_id
-  ON warehouse.fact_nbs_processing_dates
-  USING btree
-  (dw_changed_on_date_num_id);
-  
-CREATE INDEX idx_fnpd_dw_date_collected_date_num_id
-  ON warehouse.fact_nbs_processing_dates
-  USING btree
-  (dw_date_collected_date_num_id);
-  
-CREATE INDEX idx_fnpd_dw_message_sent_on_date_num_id
-  ON warehouse.fact_nbs_processing_dates
-  USING btree
-  (dw_message_sent_on_date_num_id);
-  
-CREATE INDEX idx_fnpd_dw_report_out_date_num_id
-  ON warehouse.fact_nbs_processing_dates
-  USING btree
-  (dw_report_out_date_num_id);
-
-CREATE INDEX idx_fnpd_dw_sr_accessioned_date_num_id
-  ON warehouse.fact_nbs_processing_dates
-  USING btree
-  (dw_sr_accessioned_date_num_id);
-  
-CREATE INDEX idx_fnpd_dw_login_date_num_id_max
-  ON warehouse.fact_nbs_processing_dates
-  USING btree
-  (dw_login_date_num_id_max);
-  
-CREATE INDEX idx_fnpd_dw_recd_date_num_id_max	
-  ON warehouse.fact_nbs_processing_dates
-  USING btree
-  (dw_recd_date_num_id_max);
-  
-CREATE INDEX idx_fnpd_dw_completed_date_num_id_max
-  ON warehouse.fact_nbs_processing_dates
-  USING btree
-  (dw_completed_date_num_id_max);
-  
-CREATE INDEX idx_fnpd_dw_reviewed_date_num_id_result_max
-  ON warehouse.fact_nbs_processing_dates
-  USING btree
-  (dw_reviewed_date_num_id_result_max);
-  
-CREATE INDEX idx_fnpd_dw_message_processed_on_date_num_id_result_max
-  ON warehouse.fact_nbs_processing_dates
-  USING btree
-  (dw_message_processed_on_date_num_id_result_max);
-  
-CREATE INDEX idx_fnpd_dw_result_entry_date_num_id_max
-  ON warehouse.fact_nbs_processing_dates
-  USING btree
-  (dw_result_entry_date_num_id_max);
-  
-CREATE INDEX idx_fnpd_dw_dx_treatment_date_num_id_max
-  ON warehouse.fact_nbs_processing_dates
-  USING btree
-  (dw_dx_treatment_date_num_id_max);
-  
-CREATE INDEX idx_fnpd_dw_reviewed_date_num_id_sample_max
-  ON warehouse.fact_nbs_processing_dates
-  USING btree
-  (dw_reviewed_date_num_id_sample_max);
-  
-CREATE INDEX idx_fnpd_dw_entered_on_date_num_id_max
-  ON warehouse.fact_nbs_processing_dates
-  USING btree
-  (dw_entered_on_date_num_id_max);
-  
-CREATE INDEX idx_fnpd_dw_message_processed_on_date_num_id_sample_max
-  ON warehouse.fact_nbs_processing_dates
-  USING btree
-  (dw_message_processed_on_date_num_id_sample_max);</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename/>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>Trisano OLAP DS</connection>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>150</xloc>
-      <yloc>160</yloc>
+      <xloc>666</xloc>
+      <yloc>321</yloc>
     </entry>
     <entry>
       <name>exec_update_dim_hospital_rolling_metrics</name>
@@ -1862,630 +1092,8 @@ CREATE INDEX idx_fnpd_dw_message_processed_on_date_num_id_sample_max
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>640</xloc>
-      <yloc>528</yloc>
-    </entry>
-    <entry>
-      <name>DOH User Group Grants</name>
-      <description/>
-      <type>SQL</type>
-      <sql>grant select on warehouse.fact_nbs_processing_dates to bi_nbs_user_role;
-
-grant select on warehouse.fact_nbs_processing_dates to bi_nbs_user_role;</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename/>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>Trisano OLAP DS</connection>
-      <parallel>N</parallel>
-      <draw>N</draw>
-      <nr>0</nr>
-      <xloc>720</xloc>
-      <yloc>270</yloc>
-    </entry>
-    <entry>
-      <name>Create vw_nbs_report_card</name>
-      <description/>
-      <type>SQL</type>
-      <sql>drop view vw_nbs_report_card;
-
-create or replace view vw_nbs_report_card as 
-select
-  fnc.dw_hospital_id
-  ,dates.month_num_name
-  ,fnc.specimen_type
-  ,count(1) as num_specimens_submitted
-  ,sum(case when fnc.recall_reason = 'UNSAT2' then 1 else 0 end) as num_unsat_specimens
-  ,(sum(case when fnc.recall_reason = 'UNSAT2' then 1 else 0 end)::decimal / count(1)::decimal) as pct_unsat_specimens
-  ,min(case when fnpd.dw_completed_date_num_id_max != 19000101 then fnpd.dw_completed_date_num_id_max else fill_date.today end - fnpd.dw_birth_date_num_id) as min_report_tat
-   ,sum(case when
-(case when fnpd.dw_completed_date_num_id_max != 19000101 then fnpd.dw_completed_date_num_id_max else fill_date.today end - fnpd.dw_birth_date_num_id) &lt;= 2 
-then 1
-else 0 end) as num_rec_2_day
-    ,sum(case when
-(case when fnpd.dw_completed_date_num_id_max != 19000101 then fnpd.dw_completed_date_num_id_max else fill_date.today end - fnpd.dw_birth_date_num_id) between 3 and 4 
-then 1
-else 0 end) as num_rec_3_to_4_day
-    ,sum(case when
-(case when fnpd.dw_completed_date_num_id_max != 19000101 then fnpd.dw_completed_date_num_id_max else fill_date.today end - fnpd.dw_birth_date_num_id) between 5 and 6 
-then 1
-else 0 end) as num_rec_5_to_6_day
-    ,sum(case when
-(case when fnpd.dw_completed_date_num_id_max != 19000101 then fnpd.dw_completed_date_num_id_max else fill_date.today end - fnpd.dw_birth_date_num_id) >=7 
-then 1
-else 0 end) as num_rec_7_or_more_day
-    ,avg(case when fnpd.dw_completed_date_num_id_max != 19000101 then fnpd.dw_completed_date_num_id_max else fill_date.today end - fnpd.dw_birth_date_num_id) as avg_tat
-from warehouse.fact_nbs_card fnc
-inner join warehouse.fact_nbs_processing_dates fnpd on fnpd.nbs_kit_no = fnc.nbs_kit_no
-inner join (
-select month_num_name, dw_start_date_num_id, dw_end_date_num_id
-from warehouse.vw_date_month_summary
-where year4 = date_part('year', CURRENT_DATE)-1
-order by month_number
-) dates on fnc.dw_birth_date_num_id >= dates.dw_start_date_num_id and fnc.dw_birth_date_num_id &lt; dates.dw_end_date_num_id,
-(select (date_part('year',current_date) || lpad(date_part('month', current_date)::text,2,'0') || lpad(date_part('day', current_date)::text, 2,'0'))::integer as today) fill_date
-group by 1,2,3
-order by 1
-;
-
-
-grant select on warehouse.vw_nbs_report_card to bi_nbs_user_role;
-
-grant select on warehouse.vw_nbs_report_card to bi_nbs_user_role;</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename/>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>Trisano OLAP DS</connection>
-      <parallel>N</parallel>
-      <draw>N</draw>
-      <nr>0</nr>
-      <xloc>280</xloc>
-      <yloc>470</yloc>
-    </entry>
-    <entry>
-      <name>check disk space 3</name>
-      <description/>
-      <type>SHELL</type>
-      <filename/>
-      <work_directory/>
-      <arg_from_previous>N</arg_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <set_append_logfile>N</set_append_logfile>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <insertScript>Y</insertScript>
-      <script>df -h</script>
-      <loglevel>Basic</loglevel>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>1</nr>
-      <xloc>460</xloc>
-      <yloc>280</yloc>
-    </entry>
-    <entry>
-      <name>vacuum 2</name>
-      <description/>
-      <type>SQL</type>
-      <sql>vacuum full;
-</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename/>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>Trisano OLAP DS</connection>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>1</nr>
-      <xloc>570</xloc>
-      <yloc>280</yloc>
-    </entry>
-    <entry>
-      <name>check disk space 3 2</name>
-      <description/>
-      <type>SHELL</type>
-      <filename/>
-      <work_directory/>
-      <arg_from_previous>N</arg_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <set_append_logfile>N</set_append_logfile>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <insertScript>Y</insertScript>
-      <script>df -h</script>
-      <loglevel>Basic</loglevel>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>1</nr>
-      <xloc>670</xloc>
-      <yloc>280</yloc>
-    </entry>
-    <entry>
-      <name>Create fact_nbs_result</name>
-      <description/>
-      <type>SQL</type>
-      <sql>-- Table: warehouse.fact_nbs_result
--- alter table warehouse.dim_nbs_hospital rename column dw_hospital_id to dw_nbs_hospital_id;
-
--- alter table warehouse.fact_nbs_card rename column dw_hospital_id to dw_nbs_hospital_id;
-
--- alter table warehouse.fact_nbs_card drop column dw_birthplace_id;
-
-drop table if exists warehouse.fact_nbs_result_2005;
-drop table if exists warehouse.fact_nbs_result_2009;
-drop table if exists warehouse.fact_nbs_result_2016;
-drop table if exists warehouse.fact_nbs_result_2008;
-drop table if exists warehouse.fact_nbs_result_2017;
-drop table if exists warehouse.fact_nbs_result_2015;
-drop table if exists warehouse.fact_nbs_result_2007;
-drop table if exists warehouse.fact_nbs_result_2014;
-drop table if exists warehouse.fact_nbs_result_2018;
-drop table if exists warehouse.fact_nbs_result_2013;
-drop table if exists warehouse.fact_nbs_result_2006;
-drop table if exists warehouse.fact_nbs_result_2012;
-drop table if exists warehouse.fact_nbs_result_2011;
-drop table if exists warehouse.fact_nbs_result_2010;
-
-DROP TABLE warehouse.fact_nbs_result;
-
-CREATE TABLE warehouse.fact_nbs_result
-(
-  dw_dx_treatment_date_num_id integer,
-  dw_reviewed_date_num_id integer,
-  dw_entered_on_date_num_id integer,
-  dw_nbs_result_dx_id integer,
-  dw_nbs_loinc_id integer,
-  dw_nbs_snomed_code_id integer,
-  dw_nbs_card_type_id integer,
-  dw_nbs_analysis_subcomponent_id integer,
-  dw_nbs_units_id integer,
-  dw_nbs_analysis_id integer,
-  dw_nbs_formatted_result_id integer,
-  dw_nbs_hospital_id integer,
-  accession_number character varying(30),
-  result_number bigint,
-  test_number bigint,
-  replicate_count integer,
-  raw_result character varying(254),
-  entered_on timestamp without time zone,
-  date_reviewed timestamp without time zone,
-  sample_number integer,
-  x_dx_date timestamp without time zone,
-  x_dx_treatment_date timestamp without time zone,
-  dw_message_processed_on_date_num_id integer DEFAULT 19000101,
-  src_message_processed_on timestamp without time zone DEFAULT '1900-01-01 00:00:00'::timestamp without time zone
-)
-WITH (
-  OIDS=FALSE
-);
-ALTER TABLE warehouse.fact_nbs_result
-  OWNER TO pentaho;
-GRANT ALL ON TABLE warehouse.fact_nbs_result TO pentaho;
-GRANT SELECT ON TABLE warehouse.fact_nbs_result TO bi_nbs_user_role;</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename/>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>Trisano OLAP DS</connection>
-      <parallel>N</parallel>
-      <draw>N</draw>
-      <nr>0</nr>
-      <xloc>250</xloc>
-      <yloc>400</yloc>
-    </entry>
-    <entry>
-      <name>Alter dim_nbs_hospital columns</name>
-      <description/>
-      <type>SQL</type>
-      <sql>alter table warehouse.dim_nbs_hospital rename column rolling_num_births to rolling_hospital_num_births;
-alter table warehouse.dim_nbs_hospital add column rolling_state_num_births integer;</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename/>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>Trisano OLAP DS</connection>
-      <parallel>N</parallel>
-      <draw>N</draw>
-      <nr>0</nr>
-      <xloc>340</xloc>
-      <yloc>400</yloc>
-    </entry>
-    <entry>
-      <name>truncate fact_nbs_card</name>
-      <description/>
-      <type>SQL</type>
-      <sql>delete from warehouse.fact_nbs_card</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename/>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>Trisano OLAP DS</connection>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>150</xloc>
-      <yloc>280</yloc>
-    </entry>
-    <entry>
-      <name>exec_nbs_card_fact_main 2</name>
-      <description/>
-      <type>TRANS</type>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>${pentaho.solutions.root.vfs}/etl/NBS/exec_nbs_card_fact_main.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <run_configuration/>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>310</xloc>
-      <yloc>280</yloc>
-    </entry>
-    <entry>
-      <name>exec_update_nbs_card_fact_w_arup_msg_in_main 2</name>
-      <description/>
-      <type>TRANS</type>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>${pentaho.solutions.root.vfs}/etl/NBS/exec_update_nbs_card_fact_w_arup_msg_in_main.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <run_configuration/>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>900</xloc>
-      <yloc>280</yloc>
-    </entry>
-    <entry>
-      <name>exec_update_nbs_card_w_report_out_date 2</name>
-      <description/>
-      <type>TRANS</type>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>${pentaho.solutions.root.vfs}/etl/NBS/exec_update_nbs_card_w_report_out_date.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <run_configuration/>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>1210</xloc>
-      <yloc>280</yloc>
-    </entry>
-    <entry>
-      <name>update fact_nbs_processing_dates &amp; rpt iews</name>
-      <description/>
-      <type>SQL</type>
-      <sql>drop view if exists vw_nbs_report_card;
-
-drop table if exists warehouse.fact_nbs_processing_dates;
-
-create table warehouse.fact_nbs_processing_dates as
-(
-select
-     fnc.nbs_kit_no
-    ,fnc.order_number
-    ,fnc.kit_number
-	,fnc.accession_number
-    ,fnc.specimen_type
-    ,fnc.dw_nbs_hospital_id
-    ,fnc.dw_birth_date_num_id
-	,fnc.dw_changed_on_date_num_id
-	,fnc.dw_sr_accessioned_date_num_id
-	,fnc.dw_date_collected_date_num_id
-	,fnc.dw_message_sent_on_date_num_id
-	,fnc.dw_report_out_date_num_id
-    ,max(fncl.dw_sr_received_date_num_id) as dw_sr_received_date_num_id_max
-	,max(fns.dw_login_date_num_id) as dw_login_date_num_id_max
-	,max(fns.dw_recd_date_num_id) as dw_recd_date_num_id_max	
-	,max(fns.dw_completed_date_num_id) as dw_completed_date_num_id_max
-	,max(fns.dw_reviewed_date_num_id) as dw_reviewed_date_num_id_sample_max
-	,max(fns.dw_message_processed_on_date_num_id) as dw_message_processed_on_date_num_id_sample_max
-	,max(fns.dw_result_entry_date_num_id) as dw_result_entry_date_num_id_max
-	,max(fnr.dw_dx_treatment_date_num_id) as dw_dx_treatment_date_num_id_max
-	,max(fnr.dw_reviewed_date_num_id) as dw_reviewed_date_num_id_result_max
-	,max(fnr.dw_entered_on_date_num_id) as dw_entered_on_date_num_id_max
-	,max(fnr.dw_message_processed_on_date_num_id) as dw_message_processed_on_date_num_id_result_max
-from warehouse.fact_nbs_card fnc left join warehouse.fact_nbs_card_log fncl on fncl.kit_number = fnc.kit_number and fncl.order_number = fnc.order_number
-left join warehouse.fact_nbs_sample fns on fns.accession_number = fnc.accession_number
-left join warehouse.fact_nbs_result fnr on fnr.sample_number = fns.sample_number
-group by 1,2,3,4,5,6,7,8,9,10,11,12
-);
-
-
-
-CREATE INDEX idx_fnpd_nbs_kit_no
-  ON warehouse.fact_nbs_processing_dates
-  USING btree
-  (nbs_kit_no);
-
-CREATE INDEX idx_fnpd_order_number
-  ON warehouse.fact_nbs_processing_dates
-  USING btree
-  (order_number);
-
-CREATE INDEX idx_fnpd_kit_number
-  ON warehouse.fact_nbs_processing_dates
-  USING btree
-  (kit_number);
-
-CREATE INDEX idx_fnpd_accession_number
-  ON warehouse.fact_nbs_processing_dates
-  USING btree
-  (accession_number);
-
-CREATE INDEX idx_fnpd_fnc_dw_birth_date_num_id
-  ON warehouse.fact_nbs_processing_dates
-  USING btree
-  (dw_birth_date_num_id);
-
-CREATE INDEX idx_fnpd_dw_nbs_hospital_id
-  ON warehouse.fact_nbs_processing_dates
-  USING btree
-  (dw_nbs_hospital_id);
-
-CREATE INDEX idx_fnpd_dw_changed_on_date_num_id
-  ON warehouse.fact_nbs_processing_dates
-  USING btree
-  (dw_changed_on_date_num_id);
-  
-CREATE INDEX idx_fnpd_dw_date_collected_date_num_id
-  ON warehouse.fact_nbs_processing_dates
-  USING btree
-  (dw_date_collected_date_num_id);
-  
-CREATE INDEX idx_fnpd_dw_message_sent_on_date_num_id
-  ON warehouse.fact_nbs_processing_dates
-  USING btree
-  (dw_message_sent_on_date_num_id);
-  
-CREATE INDEX idx_fnpd_dw_report_out_date_num_id
-  ON warehouse.fact_nbs_processing_dates
-  USING btree
-  (dw_report_out_date_num_id);
-
-CREATE INDEX idx_fnpd_dw_sr_accessioned_date_num_id
-  ON warehouse.fact_nbs_processing_dates
-  USING btree
-  (dw_sr_accessioned_date_num_id);
-  
-CREATE INDEX idx_fnpd_dw_login_date_num_id_max
-  ON warehouse.fact_nbs_processing_dates
-  USING btree
-  (dw_login_date_num_id_max);
-  
-CREATE INDEX idx_fnpd_dw_recd_date_num_id_max	
-  ON warehouse.fact_nbs_processing_dates
-  USING btree
-  (dw_recd_date_num_id_max);
-  
-CREATE INDEX idx_fnpd_dw_completed_date_num_id_max
-  ON warehouse.fact_nbs_processing_dates
-  USING btree
-  (dw_completed_date_num_id_max);
-  
-CREATE INDEX idx_fnpd_dw_reviewed_date_num_id_result_max
-  ON warehouse.fact_nbs_processing_dates
-  USING btree
-  (dw_reviewed_date_num_id_result_max);
-  
-CREATE INDEX idx_fnpd_dw_message_processed_on_date_num_id_result_max
-  ON warehouse.fact_nbs_processing_dates
-  USING btree
-  (dw_message_processed_on_date_num_id_result_max);
-  
-CREATE INDEX idx_fnpd_dw_result_entry_date_num_id_max
-  ON warehouse.fact_nbs_processing_dates
-  USING btree
-  (dw_result_entry_date_num_id_max);
-  
-CREATE INDEX idx_fnpd_dw_dx_treatment_date_num_id_max
-  ON warehouse.fact_nbs_processing_dates
-  USING btree
-  (dw_dx_treatment_date_num_id_max);
-  
-CREATE INDEX idx_fnpd_dw_reviewed_date_num_id_sample_max
-  ON warehouse.fact_nbs_processing_dates
-  USING btree
-  (dw_reviewed_date_num_id_sample_max);
-  
-CREATE INDEX idx_fnpd_dw_entered_on_date_num_id_max
-  ON warehouse.fact_nbs_processing_dates
-  USING btree
-  (dw_entered_on_date_num_id_max);
-  
-CREATE INDEX idx_fnpd_dw_message_processed_on_date_num_id_sample_max
-  ON warehouse.fact_nbs_processing_dates
-  USING btree
-  (dw_message_processed_on_date_num_id_sample_max);
-
-
-
-
-create or replace view vw_nbs_report_card as 
-select
-  fnc.dw_nbs_hospital_id
-  ,dates.month_num_name
-  ,fnc.specimen_type
-  ,count(1) as num_specimens_submitted
-  ,sum(case when fnc.recall_reason = 'UNSAT2' then 1 else 0 end) as num_unsat_specimens
-  ,(sum(case when fnc.recall_reason = 'UNSAT2' then 1 else 0 end)::decimal / count(1)::decimal) as pct_unsat_specimens
-  ,min(case when fnpd.dw_completed_date_num_id_max != 19000101 then fnpd.dw_completed_date_num_id_max else fill_date.today end - fnpd.dw_birth_date_num_id) as min_report_tat
-   ,sum(case when
-(case when fnpd.dw_completed_date_num_id_max != 19000101 then fnpd.dw_completed_date_num_id_max else fill_date.today end - fnpd.dw_birth_date_num_id) &lt;= 2 
-then 1
-else 0 end) as num_rec_2_day
-    ,sum(case when
-(case when fnpd.dw_completed_date_num_id_max != 19000101 then fnpd.dw_completed_date_num_id_max else fill_date.today end - fnpd.dw_birth_date_num_id) between 3 and 4 
-then 1
-else 0 end) as num_rec_3_to_4_day
-    ,sum(case when
-(case when fnpd.dw_completed_date_num_id_max != 19000101 then fnpd.dw_completed_date_num_id_max else fill_date.today end - fnpd.dw_birth_date_num_id) between 5 and 6 
-then 1
-else 0 end) as num_rec_5_to_6_day
-    ,sum(case when
-(case when fnpd.dw_completed_date_num_id_max != 19000101 then fnpd.dw_completed_date_num_id_max else fill_date.today end - fnpd.dw_birth_date_num_id) >=7 
-then 1
-else 0 end) as num_rec_7_or_more_day
-    ,avg(case when fnpd.dw_completed_date_num_id_max != 19000101 then fnpd.dw_completed_date_num_id_max else fill_date.today end - fnpd.dw_birth_date_num_id) as avg_tat
-from warehouse.fact_nbs_card fnc
-inner join warehouse.fact_nbs_processing_dates fnpd on fnpd.nbs_kit_no = fnc.nbs_kit_no
-inner join (
-select month_num_name, dw_start_date_num_id, dw_end_date_num_id
-from warehouse.vw_date_month_summary
-where year4 = date_part('year', CURRENT_DATE)-1
-order by month_number
-) dates on fnc.dw_birth_date_num_id >= dates.dw_start_date_num_id and fnc.dw_birth_date_num_id &lt; dates.dw_end_date_num_id,
-(select (date_part('year',current_date) || lpad(date_part('month', current_date)::text,2,'0') || lpad(date_part('day', current_date)::text, 2,'0'))::integer as today) fill_date
-group by 1,2,3
-order by 1
-;
-
-grant select on warehouse.fact_nbs_processing_dates to bi_nbs_user_role;
-
-grant select on warehouse.vw_nbs_report_card to bi_nbs_user_role;
-</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename/>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>Trisano OLAP DS</connection>
-      <parallel>N</parallel>
-      <draw>N</draw>
-      <nr>0</nr>
-      <xloc>162</xloc>
-      <yloc>394</yloc>
-    </entry>
-    <entry>
-      <name>exec_populate_lat_lon_on_dim_nbs_hospital</name>
-      <description/>
-      <type>TRANS</type>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>${pentaho.solutions.root.vfs}/etl/NBS/exec_populate_lat_lon_on_dim_nbs_hospital.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <run_configuration/>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>150</xloc>
-      <yloc>400</yloc>
-    </entry>
-    <entry>
-      <name>Shell</name>
-      <description/>
-      <type>SHELL</type>
-      <filename/>
-      <work_directory/>
-      <arg_from_previous>N</arg_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <set_append_logfile>N</set_append_logfile>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <insertScript>Y</insertScript>
-      <script>pwd
-java -version
-ls -alt /var/local
-echo KETTLE_HOME: $KETTLE_HOME
-</script>
-      <loglevel>Basic</loglevel>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>64</xloc>
-      <yloc>496</yloc>
+      <xloc>1126</xloc>
+      <yloc>299</yloc>
     </entry>
     <entry>
       <name>nbs2_dim_nbs_physician</name>
@@ -2546,8 +1154,8 @@ CREATE INDEX idx_dim_nbs_physician_tk
       <parallel>Y</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>384</xloc>
-      <yloc>496</yloc>
+      <xloc>1398</xloc>
+      <yloc>507</yloc>
     </entry>
     <entry>
       <name>nbs2_dim_nbs_hospital</name>
@@ -2611,8 +1219,8 @@ CREATE INDEX idx_dim_nbs_birthplace_tk
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>224</xloc>
-      <yloc>496</yloc>
+      <xloc>1270</xloc>
+      <yloc>507</yloc>
     </entry>
     <entry>
       <name>nbs2_fact_nbs_card</name>
@@ -2886,8 +1494,8 @@ CREATE INDEX idx_fact_nbs_card_src_sr_accessioned_date
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>512</xloc>
-      <yloc>496</yloc>
+      <xloc>1126</xloc>
+      <yloc>507</yloc>
     </entry>
     <entry>
       <name>Add BI Roles</name>
@@ -2908,44 +1516,8 @@ CREATE INDEX idx_fact_nbs_card_src_sr_accessioned_date
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>272</xloc>
-      <yloc>528</yloc>
-    </entry>
-    <entry>
-      <name>log_long_running_queries</name>
-      <description/>
-      <type>TRANS</type>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>${pentaho.solutions.root.vfs}/etl/fixup/log_long_running_queries.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <run_configuration>Pentaho local</run_configuration>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>
-      <parallel>N</parallel>
-      <draw>N</draw>
-      <nr>0</nr>
-      <xloc>480</xloc>
-      <yloc>432</yloc>
+      <xloc>758</xloc>
+      <yloc>299</yloc>
     </entry>
     <entry>
       <name>nbs2_dim_date</name>
@@ -3227,8 +1799,8 @@ CREATE INDEX idx_dw_dim_date_lookup_new
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>640</xloc>
-      <yloc>496</yloc>
+      <xloc>918</xloc>
+      <yloc>507</yloc>
     </entry>
     <entry>
       <name>nbs2_create fact_nbs_result</name>
@@ -3277,8 +1849,8 @@ TABLESPACE pg_default;</sql>
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>192</xloc>
-      <yloc>496</yloc>
+      <xloc>678</xloc>
+      <yloc>475</yloc>
     </entry>
     <entry>
       <name>nbs2_dim_nbs_result_dx</name>
@@ -3326,8 +1898,8 @@ CREATE UNIQUE INDEX idx_dim_nbs_result_dx_pk
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>400</xloc>
-      <yloc>496</yloc>
+      <xloc>1718</xloc>
+      <yloc>395</yloc>
     </entry>
     <entry>
       <name>nbs2_dim_nbs_loinc</name>
@@ -3375,8 +1947,8 @@ CREATE UNIQUE INDEX idx_dim_nbs_loinc_pk
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>576</xloc>
-      <yloc>496</yloc>
+      <xloc>1654</xloc>
+      <yloc>299</yloc>
     </entry>
     <entry>
       <name>nbs2_dim_nbs_snomed_code</name>
@@ -3424,8 +1996,8 @@ CREATE UNIQUE INDEX idx_dim_nbs_snomed_code_pk
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>768</xloc>
-      <yloc>496</yloc>
+      <xloc>1542</xloc>
+      <yloc>283</yloc>
     </entry>
     <entry>
       <name>nbs2_dim_nbs_card_type</name>
@@ -3474,8 +2046,8 @@ CREATE UNIQUE INDEX idx_dim_nbs_card_type_pk
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>960</xloc>
-      <yloc>496</yloc>
+      <xloc>1158</xloc>
+      <yloc>299</yloc>
     </entry>
     <entry>
       <name>nbs2_dim_nbs_analysis_subcomponent</name>
@@ -3523,8 +2095,8 @@ CREATE UNIQUE INDEX idx_dim_nbs_result_pk
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>208</xloc>
-      <yloc>608</yloc>
+      <xloc>1062</xloc>
+      <yloc>331</yloc>
     </entry>
     <entry>
       <name>nbs2_dim_nbs_units</name>
@@ -3571,8 +2143,8 @@ CREATE UNIQUE INDEX idx_dim_nbs_units_pk
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>400</xloc>
-      <yloc>608</yloc>
+      <xloc>640</xloc>
+      <yloc>352</yloc>
     </entry>
     <entry>
       <name>nbs2_dim_nbs_analysis</name>
@@ -3619,8 +2191,8 @@ CREATE UNIQUE INDEX idx_dim_nbs_analysis_pk
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>576</xloc>
-      <yloc>608</yloc>
+      <xloc>870</xloc>
+      <yloc>363</yloc>
     </entry>
     <entry>
       <name>nbs2_dim_nbs_formatted_result</name>
@@ -3667,8 +2239,8 @@ CREATE UNIQUE INDEX idx_dim_nbs_result_status_pk
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>800</xloc>
-      <yloc>608</yloc>
+      <xloc>1478</xloc>
+      <yloc>299</yloc>
     </entry>
     <entry>
       <name>create_fact_nbs_result_partitions</name>
@@ -3701,8 +2273,8 @@ CREATE UNIQUE INDEX idx_dim_nbs_result_status_pk
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>1040</xloc>
-      <yloc>608</yloc>
+      <xloc>1334</xloc>
+      <yloc>315</yloc>
     </entry>
     <entry>
       <name>nbs2_fact_nbs_sample</name>
@@ -3859,8 +2431,8 @@ CREATE INDEX idx_src_result_entry_date_id
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>192</xloc>
-      <yloc>496</yloc>
+      <xloc>1232</xloc>
+      <yloc>320</yloc>
     </entry>
     <entry>
       <name>nbs2_fact_nbs_card_log</name>
@@ -3929,8 +2501,8 @@ CREATE INDEX idx_fact_nbs_card_log_sr_received
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>352</xloc>
-      <yloc>496</yloc>
+      <xloc>1126</xloc>
+      <yloc>363</yloc>
     </entry>
     <entry>
       <name>nbs2_fact_nbs_action_item_log</name>
@@ -3978,44 +2550,8 @@ CREATE INDEX idx_fact_nbs_action_item_log_dw_completed_on
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>544</xloc>
-      <yloc>496</yloc>
-    </entry>
-    <entry>
-      <name>get_view_sql</name>
-      <description/>
-      <type>TRANS</type>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>${pentaho.solutions.root.vfs}/etl/fixup/get_view_sql.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <run_configuration>Pentaho local</run_configuration>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>
-      <parallel>N</parallel>
-      <draw>N</draw>
-      <nr>0</nr>
-      <xloc>272</xloc>
-      <yloc>496</yloc>
+      <xloc>1398</xloc>
+      <yloc>347</yloc>
     </entry>
     <entry>
       <name>nbs2_vw_date_month_summary</name>
@@ -4042,8 +2578,8 @@ ORDER BY dim_date.month_number;</sql>
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>208</xloc>
-      <yloc>496</yloc>
+      <xloc>1558</xloc>
+      <yloc>363</yloc>
     </entry>
     <entry>
       <name>nbs2_fact_nbs_action_item_log (2)</name>
@@ -4091,8 +2627,8 @@ CREATE INDEX idx_fact_nbs_action_item_log_dw_completed_on
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>272</xloc>
-      <yloc>544</yloc>
+      <xloc>1574</xloc>
+      <yloc>427</yloc>
     </entry>
     <entry>
       <name>nbs2_fact_nbs_action_item</name>
@@ -4140,8 +2676,8 @@ CREATE INDEX idx_fact_nbs_action_item_dw_completed_on
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>560</xloc>
-      <yloc>576</yloc>
+      <xloc>1318</xloc>
+      <yloc>411</yloc>
     </entry>
     <entry>
       <name>nbs2_fnr_changed_on_index</name>
@@ -4259,183 +2795,616 @@ CREATE INDEX idx_fnr_changed_on_2018
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>224</xloc>
-      <yloc>544</yloc>
+      <xloc>1152</xloc>
+      <yloc>400</yloc>
     </entry>
     <entry>
-      <name>truncate fact_nbs_sample</name>
+      <name>nedss_dim_date</name>
       <description/>
       <type>SQL</type>
-      <sql>delete from nbs_olap.fact_nbs_sample;</sql>
+      <sql>-- Table: nedss_olap.dim_date
+SELECT pg_cancel_backend(27480);
+
+DROP TABLE if exists nedss_olap.dim_date;
+
+CREATE TABLE nedss_olap.dim_date
+(
+    dw_date_id integer NOT NULL,
+    dw_date_num_id integer NOT NULL,
+    hashcode integer,
+    src_date_val date,
+    date_short character(12) COLLATE pg_catalog."default",
+    date_medium character(16) COLLATE pg_catalog."default",
+    date_long character varying(24) COLLATE pg_catalog."default",
+    date_full character varying(32) COLLATE pg_catalog."default",
+    day_in_week integer,
+    day_in_month integer,
+    day_in_year integer,
+    is_first_day_in_month smallint,
+    is_first_day_in_week smallint,
+    is_last_day_in_month smallint,
+    is_last_day_in_week smallint,
+    day_name character varying(12) COLLATE pg_catalog."default",
+    day_abbreviation character(3) COLLATE pg_catalog."default",
+    week_in_year integer,
+    week_in_month integer,
+    week_in_year_iso integer,
+    week_start_date date,
+    is_weekend smallint,
+    is_weekday smallint,
+    month_number integer,
+    month_name_val character varying(12) COLLATE pg_catalog."default",
+    month_abbreviation character(3) COLLATE pg_catalog."default",
+    month_abbreviation_year2 character(6) COLLATE pg_catalog."default",
+    year2 integer,
+    year4 integer,
+    year2_iso integer,
+    year4_iso integer,
+    quarter_number integer,
+    quarter_name character(2) COLLATE pg_catalog."default",
+    quarter_year character(7) COLLATE pg_catalog."default",
+    month_year character(7) COLLATE pg_catalog."default",
+    week_year character(7) COLLATE pg_catalog."default",
+    week_year_iso character(7) COLLATE pg_catalog."default",
+    year_week_int integer,
+    current_week_cy smallint,
+    current_month_cy smallint,
+    last_week_cy smallint,
+    last_month_cy smallint,
+    current_week_ly smallint,
+    current_month_ly smallint,
+    last_week_ly smallint,
+    last_month_ly smallint,
+    ytd_cy_day smallint,
+    ytd_cy_week smallint,
+    ytd_cy_month smallint,
+    ytd_ly_day smallint,
+    ytd_ly_week smallint,
+    ytd_ly_month smallint,
+    current_year smallint,
+    last_year smallint,
+    day_sequence integer,
+    week_sequence integer,
+    month_sequence integer,
+    year_of_weekend_date integer,
+    etl_load_date timestamp without time zone,
+    mmwr_week integer NOT NULL DEFAULT 0,
+    mmwr_year integer NOT NULL DEFAULT 0,
+    CONSTRAINT pk_dw_dim_date2 PRIMARY KEY (dw_date_id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+COMMENT ON COLUMN nedss_olap.dim_date.dw_date_id
+    IS 'Technical key of the date dimension';
+
+COMMENT ON COLUMN nedss_olap.dim_date.dw_date_num_id
+    IS 'Alternate TK of the date dimension in the format YYYYMMDD';
+
+COMMENT ON COLUMN nedss_olap.dim_date.hashcode
+    IS 'Type I dimension hashcode';
+
+COMMENT ON COLUMN nedss_olap.dim_date.src_date_val
+    IS 'Source date value';
+
+COMMENT ON COLUMN nedss_olap.dim_date.date_short
+    IS 'Short date';
+
+COMMENT ON COLUMN nedss_olap.dim_date.date_medium
+    IS 'Medium date';
+
+COMMENT ON COLUMN nedss_olap.dim_date.date_long
+    IS 'Long form date';
+
+COMMENT ON COLUMN nedss_olap.dim_date.date_full
+    IS 'Full form date';
+
+COMMENT ON COLUMN nedss_olap.dim_date.day_in_week
+    IS 'day of the week';
+
+COMMENT ON COLUMN nedss_olap.dim_date.day_in_month
+    IS 'Day number within the month';
+
+COMMENT ON COLUMN nedss_olap.dim_date.day_in_year
+    IS 'Day number within the year';
+
+COMMENT ON COLUMN nedss_olap.dim_date.is_first_day_in_month
+    IS 'Flag indicating whether the date is the first day in the month';
+
+COMMENT ON COLUMN nedss_olap.dim_date.is_first_day_in_week
+    IS 'Flag indicating whether the date is the first day in the week.';
+
+COMMENT ON COLUMN nedss_olap.dim_date.is_last_day_in_month
+    IS 'Flag indicating whether the date is the last day in the month.';
+
+COMMENT ON COLUMN nedss_olap.dim_date.is_last_day_in_week
+    IS 'Flag indicating whether the date is the last day of the week';
+
+COMMENT ON COLUMN nedss_olap.dim_date.day_name
+    IS 'textual name of the day of week';
+
+COMMENT ON COLUMN nedss_olap.dim_date.day_abbreviation
+    IS 'Abbreviated day of week';
+
+COMMENT ON COLUMN nedss_olap.dim_date.week_in_year
+    IS 'Numeric week of the year';
+
+COMMENT ON COLUMN nedss_olap.dim_date.week_in_month
+    IS 'Week number within the month.';
+
+COMMENT ON COLUMN nedss_olap.dim_date.week_in_year_iso
+    IS 'ISO standard week in year';
+
+COMMENT ON COLUMN nedss_olap.dim_date.week_start_date
+    IS 'The date representing the first day of the week.';
+
+COMMENT ON COLUMN nedss_olap.dim_date.is_weekend
+    IS 'Flag indicating wAdd dw_date_num_id to dim_dateheter or not the day Is a Saturday or Sunday?';
+
+COMMENT ON COLUMN nedss_olap.dim_date.is_weekday
+    IS 'Flag indicating whether or not the date is a weekday';
+
+COMMENT ON COLUMN nedss_olap.dim_date.month_number
+    IS 'Month number (1..12)';
+
+COMMENT ON COLUMN nedss_olap.dim_date.month_name_val
+    IS 'Name of the month';
+
+COMMENT ON COLUMN nedss_olap.dim_date.month_abbreviation
+    IS 'Abbreviated month name';
+
+COMMENT ON COLUMN nedss_olap.dim_date.month_abbreviation_year2
+    IS 'Month abbreviation with digit year';
+
+COMMENT ON COLUMN nedss_olap.dim_date.year2
+    IS 'Two digit year';
+
+COMMENT ON COLUMN nedss_olap.dim_date.year4
+    IS 'Four digit year';
+
+COMMENT ON COLUMN nedss_olap.dim_date.year2_iso
+    IS 'ISO two digit year';
+
+COMMENT ON COLUMN nedss_olap.dim_date.year4_iso
+    IS 'ISO four digit year';
+
+COMMENT ON COLUMN nedss_olap.dim_date.quarter_number
+    IS 'Numeric representation of the quarter (1..4)';
+
+COMMENT ON COLUMN nedss_olap.dim_date.quarter_name
+    IS 'Name of the quarter (Q1..Q4)';
+
+COMMENT ON COLUMN nedss_olap.dim_date.quarter_year
+    IS 'Quarter name + year';
+
+COMMENT ON COLUMN nedss_olap.dim_date.month_year
+    IS 'Month number - year4';
+
+COMMENT ON COLUMN nedss_olap.dim_date.week_year
+    IS 'Week number - year4';
+
+COMMENT ON COLUMN nedss_olap.dim_date.week_year_iso
+    IS 'week number - year4 ISO standard';
+
+COMMENT ON COLUMN nedss_olap.dim_date.year_week_int
+    IS 'Year4 and weekAdd dw_date_num_id to dim_date number as numeric value for sorting and comparison';
+
+COMMENT ON COLUMN nedss_olap.dim_date.current_week_cy
+    IS 'Is this the current week of the current year';
+
+COMMENT ON COLUMN nedss_olap.dim_date.current_month_cy
+    IS 'Is this the current month of the current year';
+
+COMMENT ON COLUMN nedss_olap.dim_date.last_week_cy
+    IS 'Is this the previous week of the current year';
+
+COMMENT ON COLUMN nedss_olap.dim_date.last_month_cy
+    IS 'Flag indicating whether this date in the previous month of the current year';
+
+COMMENT ON COLUMN nedss_olap.dim_date.current_week_ly
+    IS 'Is this date in the previous year, but the same week as the current week?';
+
+COMMENT ON COLUMN nedss_olap.dim_date.current_month_ly
+    IS 'Is this date in the previous year, but the same month of the current year?';
+
+COMMENT ON COLUMN nedss_olap.dim_date.last_week_ly
+    IS 'Is this date in the previous week the year prior?';
+
+COMMENT ON COLUMN nedss_olap.dim_date.last_month_ly
+    IS 'Is this date in the previous month the year prior';
+
+COMMENT ON COLUMN nedss_olap.dim_date.ytd_cy_day
+    IS 'Is the day portion of the date in the current year?';
+
+COMMENT ON COLUMN nedss_olap.dim_date.ytd_cy_week
+    IS 'Is the week portion of the date in the current year?';
+
+COMMENT ON COLUMN nedss_olap.dim_date.ytd_cy_month
+    IS 'Is the month of the date in the current year?';
+
+COMMENT ON COLUMN nedss_olap.dim_date.ytd_ly_day
+    IS 'Is this day part of the year to date last year (for current year / previous YTD comparison calculations)';
+
+COMMENT ON COLUMN nedss_olap.dim_date.ytd_ly_week
+    IS 'Is the date in the week last year which spilled into this year?';
+
+COMMENT ON COLUMN nedss_olap.dim_date.ytd_ly_month
+    IS 'Is this month part of the year to date last year (for current year / previous YTD comparison calculations)';
+
+COMMENT ON COLUMN nedss_olap.dim_date.current_year
+    IS 'Is the date in the current year?';
+
+COMMENT ON COLUMN nedss_olap.dim_date.last_year
+    IS 'Is the date in the previous year?';
+
+COMMENT ON COLUMN nedss_olap.dim_date.day_sequence
+    IS 'How many days back is this day from the current day?';
+
+COMMENT ON COLUMN nedss_olap.dim_date.week_sequence
+    IS 'How many weeks back from the current week is the week this date is in?';
+
+COMMENT ON COLUMN nedss_olap.dim_date.month_sequence
+    IS 'How many monts back from the current month is the month this date is in?';
+
+COMMENT ON COLUMN nedss_olap.dim_date.year_of_weekend_date
+    IS 'What year does the last day of the week fall in?';
+
+COMMENT ON COLUMN nedss_olap.dim_date.etl_load_date
+    IS 'The date this dimension record was loaded into the data nedss_olap.';
+
+-- Index: idx_dw_date_num_id
+
+-- DROP INDEX nedss_olap.idx_dw_date_num_id;
+
+CREATE INDEX idx_dw_date_num_id
+    ON nedss_olap.dim_date USING btree
+    (dw_date_num_id)
+    TABLESPACE pg_default;
+
+-- Index: idx_dw_dim_date_lookup_new
+
+-- DROP INDEX nedss_olap.idx_dw_dim_date_lookup_new;
+
+CREATE INDEX idx_dw_dim_date_lookup_new
+    ON nedss_olap.dim_date USING btree
+    (hashcode)
+    TABLESPACE pg_default;</sql>
       <useVariableSubstitution>F</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
       <sendOneStatement>F</sendOneStatement>
       <connection>NBSOLAPDS</connection>
       <parallel>N</parallel>
-      <draw>Y</draw>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>1062</xloc>
+      <yloc>427</yloc>
+    </entry>
+    <entry>
+      <name>nedss_dim_person_address</name>
+      <description/>
+      <type>SQL</type>
+      <sql>-- Table: nedss_olap.dim_person_address
+
+DROP TABLE if exists nedss_olap.dim_person_address;
+
+CREATE TABLE nedss_olap.dim_person_address
+(
+    dw_person_address_id integer NOT NULL,
+    hashcode integer,
+    src_person_address_id integer,
+    src_person_id integer,
+    county character varying(100) COLLATE pg_catalog."default",
+    state character varying(100) COLLATE pg_catalog."default",
+    postal_code character varying(10) COLLATE pg_catalog."default",
+    city character varying(255) COLLATE pg_catalog."default",
+    created_at timestamp without time zone,
+    region_longitude numeric(15,6),
+    region_latitude numeric(15,6),
+    etl_load_date timestamp without time zone,
+    CONSTRAINT pk_dim_location PRIMARY KEY (dw_person_address_id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+COMMENT ON COLUMN nedss_olap.dim_person_address.dw_person_address_id
+    IS 'Person Address technical key';
+
+COMMENT ON COLUMN nedss_olap.dim_person_address.hashcode
+    IS 'Type I dimension hashcode';
+
+COMMENT ON COLUMN nedss_olap.dim_person_address.src_person_address_id
+    IS 'OLTP source person address ID';
+
+COMMENT ON COLUMN nedss_olap.dim_person_address.county
+    IS 'The county name';
+
+-- Index: idx_dim_location_lookup
+
+-- DROP INDEX warehouse.idx_dim_location_lookup;
+
+CREATE INDEX idx_dim_location_lookup
+    ON nedss_olap.dim_person_address USING btree
+    (hashcode)
+    TABLESPACE pg_default;
+
+-- Index: idx_updated_at
+
+-- DROP INDEX warehouse.idx_updated_at;
+
+CREATE INDEX idx_created_at
+    ON nedss_olap.dim_person_address USING btree
+    (created_at)
+    TABLESPACE pg_default;
+    
+    
+CREATE INDEX idx_dpa_src_person_id
+    ON nedss_olap.dim_person_address USING btree
+    (src_person_id)
+    TABLESPACE pg_default;    
+
+CREATE INDEX idx_dpa_postal_code
+    ON nedss_olap.dim_person_address USING btree
+    (postal_code)
+    TABLESPACE pg_default;
+
+CREATE INDEX idx_dpa_city
+    ON nedss_olap.dim_person_address USING btree
+    (city)
+    TABLESPACE pg_default;
+
+CREATE INDEX idx_dpa_state
+    ON nedss_olap.dim_person_address USING btree
+    (state)
+    TABLESPACE pg_default;
+</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NEDSSOLAPDS</connection>
+      <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>934</xloc>
+      <yloc>411</yloc>
+    </entry>
+    <entry>
+      <name>nedss_dim_condition</name>
+      <description/>
+      <type>SQL</type>
+      <sql>-- Table: nedss_olap.dim_disease
+
+DROP TABLE if exists nedss_olap.dim_disease;
+DROP TABLE if exists nedss_olap.dim_condition;
+
+CREATE TABLE nedss_olap.dim_condition
+(
+    dw_condition_id integer NOT NULL,
+    hashcode bigint,
+    src_condition_id integer,
+    src_disease_id integer,
+    condition_name character varying(100) COLLATE pg_catalog."default",
+    contact_lead_in text COLLATE pg_catalog."default",
+    place_lead_in text COLLATE pg_catalog."default",
+    treatment_lead_in text COLLATE pg_catalog."default",
+    active boolean,
+    cdc_code character varying(255) COLLATE pg_catalog."default",
+    code text,
+    src_coordinator_id integer,
+    src_condition_group_id integer,
+    mdro boolean,
+    etl_load_date timestamp without time zone,
+    CONSTRAINT pk_dw_dim_disease PRIMARY KEY (dw_condition_id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+COMMENT ON TABLE nedss_olap.dim_condition
+    IS 'Disease dimension';
+
+COMMENT ON COLUMN nedss_olap.dim_condition.dw_condition_id
+    IS 'Technical key of the condition dimension.';
+
+COMMENT ON COLUMN nedss_olap.dim_condition.hashcode
+    IS 'Type I dimension hashcode';
+
+COMMENT ON COLUMN nedss_olap.dim_condition.src_disease_id
+    IS 'Source OLTP disease_id';
+
+COMMENT ON COLUMN nedss_olap.dim_condition.condition_name
+    IS 'Name of the condition';
+
+COMMENT ON COLUMN nedss_olap.dim_condition.contact_lead_in
+    IS 'Contact lead in value';
+
+COMMENT ON COLUMN nedss_olap.dim_condition.place_lead_in
+    IS 'Place Lead In value';
+
+COMMENT ON COLUMN nedss_olap.dim_condition.treatment_lead_in
+    IS 'Treatment lead in value';
+
+COMMENT ON COLUMN nedss_olap.dim_condition.active
+    IS 'active flag';
+
+COMMENT ON COLUMN nedss_olap.dim_condition.cdc_code
+    IS 'CDC code value';
+
+COMMENT ON COLUMN nedss_olap.dim_condition.mdro
+    IS 'disease mdro';
+
+COMMENT ON COLUMN nedss_olap.dim_condition.src_coordinator_id
+    IS 'The source coordinator_id';
+    
+COMMENT ON COLUMN nedss_olap.dim_condition.src_condition_group_id
+    IS 'Group similar conditions together';
+    
+COMMENT ON COLUMN nedss_olap.dim_condition.code
+    IS 'The code value from source';
+
+COMMENT ON COLUMN nedss_olap.dim_condition.etl_load_date
+    IS 'last etl load date of this disease record.';
+
+-- Index: idx_dw_dim_disease_lookup
+
+-- DROP INDEX warehouse.idx_dw_dim_disease_lookup;
+
+CREATE INDEX idx_dw_dim_condition_lookup
+    ON nedss_olap.dim_condition USING btree
+    (hashcode)
+    TABLESPACE pg_default;
+    
+CREATE INDEX idx_dw_dim_condition_dw_condition_id
+        ON nedss_olap.dim_condition USING btree
+        (dw_condition_id)
+    TABLESPACE pg_default;
+    
+CREATE INDEX idx_dw_dim_condition_active
+        ON nedss_olap.dim_condition USING btree
+        (active)
+    TABLESPACE pg_default;
+    
+CREATE INDEX idx_dw_dim_condition_mdro
+        ON nedss_olap.dim_condition USING btree
+        (mdro)
+    TABLESPACE pg_default;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NEDSSOLAPDS</connection>
+      <parallel>N</parallel>
+      <draw>N</draw>
       <nr>0</nr>
       <xloc>304</xloc>
-      <yloc>496</yloc>
+      <yloc>240</yloc>
+    </entry>
+    <entry>
+      <name>nedss_dim_agency</name>
+      <description/>
+      <type>SQL</type>
+      <sql>-- Table: warehouse.dim_jurisdiction
+
+DROP TABLE if exists nedss_olap.dim_agency;
+
+CREATE TABLE nedss_olap.dim_agency
+(
+    dw_agency_id integer NOT NULL,
+    hashcode bigint,
+	src_agency_id integer,
+	name character varying(255) COLLATE pg_catalog."default",
+    short_name character varying(255) COLLATE pg_catalog."default",
+    state_agency boolean,
+    src_task_user_id integer,
+	code text,
+	src_jurisdiction_id integer,
+	src_temp_entity_id integer,
+	src_temp_place_id integer,
+    etl_load_date timestamp without time zone,
+    CONSTRAINT pk_dim_agency PRIMARY KEY (dw_agency_id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+
+COMMENT ON TABLE nedss_olap.dim_agency
+    IS 'Agency dimension';
+
+COMMENT ON COLUMN nedss_olap.dim_agency.dw_agency_id
+    IS 'Technical key of the agency dimension.';
+
+COMMENT ON COLUMN nedss_olap.dim_agency.hashcode
+    IS 'Type I dimension hash code';
+
+COMMENT ON COLUMN nedss_olap.dim_agency.name
+    IS 'Name of the agency';
+
+COMMENT ON COLUMN nedss_olap.dim_agency.short_name
+    IS 'Shortened name of the agency.';
+
+COMMENT ON COLUMN nedss_olap.dim_agency.etl_load_date
+    IS 'The load date of this agency record.';
+
+
+-- DROP INDEX warehouse.idx_dw_dim_agency_lookup;
+
+CREATE INDEX idx_dw_dim_agencylookup
+    ON nedss_olap.dim_agency USING btree
+    (hashcode)
+    TABLESPACE pg_default;
+	
+CREATE INDEX idx_da_dw_agency_id
+	ON nedss_olap.dim_agency USING btree
+	(dw_agency_id)
+	TABLESPACE pg_default;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NEDSSOLAPDS</connection>
+      <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>400</xloc>
+      <yloc>240</yloc>
+    </entry>
+    <entry>
+      <name>nedss_dim_language</name>
+      <description/>
+      <type>SQL</type>
+      <sql>-- Table: nedss_olap.dim_disease
+
+DROP TABLE if exists nedss_olap.dim_language;
+
+CREATE TABLE nedss_olap.dim_language
+(
+    dw_language_id integer NOT NULL,
+    hashcode bigint,
+    code character varying(255) COLLATE pg_catalog."default",
+	description character varying(255) COLLATE pg_catalog."default",
+	sort_order integer,
+	src_external_codes_id integer,
+    etl_load_date timestamp without time zone,
+    CONSTRAINT pk_dw_dim_language PRIMARY KEY (dw_language_id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+
+-- Index: idx_dw_dim_disease_lookup
+
+-- DROP INDEX warehouse.idx_dw_dim_disease_lookup;
+
+CREATE INDEX idx_dw_dim_language_lookup
+    ON nedss_olap.dim_language USING btree
+    (hashcode)
+    TABLESPACE pg_default;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NEDSSOLAPDS</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>336</xloc>
+      <yloc>176</yloc>
     </entry>
   </entries>
   <hops>
     <hop>
-      <from>vw_fact_nbs_processing_dates</from>
-      <to>vw_fact_nbs_processing_dates_alt</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>START</from>
-      <to>add dimhospital and rebuild fnc</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>add dimhospital and rebuild fnc</from>
-      <to>exec_nbs_card_fact_main</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>exec_nbs_card_fact_main</from>
-      <to>exec_update_nbs_card_fact_w_arup_msg_in_main</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>exec_update_nbs_card_fact_w_arup_msg_in_main</from>
-      <to>exec_update_nbs_card_w_report_out_date</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>START</from>
-      <to>fact_nbs_processing_dates 3</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>fact_nbs_processing_dates 3</from>
-      <to>vw_fact_nbs_processing_dates</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>check disk space 3</from>
-      <to>vacuum 2</to>
-      <from_nr>1</from_nr>
-      <to_nr>1</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>vacuum 2</from>
-      <to>check disk space 3 2</to>
-      <from_nr>1</from_nr>
-      <to_nr>1</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>START</from>
-      <to>truncate fact_nbs_card</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>truncate fact_nbs_card</from>
-      <to>exec_nbs_card_fact_main 2</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>exec_nbs_card_fact_main 2</from>
-      <to>check disk space 3</to>
-      <from_nr>0</from_nr>
-      <to_nr>1</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>check disk space 3 2</from>
-      <to>exec_update_nbs_card_fact_w_arup_msg_in_main 2</to>
-      <from_nr>1</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>exec_update_nbs_card_fact_w_arup_msg_in_main 2</from>
-      <to>exec_update_nbs_card_w_report_out_date 2</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>exec_update_nbs_card_w_report_out_date 2</from>
-      <to>Success</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>exec_populate_lat_lon_on_dim_nbs_hospital</from>
-      <to>Success</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>START</from>
-      <to>exec_populate_lat_lon_on_dim_nbs_hospital</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>START</from>
-      <to>Shell</to>
+      <to>nedss_dim_language</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -4443,16 +3412,7 @@ CREATE INDEX idx_fnr_changed_on_2018
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>Shell</from>
-      <to>truncate fact_nbs_sample</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>truncate fact_nbs_sample</from>
+      <from>nedss_dim_language</from>
       <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -4463,20 +3423,4 @@ CREATE INDEX idx_fnr_changed_on_2018
   </hops>
   <notepads>
   </notepads>
-  <attributes>
-    <group>
-      <name>METASTORE.pentaho</name>
-      <attribute>
-        <key>Default Run Configuration</key>
-        <value>{"namespace":"pentaho","id":"Default Run Configuration","name":"Default Run Configuration","description":"Defines a default run configuration","metaStoreName":null}</value>
-      </attribute>
-    </group>
-    <group>
-      <name>{"_":"Embedded MetaStore Elements","namespace":"pentaho","type":"Default Run Configuration"}</name>
-      <attribute>
-        <key>Pentaho local</key>
-        <value>{"children":[{"children":[],"id":"server","value":null},{"children":[],"id":"clustered","value":"N"},{"children":[],"id":"name","value":"Pentaho local"},{"children":[],"id":"description","value":null},{"children":[],"id":"pentaho","value":"N"},{"children":[],"id":"readOnly","value":"Y"},{"children":[],"id":"sendResources","value":"N"},{"children":[],"id":"logRemoteExecutionLocally","value":"N"},{"children":[],"id":"remote","value":"N"},{"children":[],"id":"local","value":"Y"},{"children":[],"id":"showTransformations","value":"N"}],"id":"Pentaho local","value":null,"name":"Pentaho local","owner":null,"ownerPermissionsList":[]}</value>
-      </attribute>
-    </group>
-  </attributes>
 </job>

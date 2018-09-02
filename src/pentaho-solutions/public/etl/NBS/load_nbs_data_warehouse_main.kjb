@@ -355,8 +355,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>50</xloc>
-      <yloc>50</yloc>
+      <xloc>16</xloc>
+      <yloc>48</yloc>
     </entry>
     <entry>
       <name>exec_nbs_card_fact_main</name>
@@ -391,7 +391,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>496</xloc>
+      <xloc>576</xloc>
       <yloc>48</yloc>
     </entry>
     <entry>
@@ -401,8 +401,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>570</xloc>
-      <yloc>690</yloc>
+      <xloc>656</xloc>
+      <yloc>688</yloc>
     </entry>
     <entry>
       <name>exec_nbs_result_fact_main2</name>
@@ -437,8 +437,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>710</xloc>
-      <yloc>50</yloc>
+      <xloc>800</xloc>
+      <yloc>48</yloc>
     </entry>
     <entry>
       <name>load_nbs_result_all_years_main</name>
@@ -471,8 +471,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>360</xloc>
-      <yloc>170</yloc>
+      <xloc>448</xloc>
+      <yloc>160</yloc>
     </entry>
     <entry>
       <name>Success Mail</name>
@@ -518,8 +518,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>570</xloc>
-      <yloc>600</yloc>
+      <xloc>656</xloc>
+      <yloc>592</yloc>
     </entry>
     <entry>
       <name>load_date_time_dims</name>
@@ -552,7 +552,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>352</xloc>
+      <xloc>432</xloc>
       <yloc>48</yloc>
     </entry>
     <entry>
@@ -588,8 +588,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>930</xloc>
-      <yloc>50</yloc>
+      <xloc>1024</xloc>
+      <yloc>48</yloc>
     </entry>
     <entry>
       <name>exec_nbs_card_log_main</name>
@@ -624,8 +624,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1090</xloc>
-      <yloc>50</yloc>
+      <xloc>1184</xloc>
+      <yloc>48</yloc>
     </entry>
     <entry>
       <name>update null fact_nbs_card.msg_sent_on</name>
@@ -640,8 +640,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1030</xloc>
-      <yloc>140</yloc>
+      <xloc>1120</xloc>
+      <yloc>128</yloc>
     </entry>
     <entry>
       <name>exec_update_nbs_card_fact_w_arup_msg_in_main</name>
@@ -676,8 +676,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1330</xloc>
-      <yloc>50</yloc>
+      <xloc>1424</xloc>
+      <yloc>48</yloc>
     </entry>
     <entry>
       <name>exec_update_nbs_result_w_msg_processed_on</name>
@@ -712,8 +712,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1330</xloc>
-      <yloc>170</yloc>
+      <xloc>1424</xloc>
+      <yloc>160</yloc>
     </entry>
     <entry>
       <name>exec_update_nbs_sample_w_msg_processed_on</name>
@@ -748,8 +748,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1330</xloc>
-      <yloc>270</yloc>
+      <xloc>1424</xloc>
+      <yloc>256</yloc>
     </entry>
     <entry>
       <name>exec_update_nbs_sample_w_result_entry_date</name>
@@ -784,8 +784,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1330</xloc>
-      <yloc>380</yloc>
+      <xloc>1424</xloc>
+      <yloc>368</yloc>
     </entry>
     <entry>
       <name>exec_update_nbs_card_w_report_out_date</name>
@@ -820,8 +820,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1330</xloc>
-      <yloc>490</yloc>
+      <xloc>1424</xloc>
+      <yloc>480</yloc>
     </entry>
     <entry>
       <name>exec_update_action_item_log</name>
@@ -856,8 +856,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>860</xloc>
-      <yloc>490</yloc>
+      <xloc>944</xloc>
+      <yloc>480</yloc>
     </entry>
     <entry>
       <name>check disk space</name>
@@ -879,8 +879,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>150</xloc>
-      <yloc>600</yloc>
+      <xloc>240</xloc>
+      <yloc>592</yloc>
     </entry>
     <entry>
       <name>vacuum</name>
@@ -929,8 +929,8 @@ vacuum full nbs_olap.fact_nbs_sample;
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>290</xloc>
-      <yloc>600</yloc>
+      <xloc>384</xloc>
+      <yloc>592</yloc>
     </entry>
     <entry>
       <name>update fact_nbs_processing_dates &amp; rpt iews</name>
@@ -1142,7 +1142,7 @@ order by 1
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>400</xloc>
+      <xloc>480</xloc>
       <yloc>432</yloc>
     </entry>
     <entry>
@@ -1165,8 +1165,8 @@ order by 1
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>400</xloc>
-      <yloc>600</yloc>
+      <xloc>480</xloc>
+      <yloc>592</yloc>
     </entry>
     <entry>
       <name>exec_update_action_item</name>
@@ -1201,8 +1201,8 @@ order by 1
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1090</xloc>
-      <yloc>490</yloc>
+      <xloc>1184</xloc>
+      <yloc>480</yloc>
     </entry>
     <entry>
       <name>exec_update_dim_hospital_rolling_metrics</name>
@@ -1237,8 +1237,8 @@ order by 1
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>592</xloc>
-      <yloc>496</yloc>
+      <xloc>672</xloc>
+      <yloc>480</yloc>
     </entry>
     <entry>
       <name>exec_populate_lat_lon_on_dim_nbs_hospital</name>
@@ -1273,8 +1273,8 @@ order by 1
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>150</xloc>
-      <yloc>490</yloc>
+      <xloc>240</xloc>
+      <yloc>480</yloc>
     </entry>
     <entry>
       <name>Simple evaluation</name>
@@ -1295,7 +1295,7 @@ order by 1
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>176</xloc>
+      <xloc>256</xloc>
       <yloc>48</yloc>
     </entry>
     <entry>
@@ -1315,8 +1315,28 @@ order by 1
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>176</xloc>
+      <xloc>256</xloc>
       <yloc>176</yloc>
+    </entry>
+    <entry>
+      <name>set olap_schema</name>
+      <description/>
+      <type>SET_VARIABLES</type>
+      <replacevars>Y</replacevars>
+      <filename/>
+      <file_variable_type>JVM</file_variable_type>
+      <fields>
+        <field>
+          <variable_name>olap_schema</variable_name>
+          <variable_value>nbs_olap</variable_value>
+          <variable_type>JVM</variable_type>
+        </field>
+      </fields>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>128</xloc>
+      <yloc>48</yloc>
     </entry>
   </entries>
   <hops>
@@ -1528,15 +1548,6 @@ order by 1
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>START</from>
-      <to>Simple evaluation</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
       <from>Simple evaluation</from>
       <to>load_date_time_dims</to>
       <from_nr>0</from_nr>
@@ -1566,6 +1577,24 @@ order by 1
     <hop>
       <from>exec_populate_lat_lon_on_dim_nbs_hospital</from>
       <to>Success Mail</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>START</from>
+      <to>set olap_schema</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>set olap_schema</from>
+      <to>Simple evaluation</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

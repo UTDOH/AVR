@@ -518,11 +518,11 @@
     <sql>select 
    max(src_date_val) as max_dw_date
  , extract(YEAR from now()) as curr_year
-from nbs_olap.dim_date;</sql>
+from ${olap_schema}.dim_date;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
+    <variables_active>Y</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
     <cluster_schema/>
     <remotesteps>

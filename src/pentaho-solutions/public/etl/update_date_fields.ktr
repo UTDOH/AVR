@@ -1958,7 +1958,7 @@ function daysInMonth(mo,yr) {
     <error_ignored>N</error_ignored>
     <ignore_flag_field/>
     <lookup>
-      <schema>nbs_olap</schema>
+      <schema>${olap_schema}</schema>
       <table>dim_date</table>
       <key>
         <name>dw_date_id</name>
@@ -2203,7 +2203,7 @@ function daysInMonth(mo,yr) {
       </output>
     </remotesteps>
     <GUI>
-      <xloc>832</xloc>
+      <xloc>816</xloc>
       <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2223,12 +2223,12 @@ function daysInMonth(mo,yr) {
     <sql>SELECT
   dw_date_id
 , src_date_val as srcDateVal
-FROM nbs_olap.dim_date
+FROM ${olap_schema}.dim_date
 where src_date_val is not null</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
+    <variables_active>Y</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
     <cluster_schema/>
     <remotesteps>

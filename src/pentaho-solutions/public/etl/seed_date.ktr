@@ -920,7 +920,7 @@ Alert(getVariable(strVarName, ""));</jsScript_script>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <schema>nbs_olap</schema>
+    <schema>${olap_schema}</schema>
     <table>dim_date</table>
     <connection>NBSOLAPDS</connection>
     <commit>100</commit>
