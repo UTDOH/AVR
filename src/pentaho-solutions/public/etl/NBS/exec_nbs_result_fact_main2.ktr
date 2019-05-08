@@ -16,12 +16,12 @@
       </parameter>
       <parameter>
         <name>nbsoltp_schema</name>
-        <default_value>NBSPROD</default_value>
+        <default_value>NBS_USER</default_value>
         <description>NBSPROD|NBS_USER</description>
       </parameter>
       <parameter>
         <name>nbsoltp_schemaz</name>
-        <default_value>NBS_USER</default_value>
+        <default_value>NBSPROD</default_value>
         <description>NBSPROD|NBS_USER</description>
       </parameter>
       <parameter>
@@ -478,8 +478,20 @@
         <attribute>N</attribute>
       </attribute>
       <attribute>
+        <code>INITIAL_POOL_SIZE</code>
+        <attribute>5</attribute>
+      </attribute>
+      <attribute>
         <code>IS_CLUSTERED</code>
         <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>MAXIMUM_POOL_SIZE</code>
+        <attribute>20</attribute>
+      </attribute>
+      <attribute>
+        <code>POOLING_removeAbandoned</code>
+        <attribute>true</attribute>
       </attribute>
       <attribute>
         <code>PORT_NUMBER</code>
@@ -503,7 +515,7 @@
       </attribute>
       <attribute>
         <code>USE_POOLING</code>
-        <attribute>N</attribute>
+        <attribute>Y</attribute>
       </attribute>
     </attributes>
   </connection>
@@ -529,8 +541,20 @@
         <attribute>N</attribute>
       </attribute>
       <attribute>
+        <code>INITIAL_POOL_SIZE</code>
+        <attribute>5</attribute>
+      </attribute>
+      <attribute>
         <code>IS_CLUSTERED</code>
         <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>MAXIMUM_POOL_SIZE</code>
+        <attribute>20</attribute>
+      </attribute>
+      <attribute>
+        <code>POOLING_removeAbandoned</code>
+        <attribute>true</attribute>
       </attribute>
       <attribute>
         <code>PORT_NUMBER</code>
@@ -545,6 +569,10 @@
         <attribute>N</attribute>
       </attribute>
       <attribute>
+        <code>STRICT_NUMBER_38_INTERPRETATION</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
         <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
         <attribute>Y</attribute>
       </attribute>
@@ -554,7 +582,7 @@
       </attribute>
       <attribute>
         <code>USE_POOLING</code>
-        <attribute>N</attribute>
+        <attribute>Y</attribute>
       </attribute>
     </attributes>
   </connection>
@@ -687,11 +715,6 @@
     <hop>
       <from>set 0 dt 2</from>
       <to>date entered not null</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>set 0 dt 3</from>
-      <to>dx code not null</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -869,6 +892,16 @@
       <to>fact_nbs_result</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>set 0 dt 3</from>
+      <to>Partition Table exists?</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Partition Table exists?</from>
+      <to>Set Variables</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
   <step>
     <name>Abort</name>
@@ -893,8 +926,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>900</xloc>
-      <yloc>10</yloc>
+      <xloc>928</xloc>
+      <yloc>32</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -932,8 +965,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>770</xloc>
-      <yloc>850</yloc>
+      <xloc>800</xloc>
+      <yloc>864</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -996,8 +1029,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>210</xloc>
-      <yloc>100</yloc>
+      <xloc>240</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1027,8 +1060,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>210</xloc>
-      <yloc>190</yloc>
+      <xloc>240</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1091,8 +1124,8 @@ where r.ENTERED_ON >= to_date('${startDate}', 'yyyy/mm/dd') AND r.ENTERED_ON &lt
       </output>
     </remotesteps>
     <GUI>
-      <xloc>270</xloc>
-      <yloc>30</yloc>
+      <xloc>288</xloc>
+      <yloc>32</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1159,7 +1192,7 @@ where r.ENTERED_ON > ?</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>384</xloc>
+      <xloc>416</xloc>
       <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1231,8 +1264,8 @@ if (isNum(FORMATTED_ENTRY)) {
       </output>
     </remotesteps>
     <GUI>
-      <xloc>130</xloc>
-      <yloc>820</yloc>
+      <xloc>160</xloc>
+      <yloc>832</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1337,8 +1370,8 @@ if (isNum(FORMATTED_ENTRY)) {
       </output>
     </remotesteps>
     <GUI>
-      <xloc>910</xloc>
-      <yloc>820</yloc>
+      <xloc>928</xloc>
+      <yloc>832</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1391,8 +1424,8 @@ where r.ENTERED_ON >= to_date('${startDate}', 'yyyy/mm/dd') AND r.ENTERED_ON &lt
       </output>
     </remotesteps>
     <GUI>
-      <xloc>240</xloc>
-      <yloc>20</yloc>
+      <xloc>272</xloc>
+      <yloc>32</yloc>
       <draw>N</draw>
     </GUI>
   </step>
@@ -1425,7 +1458,7 @@ where r.ENTERED_ON >= to_date('${startDate}', 'yyyy/mm/dd') AND r.ENTERED_ON &lt
       </output>
     </remotesteps>
     <GUI>
-      <xloc>200</xloc>
+      <xloc>224</xloc>
       <yloc>640</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1459,8 +1492,8 @@ where r.ENTERED_ON >= to_date('${startDate}', 'yyyy/mm/dd') AND r.ENTERED_ON &lt
       </output>
     </remotesteps>
     <GUI>
-      <xloc>900</xloc>
-      <yloc>100</yloc>
+      <xloc>928</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1493,8 +1526,8 @@ where r.ENTERED_ON >= to_date('${startDate}', 'yyyy/mm/dd') AND r.ENTERED_ON &lt
       </output>
     </remotesteps>
     <GUI>
-      <xloc>680</xloc>
-      <yloc>100</yloc>
+      <xloc>704</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1529,7 +1562,7 @@ from nbs_olap.dim_date</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>680</xloc>
+      <xloc>704</xloc>
       <yloc>320</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1575,8 +1608,8 @@ from nbs_olap.dim_date</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>60</xloc>
-      <yloc>730</yloc>
+      <xloc>80</xloc>
+      <yloc>736</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1621,8 +1654,8 @@ from nbs_olap.dim_date</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>680</xloc>
-      <yloc>550</yloc>
+      <xloc>704</xloc>
+      <yloc>560</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1667,8 +1700,8 @@ from nbs_olap.dim_date</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1050</xloc>
-      <yloc>540</yloc>
+      <xloc>1072</xloc>
+      <yloc>544</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1713,8 +1746,8 @@ from nbs_olap.dim_date</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>320</xloc>
-      <yloc>930</yloc>
+      <xloc>352</xloc>
+      <yloc>944</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1799,8 +1832,8 @@ from nbs_olap.dim_date</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>770</xloc>
-      <yloc>780</yloc>
+      <xloc>800</xloc>
+      <yloc>784</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1845,8 +1878,8 @@ from nbs_olap.dim_date</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1420</xloc>
-      <yloc>290</yloc>
+      <xloc>1568</xloc>
+      <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1895,8 +1928,8 @@ from nbs_olap.dim_date</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1140</xloc>
-      <yloc>180</yloc>
+      <xloc>1296</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1941,8 +1974,8 @@ from nbs_olap.dim_date</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1430</xloc>
-      <yloc>530</yloc>
+      <xloc>1584</xloc>
+      <yloc>544</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1987,8 +2020,8 @@ from nbs_olap.dim_date</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>350</xloc>
-      <yloc>550</yloc>
+      <xloc>368</xloc>
+      <yloc>560</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2026,7 +2059,7 @@ from nbs_olap.dim_date</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>680</xloc>
+      <xloc>704</xloc>
       <yloc>640</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2060,8 +2093,8 @@ from nbs_olap.dim_date</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1140</xloc>
-      <yloc>100</yloc>
+      <xloc>1296</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2103,7 +2136,7 @@ from nbs_olap.dim_date</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1072</xloc>
+      <xloc>1104</xloc>
       <yloc>816</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2146,8 +2179,8 @@ from nbs_olap.dim_date</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>320</xloc>
-      <yloc>820</yloc>
+      <xloc>352</xloc>
+      <yloc>832</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2180,8 +2213,8 @@ from nbs_olap.dim_date</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>650</xloc>
-      <yloc>820</yloc>
+      <xloc>672</xloc>
+      <yloc>832</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2219,8 +2252,8 @@ writeToLog('m', 'startDate: ' + startDate + ', ' + 'endDate: ' + endDate);</jsSc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>110</xloc>
-      <yloc>100</yloc>
+      <xloc>128</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2253,8 +2286,8 @@ writeToLog('m', 'startDate: ' + startDate + ', ' + 'endDate: ' + endDate);</jsSc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>210</xloc>
-      <yloc>270</yloc>
+      <xloc>240</xloc>
+      <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2287,8 +2320,8 @@ writeToLog('m', 'startDate: ' + startDate + ', ' + 'endDate: ' + endDate);</jsSc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1260</xloc>
-      <yloc>180</yloc>
+      <xloc>1408</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2334,8 +2367,8 @@ writeToLog('m', 'startDate: ' + startDate + ', ' + 'endDate: ' + endDate);</jsSc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>900</xloc>
-      <yloc>180</yloc>
+      <xloc>928</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2375,8 +2408,8 @@ writeToLog('m', 'startDate: ' + startDate + ', ' + 'endDate: ' + endDate);</jsSc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>680</xloc>
-      <yloc>180</yloc>
+      <xloc>704</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2416,8 +2449,8 @@ writeToLog('m', 'startDate: ' + startDate + ', ' + 'endDate: ' + endDate);</jsSc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>480</xloc>
-      <yloc>180</yloc>
+      <xloc>512</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2450,7 +2483,7 @@ writeToLog('m', 'startDate: ' + startDate + ', ' + 'endDate: ' + endDate);</jsSc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1260</xloc>
+      <xloc>1408</xloc>
       <yloc>640</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2484,7 +2517,7 @@ writeToLog('m', 'startDate: ' + startDate + ', ' + 'endDate: ' + endDate);</jsSc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>870</xloc>
+      <xloc>896</xloc>
       <yloc>640</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2514,8 +2547,8 @@ writeToLog('m', 'startDate: ' + startDate + ', ' + 'endDate: ' + endDate);</jsSc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>380</xloc>
-      <yloc>190</yloc>
+      <xloc>400</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2553,8 +2586,8 @@ writeToLog('m', 'startDate: ' + startDate + ', ' + 'endDate: ' + endDate);</jsSc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>480</xloc>
-      <yloc>100</yloc>
+      <xloc>512</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2592,8 +2625,8 @@ writeToLog('m', 'startDate: ' + startDate + ', ' + 'endDate: ' + endDate);</jsSc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>780</xloc>
-      <yloc>100</yloc>
+      <xloc>800</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2646,8 +2679,8 @@ writeToLog('m', 'startDate: ' + startDate + ', ' + 'endDate: ' + endDate);</jsSc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1010</xloc>
-      <yloc>100</yloc>
+      <xloc>1040</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2685,8 +2718,8 @@ writeToLog('m', 'startDate: ' + startDate + ', ' + 'endDate: ' + endDate);</jsSc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1260</xloc>
-      <yloc>100</yloc>
+      <xloc>1408</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2724,8 +2757,8 @@ writeToLog('m', 'startDate: ' + startDate + ', ' + 'endDate: ' + endDate);</jsSc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>200</xloc>
-      <yloc>730</yloc>
+      <xloc>224</xloc>
+      <yloc>736</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2763,7 +2796,7 @@ writeToLog('m', 'startDate: ' + startDate + ', ' + 'endDate: ' + endDate);</jsSc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1050</xloc>
+      <xloc>1072</xloc>
       <yloc>640</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2802,8 +2835,8 @@ writeToLog('m', 'startDate: ' + startDate + ', ' + 'endDate: ' + endDate);</jsSc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>480</xloc>
-      <yloc>820</yloc>
+      <xloc>512</xloc>
+      <yloc>832</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2841,8 +2874,8 @@ writeToLog('m', 'startDate: ' + startDate + ', ' + 'endDate: ' + endDate);</jsSc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1260</xloc>
-      <yloc>290</yloc>
+      <xloc>1408</xloc>
+      <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2880,8 +2913,8 @@ writeToLog('m', 'startDate: ' + startDate + ', ' + 'endDate: ' + endDate);</jsSc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1260</xloc>
-      <yloc>530</yloc>
+      <xloc>1408</xloc>
+      <yloc>544</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2919,7 +2952,7 @@ writeToLog('m', 'startDate: ' + startDate + ', ' + 'endDate: ' + endDate);</jsSc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>350</xloc>
+      <xloc>368</xloc>
       <yloc>640</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2953,7 +2986,7 @@ writeToLog('m', 'startDate: ' + startDate + ', ' + 'endDate: ' + endDate);</jsSc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1260</xloc>
+      <xloc>1408</xloc>
       <yloc>400</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3003,8 +3036,8 @@ writeToLog('m', 'startDate: ' + startDate + ', ' + 'endDate: ' + endDate);</jsSc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>20</xloc>
-      <yloc>100</yloc>
+      <xloc>48</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3037,8 +3070,8 @@ writeToLog('m', 'startDate: ' + startDate + ', ' + 'endDate: ' + endDate);</jsSc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>380</xloc>
-      <yloc>100</yloc>
+      <xloc>400</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3071,8 +3104,63 @@ writeToLog('m', 'startDate: ' + startDate + ', ' + 'endDate: ' + endDate);</jsSc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>520</xloc>
+      <xloc>544</xloc>
       <yloc>640</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Partition Table exists?</name>
+    <type>TableExists</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>NBSOLAPDS</connection>
+    <tablenamefield>fact_table_name</tablenamefield>
+    <resultfieldname>result</resultfieldname>
+    <schemaname>nbs_olap</schemaname>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1168</xloc>
+      <yloc>112</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Set Variables</name>
+    <type>SetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      </fields>
+    <use_formatting>Y</use_formatting>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1168</xloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

@@ -478,8 +478,20 @@
         <attribute>N</attribute>
       </attribute>
       <attribute>
+        <code>INITIAL_POOL_SIZE</code>
+        <attribute>5</attribute>
+      </attribute>
+      <attribute>
         <code>IS_CLUSTERED</code>
         <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>MAXIMUM_POOL_SIZE</code>
+        <attribute>20</attribute>
+      </attribute>
+      <attribute>
+        <code>POOLING_removeAbandoned</code>
+        <attribute>true</attribute>
       </attribute>
       <attribute>
         <code>PORT_NUMBER</code>
@@ -503,7 +515,7 @@
       </attribute>
       <attribute>
         <code>USE_POOLING</code>
-        <attribute>N</attribute>
+        <attribute>Y</attribute>
       </attribute>
     </attributes>
   </connection>
@@ -529,8 +541,20 @@
         <attribute>N</attribute>
       </attribute>
       <attribute>
+        <code>INITIAL_POOL_SIZE</code>
+        <attribute>5</attribute>
+      </attribute>
+      <attribute>
         <code>IS_CLUSTERED</code>
         <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>MAXIMUM_POOL_SIZE</code>
+        <attribute>20</attribute>
+      </attribute>
+      <attribute>
+        <code>POOLING_removeAbandoned</code>
+        <attribute>true</attribute>
       </attribute>
       <attribute>
         <code>PORT_NUMBER</code>
@@ -545,6 +569,10 @@
         <attribute>N</attribute>
       </attribute>
       <attribute>
+        <code>STRICT_NUMBER_38_INTERPRETATION</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
         <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
         <attribute>Y</attribute>
       </attribute>
@@ -554,7 +582,7 @@
       </attribute>
       <attribute>
         <code>USE_POOLING</code>
-        <attribute>N</attribute>
+        <attribute>Y</attribute>
       </attribute>
     </attributes>
   </connection>
@@ -616,8 +644,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>170</xloc>
-      <yloc>170</yloc>
+      <xloc>160</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -663,8 +691,8 @@ GROUP BY text_id
       </output>
     </remotesteps>
     <GUI>
-      <xloc>450</xloc>
-      <yloc>170</yloc>
+      <xloc>448</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -705,8 +733,8 @@ GROUP BY text_id
       </output>
     </remotesteps>
     <GUI>
-      <xloc>430</xloc>
-      <yloc>230</yloc>
+      <xloc>416</xloc>
+      <yloc>240</yloc>
       <draw>N</draw>
     </GUI>
   </step>
@@ -753,8 +781,8 @@ GROUP BY text_id
       </output>
     </remotesteps>
     <GUI>
-      <xloc>830</xloc>
-      <yloc>170</yloc>
+      <xloc>816</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -790,7 +818,7 @@ from nbs_olap.dim_date</sql>
     </remotesteps>
     <GUI>
       <xloc>640</xloc>
-      <yloc>50</yloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -823,8 +851,8 @@ from nbs_olap.dim_date</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>280</xloc>
-      <yloc>170</yloc>
+      <xloc>272</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -865,7 +893,7 @@ from nbs_olap.dim_date</sql>
     </remotesteps>
     <GUI>
       <xloc>640</xloc>
-      <yloc>170</yloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -914,8 +942,8 @@ from nbs_olap.dim_date</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>50</xloc>
-      <yloc>170</yloc>
+      <xloc>48</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="Syndromic_OLAP" id="Project1598581" database="PostgreSQL" >
+	<schema name="syndromic_olap" catalogname="dlpldw" schemaname="syndromic_olap" defo="y" >
+		<table name="dim_admit_reason_code" >
+			<comment>derived dimension based on ss_processed_message.admit_reason_code</comment>
+			<column name="dw_admit_reason_code_id" type="integer" jt="4" />
+			<column name="hashcode" type="integer" jt="4" />
+			<column name="src_admit_reason_code" type="varchar" length="255" jt="12" />
+			<index name="pk_dim_admit_reason_code" unique="UNIQUE" >
+				<column name="dw_admit_reason_code_id" />
+			</index>
+		</table>
+		<table name="dim_date" >
+			<column name="dw_date_id" type="integer" jt="4" />
+			<column name="dw_date_num_id" type="integer" jt="4" >
+				<comment><![CDATA[YYYYMMDD]]></comment>
+			</column>
+			<index name="pk_dim_date" unique="UNIQUE" >
+				<column name="dw_date_num_id" />
+			</index>
+			<index name="pk_dim_date_0" unique="UNIQUE" >
+				<column name="dw_date_id" />
+			</index>
+		</table>
+		<table name="dim_diagnosis_code" >
+			<column name="dw_diagnosis_code_id" type="integer" jt="4" />
+			<column name="hashcode" type="integer" jt="4" />
+			<column name="diagnosis_description" type="varchar" length="255" jt="12" />
+			<index name="pk_dim_diagnosis_code" unique="UNIQUE" >
+				<column name="dw_diagnosis_code_id" />
+			</index>
+		</table>
+		<table name="dim_diagnosis_code_system" >
+			<column name="dw_diagnosis_code_system_id" type="integer" jt="4" />
+			<column name="hashcode" type="integer" jt="4" />
+			<column name="diagnosis_code_system" type="varchar" length="255" jt="12" />
+			<index name="pk_dim_diagnosis_code_system" unique="UNIQUE" >
+				<column name="dw_diagnosis_code_system_id" />
+			</index>
+		</table>
+		<table name="dim_facility_type" >
+			<comment>derived dimension</comment>
+			<column name="dw_facility_type_id" type="integer" jt="4" />
+			<column name="hashcode" type="integer" jt="4" />
+			<column name="facility_type_code" type="varchar" length="255" jt="12" />
+			<index name="pk_dim_facility_type" unique="UNIQUE" >
+				<column name="dw_facility_type_id" />
+			</index>
+		</table>
+		<table name="dim_mft" >
+			<comment>Medical facility dimension
+
+TODO:
+Get address from lookup table in syndromic schema - Eunice to provide</comment>
+			<column name="dw_mft_id" type="integer" jt="4" mandatory="y" />
+			<column name="hashcode" type="integer" jt="4" />
+			<column name="facility_uid" type="varchar" length="255" jt="12" />
+			<column name="connector" type="varchar" length="255" jt="12" />
+			<column name="application_name" type="varchar" length="255" jt="12" />
+			<column name="facility_name" type="varchar" length="255" jt="12" />
+			<column name="facility_id" type="varchar" length="255" jt="12" />
+			<column name="udoh_status" type="varchar" length="255" jt="12" />
+			<column name="hco" type="varchar" length="255" jt="12" />
+			<column name="biosense_status" type="varchar" length="255" jt="12" />
+			<column name="latitude" type="numeric" length="11" decimal="7" jt="2" />
+			<column name="longitude" type="numeric" length="11" decimal="7" jt="2" />
+			<index name="pk_dim_mft" unique="PRIMARY_KEY" >
+				<column name="dw_mft_id" />
+			</index>
+		</table>
+		<table name="dim_obx_identifier" >
+			<column name="dw_obx_identifier_id" type="integer" jt="4" />
+			<column name="hashcode" type="integer" jt="4" />
+			<column name="obx_identifier" type="integer" jt="4" />
+			<index name="pk_dim_obx_identifier" unique="UNIQUE" >
+				<column name="dw_obx_identifier_id" />
+			</index>
+		</table>
+		<table name="dim_rt_age_unit_syndromic_surveillance" >
+			<column name="dw_rt_age_unit_syndromic_surveillance_id" type="integer" jt="4" mandatory="y" />
+			<column name="hashcode" type="integer" jt="4" />
+			<column name="concept_code" type="varchar" length="255" jt="12" />
+			<column name="concept_name" type="varchar" length="255" jt="12" />
+			<column name="preferred_concept_name" type="varchar" length="255" jt="12" />
+			<column name="preferred_alternate_code" type="varchar" length="255" jt="12" />
+			<column name="code_system_oid" type="varchar" length="255" jt="12" />
+			<column name="code_system_name" type="varchar" length="255" jt="12" />
+			<column name="code_system_version" type="varchar" length="255" jt="12" />
+			<column name="hl7_table_0396_code" type="varchar" length="255" jt="12" />
+			<column name="value_set_concept_definition_text" type="varchar" length="255" jt="12" />
+			<column name="value_set_version" type="varchar" length="255" jt="12" />
+			<column name="dw_version_effective_date_num_id" type="integer" jt="4" >
+				<comment><![CDATA[e.g. 20190430]]></comment>
+			</column>
+			<column name="dw_version_expiration_date_num_id" type="integer" jt="4" >
+				<comment><![CDATA[e.g. 20190430]]></comment>
+			</column>
+			<column name="value_set_oid" type="varchar" length="255" jt="12" />
+			<index name="pk_dim_rt_age_unit_syndromic_surveillance" unique="PRIMARY_KEY" >
+				<column name="dw_rt_age_unit_syndromic_surveillance_id" />
+			</index>
+		</table>
+		<table name="dim_rt_discharge_disposition" >
+			<column name="dw_rt_discharge_disposition_id" type="integer" jt="4" mandatory="y" />
+			<column name="hashcode" type="integer" jt="4" />
+			<column name="concept_code" type="varchar" length="255" jt="12" />
+			<column name="concept_name" type="varchar" length="255" jt="12" />
+			<column name="preferred_concept_name" type="varchar" length="255" jt="12" />
+			<column name="preferred_alternate_code" type="varchar" length="255" jt="12" />
+			<column name="code_system_oid" type="varchar" length="255" jt="12" />
+			<column name="code_system_name" type="varchar" length="255" jt="12" />
+			<column name="code_system_version" type="varchar" length="255" jt="12" />
+			<column name="hl7_table_0396_code" type="varchar" length="255" jt="12" />
+			<column name="value_set_concept_definition_text" type="varchar" length="255" jt="12" />
+			<column name="value_set_version" type="varchar" length="255" jt="12" />
+			<column name="dw_version_effective_date_num_id" type="integer" jt="4" >
+				<comment><![CDATA[e.g. 20190430]]></comment>
+			</column>
+			<column name="dw_version_expiration_date_num_id" type="integer" jt="4" >
+				<comment><![CDATA[e.g. 20190430]]></comment>
+			</column>
+			<column name="value_set_oid" type="varchar" length="255" jt="12" />
+			<index name="pk_dim_rt_age_unit_syndromic_surveillance_1" unique="PRIMARY_KEY" >
+				<column name="dw_rt_discharge_disposition_id" />
+			</index>
+		</table>
+		<table name="dim_rt_ethnicity_group" >
+			<column name="dim_rt_ethnicity_group_id" type="integer" jt="4" mandatory="y" />
+			<column name="hashcode" type="integer" jt="4" />
+			<column name="concept_code" type="varchar" length="255" jt="12" />
+			<column name="concept_name" type="varchar" length="255" jt="12" />
+			<column name="preferred_concept_name" type="varchar" length="255" jt="12" />
+			<column name="preferred_alternate_code" type="varchar" length="255" jt="12" />
+			<column name="code_system_oid" type="varchar" length="255" jt="12" />
+			<column name="code_system_name" type="varchar" length="255" jt="12" />
+			<column name="code_system_version" type="varchar" length="255" jt="12" />
+			<column name="hl7_table_0396_code" type="varchar" length="255" jt="12" />
+			<column name="value_set_concept_definition_text" type="varchar" length="255" jt="12" />
+			<column name="value_set_version" type="varchar" length="255" jt="12" />
+			<column name="dw_version_effective_date_num_id" type="integer" jt="4" >
+				<comment><![CDATA[e.g. 20190430]]></comment>
+			</column>
+			<column name="dw_version_expiration_date_num_id" type="integer" jt="4" >
+				<comment><![CDATA[e.g. 20190430]]></comment>
+			</column>
+			<column name="value_set_oid" type="varchar" length="255" jt="12" />
+			<index name="pk_dim_rt_age_unit_syndromic_surveillance_2" unique="PRIMARY_KEY" >
+				<column name="dim_rt_ethnicity_group_id" />
+			</index>
+		</table>
+		<table name="dim_rt_facility_visit_type" >
+			<column name="dw_rt_facility_visit_type_id" type="integer" jt="4" mandatory="y" />
+			<column name="hashcode" type="integer" jt="4" />
+			<column name="concept_code" type="varchar" length="255" jt="12" />
+			<column name="concept_name" type="varchar" length="255" jt="12" />
+			<column name="preferred_concept_name" type="varchar" length="255" jt="12" />
+			<column name="preferred_alternate_code" type="varchar" length="255" jt="12" />
+			<column name="code_system_oid" type="varchar" length="255" jt="12" />
+			<column name="code_system_name" type="varchar" length="255" jt="12" />
+			<column name="code_system_version" type="varchar" length="255" jt="12" />
+			<column name="hl7_table_0396_code" type="varchar" length="255" jt="12" />
+			<column name="value_set_concept_definition_text" type="varchar" length="255" jt="12" />
+			<column name="value_set_version" type="varchar" length="255" jt="12" />
+			<column name="dw_version_effective_date_num_id" type="integer" jt="4" >
+				<comment><![CDATA[e.g. 20190430]]></comment>
+			</column>
+			<column name="dw_version_expiration_date_num_id" type="integer" jt="4" >
+				<comment><![CDATA[e.g. 20190430]]></comment>
+			</column>
+			<column name="value_set_oid" type="varchar" length="255" jt="12" />
+			<index name="pk_dim_rt_age_unit_syndromic_surveillance_3" unique="PRIMARY_KEY" >
+				<column name="dw_rt_facility_visit_type_id" />
+			</index>
+		</table>
+		<table name="dim_rt_gender_syndromic_surveillance" >
+			<column name="dw_rt_gender_syndromic_surveillance_id" type="integer" jt="4" mandatory="y" />
+			<column name="hashcode" type="integer" jt="4" />
+			<column name="concept_code" type="varchar" length="255" jt="12" />
+			<column name="concept_name" type="varchar" length="255" jt="12" />
+			<column name="preferred_concept_name" type="varchar" length="255" jt="12" />
+			<column name="preferred_alternate_code" type="varchar" length="255" jt="12" />
+			<column name="code_system_oid" type="varchar" length="255" jt="12" />
+			<column name="code_system_name" type="varchar" length="255" jt="12" />
+			<column name="code_system_version" type="varchar" length="255" jt="12" />
+			<column name="hl7_table_0396_code" type="varchar" length="255" jt="12" />
+			<column name="value_set_concept_definition_text" type="varchar" length="255" jt="12" />
+			<column name="value_set_version" type="varchar" length="255" jt="12" />
+			<column name="dw_version_effective_date_num_id" type="integer" jt="4" >
+				<comment><![CDATA[e.g. 20190430]]></comment>
+			</column>
+			<column name="dw_version_expiration_date_num_id" type="integer" jt="4" >
+				<comment><![CDATA[e.g. 20190430]]></comment>
+			</column>
+			<column name="value_set_oid" type="varchar" length="255" jt="12" />
+			<index name="pk_dim_rt_age_unit_syndromic_surveillance_4" unique="PRIMARY_KEY" >
+				<column name="dw_rt_gender_syndromic_surveillance_id" />
+			</index>
+		</table>
+		<table name="dim_rt_health_district" >
+			<comment>Grouping of counties </comment>
+			<column name="dw_rt_health_district_id" type="integer" jt="4" mandatory="y" />
+			<column name="hashcode" type="integer" jt="4" />
+			<column name="concept_code" type="varchar" length="255" jt="12" />
+			<column name="concept_name" type="varchar" length="255" jt="12" />
+			<column name="preferred_concept_name" type="varchar" length="255" jt="12" />
+			<column name="preferred_alternate_code" type="varchar" length="255" jt="12" />
+			<column name="code_system_oid" type="varchar" length="255" jt="12" />
+			<column name="code_system_name" type="varchar" length="255" jt="12" />
+			<column name="code_system_version" type="varchar" length="255" jt="12" />
+			<column name="hl7_table_0396_code" type="varchar" length="255" jt="12" />
+			<column name="value_set_concept_definition_text" type="varchar" length="255" jt="12" />
+			<column name="value_set_version" type="varchar" length="255" jt="12" />
+			<column name="dw_version_effective_date_num_id" type="integer" jt="4" >
+				<comment><![CDATA[e.g. 20190430]]></comment>
+			</column>
+			<column name="dw_version_expiration_date_num_id" type="integer" jt="4" >
+				<comment><![CDATA[e.g. 20190430]]></comment>
+			</column>
+			<column name="value_set_oid" type="varchar" length="255" jt="12" />
+			<column name="ut_public_health_district" type="varchar" length="255" jt="12" />
+			<index name="pk_dim_rt_age_unit_syndromic_surveillance_0" unique="PRIMARY_KEY" >
+				<column name="dw_rt_health_district_id" />
+			</index>
+		</table>
+		<table name="dim_rt_icd10cm_icd9cm_snomedct" >
+			<comment>This should replace the derived dimensions of fact_ss_processed_diagnosis</comment>
+			<column name="dw_rt_icd10cm_icd9cm_snomedct_id" type="integer" jt="4" mandatory="y" />
+			<column name="src_id" type="integer" jt="4" />
+			<column name="hashcode" type="integer" jt="4" />
+			<column name="concept_code" type="varchar" length="255" jt="12" />
+			<column name="concept_name" type="varchar" length="255" jt="12" />
+			<column name="preferred_concept_name" type="varchar" length="255" jt="12" />
+			<column name="preferred_alternate_code" type="varchar" length="255" jt="12" />
+			<column name="code_system_oid" type="varchar" length="255" jt="12" />
+			<column name="code_system_name" type="varchar" length="255" jt="12" />
+			<column name="code_system_version" type="varchar" length="255" jt="12" />
+			<column name="hl7_table_0396_code" type="varchar" length="255" jt="12" />
+			<column name="value_set_concept_definition_text" type="varchar" length="255" jt="12" />
+			<index name="pk_dim_rt_age_unit_syndromic_surveillance_5" unique="PRIMARY_KEY" >
+				<column name="dw_rt_icd10cm_icd9cm_snomedct_id" />
+			</index>
+		</table>
+		<table name="dim_rt_identifier_type_syndromic_surveillance" >
+			<column name="dw_rt_identifier_type_syndromic_surveillance_id" type="integer" jt="4" mandatory="y" />
+			<column name="hashcode" type="integer" jt="4" />
+			<column name="concept_code" type="varchar" length="255" jt="12" />
+			<column name="concept_name" type="varchar" length="255" jt="12" />
+			<column name="preferred_concept_name" type="varchar" length="255" jt="12" />
+			<column name="preferred_alternate_code" type="varchar" length="255" jt="12" />
+			<column name="code_system_oid" type="varchar" length="255" jt="12" />
+			<column name="code_system_name" type="varchar" length="255" jt="12" />
+			<column name="code_system_version" type="varchar" length="255" jt="12" />
+			<column name="hl7_table_0396_code" type="varchar" length="255" jt="12" />
+			<column name="value_set_concept_definition_text" type="varchar" length="255" jt="12" />
+			<column name="value_set_version" type="varchar" length="255" jt="12" />
+			<column name="dw_version_effective_date_num_id" type="integer" jt="4" >
+				<comment><![CDATA[e.g. 20190430]]></comment>
+			</column>
+			<column name="dw_version_expiration_date_num_id" type="integer" jt="4" >
+				<comment><![CDATA[e.g. 20190430]]></comment>
+			</column>
+			<column name="value_set_oid" type="varchar" length="255" jt="12" />
+			<index name="pk_dim_rt_age_unit_syndromic_surveillance_6" unique="PRIMARY_KEY" >
+				<column name="dw_rt_identifier_type_syndromic_surveillance_id" />
+			</index>
+		</table>
+		<table name="dim_rt_message_type" >
+			<column name="dw_rt_message_type_id" type="integer" jt="4" mandatory="y" />
+			<column name="hashcode" type="integer" jt="4" />
+			<column name="concept_code" type="varchar" length="255" jt="12" />
+			<column name="concept_name" type="varchar" length="255" jt="12" />
+			<column name="preferred_concept_name" type="varchar" length="255" jt="12" />
+			<column name="preferred_alternate_code" type="varchar" length="255" jt="12" />
+			<column name="code_system_oid" type="varchar" length="255" jt="12" />
+			<column name="code_system_name" type="varchar" length="255" jt="12" />
+			<column name="code_system_version" type="varchar" length="255" jt="12" />
+			<column name="hl7_table_0396_code" type="varchar" length="255" jt="12" />
+			<column name="value_set_concept_definition_text" type="varchar" length="255" jt="12" />
+			<column name="value_set_version" type="varchar" length="255" jt="12" />
+			<column name="dw_version_effective_date_num_id" type="integer" jt="4" >
+				<comment><![CDATA[e.g. 20190430]]></comment>
+			</column>
+			<column name="dw_version_expiration_date_num_id" type="integer" jt="4" >
+				<comment><![CDATA[e.g. 20190430]]></comment>
+			</column>
+			<index name="pk_dim_rt_age_unit_syndromic_surveillance_7" unique="PRIMARY_KEY" >
+				<column name="dw_rt_message_type_id" />
+			</index>
+		</table>
+		<table name="dim_rt_race_category" >
+			<column name="dw_rt_race_category_id" type="integer" jt="4" mandatory="y" />
+			<column name="hashcode" type="integer" jt="4" />
+			<column name="concept_code" type="varchar" length="255" jt="12" />
+			<column name="concept_name" type="varchar" length="255" jt="12" />
+			<column name="preferred_concept_name" type="varchar" length="255" jt="12" />
+			<column name="preferred_alternate_code" type="varchar" length="255" jt="12" />
+			<column name="code_system_oid" type="varchar" length="255" jt="12" />
+			<column name="code_system_name" type="varchar" length="255" jt="12" />
+			<column name="code_system_version" type="varchar" length="255" jt="12" />
+			<column name="hl7_table_0396_code" type="varchar" length="255" jt="12" />
+			<column name="value_set_concept_definition_text" type="varchar" length="255" jt="12" />
+			<column name="value_set_version" type="varchar" length="255" jt="12" />
+			<column name="dw_version_effective_date_num_id" type="integer" jt="4" >
+				<comment><![CDATA[e.g. 20190430]]></comment>
+			</column>
+			<column name="dw_version_expiration_date_num_id" type="integer" jt="4" >
+				<comment><![CDATA[e.g. 20190430]]></comment>
+			</column>
+			<index name="pk_dim_rt_age_unit_syndromic_surveillance_8" unique="PRIMARY_KEY" >
+				<column name="dw_rt_race_category_id" />
+			</index>
+		</table>
+		<table name="dim_segment" >
+			<column name="dw_segment_id" type="integer" jt="4" />
+			<column name="hashcode" type="integer" jt="4" />
+			<column name="segment" type="varchar" length="255" jt="12" />
+			<index name="pk_dim_segment" unique="UNIQUE" >
+				<column name="dw_segment_id" />
+			</index>
+		</table>
+		<table name="dim_time" >
+			<column name="dw_time_id" type="integer" jt="4" />
+		</table>
+		<table name="dim_trigger_event" >
+			<comment>derived dimension
+based on ss_processed_message.trigger_event</comment>
+			<column name="dw_trigger_event_id" type="integer" jt="4" />
+			<column name="hashcode" type="integer" jt="4" />
+			<column name="src_trigger_event" type="varchar" length="255" jt="12" />
+			<index name="pk_dim_trigger_event" unique="UNIQUE" >
+				<column name="dw_trigger_event_id" />
+			</index>
+		</table>
+		<table name="fact_ss_processed_chief_complaint" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="ss_processed_message_id" type="integer" jt="4" />
+			<column name="chief_complaint_code" type="varchar" length="255" jt="12" />
+			<column name="chief_complaint_text" type="varchar" length="250" jt="12" />
+			<index name="pk_fact_ss_processed_chief_complaint" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="fact_ss_processed_diagnosis" >
+			<column name="src_id" type="integer" jt="4" />
+			<column name="src_ss_processed_message_id" type="integer" jt="4" />
+			<column name="dw_diagnosis_code_id" type="integer" jt="4" />
+			<column name="dw_diagnosis_code_system_id" type="integer" jt="4" />
+			<index name="idx_dim_ss_processed_diagnosis" unique="NORMAL" >
+				<column name="dw_diagnosis_code_id" />
+			</index>
+			<index name="idx_dim_ss_processed_diagnosis_0" unique="NORMAL" >
+				<column name="dw_diagnosis_code_system_id" />
+			</index>
+			<fk name="fk_dim_ss_processed_diagnosis" to_schema="syndromic_olap" to_table="dim_diagnosis_code" >
+				<fk_column name="dw_diagnosis_code_id" pk="dw_diagnosis_code_id" />
+			</fk>
+			<fk name="fk_dim_ss_processed_diagnosis_0" to_schema="syndromic_olap" to_table="dim_diagnosis_code_system" >
+				<fk_column name="dw_diagnosis_code_system_id" pk="dw_diagnosis_code_system_id" />
+			</fk>
+		</table>
+		<table name="fact_ss_processed_message" >
+			<comment>TODO
+- all dw_date_num_id fields need a dw_time_id
+- gap analysis of any missing fields
+- move patient_county and patienti_zip and lat/lon to a new dimension (dim_patient_location)</comment>
+			<column name="src_id" type="integer" jt="4" mandatory="y" />
+			<column name="src_ss_batched_messages_id" type="integer" jt="4" />
+			<column name="src_created_at" type="timestamp" jt="93" >
+				<comment><![CDATA[in the source table this field is likely a timstamp WITH timezone]]></comment>
+			</column>
+			<column name="dw_created_at_date_num_id" type="integer" jt="4" />
+			<column name="dw_rt_message_type_id" type="integer" jt="4" />
+			<column name="dw_trigger_event_id" type="integer" jt="4" />
+			<column name="dw_admit_reason_code_id" type="integer" jt="4" />
+			<column name="admit_reason_description" type="varchar" length="255" jt="12" />
+			<column name="dw_treating_mft_id" type="integer" jt="4" />
+			<column name="dw_sending_mft_id" type="integer" jt="4" />
+			<column name="src_discharge_date_time" type="timestamp" jt="93" />
+			<column name="dw_discharge_date_num_id" type="integer" jt="4" />
+			<column name="src_observation_date_time" type="timestamp" jt="93" />
+			<column name="dw_observation_date_num_id" type="integer" jt="4" />
+			<column name="src_death_date_time" type="timestamp" jt="93" />
+			<column name="dw_death_date_num_id" type="integer" jt="4" />
+			<column name="src_recorded_date_time" type="timestamp" jt="93" />
+			<column name="dw_recorded_date_num_id" type="integer" jt="4" />
+			<column name="src_message_date_time" type="timestamp" jt="93" />
+			<column name="dw_message_date_num_id" type="integer" jt="4" />
+			<column name="first_patient_id_present" type="bool" jt="-7" />
+			<column name="patient_account_number" type="varchar" length="255" jt="12" />
+			<column name="visit_id" type="varchar" length="255" jt="12" />
+			<column name="medical_record_number_present" type="bool" jt="-7" />
+			<column name="patient_zip" type="varchar" length="50" jt="12" />
+			<column name="patient_county" type="varchar" length="255" jt="12" />
+			<column name="patient_latitude" type="numeric" length="11" decimal="7" jt="2" />
+			<column name="patient_longitude" type="numeric" length="11" decimal="7" jt="2" />
+			<column name="dw_administrative_sex_id" type="integer" jt="4" />
+			<column name="src_procedure_date_time" type="timestamp" jt="93" />
+			<column name="dw_procedure_date_num_id" type="integer" jt="4" />
+			<column name="dw_facility_type_id" type="integer" jt="4" />
+			<column name="dw_rt_discharge_disposition_id" type="integer" jt="4" />
+			<column name="triage_notes_present" type="bool" length="600" jt="-7" />
+			<column name="age_reported" type="varchar" length="255" jt="12" />
+			<column name="age_reported_num" type="integer" jt="4" >
+				<comment><![CDATA[if age_reported is numeric, that numeric value is set in this field]]></comment>
+			</column>
+			<column name="dw_rt_age_unit_syndromic_surveillance_id" type="integer" jt="4" />
+			<column name="dim_rt_ethnicity_group_id" type="integer" jt="4" />
+			<column name="medication_list" type="varchar" length="255" jt="12" />
+			<column name="dw_rt_facility_visit_type_id" type="integer" jt="4" />
+			<column name="src_ss_batched_messages_created_at" type="timestamp" jt="93" />
+			<column name="dw_ss_batched_messages_created_at_date_num_id" type="integer" jt="4" />
+			<column name="src_ss_batch_created_at" type="timestamp" jt="93" >
+				<comment><![CDATA[in the source table this field is likely a timstamp WITH timezone]]></comment>
+			</column>
+			<column name="dw_ss_batch_created_at_date_num_id" type="integer" jt="4" />
+			<index name="idx_fact_ss_processed_message" unique="NORMAL" >
+				<column name="dw_rt_message_type_id" />
+			</index>
+			<index name="idx_fact_ss_processed_message_0" unique="NORMAL" >
+				<column name="dw_created_at_date_num_id" />
+			</index>
+			<index name="idx_fact_ss_processed_message_1" unique="NORMAL" >
+				<column name="dw_trigger_event_id" />
+			</index>
+			<index name="idx_fact_ss_processed_message_2" unique="NORMAL" >
+				<column name="dw_admit_reason_code_id" />
+			</index>
+			<index name="idx_fact_ss_processed_message_3" unique="NORMAL" >
+				<column name="dw_treating_mft_id" />
+			</index>
+			<index name="idx_fact_ss_processed_message_4" unique="NORMAL" >
+				<column name="dw_sending_mft_id" />
+			</index>
+			<index name="idx_fact_ss_processed_message_5" unique="NORMAL" >
+				<column name="dw_discharge_date_num_id" />
+			</index>
+			<index name="idx_fact_ss_processed_message_6" unique="NORMAL" >
+				<column name="dw_observation_date_num_id" />
+			</index>
+			<index name="idx_fact_ss_processed_message_7" unique="NORMAL" >
+				<column name="dw_death_date_num_id" />
+			</index>
+			<index name="idx_fact_ss_processed_message_8" unique="NORMAL" >
+				<column name="dw_recorded_date_num_id" />
+			</index>
+			<index name="idx_fact_ss_processed_message_9" unique="NORMAL" >
+				<column name="dw_message_date_num_id" />
+			</index>
+			<index name="idx_fact_ss_processed_message_10" unique="NORMAL" >
+				<column name="dw_procedure_date_num_id" />
+			</index>
+			<index name="idx_fact_ss_processed_message_11" unique="NORMAL" >
+				<column name="dw_administrative_sex_id" />
+			</index>
+			<index name="idx_fact_ss_processed_message_12" unique="NORMAL" >
+				<column name="dw_facility_type_id" />
+			</index>
+			<index name="idx_fact_ss_processed_message_13" unique="NORMAL" >
+				<column name="dw_rt_discharge_disposition_id" />
+			</index>
+			<index name="idx_fact_ss_processed_message_14" unique="NORMAL" >
+				<column name="dw_rt_age_unit_syndromic_surveillance_id" />
+			</index>
+			<index name="idx_fact_ss_processed_message_15" unique="NORMAL" >
+				<column name="dim_rt_ethnicity_group_id" />
+			</index>
+			<index name="idx_fact_ss_processed_message_16" unique="NORMAL" >
+				<column name="dw_rt_facility_visit_type_id" />
+			</index>
+			<index name="idx_fact_ss_processed_message_17" unique="NORMAL" >
+				<column name="dw_ss_batched_messages_created_at_date_num_id" />
+			</index>
+			<fk name="fk_fact_ss_processed_message" to_schema="syndromic_olap" to_table="dim_rt_message_type" >
+				<fk_column name="dw_rt_message_type_id" pk="dw_rt_message_type_id" />
+			</fk>
+			<fk name="fk_fact_ss_processed_message_0" to_schema="syndromic_olap" to_table="dim_date" >
+				<fk_column name="dw_created_at_date_num_id" pk="dw_date_num_id" />
+			</fk>
+			<fk name="fk_fact_ss_processed_message_1" to_schema="syndromic_olap" to_table="dim_trigger_event" >
+				<fk_column name="dw_trigger_event_id" pk="dw_trigger_event_id" />
+			</fk>
+			<fk name="fk_fact_ss_processed_message_2" to_schema="syndromic_olap" to_table="dim_admit_reason_code" >
+				<fk_column name="dw_admit_reason_code_id" pk="dw_admit_reason_code_id" />
+			</fk>
+			<fk name="fk_fact_ss_processed_message_3" to_schema="syndromic_olap" to_table="dim_mft" >
+				<fk_column name="dw_treating_mft_id" pk="dw_mft_id" />
+			</fk>
+			<fk name="fk_fact_ss_processed_message_4" to_schema="syndromic_olap" to_table="dim_mft" >
+				<fk_column name="dw_sending_mft_id" pk="dw_mft_id" />
+			</fk>
+			<fk name="fk_fact_ss_processed_message_5" to_schema="syndromic_olap" to_table="dim_date" >
+				<fk_column name="dw_discharge_date_num_id" pk="dw_date_num_id" />
+			</fk>
+			<fk name="fk_fact_ss_processed_message_7" to_schema="syndromic_olap" to_table="dim_date" >
+				<fk_column name="dw_death_date_num_id" pk="dw_date_num_id" />
+			</fk>
+			<fk name="fk_fact_ss_processed_message_6" to_schema="syndromic_olap" to_table="dim_date" >
+				<fk_column name="dw_observation_date_num_id" pk="dw_date_num_id" />
+			</fk>
+			<fk name="fk_fact_ss_processed_message_8" to_schema="syndromic_olap" to_table="dim_date" >
+				<fk_column name="dw_recorded_date_num_id" pk="dw_date_num_id" />
+			</fk>
+			<fk name="fk_fact_ss_processed_message_9" to_schema="syndromic_olap" to_table="dim_date" >
+				<fk_column name="dw_message_date_num_id" pk="dw_date_num_id" />
+			</fk>
+			<fk name="fk_fact_ss_processed_message_10" to_schema="syndromic_olap" to_table="dim_date" >
+				<fk_column name="dw_procedure_date_num_id" pk="dw_date_num_id" />
+			</fk>
+			<fk name="fk_fact_ss_processed_message_11" to_schema="syndromic_olap" to_table="dim_rt_gender_syndromic_surveillance" >
+				<fk_column name="dw_administrative_sex_id" pk="dw_rt_gender_syndromic_surveillance_id" />
+			</fk>
+			<fk name="fk_fact_ss_processed_message_12" to_schema="syndromic_olap" to_table="dim_facility_type" >
+				<fk_column name="dw_facility_type_id" pk="dw_facility_type_id" />
+			</fk>
+			<fk name="fk_fact_ss_processed_message_13" to_schema="syndromic_olap" to_table="dim_rt_discharge_disposition" >
+				<fk_column name="dw_rt_discharge_disposition_id" pk="dw_rt_discharge_disposition_id" />
+			</fk>
+			<fk name="fk_fact_ss_processed_message_14" to_schema="syndromic_olap" to_table="dim_rt_age_unit_syndromic_surveillance" >
+				<fk_column name="dw_rt_age_unit_syndromic_surveillance_id" pk="dw_rt_age_unit_syndromic_surveillance_id" />
+			</fk>
+			<fk name="fk_fact_ss_processed_message_15" to_schema="syndromic_olap" to_table="dim_rt_ethnicity_group" >
+				<fk_column name="dim_rt_ethnicity_group_id" pk="dim_rt_ethnicity_group_id" />
+			</fk>
+			<fk name="fk_fact_ss_processed_message_16" to_schema="syndromic_olap" to_table="dim_rt_facility_visit_type" >
+				<fk_column name="dw_rt_facility_visit_type_id" pk="dw_rt_facility_visit_type_id" />
+			</fk>
+			<fk name="fk_fact_ss_processed_message_17" to_schema="syndromic_olap" to_table="dim_date" >
+				<fk_column name="dw_ss_batched_messages_created_at_date_num_id" pk="dw_date_num_id" />
+			</fk>
+		</table>
+		<table name="fact_ss_processed_message_obx" >
+			<column name="src_id" type="integer" jt="4" />
+			<column name="ss_processed_message_id" type="integer" jt="4" />
+			<column name="dw_obx_identifier_id" type="integer" jt="4" />
+			<index name="idx_fact_ss_processed_message_obx" unique="NORMAL" >
+				<column name="dw_obx_identifier_id" />
+			</index>
+			<fk name="fk_fact_ss_processed_message_obx" to_schema="syndromic_olap" to_table="dim_obx_identifier" >
+				<fk_column name="dw_obx_identifier_id" pk="dw_obx_identifier_id" />
+			</fk>
+		</table>
+		<table name="fact_ss_processed_race" >
+			<column name="src_id" type="integer" jt="4" />
+			<column name="src_ss_processed_message_id" type="integer" jt="4" />
+			<column name="dw_rt_race_category_id" type="integer" jt="4" />
+			<index name="idx_fact_ss_processed_race" unique="NORMAL" >
+				<column name="dw_rt_race_category_id" />
+			</index>
+			<fk name="fk_fact_ss_processed_race" to_schema="syndromic_olap" to_table="dim_rt_race_category" >
+				<fk_column name="dw_rt_race_category_id" pk="dw_rt_race_category_id" />
+			</fk>
+		</table>
+		<table name="fact_ss_processed_segment" >
+			<column name="src_id" type="integer" jt="4" />
+			<column name="ss_processed_message_id" type="integer" jt="4" />
+			<column name="dw_segment_id" type="integer" jt="4" />
+			<index name="idx_fact_ss_processed_segment" unique="NORMAL" >
+				<column name="dw_segment_id" />
+			</index>
+			<fk name="fk_fact_ss_processed_segment" to_schema="syndromic_olap" to_table="dim_segment" >
+				<fk_column name="dw_segment_id" pk="dw_segment_id" />
+			</fk>
+		</table>
+	</schema>
+	<connector name="Syndromic_OLAP" database="PostgreSQL" driver_class="org.postgresql.Driver" driver_jar="postgresql-42.1.1.jar" host="localhost" port="5432" instance="dlpldw" user="pentaho" schema_mapping="" />
+	<layout id="Layout1626322" name="Default" show_relation_columns="y" >
+		<entity schema="syndromic_olap" name="dim_diagnosis_code_system" color="b2cdf7" x="510" y="60" />
+		<entity schema="syndromic_olap" name="dim_diagnosis_code" color="b2cdf7" x="510" y="180" />
+		<entity schema="syndromic_olap" name="dim_trigger_event" color="b2cdf7" x="1050" y="945" />
+		<entity schema="syndromic_olap" name="dim_rt_gender_syndromic_surveillance" color="b2cdf7" x="690" y="960" />
+		<entity schema="syndromic_olap" name="dim_rt_discharge_disposition" color="b2cdf7" x="1275" y="720" />
+		<entity schema="syndromic_olap" name="dim_admit_reason_code" color="b2cdf7" x="795" y="1680" />
+		<entity schema="syndromic_olap" name="dim_rt_facility_visit_type" color="b2cdf7" x="810" y="1815" />
+		<entity schema="syndromic_olap" name="dim_rt_age_unit_syndromic_surveillance" color="b2cdf7" x="1485" y="1425" />
+		<entity schema="syndromic_olap" name="dim_facility_type" color="b2cdf7" x="1545" y="1305" />
+		<entity schema="syndromic_olap" name="dim_rt_message_type" color="b2cdf7" x="795" y="1395" />
+		<entity schema="syndromic_olap" name="dim_rt_ethnicity_group" color="b2cdf7" x="1500" y="1785" />
+		<entity schema="syndromic_olap" name="fact_ss_processed_diagnosis" color="b2cdf7" x="120" y="75" />
+		<entity schema="syndromic_olap" name="fact_ss_processed_race" color="b2cdf7" x="825" y="300" />
+		<entity schema="syndromic_olap" name="dim_rt_identifier_type_syndromic_surveillance" color="b2cdf7" x="60" y="675" />
+		<entity schema="syndromic_olap" name="fact_ss_processed_segment" color="b2cdf7" x="780" y="180" />
+		<entity schema="syndromic_olap" name="dim_segment" color="b2cdf7" x="1050" y="165" />
+		<entity schema="syndromic_olap" name="dim_obx_identifier" color="b2cdf7" x="1035" y="45" />
+		<entity schema="syndromic_olap" name="fact_ss_processed_message_obx" color="b2cdf7" x="750" y="45" />
+		<entity schema="syndromic_olap" name="dim_rt_health_district" color="b2cdf7" x="450" y="360" />
+		<entity schema="syndromic_olap" name="fact_ss_processed_chief_complaint" color="b2cdf7" x="45" y="435" />
+		<entity schema="syndromic_olap" name="dim_rt_icd10cm_icd9cm_snomedct" color="b2cdf7" x="180" y="210" />
+		<entity schema="syndromic_olap" name="dim_rt_race_category" color="b2cdf7" x="855" y="495" />
+		<entity schema="syndromic_olap" name="dim_time" color="b2cdf7" x="1440" y="1155" />
+		<entity schema="syndromic_olap" name="dim_date" color="b2cdf7" x="885" y="1275" />
+		<entity schema="syndromic_olap" name="dim_mft" color="b2cdf7" x="1560" y="1065" />
+		<entity schema="syndromic_olap" name="fact_ss_processed_message" color="b2cdf7" x="1095" y="1080" />
+	</layout>
+</project>

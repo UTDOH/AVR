@@ -39,8 +39,20 @@
         <attribute>N</attribute>
       </attribute>
       <attribute>
+        <code>INITIAL_POOL_SIZE</code>
+        <attribute>5</attribute>
+      </attribute>
+      <attribute>
         <code>IS_CLUSTERED</code>
         <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>MAXIMUM_POOL_SIZE</code>
+        <attribute>20</attribute>
+      </attribute>
+      <attribute>
+        <code>POOLING_removeAbandoned</code>
+        <attribute>true</attribute>
       </attribute>
       <attribute>
         <code>PORT_NUMBER</code>
@@ -64,7 +76,7 @@
       </attribute>
       <attribute>
         <code>USE_POOLING</code>
-        <attribute>N</attribute>
+        <attribute>Y</attribute>
       </attribute>
     </attributes>
   </connection>
@@ -360,7 +372,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>112</xloc>
+      <xloc>128</xloc>
       <yloc>224</yloc>
     </entry>
     <entry>
@@ -370,7 +382,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>592</xloc>
+      <xloc>624</xloc>
       <yloc>224</yloc>
     </entry>
     <entry>
@@ -702,11 +714,13 @@ CREATE INDEX idx_dw_nbs_hospital_id_${YYYY}
 
 DROP INDEX if exists nbs_olap.idx_fnr_changed_on_${YYYY};
 
+/*
 CREATE INDEX idx_fnr_changed_on_${YYYY}
     ON nbs_olap.fact_nbs_result_${YYYY} USING btree
     (changed_on)
 
-    TABLESPACE pg_default;</sql>
+    TABLESPACE pg_default;
+*/</sql>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
@@ -715,7 +729,7 @@ CREATE INDEX idx_fnr_changed_on_${YYYY}
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>304</xloc>
+      <xloc>336</xloc>
       <yloc>224</yloc>
     </entry>
   </entries>
@@ -745,8 +759,8 @@ CREATE INDEX idx_fnr_changed_on_${YYYY}
 (
    select * from warehouse.fact_nbs_result_full where dw_entered_on_date_num_id between ${YYYY}0101 and ${YYYY}1231
 );</note>
-      <xloc>395</xloc>
-      <yloc>329</yloc>
+      <xloc>416</xloc>
+      <yloc>320</yloc>
       <width>819</width>
       <heigth>90</heigth>
       <fontname/>

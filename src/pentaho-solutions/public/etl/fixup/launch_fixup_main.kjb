@@ -33,8 +33,20 @@
         <attribute>N</attribute>
       </attribute>
       <attribute>
+        <code>INITIAL_POOL_SIZE</code>
+        <attribute>5</attribute>
+      </attribute>
+      <attribute>
         <code>IS_CLUSTERED</code>
         <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>MAXIMUM_POOL_SIZE</code>
+        <attribute>20</attribute>
+      </attribute>
+      <attribute>
+        <code>POOLING_removeAbandoned</code>
+        <attribute>true</attribute>
       </attribute>
       <attribute>
         <code>PORT_NUMBER</code>
@@ -58,7 +70,7 @@
       </attribute>
       <attribute>
         <code>USE_POOLING</code>
-        <attribute>N</attribute>
+        <attribute>Y</attribute>
       </attribute>
     </attributes>
   </connection>
@@ -84,8 +96,20 @@
         <attribute>N</attribute>
       </attribute>
       <attribute>
+        <code>INITIAL_POOL_SIZE</code>
+        <attribute>5</attribute>
+      </attribute>
+      <attribute>
         <code>IS_CLUSTERED</code>
         <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>MAXIMUM_POOL_SIZE</code>
+        <attribute>20</attribute>
+      </attribute>
+      <attribute>
+        <code>POOLING_removeAbandoned</code>
+        <attribute>true</attribute>
       </attribute>
       <attribute>
         <code>PORT_NUMBER</code>
@@ -109,7 +133,7 @@
       </attribute>
       <attribute>
         <code>USE_POOLING</code>
-        <attribute>N</attribute>
+        <attribute>Y</attribute>
       </attribute>
     </attributes>
   </connection>
@@ -405,8 +429,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>176</xloc>
-      <yloc>176</yloc>
+      <xloc>144</xloc>
+      <yloc>160</yloc>
     </entry>
     <entry>
       <name>nedss_fact_outbreak</name>
@@ -495,8 +519,8 @@ CREATE INDEX idx_dim_outbreak_dw_outbreak_date_num_id
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>336</xloc>
-      <yloc>272</yloc>
+      <xloc>304</xloc>
+      <yloc>256</yloc>
     </entry>
     <entry>
       <name>Success</name>
@@ -505,8 +529,8 @@ CREATE INDEX idx_dim_outbreak_dw_outbreak_date_num_id
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1136</xloc>
-      <yloc>176</yloc>
+      <xloc>1104</xloc>
+      <yloc>160</yloc>
     </entry>
     <entry>
       <name>Update fnr partition tables</name>
@@ -1056,8 +1080,8 @@ CREATE INDEX idx_fact_nbs_result_src_msg_processed_on_2018
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>666</xloc>
-      <yloc>321</yloc>
+      <xloc>624</xloc>
+      <yloc>304</yloc>
     </entry>
     <entry>
       <name>exec_update_dim_hospital_rolling_metrics</name>
@@ -1092,8 +1116,8 @@ CREATE INDEX idx_fact_nbs_result_src_msg_processed_on_2018
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>1126</xloc>
-      <yloc>299</yloc>
+      <xloc>1088</xloc>
+      <yloc>272</yloc>
     </entry>
     <entry>
       <name>nbs2_dim_nbs_physician</name>
@@ -1154,8 +1178,8 @@ CREATE INDEX idx_dim_nbs_physician_tk
       <parallel>Y</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>1398</xloc>
-      <yloc>507</yloc>
+      <xloc>1360</xloc>
+      <yloc>480</yloc>
     </entry>
     <entry>
       <name>nbs2_dim_nbs_hospital</name>
@@ -1219,8 +1243,8 @@ CREATE INDEX idx_dim_nbs_birthplace_tk
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>1270</xloc>
-      <yloc>507</yloc>
+      <xloc>1232</xloc>
+      <yloc>480</yloc>
     </entry>
     <entry>
       <name>nbs2_fact_nbs_card</name>
@@ -1494,8 +1518,8 @@ CREATE INDEX idx_fact_nbs_card_src_sr_accessioned_date
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>1126</xloc>
-      <yloc>507</yloc>
+      <xloc>1088</xloc>
+      <yloc>480</yloc>
     </entry>
     <entry>
       <name>Add BI Roles</name>
@@ -1516,8 +1540,8 @@ CREATE INDEX idx_fact_nbs_card_src_sr_accessioned_date
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>758</xloc>
-      <yloc>299</yloc>
+      <xloc>720</xloc>
+      <yloc>272</yloc>
     </entry>
     <entry>
       <name>nbs2_dim_date</name>
@@ -1799,8 +1823,8 @@ CREATE INDEX idx_dw_dim_date_lookup_new
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>918</xloc>
-      <yloc>507</yloc>
+      <xloc>880</xloc>
+      <yloc>480</yloc>
     </entry>
     <entry>
       <name>nbs2_create fact_nbs_result</name>
@@ -1849,8 +1873,8 @@ TABLESPACE pg_default;</sql>
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>678</xloc>
-      <yloc>475</yloc>
+      <xloc>640</xloc>
+      <yloc>448</yloc>
     </entry>
     <entry>
       <name>nbs2_dim_nbs_result_dx</name>
@@ -1898,8 +1922,8 @@ CREATE UNIQUE INDEX idx_dim_nbs_result_dx_pk
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>1718</xloc>
-      <yloc>395</yloc>
+      <xloc>1680</xloc>
+      <yloc>368</yloc>
     </entry>
     <entry>
       <name>nbs2_dim_nbs_loinc</name>
@@ -1947,8 +1971,8 @@ CREATE UNIQUE INDEX idx_dim_nbs_loinc_pk
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>1654</xloc>
-      <yloc>299</yloc>
+      <xloc>1616</xloc>
+      <yloc>272</yloc>
     </entry>
     <entry>
       <name>nbs2_dim_nbs_snomed_code</name>
@@ -1996,8 +2020,8 @@ CREATE UNIQUE INDEX idx_dim_nbs_snomed_code_pk
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>1542</xloc>
-      <yloc>283</yloc>
+      <xloc>1504</xloc>
+      <yloc>256</yloc>
     </entry>
     <entry>
       <name>nbs2_dim_nbs_card_type</name>
@@ -2046,8 +2070,8 @@ CREATE UNIQUE INDEX idx_dim_nbs_card_type_pk
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>1158</xloc>
-      <yloc>299</yloc>
+      <xloc>1120</xloc>
+      <yloc>272</yloc>
     </entry>
     <entry>
       <name>nbs2_dim_nbs_analysis_subcomponent</name>
@@ -2095,8 +2119,8 @@ CREATE UNIQUE INDEX idx_dim_nbs_result_pk
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>1062</xloc>
-      <yloc>331</yloc>
+      <xloc>1024</xloc>
+      <yloc>304</yloc>
     </entry>
     <entry>
       <name>nbs2_dim_nbs_units</name>
@@ -2143,8 +2167,8 @@ CREATE UNIQUE INDEX idx_dim_nbs_units_pk
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>640</xloc>
-      <yloc>352</yloc>
+      <xloc>608</xloc>
+      <yloc>336</yloc>
     </entry>
     <entry>
       <name>nbs2_dim_nbs_analysis</name>
@@ -2191,8 +2215,8 @@ CREATE UNIQUE INDEX idx_dim_nbs_analysis_pk
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>870</xloc>
-      <yloc>363</yloc>
+      <xloc>832</xloc>
+      <yloc>336</yloc>
     </entry>
     <entry>
       <name>nbs2_dim_nbs_formatted_result</name>
@@ -2239,8 +2263,8 @@ CREATE UNIQUE INDEX idx_dim_nbs_result_status_pk
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>1478</xloc>
-      <yloc>299</yloc>
+      <xloc>1440</xloc>
+      <yloc>272</yloc>
     </entry>
     <entry>
       <name>create_fact_nbs_result_partitions</name>
@@ -2273,8 +2297,8 @@ CREATE UNIQUE INDEX idx_dim_nbs_result_status_pk
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>1334</xloc>
-      <yloc>315</yloc>
+      <xloc>1296</xloc>
+      <yloc>288</yloc>
     </entry>
     <entry>
       <name>nbs2_fact_nbs_sample</name>
@@ -2431,8 +2455,8 @@ CREATE INDEX idx_src_result_entry_date_id
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>1232</xloc>
-      <yloc>320</yloc>
+      <xloc>1200</xloc>
+      <yloc>304</yloc>
     </entry>
     <entry>
       <name>nbs2_fact_nbs_card_log</name>
@@ -2501,8 +2525,8 @@ CREATE INDEX idx_fact_nbs_card_log_sr_received
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>1126</xloc>
-      <yloc>363</yloc>
+      <xloc>1088</xloc>
+      <yloc>336</yloc>
     </entry>
     <entry>
       <name>nbs2_fact_nbs_action_item_log</name>
@@ -2550,8 +2574,8 @@ CREATE INDEX idx_fact_nbs_action_item_log_dw_completed_on
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>1398</xloc>
-      <yloc>347</yloc>
+      <xloc>1360</xloc>
+      <yloc>320</yloc>
     </entry>
     <entry>
       <name>nbs2_vw_date_month_summary</name>
@@ -2578,8 +2602,8 @@ ORDER BY dim_date.month_number;</sql>
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>1558</xloc>
-      <yloc>363</yloc>
+      <xloc>1520</xloc>
+      <yloc>336</yloc>
     </entry>
     <entry>
       <name>nbs2_fact_nbs_action_item_log (2)</name>
@@ -2627,8 +2651,8 @@ CREATE INDEX idx_fact_nbs_action_item_log_dw_completed_on
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>1574</xloc>
-      <yloc>427</yloc>
+      <xloc>1536</xloc>
+      <yloc>400</yloc>
     </entry>
     <entry>
       <name>nbs2_fact_nbs_action_item</name>
@@ -2676,8 +2700,8 @@ CREATE INDEX idx_fact_nbs_action_item_dw_completed_on
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>1318</xloc>
-      <yloc>411</yloc>
+      <xloc>1280</xloc>
+      <yloc>384</yloc>
     </entry>
     <entry>
       <name>nbs2_fnr_changed_on_index</name>
@@ -2795,8 +2819,8 @@ CREATE INDEX idx_fnr_changed_on_2018
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>1152</xloc>
-      <yloc>400</yloc>
+      <xloc>1120</xloc>
+      <yloc>384</yloc>
     </entry>
     <entry>
       <name>nedss_dim_date</name>
@@ -3079,8 +3103,8 @@ CREATE INDEX idx_dw_dim_date_lookup_new
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>1062</xloc>
-      <yloc>427</yloc>
+      <xloc>496</xloc>
+      <yloc>304</yloc>
     </entry>
     <entry>
       <name>nedss_dim_person_address</name>
@@ -3161,6 +3185,11 @@ CREATE INDEX idx_dpa_state
     ON nedss_olap.dim_person_address USING btree
     (state)
     TABLESPACE pg_default;
+
+CREATE INDEX idx_dpa_id
+    ON nedss_olap.dim_person_address USING btree
+    (src_person_address_id)
+    TABLESPACE pg_default;
 </sql>
       <useVariableSubstitution>F</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
@@ -3170,109 +3199,64 @@ CREATE INDEX idx_dpa_state
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>934</xloc>
-      <yloc>411</yloc>
+      <xloc>896</xloc>
+      <yloc>384</yloc>
     </entry>
     <entry>
       <name>nedss_dim_condition</name>
       <description/>
       <type>SQL</type>
-      <sql>-- Table: nedss_olap.dim_disease
+      <sql>-- Table: nedss_olap.dim_case_status
 
-DROP TABLE if exists nedss_olap.dim_disease;
-DROP TABLE if exists nedss_olap.dim_condition;
+-- DROP TABLE nedss_olap.dim_case_status;
 
-CREATE TABLE nedss_olap.dim_condition
+CREATE TABLE nedss_olap.dim_case_status
 (
-    dw_condition_id integer NOT NULL,
-    hashcode bigint,
-    src_condition_id integer,
-    src_disease_id integer,
-    condition_name character varying(100) COLLATE pg_catalog."default",
-    contact_lead_in text COLLATE pg_catalog."default",
-    place_lead_in text COLLATE pg_catalog."default",
-    treatment_lead_in text COLLATE pg_catalog."default",
-    active boolean,
-    cdc_code character varying(255) COLLATE pg_catalog."default",
-    code text,
-    src_coordinator_id integer,
-    src_condition_group_id integer,
-    mdro boolean,
-    etl_load_date timestamp without time zone,
-    CONSTRAINT pk_dw_dim_disease PRIMARY KEY (dw_condition_id)
+     dw_case_status_id integer
+    ,hashcode integer
+    ,code character varying(255)
+    ,description character_varying(255)
+    ,sort_order integer
+    ,src_external_codes_id integer
+    ,etl_load_date timestamp without time zone
 )
 WITH (
     OIDS = FALSE
 )
 TABLESPACE pg_default;
 
-COMMENT ON TABLE nedss_olap.dim_condition
-    IS 'Disease dimension';
 
-COMMENT ON COLUMN nedss_olap.dim_condition.dw_condition_id
-    IS 'Technical key of the condition dimension.';
 
-COMMENT ON COLUMN nedss_olap.dim_condition.hashcode
-    IS 'Type I dimension hashcode';
+COMMENT ON COLUMN nedss_olap.dim_case_status.dw_case_status_id
+    IS 'The dim_case_status TK';
 
-COMMENT ON COLUMN nedss_olap.dim_condition.src_disease_id
-    IS 'Source OLTP disease_id';
-
-COMMENT ON COLUMN nedss_olap.dim_condition.condition_name
-    IS 'Name of the condition';
-
-COMMENT ON COLUMN nedss_olap.dim_condition.contact_lead_in
-    IS 'Contact lead in value';
-
-COMMENT ON COLUMN nedss_olap.dim_condition.place_lead_in
-    IS 'Place Lead In value';
-
-COMMENT ON COLUMN nedss_olap.dim_condition.treatment_lead_in
-    IS 'Treatment lead in value';
-
-COMMENT ON COLUMN nedss_olap.dim_condition.active
-    IS 'active flag';
-
-COMMENT ON COLUMN nedss_olap.dim_condition.cdc_code
-    IS 'CDC code value';
-
-COMMENT ON COLUMN nedss_olap.dim_condition.mdro
-    IS 'disease mdro';
-
-COMMENT ON COLUMN nedss_olap.dim_condition.src_coordinator_id
-    IS 'The source coordinator_id';
+COMMENT ON COLUMN nedss_olap.dim_case_status.hashcode
+    IS 'The dim_case_status hashcode';
     
-COMMENT ON COLUMN nedss_olap.dim_condition.src_condition_group_id
-    IS 'Group similar conditions together';
+COMMENT ON COLUMN nedss_olap.dim_case_status.code
+    IS 'The case status code';
     
-COMMENT ON COLUMN nedss_olap.dim_condition.code
-    IS 'The code value from source';
+COMMENT ON COLUMN nedss_olap.dim_case_status.description
+    IS 'The case status description';
+   
+COMMENT ON COLUMN nedss_olap.dim_case_status.sort_order
+    IS 'The case status sort order';
 
-COMMENT ON COLUMN nedss_olap.dim_condition.etl_load_date
-    IS 'last etl load date of this disease record.';
+COMMENT ON COLUMN nedss_olap.dim_case_status.src_external_codes_id
+    IS 'The OLTP external code ID';
 
--- Index: idx_dw_dim_disease_lookup
-
--- DROP INDEX warehouse.idx_dw_dim_disease_lookup;
-
-CREATE INDEX idx_dw_dim_condition_lookup
-    ON nedss_olap.dim_condition USING btree
+COMMENT ON COLUMN nedss_olap.dim_case_status.etl_load_date
+    IS 'The date / time this dim_case_status record was loaded';
+    
+    
+CREATE INDEX idx_dw_dim_case_status_lookup
+    ON nedss_olap.dim_case_status USING btree
     (hashcode)
     TABLESPACE pg_default;
     
-CREATE INDEX idx_dw_dim_condition_dw_condition_id
-        ON nedss_olap.dim_condition USING btree
-        (dw_condition_id)
-    TABLESPACE pg_default;
-    
-CREATE INDEX idx_dw_dim_condition_active
-        ON nedss_olap.dim_condition USING btree
-        (active)
-    TABLESPACE pg_default;
-    
-CREATE INDEX idx_dw_dim_condition_mdro
-        ON nedss_olap.dim_condition USING btree
-        (mdro)
+CREATE INDEX idx_dw_dim_case_status_dw_case_status_id
+    ON nedss_olap.dim_case_status USING btree
+    (dw_case_status_id)
     TABLESPACE pg_default;</sql>
       <useVariableSubstitution>F</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
@@ -3282,8 +3266,8 @@ CREATE INDEX idx_dw_dim_condition_mdro
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>304</xloc>
-      <yloc>240</yloc>
+      <xloc>272</xloc>
+      <yloc>224</yloc>
     </entry>
     <entry>
       <name>nedss_dim_agency</name>
@@ -3353,8 +3337,8 @@ CREATE INDEX idx_da_dw_agency_id
       <parallel>N</parallel>
       <draw>N</draw>
       <nr>0</nr>
-      <xloc>400</xloc>
-      <yloc>240</yloc>
+      <xloc>368</xloc>
+      <yloc>224</yloc>
     </entry>
     <entry>
       <name>nedss_dim_language</name>
@@ -3395,16 +3379,861 @@ CREATE INDEX idx_dw_dim_language_lookup
       <sendOneStatement>F</sendOneStatement>
       <connection>NEDSSOLAPDS</connection>
       <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>240</xloc>
+      <yloc>304</yloc>
+    </entry>
+    <entry>
+      <name>nedss_dim_ethnicity</name>
+      <description/>
+      <type>SQL</type>
+      <sql>-- Table: warehouse.dim_ethnicity
+
+DROP TABLE if exists nedss_olap.dim_ethnicity;
+
+CREATE TABLE nedss_olap.dim_ethnicity
+(
+    dw_ethnicity_id integer NOT NULL,
+    hashcode integer,
+    code character varying(50) COLLATE pg_catalog."default",
+    description character varying(100) COLLATE pg_catalog."default",
+    sort_order integer,
+	src_external_codes_id integer,
+    etl_load_date timestamp without time zone,
+    CONSTRAINT pk_dw_dim_ethnicity PRIMARY KEY (dw_ethnicity_id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+
+COMMENT ON COLUMN nedss_olap.dim_ethnicity.dw_ethnicity_id
+    IS 'The data warehouse technical key for ethnicity';
+
+COMMENT ON COLUMN nedss_olap.dim_ethnicity.hashcode
+    IS 'The type I dimension hashcode';
+
+COMMENT ON COLUMN nedss_olap.dim_ethnicity.code
+    IS 'The code value of the ethnicity';
+
+COMMENT ON COLUMN nedss_olap.dim_ethnicity.description
+    IS 'The code description';
+
+COMMENT ON COLUMN nedss_olap.dim_ethnicity.etl_load_date
+    IS 'last etl load date of this ethnicity record.';
+
+-- Index: idx_dw_dim_ethnicity_lookup
+
+-- DROP INDEX warehouse.idx_dw_dim_ethnicity_lookup;
+
+CREATE INDEX idx_dw_dim_ethnicity_lookup
+    ON nedss_olap.dim_ethnicity USING btree
+    (hashcode)
+    TABLESPACE pg_default;
+	
+CREATE INDEX idx_dw_dim_ethnicity_dw_ethnicity_id
+    ON nedss_olap.dim_ethnicity USING btree
+    (dw_ethnicity_id)
+    TABLESPACE pg_default;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NEDSSOLAPDS</connection>
+      <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>288</xloc>
+      <yloc>240</yloc>
+    </entry>
+    <entry>
+      <name>nedss_dim_person</name>
+      <description/>
+      <type>SQL</type>
+      <sql>-- Table: warehouse.dim_person
+
+-- DROP TABLE warehouse.dim_person;
+DROP TABLE IF EXISTS nedss_olap.dim_person;
+
+CREATE TABLE nedss_olap.dim_person
+(
+    dw_person_id integer NOT NULL,
+    hashcode bigint,
+	src_person_id integer,
+    dw_birth_date_num_id integer,
+	dw_date_of_death_num_id integer,
+	dw_ethnicity_id integer,
+    dw_language_id integer,
+	dw_race_group_id integer,
+	src_primary_language_id integer,
+	src_age_type_id integer,
+	approximate_age_no_birthday integer,
+	birth_gender character varying(32),
+	current_gender character varying(32),
+	etl_load_date timestamp without time zone,
+    CONSTRAINT pk_dw_dim_disease_0 PRIMARY KEY (dw_person_id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+COMMENT ON TABLE nedss_olap.dim_person
+    IS 'Person dimension';
+
+COMMENT ON COLUMN nedss_olap.dim_person.dw_person_id
+    IS 'Technical key of the person dimension.';
+
+COMMENT ON COLUMN nedss_olap.dim_person.hashcode
+    IS 'Type I dimension hashcode';
+
+COMMENT ON COLUMN nedss_olap.dim_person.src_person_id
+    IS 'The source person_id of the person record';
+
+COMMENT ON COLUMN nedss_olap.dim_person.birth_gender
+    IS 'The gender of the person';
+	
+	
+COMMENT ON COLUMN nedss_olap.dim_person.dw_birth_date_num_id
+    IS 'Person birth date - FK to dim_date.dw_date_num_id';
+
+COMMENT ON COLUMN nedss_olap.dim_person.dw_date_of_death_num_id
+    IS 'Date of death date - FK to dim_date.dw_date_num_id';
+
+COMMENT ON COLUMN nedss_olap.dim_person.dw_ethnicity_id
+    IS 'The ethnicity of the person (dw_dim_ethnicity.dw_ethnicity_id)';
+
+COMMENT ON COLUMN nedss_olap.dim_person.dw_language_id
+    IS 'The language id of the person (dw_dim_language.dw_language_id)';
+
+COMMENT ON COLUMN nedss_olap.dim_person.etl_load_date
+    IS 'date time of when this dim_person record was loaded';
+
+COMMENT ON COLUMN nedss_olap.dim_person.dw_race_group_id
+    IS 'The race group [bridge tables] of this person (FK to dim_bridge_person_race.dw_bridge_person_race_id)';
+	
+COMMENT ON COLUMN nedss_olap.dim_person.src_primary_language_id
+    IS 'The primary language of the person';	
+
+COMMENT ON COLUMN nedss_olap.dim_person.src_age_type_id
+    IS 'The age type id of the person';	
+
+COMMENT ON COLUMN nedss_olap.dim_person.approximate_age_no_birthday
+    IS 'The approximate age of the person excluding whether or not they have had a birthday';	
+	
+COMMENT ON COLUMN nedss_olap.dim_person.birth_gender 
+    IS 'The gender of the person at birth';	
+	
+COMMENT ON COLUMN nedss_olap.dim_person.current_gender
+    IS 'The current gender of the person';
+	
+CREATE INDEX idx_dw_dim_person_src_person_id 
+    ON nedss_olap.dim_person USING btree
+    (src_person_id )
+    TABLESPACE pg_default;
+	
+CREATE INDEX idx_dw_dim_person_dw_birth_date_num_id
+    ON nedss_olap.dim_person USING btree
+    (dw_birth_date_num_id)
+    TABLESPACE pg_default;
+	
+CREATE INDEX idx_dw_dim_person_dw_date_of_death_num_id
+    ON nedss_olap.dim_person USING btree
+    (dw_date_of_death_num_id)
+    TABLESPACE pg_default;
+	
+CREATE INDEX idx_dw_dim_person_dw_ethnicity_id
+    ON nedss_olap.dim_person USING btree
+    (dw_ethnicity_id)
+    TABLESPACE pg_default;	
+
+CREATE INDEX idx_dw_dim_person_dw_language_id
+    ON nedss_olap.dim_person USING btree
+    (dw_language_id)
+    TABLESPACE pg_default;
+	
+CREATE INDEX idx_dw_dim_person_dw_race_group_id
+    ON nedss_olap.dim_person USING btree
+    (dw_race_group_id)
+    TABLESPACE pg_default;
+	
+CREATE INDEX idx_dw_dim_person_src_primary_language_id
+    ON nedss_olap.dim_person USING btree
+    (src_primary_language_id)
+    TABLESPACE pg_default;
+	
+CREATE INDEX idx_dw_dim_person_src_age_type_id
+    ON nedss_olap.dim_person USING btree
+    (src_age_type_id)
+    TABLESPACE pg_default;
+	
+CREATE INDEX idx_dw_dim_person_dw_person_id
+    ON nedss_olap.dim_person USING btree
+    (dw_person_id)
+    TABLESPACE pg_default;
+	
+-- Index: idx_dw_dim_person_lookup
+
+-- DROP INDEX warehouse.idx_dw_dim_person_lookup;
+
+CREATE INDEX idx_dw_dim_person_lookup
+    ON nedss_olap.dim_person USING btree
+    (hashcode)
+    TABLESPACE pg_default;
+
+</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NEDSSOLAPDS</connection>
+      <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>272</xloc>
+      <yloc>352</yloc>
+    </entry>
+    <entry>
+      <name>nedss_dim_case_status</name>
+      <description/>
+      <type>SQL</type>
+      <sql>-- Table: nedss_olap.dim_case_status
+
+DROP TABLE if exists nedss_olap.dim_case_status;
+
+CREATE TABLE nedss_olap.dim_case_status
+(
+     dw_case_status_id integer
+    ,src_case_status_id integer
+    ,hashcode integer
+    ,code character varying(255)
+    ,description character varying(255)
+    ,sort_order integer
+    ,src_external_codes_id integer
+    ,etl_load_date timestamp without time zone
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+
+
+COMMENT ON COLUMN nedss_olap.dim_case_status.dw_case_status_id
+    IS 'The dim_case_status TK';
+
+COMMENT ON COLUMN nedss_olap.dim_case_status.src_case_status_id
+    IS 'The NEDSS case_status.id column';
+
+COMMENT ON COLUMN nedss_olap.dim_case_status.hashcode
+    IS 'The dim_case_status hashcode';
+    
+COMMENT ON COLUMN nedss_olap.dim_case_status.code
+    IS 'The case status code';
+    
+COMMENT ON COLUMN nedss_olap.dim_case_status.description
+    IS 'The case status description';
+   
+COMMENT ON COLUMN nedss_olap.dim_case_status.sort_order
+    IS 'The case status sort order';
+
+COMMENT ON COLUMN nedss_olap.dim_case_status.src_external_codes_id
+    IS 'The OLTP external code ID';
+
+COMMENT ON COLUMN nedss_olap.dim_case_status.etl_load_date
+    IS 'The date / time this dim_case_status record was loaded';
+    
+    
+CREATE INDEX idx_dw_dim_case_status_lookup
+    ON nedss_olap.dim_case_status USING btree
+    (hashcode)
+    TABLESPACE pg_default;
+    
+CREATE INDEX idx_dw_dim_case_status_dw_case_status_id
+    ON nedss_olap.dim_case_status USING btree
+    (dw_case_status_id)
+    TABLESPACE pg_default;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NEDSSOLAPDS</connection>
+      <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>304</xloc>
+      <yloc>256</yloc>
+    </entry>
+    <entry>
+      <name>nedss_fact_person_condition</name>
+      <description/>
+      <type>SQL</type>
+      <sql>drop table if exists nedss_olap.fact_person_condition;
+
+create table nedss_olap.fact_person_condition (
+    dw_birth_date_num_id INTEGER,
+	dw_event_onset_date_num_id INTEGER,
+	dw_disease_onset_date_num_id INTEGER,
+	dw_date_diagnosed_date_num_id INTEGER,
+	dw_created_at_date_num_id INTEGER,
+	dw_deleted_at_date_num_id INTEGER,
+	dw_condition_id INTEGER,
+	dw_investigating_agency_id INTEGER,
+	dw_person_address_id INTEGER,
+    dw_person_id INTEGER,
+    dw_lhd_case_status_id INTEGER,
+	dw_case_status_id INTEGER,
+	src_person_condition_id INTEGER,
+	src_parent_person_condition_id INTEGER,
+	record_number VARCHAR(255),
+	src_outbreak_id INTEGER,
+	risk_factors TEXT,
+	contact_type VARCHAR(255),
+	food_handler VARCHAR(255),
+	healthcare_worker VARCHAR(255),
+	group_living VARCHAR(255),
+	day_care_association VARCHAR(255),
+	occupation VARCHAR(255),
+	pregnant VARCHAR(255),
+	caused_hospital BOOLEAN,
+	caused_death BOOLEAN,
+	src_created_at TIMESTAMP,
+	src_deleted_at TIMESTAMP,
+    src_updated_at TIMESTAMP,
+	age_at_onset INTEGER,
+	mmwr_week INTEGER,
+	mmwr_year INTEGER
+);
+
+
+CREATE INDEX idx_fct_pers_cond_dw_birth_date_num_id
+	ON nedss_olap.fact_person_condition using btree
+	(dw_birth_date_num_id)
+	TABLESPACE pg_default;
+	
+CREATE INDEX idx_fct_pers_cond_dw_event_onset_date_num_id
+	ON nedss_olap.fact_person_condition using btree
+	(dw_event_onset_date_num_id)
+	TABLESPACE pg_default;
+	
+CREATE INDEX idx_fct_pers_cond_dw_disease_onset_date_num_id
+	ON nedss_olap.fact_person_condition using btree
+	(dw_disease_onset_date_num_id)
+	TABLESPACE pg_default;
+	
+CREATE INDEX idx_fct_pers_cond_dw_date_diagnosed_date_num_id
+	ON nedss_olap.fact_person_condition using btree
+	(dw_date_diagnosed_date_num_id)
+	TABLESPACE pg_default;
+	
+CREATE INDEX idx_fct_pers_cond_dw_created_at_date_num_id
+	ON nedss_olap.fact_person_condition using btree
+	(dw_created_at_date_num_id)
+	TABLESPACE pg_default;
+	
+CREATE INDEX idx_fct_pers_cond_dw_deleted_at_date_num_id
+	ON nedss_olap.fact_person_condition using btree
+	(dw_deleted_at_date_num_id)
+	TABLESPACE pg_default;
+	
+CREATE INDEX idx_fct_pers_cond_dw_condition_id
+	ON nedss_olap.fact_person_condition using btree
+	(dw_condition_id)
+	TABLESPACE pg_default;
+	
+CREATE INDEX idx_fct_pers_cond_dw_investigating_agency_id
+	ON nedss_olap.fact_person_condition using btree
+	(dw_investigating_agency_id)
+	TABLESPACE pg_default;
+	
+CREATE INDEX idx_fct_pers_cond_dw_person_address_id
+	ON nedss_olap.fact_person_condition using btree
+	(dw_person_address_id)
+	TABLESPACE pg_default;
+	
+CREATE INDEX idx_fct_pers_cond_dw_case_status_id
+	ON nedss_olap.fact_person_condition using btree
+	(dw_case_status_id)
+	TABLESPACE pg_default;
+	
+CREATE INDEX idx_fct_pers_cond_src_person_condition_id
+	ON nedss_olap.fact_person_condition using btree
+	(src_person_condition_id)
+	TABLESPACE pg_default;
+	
+CREATE INDEX idx_fct_pers_cond_contact_type
+	ON nedss_olap.fact_person_condition using btree
+	(contact_type)
+	TABLESPACE pg_default;
+	
+CREATE INDEX idx_fct_pers_cond_food_handler
+	ON nedss_olap.fact_person_condition using btree
+	(food_handler)
+	TABLESPACE pg_default;
+	
+CREATE INDEX idx_fct_pers_cond_healthcare_worker
+	ON nedss_olap.fact_person_condition using btree
+	(healthcare_worker)
+	TABLESPACE pg_default;
+	
+CREATE INDEX idx_fct_pers_cond_group_living
+	ON nedss_olap.fact_person_condition using btree
+	(group_living)
+	TABLESPACE pg_default;
+	
+CREATE INDEX idx_fct_pers_cond_day_care_association
+	ON nedss_olap.fact_person_condition using btree
+	(day_care_association)
+	TABLESPACE pg_default;
+	
+CREATE INDEX idx_fct_pers_cond_occupation
+	ON nedss_olap.fact_person_condition using btree
+	(occupation)
+	TABLESPACE pg_default;
+	
+CREATE INDEX idx_fct_pers_cond_caused_hospital
+	ON nedss_olap.fact_person_condition using btree
+	(caused_hospital)
+	TABLESPACE pg_default;
+	
+CREATE INDEX idx_fct_pers_cond_caused_death
+	ON nedss_olap.fact_person_condition using btree
+	(caused_death)
+	TABLESPACE pg_default;
+	
+CREATE INDEX idx_fct_pers_cond_pregnant
+	ON nedss_olap.fact_person_condition using btree
+	(pregnant)
+	TABLESPACE pg_default;
+	
+CREATE INDEX idx_fct_pers_cond_age_at_onset
+	ON nedss_olap.fact_person_condition using btree
+	(age_at_onset)
+	TABLESPACE pg_default;
+
+CREATE INDEX idx_fct_pers_cond_src_created_at
+	ON nedss_olap.fact_person_condition using btree
+	(src_created_at)
+	TABLESPACE pg_default;
+	
+CREATE INDEX idx_fct_pers_cond_src_updated_at
+	ON nedss_olap.fact_person_condition using btree
+	(src_updated_at)
+	TABLESPACE pg_default;
+
+CREATE INDEX idx_fct_pers_cond_dw_person_id
+	ON nedss_olap.fact_person_condition using btree
+	(dw_person_id)
+	TABLESPACE pg_default;
+
+CREATE INDEX idx_fct_pers_cond_dw_lhd_case_status_id
+	ON nedss_olap.fact_person_condition using btree
+	(dw_lhd_case_status_id)
+	TABLESPACE pg_default;
+
+
+	</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NEDSSOLAPDS</connection>
+      <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>400</xloc>
+      <yloc>160</yloc>
+    </entry>
+    <entry>
+      <name>Load dim person address</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${pentaho.solutions.root.vfs}/etl/NEDSS/load_dim_person_address_smartystreets.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>336</xloc>
-      <yloc>176</yloc>
+      <xloc>560</xloc>
+      <yloc>32</yloc>
+    </entry>
+    <entry>
+      <name>idx_dpa_src_id</name>
+      <description/>
+      <type>SQL</type>
+      <sql>CREATE INDEX idx_dpa_src_id
+    ON nedss_olap.dim_person_address USING btree
+    (src_person_address_id)
+    TABLESPACE pg_default;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NEDSSOLAPDS</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>560</xloc>
+      <yloc>160</yloc>
+    </entry>
+    <entry>
+      <name>load_fact_person_condition</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>solution:/public/etl/NEDSS/load_fact_person_condition.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>560</xloc>
+      <yloc>304</yloc>
+    </entry>
+    <entry>
+      <name>trunc fact_person_condition</name>
+      <description/>
+      <type>SQL</type>
+      <sql>delete from nedss_olap.fact_person_condition;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NEDSSOLAPDS</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>352</xloc>
+      <yloc>240</yloc>
+    </entry>
+    <entry>
+      <name>Shell</name>
+      <description/>
+      <type>SHELL</type>
+      <filename/>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>ls -alt /var/local/pentaho8/tomcat/webapps/pentaho/META-INF
+ls -alt /var/local/pentaho8/tomcat/conf/Catalina/localhost
+cat /var/local/pentaho8/tomcat/webapps/pentaho/META-INF/context.xml
+cat /var/local/pentaho8/tomcat/conf/Catalina/localhost/pentaho.xml
+</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>592</xloc>
+      <yloc>416</yloc>
+    </entry>
+    <entry>
+      <name>SQL</name>
+      <description/>
+      <type>SQL</type>
+      <sql>select * from syndromic.ss_processed_diagnosis limit 10;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NEDSSOLAPDS</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>368</xloc>
+      <yloc>384</yloc>
+    </entry>
+    <entry>
+      <name>Set variables</name>
+      <description/>
+      <type>SET_VARIABLES</type>
+      <replacevars>Y</replacevars>
+      <filename/>
+      <file_variable_type>JVM</file_variable_type>
+      <fields>
+        <field>
+          <variable_name>YYYY</variable_name>
+          <variable_value>2019</variable_value>
+          <variable_type>JVM</variable_type>
+        </field>
+      </fields>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>176</xloc>
+      <yloc>352</yloc>
+    </entry>
+    <entry>
+      <name>create_fact_nbs_result_partition_table</name>
+      <description/>
+      <type>JOB</type>
+      <specification_method>filename</specification_method>
+      <job_object_id/>
+      <filename>${pentaho.solutions.root.vfs}/etl/NBS/create_fact_nbs_result_partition_table.kjb</filename>
+      <jobname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        <parameter>
+          <name>YYYY</name>
+          <stream_name/>
+          <value>2019</value>
+        </parameter>
+      </parameters>
+      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>304</xloc>
+      <yloc>480</yloc>
+    </entry>
+    <entry>
+      <name>Add nedss constraints</name>
+      <description/>
+      <type>SQL</type>
+      <sql>alter table nedss_olap.fact_person_condition add CONSTRAINT dim_condition FOREIGN KEY ( dw_condition_id ) REFERENCES nedss_olap.dim_condition( dw_condition_id );
+alter table nedss_olap.fact_person_condition add CONSTRAINT dim_person FOREIGN KEY ( dw_person_id ) REFERENCES nedss_olap.dim_person( dw_person_id );
+alter table nedss_olap.fact_person_condition add CONSTRAINT dim_person_address FOREIGN KEY ( dw_person_address_id ) REFERENCES nedss_olap.dim_person_address( dw_person_address_id );
+alter table nedss_olap.fact_person_condition add CONSTRAINT fact_outbreak FOREIGN KEY ( src_outbreak_id ) REFERENCES nedss_olap.fact_outbreak( src_outbreak_id );
+
+
+alter table nedss_olap.dim_date add CONSTRAINT idx_dw_date_num_id_unq UNIQUE ( dw_date_num_id );
+alter table nedss_olap.fact_person_condition add CONSTRAINT fk_fpc_birth_date FOREIGN KEY ( dw_birth_date_num_id ) REFERENCES nedss_olap.dim_date( dw_date_num_id );
+alter table nedss_olap.fact_person_condition add CONSTRAINT fk_fpc_event_onset_date FOREIGN KEY ( dw_event_onset_date_num_id ) REFERENCES nedss_olap.dim_date( dw_date_num_id );
+alter table nedss_olap.fact_person_condition add CONSTRAINT fk_fpc_disease_onset_date FOREIGN KEY ( dw_disease_onset_date_num_id ) REFERENCES nedss_olap.dim_date( dw_date_num_id );
+alter table nedss_olap.fact_person_condition add CONSTRAINT fk_fpc_date_diagnosed FOREIGN KEY ( dw_date_diagnosed_date_num_id ) REFERENCES nedss_olap.dim_date( dw_date_num_id );
+alter table nedss_olap.fact_person_condition add CONSTRAINT fk_fpc_created_at_date FOREIGN KEY ( dw_created_at_date_num_id ) REFERENCES nedss_olap.dim_date( dw_date_num_id );
+alter table nedss_olap.fact_person_condition add CONSTRAINT fk_fpc_deleted_at_date FOREIGN KEY ( dw_deleted_at_date_num_id ) REFERENCES nedss_olap.dim_date( dw_date_num_id );
+alter table nedss_olap.fact_person_condition add CONSTRAINT fk_fpc_agency FOREIGN KEY ( dw_investigating_agency_id ) REFERENCES nedss_olap.dim_agency( dw_agency_id );
+
+alter table nedss_olap.dim_case_status add CONSTRAINT pk_dim_case_status PRIMARY KEY ( dw_case_status_id );
+alter table nedss_olap.dim_case_status add CONSTRAINT idx_dw_dim_case_status_dw_case_status_id_uq UNIQUE ( dw_case_status_id ); 
+alter table nedss_olap.fact_person_condition add CONSTRAINT fk_fpc_lhd_case_status FOREIGN KEY ( dw_lhd_case_status_id ) REFERENCES nedss_olap.dim_case_status( dw_case_status_id );
+alter table nedss_olap.fact_person_condition add CONSTRAINT fk_fpc_case_status FOREIGN KEY ( dw_case_status_id ) REFERENCES nedss_olap.dim_case_status( dw_case_status_id );
+
+
+alter table nedss_olap.dim_person add CONSTRAINT dim_ethnicity FOREIGN KEY ( dw_ethnicity_id ) REFERENCES nedss_olap.dim_ethnicity( dw_ethnicity_id );
+alter table nedss_olap.dim_person add CONSTRAINT dim_language FOREIGN KEY ( dw_language_id ) REFERENCES nedss_olap.dim_language( dw_language_id );
+alter table nedss_olap.dim_person add CONSTRAINT fk_dim_person_birth_date FOREIGN KEY ( dw_birth_date_num_id ) REFERENCES nedss_olap.dim_date( dw_date_num_id );
+alter table nedss_olap.dim_person add CONSTRAINT fk_dim_person_death_date FOREIGN KEY ( dw_date_of_death_num_id ) REFERENCES nedss_olap.dim_date( dw_date_num_id );
+
+alter table nedss_olap.fact_outbreak add CONSTRAINT fk_fo_first_known_onset_dt FOREIGN KEY ( dw_first_known_onset_date_num_id ) REFERENCES nedss_olap.dim_date( dw_date_num_id );
+alter table nedss_olap.fact_outbreak add CONSTRAINT fk_fo_date_entered_nors FOREIGN KEY ( dw_date_entered_into_nors_date_num ) REFERENCES nedss_olap.dim_date( dw_date_num_id );
+alter table nedss_olap.fact_outbreak add CONSTRAINT fk_fo_outbreak_date FOREIGN KEY ( dw_outbreak_date_num_id ) REFERENCES nedss_olap.dim_date( dw_date_num_id );
+
+
+
+</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NEDSSOLAPDS</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>80</xloc>
+      <yloc>384</yloc>
     </entry>
   </entries>
   <hops>
     <hop>
+      <from>Load dim person address</from>
+      <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
       <from>START</from>
-      <to>nedss_dim_language</to>
+      <to>Load dim person address</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>START</from>
+      <to>idx_dpa_src_id</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>idx_dpa_src_id</from>
+      <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>load_fact_person_condition</from>
+      <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>START</from>
+      <to>trunc fact_person_condition</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>trunc fact_person_condition</from>
+      <to>load_fact_person_condition</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>START</from>
+      <to>Shell</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Shell</from>
+      <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>START</from>
+      <to>SQL</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>SQL</from>
+      <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>START</from>
+      <to>Set variables</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Set variables</from>
+      <to>create_fact_nbs_result_partition_table</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>create_fact_nbs_result_partition_table</from>
+      <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>START</from>
+      <to>Add nedss constraints</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -3412,7 +4241,7 @@ CREATE INDEX idx_dw_dim_language_lookup
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>nedss_dim_language</from>
+      <from>Add nedss constraints</from>
       <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -3423,4 +4252,20 @@ CREATE INDEX idx_dw_dim_language_lookup
   </hops>
   <notepads>
   </notepads>
+  <attributes>
+    <group>
+      <name>METASTORE.pentaho</name>
+      <attribute>
+        <key>Default Run Configuration</key>
+        <value>{"namespace":"pentaho","id":"Default Run Configuration","name":"Default Run Configuration","description":"Defines a default run configuration","metaStoreName":null}</value>
+      </attribute>
+    </group>
+    <group>
+      <name>{"_":"Embedded MetaStore Elements","namespace":"pentaho","type":"Default Run Configuration"}</name>
+      <attribute>
+        <key>Pentaho local</key>
+        <value>{"children":[{"children":[],"id":"server","value":null},{"children":[],"id":"clustered","value":"N"},{"children":[],"id":"name","value":"Pentaho local"},{"children":[],"id":"description","value":null},{"children":[],"id":"pentaho","value":"N"},{"children":[],"id":"readOnly","value":"Y"},{"children":[],"id":"sendResources","value":"N"},{"children":[],"id":"logRemoteExecutionLocally","value":"N"},{"children":[],"id":"remote","value":"N"},{"children":[],"id":"local","value":"Y"},{"children":[],"id":"showTransformations","value":"N"}],"id":"Pentaho local","value":null,"name":"Pentaho local","owner":null,"ownerPermissionsList":[]}</value>
+      </attribute>
+    </group>
+  </attributes>
 </job>

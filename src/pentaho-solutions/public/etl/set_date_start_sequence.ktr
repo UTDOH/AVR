@@ -457,8 +457,20 @@
         <attribute>N</attribute>
       </attribute>
       <attribute>
+        <code>INITIAL_POOL_SIZE</code>
+        <attribute>5</attribute>
+      </attribute>
+      <attribute>
         <code>IS_CLUSTERED</code>
         <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>MAXIMUM_POOL_SIZE</code>
+        <attribute>20</attribute>
+      </attribute>
+      <attribute>
+        <code>POOLING_removeAbandoned</code>
+        <attribute>true</attribute>
       </attribute>
       <attribute>
         <code>PORT_NUMBER</code>
@@ -482,7 +494,7 @@
       </attribute>
       <attribute>
         <code>USE_POOLING</code>
-        <attribute>N</attribute>
+        <attribute>Y</attribute>
       </attribute>
     </attributes>
   </connection>
@@ -532,8 +544,8 @@ from ${olap_schema}.dim_date;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>95</xloc>
-      <yloc>169</yloc>
+      <xloc>80</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -556,7 +568,7 @@ from ${olap_schema}.dim_date;</sql>
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>if (max_dw_date == null)
 {
-	max_dw_date = str2date("01.01.2005","dd.MM.yyyy");
+	max_dw_date = str2date("01.01.1930","dd.MM.yyyy");
 }
 
 var max_dw_date_var = max_dw_date;
@@ -632,8 +644,8 @@ Alert(dateDiff(d1,d2,"wd"));</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>353</xloc>
-      <yloc>170</yloc>
+      <xloc>352</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -677,8 +689,8 @@ Alert(dateDiff(d1,d2,"wd"));</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>709</xloc>
-      <yloc>170</yloc>
+      <xloc>704</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -711,8 +723,8 @@ Alert(dateDiff(d1,d2,"wd"));</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>533</xloc>
-      <yloc>170</yloc>
+      <xloc>528</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

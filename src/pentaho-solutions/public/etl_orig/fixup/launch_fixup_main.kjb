@@ -1,0 +1,3661 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job>
+  <name>launch_fixup_main</name>
+  <description/>
+  <extended_description/>
+  <job_version/>
+  <directory>/</directory>
+  <created_user>-</created_user>
+  <created_date>2018/09/01 15:59:05.779</created_date>
+  <modified_user>-</modified_user>
+  <modified_date>2018/09/01 15:59:05.779</modified_date>
+  <parameters>
+    </parameters>
+  <connection>
+    <name>NBSOLAPDS</name>
+    <server/>
+    <type>POSTGRESQL</type>
+    <access>JNDI</access>
+    <database>NBSOLAPDS</database>
+    <port>1521</port>
+    <username/>
+    <password>Encrypted </password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>INITIAL_POOL_SIZE</code>
+        <attribute>5</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>MAXIMUM_POOL_SIZE</code>
+        <attribute>20</attribute>
+      </attribute>
+      <attribute>
+        <code>POOLING_removeAbandoned</code>
+        <attribute>true</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>1521</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>Y</attribute>
+      </attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>NEDSSOLAPDS</name>
+    <server/>
+    <type>POSTGRESQL</type>
+    <access>JNDI</access>
+    <database>NEDSSOLAPDS</database>
+    <port>1521</port>
+    <username/>
+    <password>Encrypted </password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>INITIAL_POOL_SIZE</code>
+        <attribute>5</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>MAXIMUM_POOL_SIZE</code>
+        <attribute>20</attribute>
+      </attribute>
+      <attribute>
+        <code>POOLING_removeAbandoned</code>
+        <attribute>true</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>1521</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>Y</attribute>
+      </attribute>
+    </attributes>
+  </connection>
+  <slaveservers>
+    </slaveservers>
+  <job-log-table>
+    <connection/>
+    <schema/>
+    <table/>
+    <size_limit_lines/>
+    <interval/>
+    <timeout_days/>
+    <field>
+      <id>ID_JOB</id>
+      <enabled>Y</enabled>
+      <name>ID_JOB</name>
+    </field>
+    <field>
+      <id>CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>CHANNEL_ID</name>
+    </field>
+    <field>
+      <id>JOBNAME</id>
+      <enabled>Y</enabled>
+      <name>JOBNAME</name>
+    </field>
+    <field>
+      <id>STATUS</id>
+      <enabled>Y</enabled>
+      <name>STATUS</name>
+    </field>
+    <field>
+      <id>LINES_READ</id>
+      <enabled>Y</enabled>
+      <name>LINES_READ</name>
+    </field>
+    <field>
+      <id>LINES_WRITTEN</id>
+      <enabled>Y</enabled>
+      <name>LINES_WRITTEN</name>
+    </field>
+    <field>
+      <id>LINES_UPDATED</id>
+      <enabled>Y</enabled>
+      <name>LINES_UPDATED</name>
+    </field>
+    <field>
+      <id>LINES_INPUT</id>
+      <enabled>Y</enabled>
+      <name>LINES_INPUT</name>
+    </field>
+    <field>
+      <id>LINES_OUTPUT</id>
+      <enabled>Y</enabled>
+      <name>LINES_OUTPUT</name>
+    </field>
+    <field>
+      <id>LINES_REJECTED</id>
+      <enabled>Y</enabled>
+      <name>LINES_REJECTED</name>
+    </field>
+    <field>
+      <id>ERRORS</id>
+      <enabled>Y</enabled>
+      <name>ERRORS</name>
+    </field>
+    <field>
+      <id>STARTDATE</id>
+      <enabled>Y</enabled>
+      <name>STARTDATE</name>
+    </field>
+    <field>
+      <id>ENDDATE</id>
+      <enabled>Y</enabled>
+      <name>ENDDATE</name>
+    </field>
+    <field>
+      <id>LOGDATE</id>
+      <enabled>Y</enabled>
+      <name>LOGDATE</name>
+    </field>
+    <field>
+      <id>DEPDATE</id>
+      <enabled>Y</enabled>
+      <name>DEPDATE</name>
+    </field>
+    <field>
+      <id>REPLAYDATE</id>
+      <enabled>Y</enabled>
+      <name>REPLAYDATE</name>
+    </field>
+    <field>
+      <id>LOG_FIELD</id>
+      <enabled>Y</enabled>
+      <name>LOG_FIELD</name>
+    </field>
+    <field>
+      <id>EXECUTING_SERVER</id>
+      <enabled>N</enabled>
+      <name>EXECUTING_SERVER</name>
+    </field>
+    <field>
+      <id>EXECUTING_USER</id>
+      <enabled>N</enabled>
+      <name>EXECUTING_USER</name>
+    </field>
+    <field>
+      <id>START_JOB_ENTRY</id>
+      <enabled>N</enabled>
+      <name>START_JOB_ENTRY</name>
+    </field>
+    <field>
+      <id>CLIENT</id>
+      <enabled>N</enabled>
+      <name>CLIENT</name>
+    </field>
+  </job-log-table>
+  <jobentry-log-table>
+    <connection/>
+    <schema/>
+    <table/>
+    <timeout_days/>
+    <field>
+      <id>ID_BATCH</id>
+      <enabled>Y</enabled>
+      <name>ID_BATCH</name>
+    </field>
+    <field>
+      <id>CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>CHANNEL_ID</name>
+    </field>
+    <field>
+      <id>LOG_DATE</id>
+      <enabled>Y</enabled>
+      <name>LOG_DATE</name>
+    </field>
+    <field>
+      <id>JOBNAME</id>
+      <enabled>Y</enabled>
+      <name>TRANSNAME</name>
+    </field>
+    <field>
+      <id>JOBENTRYNAME</id>
+      <enabled>Y</enabled>
+      <name>STEPNAME</name>
+    </field>
+    <field>
+      <id>LINES_READ</id>
+      <enabled>Y</enabled>
+      <name>LINES_READ</name>
+    </field>
+    <field>
+      <id>LINES_WRITTEN</id>
+      <enabled>Y</enabled>
+      <name>LINES_WRITTEN</name>
+    </field>
+    <field>
+      <id>LINES_UPDATED</id>
+      <enabled>Y</enabled>
+      <name>LINES_UPDATED</name>
+    </field>
+    <field>
+      <id>LINES_INPUT</id>
+      <enabled>Y</enabled>
+      <name>LINES_INPUT</name>
+    </field>
+    <field>
+      <id>LINES_OUTPUT</id>
+      <enabled>Y</enabled>
+      <name>LINES_OUTPUT</name>
+    </field>
+    <field>
+      <id>LINES_REJECTED</id>
+      <enabled>Y</enabled>
+      <name>LINES_REJECTED</name>
+    </field>
+    <field>
+      <id>ERRORS</id>
+      <enabled>Y</enabled>
+      <name>ERRORS</name>
+    </field>
+    <field>
+      <id>RESULT</id>
+      <enabled>Y</enabled>
+      <name>RESULT</name>
+    </field>
+    <field>
+      <id>NR_RESULT_ROWS</id>
+      <enabled>Y</enabled>
+      <name>NR_RESULT_ROWS</name>
+    </field>
+    <field>
+      <id>NR_RESULT_FILES</id>
+      <enabled>Y</enabled>
+      <name>NR_RESULT_FILES</name>
+    </field>
+    <field>
+      <id>LOG_FIELD</id>
+      <enabled>N</enabled>
+      <name>LOG_FIELD</name>
+    </field>
+    <field>
+      <id>COPY_NR</id>
+      <enabled>N</enabled>
+      <name>COPY_NR</name>
+    </field>
+  </jobentry-log-table>
+  <channel-log-table>
+    <connection/>
+    <schema/>
+    <table/>
+    <timeout_days/>
+    <field>
+      <id>ID_BATCH</id>
+      <enabled>Y</enabled>
+      <name>ID_BATCH</name>
+    </field>
+    <field>
+      <id>CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>CHANNEL_ID</name>
+    </field>
+    <field>
+      <id>LOG_DATE</id>
+      <enabled>Y</enabled>
+      <name>LOG_DATE</name>
+    </field>
+    <field>
+      <id>LOGGING_OBJECT_TYPE</id>
+      <enabled>Y</enabled>
+      <name>LOGGING_OBJECT_TYPE</name>
+    </field>
+    <field>
+      <id>OBJECT_NAME</id>
+      <enabled>Y</enabled>
+      <name>OBJECT_NAME</name>
+    </field>
+    <field>
+      <id>OBJECT_COPY</id>
+      <enabled>Y</enabled>
+      <name>OBJECT_COPY</name>
+    </field>
+    <field>
+      <id>REPOSITORY_DIRECTORY</id>
+      <enabled>Y</enabled>
+      <name>REPOSITORY_DIRECTORY</name>
+    </field>
+    <field>
+      <id>FILENAME</id>
+      <enabled>Y</enabled>
+      <name>FILENAME</name>
+    </field>
+    <field>
+      <id>OBJECT_ID</id>
+      <enabled>Y</enabled>
+      <name>OBJECT_ID</name>
+    </field>
+    <field>
+      <id>OBJECT_REVISION</id>
+      <enabled>Y</enabled>
+      <name>OBJECT_REVISION</name>
+    </field>
+    <field>
+      <id>PARENT_CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>PARENT_CHANNEL_ID</name>
+    </field>
+    <field>
+      <id>ROOT_CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>ROOT_CHANNEL_ID</name>
+    </field>
+  </channel-log-table>
+  <pass_batchid>N</pass_batchid>
+  <shared_objects_file/>
+  <entries>
+    <entry>
+      <name>START</name>
+      <description/>
+      <type>SPECIAL</type>
+      <start>Y</start>
+      <dummy>N</dummy>
+      <repeat>N</repeat>
+      <schedulerType>0</schedulerType>
+      <intervalSeconds>0</intervalSeconds>
+      <intervalMinutes>60</intervalMinutes>
+      <hour>12</hour>
+      <minutes>0</minutes>
+      <weekDay>1</weekDay>
+      <DayOfMonth>1</DayOfMonth>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>144</xloc>
+      <yloc>160</yloc>
+    </entry>
+    <entry>
+      <name>nedss_fact_outbreak</name>
+      <description/>
+      <type>SQL</type>
+      <sql>-- Table: nedss_olap.dim_outbreak
+
+DROP TABLE if exists nedss_olap.dim_outbreak;
+
+DROP TABLE if exists nedss_olap.fact_outbreak;
+
+CREATE TABLE nedss_olap.fact_outbreak
+(
+    src_outbreak_id integer,
+	dw_first_known_onset_date_num_id integer,
+	dw_date_entered_into_nors_date_num integer,
+	dw_outbreak_date_num_id integer,
+	first_known_onset_date timestamp without time zone,
+	date_entered_into_nors timestamp without time zone,
+	outbreak_date timestamp without time zone,
+    "number" character varying(1024) COLLATE pg_catalog."default",
+    name character varying(1024) COLLATE pg_catalog."default",
+    created_at timestamp without time zone,
+    src_outbreaks_id integer,
+    src_outbreaks_parent_id integer,
+    src_condition_id integer,
+    src_parent_outbreak_id integer,
+    src_location_type integer,
+    src_agency_id integer,
+    src_status integer,
+    report_required boolean,
+    report_approved boolean,
+    report_approved_date timestamp without time zone,
+    link_to_epi_tracker boolean,
+    epi_tracker_name character varying(1024) COLLATE pg_catalog."default",
+    src_investigator_id integer,
+    primary_transmission text COLLATE pg_catalog."default",
+    major_setting text COLLATE pg_catalog."default",
+    etiology_status text COLLATE pg_catalog."default",
+    confirmed_state text COLLATE pg_catalog."default",
+    pfge_cluster text COLLATE pg_catalog."default",
+    nors_id text COLLATE pg_catalog."default",
+    confirmed_cases integer,
+    probable_cases integer,
+    national_outbreak boolean,
+    disease_type text COLLATE pg_catalog."default",
+    etl_load_date timestamp without time zone,
+    CONSTRAINT pk_dw_dim_outbreak PRIMARY KEY (src_outbreak_id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+-- Index: idx_dim_outbreak_dw_date_entered_into_nors_date_num
+
+-- DROP INDEX nedss_olap.idx_dim_outbreak_dw_date_entered_into_nors_date_num;
+
+CREATE INDEX idx_dim_outbreak_dw_date_entered_into_nors_date_num
+    ON nedss_olap.fact_outbreak USING btree
+    (dw_date_entered_into_nors_date_num)
+    TABLESPACE pg_default;
+
+-- Index: idx_dim_outbreak_dw_first_known_onset_date_num_id
+
+-- DROP INDEX nedss_olap.idx_dim_outbreak_dw_first_known_onset_date_num_id;
+
+CREATE INDEX idx_dim_outbreak_dw_first_known_onset_date_num_id
+    ON nedss_olap.fact_outbreak USING btree
+    (dw_first_known_onset_date_num_id)
+    TABLESPACE pg_default;
+
+-- Index: idx_dim_outbreak_dw_outbreak_date_num_id
+
+-- DROP INDEX nedss_olap.idx_dim_outbreak_dw_outbreak_date_num_id;
+
+CREATE INDEX idx_dim_outbreak_dw_outbreak_date_num_id
+    ON nedss_olap.fact_outbreak USING btree
+    (dw_outbreak_date_num_id)
+    TABLESPACE pg_default;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NEDSSOLAPDS</connection>
+      <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>304</xloc>
+      <yloc>256</yloc>
+    </entry>
+    <entry>
+      <name>Success</name>
+      <description/>
+      <type>SUCCESS</type>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1104</xloc>
+      <yloc>160</yloc>
+    </entry>
+    <entry>
+      <name>Update fnr partition tables</name>
+      <description/>
+      <type>SQL</type>
+      <sql>DROP INDEX warehouse.idx_fact_nbs_result_src_msg_processed_on;
+
+DROP INDEX warehouse.idx_fact_nbs_result_dw_msg_processed_on;
+
+
+CREATE INDEX idx_x_dx_sample_number_2006
+  ON warehouse.fact_nbs_result_2006
+  USING btree
+  (sample_number);
+  
+CREATE INDEX idx_fact_nbs_result_dw_msg_processed_on_2006
+  ON warehouse.fact_nbs_result_2006
+  USING btree
+  (dw_message_processed_on_date_num_id);
+  
+CREATE INDEX idx_fact_nbs_result_src_msg_processed_on_2006
+  ON warehouse.fact_nbs_result_2006
+  USING btree
+  (src_message_processed_on);
+
+
+CREATE INDEX idx_x_dx_sample_number_2007
+  ON warehouse.fact_nbs_result_2007
+  USING btree
+  (sample_number);
+  
+CREATE INDEX idx_fact_nbs_result_dw_msg_processed_on_2007
+  ON warehouse.fact_nbs_result_2007
+  USING btree
+  (dw_message_processed_on_date_num_id);
+  
+CREATE INDEX idx_fact_nbs_result_src_msg_processed_on_2007
+  ON warehouse.fact_nbs_result_2007
+  USING btree
+  (src_message_processed_on);  
+  
+
+CREATE INDEX idx_x_dx_sample_number_2008
+  ON warehouse.fact_nbs_result_2008
+  USING btree
+  (sample_number);
+  
+CREATE INDEX idx_fact_nbs_result_dw_msg_processed_on_2008
+  ON warehouse.fact_nbs_result_2008
+  USING btree
+  (dw_message_processed_on_date_num_id);
+  
+CREATE INDEX idx_fact_nbs_result_src_msg_processed_on_2008
+  ON warehouse.fact_nbs_result_2008
+  USING btree
+  (src_message_processed_on);  
+  
+
+CREATE INDEX idx_x_dx_sample_number_2009
+  ON warehouse.fact_nbs_result_2009
+  USING btree
+  (sample_number);
+  
+CREATE INDEX idx_fact_nbs_result_dw_msg_processed_on_2009
+  ON warehouse.fact_nbs_result_2009
+  USING btree
+  (dw_message_processed_on_date_num_id);
+  
+CREATE INDEX idx_fact_nbs_result_src_msg_processed_on_2009
+  ON warehouse.fact_nbs_result_2009
+  USING btree
+  (src_message_processed_on);
+  
+
+CREATE INDEX idx_x_dx_sample_number_2010
+  ON warehouse.fact_nbs_result_2010
+  USING btree
+  (sample_number);
+  
+CREATE INDEX idx_fact_nbs_result_dw_msg_processed_on_2010
+  ON warehouse.fact_nbs_result_2010
+  USING btree
+  (dw_message_processed_on_date_num_id);
+  
+CREATE INDEX idx_fact_nbs_result_src_msg_processed_on_2010
+  ON warehouse.fact_nbs_result_2010
+  USING btree
+  (src_message_processed_on);
+  
+
+CREATE INDEX idx_x_dx_sample_number_2011
+  ON warehouse.fact_nbs_result_2011
+  USING btree
+  (sample_number);
+  
+CREATE INDEX idx_fact_nbs_result_dw_msg_processed_on_2011
+  ON warehouse.fact_nbs_result_2011
+  USING btree
+  (dw_message_processed_on_date_num_id);
+  
+CREATE INDEX idx_fact_nbs_result_src_msg_processed_on_2011
+  ON warehouse.fact_nbs_result_2011
+  USING btree
+  (src_message_processed_on);
+  
+  
+CREATE INDEX idx_x_dx_sample_number_2012
+  ON warehouse.fact_nbs_result_2012
+  USING btree
+  (sample_number);
+  
+CREATE INDEX idx_fact_nbs_result_dw_msg_processed_on_2012
+  ON warehouse.fact_nbs_result_2012
+  USING btree
+  (dw_message_processed_on_date_num_id);
+  
+CREATE INDEX idx_fact_nbs_result_src_msg_processed_on_2012
+  ON warehouse.fact_nbs_result_2012
+  USING btree
+  (src_message_processed_on);
+  
+  
+CREATE INDEX idx_x_dx_sample_number_2013
+  ON warehouse.fact_nbs_result_2013
+  USING btree
+  (sample_number);
+  
+CREATE INDEX idx_fact_nbs_result_dw_msg_processed_on_2013
+  ON warehouse.fact_nbs_result_2013
+  USING btree
+  (dw_message_processed_on_date_num_id);
+  
+CREATE INDEX idx_fact_nbs_result_src_msg_processed_on_2013
+  ON warehouse.fact_nbs_result_2013
+  USING btree
+  (src_message_processed_on);
+  
+
+CREATE INDEX idx_x_dx_sample_number_2014
+  ON warehouse.fact_nbs_result_2014
+  USING btree
+  (sample_number);
+  
+CREATE INDEX idx_fact_nbs_result_dw_msg_processed_on_2014
+  ON warehouse.fact_nbs_result_2014
+  USING btree
+  (dw_message_processed_on_date_num_id);
+  
+CREATE INDEX idx_fact_nbs_result_src_msg_processed_on_2014
+  ON warehouse.fact_nbs_result_2014  
+  USING btree
+  (src_message_processed_on);
+  
+CREATE INDEX idx_x_dx_sample_number_2015
+  ON warehouse.fact_nbs_result_2015
+  USING btree
+  (sample_number);
+  
+CREATE INDEX idx_fact_nbs_result_dw_msg_processed_on_2015
+  ON warehouse.fact_nbs_result_2015
+  USING btree
+  (dw_message_processed_on_date_num_id);
+  
+CREATE INDEX idx_fact_nbs_result_src_msg_processed_on_2015
+  ON warehouse.fact_nbs_result_2015
+  USING btree
+  (src_message_processed_on);
+  
+CREATE INDEX idx_x_dx_sample_number_2016
+  ON warehouse.fact_nbs_result_2016
+  USING btree
+  (sample_number);
+  
+CREATE INDEX idx_fact_nbs_result_dw_msg_processed_on_2016
+  ON warehouse.fact_nbs_result_2016
+  USING btree
+  (dw_message_processed_on_date_num_id);
+  
+CREATE INDEX idx_fact_nbs_result_src_msg_processed_on_2016
+  ON warehouse.fact_nbs_result_2016
+  USING btree
+  (src_message_processed_on);
+  
+ 
+CREATE INDEX idx_x_dx_sample_number_2017
+  ON warehouse.fact_nbs_result_2017
+  USING btree
+  (sample_number);
+  
+CREATE INDEX idx_fact_nbs_result_dw_msg_processed_on_2017
+  ON warehouse.fact_nbs_result_2017
+  USING btree
+  (dw_message_processed_on_date_num_id);
+  
+CREATE INDEX idx_fact_nbs_result_src_msg_processed_on_2017
+  ON warehouse.fact_nbs_result_2017
+  USING btree
+  (src_message_processed_on); 
+  
+  
+-- Table: warehouse.fact_nbs_result_2018
+
+-- DROP TABLE warehouse.fact_nbs_result_2018;
+
+CREATE TABLE warehouse.fact_nbs_result_2018
+(
+-- Inherited from table warehouse.fact_nbs_result:  dw_dx_treatment_date_num_id integer,
+-- Inherited from table warehouse.fact_nbs_result:  dw_reviewed_date_num_id integer,
+-- Inherited from table warehouse.fact_nbs_result:  dw_entered_on_date_num_id integer,
+-- Inherited from table warehouse.fact_nbs_result:  dw_nbs_result_dx_id integer,
+-- Inherited from table warehouse.fact_nbs_result:  dw_nbs_loinc_id integer,
+-- Inherited from table warehouse.fact_nbs_result:  dw_nbs_snomed_code_id integer,
+-- Inherited from table warehouse.fact_nbs_result:  dw_nbs_card_type_id integer,
+-- Inherited from table warehouse.fact_nbs_result:  dw_nbs_result_id integer,
+-- Inherited from table warehouse.fact_nbs_result:  dw_nbs_units_id integer,
+-- Inherited from table warehouse.fact_nbs_result:  dw_nbs_analysis_id integer,
+-- Inherited from table warehouse.fact_nbs_result:  dw_nbs_result_status_id integer,
+-- Inherited from table warehouse.fact_nbs_result:  text_id character varying(30),
+-- Inherited from table warehouse.fact_nbs_result:  result_number bigint,
+-- Inherited from table warehouse.fact_nbs_result:  test_number bigint,
+-- Inherited from table warehouse.fact_nbs_result:  replicate_count integer,
+-- Inherited from table warehouse.fact_nbs_result:  formatted_entry numeric(10,2),
+-- Inherited from table warehouse.fact_nbs_result:  entry character varying(254),
+-- Inherited from table warehouse.fact_nbs_result:  entered_on timestamp without time zone,
+-- Inherited from table warehouse.fact_nbs_result:  date_reviewed timestamp without time zone,
+-- Inherited from table warehouse.fact_nbs_result:  sample_number integer,
+-- Inherited from table warehouse.fact_nbs_result:  x_dx_date timestamp without time zone,
+-- Inherited from table warehouse.fact_nbs_result:  x_dx_treatment_date timestamp without time zone,
+-- Inherited from table warehouse.fact_nbs_result:  dw_message_processed_on_date_num_id integer,
+-- Inherited from table warehouse.fact_nbs_result:  src_message_processed_on timestamp without time zone,
+  CONSTRAINT fact_nbs_result_2018_dw_entered_on_date_num_id_check CHECK (dw_entered_on_date_num_id >= 20180101 AND dw_entered_on_date_num_id &lt; 20181231)
+)
+INHERITS (warehouse.fact_nbs_result)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE warehouse.fact_nbs_result_2018
+  OWNER TO pentaho;
+
+-- Index: warehouse.idx_date_reviewed_2018
+
+-- DROP INDEX warehouse.idx_date_reviewed_2018;
+
+CREATE INDEX idx_date_reviewed_2018
+  ON warehouse.fact_nbs_result_2018
+  USING btree
+  (date_reviewed);
+
+-- Index: warehouse.idx_dw_dx_treatment_date_id_2018
+
+-- DROP INDEX warehouse.idx_dw_dx_treatment_date_id_2018;
+
+CREATE INDEX idx_dw_dx_treatment_date_id_2018
+  ON warehouse.fact_nbs_result_2018
+  USING btree
+  (dw_dx_treatment_date_num_id);
+
+-- Index: warehouse.idx_dw_entered_on_date_num_id_2018
+
+-- DROP INDEX warehouse.idx_dw_entered_on_date_num_id_2018;
+
+CREATE INDEX idx_dw_entered_on_date_num_id_2018
+  ON warehouse.fact_nbs_result_2018
+  USING btree
+  (dw_entered_on_date_num_id);
+
+-- Index: warehouse.idx_dw_nbs_analysis_id_2018
+
+-- DROP INDEX warehouse.idx_dw_nbs_analysis_id_2018;
+
+CREATE INDEX idx_dw_nbs_analysis_id_2018
+  ON warehouse.fact_nbs_result_2018
+  USING btree
+  (dw_nbs_analysis_id);
+
+-- Index: warehouse.idx_dw_nbs_card_type_id_2018
+
+-- DROP INDEX warehouse.idx_dw_nbs_card_type_id_2018;
+
+CREATE INDEX idx_dw_nbs_card_type_id_2018
+  ON warehouse.fact_nbs_result_2018
+  USING btree
+  (dw_nbs_card_type_id);
+
+-- Index: warehouse.idx_dw_nbs_loinc_id_2018
+
+-- DROP INDEX warehouse.idx_dw_nbs_loinc_id_2018;
+
+CREATE INDEX idx_dw_nbs_loinc_id_2018
+  ON warehouse.fact_nbs_result_2018
+  USING btree
+  (dw_nbs_loinc_id);
+
+-- Index: warehouse.idx_dw_nbs_result_dx_id_2018
+
+-- DROP INDEX warehouse.idx_dw_nbs_result_dx_id_2018;
+
+CREATE INDEX idx_dw_nbs_result_dx_id_2018
+  ON warehouse.fact_nbs_result_2018
+  USING btree
+  (dw_nbs_result_dx_id);
+
+-- Index: warehouse.idx_dw_nbs_result_id_2018
+
+-- DROP INDEX warehouse.idx_dw_nbs_result_id_2018;
+
+CREATE INDEX idx_dw_nbs_result_id_2018
+  ON warehouse.fact_nbs_result_2018
+  USING btree
+  (dw_nbs_result_id);
+
+-- Index: warehouse.idx_dw_nbs_result_status_id_2018
+
+-- DROP INDEX warehouse.idx_dw_nbs_result_status_id_2018;
+
+CREATE INDEX idx_dw_nbs_result_status_id_2018
+  ON warehouse.fact_nbs_result_2018
+  USING btree
+  (dw_nbs_result_status_id);
+
+-- Index: warehouse.idx_dw_nbs_snomed_code_id_2018
+
+-- DROP INDEX warehouse.idx_dw_nbs_snomed_code_id_2018;
+
+CREATE INDEX idx_dw_nbs_snomed_code_id_2018
+  ON warehouse.fact_nbs_result_2018
+  USING btree
+  (dw_nbs_snomed_code_id);
+
+-- Index: warehouse.idx_dw_reviewed_date_id_2018
+
+-- DROP INDEX warehouse.idx_dw_reviewed_date_id_2018;
+
+CREATE INDEX idx_dw_reviewed_date_id_2018
+  ON warehouse.fact_nbs_result_2018
+  USING btree
+  (dw_reviewed_date_num_id);
+
+-- Index: warehouse.idx_entered_on_2018
+
+-- DROP INDEX warehouse.idx_entered_on_2018;
+
+CREATE INDEX idx_entered_on_2018
+  ON warehouse.fact_nbs_result_2018
+  USING btree
+  (entered_on);
+
+-- Index: warehouse.idx_full_date_reviewed_2018
+
+-- DROP INDEX warehouse.idx_full_date_reviewed_2018;
+
+CREATE INDEX idx_full_date_reviewed_2018
+  ON warehouse.fact_nbs_result_2018
+  USING btree
+  (date_reviewed);
+
+-- Index: warehouse.idx_full_dw_dx_treatment_date_id_2018
+
+-- DROP INDEX warehouse.idx_full_dw_dx_treatment_date_id_2018;
+
+CREATE INDEX idx_full_dw_dx_treatment_date_id_2018
+  ON warehouse.fact_nbs_result_2018
+  USING btree
+  (dw_dx_treatment_date_num_id);
+
+-- Index: warehouse.idx_full_dw_entered_on_date_num_id_2018
+
+-- DROP INDEX warehouse.idx_full_dw_entered_on_date_num_id_2018;
+
+CREATE INDEX idx_full_dw_entered_on_date_num_id_2018
+  ON warehouse.fact_nbs_result_2018
+  USING btree
+  (dw_entered_on_date_num_id);
+
+-- Index: warehouse.idx_full_dw_nbs_analysis_id_2018
+
+-- DROP INDEX warehouse.idx_full_dw_nbs_analysis_id_2018;
+
+CREATE INDEX idx_full_dw_nbs_analysis_id_2018
+  ON warehouse.fact_nbs_result_2018
+  USING btree
+  (dw_nbs_analysis_id);
+
+-- Index: warehouse.idx_full_dw_nbs_card_type_id_2018
+
+-- DROP INDEX warehouse.idx_full_dw_nbs_card_type_id_2018;
+
+CREATE INDEX idx_full_dw_nbs_card_type_id_2018
+  ON warehouse.fact_nbs_result_2018
+  USING btree
+  (dw_nbs_card_type_id);
+
+-- Index: warehouse.idx_full_dw_nbs_loinc_id_2018
+
+-- DROP INDEX warehouse.idx_full_dw_nbs_loinc_id_2018;
+
+CREATE INDEX idx_full_dw_nbs_loinc_id_2018
+  ON warehouse.fact_nbs_result_2018
+  USING btree
+  (dw_nbs_loinc_id);
+
+-- Index: warehouse.idx_full_dw_nbs_result_dx_id_2018
+
+-- DROP INDEX warehouse.idx_full_dw_nbs_result_dx_id_2018;
+
+CREATE INDEX idx_full_dw_nbs_result_dx_id_2018
+  ON warehouse.fact_nbs_result_2018
+  USING btree
+  (dw_nbs_result_dx_id);
+
+-- Index: warehouse.idx_full_dw_nbs_result_id_2018
+
+-- DROP INDEX warehouse.idx_full_dw_nbs_result_id_2018;
+
+CREATE INDEX idx_full_dw_nbs_result_id_2018
+  ON warehouse.fact_nbs_result_2018
+  USING btree
+  (dw_nbs_result_id);
+
+-- Index: warehouse.idx_full_dw_nbs_result_status_id_2018
+
+-- DROP INDEX warehouse.idx_full_dw_nbs_result_status_id_2018;
+
+CREATE INDEX idx_full_dw_nbs_result_status_id_2018
+  ON warehouse.fact_nbs_result_2018
+  USING btree
+  (dw_nbs_result_status_id);
+
+-- Index: warehouse.idx_full_dw_nbs_snomed_code_id_2018
+
+-- DROP INDEX warehouse.idx_full_dw_nbs_snomed_code_id_2018;
+
+CREATE INDEX idx_full_dw_nbs_snomed_code_id_2018
+  ON warehouse.fact_nbs_result_2018
+  USING btree
+  (dw_nbs_snomed_code_id);
+
+-- Index: warehouse.idx_full_dw_reviewed_date_id_2018
+
+-- DROP INDEX warehouse.idx_full_dw_reviewed_date_id_2018;
+
+CREATE INDEX idx_full_dw_reviewed_date_id_2018
+  ON warehouse.fact_nbs_result_2018
+  USING btree
+  (dw_reviewed_date_num_id);
+
+-- Index: warehouse.idx_full_entered_on_2018
+
+-- DROP INDEX warehouse.idx_full_entered_on_2018;
+
+CREATE INDEX idx_full_entered_on_2018
+  ON warehouse.fact_nbs_result_2018
+  USING btree
+  (entered_on);
+
+-- Index: warehouse.idx_full_nbs_units_id_2018
+
+-- DROP INDEX warehouse.idx_full_nbs_units_id_2018;
+
+CREATE INDEX idx_full_nbs_units_id_2018
+  ON warehouse.fact_nbs_result_2018
+  USING btree
+  (dw_nbs_units_id);
+
+-- Index: warehouse.idx_full_result_number_2018
+
+-- DROP INDEX warehouse.idx_full_result_number_2018;
+
+CREATE INDEX idx_full_result_number_2018
+  ON warehouse.fact_nbs_result_2018
+  USING btree
+  (result_number);
+
+-- Index: warehouse.idx_full_text_id_2018
+
+-- DROP INDEX warehouse.idx_full_text_id_2018;
+
+CREATE INDEX idx_full_text_id_2018
+  ON warehouse.fact_nbs_result_2018
+  USING btree
+  (text_id COLLATE pg_catalog."default");
+
+-- Index: warehouse.idx_full_x_dx_treatment_date_2018
+
+-- DROP INDEX warehouse.idx_full_x_dx_treatment_date_2018;
+
+CREATE INDEX idx_full_x_dx_treatment_date_2018
+  ON warehouse.fact_nbs_result_2018
+  USING btree
+  (x_dx_treatment_date);
+
+-- Index: warehouse.idx_nbs_units_id_2018
+
+-- DROP INDEX warehouse.idx_nbs_units_id_2018;
+
+CREATE INDEX idx_nbs_units_id_2018
+  ON warehouse.fact_nbs_result_2018
+  USING btree
+  (dw_nbs_units_id);
+
+-- Index: warehouse.idx_result_number_2018
+
+-- DROP INDEX warehouse.idx_result_number_2018;
+
+CREATE INDEX idx_result_number_2018
+  ON warehouse.fact_nbs_result_2018
+  USING btree
+  (result_number);
+
+-- Index: warehouse.idx_text_id_2018
+
+-- DROP INDEX warehouse.idx_text_id_2018;
+
+CREATE INDEX idx_text_id_2018
+  ON warehouse.fact_nbs_result_2018
+  USING btree
+  (text_id COLLATE pg_catalog."default");
+
+-- Index: warehouse.idx_x_dx_treatment_date_2018
+
+-- DROP INDEX warehouse.idx_x_dx_treatment_date_2018;
+
+CREATE INDEX idx_x_dx_treatment_date_2018
+  ON warehouse.fact_nbs_result_2018
+  USING btree
+  (x_dx_treatment_date);
+
+CREATE INDEX idx_x_dx_sample_number_2018
+  ON warehouse.fact_nbs_result_2018
+  USING btree
+  (sample_number);
+  
+CREATE INDEX idx_fact_nbs_result_dw_msg_processed_on_2018
+  ON warehouse.fact_nbs_result_2018
+  USING btree
+  (dw_message_processed_on_date_num_id);
+  
+CREATE INDEX idx_fact_nbs_result_src_msg_processed_on_2018
+  ON warehouse.fact_nbs_result_2018
+  USING btree
+  (src_message_processed_on); </sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection/>
+      <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>624</xloc>
+      <yloc>304</yloc>
+    </entry>
+    <entry>
+      <name>exec_update_dim_hospital_rolling_metrics</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${pentaho.solutions.root.vfs}/etl/NBS/exec_update_dim_hospital_rolling_metrics.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration/>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>1088</xloc>
+      <yloc>272</yloc>
+    </entry>
+    <entry>
+      <name>nbs2_dim_nbs_physician</name>
+      <description/>
+      <type>SQL</type>
+      <sql>-- Table: nbs_olap.dim_nbs_physician
+
+DROP TABLE IF EXISTS nbs_olap.dim_nbs_physician;
+
+DROP SEQUENCE IF EXISTS nbs_olap.dim_nbs_physician_dw_physician_id_seq;
+
+CREATE TABLE nbs_olap.dim_nbs_physician
+(
+    dw_physician_id bigint NOT NULL DEFAULT 0,
+    version integer,
+    start_date timestamp without time zone,
+    end_date timestamp without time zone,
+    person_number numeric(38,0),
+    physician_city character varying(128) COLLATE pg_catalog."default",
+    physician_state character varying(16) COLLATE pg_catalog."default",
+    physician_zip character varying(10) COLLATE pg_catalog."default",
+    physician_country character varying(128) COLLATE pg_catalog."default"
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE nbs_olap.dim_nbs_physician
+    OWNER to pentaho;
+
+GRANT ALL ON TABLE nbs_olap.dim_nbs_physician TO pentaho;
+
+-- GRANT SELECT ON TABLE nbs_olap.dim_nbs_physician TO bi_nbs_user_role;
+
+-- Index: idx_dim_nbs_physician_lookup
+
+-- DROP INDEX nbs_olap.idx_dim_nbs_physician_lookup;
+
+CREATE INDEX idx_dim_nbs_physician_lookup
+    ON nbs_olap.dim_nbs_physician USING btree
+    (person_number)
+    TABLESPACE pg_default;
+
+-- Index: idx_dim_nbs_physician_tk
+
+-- DROP INDEX nbs_olap.idx_dim_nbs_physician_tk;
+
+CREATE INDEX idx_dim_nbs_physician_tk
+    ON nbs_olap.dim_nbs_physician USING btree
+    (dw_physician_id)
+    TABLESPACE pg_default;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NBSOLAPDS</connection>
+      <parallel>Y</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>1360</xloc>
+      <yloc>480</yloc>
+    </entry>
+    <entry>
+      <name>nbs2_dim_nbs_hospital</name>
+      <description/>
+      <type>SQL</type>
+      <sql>-- Table: public.dim_nbs_hospital
+
+DROP TABLE IF EXISTS nbs_olap.dim_nbs_hospital;
+
+DROP SEQUENCE IF EXISTS nbs_olap.dim_nbs_hospital_dw_hospital_id_seq;
+
+CREATE TABLE nbs_olap.dim_nbs_hospital
+(
+    dw_nbs_hospital_id bigint NOT NULL DEFAULT 0,
+    version integer,
+    start_date timestamp without time zone,
+    end_date timestamp without time zone,
+    hospital_code character varying(255),
+    hospital_city character varying(128) COLLATE pg_catalog."default",
+    hospital_state character varying(16) COLLATE pg_catalog."default",
+    hospital_country character varying(128) COLLATE pg_catalog."default",
+    hospital_zip character varying(10) COLLATE pg_catalog."default",
+	rolling_pct_of_births numeric (10,9),
+    rolling_hospital_num_births numeric (10,0),
+    src_person_number numeric(10,0),
+    hospital_name character varying(255) COLLATE pg_catalog."default",
+    hospital_street_addr character varying(510) COLLATE pg_catalog."default",
+    latitude numeric(11,7),
+    longitude numeric(11,7),
+    rolling_state_num_births numeric(10,0)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+-- GRANT SELECT ON TABLE public.dim_nbs_hospital TO bi_nbs_user_role;
+
+-- Index: idx_dim_nbs_birthplace_lookup
+
+-- DROP INDEX public.idx_dim_nbs_birthplace_lookup;
+
+CREATE INDEX idx_dim_nbs_hospital_lookup
+    ON nbs_olap.dim_nbs_hospital USING btree
+    (hospital_code)
+    TABLESPACE pg_default;
+
+-- Index: idx_dim_nbs_birthplace_tk
+
+-- DROP INDEX public.idx_dim_nbs_birthplace_tk;
+
+CREATE INDEX idx_dim_nbs_birthplace_tk
+    ON nbs_olap.dim_nbs_hospital USING btree
+    (dw_nbs_hospital_id)
+    TABLESPACE pg_default;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NBSOLAPDS</connection>
+      <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>1232</xloc>
+      <yloc>480</yloc>
+    </entry>
+    <entry>
+      <name>nbs2_fact_nbs_card</name>
+      <description/>
+      <type>SQL</type>
+      <sql>-- Table: nbs_olap.fact_nbs_card
+DROP TABLE iF EXISTS nbs_olap.fact_nbs_card;
+
+CREATE TABLE nbs_olap.fact_nbs_card
+(
+    nbs_kit_no integer,
+    kit_number character varying(15) COLLATE pg_catalog."default",
+    order_number integer,
+    dw_physician_id integer,
+    dw_changed_on_date_num_id integer,
+    dw_sr_accessioned_date_num_id integer,
+    dw_date_collected_date_num_id integer,
+    dw_birth_date_num_id integer,
+    dw_mothers_birth_date_num_id integer,
+    dw_message_sent_on_date_num_id integer,
+    dw_report_out_date_num_id integer,
+    dw_nbs_hospital_id integer,
+	src_message_sent_on timestamp without time zone,
+    src_report_out_date timestamp without time zone,
+    sr_accessioned timestamp without time zone,
+    specimen_type character varying(255) COLLATE pg_catalog."default",
+    accession_number character varying(30) COLLATE pg_catalog."default",
+    reject_reason character varying(128) COLLATE pg_catalog."default",
+    babys_sex character varying(1) COLLATE pg_catalog."default",
+    breast integer,
+    bottle integer,
+    adoption integer,
+    premature_sick integer,
+    multiple_birth integer,
+    home_birth integer,
+    transfusion integer,
+    card_ok integer,
+    x_missing_data integer,
+    transfusion_date date,
+    birth_weight numeric(38,0),
+    mothers_zip character varying(10) COLLATE pg_catalog."default",
+    recall_reason character varying(10) COLLATE pg_catalog."default",
+    meconium_ileus integer,
+    steroids integer,
+    tpn integer,
+    birthplace_type character varying(255) COLLATE pg_catalog."default",
+    changed_on timestamp without time zone,
+    date_collected timestamp without time zone,
+    first_entry_on timestamp without time zone,
+    second_entry_on timestamp without time zone
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE nbs_olap.fact_nbs_card
+    OWNER to pentaho;
+
+GRANT ALL ON TABLE nbs_olap.fact_nbs_card TO pentaho;
+
+-- GRANT SELECT ON TABLE nbs_olap.fact_nbs_card TO bi_nbs_user_role;
+
+-- Index: idx_fact_nbs_card_accession_number
+
+-- DROP INDEX nbs_olap.idx_fact_nbs_card_accession_number;
+
+CREATE INDEX idx_fact_nbs_card_accession_number
+    ON nbs_olap.fact_nbs_card USING btree
+    (accession_number COLLATE pg_catalog."default")
+    TABLESPACE pg_default;
+
+-- Index: idx_fact_nbs_card_babys_sex
+
+-- DROP INDEX nbs_olap.idx_fact_nbs_card_babys_sex;
+
+CREATE INDEX idx_fact_nbs_card_babys_sex
+    ON nbs_olap.fact_nbs_card USING btree
+    (babys_sex COLLATE pg_catalog."default")
+    TABLESPACE pg_default;
+
+-- Index: idx_fact_nbs_card_birth_blind_entry_on
+
+-- DROP INDEX nbs_olap.idx_fact_nbs_card_birth_blind_entry_on;
+
+CREATE INDEX idx_fact_nbs_card_birth_first_entry_on
+    ON nbs_olap.fact_nbs_card USING btree
+    (first_entry_on)
+    TABLESPACE pg_default;
+
+-- Index: idx_fact_nbs_card_birth_date
+
+-- DROP INDEX nbs_olap.idx_fact_nbs_card_birth_date;
+
+CREATE INDEX idx_fact_nbs_card_birth_date
+    ON nbs_olap.fact_nbs_card USING btree
+    (dw_birth_date_num_id)
+    TABLESPACE pg_default;
+
+-- Index: idx_fact_nbs_card_birth_second_entry_on
+
+-- DROP INDEX nbs_olap.idx_fact_nbs_card_birth_second_entry_on;
+
+CREATE INDEX idx_fact_nbs_card_second_entry_on
+    ON nbs_olap.fact_nbs_card USING btree
+    (second_entry_on)
+    TABLESPACE pg_default;
+
+-- Index: idx_fact_nbs_card_birthplace
+
+-- DROP INDEX nbs_olap.idx_fact_nbs_card_birthplace;
+
+CREATE INDEX idx_fact_nbs_card_hospital
+    ON nbs_olap.fact_nbs_card USING btree
+    (dw_nbs_hospital_id)
+    TABLESPACE pg_default;
+
+-- Index: idx_fact_nbs_card_changed_on
+
+-- DROP INDEX nbs_olap.idx_fact_nbs_card_changed_on;
+
+CREATE INDEX idx_fact_nbs_card_changed_on
+    ON nbs_olap.fact_nbs_card USING btree
+    (dw_changed_on_date_num_id)
+    TABLESPACE pg_default;
+
+-- Index: idx_fact_nbs_card_date_collected
+
+-- DROP INDEX nbs_olap.idx_fact_nbs_card_date_collected;
+
+CREATE INDEX idx_fact_nbs_card_date_collected
+    ON nbs_olap.fact_nbs_card USING btree
+    (dw_date_collected_date_num_id)
+    TABLESPACE pg_default;
+
+-- Index: idx_fact_nbs_card_dw_msg_sent_on
+
+-- DROP INDEX nbs_olap.idx_fact_nbs_card_dw_msg_sent_on;
+
+CREATE INDEX idx_fact_nbs_card_dw_msg_sent_on
+    ON nbs_olap.fact_nbs_card USING btree
+    (dw_message_sent_on_date_num_id)
+    TABLESPACE pg_default;
+
+-- Index: idx_fact_nbs_card_dw_report_out_date
+
+-- DROP INDEX nbs_olap.idx_fact_nbs_card_dw_report_out_date;
+
+CREATE INDEX idx_fact_nbs_card_dw_report_out_date
+    ON nbs_olap.fact_nbs_card USING btree
+    (dw_report_out_date_num_id)
+    TABLESPACE pg_default;
+
+-- Index: idx_fact_nbs_card_inc_etl
+
+-- DROP INDEX nbs_olap.idx_fact_nbs_card_inc_etl;
+
+CREATE INDEX idx_fact_nbs_card_inc_etl
+    ON nbs_olap.fact_nbs_card USING btree
+    (changed_on)
+    TABLESPACE pg_default;
+
+CREATE INDEX idx_fact_nbs_card_lookup
+    ON nbs_olap.fact_nbs_card USING btree
+    (order_number, kit_number)
+    TABLESPACE pg_default;
+
+-- Index: idx_fact_nbs_card_mothers_birth_date
+
+-- DROP INDEX nbs_olap.idx_fact_nbs_card_mothers_birth_date;
+
+CREATE INDEX idx_fact_nbs_card_mothers_birth_date
+    ON nbs_olap.fact_nbs_card USING btree
+    (dw_mothers_birth_date_num_id)
+    TABLESPACE pg_default;
+
+-- Index: idx_fact_nbs_card_mothers_zip
+
+-- DROP INDEX nbs_olap.idx_fact_nbs_card_mothers_zip;
+
+CREATE INDEX idx_fact_nbs_card_mothers_zip
+    ON nbs_olap.fact_nbs_card USING btree
+    (mothers_zip COLLATE pg_catalog."default")
+    TABLESPACE pg_default;
+
+-- Index: idx_fact_nbs_card_name
+
+-- DROP INDEX nbs_olap.idx_fact_nbs_card_name;
+
+CREATE INDEX idx_fact_nbs_card_name
+    ON nbs_olap.fact_nbs_card USING btree
+    (kit_number COLLATE pg_catalog."default")
+    TABLESPACE pg_default;
+
+-- Index: idx_fact_nbs_card_physician
+
+-- DROP INDEX nbs_olap.idx_fact_nbs_card_physician;
+
+CREATE INDEX idx_fact_nbs_card_physician
+    ON nbs_olap.fact_nbs_card USING btree
+    (dw_physician_id)
+    TABLESPACE pg_default;
+
+-- Index: idx_fact_nbs_card_recall_reason
+
+-- DROP INDEX nbs_olap.idx_fact_nbs_card_recall_reason;
+
+CREATE INDEX idx_fact_nbs_card_recall_reason
+    ON nbs_olap.fact_nbs_card USING btree
+    (recall_reason COLLATE pg_catalog."default")
+    TABLESPACE pg_default;
+
+-- Index: idx_fact_nbs_card_reject_reason
+
+-- DROP INDEX nbs_olap.idx_fact_nbs_card_reject_reason;
+
+CREATE INDEX idx_fact_nbs_card_reject_reason
+    ON nbs_olap.fact_nbs_card USING btree
+    (reject_reason COLLATE pg_catalog."default")
+    TABLESPACE pg_default;
+
+-- Index: idx_fact_nbs_card_specimen_type
+
+-- DROP INDEX nbs_olap.idx_fact_nbs_card_specimen_type;
+
+CREATE INDEX idx_fact_nbs_card_specimen_type
+    ON nbs_olap.fact_nbs_card USING btree
+    (specimen_type COLLATE pg_catalog."default")
+    TABLESPACE pg_default;
+
+-- Index: idx_fact_nbs_card_sr_accessioned_date
+
+-- DROP INDEX nbs_olap.idx_fact_nbs_card_sr_accessioned_date;
+
+CREATE INDEX idx_fact_nbs_card_sr_accessioned_date
+    ON nbs_olap.fact_nbs_card USING btree
+    (dw_sr_accessioned_date_num_id)
+    TABLESPACE pg_default;
+
+-- Index: idx_fact_nbs_card_src_msg_sent_on
+
+-- DROP INDEX nbs_olap.idx_fact_nbs_card_src_msg_sent_on;
+
+CREATE INDEX idx_fact_nbs_card_src_msg_sent_on
+    ON nbs_olap.fact_nbs_card USING btree
+    (src_message_sent_on)
+    TABLESPACE pg_default;
+
+-- Index: idx_fact_nbs_card_src_report_out_date
+
+-- DROP INDEX nbs_olap.idx_fact_nbs_card_src_report_out_date;
+
+CREATE INDEX idx_fact_nbs_card_src_report_out_date
+    ON nbs_olap.fact_nbs_card USING btree
+    (src_report_out_date)
+    TABLESPACE pg_default;
+
+-- Index: idx_fact_nbs_card_src_sr_accessioned_date
+
+-- DROP INDEX nbs_olap.idx_fact_nbs_card_src_sr_accessioned_date;
+
+CREATE INDEX idx_fact_nbs_card_src_sr_accessioned_date
+    ON nbs_olap.fact_nbs_card USING btree
+    (sr_accessioned)
+    TABLESPACE pg_default;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NBSOLAPDS</connection>
+      <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>1088</xloc>
+      <yloc>480</yloc>
+    </entry>
+    <entry>
+      <name>Add BI Roles</name>
+      <description/>
+      <type>SQL</type>
+      <sql>CREATE USER bi_nbs_user_role WITH
+  LOGIN
+  NOSUPERUSER
+  INHERIT
+  NOCREATEDB
+  NOCREATEROLE
+  NOREPLICATION;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NBSOLAPDS</connection>
+      <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>720</xloc>
+      <yloc>272</yloc>
+    </entry>
+    <entry>
+      <name>nbs2_dim_date</name>
+      <description/>
+      <type>SQL</type>
+      <sql>-- Table: nbs_olap.dim_date
+
+DROP TABLE if exists nbs_olap.dim_date;
+
+CREATE TABLE nbs_olap.dim_date
+(
+    dw_date_id integer NOT NULL,
+    dw_date_num_id integer NOT NULL,
+    hashcode integer,
+    src_date_val date,
+    date_short character(12) COLLATE pg_catalog."default",
+    date_medium character(16) COLLATE pg_catalog."default",
+    date_long character varying(24) COLLATE pg_catalog."default",
+    date_full character varying(32) COLLATE pg_catalog."default",
+    day_in_week integer,
+    day_in_month integer,
+    day_in_year integer,
+    is_first_day_in_month smallint,
+    is_first_day_in_week smallint,
+    is_last_day_in_month smallint,
+    is_last_day_in_week smallint,
+    day_name character varying(12) COLLATE pg_catalog."default",
+    day_abbreviation character(3) COLLATE pg_catalog."default",
+    week_in_year integer,
+    week_in_month integer,
+    week_in_year_iso integer,
+    week_start_date date,
+    is_weekend smallint,
+    is_weekday smallint,
+    month_number integer,
+    month_name_val character varying(12) COLLATE pg_catalog."default",
+    month_abbreviation character(3) COLLATE pg_catalog."default",
+    month_abbreviation_year2 character(6) COLLATE pg_catalog."default",
+    year2 integer,
+    year4 integer,
+    year2_iso integer,
+    year4_iso integer,
+    quarter_number integer,
+    quarter_name character(2) COLLATE pg_catalog."default",
+    quarter_year character(7) COLLATE pg_catalog."default",
+    month_year character(7) COLLATE pg_catalog."default",
+    week_year character(7) COLLATE pg_catalog."default",
+    week_year_iso character(7) COLLATE pg_catalog."default",
+    year_week_int integer,
+    current_week_cy smallint,
+    current_month_cy smallint,
+    last_week_cy smallint,
+    last_month_cy smallint,
+    current_week_ly smallint,
+    current_month_ly smallint,
+    last_week_ly smallint,
+    last_month_ly smallint,
+    ytd_cy_day smallint,
+    ytd_cy_week smallint,
+    ytd_cy_month smallint,
+    ytd_ly_day smallint,
+    ytd_ly_week smallint,
+    ytd_ly_month smallint,
+    current_year smallint,
+    last_year smallint,
+    day_sequence integer,
+    week_sequence integer,
+    month_sequence integer,
+    year_of_weekend_date integer,
+    etl_load_date timestamp without time zone,
+    mmwr_week integer NOT NULL DEFAULT 0,
+    mmwr_year integer NOT NULL DEFAULT 0,
+    CONSTRAINT pk_dw_dim_date2 PRIMARY KEY (dw_date_id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+COMMENT ON COLUMN nbs_olap.dim_date.dw_date_id
+    IS 'Technical key of the date dimension';
+
+COMMENT ON COLUMN nbs_olap.dim_date.dw_date_num_id
+    IS 'Alternate TK of the date dimension in the format YYYYMMDD';
+
+COMMENT ON COLUMN nbs_olap.dim_date.hashcode
+    IS 'Type I dimension hashcode';
+
+COMMENT ON COLUMN nbs_olap.dim_date.src_date_val
+    IS 'Source date value';
+
+COMMENT ON COLUMN nbs_olap.dim_date.date_short
+    IS 'Short date';
+
+COMMENT ON COLUMN nbs_olap.dim_date.date_medium
+    IS 'Medium date';
+
+COMMENT ON COLUMN nbs_olap.dim_date.date_long
+    IS 'Long form date';
+
+COMMENT ON COLUMN nbs_olap.dim_date.date_full
+    IS 'Full form date';
+
+COMMENT ON COLUMN nbs_olap.dim_date.day_in_week
+    IS 'day of the week';
+
+COMMENT ON COLUMN nbs_olap.dim_date.day_in_month
+    IS 'Day number within the month';
+
+COMMENT ON COLUMN nbs_olap.dim_date.day_in_year
+    IS 'Day number within the year';
+
+COMMENT ON COLUMN nbs_olap.dim_date.is_first_day_in_month
+    IS 'Flag indicating whether the date is the first day in the month';
+
+COMMENT ON COLUMN nbs_olap.dim_date.is_first_day_in_week
+    IS 'Flag indicating whether the date is the first day in the week.';
+
+COMMENT ON COLUMN nbs_olap.dim_date.is_last_day_in_month
+    IS 'Flag indicating whether the date is the last day in the month.';
+
+COMMENT ON COLUMN nbs_olap.dim_date.is_last_day_in_week
+    IS 'Flag indicating whether the date is the last day of the week';
+
+COMMENT ON COLUMN nbs_olap.dim_date.day_name
+    IS 'textual name of the day of week';
+
+COMMENT ON COLUMN nbs_olap.dim_date.day_abbreviation
+    IS 'Abbreviated day of week';
+
+COMMENT ON COLUMN nbs_olap.dim_date.week_in_year
+    IS 'Numeric week of the year';
+
+COMMENT ON COLUMN nbs_olap.dim_date.week_in_month
+    IS 'Week number within the month.';
+
+COMMENT ON COLUMN nbs_olap.dim_date.week_in_year_iso
+    IS 'ISO standard week in year';
+
+COMMENT ON COLUMN nbs_olap.dim_date.week_start_date
+    IS 'The date representing the first day of the week.';
+
+COMMENT ON COLUMN nbs_olap.dim_date.is_weekend
+    IS 'Flag indicating wAdd dw_date_num_id to dim_dateheter or not the day Is a Saturday or Sunday?';
+
+COMMENT ON COLUMN nbs_olap.dim_date.is_weekday
+    IS 'Flag indicating whether or not the date is a weekday';
+
+COMMENT ON COLUMN nbs_olap.dim_date.month_number
+    IS 'Month number (1..12)';
+
+COMMENT ON COLUMN nbs_olap.dim_date.month_name_val
+    IS 'Name of the month';
+
+COMMENT ON COLUMN nbs_olap.dim_date.month_abbreviation
+    IS 'Abbreviated month name';
+
+COMMENT ON COLUMN nbs_olap.dim_date.month_abbreviation_year2
+    IS 'Month abbreviation with digit year';
+
+COMMENT ON COLUMN nbs_olap.dim_date.year2
+    IS 'Two digit year';
+
+COMMENT ON COLUMN nbs_olap.dim_date.year4
+    IS 'Four digit year';
+
+COMMENT ON COLUMN nbs_olap.dim_date.year2_iso
+    IS 'ISO two digit year';
+
+COMMENT ON COLUMN nbs_olap.dim_date.year4_iso
+    IS 'ISO four digit year';
+
+COMMENT ON COLUMN nbs_olap.dim_date.quarter_number
+    IS 'Numeric representation of the quarter (1..4)';
+
+COMMENT ON COLUMN nbs_olap.dim_date.quarter_name
+    IS 'Name of the quarter (Q1..Q4)';
+
+COMMENT ON COLUMN nbs_olap.dim_date.quarter_year
+    IS 'Quarter name + year';
+
+COMMENT ON COLUMN nbs_olap.dim_date.month_year
+    IS 'Month number - year4';
+
+COMMENT ON COLUMN nbs_olap.dim_date.week_year
+    IS 'Week number - year4';
+
+COMMENT ON COLUMN nbs_olap.dim_date.week_year_iso
+    IS 'week number - year4 ISO standard';
+
+COMMENT ON COLUMN nbs_olap.dim_date.year_week_int
+    IS 'Year4 and weekAdd dw_date_num_id to dim_date number as numeric value for sorting and comparison';
+
+COMMENT ON COLUMN nbs_olap.dim_date.current_week_cy
+    IS 'Is this the current week of the current year';
+
+COMMENT ON COLUMN nbs_olap.dim_date.current_month_cy
+    IS 'Is this the current month of the current year';
+
+COMMENT ON COLUMN nbs_olap.dim_date.last_week_cy
+    IS 'Is this the previous week of the current year';
+
+COMMENT ON COLUMN nbs_olap.dim_date.last_month_cy
+    IS 'Flag indicating whether this date in the previous month of the current year';
+
+COMMENT ON COLUMN nbs_olap.dim_date.current_week_ly
+    IS 'Is this date in the previous year, but the same week as the current week?';
+
+COMMENT ON COLUMN nbs_olap.dim_date.current_month_ly
+    IS 'Is this date in the previous year, but the same month of the current year?';
+
+COMMENT ON COLUMN nbs_olap.dim_date.last_week_ly
+    IS 'Is this date in the previous week the year prior?';
+
+COMMENT ON COLUMN nbs_olap.dim_date.last_month_ly
+    IS 'Is this date in the previous month the year prior';
+
+COMMENT ON COLUMN nbs_olap.dim_date.ytd_cy_day
+    IS 'Is the day portion of the date in the current year?';
+
+COMMENT ON COLUMN nbs_olap.dim_date.ytd_cy_week
+    IS 'Is the week portion of the date in the current year?';
+
+COMMENT ON COLUMN nbs_olap.dim_date.ytd_cy_month
+    IS 'Is the month of the date in the current year?';
+
+COMMENT ON COLUMN nbs_olap.dim_date.ytd_ly_day
+    IS 'Is this day part of the year to date last year (for current year / previous YTD comparison calculations)';
+
+COMMENT ON COLUMN nbs_olap.dim_date.ytd_ly_week
+    IS 'Is the date in the week last year which spilled into this year?';
+
+COMMENT ON COLUMN nbs_olap.dim_date.ytd_ly_month
+    IS 'Is this month part of the year to date last year (for current year / previous YTD comparison calculations)';
+
+COMMENT ON COLUMN nbs_olap.dim_date.current_year
+    IS 'Is the date in the current year?';
+
+COMMENT ON COLUMN nbs_olap.dim_date.last_year
+    IS 'Is the date in the previous year?';
+
+COMMENT ON COLUMN nbs_olap.dim_date.day_sequence
+    IS 'How many days back is this day from the current day?';
+
+COMMENT ON COLUMN nbs_olap.dim_date.week_sequence
+    IS 'How many weeks back from the current week is the week this date is in?';
+
+COMMENT ON COLUMN nbs_olap.dim_date.month_sequence
+    IS 'How many monts back from the current month is the month this date is in?';
+
+COMMENT ON COLUMN nbs_olap.dim_date.year_of_weekend_date
+    IS 'What year does the last day of the week fall in?';
+
+COMMENT ON COLUMN nbs_olap.dim_date.etl_load_date
+    IS 'The date this dimension record was loaded into the data nbs_olap.';
+
+-- Index: idx_dw_date_num_id
+
+-- DROP INDEX nbs_olap.idx_dw_date_num_id;
+
+CREATE INDEX idx_dw_date_num_id
+    ON nbs_olap.dim_date USING btree
+    (dw_date_num_id)
+    TABLESPACE pg_default;
+
+-- Index: idx_dw_dim_date_lookup_new
+
+-- DROP INDEX nbs_olap.idx_dw_dim_date_lookup_new;
+
+CREATE INDEX idx_dw_dim_date_lookup_new
+    ON nbs_olap.dim_date USING btree
+    (hashcode)
+    TABLESPACE pg_default;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NBSOLAPDS</connection>
+      <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>880</xloc>
+      <yloc>480</yloc>
+    </entry>
+    <entry>
+      <name>nbs2_create fact_nbs_result</name>
+      <description/>
+      <type>SQL</type>
+      <sql>-- Table: nbs_olap.fact_nbs_result
+
+DROP TABLE if exists nbs_olap.fact_nbs_result CASCADE;
+
+CREATE TABLE nbs_olap.fact_nbs_result
+(
+    dw_dx_treatment_date_num_id integer,
+    dw_reviewed_date_num_id integer,
+    dw_entered_on_date_num_id integer,
+    dw_nbs_result_dx_id integer,
+    dw_nbs_loinc_id integer,
+    dw_nbs_snomed_code_id integer,
+    dw_nbs_card_type_id integer,
+    dw_nbs_analysis_subcomponent_id integer,
+    dw_nbs_units_id integer,
+    dw_nbs_analysis_id integer,
+    dw_nbs_formatted_result_id integer,
+    dw_nbs_hospital_id integer,
+    dw_message_processed_on_date_num_id integer DEFAULT 19000101,
+    src_message_processed_on timestamp without time zone DEFAULT '1900-01-01 00:00:00'::timestamp without time zone,
+    accession_number character varying(30) COLLATE pg_catalog."default",
+    result_number bigint,
+    test_number bigint,
+    replicate_count integer,
+    raw_result character varying(255) COLLATE pg_catalog."default",
+    entered_on timestamp without time zone,
+    date_reviewed timestamp without time zone,
+    sample_number integer,
+    x_dx_date timestamp without time zone,
+    x_dx_treatment_date timestamp without time zone
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NBSOLAPDS</connection>
+      <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>640</xloc>
+      <yloc>448</yloc>
+    </entry>
+    <entry>
+      <name>nbs2_dim_nbs_result_dx</name>
+      <description/>
+      <type>SQL</type>
+      <sql>-- Table: nbs_olap.dim_nbs_result_dx
+
+DROP TABLE if exists nbs_olap.dim_nbs_result_dx;
+
+CREATE TABLE nbs_olap.dim_nbs_result_dx
+(
+    dw_nbs_result_dx_id bigint NOT NULL,
+    x_dx_code character varying(10) COLLATE pg_catalog."default",
+    x_dx_text character varying(254) COLLATE pg_catalog."default",
+    hashcode bigint,
+    last_update_dt timestamp without time zone
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+-- Index: idx_dim_nbs_result_dx_lookup
+
+-- DROP INDEX nbs_olap.idx_dim_nbs_result_dx_lookup;
+
+CREATE INDEX idx_dim_nbs_result_dx_lookup
+    ON nbs_olap.dim_nbs_result_dx USING btree
+    (hashcode)
+    TABLESPACE pg_default;
+
+-- Index: idx_dim_nbs_result_dx_pk
+
+-- DROP INDEX nbs_olap.idx_dim_nbs_result_dx_pk;
+
+CREATE UNIQUE INDEX idx_dim_nbs_result_dx_pk
+    ON nbs_olap.dim_nbs_result_dx USING btree
+    (dw_nbs_result_dx_id)
+    TABLESPACE pg_default;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NBSOLAPDS</connection>
+      <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>1680</xloc>
+      <yloc>368</yloc>
+    </entry>
+    <entry>
+      <name>nbs2_dim_nbs_loinc</name>
+      <description/>
+      <type>SQL</type>
+      <sql>-- Table: nbs_olap.dim_nbs_loinc
+
+DROP TABLE if exists nbs_olap.dim_nbs_loinc;
+
+CREATE TABLE nbs_olap.dim_nbs_loinc
+(
+    dw_nbs_loinc_id bigint NOT NULL,
+    loinc character varying(7) COLLATE pg_catalog."default",
+    hashcode bigint,
+    last_update_dt timestamp without time zone
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+
+-- Index: idx_dim_nbs_loinc_lookup
+
+-- DROP INDEX nbs_olap.idx_dim_nbs_loinc_lookup;
+
+CREATE INDEX idx_dim_nbs_loinc_lookup
+    ON nbs_olap.dim_nbs_loinc USING btree
+    (hashcode)
+    TABLESPACE pg_default;
+
+-- Index: idx_dim_nbs_loinc_pk
+
+-- DROP INDEX nbs_olap.idx_dim_nbs_loinc_pk;
+
+CREATE UNIQUE INDEX idx_dim_nbs_loinc_pk
+    ON nbs_olap.dim_nbs_loinc USING btree
+    (dw_nbs_loinc_id)
+    TABLESPACE pg_default;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NBSOLAPDS</connection>
+      <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>1616</xloc>
+      <yloc>272</yloc>
+    </entry>
+    <entry>
+      <name>nbs2_dim_nbs_snomed_code</name>
+      <description/>
+      <type>SQL</type>
+      <sql>-- Table: nbs_olap.dim_nbs_snomed_code
+
+DROP TABLE if exists nbs_olap.dim_nbs_snomed_code;
+
+CREATE TABLE nbs_olap.dim_nbs_snomed_code
+(
+    dw_nbs_snomed_code_id bigint NOT NULL,
+    snomed_code character varying(10) COLLATE pg_catalog."default",
+    hashcode bigint,
+    last_update_dt timestamp without time zone
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+
+-- Index: idx_dim_nbs_snomed_code_lookup
+
+-- DROP INDEX nbs_olap.idx_dim_nbs_snomed_code_lookup;
+
+CREATE INDEX idx_dim_nbs_snomed_code_lookup
+    ON nbs_olap.dim_nbs_snomed_code USING btree
+    (hashcode)
+    TABLESPACE pg_default;
+
+-- Index: idx_dim_nbs_snomed_code_pk
+
+-- DROP INDEX nbs_olap.idx_dim_nbs_snomed_code_pk;
+
+CREATE UNIQUE INDEX idx_dim_nbs_snomed_code_pk
+    ON nbs_olap.dim_nbs_snomed_code USING btree
+    (dw_nbs_snomed_code_id)
+    TABLESPACE pg_default;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NBSOLAPDS</connection>
+      <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>1504</xloc>
+      <yloc>256</yloc>
+    </entry>
+    <entry>
+      <name>nbs2_dim_nbs_card_type</name>
+      <description/>
+      <type>SQL</type>
+      <sql>-- Table: nbs_olap.dim_nbs_card_type
+
+DROP TABLE if exists nbs_olap.dim_nbs_card_type;
+
+CREATE TABLE nbs_olap.dim_nbs_card_type
+(
+    dw_nbs_card_type_id bigint NOT NULL,
+    nbs_card_type character varying(1) COLLATE pg_catalog."default",
+    nbs_card_type_desc character varying(128) COLLATE pg_catalog."default",
+    hashcode bigint,
+    last_update_dt timestamp without time zone
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+
+-- Index: idx_dim_nbs_card_type_lookup
+
+-- DROP INDEX nbs_olap.idx_dim_nbs_card_type_lookup;
+
+CREATE INDEX idx_dim_nbs_card_type_lookup
+    ON nbs_olap.dim_nbs_card_type USING btree
+    (hashcode)
+    TABLESPACE pg_default;
+
+-- Index: idx_dim_nbs_card_type_pk
+
+-- DROP INDEX nbs_olap.idx_dim_nbs_card_type_pk;
+
+CREATE UNIQUE INDEX idx_dim_nbs_card_type_pk
+    ON nbs_olap.dim_nbs_card_type USING btree
+    (dw_nbs_card_type_id)
+    TABLESPACE pg_default;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NBSOLAPDS</connection>
+      <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>1120</xloc>
+      <yloc>272</yloc>
+    </entry>
+    <entry>
+      <name>nbs2_dim_nbs_analysis_subcomponent</name>
+      <description/>
+      <type>SQL</type>
+      <sql>-- Table: nbs_olap.dim_nbs_analysis_subcomponent
+
+DROP TABLE if exists nbs_olap.dim_nbs_analysis_subcomponent;
+
+CREATE TABLE nbs_olap.dim_nbs_analysis_subcomponent
+(
+    dw_nbs_analysis_subcomponent_id bigint NOT NULL,
+    analysis_subcomponent character varying(40) COLLATE pg_catalog."default",
+    hashcode bigint,
+    last_update_dt timestamp without time zone
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+
+-- Index: idx_dim_nbs_result_lookup
+
+-- DROP INDEX nbs_olap.idx_dim_nbs_result_lookup;
+
+CREATE INDEX idx_dim_nbs_result_lookup
+    ON nbs_olap.dim_nbs_analysis_subcomponent USING btree
+    (hashcode)
+    TABLESPACE pg_default;
+
+-- Index: idx_dim_nbs_result_pk
+
+-- DROP INDEX nbs_olap.idx_dim_nbs_result_pk;
+
+CREATE UNIQUE INDEX idx_dim_nbs_result_pk
+    ON nbs_olap.dim_nbs_analysis_subcomponent USING btree
+    (dw_nbs_analysis_subcomponent_id)
+    TABLESPACE pg_default;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NBSOLAPDS</connection>
+      <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>1024</xloc>
+      <yloc>304</yloc>
+    </entry>
+    <entry>
+      <name>nbs2_dim_nbs_units</name>
+      <description/>
+      <type>SQL</type>
+      <sql>-- Table: nbs_olap.dim_nbs_units
+
+DROP TABLE if exists nbs_olap.dim_nbs_units;
+
+CREATE TABLE nbs_olap.dim_nbs_units
+(
+    dw_nbs_units_id bigint NOT NULL,
+    units character varying(10) COLLATE pg_catalog."default",
+    hashcode bigint,
+    last_update_dt timestamp without time zone
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+-- Index: idx_dim_nbs_units_lookup
+
+-- DROP INDEX nbs_olap.idx_dim_nbs_units_lookup;
+
+CREATE INDEX idx_dim_nbs_units_lookup
+    ON nbs_olap.dim_nbs_units USING btree
+    (hashcode)
+    TABLESPACE pg_default;
+
+-- Index: idx_dim_nbs_units_pk
+
+-- DROP INDEX nbs_olap.idx_dim_nbs_units_pk;
+
+CREATE UNIQUE INDEX idx_dim_nbs_units_pk
+    ON nbs_olap.dim_nbs_units USING btree
+    (dw_nbs_units_id)
+    TABLESPACE pg_default;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NBSOLAPDS</connection>
+      <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>608</xloc>
+      <yloc>336</yloc>
+    </entry>
+    <entry>
+      <name>nbs2_dim_nbs_analysis</name>
+      <description/>
+      <type>SQL</type>
+      <sql>-- Table: nbs_olap.dim_nbs_analysis
+
+DROP TABLE if exists nbs_olap.dim_nbs_analysis;
+
+CREATE TABLE nbs_olap.dim_nbs_analysis
+(
+    dw_nbs_analysis_id bigint NOT NULL,
+    analysis character varying(20) COLLATE pg_catalog."default",
+    hashcode bigint,
+    last_update_dt timestamp without time zone
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+-- Index: idx_dim_nbs_analysis_lookup
+
+-- DROP INDEX nbs_olap.idx_dim_nbs_analysis_lookup;
+
+CREATE INDEX idx_dim_nbs_analysis_lookup
+    ON nbs_olap.dim_nbs_analysis USING btree
+    (hashcode)
+    TABLESPACE pg_default;
+
+-- Index: idx_dim_nbs_analysis_pk
+
+-- DROP INDEX nbs_olap.idx_dim_nbs_analysis_pk;
+
+CREATE UNIQUE INDEX idx_dim_nbs_analysis_pk
+    ON nbs_olap.dim_nbs_analysis USING btree
+    (dw_nbs_analysis_id)
+    TABLESPACE pg_default;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NBSOLAPDS</connection>
+      <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>832</xloc>
+      <yloc>336</yloc>
+    </entry>
+    <entry>
+      <name>nbs2_dim_nbs_formatted_result</name>
+      <description/>
+      <type>SQL</type>
+      <sql>-- Table: nbs_olap.dim_nbs_formatted_result
+
+DROP TABLE if exists nbs_olap.dim_nbs_formatted_result;
+
+CREATE TABLE nbs_olap.dim_nbs_formatted_result
+(
+    dw_nbs_formatted_result_id bigint NOT NULL,
+    formatted_result text COLLATE pg_catalog."default",
+    hashcode bigint,
+    last_update_dt timestamp without time zone
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+-- Index: idx_dim_nbs_result_status_lookup
+
+-- DROP INDEX nbs_olap.idx_dim_nbs_result_status_lookup;
+
+CREATE INDEX idx_dim_nbs_result_status_lookup
+    ON nbs_olap.dim_nbs_formatted_result USING btree
+    (hashcode)
+    TABLESPACE pg_default;
+
+-- Index: idx_dim_nbs_result_status_pk
+
+-- DROP INDEX nbs_olap.idx_dim_nbs_result_status_pk;
+
+CREATE UNIQUE INDEX idx_dim_nbs_result_status_pk
+    ON nbs_olap.dim_nbs_formatted_result USING btree
+    (dw_nbs_formatted_result_id)
+    TABLESPACE pg_default;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NBSOLAPDS</connection>
+      <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>1440</xloc>
+      <yloc>272</yloc>
+    </entry>
+    <entry>
+      <name>create_fact_nbs_result_partitions</name>
+      <description/>
+      <type>JOB</type>
+      <specification_method>filename</specification_method>
+      <job_object_id/>
+      <filename>${pentaho.solutions.root.vfs}/etl/fixup/create_fact_nbs_result_partitions.kjb</filename>
+      <jobname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>1296</xloc>
+      <yloc>288</yloc>
+    </entry>
+    <entry>
+      <name>nbs2_fact_nbs_sample</name>
+      <description/>
+      <type>SQL</type>
+      <sql>-- Table: nbs_olap.fact_nbs_sample
+
+DROP TABLE if exists nbs_olap.fact_nbs_sample;
+
+CREATE TABLE nbs_olap.fact_nbs_sample
+(
+    dw_login_date_num_id integer,
+    dw_recd_date_num_id integer,
+    dw_completed_date_num_id integer,
+    dw_reviewed_date_num_id integer,
+    changed_on timestamp without time zone,
+    sample_number bigint,
+    accession_number character varying(30) COLLATE pg_catalog."default",
+    is_normal character(1) COLLATE pg_catalog."default",
+    status character(1) COLLATE pg_catalog."default",
+    product character varying(128) COLLATE pg_catalog."default",
+    dw_result_entry_date_num_id integer DEFAULT 19000101,
+    src_result_entry_date timestamp without time zone DEFAULT '1900-01-01 00:00:00'::timestamp without time zone,
+    dw_message_processed_on_date_num_id integer DEFAULT 19000101,
+    src_message_processed_on timestamp without time zone DEFAULT '1900-01-01 00:00:00'::timestamp without time zone
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+
+-- Index: idx_dw_result_entry_date_num_id
+
+-- DROP INDEX nbs_olap.idx_dw_result_entry_date_num_id;
+
+CREATE INDEX idx_dw_result_entry_date_num_id
+    ON nbs_olap.fact_nbs_sample USING btree
+    (dw_result_entry_date_num_id)
+    TABLESPACE pg_default;
+
+-- Index: idx_fact_nbs_sample_changed_on
+
+-- DROP INDEX nbs_olap.idx_fact_nbs_sample_changed_on;
+
+CREATE INDEX idx_fact_nbs_sample_changed_on
+    ON nbs_olap.fact_nbs_sample USING btree
+    (changed_on)
+    TABLESPACE pg_default;
+
+-- Index: idx_fact_nbs_sample_completed_date
+
+-- DROP INDEX nbs_olap.idx_fact_nbs_sample_completed_date;
+
+CREATE INDEX idx_fact_nbs_sample_completed_date
+    ON nbs_olap.fact_nbs_sample USING btree
+    (dw_completed_date_num_id)
+    TABLESPACE pg_default;
+
+-- Index: idx_fact_nbs_sample_is_normal
+
+-- DROP INDEX nbs_olap.idx_fact_nbs_sample_is_normal;
+
+CREATE INDEX idx_fact_nbs_sample_is_normal
+    ON nbs_olap.fact_nbs_sample USING btree
+    (is_normal COLLATE pg_catalog."default")
+    TABLESPACE pg_default;
+
+-- Index: idx_fact_nbs_sample_login_date
+
+-- DROP INDEX nbs_olap.idx_fact_nbs_sample_login_date;
+
+CREATE INDEX idx_fact_nbs_sample_login_date
+    ON nbs_olap.fact_nbs_sample USING btree
+    (dw_login_date_num_id)
+    TABLESPACE pg_default;
+
+-- Index: idx_fact_nbs_sample_product
+
+-- DROP INDEX nbs_olap.idx_fact_nbs_sample_product;
+
+CREATE INDEX idx_fact_nbs_sample_product
+    ON nbs_olap.fact_nbs_sample USING btree
+    (product COLLATE pg_catalog."default")
+    TABLESPACE pg_default;
+
+-- Index: idx_fact_nbs_sample_recd_date
+
+-- DROP INDEX nbs_olap.idx_fact_nbs_sample_recd_date;
+
+CREATE INDEX idx_fact_nbs_sample_recd_date
+    ON nbs_olap.fact_nbs_sample USING btree
+    (dw_recd_date_num_id)
+    TABLESPACE pg_default;
+
+-- Index: idx_fact_nbs_sample_reviewed_date
+
+-- DROP INDEX nbs_olap.idx_fact_nbs_sample_reviewed_date;
+
+CREATE INDEX idx_fact_nbs_sample_reviewed_date
+    ON nbs_olap.fact_nbs_sample USING btree
+    (dw_reviewed_date_num_id)
+    TABLESPACE pg_default;
+
+-- Index: idx_fact_nbs_sample_status
+
+-- DROP INDEX nbs_olap.idx_fact_nbs_sample_status;
+
+CREATE INDEX idx_fact_nbs_sample_status
+    ON nbs_olap.fact_nbs_sample USING btree
+    (status COLLATE pg_catalog."default")
+    TABLESPACE pg_default;
+
+-- Index: idx_fn_sample_number
+
+-- DROP INDEX nbs_olap.idx_fn_sample_number;
+
+CREATE INDEX idx_fn_sample_number
+    ON nbs_olap.fact_nbs_sample USING btree
+    (sample_number)
+    TABLESPACE pg_default;
+
+-- Index: idx_fns_dw_msg_processed_on
+
+-- DROP INDEX nbs_olap.idx_fns_dw_msg_processed_on;
+
+CREATE INDEX idx_fns_dw_msg_processed_on
+    ON nbs_olap.fact_nbs_sample USING btree
+    (dw_message_processed_on_date_num_id)
+    TABLESPACE pg_default;
+
+-- Index: idx_fns_src_msg_processed_on
+
+-- DROP INDEX nbs_olap.idx_fns_src_msg_processed_on;
+
+CREATE INDEX idx_fns_src_msg_processed_on
+    ON nbs_olap.fact_nbs_sample USING btree
+    (src_message_processed_on)
+    TABLESPACE pg_default;
+
+-- Index: idx_src_result_entry_date_id
+
+-- DROP INDEX nbs_olap.idx_src_result_entry_date_id;
+
+CREATE INDEX idx_src_result_entry_date_id
+    ON nbs_olap.fact_nbs_sample USING btree
+    (src_result_entry_date)
+    TABLESPACE pg_default;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NBSOLAPDS</connection>
+      <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>1200</xloc>
+      <yloc>304</yloc>
+    </entry>
+    <entry>
+      <name>nbs2_fact_nbs_card_log</name>
+      <description/>
+      <type>SQL</type>
+      <sql>-- Table: nbs_olap.fact_nbs_card_log
+
+DROP TABLE if exists nbs_olap.fact_nbs_card_log;
+
+CREATE TABLE nbs_olap.fact_nbs_card_log
+(
+    src_id integer,
+    dw_sr_received_date_num_id integer,
+    kit_number character varying(255) COLLATE pg_catalog."default",
+    sr_received timestamp without time zone,
+    card_type character varying(255) COLLATE pg_catalog."default",
+    log_delayed character varying(1) COLLATE pg_catalog."default",
+    order_number integer
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+
+-- Index: idx_fact_nbs_card_log_dw_sr_recieved
+
+-- DROP INDEX nbs_olap.idx_fact_nbs_card_log_dw_sr_recieved;
+
+CREATE INDEX idx_fact_nbs_card_log_dw_sr_recieved
+    ON nbs_olap.fact_nbs_card_log USING btree
+    (dw_sr_received_date_num_id)
+    TABLESPACE pg_default;
+
+-- Index: idx_fact_nbs_card_log_kit_number
+
+-- DROP INDEX nbs_olap.idx_fact_nbs_card_log_kit_number;
+
+CREATE INDEX idx_fact_nbs_card_log_kit_number
+    ON nbs_olap.fact_nbs_card_log USING btree
+    (kit_number COLLATE pg_catalog."default")
+    TABLESPACE pg_default;
+
+-- Index: idx_fact_nbs_card_log_name
+
+-- DROP INDEX nbs_olap.idx_fact_nbs_card_log_name;
+
+CREATE INDEX idx_fact_nbs_card_log_name
+    ON nbs_olap.fact_nbs_card_log USING btree
+    (kit_number COLLATE pg_catalog."default")
+    TABLESPACE pg_default;
+
+-- Index: idx_fact_nbs_card_log_sr_received
+
+-- DROP INDEX nbs_olap.idx_fact_nbs_card_log_sr_received;
+
+CREATE INDEX idx_fact_nbs_card_log_sr_received
+    ON nbs_olap.fact_nbs_card_log USING btree
+    (sr_received)
+    TABLESPACE pg_default;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NBSOLAPDS</connection>
+      <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>1088</xloc>
+      <yloc>336</yloc>
+    </entry>
+    <entry>
+      <name>nbs2_fact_nbs_action_item_log</name>
+      <description/>
+      <type>SQL</type>
+      <sql>-- Table: nbs_olap.fact_nbs_action_item_log
+
+DROP TABLE if exists nbs_olap.fact_nbs_action_item_log;
+
+CREATE TABLE nbs_olap.fact_nbs_action_item_log
+(
+    nbs_kit_no integer,
+    description character varying(255) COLLATE pg_catalog."default",
+    src_completed_on timestamp without time zone DEFAULT '1900-01-01 00:00:00'::timestamp without time zone,
+    dw_completed_on_date_num_id integer DEFAULT 19000101,
+    accession_number character varying(30) COLLATE pg_catalog."default"
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+-- Index: idx_fact_nbs_action_item_log_completed_on
+
+-- DROP INDEX nbs_olap.idx_fact_nbs_action_item_log_completed_on;
+
+CREATE INDEX idx_fact_nbs_action_item_log_completed_on
+    ON nbs_olap.fact_nbs_action_item_log USING btree
+    (src_completed_on)
+    TABLESPACE pg_default;
+
+-- Index: idx_fact_nbs_action_item_log_dw_completed_on
+
+-- DROP INDEX nbs_olap.idx_fact_nbs_action_item_log_dw_completed_on;
+
+CREATE INDEX idx_fact_nbs_action_item_log_dw_completed_on
+    ON nbs_olap.fact_nbs_action_item_log USING btree
+    (dw_completed_on_date_num_id)
+    TABLESPACE pg_default;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NBSOLAPDS</connection>
+      <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>1360</xloc>
+      <yloc>320</yloc>
+    </entry>
+    <entry>
+      <name>nbs2_vw_date_month_summary</name>
+      <description/>
+      <type>SQL</type>
+      <sql>create or replace view nbs_olap.vw_date_month_summary as 
+SELECT dim_date.month_abbreviation,
+dim_date.month_number,
+dim_date.year4,
+(lpad(dim_date.month_number::text, 2, '0'::text) || ' - '::text) || upper(dim_date.month_abbreviation::text) AS month_num_name,
+((dim_date.year4::text || lpad(dim_date.month_number::text, 2, '0'::text)) || lpad(1::text, 2, '0'::text))::integer AS dw_start_date_num_id,
+CASE
+WHEN dim_date.month_number &lt; 12 THEN (((dim_date.year4::text || lpad(dim_date.month_number::text, 2, '0'::text)) || lpad(1::text, 2, '0'::text))::integer) + 100
+ELSE ((((dim_date.year4 + 1)::text) || lpad(1::text, 2, '0'::text)) || lpad(1::text, 2, '0'::text))::integer
+END AS dw_end_date_num_id
+FROM nbs_olap.dim_date
+GROUP BY dim_date.month_abbreviation, dim_date.month_number, dim_date.year4
+ORDER BY dim_date.month_number;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NBSOLAPDS</connection>
+      <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>1520</xloc>
+      <yloc>336</yloc>
+    </entry>
+    <entry>
+      <name>nbs2_fact_nbs_action_item_log (2)</name>
+      <description/>
+      <type>SQL</type>
+      <sql>-- Table: nbs_olap.fact_nbs_action_item_log
+
+DROP TABLE if exists nbs_olap.fact_nbs_action_item_log;
+
+CREATE TABLE nbs_olap.fact_nbs_action_item_log
+(
+    nbs_kit_no integer,
+    description character varying(255) COLLATE pg_catalog."default",
+    src_completed_on timestamp without time zone DEFAULT '1900-01-01 00:00:00'::timestamp without time zone,
+    dw_completed_on_date_num_id integer DEFAULT 19000101,
+    accession_number character varying(30) COLLATE pg_catalog."default"
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+-- Index: idx_fact_nbs_action_item_log_completed_on
+
+-- DROP INDEX nbs_olap.idx_fact_nbs_action_item_log_completed_on;
+
+CREATE INDEX idx_fact_nbs_action_item_log_completed_on
+    ON nbs_olap.fact_nbs_action_item_log USING btree
+    (src_completed_on)
+    TABLESPACE pg_default;
+
+-- Index: idx_fact_nbs_action_item_log_dw_completed_on
+
+-- DROP INDEX nbs_olap.idx_fact_nbs_action_item_log_dw_completed_on;
+
+CREATE INDEX idx_fact_nbs_action_item_log_dw_completed_on
+    ON nbs_olap.fact_nbs_action_item_log USING btree
+    (dw_completed_on_date_num_id)
+    TABLESPACE pg_default;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NBSOLAPDS</connection>
+      <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>1536</xloc>
+      <yloc>400</yloc>
+    </entry>
+    <entry>
+      <name>nbs2_fact_nbs_action_item</name>
+      <description/>
+      <type>SQL</type>
+      <sql>-- Table: nbs_olap.fact_nbs_action_item_log
+
+DROP TABLE if exists nbs_olap.fact_nbs_action_item;
+
+CREATE TABLE nbs_olap.fact_nbs_action_item
+(
+    src_action_item_id integer,
+    nbs_kit_no integer,
+    description character varying(255) COLLATE pg_catalog."default",
+    dw_completed_on_date_num_id integer DEFAULT 19000101,
+    accession_number character varying(30) COLLATE pg_catalog."default"
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+-- Index: idx_fact_nbs_action_item_log_completed_on
+
+-- DROP INDEX nbs_olap.idx_fact_nbs_action_item_log_completed_on;
+
+CREATE INDEX idx_fact_nbs_action_item_src_action_item_id
+    ON nbs_olap.fact_nbs_action_item USING btree
+    (src_action_item_id)
+    TABLESPACE pg_default;
+
+-- Index: idx_fact_nbs_action_item_log_dw_completed_on
+
+-- DROP INDEX nbs_olap.idx_fact_nbs_action_item_log_dw_completed_on;
+
+CREATE INDEX idx_fact_nbs_action_item_dw_completed_on
+    ON nbs_olap.fact_nbs_action_item USING btree
+    (dw_completed_on_date_num_id)
+    TABLESPACE pg_default;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NBSOLAPDS</connection>
+      <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>1280</xloc>
+      <yloc>384</yloc>
+    </entry>
+    <entry>
+      <name>nbs2_fnr_changed_on_index</name>
+      <description/>
+      <type>SQL</type>
+      <sql>DROP INDEX if exists nbs_olap.idx_fnr_changed_on_2006;
+
+CREATE INDEX idx_fnr_changed_on_2006
+    ON nbs_olap.fact_nbs_result_2006 USING btree
+    (changed_on)
+
+    TABLESPACE pg_default;
+
+DROP INDEX if exists nbs_olap.idx_fnr_changed_on_2007;
+
+CREATE INDEX idx_fnr_changed_on_2007
+    ON nbs_olap.fact_nbs_result_2007 USING btree
+    (changed_on)
+
+    TABLESPACE pg_default;
+
+DROP INDEX if exists nbs_olap.idx_fnr_changed_on_2008;
+
+CREATE INDEX idx_fnr_changed_on_2008
+    ON nbs_olap.fact_nbs_result_2008 USING btree
+    (changed_on)
+
+    TABLESPACE pg_default;
+
+DROP INDEX if exists nbs_olap.idx_fnr_changed_on_2009;
+
+CREATE INDEX idx_fnr_changed_on_2009
+    ON nbs_olap.fact_nbs_result_2009 USING btree
+    (changed_on)
+
+    TABLESPACE pg_default;
+
+DROP INDEX if exists nbs_olap.idx_fnr_changed_on_2010;
+
+CREATE INDEX idx_fnr_changed_on_2010
+    ON nbs_olap.fact_nbs_result_2010 USING btree
+    (changed_on)
+
+    TABLESPACE pg_default;
+
+DROP INDEX if exists nbs_olap.idx_fnr_changed_on_2011;
+
+CREATE INDEX idx_fnr_changed_on_2011
+    ON nbs_olap.fact_nbs_result_2011 USING btree
+    (changed_on)
+
+    TABLESPACE pg_default;
+
+DROP INDEX if exists nbs_olap.idx_fnr_changed_on_2012;
+
+CREATE INDEX idx_fnr_changed_on_2012
+    ON nbs_olap.fact_nbs_result_2012 USING btree
+    (changed_on)
+
+    TABLESPACE pg_default;
+
+
+DROP INDEX if exists nbs_olap.idx_fnr_changed_on_2013;
+
+CREATE INDEX idx_fnr_changed_on_2013
+    ON nbs_olap.fact_nbs_result_2013 USING btree
+    (changed_on)
+
+    TABLESPACE pg_default;
+
+DROP INDEX if exists nbs_olap.idx_fnr_changed_on_2014;
+
+CREATE INDEX idx_fnr_changed_on_2014
+    ON nbs_olap.fact_nbs_result_2014 USING btree
+    (changed_on)
+
+    TABLESPACE pg_default;
+
+DROP INDEX if exists nbs_olap.idx_fnr_changed_on_2015;
+
+CREATE INDEX idx_fnr_changed_on_2015
+    ON nbs_olap.fact_nbs_result_2015 USING btree
+    (changed_on)
+
+    TABLESPACE pg_default;
+
+DROP INDEX if exists nbs_olap.idx_fnr_changed_on_2016;
+
+CREATE INDEX idx_fnr_changed_on_2016
+    ON nbs_olap.fact_nbs_result_2016 USING btree
+    (changed_on)
+
+    TABLESPACE pg_default;
+
+DROP INDEX if exists nbs_olap.idx_fnr_changed_on_2017;
+
+CREATE INDEX idx_fnr_changed_on_2017
+    ON nbs_olap.fact_nbs_result_2017 USING btree
+    (changed_on)
+
+    TABLESPACE pg_default;
+
+DROP INDEX if exists nbs_olap.idx_fnr_changed_on_2018;
+
+CREATE INDEX idx_fnr_changed_on_2018
+    ON nbs_olap.fact_nbs_result_2018 USING btree
+    (changed_on)
+
+    TABLESPACE pg_default;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NBSOLAPDS</connection>
+      <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>1120</xloc>
+      <yloc>384</yloc>
+    </entry>
+    <entry>
+      <name>nedss_dim_date</name>
+      <description/>
+      <type>SQL</type>
+      <sql>-- Table: nedss_olap.dim_date
+SELECT pg_cancel_backend(27480);
+
+DROP TABLE if exists nedss_olap.dim_date;
+
+CREATE TABLE nedss_olap.dim_date
+(
+    dw_date_id integer NOT NULL,
+    dw_date_num_id integer NOT NULL,
+    hashcode integer,
+    src_date_val date,
+    date_short character(12) COLLATE pg_catalog."default",
+    date_medium character(16) COLLATE pg_catalog."default",
+    date_long character varying(24) COLLATE pg_catalog."default",
+    date_full character varying(32) COLLATE pg_catalog."default",
+    day_in_week integer,
+    day_in_month integer,
+    day_in_year integer,
+    is_first_day_in_month smallint,
+    is_first_day_in_week smallint,
+    is_last_day_in_month smallint,
+    is_last_day_in_week smallint,
+    day_name character varying(12) COLLATE pg_catalog."default",
+    day_abbreviation character(3) COLLATE pg_catalog."default",
+    week_in_year integer,
+    week_in_month integer,
+    week_in_year_iso integer,
+    week_start_date date,
+    is_weekend smallint,
+    is_weekday smallint,
+    month_number integer,
+    month_name_val character varying(12) COLLATE pg_catalog."default",
+    month_abbreviation character(3) COLLATE pg_catalog."default",
+    month_abbreviation_year2 character(6) COLLATE pg_catalog."default",
+    year2 integer,
+    year4 integer,
+    year2_iso integer,
+    year4_iso integer,
+    quarter_number integer,
+    quarter_name character(2) COLLATE pg_catalog."default",
+    quarter_year character(7) COLLATE pg_catalog."default",
+    month_year character(7) COLLATE pg_catalog."default",
+    week_year character(7) COLLATE pg_catalog."default",
+    week_year_iso character(7) COLLATE pg_catalog."default",
+    year_week_int integer,
+    current_week_cy smallint,
+    current_month_cy smallint,
+    last_week_cy smallint,
+    last_month_cy smallint,
+    current_week_ly smallint,
+    current_month_ly smallint,
+    last_week_ly smallint,
+    last_month_ly smallint,
+    ytd_cy_day smallint,
+    ytd_cy_week smallint,
+    ytd_cy_month smallint,
+    ytd_ly_day smallint,
+    ytd_ly_week smallint,
+    ytd_ly_month smallint,
+    current_year smallint,
+    last_year smallint,
+    day_sequence integer,
+    week_sequence integer,
+    month_sequence integer,
+    year_of_weekend_date integer,
+    etl_load_date timestamp without time zone,
+    mmwr_week integer NOT NULL DEFAULT 0,
+    mmwr_year integer NOT NULL DEFAULT 0,
+    CONSTRAINT pk_dw_dim_date2 PRIMARY KEY (dw_date_id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+COMMENT ON COLUMN nedss_olap.dim_date.dw_date_id
+    IS 'Technical key of the date dimension';
+
+COMMENT ON COLUMN nedss_olap.dim_date.dw_date_num_id
+    IS 'Alternate TK of the date dimension in the format YYYYMMDD';
+
+COMMENT ON COLUMN nedss_olap.dim_date.hashcode
+    IS 'Type I dimension hashcode';
+
+COMMENT ON COLUMN nedss_olap.dim_date.src_date_val
+    IS 'Source date value';
+
+COMMENT ON COLUMN nedss_olap.dim_date.date_short
+    IS 'Short date';
+
+COMMENT ON COLUMN nedss_olap.dim_date.date_medium
+    IS 'Medium date';
+
+COMMENT ON COLUMN nedss_olap.dim_date.date_long
+    IS 'Long form date';
+
+COMMENT ON COLUMN nedss_olap.dim_date.date_full
+    IS 'Full form date';
+
+COMMENT ON COLUMN nedss_olap.dim_date.day_in_week
+    IS 'day of the week';
+
+COMMENT ON COLUMN nedss_olap.dim_date.day_in_month
+    IS 'Day number within the month';
+
+COMMENT ON COLUMN nedss_olap.dim_date.day_in_year
+    IS 'Day number within the year';
+
+COMMENT ON COLUMN nedss_olap.dim_date.is_first_day_in_month
+    IS 'Flag indicating whether the date is the first day in the month';
+
+COMMENT ON COLUMN nedss_olap.dim_date.is_first_day_in_week
+    IS 'Flag indicating whether the date is the first day in the week.';
+
+COMMENT ON COLUMN nedss_olap.dim_date.is_last_day_in_month
+    IS 'Flag indicating whether the date is the last day in the month.';
+
+COMMENT ON COLUMN nedss_olap.dim_date.is_last_day_in_week
+    IS 'Flag indicating whether the date is the last day of the week';
+
+COMMENT ON COLUMN nedss_olap.dim_date.day_name
+    IS 'textual name of the day of week';
+
+COMMENT ON COLUMN nedss_olap.dim_date.day_abbreviation
+    IS 'Abbreviated day of week';
+
+COMMENT ON COLUMN nedss_olap.dim_date.week_in_year
+    IS 'Numeric week of the year';
+
+COMMENT ON COLUMN nedss_olap.dim_date.week_in_month
+    IS 'Week number within the month.';
+
+COMMENT ON COLUMN nedss_olap.dim_date.week_in_year_iso
+    IS 'ISO standard week in year';
+
+COMMENT ON COLUMN nedss_olap.dim_date.week_start_date
+    IS 'The date representing the first day of the week.';
+
+COMMENT ON COLUMN nedss_olap.dim_date.is_weekend
+    IS 'Flag indicating wAdd dw_date_num_id to dim_dateheter or not the day Is a Saturday or Sunday?';
+
+COMMENT ON COLUMN nedss_olap.dim_date.is_weekday
+    IS 'Flag indicating whether or not the date is a weekday';
+
+COMMENT ON COLUMN nedss_olap.dim_date.month_number
+    IS 'Month number (1..12)';
+
+COMMENT ON COLUMN nedss_olap.dim_date.month_name_val
+    IS 'Name of the month';
+
+COMMENT ON COLUMN nedss_olap.dim_date.month_abbreviation
+    IS 'Abbreviated month name';
+
+COMMENT ON COLUMN nedss_olap.dim_date.month_abbreviation_year2
+    IS 'Month abbreviation with digit year';
+
+COMMENT ON COLUMN nedss_olap.dim_date.year2
+    IS 'Two digit year';
+
+COMMENT ON COLUMN nedss_olap.dim_date.year4
+    IS 'Four digit year';
+
+COMMENT ON COLUMN nedss_olap.dim_date.year2_iso
+    IS 'ISO two digit year';
+
+COMMENT ON COLUMN nedss_olap.dim_date.year4_iso
+    IS 'ISO four digit year';
+
+COMMENT ON COLUMN nedss_olap.dim_date.quarter_number
+    IS 'Numeric representation of the quarter (1..4)';
+
+COMMENT ON COLUMN nedss_olap.dim_date.quarter_name
+    IS 'Name of the quarter (Q1..Q4)';
+
+COMMENT ON COLUMN nedss_olap.dim_date.quarter_year
+    IS 'Quarter name + year';
+
+COMMENT ON COLUMN nedss_olap.dim_date.month_year
+    IS 'Month number - year4';
+
+COMMENT ON COLUMN nedss_olap.dim_date.week_year
+    IS 'Week number - year4';
+
+COMMENT ON COLUMN nedss_olap.dim_date.week_year_iso
+    IS 'week number - year4 ISO standard';
+
+COMMENT ON COLUMN nedss_olap.dim_date.year_week_int
+    IS 'Year4 and weekAdd dw_date_num_id to dim_date number as numeric value for sorting and comparison';
+
+COMMENT ON COLUMN nedss_olap.dim_date.current_week_cy
+    IS 'Is this the current week of the current year';
+
+COMMENT ON COLUMN nedss_olap.dim_date.current_month_cy
+    IS 'Is this the current month of the current year';
+
+COMMENT ON COLUMN nedss_olap.dim_date.last_week_cy
+    IS 'Is this the previous week of the current year';
+
+COMMENT ON COLUMN nedss_olap.dim_date.last_month_cy
+    IS 'Flag indicating whether this date in the previous month of the current year';
+
+COMMENT ON COLUMN nedss_olap.dim_date.current_week_ly
+    IS 'Is this date in the previous year, but the same week as the current week?';
+
+COMMENT ON COLUMN nedss_olap.dim_date.current_month_ly
+    IS 'Is this date in the previous year, but the same month of the current year?';
+
+COMMENT ON COLUMN nedss_olap.dim_date.last_week_ly
+    IS 'Is this date in the previous week the year prior?';
+
+COMMENT ON COLUMN nedss_olap.dim_date.last_month_ly
+    IS 'Is this date in the previous month the year prior';
+
+COMMENT ON COLUMN nedss_olap.dim_date.ytd_cy_day
+    IS 'Is the day portion of the date in the current year?';
+
+COMMENT ON COLUMN nedss_olap.dim_date.ytd_cy_week
+    IS 'Is the week portion of the date in the current year?';
+
+COMMENT ON COLUMN nedss_olap.dim_date.ytd_cy_month
+    IS 'Is the month of the date in the current year?';
+
+COMMENT ON COLUMN nedss_olap.dim_date.ytd_ly_day
+    IS 'Is this day part of the year to date last year (for current year / previous YTD comparison calculations)';
+
+COMMENT ON COLUMN nedss_olap.dim_date.ytd_ly_week
+    IS 'Is the date in the week last year which spilled into this year?';
+
+COMMENT ON COLUMN nedss_olap.dim_date.ytd_ly_month
+    IS 'Is this month part of the year to date last year (for current year / previous YTD comparison calculations)';
+
+COMMENT ON COLUMN nedss_olap.dim_date.current_year
+    IS 'Is the date in the current year?';
+
+COMMENT ON COLUMN nedss_olap.dim_date.last_year
+    IS 'Is the date in the previous year?';
+
+COMMENT ON COLUMN nedss_olap.dim_date.day_sequence
+    IS 'How many days back is this day from the current day?';
+
+COMMENT ON COLUMN nedss_olap.dim_date.week_sequence
+    IS 'How many weeks back from the current week is the week this date is in?';
+
+COMMENT ON COLUMN nedss_olap.dim_date.month_sequence
+    IS 'How many monts back from the current month is the month this date is in?';
+
+COMMENT ON COLUMN nedss_olap.dim_date.year_of_weekend_date
+    IS 'What year does the last day of the week fall in?';
+
+COMMENT ON COLUMN nedss_olap.dim_date.etl_load_date
+    IS 'The date this dimension record was loaded into the data nedss_olap.';
+
+-- Index: idx_dw_date_num_id
+
+-- DROP INDEX nedss_olap.idx_dw_date_num_id;
+
+CREATE INDEX idx_dw_date_num_id
+    ON nedss_olap.dim_date USING btree
+    (dw_date_num_id)
+    TABLESPACE pg_default;
+
+-- Index: idx_dw_dim_date_lookup_new
+
+-- DROP INDEX nedss_olap.idx_dw_dim_date_lookup_new;
+
+CREATE INDEX idx_dw_dim_date_lookup_new
+    ON nedss_olap.dim_date USING btree
+    (hashcode)
+    TABLESPACE pg_default;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NBSOLAPDS</connection>
+      <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>1024</xloc>
+      <yloc>400</yloc>
+    </entry>
+    <entry>
+      <name>nedss_dim_person_address</name>
+      <description/>
+      <type>SQL</type>
+      <sql>-- Table: nedss_olap.dim_person_address
+
+DROP TABLE if exists nedss_olap.dim_person_address;
+
+CREATE TABLE nedss_olap.dim_person_address
+(
+    dw_person_address_id integer NOT NULL,
+    hashcode integer,
+    src_person_address_id integer,
+    src_person_id integer,
+    county character varying(100) COLLATE pg_catalog."default",
+    state character varying(100) COLLATE pg_catalog."default",
+    postal_code character varying(10) COLLATE pg_catalog."default",
+    city character varying(255) COLLATE pg_catalog."default",
+    created_at timestamp without time zone,
+    region_longitude numeric(15,6),
+    region_latitude numeric(15,6),
+    etl_load_date timestamp without time zone,
+    CONSTRAINT pk_dim_location PRIMARY KEY (dw_person_address_id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+COMMENT ON COLUMN nedss_olap.dim_person_address.dw_person_address_id
+    IS 'Person Address technical key';
+
+COMMENT ON COLUMN nedss_olap.dim_person_address.hashcode
+    IS 'Type I dimension hashcode';
+
+COMMENT ON COLUMN nedss_olap.dim_person_address.src_person_address_id
+    IS 'OLTP source person address ID';
+
+COMMENT ON COLUMN nedss_olap.dim_person_address.county
+    IS 'The county name';
+
+-- Index: idx_dim_location_lookup
+
+-- DROP INDEX warehouse.idx_dim_location_lookup;
+
+CREATE INDEX idx_dim_location_lookup
+    ON nedss_olap.dim_person_address USING btree
+    (hashcode)
+    TABLESPACE pg_default;
+
+-- Index: idx_updated_at
+
+-- DROP INDEX warehouse.idx_updated_at;
+
+CREATE INDEX idx_created_at
+    ON nedss_olap.dim_person_address USING btree
+    (created_at)
+    TABLESPACE pg_default;
+    
+    
+CREATE INDEX idx_dpa_src_person_id
+    ON nedss_olap.dim_person_address USING btree
+    (src_person_id)
+    TABLESPACE pg_default;    
+
+CREATE INDEX idx_dpa_postal_code
+    ON nedss_olap.dim_person_address USING btree
+    (postal_code)
+    TABLESPACE pg_default;
+
+CREATE INDEX idx_dpa_city
+    ON nedss_olap.dim_person_address USING btree
+    (city)
+    TABLESPACE pg_default;
+
+CREATE INDEX idx_dpa_state
+    ON nedss_olap.dim_person_address USING btree
+    (state)
+    TABLESPACE pg_default;
+</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NEDSSOLAPDS</connection>
+      <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>896</xloc>
+      <yloc>384</yloc>
+    </entry>
+    <entry>
+      <name>nedss_dim_condition</name>
+      <description/>
+      <type>SQL</type>
+      <sql>-- Table: nedss_olap.dim_disease
+
+DROP TABLE if exists nedss_olap.dim_disease;
+DROP TABLE if exists nedss_olap.dim_condition;
+
+CREATE TABLE nedss_olap.dim_condition
+(
+    dw_condition_id integer NOT NULL,
+    hashcode bigint,
+    src_condition_id integer,
+    src_disease_id integer,
+    condition_name character varying(100) COLLATE pg_catalog."default",
+    contact_lead_in text COLLATE pg_catalog."default",
+    place_lead_in text COLLATE pg_catalog."default",
+    treatment_lead_in text COLLATE pg_catalog."default",
+    active boolean,
+    cdc_code character varying(255) COLLATE pg_catalog."default",
+    code text,
+    src_coordinator_id integer,
+    src_condition_group_id integer,
+    mdro boolean,
+    etl_load_date timestamp without time zone,
+    CONSTRAINT pk_dw_dim_disease PRIMARY KEY (dw_condition_id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+COMMENT ON TABLE nedss_olap.dim_condition
+    IS 'Disease dimension';
+
+COMMENT ON COLUMN nedss_olap.dim_condition.dw_condition_id
+    IS 'Technical key of the condition dimension.';
+
+COMMENT ON COLUMN nedss_olap.dim_condition.hashcode
+    IS 'Type I dimension hashcode';
+
+COMMENT ON COLUMN nedss_olap.dim_condition.src_disease_id
+    IS 'Source OLTP disease_id';
+
+COMMENT ON COLUMN nedss_olap.dim_condition.condition_name
+    IS 'Name of the condition';
+
+COMMENT ON COLUMN nedss_olap.dim_condition.contact_lead_in
+    IS 'Contact lead in value';
+
+COMMENT ON COLUMN nedss_olap.dim_condition.place_lead_in
+    IS 'Place Lead In value';
+
+COMMENT ON COLUMN nedss_olap.dim_condition.treatment_lead_in
+    IS 'Treatment lead in value';
+
+COMMENT ON COLUMN nedss_olap.dim_condition.active
+    IS 'active flag';
+
+COMMENT ON COLUMN nedss_olap.dim_condition.cdc_code
+    IS 'CDC code value';
+
+COMMENT ON COLUMN nedss_olap.dim_condition.mdro
+    IS 'disease mdro';
+
+COMMENT ON COLUMN nedss_olap.dim_condition.src_coordinator_id
+    IS 'The source coordinator_id';
+    
+COMMENT ON COLUMN nedss_olap.dim_condition.src_condition_group_id
+    IS 'Group similar conditions together';
+    
+COMMENT ON COLUMN nedss_olap.dim_condition.code
+    IS 'The code value from source';
+
+COMMENT ON COLUMN nedss_olap.dim_condition.etl_load_date
+    IS 'last etl load date of this disease record.';
+
+-- Index: idx_dw_dim_disease_lookup
+
+-- DROP INDEX warehouse.idx_dw_dim_disease_lookup;
+
+CREATE INDEX idx_dw_dim_condition_lookup
+    ON nedss_olap.dim_condition USING btree
+    (hashcode)
+    TABLESPACE pg_default;
+    
+CREATE INDEX idx_dw_dim_condition_dw_condition_id
+        ON nedss_olap.dim_condition USING btree
+        (dw_condition_id)
+    TABLESPACE pg_default;
+    
+CREATE INDEX idx_dw_dim_condition_active
+        ON nedss_olap.dim_condition USING btree
+        (active)
+    TABLESPACE pg_default;
+    
+CREATE INDEX idx_dw_dim_condition_mdro
+        ON nedss_olap.dim_condition USING btree
+        (mdro)
+    TABLESPACE pg_default;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NEDSSOLAPDS</connection>
+      <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>272</xloc>
+      <yloc>224</yloc>
+    </entry>
+    <entry>
+      <name>nedss_dim_agency</name>
+      <description/>
+      <type>SQL</type>
+      <sql>-- Table: warehouse.dim_jurisdiction
+
+DROP TABLE if exists nedss_olap.dim_agency;
+
+CREATE TABLE nedss_olap.dim_agency
+(
+    dw_agency_id integer NOT NULL,
+    hashcode bigint,
+	src_agency_id integer,
+	name character varying(255) COLLATE pg_catalog."default",
+    short_name character varying(255) COLLATE pg_catalog."default",
+    state_agency boolean,
+    src_task_user_id integer,
+	code text,
+	src_jurisdiction_id integer,
+	src_temp_entity_id integer,
+	src_temp_place_id integer,
+    etl_load_date timestamp without time zone,
+    CONSTRAINT pk_dim_agency PRIMARY KEY (dw_agency_id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+
+COMMENT ON TABLE nedss_olap.dim_agency
+    IS 'Agency dimension';
+
+COMMENT ON COLUMN nedss_olap.dim_agency.dw_agency_id
+    IS 'Technical key of the agency dimension.';
+
+COMMENT ON COLUMN nedss_olap.dim_agency.hashcode
+    IS 'Type I dimension hash code';
+
+COMMENT ON COLUMN nedss_olap.dim_agency.name
+    IS 'Name of the agency';
+
+COMMENT ON COLUMN nedss_olap.dim_agency.short_name
+    IS 'Shortened name of the agency.';
+
+COMMENT ON COLUMN nedss_olap.dim_agency.etl_load_date
+    IS 'The load date of this agency record.';
+
+
+-- DROP INDEX warehouse.idx_dw_dim_agency_lookup;
+
+CREATE INDEX idx_dw_dim_agencylookup
+    ON nedss_olap.dim_agency USING btree
+    (hashcode)
+    TABLESPACE pg_default;
+	
+CREATE INDEX idx_da_dw_agency_id
+	ON nedss_olap.dim_agency USING btree
+	(dw_agency_id)
+	TABLESPACE pg_default;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NEDSSOLAPDS</connection>
+      <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>368</xloc>
+      <yloc>224</yloc>
+    </entry>
+    <entry>
+      <name>nedss_dim_language</name>
+      <description/>
+      <type>SQL</type>
+      <sql>-- Table: nedss_olap.dim_disease
+
+DROP TABLE if exists nedss_olap.dim_language;
+
+CREATE TABLE nedss_olap.dim_language
+(
+    dw_language_id integer NOT NULL,
+    hashcode bigint,
+    code character varying(255) COLLATE pg_catalog."default",
+	description character varying(255) COLLATE pg_catalog."default",
+	sort_order integer,
+	src_external_codes_id integer,
+    etl_load_date timestamp without time zone,
+    CONSTRAINT pk_dw_dim_language PRIMARY KEY (dw_language_id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+
+-- Index: idx_dw_dim_disease_lookup
+
+-- DROP INDEX warehouse.idx_dw_dim_disease_lookup;
+
+CREATE INDEX idx_dw_dim_language_lookup
+    ON nedss_olap.dim_language USING btree
+    (hashcode)
+    TABLESPACE pg_default;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NEDSSOLAPDS</connection>
+      <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>240</xloc>
+      <yloc>304</yloc>
+    </entry>
+    <entry>
+      <name>nedss_dim_ethnicity</name>
+      <description/>
+      <type>SQL</type>
+      <sql>-- Table: warehouse.dim_ethnicity
+
+DROP TABLE if exists nedss_olap.dim_ethnicity;
+
+CREATE TABLE nedss_olap.dim_ethnicity
+(
+    dw_ethnicity_id integer NOT NULL,
+    hashcode integer,
+    code character varying(50) COLLATE pg_catalog."default",
+    description character varying(100) COLLATE pg_catalog."default",
+    sort_order integer,
+	src_external_codes_id integer,
+    etl_load_date timestamp without time zone,
+    CONSTRAINT pk_dw_dim_ethnicity PRIMARY KEY (dw_ethnicity_id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+
+COMMENT ON COLUMN nedss_olap.dim_ethnicity.dw_ethnicity_id
+    IS 'The data warehouse technical key for ethnicity';
+
+COMMENT ON COLUMN nedss_olap.dim_ethnicity.hashcode
+    IS 'The type I dimension hashcode';
+
+COMMENT ON COLUMN nedss_olap.dim_ethnicity.code
+    IS 'The code value of the ethnicity';
+
+COMMENT ON COLUMN nedss_olap.dim_ethnicity.description
+    IS 'The code description';
+
+COMMENT ON COLUMN nedss_olap.dim_ethnicity.etl_load_date
+    IS 'last etl load date of this ethnicity record.';
+
+-- Index: idx_dw_dim_ethnicity_lookup
+
+-- DROP INDEX warehouse.idx_dw_dim_ethnicity_lookup;
+
+CREATE INDEX idx_dw_dim_ethnicity_lookup
+    ON nedss_olap.dim_ethnicity USING btree
+    (hashcode)
+    TABLESPACE pg_default;
+	
+CREATE INDEX idx_dw_dim_ethnicity_dw_ethnicity_id
+    ON nedss_olap.dim_ethnicity USING btree
+    (dw_ethnicity_id)
+    TABLESPACE pg_default;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NEDSSOLAPDS</connection>
+      <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>288</xloc>
+      <yloc>240</yloc>
+    </entry>
+    <entry>
+      <name>nedss_dim_person</name>
+      <description/>
+      <type>SQL</type>
+      <sql>-- Table: warehouse.dim_person
+
+-- DROP TABLE warehouse.dim_person;
+DROP TABLE IF EXISTS nedss_olap.dim_person;
+
+CREATE TABLE nedss_olap.dim_person
+(
+    dw_person_id integer NOT NULL,
+    hashcode bigint,
+	src_person_id integer,
+    dw_birth_date_num_id integer,
+	dw_date_of_death_num_id integer,
+	dw_ethnicity_id integer,
+    dw_language_id integer,
+	dw_race_group_id integer,
+	src_primary_language_id integer,
+	src_age_type_id integer,
+	approximate_age_no_birthday integer,
+	birth_gender character varying(32),
+	current_gender character varying(32),
+	etl_load_date timestamp without time zone,
+    CONSTRAINT pk_dw_dim_disease_0 PRIMARY KEY (dw_person_id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+COMMENT ON TABLE nedss_olap.dim_person
+    IS 'Person dimension';
+
+COMMENT ON COLUMN nedss_olap.dim_person.dw_person_id
+    IS 'Technical key of the person dimension.';
+
+COMMENT ON COLUMN nedss_olap.dim_person.hashcode
+    IS 'Type I dimension hashcode';
+
+COMMENT ON COLUMN nedss_olap.dim_person.src_person_id
+    IS 'The source person_id of the person record';
+
+COMMENT ON COLUMN nedss_olap.dim_person.birth_gender
+    IS 'The gender of the person';
+	
+	
+COMMENT ON COLUMN nedss_olap.dim_person.dw_birth_date_num_id
+    IS 'Person birth date - FK to dim_date.dw_date_num_id';
+
+COMMENT ON COLUMN nedss_olap.dim_person.dw_date_of_death_num_id
+    IS 'Date of death date - FK to dim_date.dw_date_num_id';
+
+COMMENT ON COLUMN nedss_olap.dim_person.dw_ethnicity_id
+    IS 'The ethnicity of the person (dw_dim_ethnicity.dw_ethnicity_id)';
+
+COMMENT ON COLUMN nedss_olap.dim_person.dw_language_id
+    IS 'The language id of the person (dw_dim_language.dw_language_id)';
+
+COMMENT ON COLUMN nedss_olap.dim_person.etl_load_date
+    IS 'date time of when this dim_person record was loaded';
+
+COMMENT ON COLUMN nedss_olap.dim_person.dw_race_group_id
+    IS 'The race group [bridge tables] of this person (FK to dim_bridge_person_race.dw_bridge_person_race_id)';
+	
+COMMENT ON COLUMN nedss_olap.dim_person.src_primary_language_id
+    IS 'The primary language of the person';	
+
+COMMENT ON COLUMN nedss_olap.dim_person.src_age_type_id
+    IS 'The age type id of the person';	
+
+COMMENT ON COLUMN nedss_olap.dim_person.approximate_age_no_birthday
+    IS 'The approximate age of the person excluding whether or not they have had a birthday';	
+	
+COMMENT ON COLUMN nedss_olap.dim_person.birth_gender 
+    IS 'The gender of the person at birth';	
+	
+COMMENT ON COLUMN nedss_olap.dim_person.current_gender
+    IS 'The current gender of the person';
+	
+CREATE INDEX idx_dw_dim_person_src_person_id 
+    ON nedss_olap.dim_person USING btree
+    (src_person_id )
+    TABLESPACE pg_default;
+	
+CREATE INDEX idx_dw_dim_person_dw_birth_date_num_id
+    ON nedss_olap.dim_person USING btree
+    (dw_birth_date_num_id)
+    TABLESPACE pg_default;
+	
+CREATE INDEX idx_dw_dim_person_dw_date_of_death_num_id
+    ON nedss_olap.dim_person USING btree
+    (dw_date_of_death_num_id)
+    TABLESPACE pg_default;
+	
+CREATE INDEX idx_dw_dim_person_dw_ethnicity_id
+    ON nedss_olap.dim_person USING btree
+    (dw_ethnicity_id)
+    TABLESPACE pg_default;	
+
+CREATE INDEX idx_dw_dim_person_dw_language_id
+    ON nedss_olap.dim_person USING btree
+    (dw_language_id)
+    TABLESPACE pg_default;
+	
+CREATE INDEX idx_dw_dim_person_dw_race_group_id
+    ON nedss_olap.dim_person USING btree
+    (dw_race_group_id)
+    TABLESPACE pg_default;
+	
+CREATE INDEX idx_dw_dim_person_src_primary_language_id
+    ON nedss_olap.dim_person USING btree
+    (src_primary_language_id)
+    TABLESPACE pg_default;
+	
+CREATE INDEX idx_dw_dim_person_src_age_type_id
+    ON nedss_olap.dim_person USING btree
+    (src_age_type_id)
+    TABLESPACE pg_default;
+	
+CREATE INDEX idx_dw_dim_person_dw_person_id
+    ON nedss_olap.dim_person USING btree
+    (dw_person_id)
+    TABLESPACE pg_default;
+	
+-- Index: idx_dw_dim_person_lookup
+
+-- DROP INDEX warehouse.idx_dw_dim_person_lookup;
+
+CREATE INDEX idx_dw_dim_person_lookup
+    ON nedss_olap.dim_person USING btree
+    (hashcode)
+    TABLESPACE pg_default;
+
+</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NEDSSOLAPDS</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>288</xloc>
+      <yloc>160</yloc>
+    </entry>
+  </entries>
+  <hops>
+    <hop>
+      <from>START</from>
+      <to>nedss_dim_person</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>nedss_dim_person</from>
+      <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+  </hops>
+  <notepads>
+  </notepads>
+</job>

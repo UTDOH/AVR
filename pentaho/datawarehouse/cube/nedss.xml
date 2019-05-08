@@ -27,7 +27,7 @@
   </Dimension>
   <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Outbreak">
     <Hierarchy name="Outbreak" visible="true" hasAll="true" primaryKey="dw_outbreak_id">
-      <Table name="dim_outbreak" schema="warehouse">
+      <Table name="dim_outbreak" schema="nedss_olap">
       </Table>
       <Level name="Outbreak Name" visible="true" table="dim_outbreak" column="outbreak_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
         <Property name="out Break Number" column="outbreak_number" type="String">
@@ -150,12 +150,12 @@ from dim_person]]>
       </Level>
     </Hierarchy>
   </Dimension>
-  <Dimension type="StandardDimension" visible="true" name="Patient-Race">
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Patient-Race">
     <Hierarchy name="Race" visible="true" hasAll="true" primaryKey="dw_person_id" primaryKeyTable="dim_person">
-      <Join leftKey="dw_race_id" rightAlias="" rightKey="dw_race_id">
-        <Table name="dim_person" schema="warehouse" alias="">
+      <Join leftKey="dw_race_id" rightKey="dw_race_id">
+        <Table name="dim_person" schema="warehouse">
         </Table>
-        <Table name="dim_race" schema="warehouse" alias="">
+        <Table name="dim_race" schema="warehouse">
         </Table>
       </Join>
       <Level name="Race" visible="true" table="dim_race" column="races_description" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
@@ -163,10 +163,8 @@ from dim_person]]>
     </Hierarchy>
   </Dimension>
   <Cube name="Events_v1" visible="true" cache="true" enabled="true">
-    <Table name="fact_event" schema="warehouse">
+    <Table name="fact_person_condition" schema="nedss_olap">
     </Table>
-    <DimensionUsage source="Outbreak" name="Outbreak" caption="Outbreak" visible="true" foreignKey="dw_outbreak_id" highCardinality="false">
-    </DimensionUsage>
     <DimensionUsage source="Date" name="Investigation Completed By State Date" caption="Investigation Completed By State Date" visible="true" foreignKey="dw_investigation_completed_by_state_date_id" highCardinality="false">
     </DimensionUsage>
     <DimensionUsage source="Date" name="Reported PH Date" caption="Reported PH Date" visible="true" foreignKey="dw_first_reported_ph_date_id" highCardinality="false">
@@ -203,7 +201,7 @@ from dim_person]]>
     </DimensionUsage>
     <DimensionUsage source="Patient-Gender" name="Patient-Gender" visible="true" foreignKey="dw_person_id" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="Patient-Race" name="Patient-Race" caption="Patient-Race" visible="true" foreignKey="dw_person_id">
+    <DimensionUsage source="Patient-Race" name="Patient-Race" caption="Patient-Race" visible="true" foreignKey="dw_person_id" highCardinality="false">
     </DimensionUsage>
     <Measure name="Disease Count" column="dw_disease_id" datatype="Integer" aggregator="count" visible="true">
     </Measure>
@@ -503,7 +501,7 @@ where col_group = 'cpx_prev_disease']]>
         </Level>
       </Hierarchy>
     </Dimension>
-    <DimensionUsage source="Patient-Race" name="Patient-Race" caption="Patient-Race" visible="true" foreignKey="dw_person_id">
+    <DimensionUsage source="Patient-Race" name="Patient-Race" caption="Patient-Race" visible="true" foreignKey="dw_person_id" highCardinality="false">
     </DimensionUsage>
     <Measure name="Disease Count" column="src_event_id" datatype="Integer" aggregator="distinct count" visible="true">
     </Measure>
