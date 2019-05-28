@@ -4059,13 +4059,22 @@ cat /var/local/pentaho8/tomcat/conf/Catalina/localhost/pentaho.xml
       <name>Add nedss constraints</name>
       <description/>
       <type>SQL</type>
-      <sql>alter table nedss_olap.fact_person_condition add CONSTRAINT dim_condition FOREIGN KEY ( dw_condition_id ) REFERENCES nedss_olap.dim_condition( dw_condition_id );
-alter table nedss_olap.fact_person_condition add CONSTRAINT dim_person FOREIGN KEY ( dw_person_id ) REFERENCES nedss_olap.dim_person( dw_person_id );
-alter table nedss_olap.fact_person_condition add CONSTRAINT dim_person_address FOREIGN KEY ( dw_person_address_id ) REFERENCES nedss_olap.dim_person_address( dw_person_address_id );
+      <sql>/*
 alter table nedss_olap.fact_person_condition add CONSTRAINT fact_outbreak FOREIGN KEY ( src_outbreak_id ) REFERENCES nedss_olap.fact_outbreak( src_outbreak_id );
+*/
 
+/*
+alter table nedss_olap.fact_person_condition add CONSTRAINT dim_condition FOREIGN KEY ( dw_condition_id ) REFERENCES nedss_olap.dim_condition( dw_condition_id );
 
+insert into nedss_olap.dim_person (dw_person_id) values (0);
+alter table nedss_olap.fact_person_condition add CONSTRAINT dim_person FOREIGN KEY ( dw_person_id ) REFERENCES nedss_olap.dim_person( dw_person_id );
+
+insert into nedss_olap.dim_person_address (dw_person_address_id) values (0);
+alter table nedss_olap.fact_person_condition add CONSTRAINT dim_person_address FOREIGN KEY ( dw_person_address_id ) REFERENCES nedss_olap.dim_person_address( dw_person_address_id );
+
+insert into nedss_olap.dim_date (dw_date_id, dw_date_num_id) values (0,0);
 alter table nedss_olap.dim_date add CONSTRAINT idx_dw_date_num_id_unq UNIQUE ( dw_date_num_id );
+
 alter table nedss_olap.fact_person_condition add CONSTRAINT fk_fpc_birth_date FOREIGN KEY ( dw_birth_date_num_id ) REFERENCES nedss_olap.dim_date( dw_date_num_id );
 alter table nedss_olap.fact_person_condition add CONSTRAINT fk_fpc_event_onset_date FOREIGN KEY ( dw_event_onset_date_num_id ) REFERENCES nedss_olap.dim_date( dw_date_num_id );
 alter table nedss_olap.fact_person_condition add CONSTRAINT fk_fpc_disease_onset_date FOREIGN KEY ( dw_disease_onset_date_num_id ) REFERENCES nedss_olap.dim_date( dw_date_num_id );
@@ -4075,12 +4084,24 @@ alter table nedss_olap.fact_person_condition add CONSTRAINT fk_fpc_deleted_at_da
 alter table nedss_olap.fact_person_condition add CONSTRAINT fk_fpc_agency FOREIGN KEY ( dw_investigating_agency_id ) REFERENCES nedss_olap.dim_agency( dw_agency_id );
 
 alter table nedss_olap.dim_case_status add CONSTRAINT pk_dim_case_status PRIMARY KEY ( dw_case_status_id );
-alter table nedss_olap.dim_case_status add CONSTRAINT idx_dw_dim_case_status_dw_case_status_id_uq UNIQUE ( dw_case_status_id ); 
+alter table nedss_olap.dim_case_status add CONSTRAINT idx_dw_dim_case_status_dw_case_status_id_uq UNIQUE ( dw_case_status_id );
+
+insert into nedss_olap.dim_case_status (dw_case_status_id) values (0);
+
 alter table nedss_olap.fact_person_condition add CONSTRAINT fk_fpc_lhd_case_status FOREIGN KEY ( dw_lhd_case_status_id ) REFERENCES nedss_olap.dim_case_status( dw_case_status_id );
 alter table nedss_olap.fact_person_condition add CONSTRAINT fk_fpc_case_status FOREIGN KEY ( dw_case_status_id ) REFERENCES nedss_olap.dim_case_status( dw_case_status_id );
 
+insert into nedss_olap.dim_ethnicity (dw_ethnicity_id) values (0);
 
 alter table nedss_olap.dim_person add CONSTRAINT dim_ethnicity FOREIGN KEY ( dw_ethnicity_id ) REFERENCES nedss_olap.dim_ethnicity( dw_ethnicity_id );
+*/
+
+
+
+
+ 
+
+insert into nedss_olap.dim_language(dw_language_id) values (0);
 alter table nedss_olap.dim_person add CONSTRAINT dim_language FOREIGN KEY ( dw_language_id ) REFERENCES nedss_olap.dim_language( dw_language_id );
 alter table nedss_olap.dim_person add CONSTRAINT fk_dim_person_birth_date FOREIGN KEY ( dw_birth_date_num_id ) REFERENCES nedss_olap.dim_date( dw_date_num_id );
 alter table nedss_olap.dim_person add CONSTRAINT fk_dim_person_death_date FOREIGN KEY ( dw_date_of_death_num_id ) REFERENCES nedss_olap.dim_date( dw_date_num_id );

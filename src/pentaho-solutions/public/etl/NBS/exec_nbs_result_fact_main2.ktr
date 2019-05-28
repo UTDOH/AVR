@@ -1198,6 +1198,34 @@ where r.ENTERED_ON > ?</sql>
     </GUI>
   </step>
   <step>
+    <name>Partition Table exists?</name>
+    <type>TableExists</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>NBSOLAPDS</connection>
+    <tablenamefield>fact_table_name</tablenamefield>
+    <resultfieldname>result</resultfieldname>
+    <schemaname>nbs_olap</schemaname>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1168</xloc>
+      <yloc>112</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>Prep Formatted Entry</name>
     <type>ScriptValueMod</type>
     <description/>
@@ -1372,6 +1400,33 @@ if (isNum(FORMATTED_ENTRY)) {
     <GUI>
       <xloc>928</xloc>
       <yloc>832</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Set Variables</name>
+    <type>SetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      </fields>
+    <use_formatting>Y</use_formatting>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1168</xloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3106,61 +3161,6 @@ writeToLog('m', 'startDate: ' + startDate + ', ' + 'endDate: ' + endDate);</jsSc
     <GUI>
       <xloc>544</xloc>
       <yloc>640</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Partition Table exists?</name>
-    <type>TableExists</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>NBSOLAPDS</connection>
-    <tablenamefield>fact_table_name</tablenamefield>
-    <resultfieldname>result</resultfieldname>
-    <schemaname>nbs_olap</schemaname>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1168</xloc>
-      <yloc>112</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Set Variables</name>
-    <type>SetVariable</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      </fields>
-    <use_formatting>Y</use_formatting>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1168</xloc>
-      <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
