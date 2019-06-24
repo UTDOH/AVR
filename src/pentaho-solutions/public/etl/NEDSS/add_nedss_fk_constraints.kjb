@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job>
+  <name>add_nedss_fk_constraints</name>
+  <description/>
+  <extended_description/>
+  <job_version/>
+  <directory>/</directory>
+  <created_user>-</created_user>
+  <created_date>2019/05/30 10:10:07.634</created_date>
+  <modified_user>-</modified_user>
+  <modified_date>2019/05/30 10:10:07.634</modified_date>
+  <parameters>
+    </parameters>
+  <connection>
+    <name>NEDSSOLAPDS</name>
+    <server/>
+    <type>POSTGRESQL</type>
+    <access>JNDI</access>
+    <database>NEDSSOLAPDS</database>
+    <port>1521</port>
+    <username/>
+    <password>Encrypted </password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>INITIAL_POOL_SIZE</code>
+        <attribute>5</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>MAXIMUM_POOL_SIZE</code>
+        <attribute>20</attribute>
+      </attribute>
+      <attribute>
+        <code>POOLING_removeAbandoned</code>
+        <attribute>true</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>1521</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>Y</attribute>
+      </attribute>
+    </attributes>
+  </connection>
+  <slaveservers>
+    </slaveservers>
+  <job-log-table>
+    <connection/>
+    <schema/>
+    <table/>
+    <size_limit_lines/>
+    <interval/>
+    <timeout_days/>
+    <field>
+      <id>ID_JOB</id>
+      <enabled>Y</enabled>
+      <name>ID_JOB</name>
+    </field>
+    <field>
+      <id>CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>CHANNEL_ID</name>
+    </field>
+    <field>
+      <id>JOBNAME</id>
+      <enabled>Y</enabled>
+      <name>JOBNAME</name>
+    </field>
+    <field>
+      <id>STATUS</id>
+      <enabled>Y</enabled>
+      <name>STATUS</name>
+    </field>
+    <field>
+      <id>LINES_READ</id>
+      <enabled>Y</enabled>
+      <name>LINES_READ</name>
+    </field>
+    <field>
+      <id>LINES_WRITTEN</id>
+      <enabled>Y</enabled>
+      <name>LINES_WRITTEN</name>
+    </field>
+    <field>
+      <id>LINES_UPDATED</id>
+      <enabled>Y</enabled>
+      <name>LINES_UPDATED</name>
+    </field>
+    <field>
+      <id>LINES_INPUT</id>
+      <enabled>Y</enabled>
+      <name>LINES_INPUT</name>
+    </field>
+    <field>
+      <id>LINES_OUTPUT</id>
+      <enabled>Y</enabled>
+      <name>LINES_OUTPUT</name>
+    </field>
+    <field>
+      <id>LINES_REJECTED</id>
+      <enabled>Y</enabled>
+      <name>LINES_REJECTED</name>
+    </field>
+    <field>
+      <id>ERRORS</id>
+      <enabled>Y</enabled>
+      <name>ERRORS</name>
+    </field>
+    <field>
+      <id>STARTDATE</id>
+      <enabled>Y</enabled>
+      <name>STARTDATE</name>
+    </field>
+    <field>
+      <id>ENDDATE</id>
+      <enabled>Y</enabled>
+      <name>ENDDATE</name>
+    </field>
+    <field>
+      <id>LOGDATE</id>
+      <enabled>Y</enabled>
+      <name>LOGDATE</name>
+    </field>
+    <field>
+      <id>DEPDATE</id>
+      <enabled>Y</enabled>
+      <name>DEPDATE</name>
+    </field>
+    <field>
+      <id>REPLAYDATE</id>
+      <enabled>Y</enabled>
+      <name>REPLAYDATE</name>
+    </field>
+    <field>
+      <id>LOG_FIELD</id>
+      <enabled>Y</enabled>
+      <name>LOG_FIELD</name>
+    </field>
+    <field>
+      <id>EXECUTING_SERVER</id>
+      <enabled>N</enabled>
+      <name>EXECUTING_SERVER</name>
+    </field>
+    <field>
+      <id>EXECUTING_USER</id>
+      <enabled>N</enabled>
+      <name>EXECUTING_USER</name>
+    </field>
+    <field>
+      <id>START_JOB_ENTRY</id>
+      <enabled>N</enabled>
+      <name>START_JOB_ENTRY</name>
+    </field>
+    <field>
+      <id>CLIENT</id>
+      <enabled>N</enabled>
+      <name>CLIENT</name>
+    </field>
+  </job-log-table>
+  <jobentry-log-table>
+    <connection/>
+    <schema/>
+    <table/>
+    <timeout_days/>
+    <field>
+      <id>ID_BATCH</id>
+      <enabled>Y</enabled>
+      <name>ID_BATCH</name>
+    </field>
+    <field>
+      <id>CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>CHANNEL_ID</name>
+    </field>
+    <field>
+      <id>LOG_DATE</id>
+      <enabled>Y</enabled>
+      <name>LOG_DATE</name>
+    </field>
+    <field>
+      <id>JOBNAME</id>
+      <enabled>Y</enabled>
+      <name>TRANSNAME</name>
+    </field>
+    <field>
+      <id>JOBENTRYNAME</id>
+      <enabled>Y</enabled>
+      <name>STEPNAME</name>
+    </field>
+    <field>
+      <id>LINES_READ</id>
+      <enabled>Y</enabled>
+      <name>LINES_READ</name>
+    </field>
+    <field>
+      <id>LINES_WRITTEN</id>
+      <enabled>Y</enabled>
+      <name>LINES_WRITTEN</name>
+    </field>
+    <field>
+      <id>LINES_UPDATED</id>
+      <enabled>Y</enabled>
+      <name>LINES_UPDATED</name>
+    </field>
+    <field>
+      <id>LINES_INPUT</id>
+      <enabled>Y</enabled>
+      <name>LINES_INPUT</name>
+    </field>
+    <field>
+      <id>LINES_OUTPUT</id>
+      <enabled>Y</enabled>
+      <name>LINES_OUTPUT</name>
+    </field>
+    <field>
+      <id>LINES_REJECTED</id>
+      <enabled>Y</enabled>
+      <name>LINES_REJECTED</name>
+    </field>
+    <field>
+      <id>ERRORS</id>
+      <enabled>Y</enabled>
+      <name>ERRORS</name>
+    </field>
+    <field>
+      <id>RESULT</id>
+      <enabled>Y</enabled>
+      <name>RESULT</name>
+    </field>
+    <field>
+      <id>NR_RESULT_ROWS</id>
+      <enabled>Y</enabled>
+      <name>NR_RESULT_ROWS</name>
+    </field>
+    <field>
+      <id>NR_RESULT_FILES</id>
+      <enabled>Y</enabled>
+      <name>NR_RESULT_FILES</name>
+    </field>
+    <field>
+      <id>LOG_FIELD</id>
+      <enabled>N</enabled>
+      <name>LOG_FIELD</name>
+    </field>
+    <field>
+      <id>COPY_NR</id>
+      <enabled>N</enabled>
+      <name>COPY_NR</name>
+    </field>
+  </jobentry-log-table>
+  <channel-log-table>
+    <connection/>
+    <schema/>
+    <table/>
+    <timeout_days/>
+    <field>
+      <id>ID_BATCH</id>
+      <enabled>Y</enabled>
+      <name>ID_BATCH</name>
+    </field>
+    <field>
+      <id>CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>CHANNEL_ID</name>
+    </field>
+    <field>
+      <id>LOG_DATE</id>
+      <enabled>Y</enabled>
+      <name>LOG_DATE</name>
+    </field>
+    <field>
+      <id>LOGGING_OBJECT_TYPE</id>
+      <enabled>Y</enabled>
+      <name>LOGGING_OBJECT_TYPE</name>
+    </field>
+    <field>
+      <id>OBJECT_NAME</id>
+      <enabled>Y</enabled>
+      <name>OBJECT_NAME</name>
+    </field>
+    <field>
+      <id>OBJECT_COPY</id>
+      <enabled>Y</enabled>
+      <name>OBJECT_COPY</name>
+    </field>
+    <field>
+      <id>REPOSITORY_DIRECTORY</id>
+      <enabled>Y</enabled>
+      <name>REPOSITORY_DIRECTORY</name>
+    </field>
+    <field>
+      <id>FILENAME</id>
+      <enabled>Y</enabled>
+      <name>FILENAME</name>
+    </field>
+    <field>
+      <id>OBJECT_ID</id>
+      <enabled>Y</enabled>
+      <name>OBJECT_ID</name>
+    </field>
+    <field>
+      <id>OBJECT_REVISION</id>
+      <enabled>Y</enabled>
+      <name>OBJECT_REVISION</name>
+    </field>
+    <field>
+      <id>PARENT_CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>PARENT_CHANNEL_ID</name>
+    </field>
+    <field>
+      <id>ROOT_CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>ROOT_CHANNEL_ID</name>
+    </field>
+  </channel-log-table>
+  <pass_batchid>N</pass_batchid>
+  <shared_objects_file/>
+  <entries>
+    <entry>
+      <name>Add nedss constraints</name>
+      <description/>
+      <type>SQL</type>
+      <sql>/*
+alter table nedss_olap.fact_person_condition add CONSTRAINT fact_outbreak FOREIGN KEY ( src_outbreak_id ) REFERENCES nedss_olap.fact_outbreak( src_outbreak_id );
+*/
+
+/*
+alter table nedss_olap.fact_person_condition add CONSTRAINT dim_condition FOREIGN KEY ( dw_condition_id ) REFERENCES nedss_olap.dim_condition( dw_condition_id );
+
+insert into nedss_olap.dim_person (dw_person_id) values (0);
+alter table nedss_olap.fact_person_condition add CONSTRAINT dim_person FOREIGN KEY ( dw_person_id ) REFERENCES nedss_olap.dim_person( dw_person_id );
+
+insert into nedss_olap.dim_person_address (dw_person_address_id) values (0);
+alter table nedss_olap.fact_person_condition add CONSTRAINT dim_person_address FOREIGN KEY ( dw_person_address_id ) REFERENCES nedss_olap.dim_person_address( dw_person_address_id );
+
+insert into nedss_olap.dim_date (dw_date_id, dw_date_num_id) values (0,0);
+alter table nedss_olap.dim_date add CONSTRAINT idx_dw_date_num_id_unq UNIQUE ( dw_date_num_id );
+
+alter table nedss_olap.fact_person_condition add CONSTRAINT fk_fpc_birth_date FOREIGN KEY ( dw_birth_date_num_id ) REFERENCES nedss_olap.dim_date( dw_date_num_id );
+alter table nedss_olap.fact_person_condition add CONSTRAINT fk_fpc_event_onset_date FOREIGN KEY ( dw_event_onset_date_num_id ) REFERENCES nedss_olap.dim_date( dw_date_num_id );
+alter table nedss_olap.fact_person_condition add CONSTRAINT fk_fpc_disease_onset_date FOREIGN KEY ( dw_disease_onset_date_num_id ) REFERENCES nedss_olap.dim_date( dw_date_num_id );
+alter table nedss_olap.fact_person_condition add CONSTRAINT fk_fpc_date_diagnosed FOREIGN KEY ( dw_date_diagnosed_date_num_id ) REFERENCES nedss_olap.dim_date( dw_date_num_id );
+alter table nedss_olap.fact_person_condition add CONSTRAINT fk_fpc_created_at_date FOREIGN KEY ( dw_created_at_date_num_id ) REFERENCES nedss_olap.dim_date( dw_date_num_id );
+alter table nedss_olap.fact_person_condition add CONSTRAINT fk_fpc_deleted_at_date FOREIGN KEY ( dw_deleted_at_date_num_id ) REFERENCES nedss_olap.dim_date( dw_date_num_id );
+alter table nedss_olap.fact_person_condition add CONSTRAINT fk_fpc_agency FOREIGN KEY ( dw_investigating_agency_id ) REFERENCES nedss_olap.dim_agency( dw_agency_id );
+
+alter table nedss_olap.dim_case_status add CONSTRAINT pk_dim_case_status PRIMARY KEY ( dw_case_status_id );
+alter table nedss_olap.dim_case_status add CONSTRAINT idx_dw_dim_case_status_dw_case_status_id_uq UNIQUE ( dw_case_status_id );
+
+insert into nedss_olap.dim_case_status (dw_case_status_id) values (0);
+
+alter table nedss_olap.fact_person_condition add CONSTRAINT fk_fpc_lhd_case_status FOREIGN KEY ( dw_lhd_case_status_id ) REFERENCES nedss_olap.dim_case_status( dw_case_status_id );
+alter table nedss_olap.fact_person_condition add CONSTRAINT fk_fpc_case_status FOREIGN KEY ( dw_case_status_id ) REFERENCES nedss_olap.dim_case_status( dw_case_status_id );
+
+insert into nedss_olap.dim_ethnicity (dw_ethnicity_id) values (0);
+
+alter table nedss_olap.dim_person add CONSTRAINT dim_ethnicity FOREIGN KEY ( dw_ethnicity_id ) REFERENCES nedss_olap.dim_ethnicity( dw_ethnicity_id );
+*/
+
+
+
+
+ 
+
+insert into nedss_olap.dim_language(dw_language_id) values (0);
+alter table nedss_olap.dim_person add CONSTRAINT dim_language FOREIGN KEY ( dw_language_id ) REFERENCES nedss_olap.dim_language( dw_language_id );
+alter table nedss_olap.dim_person add CONSTRAINT fk_dim_person_birth_date FOREIGN KEY ( dw_birth_date_num_id ) REFERENCES nedss_olap.dim_date( dw_date_num_id );
+alter table nedss_olap.dim_person add CONSTRAINT fk_dim_person_death_date FOREIGN KEY ( dw_date_of_death_num_id ) REFERENCES nedss_olap.dim_date( dw_date_num_id );
+
+alter table nedss_olap.fact_outbreak add CONSTRAINT fk_fo_first_known_onset_dt FOREIGN KEY ( dw_first_known_onset_date_num_id ) REFERENCES nedss_olap.dim_date( dw_date_num_id );
+alter table nedss_olap.fact_outbreak add CONSTRAINT fk_fo_date_entered_nors FOREIGN KEY ( dw_date_entered_into_nors_date_num ) REFERENCES nedss_olap.dim_date( dw_date_num_id );
+alter table nedss_olap.fact_outbreak add CONSTRAINT fk_fo_outbreak_date FOREIGN KEY ( dw_outbreak_date_num_id ) REFERENCES nedss_olap.dim_date( dw_date_num_id );
+
+
+
+</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>NEDSSOLAPDS</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>385</xloc>
+      <yloc>224</yloc>
+    </entry>
+    <entry>
+      <name>START</name>
+      <description/>
+      <type>SPECIAL</type>
+      <start>Y</start>
+      <dummy>N</dummy>
+      <repeat>N</repeat>
+      <schedulerType>0</schedulerType>
+      <intervalSeconds>0</intervalSeconds>
+      <intervalMinutes>60</intervalMinutes>
+      <hour>12</hour>
+      <minutes>0</minutes>
+      <weekDay>1</weekDay>
+      <DayOfMonth>1</DayOfMonth>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>176</xloc>
+      <yloc>224</yloc>
+    </entry>
+    <entry>
+      <name>Success</name>
+      <description/>
+      <type>SUCCESS</type>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>608</xloc>
+      <yloc>224</yloc>
+    </entry>
+  </entries>
+  <hops>
+    <hop>
+      <from>START</from>
+      <to>Add nedss constraints</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Add nedss constraints</from>
+      <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+  </hops>
+  <notepads>
+  </notepads>
+</job>
