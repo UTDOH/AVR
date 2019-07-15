@@ -706,7 +706,7 @@ based on ss_processed_message.trigger_event</comment>
 		<table name="etl_metrics_config" >
 			<column name="id" type="integer" length="10" decimal="0" jt="4" />
 			<column name="description" type="varchar" length="255" decimal="0" jt="12" />
-			<column name="type" type="integer" length="10" decimal="0" jt="4" >
+			<column name="type" type="varchar" length="255" jt="12" >
 				<comment><![CDATA[range, null, acceptable_value]]></comment>
 			</column>
 			<column name="source_table" type="varchar" length="255" decimal="0" jt="12" />
@@ -799,8 +799,8 @@ X move patient_county and patienti_zip and lat/lon to a new dimension (dim_patie
 			<column name="dw_treating_mft_id" type="integer" jt="4" />
 			<column name="dw_sending_mft_id" type="integer" jt="4" />
 			<column name="src_admit_date_time" type="timestamp" jt="93" />
-			<column name="dw_admin_date_num_id" type="integer" jt="4" />
-			<column name="dw_admin_time_id" type="integer" jt="4" />
+			<column name="dw_admit_date_num_id" type="integer" jt="4" />
+			<column name="dw_admit_time_id" type="integer" jt="4" />
 			<column name="src_discharge_date_time" type="timestamp" jt="93" />
 			<column name="src_observation_date_time" type="timestamp" jt="93" />
 			<column name="src_death_date_time" type="timestamp" jt="93" />
@@ -816,7 +816,7 @@ X move patient_county and patienti_zip and lat/lon to a new dimension (dim_patie
 			<column name="dw_procedure_date_num_id" type="integer" jt="4" />
 			<column name="dw_procedure_time_id" type="integer" jt="4" />
 			<column name="triage_notes_present" type="bool" length="600" jt="-7" />
-			<column name="age_reported" type="varchar" length="255" jt="12" />
+			<column name="age_units_reported" type="varchar" length="255" jt="12" />
 			<column name="age_reported_num" type="integer" jt="4" >
 				<comment><![CDATA[if age_reported is numeric, that numeric value is set in this field]]></comment>
 			</column>
@@ -831,9 +831,6 @@ X move patient_county and patienti_zip and lat/lon to a new dimension (dim_patie
 			<column name="tf1_age_reported_v" type="integer" jt="4" >
 				<comment><![CDATA[is age_reported not null and one of rt_age_unit_syndromic_surveillance]]></comment>
 			</column>
-			<column name="tf1_admit_date_time_c" type="integer" jt="4" >
-				<comment><![CDATA[is admit_date not null (converted properly)]]></comment>
-			</column>
 			<column name="tf1_admit_reason_c" type="integer" jt="4" >
 				<comment><![CDATA[is admit_reason_description not null]]></comment>
 			</column>
@@ -841,6 +838,21 @@ X move patient_county and patienti_zip and lat/lon to a new dimension (dim_patie
 				<comment><![CDATA[is administrative_sex not null and one of syndromic.rt_gender_syndromic_surveillance]]></comment>
 			</column>
 			<column name="biosense_status" type="varchar" length="255" jt="12" />
+			<column name="chief_complaints_text" type="varchar" length="1024" jt="12" />
+			<column name="tf1_chiefcomplaint_v" type="integer" jt="4" />
+			<column name="tf1_first_patient_id_present_c" type="integer" jt="4" />
+			<column name="tf1_visit_id_c" type="integer" jt="4" />
+			<column name="tf1_medical_record_number_present" type="integer" jt="4" />
+			<column name="tf1_futuredate_v" type="integer" jt="4" />
+			<column name="tf1_trigger_event_v" type="integer" jt="4" />
+			<column name="tf1_message_type_v" type="integer" jt="4" />
+			<column name="tf1_discharge_date_time_c" type="integer" jt="4" />
+			<column name="tf1_admit_date_time_c" type="integer" jt="4" />
+			<column name="tf1_patient_death_date_time_c" type="integer" jt="4" />
+			<column name="tf1_recorded_date_time_c" type="integer" jt="4" />
+			<column name="tf1_message_date_time_c" type="integer" jt="4" />
+			<column name="tf1_procedure_date_time_c" type="integer" jt="4" />
+			<column name="tf2_admit_date_time_v" type="integer" jt="4" />
 			<index name="idx_fact_ss_processed_message_1" unique="NORMAL" >
 				<column name="dw_trigger_event_id" />
 			</index>
@@ -875,10 +887,10 @@ X move patient_county and patienti_zip and lat/lon to a new dimension (dim_patie
 				<column name="src_id" />
 			</index>
 			<index name="idx_fact_ss_processed_message" unique="NORMAL" >
-				<column name="dw_admin_date_num_id" />
+				<column name="dw_admit_date_num_id" />
 			</index>
 			<index name="idx_fact_ss_processed_message_0" unique="NORMAL" >
-				<column name="dw_admin_time_id" />
+				<column name="dw_admit_time_id" />
 			</index>
 			<fk name="fk_fact_ss_processed_message_1" to_schema="syndromic_olap" to_table="dim_trigger_event" >
 				<fk_column name="dw_trigger_event_id" pk="dw_trigger_event_id" />
@@ -905,10 +917,10 @@ X move patient_county and patienti_zip and lat/lon to a new dimension (dim_patie
 				<fk_column name="dw_ss_batched_message_created_at_time_id" pk="dw_time_id" />
 			</fk>
 			<fk name="fk_fact_ss_processed_message" to_schema="syndromic_olap" to_table="dim_date" >
-				<fk_column name="dw_admin_date_num_id" pk="dw_date_id" />
+				<fk_column name="dw_admit_date_num_id" pk="dw_date_id" />
 			</fk>
 			<fk name="fk_fact_ss_processed_message_0" to_schema="syndromic_olap" to_table="dim_time" >
-				<fk_column name="dw_admin_time_id" pk="dw_time_id" />
+				<fk_column name="dw_admit_time_id" pk="dw_time_id" />
 			</fk>
 		</table>
 	</schema>
@@ -933,14 +945,6 @@ X move patient_county and patienti_zip and lat/lon to a new dimension (dim_patie
 		<entity schema="syndromic" name="rt_ethnicity_group" color="b2cdf7" x="60" y="1755" />
 		<entity schema="syndromic" name="ss_processed_segment_obx" color="b2cdf7" x="315" y="1605" />
 		<entity schema="syndromic_olap" name="deprecate_dim_admit_reason_code" color="b2cdf7" x="450" y="1410" />
-		<entity schema="syndromic_olap" name="dim_rt_identifier_type_syndromic_surveillance" color="e8d18a" x="75" y="675" />
-		<entity schema="syndromic_olap" name="dim_rt_facility_visit_type" color="000000" x="825" y="1815" />
-		<entity schema="syndromic_olap" name="dim_rt_message_type" color="e8d18a" x="420" y="1050" />
-		<entity schema="syndromic_olap" name="dim_rt_age_unit_syndromic_surveillance" color="e8d18a" x="405" y="1005" />
-		<entity schema="syndromic_olap" name="dim_rt_gender_syndromic_surveillance" color="e8d18a" x="390" y="975" />
-		<entity schema="syndromic_olap" name="dim_rt_discharge_disposition" color="e8d18a" x="405" y="975" />
-		<entity schema="syndromic_olap" name="dim_rt_icd10cm_icd9cm_snomedct" color="e8d18a" x="165" y="705" />
-		<entity schema="syndromic_olap" name="dim_rt_race_category" color="e8d18a" x="45" y="645" />
 		<entity schema="syndromic_olap" name="fact_ss_processed_diagnosis" color="b2cdf7" x="135" y="75" />
 		<entity schema="syndromic_olap" name="fact_ss_processed_segment" color="b2cdf7" x="795" y="180" />
 		<entity schema="syndromic_olap" name="fact_ss_processed_segment_obx" color="b2cdf7" x="765" y="45" />
@@ -952,13 +956,21 @@ X move patient_county and patienti_zip and lat/lon to a new dimension (dim_patie
 			<column name="hashcode" />
 			<column name="src_date_val" />
 		</entity>
-		<entity schema="syndromic_olap" name="dim_rt_ethnicity_group" color="e8d18a" x="330" y="1095" />
 		<entity schema="syndromic" name="rt_gender_syndromic_surveillance" color="b2cdf7" x="225" y="1830" />
 		<entity schema="syndromic_olap" name="dim_patient_location" color="000000" x="1170" y="1995" />
 		<entity schema="syndromic_olap" name="dim_rt_health_district" color="000000" x="465" y="360" />
 		<entity schema="syndromic_olap" name="dim_mft" color="000000" x="1635" y="960" />
-		<entity schema="syndromic_olap" name="qa_ss_processed_message" color="b2cdf7" x="1110" y="1095" />
 		<entity schema="syndromic_olap" name="etl_metrics_config" color="b2cdf7" x="1620" y="1500" />
+		<entity schema="syndromic_olap" name="dim_rt_discharge_disposition" color="e8d18a" x="615" y="570" />
+		<entity schema="syndromic_olap" name="dim_rt_age_unit_syndromic_surveillance" color="e8d18a" x="195" y="1020" />
+		<entity schema="syndromic_olap" name="dim_rt_icd10cm_icd9cm_snomedct" color="e8d18a" x="435" y="705" />
+		<entity schema="syndromic_olap" name="dim_rt_identifier_type_syndromic_surveillance" color="e8d18a" x="180" y="570" />
+		<entity schema="syndromic_olap" name="dim_rt_gender_syndromic_surveillance" color="e8d18a" x="450" y="810" />
+		<entity schema="syndromic_olap" name="dim_rt_ethnicity_group" color="e8d18a" x="330" y="1095" />
+		<entity schema="syndromic_olap" name="dim_rt_message_type" color="e8d18a" x="420" y="1050" />
+		<entity schema="syndromic_olap" name="dim_rt_race_category" color="e8d18a" x="45" y="645" />
+		<entity schema="syndromic_olap" name="dim_rt_facility_visit_type" color="000000" x="825" y="1815" />
+		<entity schema="syndromic_olap" name="qa_ss_processed_message" color="b2cdf7" x="1110" y="1095" />
 		<script name="dim_rt_gender_syndromic_surveillance" id="SQL8033058" >
 			<string><![CDATA[CREATE TABLE syndromic_olap.dim_rt_gender_syndromic_surveillance ( 
 	dw_rt_gender_syndromic_surveillance_id integer  NOT NULL,
