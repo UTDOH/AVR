@@ -566,6 +566,42 @@
         <name>biosense_status</name>
         <lookup>biosense_status</lookup>
       </key>
+      <key>
+        <name>date_inactivated</name>
+        <lookup>date_inactivated</lookup>
+      </key>
+      <key>
+        <name>vendor</name>
+        <lookup>vendor</lookup>
+      </key>
+      <key>
+        <name>facility_name_mupi</name>
+        <lookup>facility_name_mupi</lookup>
+      </key>
+      <key>
+        <name>c_biosense_facility_id</name>
+        <lookup>c_biosense_facility_id</lookup>
+      </key>
+      <key>
+        <name>street_name</name>
+        <lookup>street_name</lookup>
+      </key>
+      <key>
+        <name>city</name>
+        <lookup>city</lookup>
+      </key>
+      <key>
+        <name>county</name>
+        <lookup>county</lookup>
+      </key>
+      <key>
+        <name>local_health_district</name>
+        <lookup>local_health_district</lookup>
+      </key>
+      <key>
+        <name>zip_code</name>
+        <lookup>zip_code</lookup>
+      </key>
       <return>
         <name>dw_mft_id</name>
         <creation_method>tablemax</creation_method>

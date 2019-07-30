@@ -12,6 +12,57 @@
   <parameters>
     </parameters>
   <connection>
+    <name>DCPLDW</name>
+    <server/>
+    <type>POSTGRESQL</type>
+    <access>JNDI</access>
+    <database>DCPLDW</database>
+    <port>1521</port>
+    <username/>
+    <password>Encrypted </password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>1521</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
+  <connection>
     <name>NBSOLAPDS</name>
     <server/>
     <type>POSTGRESQL</type>
@@ -4364,141 +4415,39 @@ ALTER TABLE syndromic_olap.qa_ss_processed_message ADD CONSTRAINT fk_fact_ss_pro
       <name>add syndromic_olap schema 2</name>
       <description/>
       <type>SQL</type>
-      <sql>drop table if exists syndromic_olap.qa_ss_processed_message;
+      <sql>ALTER TABLE syndromic_olap.dim_mft DROP COLUMN c_biofacility_id;
+ALTER TABLE syndromic_olap.dim_mft DROP COLUMN mft_status;
+ALTER TABLE syndromic_olap.dim_mft ADD date_inactivated date;
+ALTER TABLE syndromic_olap.dim_mft ADD vendor varchar(255);
+ALTER TABLE syndromic_olap.dim_mft ADD facility_name_mupi varchar(255);
+ALTER TABLE syndromic_olap.dim_mft ADD facility_type_code varchar(255);
+ALTER TABLE syndromic_olap.dim_mft ADD c_biosense_facility_id varchar(255);
+ALTER TABLE syndromic_olap.dim_mft ADD street_name varchar(255);
+ALTER TABLE syndromic_olap.dim_mft ADD city varchar(255);
+ALTER TABLE syndromic_olap.dim_mft ADD county varchar(255);
+ALTER TABLE syndromic_olap.dim_mft ADD local_health_district varchar(255);
+ALTER TABLE syndromic_olap.dim_mft ADD zip_code varchar(255);
 
-CREATE TABLE syndromic_olap.qa_ss_processed_message ( 
-	src_id               integer  NOT NULL,
-	src_ss_batched_messages_id integer  ,
-	src_created_at       timestamp  ,
-	mft_status           varchar(255)  ,
-	dw_trigger_event_id  integer  ,
-	admit_reason_description varchar(255)  ,
-	dw_treating_mft_id   integer  ,
-	dw_sending_mft_id    integer  ,
-	src_admit_date_time  timestamp  ,
-	dw_admit_date_num_id integer  ,
-	dw_admit_time_id     integer  ,
-	src_discharge_date_time timestamp  ,
-	src_observation_date_time timestamp  ,
-	src_death_date_time  timestamp  ,
-	src_recorded_date_time timestamp  ,
-	src_message_date_time timestamp  ,
-	first_patient_id_present bool  ,
-	visit_id             varchar(255)  ,
-	patient_account_number varchar(255)  ,
-	medical_record_number_present varchar(255)  ,
-	administrative_sex   varchar(255)  ,
-	dw_patient_location_id integer  ,
-	src_procedure_date_time timestamp  ,
-	dw_procedure_date_num_id integer  ,
-	dw_procedure_time_id integer  ,
-	triage_notes_present bool  ,
-	age_units_reported   varchar(255)  ,
-	age_reported_num     integer  ,
-	medication_list      varchar(255)  ,
-	dw_rt_facility_visit_type_id integer  ,
-	src_ss_batched_messages_created_at timestamp  ,
-	dw_ss_batched_messages_created_at_date_num_id integer  ,
-	dw_ss_batched_message_created_at_time_id integer  ,
-	dw_mft_id            integer  ,
-	tf1_age_reported_v   integer  ,
-	tf1_admit_reason_c   integer  ,
-	tf_administrative_sex_v integer  ,
-	biosense_status      varchar(255)  ,
-	chief_complaints_text varchar(1024)  ,
-	tf1_chiefcomplaint_v integer  ,
-	tf1_first_patient_id_present_c integer  ,
-	tf1_visit_id_c       integer  ,
-	tf1_medical_record_number_present integer  ,
-	tf1_futuredate_v     integer  ,
-	tf1_trigger_event_v  integer  ,
-	tf1_message_type_v   integer  ,
-	tf1_discharge_date_time_c integer  ,
-	tf1_admit_date_time_c integer  ,
-	tf1_patient_death_date_time_c integer  ,
-	tf1_recorded_date_time_c integer  ,
-	tf1_message_date_time_c integer  ,
-	tf1_procedure_date_time_c integer  ,
-	tf2_admit_date_time_v integer  ,
-	CONSTRAINT idx_fact_ss_processed_message_32 UNIQUE ( src_id ) 
- );
 
-CREATE INDEX idx_fact_ss_processed_message_1 ON syndromic_olap.qa_ss_processed_message ( dw_trigger_event_id );
 
-CREATE INDEX idx_fact_ss_processed_message_3 ON syndromic_olap.qa_ss_processed_message ( dw_treating_mft_id );
 
-CREATE INDEX idx_fact_ss_processed_message_4 ON syndromic_olap.qa_ss_processed_message ( dw_sending_mft_id );
 
-CREATE INDEX idx_fact_ss_processed_message_10 ON syndromic_olap.qa_ss_processed_message ( dw_procedure_date_num_id );
 
-CREATE INDEX idx_fact_ss_processed_message_16 ON syndromic_olap.qa_ss_processed_message ( dw_rt_facility_visit_type_id );
 
-CREATE INDEX idx_fact_ss_processed_message_17 ON syndromic_olap.qa_ss_processed_message ( dw_ss_batched_messages_created_at_date_num_id );
 
-CREATE INDEX idx_fact_ss_processed_message_19 ON syndromic_olap.qa_ss_processed_message ( dw_mft_id );
 
-CREATE INDEX idx_fact_ss_processed_message_20 ON syndromic_olap.qa_ss_processed_message ( dw_patient_location_id );
-
-CREATE INDEX idx_fact_ss_processed_message_28 ON syndromic_olap.qa_ss_processed_message ( dw_procedure_time_id );
-
-CREATE INDEX idx_fact_ss_processed_message_29 ON syndromic_olap.qa_ss_processed_message ( dw_ss_batched_message_created_at_time_id );
-
-CREATE INDEX idx_fact_ss_processed_message ON syndromic_olap.qa_ss_processed_message ( dw_admit_date_num_id );
-
-CREATE INDEX idx_fact_ss_processed_message_0 ON syndromic_olap.qa_ss_processed_message ( dw_admit_time_id );
-
-COMMENT ON TABLE syndromic_olap.qa_ss_processed_message IS 'TODO
-X all dw_date_num_id fields need a dw_time_id
-X gap analysis of any missing fields
-X move patient_county and patienti_zip and lat/lon to a new dimension (dim_patient_location)
-
-6/11/2019 - use src_ss_batched_messages_created_at as the partition key';
-
-COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.src_created_at IS 'in the source table this field is likely a timstamp WITH timezone';
-
-COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.mft_status IS 'onboarding, active, inactive, etc.. this remains static (point in time history)';
-
-COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.age_reported_num IS 'if age_reported is numeric, that numeric value is set in this field';
-
-COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.dw_mft_id IS 'ss_processed_message.facility_uid';
-
-COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.tf1_age_reported_v IS 'is age_reported not null and one of rt_age_unit_syndromic_surveillance';
-
-COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.tf1_admit_reason_c IS 'is admit_reason_description not null';
-
-COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.tf_administrative_sex_v IS 'is administrative_sex not null and one of syndromic.rt_gender_syndromic_surveillance';
-
-ALTER TABLE syndromic_olap.qa_ss_processed_message ADD CONSTRAINT fk_fact_ss_processed_message_1 FOREIGN KEY ( dw_trigger_event_id ) REFERENCES syndromic_olap.dim_trigger_event( dw_trigger_event_id );
-
-ALTER TABLE syndromic_olap.qa_ss_processed_message ADD CONSTRAINT fk_fact_ss_processed_message_3 FOREIGN KEY ( dw_treating_mft_id ) REFERENCES syndromic_olap.dim_mft( dw_mft_id );
-
-ALTER TABLE syndromic_olap.qa_ss_processed_message ADD CONSTRAINT fk_fact_ss_processed_message_4 FOREIGN KEY ( dw_sending_mft_id ) REFERENCES syndromic_olap.dim_mft( dw_mft_id );
-
-ALTER TABLE syndromic_olap.qa_ss_processed_message ADD CONSTRAINT fk_fact_ss_processed_message_16 FOREIGN KEY ( dw_rt_facility_visit_type_id ) REFERENCES syndromic_olap.dim_rt_facility_visit_type( dw_rt_facility_visit_type_id );
-
-ALTER TABLE syndromic_olap.qa_ss_processed_message ADD CONSTRAINT fk_fact_ss_processed_message_17 FOREIGN KEY ( dw_ss_batched_messages_created_at_date_num_id ) REFERENCES syndromic_olap.dim_date( dw_date_num_id );
-
-ALTER TABLE syndromic_olap.qa_ss_processed_message ADD CONSTRAINT fk_fact_ss_processed_message_19 FOREIGN KEY ( dw_mft_id ) REFERENCES syndromic_olap.dim_mft( dw_mft_id );
-
-ALTER TABLE syndromic_olap.qa_ss_processed_message ADD CONSTRAINT fk_fact_ss_processed_message_20 FOREIGN KEY ( dw_patient_location_id ) REFERENCES syndromic_olap.dim_patient_location( dw_patient_location_id );
-
-ALTER TABLE syndromic_olap.qa_ss_processed_message ADD CONSTRAINT fk_fact_ss_processed_message_29 FOREIGN KEY ( dw_ss_batched_message_created_at_time_id ) REFERENCES syndromic_olap.dim_time( dw_time_id );
-
-ALTER TABLE syndromic_olap.qa_ss_processed_message ADD CONSTRAINT fk_fact_ss_processed_message_0 FOREIGN KEY ( dw_admit_time_id ) REFERENCES syndromic_olap.dim_time( dw_time_id );
-
-ALTER TABLE syndromic_olap.qa_ss_processed_message ADD CONSTRAINT fk_qa_ss_processed_message FOREIGN KEY ( dw_admit_date_num_id ) REFERENCES syndromic_olap.dim_date( dw_date_num_id );
 
 </sql>
       <useVariableSubstitution>F</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
       <sendOneStatement>F</sendOneStatement>
-      <connection>NEDSSOLAPDS</connection>
+      <connection>DCPLDW</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>128</xloc>
-      <yloc>416</yloc>
+      <yloc>400</yloc>
     </entry>
   </entries>
   <hops>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>load_qa_processed_message3</name>
+    <name>load_qa_processed_message</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -438,10 +438,34 @@
     <notepad>
       <note>Open question - what is the
 link to rt_facility_visit_type?</note>
-      <xloc>1168</xloc>
-      <yloc>672</yloc>
+      <xloc>672</xloc>
+      <yloc>736</yloc>
       <width>189</width>
       <heigth>50</heigth>
+      <fontname>Cantarell</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>still need to add tf1_chiefCompaint_v
+see email from Eunice on 7/12/2019
+The solution will be to use a data validation
+step that uses a table to lookup invalid values</note>
+      <xloc>1360</xloc>
+      <yloc>304</yloc>
+      <width>301</width>
+      <heigth>90</heigth>
       <fontname>Cantarell</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -579,11 +603,6 @@ link to rt_facility_visit_type?</note>
       <enabled>N</enabled>
     </hop>
     <hop>
-      <from>get max src_id</from>
-      <to>Add constants</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Convert Age to Int</from>
       <to>Error Handling - Invalid Num</to>
       <enabled>Y</enabled>
@@ -611,12 +630,12 @@ link to rt_facility_visit_type?</note>
     <hop>
       <from>Add constants</from>
       <to>get ss_processed_messages 2 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>get ss_processed_messages 2 2</from>
       <to>Convert Age to Int</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>dim_date</from>
@@ -630,12 +649,7 @@ link to rt_facility_visit_type?</note>
     </hop>
     <hop>
       <from>dim_mft</from>
-      <to>lookup_dim_mft</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>dim_patient_location</from>
-      <to>lookup_dim_mft</to>
+      <to>lookup_sending_dim_mft</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -644,7 +658,7 @@ link to rt_facility_visit_type?</note>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>lookup_dim_mft</from>
+      <from>lookup_sending_dim_mft</from>
       <to>lookup_dim_rt_facility_visit_type</to>
       <enabled>N</enabled>
     </hop>
@@ -656,11 +670,6 @@ link to rt_facility_visit_type?</note>
     <hop>
       <from>validate chief_complaint</from>
       <to>dim_patient_location</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>add validation fields</from>
-      <to>tf2_admit_date_time_c</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -679,43 +688,143 @@ link to rt_facility_visit_type?</note>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>lookup_processed_time</from>
-      <to>validate chief_complaint</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>dim_time</from>
       <to>lookup_processed_time</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>lookup_dim_mft</from>
+      <from>lookup_sending_dim_mft</from>
       <to>Modified Java Script Value</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Modified Java Script Value</from>
-      <to>qa_ss_processed_message</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>lookup admit date</from>
       <to>Modified Java Script Value 2 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Modified Java Script Value 2 2</from>
+      <to>Parse time fields</to>
+      <enabled>N</enabled>
+    </hop>
+    <hop>
+      <from>Validity Validations</from>
+      <to>lookup date batched msg created at</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>add validation fields</from>
+      <to>Completeness Validations</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Completeness Validations</from>
+      <to>administrative_sex_v</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>administrative_sex_v</from>
+      <to>Validity Validations</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>administrative_sex_v</from>
+      <to>update QA field 3</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>update QA field 3</from>
+      <to>Validity Validations</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Modified Java Script Value</from>
+      <to>Select values</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select values</from>
+      <to>qa_ss_processed_message</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>dim_patient_location</from>
+      <to>lookup_treating_dim_mft</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>dim_mft</from>
+      <to>lookup_treating_dim_mft</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Add constants</from>
+      <to>get ss_processed_messages 2 2 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>get ss_processed_messages 2 2 2</from>
+      <to>Convert Age to Int</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>lookup admit date</from>
       <to>Parse time fields</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>lookup date batched msg created at</from>
+      <to>lookup procedure date</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>lookup procedure date</from>
       <to>lookup admit date</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>tf2_admit_date_time_c</from>
-      <to>lookup date batched msg created at</to>
+      <from>dim_date</from>
+      <to>lookup procedure date</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>lookup_processed_time</from>
+      <to>lookup_procedure_time</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>dim_time</from>
+      <to>lookup_procedure_time</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>lookup_procedure_time</from>
+      <to>validate chief_complaint</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>lookup_treating_dim_mft</from>
+      <to>lookup_main_dim_mft</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>lookup_main_dim_mft</from>
+      <to>lookup_sending_dim_mft</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>dim_mft</from>
+      <to>lookup_main_dim_mft</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>get max src_id</from>
+      <to>Log Max</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Log Max</from>
+      <to>Add constants</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -788,7 +897,7 @@ link to rt_facility_visit_type?</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>208</xloc>
+      <xloc>256</xloc>
       <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
@@ -822,7 +931,7 @@ if (!age_reported) {
       <field>
         <name>age_reported_int</name>
         <rename>age_reported_int</rename>
-        <type>Number</type>
+        <type>Integer</type>
         <length>-1</length>
         <precision>-1</precision>
         <replace>N</replace>
@@ -836,7 +945,7 @@ if (!age_reported) {
       </output>
     </remotesteps>
     <GUI>
-      <xloc>576</xloc>
+      <xloc>624</xloc>
       <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
@@ -860,7 +969,7 @@ if (!age_reported) {
       </output>
     </remotesteps>
     <GUI>
-      <xloc>576</xloc>
+      <xloc>624</xloc>
       <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
@@ -903,8 +1012,8 @@ if (!age_reported) {
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1392</xloc>
-      <yloc>544</yloc>
+      <xloc>880</xloc>
+      <yloc>608</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -940,7 +1049,7 @@ writeToLog('m', 'dw_admit_date_num_id: ' + dw_admit_date_num_id);</jsScript_scri
       </output>
     </remotesteps>
     <GUI>
-      <xloc>2416</xloc>
+      <xloc>2080</xloc>
       <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
@@ -964,14 +1073,19 @@ writeToLog('m', 'dw_admit_date_num_id: ' + dw_admit_date_num_id);</jsScript_scri
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>var admit_time_val = null;
 var ss_batched_message_created_at_time_val = null;
+var procedure_time_val = null;
 
-writeToLog('m', 'admit_date_time: ' + admit_date_time);
+//writeToLog('m', 'admit_date_time: ' + admit_date_time);
 if (admit_date_time) {
 	admit_time_val = date2str(admit_date_time, "HH:mm");
 }
 
 if (ss_batched_messages_created_at) {
 	ss_batched_message_created_at_time_val = date2str(ss_batched_messages_created_at, "HH:mm");
+}
+
+if (procedure_date_time) {
+	procedure_time_val = date2str(procedure_date_time, "HH:mm");
 }</jsScript_script>
       </jsScript>
       <jsScript>
@@ -1038,6 +1152,14 @@ Alert(date2str(dValue,"dd.MM.yyyy HH:mm:ss","EN", "EST"));
         <precision>-1</precision>
         <replace>N</replace>
       </field>
+      <field>
+        <name>procedure_time_val</name>
+        <rename>procedure_time_val</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
     </fields>
     <cluster_schema/>
     <remotesteps>
@@ -1047,8 +1169,8 @@ Alert(date2str(dValue,"dd.MM.yyyy HH:mm:ss","EN", "EST"));
       </output>
     </remotesteps>
     <GUI>
-      <xloc>2416</xloc>
-      <yloc>544</yloc>
+      <xloc>1952</xloc>
+      <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1263,7 +1385,7 @@ Alert(date2str(dValue,"dd.MM.yyyy HH:mm:ss","EN", "EST"));
         <currency/>
         <decimal/>
         <group/>
-        <nullif/>
+        <nullif>1</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -1277,7 +1399,7 @@ Alert(date2str(dValue,"dd.MM.yyyy HH:mm:ss","EN", "EST"));
       </output>
     </remotesteps>
     <GUI>
-      <xloc>720</xloc>
+      <xloc>768</xloc>
       <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1314,7 +1436,7 @@ from ${olap_schema}.dim_date
       </output>
     </remotesteps>
     <GUI>
-      <xloc>2272</xloc>
+      <xloc>1728</xloc>
       <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1323,7 +1445,7 @@ from ${olap_schema}.dim_date
     <name>dim_mft</name>
     <type>TableInput</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -1334,6 +1456,9 @@ from ${olap_schema}.dim_date
     <sql>select 
 	dw_mft_id
 	,facility_uid
+    ,facility_id
+    ,biosense_status
+	,mft_status
 from ${olap_schema}.dim_mft</sql>
     <limit>0</limit>
     <lookup/>
@@ -1348,8 +1473,8 @@ from ${olap_schema}.dim_mft</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1616</xloc>
-      <yloc>640</yloc>
+      <xloc>1168</xloc>
+      <yloc>720</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1378,6 +1503,10 @@ from ${olap_schema}.dim_mft</sql>
         <name>patient_zip</name>
         <lookup>patient_zip</lookup>
       </key>
+      <key>
+        <name>c_patient_county</name>
+        <lookup>patient_county</lookup>
+      </key>
       <return>
         <name>dw_patient_location_id</name>
         <creation_method>tablemax</creation_method>
@@ -1394,8 +1523,8 @@ from ${olap_schema}.dim_mft</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1808</xloc>
-      <yloc>544</yloc>
+      <xloc>1568</xloc>
+      <yloc>608</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1428,8 +1557,8 @@ from ${olap_schema}.dim_rt_facility_visit_type</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1408</xloc>
-      <yloc>688</yloc>
+      <xloc>912</xloc>
+      <yloc>752</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1462,8 +1591,8 @@ from ${olap_schema}.dim_time</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>2224</xloc>
-      <yloc>672</yloc>
+      <xloc>2096</xloc>
+      <yloc>512</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1493,7 +1622,7 @@ from ${olap_schema}.dim_time</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1232</xloc>
+      <xloc>1280</xloc>
       <yloc>64</yloc>
       <draw>N</draw>
     </GUI>
@@ -1524,7 +1653,7 @@ from ${olap_schema}.dim_time</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>80</xloc>
+      <xloc>32</xloc>
       <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1581,7 +1710,7 @@ from ${olap_schema}.dim_time</sql>
 	string_agg(spcc.chief_complaint_text, '|') as chief_complaints_text
 from syndromic.ss_processed_message spm
 left join syndromic.ss_processed_chief_complaint spcc on spcc.id = spm.id
-where spm.id = 60914840
+where spm.id = 60914840 and spm.id &lt;= ${max_processed_message_id}
 group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35</sql>
     <outer_join>N</outer_join>
     <replace_vars>Y</replace_vars>
@@ -1595,7 +1724,7 @@ group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27
       </output>
     </remotesteps>
     <GUI>
-      <xloc>384</xloc>
+      <xloc>432</xloc>
       <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1631,17 +1760,18 @@ group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27
 	death_date_time,
 	recorded_date_time,
 	message_date_time,
-	first_patient_id_present,
+	case when first_patient_id_present = true then 1 else 0 end as first_patient_id_present,
 	patient_account_number,
 	visit_id,
 	medical_record_number_present,
 	patient_zip,
 	c_patient_county,
 	administrative_sex,
+	procedure_date_time::date as procedure_date,
 	procedure_date_time,
 	facility_type_code,
 	discharge_disposition,
-	triage_notes_present,
+	case when triage_notes_present = true then 1 else 0 end as triage_notes_present,
 	age_reported,
 	age_units_reported,
 	ethnicity_code,
@@ -1654,8 +1784,8 @@ group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27
 	string_agg(spcc.chief_complaint_text, '|') as chief_complaints_text
 from syndromic.ss_processed_message spm
 left join syndromic.ss_processed_chief_complaint spcc on spcc.id = spm.id
-where spm.id = 14701957
-group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37</sql>
+where spm.id = 14701957 and spm.id &lt;= ${max_processed_message_id}
+group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38</sql>
     <outer_join>N</outer_join>
     <replace_vars>Y</replace_vars>
     <parameter>
@@ -1668,7 +1798,7 @@ group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27
       </output>
     </remotesteps>
     <GUI>
-      <xloc>368</xloc>
+      <xloc>416</xloc>
       <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1709,7 +1839,7 @@ group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27
       </output>
     </remotesteps>
     <GUI>
-      <xloc>2416</xloc>
+      <xloc>1952</xloc>
       <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1750,7 +1880,7 @@ group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27
       </output>
     </remotesteps>
     <GUI>
-      <xloc>2144</xloc>
+      <xloc>1472</xloc>
       <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1791,13 +1921,13 @@ group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27
       </output>
     </remotesteps>
     <GUI>
-      <xloc>2272</xloc>
-      <yloc>544</yloc>
+      <xloc>1952</xloc>
+      <yloc>464</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>lookup_dim_mft</name>
+    <name>lookup_sending_dim_mft</name>
     <type>StreamLookup</type>
     <description/>
     <distribute>Y</distribute>
@@ -1814,12 +1944,12 @@ group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27
     <integer_pair>N</integer_pair>
     <lookup>
       <key>
-        <name>facility_uid</name>
-        <field>facility_uid</field>
+        <name>sending_facility_id</name>
+        <field>facility_id</field>
       </key>
       <value>
         <name>dw_mft_id</name>
-        <rename>dw_mft_id</rename>
+        <rename>dw_sending_mft_id</rename>
         <default>0</default>
         <type>Integer</type>
       </value>
@@ -1832,8 +1962,8 @@ group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1616</xloc>
-      <yloc>544</yloc>
+      <xloc>1024</xloc>
+      <yloc>608</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1873,8 +2003,8 @@ group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1408</xloc>
-      <yloc>608</yloc>
+      <xloc>896</xloc>
+      <yloc>672</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1914,8 +2044,8 @@ group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27
       </output>
     </remotesteps>
     <GUI>
-      <xloc>2128</xloc>
-      <yloc>544</yloc>
+      <xloc>1952</xloc>
+      <yloc>528</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1957,8 +2087,163 @@ group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27
       </output>
     </remotesteps>
     <GUI>
-      <xloc>720</xloc>
+      <xloc>768</xloc>
       <yloc>304</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Completeness Validations</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>tf1_admit_reason_c = isNotEmpty(admit_reason_code);
+tf1_first_patient_id_present_c = isNotEmpty(first_patient_id_present);
+tf1_visit_id_c = isNotEmpty(visit_id);
+tf1_medical_record_number_present_c = isNotEmpty(medical_record_number_present);
+
+if (!discharge_date_time) {
+	tf1_discharge_date_time_c = 0;
+}
+
+if (!admit_date_time) {
+	tf1_admit_date_time_c = 0;
+}
+
+if (!tf1_patient_death_date_time_c) {
+	tf1_patient_death_date_time_c = 0;
+}
+
+if (!recorded_date_time) {
+	tf1_recorded_date_time_c = 0;
+}
+
+if (!message_date_time) {
+	tf1_message_date_time_c = 0;
+}
+
+if (!procedure_date_time) {
+	tf1_procedure_date_time_c = 0;
+}
+
+function isNotEmpty(str) {
+	ret = 0;
+	//writeToLog('m', 'Received Str: (' + str + ')');
+	if (str) {
+		//writeToLog('m', 'trimmed str = (' + trim(str) + ')');
+		if (!trim(str).equals('')) {
+			ret = 1;
+		}
+	}
+
+	return ret;
+} </jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>
+      <field>
+        <name>tf1_admit_reason_c</name>
+        <rename>tf1_admit_reason_c</rename>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
+      <field>
+        <name>tf1_first_patient_id_present_c</name>
+        <rename>tf1_first_patient_id_present_c</rename>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
+      <field>
+        <name>tf1_visit_id_c</name>
+        <rename>tf1_visit_id_c</rename>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
+      <field>
+        <name>tf1_medical_record_number_present_c</name>
+        <rename>tf1_medical_record_number_present_c</rename>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
+      <field>
+        <name>tf1_discharge_date_time_c</name>
+        <rename>tf1_discharge_date_time_c</rename>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
+      <field>
+        <name>tf1_admit_date_time_c</name>
+        <rename>tf1_admit_date_time_c</rename>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
+      <field>
+        <name>tf1_patient_death_date_time_c</name>
+        <rename>tf1_patient_death_date_time_c</rename>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
+      <field>
+        <name>tf1_recorded_date_time_c</name>
+        <rename>tf1_recorded_date_time_c</rename>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
+      <field>
+        <name>tf1_message_date_time_c</name>
+        <rename>tf1_message_date_time_c</rename>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
+      <field>
+        <name>tf1_procedure_date_time_c</name>
+        <rename>tf1_procedure_date_time_c</rename>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
+    </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>928</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1980,7 +2265,7 @@ group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27
     <truncate>N</truncate>
     <ignore_errors>N</ignore_errors>
     <use_batch>N</use_batch>
-    <specify_fields>Y</specify_fields>
+    <specify_fields>N</specify_fields>
     <partitioning_enabled>N</partitioning_enabled>
     <partitioning_field/>
     <partitioning_daily>N</partitioning_daily>
@@ -2180,13 +2465,43 @@ group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1168</xloc>
-      <yloc>544</yloc>
+      <xloc>656</xloc>
+      <yloc>608</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>tf2_admit_date_time_c</name>
+    <name>remove err fieldname 3</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <select_unspecified>N</select_unspecified>
+      <remove>
+        <name>error_code_fieldname</name>
+      </remove>
+    </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1104</xloc>
+      <yloc>384</yloc>
+      <draw>N</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Validity Validations</name>
     <type>ScriptValueMod</type>
     <description/>
     <distribute>Y</distribute>
@@ -2203,32 +2518,38 @@ group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27
         <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>//Script here
-if (dateDiff(admit_date_time,ss_batched_messages_created_at,"d")>0) {	
+if (dateDiff(admit_date_time,ss_batched_messages_created_at,"d")&lt;0) {	
 	tf2_admit_date_time_v = 0;
 }
 
-if (!discharge_date_time) {
-	tf1_discharge_date_time_c = 0;
+if (age_reported_int) {
+	if (age_reported_int >= 0 &amp;&amp; age_reported_int &lt;= 129) {
+		tf1_age_reported_v = 1;
+	}
 }
 
-if (!admit_date_time) {
-	tf1_admit_date_time_c = 0;
+if (message_type) {
+	if (message_type == 'ADT') {
+		tf1_message_type_v = 1;
+	}
 }
 
-if (!tf1_patient_death_date_time_c) {
-	tf1_patient_death_date_time_c = 0;
+if (trigger_event) {
+//  or   or  or 
+	if (trigger_event == 'A01' || trigger_event == 'A03' || trigger_event == 'A04' || trigger_event == 'A08') {
+		tf1_trigger_event_v = 1;
+	}
 }
 
-if (!recorded_date_time) {
-	tf1_recorded_date_time_c = 0;
-}
-
-if (!message_date_time) {
-	tf1_message_date_time_c = 0;
-}
-
-if (!procedure_date_time) {
-	tf1_procedure_date_time_c = 0;
+if (dateDiff(observation_date_time,curr_dt_time,"d") &lt; 0 ||
+    dateDiff(discharge_date_time,curr_dt_time,"d") &lt; 0 || 
+	dateDiff(admit_date_time,curr_dt_time,"d") &lt; 0 || 
+	dateDiff(death_date_time,curr_dt_time,"d") &lt; 0 || 
+	dateDiff(recorded_date_time,curr_dt_time,"d") &lt; 0 || 
+	dateDiff(message_date_time,curr_dt_time,"d") &lt; 0 || 
+	dateDiff(procedure_date_time,curr_dt_time,"d") &lt; 0)
+{	
+	tf1_futuredate_v = 0;
 }</jsScript_script>
       </jsScript>
       <jsScript>
@@ -2272,48 +2593,32 @@ Alert(dateDiff(d1,d2,"wd"));</jsScript_script>
         <replace>Y</replace>
       </field>
       <field>
-        <name>tf1_discharge_date_time_c</name>
-        <rename>tf1_discharge_date_time_c</rename>
+        <name>tf1_age_reported_v</name>
+        <rename>tf1_age_reported_v</rename>
         <type>Number</type>
         <length>-1</length>
         <precision>-1</precision>
         <replace>Y</replace>
       </field>
       <field>
-        <name>tf1_admit_date_time_c</name>
-        <rename>tf1_admit_date_time_c</rename>
+        <name>tf1_age_reported_v</name>
+        <rename>tf1_age_reported_v</rename>
         <type>Number</type>
         <length>-1</length>
         <precision>-1</precision>
         <replace>Y</replace>
       </field>
       <field>
-        <name>tf1_patient_death_date_time_c</name>
-        <rename>tf1_patient_death_date_time_c</rename>
+        <name>tf1_trigger_event_v</name>
+        <rename>tf1_trigger_event_v</rename>
         <type>Number</type>
         <length>-1</length>
         <precision>-1</precision>
         <replace>Y</replace>
       </field>
       <field>
-        <name>tf1_recorded_date_time_c</name>
-        <rename>tf1_recorded_date_time_c</rename>
-        <type>Number</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>Y</replace>
-      </field>
-      <field>
-        <name>tf1_message_date_time_c</name>
-        <rename>tf1_message_date_time_c</rename>
-        <type>Number</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>Y</replace>
-      </field>
-      <field>
-        <name>tf1_procedure_date_time_c</name>
-        <rename>tf1_procedure_date_time_c</rename>
+        <name>tf1_futuredate_v</name>
+        <rename>tf1_futuredate_v</rename>
         <type>Number</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -2328,8 +2633,52 @@ Alert(dateDiff(d1,d2,"wd"));</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1712</xloc>
+      <xloc>1280</xloc>
       <yloc>176</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>update QA field 3</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>tf1_administrative_sex_v = 0;
+</jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>
+      <field>
+        <name>tf1_administrative_sex_v</name>
+        <rename>tf1_administrative_sex_v</rename>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
+    </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1120</xloc>
+      <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2449,8 +2798,754 @@ function containsInvalidText(str) {
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1968</xloc>
-      <yloc>544</yloc>
+      <xloc>1760</xloc>
+      <yloc>608</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>administrative_sex_v</name>
+    <type>Validator</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <validate_all>N</validate_all>
+    <concat_errors>N</concat_errors>
+    <concat_separator>|</concat_separator>
+    <validator_field>
+      <name>administrative_sex</name>
+      <validation_name>administrative_sex_v</validation_name>
+      <max_length/>
+      <min_length/>
+      <null_allowed>Y</null_allowed>
+      <only_null_allowed>N</only_null_allowed>
+      <only_numeric_allowed>N</only_numeric_allowed>
+      <data_type>String</data_type>
+      <data_type_verified>N</data_type_verified>
+      <conversion_mask/>
+      <decimal_symbol/>
+      <grouping_symbol/>
+      <max_value/>
+      <min_value/>
+      <start_string/>
+      <end_string/>
+      <start_string_not_allowed/>
+      <end_string_not_allowed/>
+      <regular_expression/>
+      <regular_expression_not_allowed/>
+      <error_code/>
+      <error_description/>
+      <is_sourcing_values>N</is_sourcing_values>
+      <sourcing_step/>
+      <sourcing_field/>
+      <allowed_value>
+        <value>F</value>
+        <value>M</value>
+        <value>O</value>
+        <value>U</value>
+      </allowed_value>
+    </validator_field>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1120</xloc>
+      <yloc>176</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Completeness Validations 2</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>tf1_admit_reason_c = isNotEmpty(admit_reason_code);
+tf1_first_patient_id_present_c = isNotEmpty(first_patient_id_present);
+tf1_visit_id_c = isNotEmpty(visit_id);
+tf1_medical_record_number_present_c = isNotEmpty(medical_record_number_present);
+
+if (!discharge_date_time) {
+	tf1_discharge_date_time_c = 0;
+}
+
+if (!admit_date_time) {
+	tf1_admit_date_time_c = 0;
+}
+
+if (!tf1_patient_death_date_time_c) {
+	tf1_patient_death_date_time_c = 0;
+}
+
+if (!recorded_date_time) {
+	tf1_recorded_date_time_c = 0;
+}
+
+if (!message_date_time) {
+	tf1_message_date_time_c = 0;
+}
+
+if (!procedure_date_time) {
+	tf1_procedure_date_time_c = 0;
+}
+
+function isNotEmpty(str) {
+	ret = 0;
+	writeToLog('m', 'Received Str: (' + str + ')');
+	if (str) {
+		writeToLog('m', 'trimmed str = (' + trim(str) + ')');
+		if (!trim(str).equals('')) {
+			ret = 1;
+		}
+	}
+
+	return ret;
+} </jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>
+      <field>
+        <name>tf1_age_reported_v</name>
+        <rename>tf1_age_reported_v</rename>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
+      <field>
+        <name>tf1_admit_reason_c</name>
+        <rename>tf1_admit_reason_c</rename>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
+      <field>
+        <name>tf1_first_patient_id_present_c</name>
+        <rename>tf1_first_patient_id_present_c</rename>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
+      <field>
+        <name>tf1_visit_id_c</name>
+        <rename>tf1_visit_id_c</rename>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
+      <field>
+        <name>tf1_medical_record_number_present_c</name>
+        <rename>tf1_medical_record_number_present_c</rename>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
+      <field>
+        <name>tf1_discharge_date_time_c</name>
+        <rename>tf1_discharge_date_time_c</rename>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
+      <field>
+        <name>tf1_admit_date_time_c</name>
+        <rename>tf1_admit_date_time_c</rename>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
+      <field>
+        <name>tf1_patient_death_date_time_c</name>
+        <rename>tf1_patient_death_date_time_c</rename>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
+      <field>
+        <name>tf1_recorded_date_time_c</name>
+        <rename>tf1_recorded_date_time_c</rename>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
+      <field>
+        <name>tf1_message_date_time_c</name>
+        <rename>tf1_message_date_time_c</rename>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
+      <field>
+        <name>tf1_procedure_date_time_c</name>
+        <rename>tf1_procedure_date_time_c</rename>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
+    </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>912</xloc>
+      <yloc>304</yloc>
+      <draw>N</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select values</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>src_id</name>
+        <rename>src_id</rename>
+      </field>
+      <field>
+        <name>ss_batched_messages_id</name>
+        <rename>src_ss_batched_messages_id</rename>
+      </field>
+      <field>
+        <name>created_at</name>
+        <rename>src_created_at</rename>
+      </field>
+      <field>
+        <name>admit_reason_description</name>
+        <rename>admit_reason_description</rename>
+      </field>
+      <field>
+        <name>dw_treating_mft_id</name>
+        <rename>dw_treating_mft_id</rename>
+      </field>
+      <field>
+        <name>dw_sending_mft_id</name>
+        <rename>dw_sending_mft_id</rename>
+      </field>
+      <field>
+        <name>discharge_date_time</name>
+        <rename>src_discharge_date_time</rename>
+      </field>
+      <field>
+        <name>observation_date_time</name>
+        <rename>src_observation_date_time</rename>
+      </field>
+      <field>
+        <name>death_date_time</name>
+        <rename>src_death_date_time</rename>
+      </field>
+      <field>
+        <name>recorded_date_time</name>
+        <rename>src_recorded_date_time</rename>
+      </field>
+      <field>
+        <name>message_date_time</name>
+        <rename>src_message_date_time</rename>
+      </field>
+      <field>
+        <name>patient_account_number</name>
+        <rename>patient_account_number</rename>
+      </field>
+      <field>
+        <name>visit_id</name>
+        <rename>visit_id</rename>
+      </field>
+      <field>
+        <name>medical_record_number_present</name>
+        <rename>medical_record_number_present</rename>
+      </field>
+      <field>
+        <name>procedure_date_time</name>
+        <rename>src_procedure_date_time</rename>
+      </field>
+      <field>
+        <name>age_units_reported</name>
+        <rename>age_units_reported</rename>
+      </field>
+      <field>
+        <name>age_reported_int</name>
+        <rename>age_reported_num</rename>
+      </field>
+      <field>
+        <name>medication_list</name>
+        <rename>medication_list</rename>
+      </field>
+      <field>
+        <name>dw_rt_facility_visit_type_id</name>
+        <rename>dw_rt_facility_visit_type_id</rename>
+      </field>
+      <field>
+        <name>ss_batched_messages_created_at</name>
+        <rename>src_ss_batched_messages_created_at</rename>
+      </field>
+      <field>
+        <name>dw_ss_batched_messages_created_at_date_num_id</name>
+        <rename>dw_ss_batched_messages_created_at_date_num_id</rename>
+      </field>
+      <field>
+        <name>admit_date_time</name>
+        <rename>src_admit_date_time</rename>
+      </field>
+      <field>
+        <name>dw_ss_batched_message_created_at_time_id</name>
+        <rename>dw_ss_batched_message_created_at_time_id</rename>
+      </field>
+      <field>
+        <name>dw_admit_date_num_id</name>
+        <rename>dw_admit_date_num_id</rename>
+      </field>
+      <field>
+        <name>dw_admit_time_id</name>
+        <rename>dw_admit_time_id</rename>
+      </field>
+      <field>
+        <name>tf1_age_reported_v</name>
+        <rename>tf1_age_reported_v</rename>
+      </field>
+      <field>
+        <name>tf1_admit_reason_c</name>
+        <rename>tf1_admit_reason_c</rename>
+      </field>
+      <field>
+        <name>administrative_sex</name>
+        <rename>administrative_sex</rename>
+      </field>
+      <field>
+        <name>tf1_chiefcomplaint_v</name>
+        <rename>tf1_chiefcomplaint_v</rename>
+      </field>
+      <field>
+        <name>tf1_first_patient_id_present_c</name>
+        <rename>tf1_first_patient_id_present_c</rename>
+      </field>
+      <field>
+        <name>tf1_visit_id_c</name>
+        <rename>tf1_visit_id_c</rename>
+      </field>
+      <field>
+        <name>tf1_futuredate_v</name>
+        <rename>tf1_futuredate_v</rename>
+      </field>
+      <field>
+        <name>tf1_trigger_event_v</name>
+        <rename>tf1_trigger_event_v</rename>
+      </field>
+      <field>
+        <name>tf1_message_type_v</name>
+        <rename>tf1_message_type_v</rename>
+      </field>
+      <field>
+        <name>tf1_discharge_date_time_c</name>
+        <rename>tf1_discharge_date_time_c</rename>
+      </field>
+      <field>
+        <name>tf1_admit_date_time_c</name>
+        <rename>tf1_admit_date_time_c</rename>
+      </field>
+      <field>
+        <name>tf1_patient_death_date_time_c</name>
+        <rename>tf1_patient_death_date_time_c</rename>
+      </field>
+      <field>
+        <name>tf1_recorded_date_time_c</name>
+        <rename>tf1_recorded_date_time_c</rename>
+      </field>
+      <field>
+        <name>tf1_message_date_time_c</name>
+        <rename>tf1_message_date_time_c</rename>
+      </field>
+      <field>
+        <name>tf1_procedure_date_time_c</name>
+        <rename>tf1_procedure_date_time_c</rename>
+      </field>
+      <field>
+        <name>chief_complaints_text</name>
+        <rename>chief_complaints_text</rename>
+      </field>
+      <field>
+        <name>tf2_admit_date_time_v</name>
+        <rename>tf2_admit_date_time_v</rename>
+      </field>
+      <field>
+        <name>tf1_administrative_sex_v</name>
+        <rename>tf1_administrative_sex_v</rename>
+      </field>
+      <field>
+        <name>dw_procedure_date_num_id</name>
+        <rename>dw_procedure_date_num_id</rename>
+      </field>
+      <field>
+        <name>dw_procedure_time_id</name>
+        <rename>dw_procedure_time_id</rename>
+      </field>
+      <field>
+        <name>dw_mft_id</name>
+        <rename>dw_mft_id</rename>
+      </field>
+      <field>
+        <name>biosense_status</name>
+        <rename>biosense_status</rename>
+      </field>
+      <field>
+        <name>mft_status</name>
+        <rename>mft_status</rename>
+      </field>
+      <field>
+        <name>dw_patient_location_id</name>
+        <rename>dw_patient_location_id</rename>
+      </field>
+      <field>
+        <name>triage_notes_present</name>
+        <rename>triage_notes_present</rename>
+      </field>
+      <field>
+        <name>first_patient_id_present</name>
+        <rename>first_patient_id_present</rename>
+      </field>
+      <field>
+        <name>tf1_medical_record_number_present_c</name>
+        <rename>tf1_medical_record_number_present_c</rename>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>752</xloc>
+      <yloc>608</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>lookup_treating_dim_mft</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <from>dim_mft</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>N</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>treating_facility_id</name>
+        <field>facility_id</field>
+      </key>
+      <value>
+        <name>dw_mft_id</name>
+        <rename>dw_treating_mft_id</rename>
+        <default>0</default>
+        <type>Integer</type>
+      </value>
+    </lookup>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1312</xloc>
+      <yloc>608</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>get ss_processed_messages 2 2 2</name>
+    <type>DBJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>DCPLDW</connection>
+    <rowlimit>0</rowlimit>
+    <sql>select
+	now() as curr_dt_time,
+	spm.id as src_id,
+	ss_batched_messages_id,
+	created_at,
+	message_type,
+	trigger_event,
+	admit_reason_code,
+	admit_reason_description,
+	treating_facility_id,
+	sending_facility_id,
+	admit_date_time::date as admit_date,
+    admit_date_time,
+    discharge_date_time,
+	observation_date_time,
+	death_date_time,
+	recorded_date_time,
+	message_date_time,
+	case when first_patient_id_present = true then 1 else 0 end as first_patient_id_present,
+	patient_account_number,
+	visit_id,
+	medical_record_number_present,
+	patient_zip,
+	c_patient_county,
+	administrative_sex,
+	procedure_date_time::date as procedure_date,
+	procedure_date_time,
+	facility_type_code,
+	discharge_disposition,
+	case when triage_notes_present = true then 1 else 0 end as triage_notes_present,
+	age_reported,
+	age_units_reported,
+	ethnicity_code,
+	ethnicity_description,
+	medication_list,
+	facility_type_code_system,
+	ss_batched_messages_created_at,
+    ss_batched_messages_created_at::date as ss_batched_messages_created_at_date,
+    facility_uid,
+	string_agg(spcc.chief_complaint_text, '|') as chief_complaints_text
+from syndromic.ss_processed_message spm
+left join syndromic.ss_processed_chief_complaint spcc on spcc.id = spm.id
+where spm.id >= ? and spm.id &lt;= ${max_processed_message_id}
+group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38</sql>
+    <outer_join>N</outer_join>
+    <replace_vars>Y</replace_vars>
+    <parameter>
+      <field>
+        <name>max_src_id</name>
+        <type>Integer</type>
+      </field>
+    </parameter>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>416</xloc>
+      <yloc>272</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>lookup procedure date</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <from>dim_date</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>N</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>procedure_date</name>
+        <field>src_date_val</field>
+      </key>
+      <value>
+        <name>dw_date_num_id</name>
+        <rename>dw_procedure_date_num_id</rename>
+        <default>0</default>
+        <type>Integer</type>
+      </value>
+    </lookup>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1728</xloc>
+      <yloc>176</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>lookup_procedure_time</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <from>dim_time</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>N</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>procedure_time_val</name>
+        <field>time_val</field>
+      </key>
+      <value>
+        <name>dw_time_id</name>
+        <rename>dw_procedure_time_id</rename>
+        <default>0</default>
+        <type>Integer</type>
+      </value>
+    </lookup>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1952</xloc>
+      <yloc>608</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>lookup_main_dim_mft</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <from>dim_mft</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>N</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>facility_uid</name>
+        <field>facility_uid</field>
+      </key>
+      <value>
+        <name>dw_mft_id</name>
+        <rename>dw_mft_id</rename>
+        <default>0</default>
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>biosense_status</name>
+        <rename>biosense_status</rename>
+        <default/>
+        <type>String</type>
+      </value>
+      <value>
+        <name>mft_status</name>
+        <rename>mft_status</rename>
+        <default/>
+        <type>String</type>
+      </value>
+    </lookup>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1168</xloc>
+      <yloc>608</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Log Max</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>writeToLog('m', 'max src_id: ' + max_src_id);</jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>    </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>144</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2458,6 +3553,18 @@ function containsInvalidText(str) {
     <error>
       <source_step>Convert Age to Int</source_step>
       <target_step>Error Handling - Invalid Num</target_step>
+      <is_enabled>Y</is_enabled>
+      <nr_valuename/>
+      <descriptions_valuename/>
+      <fields_valuename/>
+      <codes_valuename/>
+      <max_errors/>
+      <max_pct_errors/>
+      <min_pct_rows/>
+    </error>
+    <error>
+      <source_step>administrative_sex_v</source_step>
+      <target_step>update QA field 3</target_step>
       <is_enabled>Y</is_enabled>
       <nr_valuename/>
       <descriptions_valuename/>
