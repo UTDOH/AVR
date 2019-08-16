@@ -11,6 +11,57 @@
   <modified_date>2019/05/21 12:50:18.797</modified_date>
   <parameters>
     </parameters>
+  <connection>
+    <name>DCPLDW</name>
+    <server/>
+    <type>POSTGRESQL</type>
+    <access>JNDI</access>
+    <database>DCPLDW</database>
+    <port>1521</port>
+    <username/>
+    <password>Encrypted </password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>1521</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
   <slaveservers>
     </slaveservers>
   <job-log-table>
@@ -485,7 +536,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>${pentaho.solutions.root.vfs}/etl/Syndromic/load_qa_processed_message.ktr</filename>
+      <filename>${pentaho.solutions.root.vfs}/etl/Syndromic/load_qa_processed_message_new.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -513,7 +564,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>1120</xloc>
-      <yloc>272</yloc>
+      <yloc>432</yloc>
     </entry>
     <entry>
       <name>set_max_processed_message_id</name>
@@ -586,6 +637,84 @@
       <nr>0</nr>
       <xloc>1120</xloc>
       <yloc>112</yloc>
+    </entry>
+    <entry>
+      <name>vacuum large table</name>
+      <description/>
+      <type>SQL</type>
+      <sql>vacuum analyze syndromic_olap.qa_ss_processed_message;
+vacuum analyze syndromic_olap.dim_patient_location;
+
+
+
+
+
+
+
+
+</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>DCPLDW</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1120</xloc>
+      <yloc>544</yloc>
+    </entry>
+    <entry>
+      <name>load_ss_processed_chief_complaint_summary.ktr</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${pentaho.solutions.root.vfs}/etl/Syndromic/load_ss_processed_chief_complaint_summary.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1120</xloc>
+      <yloc>320</yloc>
+    </entry>
+    <entry>
+      <name>truncate etl_ss_processed_chief_complaint_summary</name>
+      <description/>
+      <type>SQL</type>
+      <sql>delete from syndromic_olap.etl_ss_processed_chief_complaint_summary;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>DCPLDW</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1120</xloc>
+      <yloc>208</yloc>
     </entry>
   </entries>
   <hops>
@@ -671,8 +800,35 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>load_dim_person_location</from>
+      <from>load_qa_processed_message</from>
+      <to>vacuum large table</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>load_ss_processed_chief_complaint_summary.ktr</from>
       <to>load_qa_processed_message</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>load_dim_person_location</from>
+      <to>truncate etl_ss_processed_chief_complaint_summary</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>truncate etl_ss_processed_chief_complaint_summary</from>
+      <to>load_ss_processed_chief_complaint_summary.ktr</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

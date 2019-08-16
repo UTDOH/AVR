@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>load_qa_processed_message</name>
+    <name>load_qa_processed_message_new</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -438,7 +438,7 @@
     <notepad>
       <note>Open question - what is the
 link to rt_facility_visit_type?</note>
-      <xloc>672</xloc>
+      <xloc>432</xloc>
       <yloc>736</yloc>
       <width>189</width>
       <heigth>50</heigth>
@@ -462,7 +462,7 @@ link to rt_facility_visit_type?</note>
 see email from Eunice on 7/12/2019
 The solution will be to use a data validation
 step that uses a table to lookup invalid values</note>
-      <xloc>1360</xloc>
+      <xloc>1120</xloc>
       <yloc>304</yloc>
       <width>301</width>
       <heigth>90</heigth>
@@ -809,11 +809,6 @@ step that uses a table to lookup invalid values</note>
     </hop>
     <hop>
       <from>get ss_processed_messages 2 2</from>
-      <to>Get Agg Chief Compliant</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Get Agg Chief Compliant</from>
       <to>Convert Age to Int</to>
       <enabled>Y</enabled>
     </hop>
@@ -861,7 +856,7 @@ if (!age_reported) {
       </output>
     </remotesteps>
     <GUI>
-      <xloc>624</xloc>
+      <xloc>480</xloc>
       <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
@@ -885,7 +880,7 @@ if (!age_reported) {
       </output>
     </remotesteps>
     <GUI>
-      <xloc>624</xloc>
+      <xloc>480</xloc>
       <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
@@ -928,7 +923,7 @@ if (!age_reported) {
       </output>
     </remotesteps>
     <GUI>
-      <xloc>880</xloc>
+      <xloc>736</xloc>
       <yloc>608</yloc>
       <draw>Y</draw>
     </GUI>
@@ -965,7 +960,7 @@ writeToLog('m', 'dw_admit_date_num_id: ' + dw_admit_date_num_id);</jsScript_scri
       </output>
     </remotesteps>
     <GUI>
-      <xloc>2080</xloc>
+      <xloc>1936</xloc>
       <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1085,7 +1080,7 @@ Alert(date2str(dValue,"dd.MM.yyyy HH:mm:ss","EN", "EST"));
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1952</xloc>
+      <xloc>1808</xloc>
       <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1306,6 +1301,102 @@ Alert(date2str(dValue,"dd.MM.yyyy HH:mm:ss","EN", "EST"));
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
       </field>
+      <field>
+        <name>tf1_medication_list_c</name>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>1</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>tf1_discharge_disposition_c</name>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>1</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>tf1_patient_account_number_c</name>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>1</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>tf1_observation_date_time_c</name>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>1</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>tf1_admit_reason_code_c</name>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>1</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>tf1_admit_reason_description_c</name>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>tf1_treating_facility_id_c</name>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>tf1_sending_facility_id_c</name>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
     </fields>
     <cluster_schema/>
     <remotesteps>
@@ -1315,7 +1406,7 @@ Alert(date2str(dValue,"dd.MM.yyyy HH:mm:ss","EN", "EST"));
       </output>
     </remotesteps>
     <GUI>
-      <xloc>768</xloc>
+      <xloc>624</xloc>
       <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1352,7 +1443,7 @@ from ${olap_schema}.dim_date
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1728</xloc>
+      <xloc>1584</xloc>
       <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1389,7 +1480,7 @@ from ${olap_schema}.dim_mft</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1168</xloc>
+      <xloc>1024</xloc>
       <yloc>720</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1439,7 +1530,7 @@ from ${olap_schema}.dim_mft</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1568</xloc>
+      <xloc>1424</xloc>
       <yloc>608</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1473,7 +1564,7 @@ from ${olap_schema}.dim_rt_facility_visit_type</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>912</xloc>
+      <xloc>768</xloc>
       <yloc>752</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1507,7 +1598,7 @@ from ${olap_schema}.dim_time</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>2096</xloc>
+      <xloc>1952</xloc>
       <yloc>512</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1538,7 +1629,7 @@ from ${olap_schema}.dim_time</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1280</xloc>
+      <xloc>1136</xloc>
       <yloc>64</yloc>
       <draw>N</draw>
     </GUI>
@@ -1696,9 +1787,11 @@ group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27
 	facility_type_code_system,
 	ss_batched_messages_created_at,
     ss_batched_messages_created_at::date as ss_batched_messages_created_at_date,
-    facility_uid
+    facility_uid,
+    espccs.chief_complaint_texts
 from syndromic.ss_processed_message spm
-where spm.id >= 65000000 and spm.id &lt;= ${max_processed_message_id}</sql>
+left join syndromic_olap.etl_ss_processed_chief_complaint_summary espccs on espccs.ss_processed_message_src_id = spm.id
+where spm.id >= 70000000 and spm.id &lt;= ${max_processed_message_id}</sql>
     <outer_join>N</outer_join>
     <replace_vars>Y</replace_vars>
     <parameter>
@@ -1752,7 +1845,7 @@ where spm.id >= 65000000 and spm.id &lt;= ${max_processed_message_id}</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1952</xloc>
+      <xloc>1808</xloc>
       <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1793,7 +1886,7 @@ where spm.id >= 65000000 and spm.id &lt;= ${max_processed_message_id}</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1472</xloc>
+      <xloc>1328</xloc>
       <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1834,7 +1927,7 @@ where spm.id >= 65000000 and spm.id &lt;= ${max_processed_message_id}</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1952</xloc>
+      <xloc>1808</xloc>
       <yloc>464</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1875,7 +1968,7 @@ where spm.id >= 65000000 and spm.id &lt;= ${max_processed_message_id}</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1024</xloc>
+      <xloc>880</xloc>
       <yloc>608</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1916,7 +2009,7 @@ where spm.id >= 65000000 and spm.id &lt;= ${max_processed_message_id}</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>896</xloc>
+      <xloc>752</xloc>
       <yloc>672</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1957,7 +2050,7 @@ where spm.id >= 65000000 and spm.id &lt;= ${max_processed_message_id}</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1952</xloc>
+      <xloc>1808</xloc>
       <yloc>528</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2000,7 +2093,7 @@ where spm.id >= 65000000 and spm.id &lt;= ${max_processed_message_id}</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>768</xloc>
+      <xloc>624</xloc>
       <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2049,6 +2142,25 @@ if (!message_date_time) {
 
 if (!procedure_date_time) {
 	tf1_procedure_date_time_c = 0;
+}
+
+tf1_medication_list_c = isNotEmpty(medication_list);
+tf1_discharge_disposition_c = isNotEmpty(discharge_disposition);
+tf1_patient_account_number_c = isNotEmpty(patient_account_number);
+
+if (!observation_date_time) {
+	tf1_observation_date_time_c = 0;
+}
+
+tf1_admit_reason_code_c = isNotEmpty(admit_reason_code);
+tf1_admit_reason_description_c = isNotEmpty(admit_reason_description);
+
+if (!treating_facility_id) {
+	tf1_treating_facility_id_c = 0;
+}
+
+if (!sending_facility_id) {
+	tf1_sending_facility_id_c = 0;
 }
 
 function isNotEmpty(str) {
@@ -2146,6 +2258,70 @@ function isNotEmpty(str) {
         <precision>-1</precision>
         <replace>Y</replace>
       </field>
+      <field>
+        <name>tf1_medication_list_c</name>
+        <rename>tf1_medication_list_c</rename>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
+      <field>
+        <name>tf1_discharge_disposition_c</name>
+        <rename>tf1_discharge_disposition_c</rename>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
+      <field>
+        <name>tf1_patient_account_number_c</name>
+        <rename>tf1_patient_account_number_c</rename>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
+      <field>
+        <name>tf1_observation_date_time_c</name>
+        <rename>tf1_observation_date_time_c</rename>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
+      <field>
+        <name>tf1_admit_reason_code_c</name>
+        <rename>tf1_admit_reason_code_c</rename>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
+      <field>
+        <name>tf1_admit_reason_description_c</name>
+        <rename>tf1_admit_reason_description_c</rename>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
+      <field>
+        <name>tf1_treating_facility_id_c</name>
+        <rename>tf1_treating_facility_id_c</rename>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
+      <field>
+        <name>tf1_sending_facility_id_c</name>
+        <rename>tf1_sending_facility_id_c</rename>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
     </fields>
     <cluster_schema/>
     <remotesteps>
@@ -2155,7 +2331,7 @@ function isNotEmpty(str) {
       </output>
     </remotesteps>
     <GUI>
-      <xloc>928</xloc>
+      <xloc>784</xloc>
       <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2378,7 +2554,7 @@ function isNotEmpty(str) {
       </output>
     </remotesteps>
     <GUI>
-      <xloc>656</xloc>
+      <xloc>512</xloc>
       <yloc>608</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2408,7 +2584,7 @@ function isNotEmpty(str) {
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1104</xloc>
+      <xloc>960</xloc>
       <yloc>384</yloc>
       <draw>N</draw>
     </GUI>
@@ -2546,7 +2722,7 @@ Alert(dateDiff(d1,d2,"wd"));</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1280</xloc>
+      <xloc>1136</xloc>
       <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2590,7 +2766,7 @@ Alert(dateDiff(d1,d2,"wd"));</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1120</xloc>
+      <xloc>976</xloc>
       <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2613,34 +2789,34 @@ Alert(dateDiff(d1,d2,"wd"));</jsScript_script>
         <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>var tf1_chiefcomplaint_v = 1;
-if(chief_complaints_text) {
+if(chief_complaint_texts) {
 	var strIndex = 0;
 	var strNextIndex = 0;
 	var str;
 	//writeToLog('m', '----------------------------------------------');
-	//writeToLog('m', 'chief_complaints_text.length=' + chief_complaints_text.length);
-	if (chief_complaints_text.length &lt;= 2) {
+	//writeToLog('m', 'chief_complaint_texts.length=' + chief_complaint_texts.length);
+	if (chief_complaint_texts.length &lt;= 2) {
 		tf1_chiefcomplaint_v = 0;
 	} else {
-		for (var i = 0; i &lt; chief_complaints_text.length; i++) {
-			strIndex = indexOf(chief_complaints_text, '|', i);
+		for (var i = 0; i &lt; chief_complaint_texts.length; i++) {
+			strIndex = indexOf(chief_complaint_texts, '|', i);
 			//writeToLog('m', 'strIndex=' + strIndex);
 			if (strIndex > 0) {
-				//strNextIndex = indexOf(chief_complaints_text, '|', strIndex, chief_complaints_text.length);
+				//strNextIndex = indexOf(chief_complaint_texts, '|', strIndex, chief_complaint_texts.length);
 				//if(strNextIndex > -1) {
-				//str = substr(chief_complaints_text, i, strIndex,);
+				//str = substr(chief_complaint_texts, i, strIndex,);
 			
-				str = substr(chief_complaints_text, i, (strIndex-i));
+				str = substr(chief_complaint_texts, i, (strIndex-i));
 				//writeToLog('m', 'strIndex=' + strIndex + ',i=' + i + 'str=' + str);
 				i = strIndex;
 			} else {
-				str = substr(chief_complaints_text, i, chief_complaints_text.length);
-				i = chief_complaints_text.length;
+				str = substr(chief_complaint_texts, i, chief_complaint_texts.length);
+				i = chief_complaint_texts.length;
 				//writeToLog('m', 'strIndex=' + strIndex + ',i=' + i + 'str=' + str);
 			}
 			if (containsInvalidText(str)) {
 				tf1_chiefcomplaint_v = 0;
-				i = chief_complaints_text.length; //break loop
+				i = chief_complaint_texts.length; //break loop
 			}
 		}
 	}
@@ -2711,7 +2887,7 @@ function containsInvalidText(str) {
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1760</xloc>
+      <xloc>1616</xloc>
       <yloc>608</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2771,7 +2947,7 @@ function containsInvalidText(str) {
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1120</xloc>
+      <xloc>976</xloc>
       <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2934,7 +3110,7 @@ function isNotEmpty(str) {
       </output>
     </remotesteps>
     <GUI>
-      <xloc>912</xloc>
+      <xloc>768</xloc>
       <yloc>304</yloc>
       <draw>N</draw>
     </GUI>
@@ -3112,10 +3288,6 @@ function isNotEmpty(str) {
         <rename>tf1_procedure_date_time_c</rename>
       </field>
       <field>
-        <name>chief_complaints_text</name>
-        <rename>chief_complaints_text</rename>
-      </field>
-      <field>
         <name>tf2_admit_date_time_v</name>
         <rename>tf2_admit_date_time_v</rename>
       </field>
@@ -3159,6 +3331,38 @@ function isNotEmpty(str) {
         <name>udoh_status</name>
         <rename>mft_udoh_status</rename>
       </field>
+      <field>
+        <name>tf1_medication_list_c</name>
+        <rename>tf1_medication_list_c</rename>
+      </field>
+      <field>
+        <name>tf1_discharge_disposition_c</name>
+        <rename>tf1_discharge_disposition_c</rename>
+      </field>
+      <field>
+        <name>tf1_patient_account_number_c</name>
+        <rename>tf1_patient_account_number_c</rename>
+      </field>
+      <field>
+        <name>tf1_observation_date_time_c</name>
+        <rename>tf1_observation_date_time_c</rename>
+      </field>
+      <field>
+        <name>tf1_admit_reason_code_c</name>
+        <rename>tf1_admit_reason_code_c</rename>
+      </field>
+      <field>
+        <name>tf1_admit_reason_description_c</name>
+        <rename>tf1_admit_reason_description_c</rename>
+      </field>
+      <field>
+        <name>tf1_treating_facility_id_c</name>
+        <rename>tf1_treating_facility_id_c</rename>
+      </field>
+      <field>
+        <name>tf1_sending_facility_id_c</name>
+        <rename>tf1_sending_facility_id_c</rename>
+      </field>
       <select_unspecified>N</select_unspecified>
     </fields>
     <cluster_schema/>
@@ -3169,7 +3373,7 @@ function isNotEmpty(str) {
       </output>
     </remotesteps>
     <GUI>
-      <xloc>752</xloc>
+      <xloc>608</xloc>
       <yloc>608</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3210,7 +3414,7 @@ function isNotEmpty(str) {
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1312</xloc>
+      <xloc>1168</xloc>
       <yloc>608</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3329,7 +3533,7 @@ group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1728</xloc>
+      <xloc>1584</xloc>
       <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3370,7 +3574,7 @@ group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1952</xloc>
+      <xloc>1808</xloc>
       <yloc>608</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3423,7 +3627,7 @@ group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1168</xloc>
+      <xloc>1024</xloc>
       <yloc>608</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3458,44 +3662,6 @@ group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27
     </remotesteps>
     <GUI>
       <xloc>144</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Get Agg Chief Compliant</name>
-    <type>DBJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>DCPLDW</connection>
-    <rowlimit>0</rowlimit>
-    <sql>select
-	string_agg(spcc.chief_complaint_text, '|') as chief_complaints_text
-from syndromic.ss_processed_chief_complaint spcc
-where spcc.id = ?</sql>
-    <outer_join>Y</outer_join>
-    <replace_vars>N</replace_vars>
-    <parameter>
-      <field>
-        <name>src_id</name>
-        <type>Integer</type>
-      </field>
-    </parameter>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>480</xloc>
       <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
