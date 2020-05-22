@@ -1,24 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>exec_update_nbs_result_w_msg_processed_on</name>
+    <name>geocode_etl_us_zipcodes</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
-    <trans_status>0</trans_status>
     <directory>/</directory>
     <parameters>
-      <parameter>
-        <name>nbsoltp_schema</name>
-        <default_value>NBSPROD</default_value>
-        <description>NBSPROD|NBS_USER</description>
-      </parameter>
-      <parameter>
-        <name>nbsoltp_schemaz</name>
-        <default_value>NBS_USER</default_value>
-        <description>NBSPROD|NBS_USER</description>
-      </parameter>
     </parameters>
     <log>
       <trans-log-table>
@@ -438,20 +427,20 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2017/12/02 21:07:59.720</created_date>
+    <created_date>2019/10/17 14:55:33.380</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2017/12/02 21:07:59.720</modified_date>
-    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
+    <modified_date>2019/10/17 14:55:33.380</modified_date>
+    <key_for_session_key/>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
   <connection>
-    <name>NBSOLAPDS</name>
+    <name>DCPLDW</name>
     <server/>
     <type>POSTGRESQL</type>
     <access>JNDI</access>
-    <database>NBSOLAPDS</database>
+    <database>DCPLDW</database>
     <port>1521</port>
     <username/>
     <password>Encrypted </password>
@@ -468,20 +457,8 @@
         <attribute>N</attribute>
       </attribute>
       <attribute>
-        <code>INITIAL_POOL_SIZE</code>
-        <attribute>5</attribute>
-      </attribute>
-      <attribute>
         <code>IS_CLUSTERED</code>
         <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>MAXIMUM_POOL_SIZE</code>
-        <attribute>20</attribute>
-      </attribute>
-      <attribute>
-        <code>POOLING_removeAbandoned</code>
-        <attribute>true</attribute>
       </attribute>
       <attribute>
         <code>PORT_NUMBER</code>
@@ -505,253 +482,29 @@
       </attribute>
       <attribute>
         <code>USE_POOLING</code>
-        <attribute>Y</attribute>
-      </attribute>
-    </attributes>
-  </connection>
-  <connection>
-    <name>NBSOLTP</name>
-    <server/>
-    <type>ORACLE</type>
-    <access>JNDI</access>
-    <database>NBSOLTP</database>
-    <port>1521</port>
-    <username/>
-    <password>Encrypted </password>
-    <servername/>
-    <data_tablespace>${nbsoltp_schema}</data_tablespace>
-    <index_tablespace>${nbsoltp_schema}</index_tablespace>
-    <attributes>
-      <attribute>
-        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
         <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>INITIAL_POOL_SIZE</code>
-        <attribute>5</attribute>
-      </attribute>
-      <attribute>
-        <code>IS_CLUSTERED</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>MAXIMUM_POOL_SIZE</code>
-        <attribute>20</attribute>
-      </attribute>
-      <attribute>
-        <code>POOLING_removeAbandoned</code>
-        <attribute>true</attribute>
-      </attribute>
-      <attribute>
-        <code>PORT_NUMBER</code>
-        <attribute>1521</attribute>
-      </attribute>
-      <attribute>
-        <code>PRESERVE_RESERVED_WORD_CASE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>QUOTE_ALL_FIELDS</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>STRICT_NUMBER_38_INTERPRETATION</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>USE_POOLING</code>
-        <attribute>Y</attribute>
       </attribute>
     </attributes>
   </connection>
   <order>
     <hop>
-      <from>Log Date</from>
-      <to>Get ARUP Message Out Date 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Get ARUP Message Out Date 2</from>
-      <to>Calculator</to>
+      <from>update_dim_patient_location_with_etl_us_zipcodes</from>
+      <to>Modified Java Script Value</to>
       <enabled>N</enabled>
     </hop>
     <hop>
-      <from>Calculator</from>
-      <to>Update fns.src_message_processed_on</to>
+      <from>Modified Java Script Value</from>
+      <to>Smarty Streets API Address Lookup</to>
       <enabled>N</enabled>
     </hop>
     <hop>
-      <from>Get Max SRC_MESSAGE_PROCESSED_ON</from>
-      <to>Log Date</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Get ARUP Message Out Date 2</from>
-      <to>Update fns.src_message_processed_on</to>
+      <from>update_dim_patient_location_with_etl_us_zipcodes</from>
+      <to>Update</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Calculator</name>
-    <type>Calculator</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <calculation>
-      <field_name>SAMPLE_NUMBER_AS_INT</field_name>
-      <calc_type>COPY_FIELD</calc_type>
-      <field_a>SAMPLE_NUMBER</field_a>
-      <field_b/>
-      <field_c/>
-      <value_type>Integer</value_type>
-      <value_length>-1</value_length>
-      <value_precision>-1</value_precision>
-      <remove>N</remove>
-      <conversion_mask/>
-      <decimal_symbol/>
-      <grouping_symbol/>
-      <currency_symbol/>
-    </calculation>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>752</xloc>
-      <yloc>96</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Data Grid</name>
-    <type>DataGrid</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>DW_MESSAGE_PROCESSED_ON</name>
-        <type>Integer</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>sample_number</name>
-        <type>BigNumber</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>SRC_MESSAGE_PROCESSED_ON</name>
-        <type>Timestamp</type>
-        <format>yyyy/MM/dd HH:mm:ss</format>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-    <data>
-      <line>
-        <item>20171011</item>
-        <item>3082829</item>
-        <item>2017/10/11 13:27:01</item>
-      </line>
-    </data>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>704</xloc>
-      <yloc>208</yloc>
-      <draw>N</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Get ARUP Message Out Date 2</name>
-    <type>DBJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>NBSOLTP</connection>
-    <rowlimit>0</rowlimit>
-    <sql>select 
-	 SAMPLE_NUMBER
-	,MAX(MESSAGE_PROCESSED_ON) as SRC_MESSAGE_PROCESSED_ON
-    ,TO_NUMBER(TO_CHAR(MAX(MESSAGE_PROCESSED_ON), 'YYYYMMDD')) AS DW_MESSAGE_PROCESSED_ON
-FROM ${nbsoltp_schema}.NBS_ARUP_MESSAGE_IN
-WHERE MESSAGE_PROCESSED_ON >= ?
-group by SAMPLE_NUMBER
-</sql>
-    <outer_join>N</outer_join>
-    <replace_vars>Y</replace_vars>
-    <parameter>
-      <field>
-        <name>max_src_message_processed_on</name>
-        <type>Date</type>
-      </field>
-    </parameter>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>560</xloc>
-      <yloc>208</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Get Max SRC_MESSAGE_PROCESSED_ON</name>
+    <name>update_dim_patient_location_with_etl_us_zipcodes</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -761,10 +514,20 @@ group by SAMPLE_NUMBER
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>NBSOLAPDS</connection>
+    <connection>DCPLDW</connection>
     <sql>select 
-	case when max(SRC_MESSAGE_PROCESSED_ON) is not null then max(SRC_MESSAGE_PROCESSED_ON) else date '2006-01-01' end as max_SRC_MESSAGE_PROCESSED_ON 
-from nbs_olap.fact_nbs_result;</sql>
+	 patient_zip
+	,lower(euz.county_name) as patient_county
+	,euz.state_id
+    ,euz.lat
+	,euz.lng
+    ,lower(euz.county_name)||', '||lower(euz.state_id) as patient_county_state_id
+    ,'c9e34459-6e2c-4d16-853b-809a8ff1a6d2' as authid
+    ,'OtIdBhYJPj2QjwpG8gZA1R32W1XqxkF3vle5DYu%2F89U%2BtrOrgkzaE1LSU1NHU6njcKh9jmf%2F%2F%2B21QI%2B7oOLKfg%3D%3D' as authtoken
+    ,1 as version_id
+    ,now() as start_date
+from syndromic_olap.dim_patient_location dpl 
+inner join syndromic_olap.etl_us_zipcodes euz on euz.zip = substring(patient_zip, 0, 6);</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -778,13 +541,56 @@ from nbs_olap.fact_nbs_result;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>176</xloc>
-      <yloc>208</yloc>
+      <xloc>112</xloc>
+      <yloc>32</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Log Date</name>
+    <name>Smarty Streets API Address Lookup</name>
+    <type>HTTP</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <url>https://us-zipcode.api.smartystreets.com</url>
+    <urlInField>Y</urlInField>
+    <urlField>apiurl</urlField>
+    <encoding>UTF-8</encoding>
+    <httpLogin/>
+    <httpPassword>Encrypted </httpPassword>
+    <proxyHost/>
+    <proxyPort/>
+    <socketTimeout>10000</socketTimeout>
+    <connectionTimeout>10000</connectionTimeout>
+    <closeIdleConnectionsTime>-1</closeIdleConnectionsTime>
+    <lookup>
+    </lookup>
+    <result>
+      <name>result</name>
+      <code/>
+      <response_time/>
+      <response_header/>
+    </result>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>544</xloc>
+      <yloc>48</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Modified Java Script Value</name>
     <type>ScriptValueMod</type>
     <description/>
     <distribute>Y</distribute>
@@ -800,10 +606,20 @@ from nbs_olap.fact_nbs_result;</sql>
       <jsScript>
         <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>writeToLog('m', 'max_src_message_processed_on: ' + max_src_message_processed_on)</jsScript_script>
+        <jsScript_script>var apiurl = 'https://us-zipcode.api.smartystreets.com/lookup?auth-id=' + authid + '&amp;auth-token=' + authtoken;
+apiurl = apiurl + '&amp;zipcode=' + replace(zip, ' ', '%20');</jsScript_script>
       </jsScript>
     </jsScripts>
-    <fields>    </fields>
+    <fields>
+      <field>
+        <name>apiurl</name>
+        <rename>apiurl</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+    </fields>
     <cluster_schema/>
     <remotesteps>
       <input>
@@ -812,13 +628,13 @@ from nbs_olap.fact_nbs_result;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>400</xloc>
-      <yloc>208</yloc>
+      <xloc>304</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Update fns.src_message_processed_on</name>
+    <name>Update</name>
     <type>Update</type>
     <description/>
     <distribute>Y</distribute>
@@ -828,28 +644,44 @@ from nbs_olap.fact_nbs_result;</sql>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>NBSOLAPDS</connection>
-    <skip_lookup>Y</skip_lookup>
+    <connection>DCPLDW</connection>
+    <skip_lookup>N</skip_lookup>
     <commit>100</commit>
-    <use_batch>Y</use_batch>
+    <use_batch>N</use_batch>
     <error_ignored>N</error_ignored>
     <ignore_flag_field/>
     <lookup>
-      <schema>nbs_olap</schema>
-      <table>fact_nbs_result</table>
+      <schema>syndromic_olap</schema>
+      <table>dim_patient_location</table>
       <key>
-        <name>SAMPLE_NUMBER</name>
-        <field>sample_number</field>
+        <name>patient_zip</name>
+        <field>patient_zip</field>
         <condition>=</condition>
         <name2/>
       </key>
       <value>
-        <name>dw_message_processed_on_date_num_id</name>
-        <rename>DW_MESSAGE_PROCESSED_ON</rename>
+        <name>patient_latitude</name>
+        <rename>lat</rename>
       </value>
       <value>
-        <name>src_message_processed_on</name>
-        <rename>SRC_MESSAGE_PROCESSED_ON</rename>
+        <name>patient_longitude</name>
+        <rename>lng</rename>
+      </value>
+      <value>
+        <name>patient_state_id</name>
+        <rename>state_id</rename>
+      </value>
+      <value>
+        <name>patient_county_state_id</name>
+        <rename>patient_county_state_id</rename>
+      </value>
+      <value>
+        <name>version_id</name>
+        <rename>version_id</rename>
+      </value>
+      <value>
+        <name>start_date</name>
+        <rename>start_date</rename>
       </value>
     </lookup>
     <cluster_schema/>
@@ -860,7 +692,7 @@ from nbs_olap.fact_nbs_result;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>944</xloc>
+      <xloc>208</xloc>
       <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>

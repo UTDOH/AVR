@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>exec_nbs_sample_main</name>
+    <name>load_dim_mft_smartystreets</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -9,26 +9,6 @@
     <trans_status>0</trans_status>
     <directory>/</directory>
     <parameters>
-      <parameter>
-        <name>endDate</name>
-        <default_value>NULL</default_value>
-        <description/>
-      </parameter>
-      <parameter>
-        <name>nbsoltp_schema</name>
-        <default_value>NBSPROD</default_value>
-        <description>NBSPROD|NBS_USER</description>
-      </parameter>
-      <parameter>
-        <name>nbsoltp_schemazz</name>
-        <default_value>NBS_USER</default_value>
-        <description>NBSPROD|NBS_USER</description>
-      </parameter>
-      <parameter>
-        <name>startDate</name>
-        <default_value>NULL</default_value>
-        <description/>
-      </parameter>
     </parameters>
     <log>
       <trans-log-table>
@@ -448,20 +428,20 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2017/11/24 15:51:32.694</created_date>
+    <created_date>2014/02/17 13:45:06.363</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2017/11/24 15:51:32.694</modified_date>
+    <modified_date>2014/02/17 13:45:06.363</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
   <connection>
-    <name>NBSOLAPDS</name>
+    <name>DCPLDW</name>
     <server/>
     <type>POSTGRESQL</type>
     <access>JNDI</access>
-    <database>NBSOLAPDS</database>
+    <database>DCPLDW</database>
     <port>1521</port>
     <username/>
     <password>Encrypted </password>
@@ -478,20 +458,8 @@
         <attribute>N</attribute>
       </attribute>
       <attribute>
-        <code>INITIAL_POOL_SIZE</code>
-        <attribute>5</attribute>
-      </attribute>
-      <attribute>
         <code>IS_CLUSTERED</code>
         <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>MAXIMUM_POOL_SIZE</code>
-        <attribute>20</attribute>
-      </attribute>
-      <attribute>
-        <code>POOLING_removeAbandoned</code>
-        <attribute>true</attribute>
       </attribute>
       <attribute>
         <code>PORT_NUMBER</code>
@@ -515,875 +483,99 @@
       </attribute>
       <attribute>
         <code>USE_POOLING</code>
-        <attribute>Y</attribute>
-      </attribute>
-    </attributes>
-  </connection>
-  <connection>
-    <name>NBSOLTP</name>
-    <server/>
-    <type>ORACLE</type>
-    <access>JNDI</access>
-    <database>NBSOLTP</database>
-    <port>1521</port>
-    <username/>
-    <password>Encrypted </password>
-    <servername/>
-    <data_tablespace>${nbsoltp_schema}</data_tablespace>
-    <index_tablespace>${nbsoltp_schema}</index_tablespace>
-    <attributes>
-      <attribute>
-        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
         <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>INITIAL_POOL_SIZE</code>
-        <attribute>5</attribute>
-      </attribute>
-      <attribute>
-        <code>IS_CLUSTERED</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>MAXIMUM_POOL_SIZE</code>
-        <attribute>20</attribute>
-      </attribute>
-      <attribute>
-        <code>POOLING_removeAbandoned</code>
-        <attribute>true</attribute>
-      </attribute>
-      <attribute>
-        <code>PORT_NUMBER</code>
-        <attribute>1521</attribute>
-      </attribute>
-      <attribute>
-        <code>PRESERVE_RESERVED_WORD_CASE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>QUOTE_ALL_FIELDS</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>STRICT_NUMBER_38_INTERPRETATION</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>USE_POOLING</code>
-        <attribute>Y</attribute>
       </attribute>
     </attributes>
   </connection>
   <order>
     <hop>
-      <from>Get Max Date</from>
-      <to>log dates 2</to>
+      <from>Smarty Streets API Address Lookup</from>
+      <to>Log API Error</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>log dates 2</from>
-      <to>Get Results Incremental</to>
+      <from>Json Input</from>
+      <to>Log error</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>start</from>
-      <to>Get Max Date</to>
+      <from>merge streams</from>
+      <to>dim_mft</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>dim_date</from>
-      <to>lookup completed_date</to>
+      <from>remove API result fields</from>
+      <to>merge streams</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>dim_date</from>
-      <to>lookup recd_date</to>
+      <from>Log error</from>
+      <to>remove API result fields 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>dim_date</from>
-      <to>lookup login_date</to>
+      <from>remove API result fields 2</from>
+      <to>merge streams 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>login date not null</from>
-      <to>set 0 dt</to>
+      <from>merge streams 2</from>
+      <to>Add default lat-lon</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>dim_date</from>
-      <to>lookup reviewed_date</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Get Results Incremental</from>
-      <to>login date not null</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>login date not null</from>
-      <to>lookup login_date</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>set 0 dt</from>
-      <to>RECD_DATE not null</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>lookup login_date</from>
-      <to>RECD_DATE not null</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>RECD_DATE not null</from>
-      <to>lookup recd_date</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>RECD_DATE not null</from>
-      <to>set 0 dt 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>set 0 dt 2</from>
-      <to>completed_datenot null 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>lookup recd_date</from>
-      <to>completed_datenot null 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>completed_datenot null 2</from>
-      <to>lookup completed_date</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>completed_datenot null 2</from>
-      <to>set 0 dt 3</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>set 0 dt 3</from>
-      <to>reviewed_datenot null</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>reviewed_datenot null</from>
-      <to>lookup reviewed_date</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>reviewed_datenot null</from>
-      <to>set 0 dt 4</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>set 0 dt 4</from>
-      <to>fact_nbs_sample</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Get Results Incremental Nov 2017</from>
-      <to>login date not null</to>
+      <from>Json Input</from>
+      <to>Log lat/lon</to>
       <enabled>N</enabled>
     </hop>
     <hop>
-      <from>start</from>
-      <to>Get Results Incremental Nov 2017</to>
+      <from>Log lat/lon</from>
+      <to>remove API result fields</to>
       <enabled>N</enabled>
     </hop>
     <hop>
-      <from>set 0 dt 4</from>
-      <to>fact_nbs_sample 2</to>
-      <enabled>N</enabled>
-    </hop>
-    <hop>
-      <from>lookup completed_date</from>
-      <to>reviewed_datenot null</to>
+      <from>Log API Error</from>
+      <to>merge streams 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>lookup reviewed_date</from>
-      <to>fact_nbs_sample</to>
+      <from>Smarty Streets API Address Lookup</from>
+      <to>Log API Response</to>
+      <enabled>N</enabled>
+    </hop>
+    <hop>
+      <from>Log API Response</from>
+      <to>Json Input</to>
+      <enabled>N</enabled>
+    </hop>
+    <hop>
+      <from>Smarty Streets API Address Lookup</from>
+      <to>Json Input</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Json Input</from>
+      <to>remove API result fields</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>get_dim_mfts</from>
+      <to>Construct Address</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Construct Address</from>
+      <to>Smarty Streets API Address Lookup</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Add default lat-lon</from>
+      <to>merge streams</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Get Max Date</name>
-    <type>DBJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>NBSOLAPDS</connection>
-    <rowlimit>0</rowlimit>
-    <sql>select CASE WHEN max(changed_on) is not null then max(changed_on) else to_date('1900/01/01', 'YYYY/DD/mm') end as maxSampleChangedOn from nbs_olap.fact_nbs_sample</sql>
-    <outer_join>N</outer_join>
-    <replace_vars>N</replace_vars>
-    <parameter>
-    </parameter>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>160</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Get Results Incremental</name>
-    <type>DBJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>NBSOLTP</connection>
-    <rowlimit>0</rowlimit>
-    <sql>select TO_CHAR(SAMPLE_NUMBER) AS SAMPLE_NUMBER,
-  TEXT_ID AS ACCESSION_NUMBER,
-  STATUS,
-  CHANGED_ON,
-  to_date(LOGIN_DATE) as LOGIN_DATE,
-  to_date(RECD_DATE) as RECD_DATE,
-  to_date(DATE_COMPLETED) as DATE_COMPLETED,
-  to_date(DATE_REVIEWED) as DATE_REVIEWED,
-  IS_NORMAL,
-  PRODUCT
-from ${nbsoltp_schema}.SAMPLE
-WHERE CHANGED_ON > ?</sql>
-    <outer_join>N</outer_join>
-    <replace_vars>Y</replace_vars>
-    <parameter>
-      <field>
-        <name>maxsamplechangedon</name>
-        <type>Date</type>
-      </field>
-    </parameter>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>384</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Get Results Incremental Nov 2017</name>
-    <type>DBJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>NBSOLTP</connection>
-    <rowlimit>0</rowlimit>
-    <sql>select SAMPLE_NUMBER,
-  TEXT_ID AS ACCESSION_NUMBER,
-  STATUS,
-  CHANGED_ON,
-  to_date(LOGIN_DATE) as LOGIN_DATE,
-  to_date(RECD_DATE) as RECD_DATE,
-  to_date(DATE_COMPLETED) as DATE_COMPLETED,
-  to_date(DATE_REVIEWED) as DATE_REVIEWED,
-  IS_NORMAL,
-  PRODUCT
-from ${nbsoltp_schema}.SAMPLE
-WHERE CHANGED_ON > to_date('2017/11/01', 'YYYY/MM/dd')</sql>
-    <outer_join>N</outer_join>
-    <replace_vars>Y</replace_vars>
-    <parameter>
-    </parameter>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>336</xloc>
-      <yloc>336</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>RECD_DATE not null</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <send_true_to>lookup recd_date</send_true_to>
-    <send_false_to>set 0 dt 2</send_false_to>
-    <compare>
-      <condition>
-        <negated>N</negated>
-        <leftvalue>RECD_DATE</leftvalue>
-        <function>IS NOT NULL</function>
-        <rightvalue/>
-      </condition>
-    </compare>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>784</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>completed_datenot null 2</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <send_true_to>lookup completed_date</send_true_to>
-    <send_false_to>set 0 dt 3</send_false_to>
-    <compare>
-      <condition>
-        <negated>N</negated>
-        <leftvalue>DATE_COMPLETED</leftvalue>
-        <function>IS NOT NULL</function>
-        <rightvalue/>
-      </condition>
-    </compare>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>992</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>dim_date</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>NBSOLAPDS</connection>
-    <sql>select 
-   dw_date_id
-  ,dw_date_num_id
-  ,year4
-  ,src_date_val
-from nbs_olap.dim_date</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>912</xloc>
-      <yloc>432</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>fact_nbs_sample</name>
-    <type>InsertUpdate</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>NBSOLAPDS</connection>
-    <commit>1000</commit>
-    <update_bypassed>Y</update_bypassed>
-    <lookup>
-      <schema>nbs_olap</schema>
-      <table>fact_nbs_sample</table>
-      <key>
-        <name>SAMPLE_NUMBER</name>
-        <field>sample_number</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>dw_login_date_num_id</name>
-        <rename>dw_login_date_num_id</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>dw_recd_date_num_id</name>
-        <rename>dw_recd_date_num_id</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>dw_completed_date_num_id</name>
-        <rename>dw_completed_date_num_id</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>dw_reviewed_date_num_id</name>
-        <rename>dw_reviewed_date_num_id</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>changed_on</name>
-        <rename>CHANGED_ON</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>sample_number</name>
-        <rename>SAMPLE_NUMBER</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>accession_number</name>
-        <rename>ACCESSION_NUMBER</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>is_normal</name>
-        <rename>IS_NORMAL</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>status</name>
-        <rename>STATUS</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>product</name>
-        <rename>PRODUCT</rename>
-        <update>N</update>
-      </value>
-    </lookup>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1488</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>fact_nbs_sample 2</name>
-    <type>TableOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>NBSOLAPDS</connection>
-    <schema/>
-    <table>fact_nbs_sample</table>
-    <commit>1000</commit>
-    <truncate>N</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
-    <fields>
-      <field>
-        <column_name>dw_login_date_num_id</column_name>
-        <stream_name>dw_login_date_num_id</stream_name>
-      </field>
-      <field>
-        <column_name>dw_recd_date_num_id</column_name>
-        <stream_name>dw_recd_date_num_id</stream_name>
-      </field>
-      <field>
-        <column_name>dw_completed_date_num_id</column_name>
-        <stream_name>dw_completed_date_num_id</stream_name>
-      </field>
-      <field>
-        <column_name>dw_reviewed_date_num_id</column_name>
-        <stream_name>dw_reviewed_date_num_id</stream_name>
-      </field>
-      <field>
-        <column_name>changed_on</column_name>
-        <stream_name>CHANGED_ON</stream_name>
-      </field>
-      <field>
-        <column_name>sample_number</column_name>
-        <stream_name>SAMPLE_NUMBER</stream_name>
-      </field>
-      <field>
-        <column_name>accession_number</column_name>
-        <stream_name>ACCESSION_NUMBER</stream_name>
-      </field>
-      <field>
-        <column_name>is_normal</column_name>
-        <stream_name>IS_NORMAL</stream_name>
-      </field>
-      <field>
-        <column_name>status</column_name>
-        <stream_name>STATUS</stream_name>
-      </field>
-      <field>
-        <column_name>product</column_name>
-        <stream_name>PRODUCT</stream_name>
-      </field>
-    </fields>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1472</xloc>
-      <yloc>272</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>log dates 2</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>
-      <jsScript>
-        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>writeToLog('m', 'maxsamplechangedon: ' + maxsamplechangedon);</jsScript_script>
-      </jsScript>
-    </jsScripts>
-    <fields>    </fields>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>272</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>login date not null</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <send_true_to>lookup login_date</send_true_to>
-    <send_false_to>set 0 dt</send_false_to>
-    <compare>
-      <condition>
-        <negated>N</negated>
-        <leftvalue>LOGIN_DATE</leftvalue>
-        <function>IS NOT NULL</function>
-        <rightvalue/>
-      </condition>
-    </compare>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>576</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>lookup completed_date</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <from>dim_date</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>N</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>DATE_COMPLETED</name>
-        <field>src_date_val</field>
-      </key>
-      <value>
-        <name>dw_date_num_id</name>
-        <rename>dw_completed_date_num_id</rename>
-        <default/>
-        <type>None</type>
-      </value>
-    </lookup>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>992</xloc>
-      <yloc>272</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>lookup login_date</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <from>dim_date</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>N</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>LOGIN_DATE</name>
-        <field>src_date_val</field>
-      </key>
-      <value>
-        <name>dw_date_num_id</name>
-        <rename>dw_login_date_num_id</rename>
-        <default>0</default>
-        <type>Integer</type>
-      </value>
-    </lookup>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>576</xloc>
-      <yloc>272</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>lookup recd_date</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <from>dim_date</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>N</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>RECD_DATE</name>
-        <field>src_date_val</field>
-      </key>
-      <value>
-        <name>dw_date_num_id</name>
-        <rename>dw_recd_date_num_id</rename>
-        <default>0</default>
-        <type>Integer</type>
-      </value>
-    </lookup>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>784</xloc>
-      <yloc>272</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>lookup reviewed_date</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <from>dim_date</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>N</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>DATE_REVIEWED</name>
-        <field>src_date_val</field>
-      </key>
-      <value>
-        <name>dw_date_num_id</name>
-        <rename>dw_reviewed_date_num_id</rename>
-        <default/>
-        <type>None</type>
-      </value>
-    </lookup>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1232</xloc>
-      <yloc>272</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>reviewed_datenot null</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <send_true_to>lookup reviewed_date</send_true_to>
-    <send_false_to>set 0 dt 4</send_false_to>
-    <compare>
-      <condition>
-        <negated>N</negated>
-        <leftvalue>DATE_REVIEWED</leftvalue>
-        <function>IS NOT NULL</function>
-        <rightvalue/>
-      </condition>
-    </compare>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1232</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>set 0 dt</name>
+    <name>Add default lat-lon</name>
     <type>Calculator</type>
     <description/>
     <distribute>Y</distribute>
@@ -1394,92 +586,29 @@ from nbs_olap.dim_date</sql>
       <schema_name/>
     </partitioning>
     <calculation>
-      <field_name>dw_login_date_num_id</field_name>
+      <field_name>latitude</field_name>
       <calc_type>CONSTANT</calc_type>
-      <field_a>19000101</field_a>
+      <field_a>0.0</field_a>
       <field_b/>
       <field_c/>
-      <value_type>Integer</value_type>
-      <value_length>-1</value_length>
-      <value_precision>-1</value_precision>
+      <value_type>Number</value_type>
+      <value_length>11</value_length>
+      <value_precision>7</value_precision>
       <remove>N</remove>
       <conversion_mask/>
       <decimal_symbol/>
       <grouping_symbol/>
       <currency_symbol/>
     </calculation>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>672</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>set 0 dt 2</name>
-    <type>Calculator</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
     <calculation>
-      <field_name>dw_recd_date_num_id</field_name>
+      <field_name>longitude</field_name>
       <calc_type>CONSTANT</calc_type>
-      <field_a>19000101</field_a>
+      <field_a>0.0</field_a>
       <field_b/>
       <field_c/>
-      <value_type>Integer</value_type>
-      <value_length>-1</value_length>
-      <value_precision>-1</value_precision>
-      <remove>N</remove>
-      <conversion_mask/>
-      <decimal_symbol/>
-      <grouping_symbol/>
-      <currency_symbol/>
-    </calculation>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>896</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>set 0 dt 3</name>
-    <type>Calculator</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <calculation>
-      <field_name>dw_completed_date_num_id</field_name>
-      <calc_type>CONSTANT</calc_type>
-      <field_a>19000101</field_a>
-      <field_b/>
-      <field_c/>
-      <value_type>Integer</value_type>
-      <value_length>-1</value_length>
-      <value_precision>-1</value_precision>
+      <value_type>Number</value_type>
+      <value_length>11</value_length>
+      <value_precision>7</value_precision>
       <remove>N</remove>
       <conversion_mask/>
       <decimal_symbol/>
@@ -1495,13 +624,13 @@ from nbs_olap.dim_date</sql>
     </remotesteps>
     <GUI>
       <xloc>1120</xloc>
-      <yloc>176</yloc>
+      <yloc>560</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>set 0 dt 4</name>
-    <type>Calculator</type>
+    <name>Construct Address</name>
+    <type>ScriptValueMod</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1510,69 +639,70 @@ from nbs_olap.dim_date</sql>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <calculation>
-      <field_name>dw_reviewed_date_num_id</field_name>
-      <calc_type>CONSTANT</calc_type>
-      <field_a>19000101</field_a>
-      <field_b/>
-      <field_c/>
-      <value_type>Integer</value_type>
-      <value_length>-1</value_length>
-      <value_precision>-1</value_precision>
-      <remove>N</remove>
-      <conversion_mask/>
-      <decimal_symbol/>
-      <grouping_symbol/>
-      <currency_symbol/>
-    </calculation>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1360</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>start</name>
-    <type>GetVariable</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>//Script here
+var apiurl = 'https://us-street.api.smartystreets.com/street-address?auth-id=' + authid + '&amp;auth-token=' + authtoken;
+
+apiurl = apiurl + '&amp;street=' + replace(street_name, ' ', '%20');
+
+if (city != null) {
+	apiurl = apiurl + '&amp;city=' + replace(city, ' ', '%20');
+}
+
+if(state_name != null) {
+	apiurl = apiurl + '&amp;state=' + replace(state_name, ' ', '%20');
+}
+
+if (zip_code != null) {
+	apiurl = apiurl + '&amp;zipcode=' + replace(zip_code, ' ', '%20');
+}
+
+//writeToLog('m', 'apiurl=' + apiurl);
+</jsScript_script>
+      </jsScript>
+      <jsScript>
+        <jsScript_type>-1</jsScript_type>
+        <jsScript_name>replace_Sample</jsScript_name>
+        <jsScript_script>// Replaces Strings inside the given Variable.
+// It is possible to make more replacements inside
+// one call. The given variables must be an odd number
+//
+// Usage:
+// replace(var, var, var);
+// 1: String - The Variable with the content to replace.
+// 2: String - The Value to search for.
+// 3: String - The Value to replace with.
+//
+// replace(var, var, var, var,var,...)
+// 1: String - The Variable with the content to replace.
+// 2: String - The First Value to search for.
+// 3: String - The First Value to replace with.
+// 4: String - The Second Value to search for.
+// 5: String - The Second Value to replace with.
+// ...
+//
+// 2006-11-15
+//
+var str1 = "Hello World, this is a nice function";      
+var str2 = replace(str1,"World", "Folk");
+Alert(str2);
+var str2 = replace(str1,"World", "Folk", "nice","beautifull");
+Alert(str2);</jsScript_script>
+      </jsScript>
+    </jsScripts>
     <fields>
       <field>
-        <name>startDate</name>
-        <variable>${startDate}</variable>
+        <name>apiurl</name>
+        <rename>apiurl</rename>
         <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
         <length>-1</length>
         <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>endDate</name>
-        <variable>${endDate}</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
+        <replace>N</replace>
       </field>
     </fields>
     <cluster_schema/>
@@ -1583,12 +713,745 @@ from nbs_olap.dim_date</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>32</xloc>
+      <xloc>336</xloc>
+      <yloc>96</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Data Grid</name>
+    <type>DataGrid</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>id</name>
+        <type>Integer</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>9</length>
+        <precision>0</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>person_id</name>
+        <type>Integer</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>9</length>
+        <precision>0</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>county</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>1024</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>state</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>1024</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>postal_code</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>32</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>city</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>1024</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>created_at</name>
+        <type>Timestamp</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>6</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>apikey</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>2147483647</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <data>
+      <line>
+        <item>701223</item>
+        <item>367077</item>
+        <item>SL</item>
+        <item>UT</item>
+        <item>84081</item>
+        <item>West Jordan</item>
+        <item>2018-05-17 15:09:58</item>
+        <item>AIzaSyAEofOXEZM3jXa0g8d8lt59nNF1fYGbWPM</item>
+      </line>
+      <line>
+        <item>698281</item>
+        <item>365430</item>
+        <item/>
+        <item>UT</item>
+        <item/>
+        <item>SALT LAKE</item>
+        <item>2018-05-04 16:19:03</item>
+        <item>AIzaSyAEofOXEZM3jXa0g8d8lt59nNF1fYGbWPM</item>
+      </line>
+      <line>
+        <item>708903</item>
+        <item>372877</item>
+        <item/>
+        <item/>
+        <item/>
+        <item>UNKNOWN</item>
+        <item>2018-07-09 16:35:15</item>
+        <item>AIzaSyAEofOXEZM3jXa0g8d8lt59nNF1fYGbWPM</item>
+      </line>
+    </data>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>192</xloc>
+      <yloc>128</yloc>
+      <draw>N</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Data Grid 2</name>
+    <type>DataGrid</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>result</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <data>
+      <line>
+        <item> [{"input_index":0,"candidate_index":0,"delivery_line_1":"1200 E 3900 S","last_line":"Salt Lake City UT 84124-1300","delivery_point_barcode":"841241300007","components":{"primary_number":"1200","street_predirection":"E","street_name":"3900","street_postdirection":"S","city_name":"Salt Lake City","default_city_name":"Salt Lake City","state_abbreviation":"UT","zipcode":"84124","plus4_code":"1300","delivery_point":"00","delivery_point_check_digit":"7"},"metadata":{"record_type":"S","zip_type":"Standard","county_fips":"49035","county_name":"Salt Lake","carrier_route":"C010","congressional_district":"04","rdi":"Commercial","elot_sequence":"0065","elot_sort":"A","latitude":40.68696,"longitude":-111.85646,"precision":"Zip9","time_zone":"Mountain","utc_offset":-7,"dst":true},"analysis":{"dpv_match_code":"Y","dpv_footnotes":"AABB","dpv_cmra":"N","dpv_vacant":"N","active":"Y","footnotes":"N#"}}]]</item>
+      </line>
+    </data>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>368</xloc>
+      <yloc>272</yloc>
+      <draw>N</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Json Input</name>
+    <type>JsonInput</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <include>N</include>
+    <include_field/>
+    <rownum>N</rownum>
+    <addresultfile>N</addresultfile>
+    <readurl>N</readurl>
+    <removeSourceField>N</removeSourceField>
+    <IsIgnoreEmptyFile>N</IsIgnoreEmptyFile>
+    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
+    <ignoreMissingPath>N</ignoreMissingPath>
+    <rownum_field/>
+    <file>
+      <name/>
+      <filemask/>
+      <exclude_filemask/>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <fields>
+      <field>
+        <name>latitude</name>
+        <path>$[1].latitude</path>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>11</length>
+        <precision>7</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>longitude</name>
+        <path>$[1].longitude</path>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>11</length>
+        <precision>7</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+    </fields>
+    <limit>0</limit>
+    <IsInFields>Y</IsInFields>
+    <IsAFile>N</IsAFile>
+    <valueField>result</valueField>
+    <shortFileFieldName/>
+    <pathFieldName/>
+    <hiddenFieldName/>
+    <lastModificationTimeFieldName/>
+    <uriNameFieldName/>
+    <rootUriNameFieldName/>
+    <extensionFieldName/>
+    <sizeFieldName/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>672</xloc>
+      <yloc>272</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Log API Error</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>writeToLog('m', 'Error locating lat/lon dw_mft_id:' + dw_mft_id + 'apiurl (' + apiurl + ')';</jsScript_script>
+      </jsScript>
+      <jsScript>
+        <jsScript_type>-1</jsScript_type>
+        <jsScript_name>replace_Sample</jsScript_name>
+        <jsScript_script>// Replaces Strings inside the given Variable.
+// It is possible to make more replacements inside
+// one call. The given variables must be an odd number
+//
+// Usage:
+// replace(var, var, var);
+// 1: String - The Variable with the content to replace.
+// 2: String - The Value to search for.
+// 3: String - The Value to replace with.
+//
+// replace(var, var, var, var,var,...)
+// 1: String - The Variable with the content to replace.
+// 2: String - The First Value to search for.
+// 3: String - The First Value to replace with.
+// 4: String - The Second Value to search for.
+// 5: String - The Second Value to replace with.
+// ...
+//
+// 2006-11-15
+//
+var str1 = "Hello World, this is a nice function";      
+var str2 = replace(str1,"World", "Folk");
+Alert(str2);
+var str2 = replace(str1,"World", "Folk", "nice","beautifull");
+Alert(str2);</jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>    </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>880</xloc>
+      <yloc>96</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Log API Response</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>writeToLog('m', 'API Result: ' + result);
+
+</jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>    </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>784</xloc>
       <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
+  <step>
+    <name>Log error</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>writeToLog('m', 'Error locating lat/lon [dw_mft_id:' + dw_mft_id 
++ 'API Response: ' + result + ']');</jsScript_script>
+      </jsScript>
+      <jsScript>
+        <jsScript_type>-1</jsScript_type>
+        <jsScript_name>replace_Sample</jsScript_name>
+        <jsScript_script>// Replaces Strings inside the given Variable.
+// It is possible to make more replacements inside
+// one call. The given variables must be an odd number
+//
+// Usage:
+// replace(var, var, var);
+// 1: String - The Variable with the content to replace.
+// 2: String - The Value to search for.
+// 3: String - The Value to replace with.
+//
+// replace(var, var, var, var,var,...)
+// 1: String - The Variable with the content to replace.
+// 2: String - The First Value to search for.
+// 3: String - The First Value to replace with.
+// 4: String - The Second Value to search for.
+// 5: String - The Second Value to replace with.
+// ...
+//
+// 2006-11-15
+//
+var str1 = "Hello World, this is a nice function";      
+var str2 = replace(str1,"World", "Folk");
+Alert(str2);
+var str2 = replace(str1,"World", "Folk", "nice","beautifull");
+Alert(str2);</jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>    </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>816</xloc>
+      <yloc>352</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Log lat/lon</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>writeToLog('m', 'latitude: ' + latitude);
+writeToLog('m', 'longitude: ' + longitude);
+
+</jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>    </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>608</xloc>
+      <yloc>384</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Smarty Streets API Address Lookup</name>
+    <type>HTTP</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <url>https://us-zipcode.api.smartystreets.com</url>
+    <urlInField>Y</urlInField>
+    <urlField>apiurl</urlField>
+    <encoding>UTF-8</encoding>
+    <httpLogin/>
+    <httpPassword>Encrypted </httpPassword>
+    <proxyHost/>
+    <proxyPort/>
+    <socketTimeout>10000</socketTimeout>
+    <connectionTimeout>10000</connectionTimeout>
+    <closeIdleConnectionsTime>-1</closeIdleConnectionsTime>
+    <lookup>
+    </lookup>
+    <result>
+      <name>result</name>
+      <code/>
+      <response_time/>
+      <response_header/>
+    </result>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>672</xloc>
+      <yloc>96</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>dim_mft</name>
+    <type>Update</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>DCPLDW</connection>
+    <skip_lookup>N</skip_lookup>
+    <commit>100</commit>
+    <use_batch>N</use_batch>
+    <error_ignored>N</error_ignored>
+    <ignore_flag_field/>
+    <lookup>
+      <schema>syndromic_olap</schema>
+      <table>dim_mft</table>
+      <key>
+        <name>dw_mft_id</name>
+        <field>dw_mft_id</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>latitude</name>
+        <rename>latitude</rename>
+      </value>
+      <value>
+        <name>longitude</name>
+        <rename>longitude</rename>
+      </value>
+    </lookup>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>672</xloc>
+      <yloc>704</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>get_dim_mfts</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>DCPLDW</connection>
+    <sql>select
+ dw_mft_id
+,street_name
+,city
+,county
+,zip_code
+,'Utah' as state_name
+,'c9e34459-6e2c-4d16-853b-809a8ff1a6d2' as authid
+,'OtIdBhYJPj2QjwpG8gZA1R32W1XqxkF3vle5DYu%2F89U%2BtrOrgkzaE1LSU1NHU6njcKh9jmf%2F%2F%2B21QI%2B7oOLKfg%3D%3D' as authtoken
+from syndromic_olap.dim_mft
+where latitude is null and longitude is null and street_name is not null</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>96</xloc>
+      <yloc>96</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>merge streams</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>672</xloc>
+      <yloc>560</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>merge streams 2</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1120</xloc>
+      <yloc>96</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>remove API result fields</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <select_unspecified>N</select_unspecified>
+      <remove>
+        <name>result</name>
+      </remove>
+    </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>672</xloc>
+      <yloc>496</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>remove API result fields 2</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <select_unspecified>N</select_unspecified>
+      <remove>
+        <name>result</name>
+      </remove>
+    </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>976</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step_error_handling>
+    <error>
+      <source_step>Json Input</source_step>
+      <target_step>Log error</target_step>
+      <is_enabled>Y</is_enabled>
+      <nr_valuename/>
+      <descriptions_valuename/>
+      <fields_valuename/>
+      <codes_valuename/>
+      <max_errors/>
+      <max_pct_errors/>
+      <min_pct_rows/>
+    </error>
+    <error>
+      <source_step>Smarty Streets API Address Lookup</source_step>
+      <target_step>Log API Error</target_step>
+      <is_enabled>Y</is_enabled>
+      <nr_valuename/>
+      <descriptions_valuename/>
+      <fields_valuename/>
+      <codes_valuename/>
+      <max_errors/>
+      <max_pct_errors/>
+      <min_pct_rows/>
+    </error>
   </step_error_handling>
   <slave-step-copy-partition-distribution>
   </slave-step-copy-partition-distribution>

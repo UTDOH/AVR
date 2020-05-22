@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>load_qa_processed_message_new</name>
+    <name>load_qa_processed_message_agetest</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -438,7 +438,7 @@
     <notepad>
       <note>Open question - what is the
 link to rt_facility_visit_type?</note>
-      <xloc>432</xloc>
+      <xloc>832</xloc>
       <yloc>736</yloc>
       <width>189</width>
       <heigth>50</heigth>
@@ -608,23 +608,8 @@ link to rt_facility_visit_type?</note>
   </connection>
   <order>
     <hop>
-      <from>Convert Age to Int</from>
-      <to>Error Handling - Invalid Num</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Convert Age to Int</from>
-      <to>add validation fields</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Error Handling - Invalid Num</from>
       <to>null age</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>null age</from>
-      <to>add validation fields</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -678,36 +663,6 @@ link to rt_facility_visit_type?</note>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>administrative_sex_v</from>
-      <to>Validity Validations</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>administrative_sex_v</from>
-      <to>update QA field 3</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>update QA field 3</from>
-      <to>Validity Validations</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Modified Java Script Value</from>
-      <to>Select values</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Select values</from>
-      <to>qa_ss_processed_message</to>
-      <enabled>N</enabled>
-    </hop>
-    <hop>
-      <from>dim_patient_location</from>
-      <to>lookup_treating_dim_mft</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>dim_mft</from>
       <to>lookup_treating_dim_mft</to>
       <enabled>Y</enabled>
@@ -758,33 +713,8 @@ link to rt_facility_visit_type?</note>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>get max src_id</from>
-      <to>Log Max</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Log Max</from>
-      <to>get ss_processed_messages 2 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>get ss_processed_messages 2 2</from>
-      <to>Convert Age to Int</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>lookup_procedure_time</from>
-      <to>dim_patient_location</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Completeness Validations</from>
       <to>admin sex not null</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>admin sex not null</from>
-      <to>administrative_sex_v</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -798,8 +728,38 @@ link to rt_facility_visit_type?</note>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Select values</from>
-      <to>Upsert qa_ss_processed_message</to>
+      <from>Convert Age to Int</from>
+      <to>Error Handling - Invalid Num</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Convert Age to Int</from>
+      <to>add validation fields</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>admin sex not null</from>
+      <to>update QA field 3</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>update QA field 3</from>
+      <to>Validity Validations</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Get Processed Messages</from>
+      <to>Convert Age to Int</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>lookup_procedure_time</from>
+      <to>lookup_treating_dim_mft</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>null age</from>
+      <to>add validation fields</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -831,10 +791,10 @@ if (!medical_record_number_present) {
 	tf1_medical_record_number_present_c = 1;
 }
 
-if (!first_patient_id_present) {
-	tf1_first_patient_id_present_c = 0;
-} else {
+if (first_patient_id_present == 1) {
 	tf1_first_patient_id_present_c = 1;
+} else {
+	tf1_first_patient_id_present_c = 0;
 }
 
 if (!discharge_date_time) {
@@ -1235,10 +1195,12 @@ function isNotEmpty(str) {
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>var age_reported_int = null;
 
-if (!age_reported) {
+writeToLog('m', 'Converting age (' + age_reported + ')');
+if (age_reported != null) {
 	age_reported_int = str2num(age_reported);
 }
-</jsScript_script>
+
+writeToLog('m', 'Converted age (' + age_reported_int + ')');</jsScript_script>
       </jsScript>
     </jsScripts>
     <fields>
@@ -1289,26 +1251,97 @@ if (!age_reported) {
     </GUI>
   </step>
   <step>
-    <name>Log Max</name>
-    <type>ScriptValueMod</type>
+    <name>Get Processed Messages</name>
+    <type>TableInput</type>
     <description/>
-    <distribute>N</distribute>
+    <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>
-      <jsScript>
-        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>writeToLog('m', 'max src_id: ' + max_src_id);</jsScript_script>
-      </jsScript>
-    </jsScripts>
-    <fields>    </fields>
+    <connection>DCPLDW</connection>
+    <sql>select
+	now() as curr_dt_time,
+	spm.id as src_id,
+    case when dpl.dw_patient_location_id is not null then dpl.dw_patient_location_id else 0 end as dw_patient_location_id,
+	ss_batched_messages_id,
+	created_at,
+	message_type,
+	trigger_event,
+	admit_reason_code,
+	admit_reason_description,
+	treating_facility_id,
+	sending_facility_id,
+	admit_date_time::date as admit_date,
+    admit_date_time,
+    discharge_date_time,
+	observation_date_time,
+	death_date_time,
+	recorded_date_time,
+	message_date_time,
+	case when first_patient_id_present = true then 1 else 0 end as first_patient_id_present,
+	patient_account_number,
+	visit_id,
+	medical_record_number_present,
+	spm.patient_zip,
+	c_patient_county,
+	administrative_sex,
+	procedure_date_time::date as procedure_date,
+	procedure_date_time,
+	facility_type_code,
+	discharge_disposition,
+	case when triage_notes_present = true then 1 else 0 end as triage_notes_present,
+	age_reported,
+	age_units_reported,
+	ethnicity_code,
+	ethnicity_description,
+	medication_list,
+	facility_type_code_system,
+    'Reporting Period '||dd.quarter_number as tf1_reporting_period,
+	ss_batched_messages_created_at,
+    ss_batched_messages_created_at::date as ss_batched_messages_created_at_date,
+    facility_uid,
+    espccs.chief_complaint_texts,
+    espccs.tf1_chiefcomplaint_v,
+    case when spm.admit_reason_code is null then null 
+    when admtrsn.id is not null then 1 else 0 end as tf1_admit_reason_code_v,
+    case when spm.ethnicity_code is null then null
+    when reg.concept_code is not null then 1 else 0 end as tf1_ethnicity_code_v,
+    case when spm.age_units_reported is null then null
+    when rauss.concept_code is not null then 1 else 0 end as tf1_age_units_reported_v,
+    case when facility_type_code is null then null
+    when facility_type_code in ('261QE0002X','1021-5','261QM2500X', '261QP2300X','261QU0200X') then 1 else 0 end as tf1_facility_type_code_v2,
+    case when message_type is null then null 
+    when message_type = 'ADT' then 1 else 0 end as tf1_message_type_v1,
+    case when admit_date_time &lt; message_date_time then 1 else 0 end as tf1_admit_date_time_v,
+    case when spm.c_patient_county is null then null 
+    when rc.concept_code is not null then 1 else 0 end as tf1_c_patient_county_v,
+    case when spm.discharge_disposition is null then null
+    when nnt.nicc_term is not null then 0 else 1 end as tf1_discharge_disposition_v,
+    case when spm.patient_zip is null then null
+    when (select regexp_matches(spm.patient_zip, '^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$')) is not null or (select regexp_matches(spm.patient_zip, '^[0-9][0-9][0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]$')) is not null or (select regexp_matches(spm.patient_zip, '^[0-9][0-9][0-9][0-9][0-9]$')) is not null then 1 else 0 end  as tf1_patient_zip_v,
+    pds.tf1_diagnosis_code_v,
+    pds.tf1_diagnosis_description_v,
+    prs.tf1_race_code_v
+from syndromic.ss_processed_message spm
+left join syndromic_olap.etl_ss_processed_chief_complaint_summary espccs on espccs.ss_processed_message_src_id = spm.id
+left join syndromic.rt_icd10cm_icd9cm_snomedct admtrsn on admtrsn.code_system_name='ICD-10-CM Diagnosis' and (admtrsn.concept_code = spm.admit_reason_code or admtrsn.preferred_alternate_code = spm.admit_reason_code) 
+left join syndromic.rt_ethnicity_group reg on reg.concept_code = spm.ethnicity_code
+left join syndromic.rt_age_unit_syndromic_surveillance rauss on rauss.preferred_concept_name = spm.age_units_reported
+left join syndromic_olap.dim_patient_location2 dpl on dpl.patient_zip = substring(spm.patient_zip, 0, 6)
+left join syndromic.rt_county rc on lower(rc.preferred_concept_name) = dpl.patient_county_state_id
+left join syndromic_olap.etl_nssp_nicc_terminology nnt on nnt.nicc_term = spm.discharge_disposition
+left join syndromic_olap.etl_processed_diagnosis_summary pds on pds.ss_processed_message_id = spm.id
+left join syndromic_olap.etl_processed_race_summary prs on prs.ss_processed_message_id = spm.id
+left join syndromic_olap.dim_date dd on dd.dw_date_num_id = to_char(ss_batched_messages_created_at, 'YYYYMMDD')::integer
+where spm.id in (40000000,40475511,40000063)</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
     <cluster_schema/>
     <remotesteps>
       <input>
@@ -1317,8 +1350,8 @@ if (!age_reported) {
       </output>
     </remotesteps>
     <GUI>
-      <xloc>144</xloc>
-      <yloc>176</yloc>
+      <xloc>208</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1339,7 +1372,10 @@ if (!age_reported) {
       <jsScript>
         <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>var dw_rt_facility_visit_type_id = null;</jsScript_script>
+        <jsScript_script>var dw_rt_facility_visit_type_id = null;
+
+writeToLog('m', 'END age_reported_int = (' + age_reported_int + '), tf1_age_reported_v = (' + tf1_age_reported_v + ')');
+</jsScript_script>
       </jsScript>
     </jsScripts>
     <fields>
@@ -1360,7 +1396,7 @@ if (!age_reported) {
       </output>
     </remotesteps>
     <GUI>
-      <xloc>736</xloc>
+      <xloc>1136</xloc>
       <yloc>608</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1523,329 +1559,6 @@ Alert(date2str(dValue,"dd.MM.yyyy HH:mm:ss","EN", "EST"));
     </GUI>
   </step>
   <step>
-    <name>Select values</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>src_id</name>
-        <rename>src_id</rename>
-      </field>
-      <field>
-        <name>ss_batched_messages_id</name>
-        <rename>src_ss_batched_messages_id</rename>
-      </field>
-      <field>
-        <name>created_at</name>
-        <rename>src_created_at</rename>
-      </field>
-      <field>
-        <name>admit_reason_description</name>
-        <rename>admit_reason_description</rename>
-      </field>
-      <field>
-        <name>dw_treating_mft_id</name>
-        <rename>dw_treating_mft_id</rename>
-      </field>
-      <field>
-        <name>dw_sending_mft_id</name>
-        <rename>dw_sending_mft_id</rename>
-      </field>
-      <field>
-        <name>discharge_date_time</name>
-        <rename>src_discharge_date_time</rename>
-      </field>
-      <field>
-        <name>observation_date_time</name>
-        <rename>src_observation_date_time</rename>
-      </field>
-      <field>
-        <name>death_date_time</name>
-        <rename>src_death_date_time</rename>
-      </field>
-      <field>
-        <name>recorded_date_time</name>
-        <rename>src_recorded_date_time</rename>
-      </field>
-      <field>
-        <name>message_date_time</name>
-        <rename>src_message_date_time</rename>
-      </field>
-      <field>
-        <name>patient_account_number</name>
-        <rename>patient_account_number</rename>
-      </field>
-      <field>
-        <name>visit_id</name>
-        <rename>visit_id</rename>
-      </field>
-      <field>
-        <name>medical_record_number_present</name>
-        <rename>medical_record_number_present</rename>
-      </field>
-      <field>
-        <name>procedure_date_time</name>
-        <rename>src_procedure_date_time</rename>
-      </field>
-      <field>
-        <name>age_units_reported</name>
-        <rename>age_units_reported</rename>
-      </field>
-      <field>
-        <name>age_reported_int</name>
-        <rename>age_reported_num</rename>
-      </field>
-      <field>
-        <name>medication_list</name>
-        <rename>medication_list</rename>
-      </field>
-      <field>
-        <name>dw_rt_facility_visit_type_id</name>
-        <rename>dw_rt_facility_visit_type_id</rename>
-      </field>
-      <field>
-        <name>ss_batched_messages_created_at</name>
-        <rename>src_ss_batched_messages_created_at</rename>
-      </field>
-      <field>
-        <name>dw_ss_batched_messages_created_at_date_num_id</name>
-        <rename>dw_ss_batched_messages_created_at_date_num_id</rename>
-      </field>
-      <field>
-        <name>admit_date_time</name>
-        <rename>src_admit_date_time</rename>
-      </field>
-      <field>
-        <name>dw_ss_batched_message_created_at_time_id</name>
-        <rename>dw_ss_batched_message_created_at_time_id</rename>
-      </field>
-      <field>
-        <name>dw_admit_date_num_id</name>
-        <rename>dw_admit_date_num_id</rename>
-      </field>
-      <field>
-        <name>dw_admit_time_id</name>
-        <rename>dw_admit_time_id</rename>
-      </field>
-      <field>
-        <name>tf1_age_reported_v</name>
-        <rename>tf1_age_reported_v</rename>
-      </field>
-      <field>
-        <name>tf1_admit_reason_c</name>
-        <rename>tf1_admit_reason_c</rename>
-      </field>
-      <field>
-        <name>administrative_sex</name>
-        <rename>administrative_sex</rename>
-      </field>
-      <field>
-        <name>tf1_chiefcomplaint_v</name>
-        <rename>tf1_chiefcomplaint_v</rename>
-      </field>
-      <field>
-        <name>tf1_first_patient_id_present_c</name>
-        <rename>tf1_first_patient_id_present_c</rename>
-      </field>
-      <field>
-        <name>tf1_visit_id_c</name>
-        <rename>tf1_visit_id_c</rename>
-      </field>
-      <field>
-        <name>tf1_futuredate_v</name>
-        <rename>tf1_futuredate_v</rename>
-      </field>
-      <field>
-        <name>tf1_trigger_event_v</name>
-        <rename>tf1_trigger_event_v</rename>
-      </field>
-      <field>
-        <name>tf1_message_type_v</name>
-        <rename>tf1_message_type_v</rename>
-      </field>
-      <field>
-        <name>tf1_discharge_date_time_c</name>
-        <rename>tf1_discharge_date_time_c</rename>
-      </field>
-      <field>
-        <name>tf1_admit_date_time_c</name>
-        <rename>tf1_admit_date_time_c</rename>
-      </field>
-      <field>
-        <name>tf1_patient_death_date_time_c</name>
-        <rename>tf1_patient_death_date_time_c</rename>
-      </field>
-      <field>
-        <name>tf1_recorded_date_time_c</name>
-        <rename>tf1_recorded_date_time_c</rename>
-      </field>
-      <field>
-        <name>tf1_message_date_time_c</name>
-        <rename>tf1_message_date_time_c</rename>
-      </field>
-      <field>
-        <name>tf1_procedure_date_time_c</name>
-        <rename>tf1_procedure_date_time_c</rename>
-      </field>
-      <field>
-        <name>tf2_admit_date_time_v</name>
-        <rename>tf2_admit_date_time_v</rename>
-      </field>
-      <field>
-        <name>tf1_administrative_sex_v</name>
-        <rename>tf1_administrative_sex_v</rename>
-      </field>
-      <field>
-        <name>dw_procedure_date_num_id</name>
-        <rename>dw_procedure_date_num_id</rename>
-      </field>
-      <field>
-        <name>dw_procedure_time_id</name>
-        <rename>dw_procedure_time_id</rename>
-      </field>
-      <field>
-        <name>dw_mft_id</name>
-        <rename>dw_mft_id</rename>
-      </field>
-      <field>
-        <name>biosense_status</name>
-        <rename>biosense_status</rename>
-      </field>
-      <field>
-        <name>dw_patient_location_id</name>
-        <rename>dw_patient_location_id</rename>
-      </field>
-      <field>
-        <name>triage_notes_present</name>
-        <rename>triage_notes_present</rename>
-      </field>
-      <field>
-        <name>first_patient_id_present</name>
-        <rename>first_patient_id_present</rename>
-      </field>
-      <field>
-        <name>tf1_medical_record_number_present_c</name>
-        <rename>tf1_medical_record_number_present_c</rename>
-      </field>
-      <field>
-        <name>udoh_status</name>
-        <rename>mft_udoh_status</rename>
-      </field>
-      <field>
-        <name>tf1_medication_list_c</name>
-        <rename>tf1_medication_list_c</rename>
-      </field>
-      <field>
-        <name>tf1_discharge_disposition_c</name>
-        <rename>tf1_discharge_disposition_c</rename>
-      </field>
-      <field>
-        <name>tf1_patient_account_number_c</name>
-        <rename>tf1_patient_account_number_c</rename>
-      </field>
-      <field>
-        <name>tf1_observation_date_time_c</name>
-        <rename>tf1_observation_date_time_c</rename>
-      </field>
-      <field>
-        <name>tf1_admit_reason_code_c</name>
-        <rename>tf1_admit_reason_code_c</rename>
-      </field>
-      <field>
-        <name>tf1_admit_reason_description_c</name>
-        <rename>tf1_admit_reason_description_c</rename>
-      </field>
-      <field>
-        <name>tf1_treating_facility_id_c</name>
-        <rename>tf1_treating_facility_id_c</rename>
-      </field>
-      <field>
-        <name>tf1_sending_facility_id_c</name>
-        <rename>tf1_sending_facility_id_c</rename>
-      </field>
-      <field>
-        <name>chief_complaint_texts</name>
-        <rename>chief_complaints_text</rename>
-      </field>
-      <field>
-        <name>tf1_admit_reason_code_v</name>
-        <rename>tf1_admit_reason_code_v</rename>
-      </field>
-      <field>
-        <name>tf1_ethnicity_code_v</name>
-        <rename>tf1_ethnicity_code_v</rename>
-      </field>
-      <field>
-        <name>tf1_age_units_reported_v</name>
-        <rename>tf1_age_units_reported_v</rename>
-      </field>
-      <field>
-        <name>tf1_facility_type_code_v2</name>
-        <rename>tf1_facility_type_code_v2</rename>
-      </field>
-      <field>
-        <name>tf1_message_type_v1</name>
-        <rename>tf1_message_type_v1</rename>
-      </field>
-      <field>
-        <name>tf1_admit_date_time_v</name>
-        <rename>tf1_admit_date_time_v</rename>
-      </field>
-      <field>
-        <name>tf1_c_patient_county_v</name>
-        <rename>tf1_c_patient_county_v</rename>
-      </field>
-      <field>
-        <name>tf1_patient_zip_v</name>
-        <rename>tf1_patient_zip_v</rename>
-      </field>
-      <field>
-        <name>tf1_diagnosis_code_v</name>
-        <rename>tf1_diagnosis_code_v</rename>
-      </field>
-      <field>
-        <name>tf1_diagnosis_description_v</name>
-        <rename>tf1_diagnosis_description_v</rename>
-      </field>
-      <field>
-        <name>tf1_race_code_v</name>
-        <rename>tf1_race_code_v</rename>
-      </field>
-      <field>
-        <name>tf1_discharge_disposition_v</name>
-        <rename>tf1_discharge_disposition_v</rename>
-      </field>
-      <field>
-        <name>tf1_reporting_period</name>
-        <rename>tf1_reporting_period</rename>
-      </field>
-      <field>
-        <name>curr_dt_time</name>
-        <rename>etl_load_date</rename>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>608</xloc>
-      <yloc>608</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>Validity Validations</name>
     <type>ScriptValueMod</type>
     <description/>
@@ -1868,10 +1581,14 @@ if (dateDiff(admit_date_time,ss_batched_messages_created_at,"d")&lt;0) {
 }
 
 if (age_reported_int) {
+	writeToLog('m', 'age_reported_int non null - validating (' + age_reported_int + ')');
 	if (age_reported_int >= 0 &amp;&amp; age_reported_int &lt;= 119) {
+		writeToLog('m', 'age reported >=0 and &lt;= 119)');
 		tf1_age_reported_v = 1;
 	}
 }
+
+writeToLog('m', 'age_reported_int = (' + age_reported_int + '), tf1_age_reported_v = (' + tf1_age_reported_v + ')');
 
 if (message_type) {
 	if (message_type == 'ADT') {
@@ -2275,52 +1992,26 @@ if (dateDiff(observation_date_time,curr_dt_time,"d") &lt; 0 ||
     </GUI>
   </step>
   <step>
-    <name>administrative_sex_v</name>
-    <type>Validator</type>
+    <name>admin sex not null</name>
+    <type>FilterRows</type>
     <description/>
-    <distribute>N</distribute>
+    <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <validate_all>N</validate_all>
-    <concat_errors>N</concat_errors>
-    <concat_separator>|</concat_separator>
-    <validator_field>
-      <name>administrative_sex</name>
-      <validation_name>administrative_sex_v</validation_name>
-      <max_length/>
-      <min_length/>
-      <null_allowed>Y</null_allowed>
-      <only_null_allowed>N</only_null_allowed>
-      <only_numeric_allowed>N</only_numeric_allowed>
-      <data_type>String</data_type>
-      <data_type_verified>N</data_type_verified>
-      <conversion_mask/>
-      <decimal_symbol/>
-      <grouping_symbol/>
-      <max_value/>
-      <min_value/>
-      <start_string/>
-      <end_string/>
-      <start_string_not_allowed/>
-      <end_string_not_allowed/>
-      <regular_expression/>
-      <regular_expression_not_allowed/>
-      <error_code/>
-      <error_description/>
-      <is_sourcing_values>N</is_sourcing_values>
-      <sourcing_step/>
-      <sourcing_field/>
-      <allowed_value>
-        <value>F</value>
-        <value>M</value>
-        <value>O</value>
-        <value>U</value>
-      </allowed_value>
-    </validator_field>
+    <send_true_to>update QA field 3</send_true_to>
+    <send_false_to>null admin sex</send_false_to>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <leftvalue>administrative_sex</leftvalue>
+        <function>IS NOT NULL</function>
+        <rightvalue/>
+      </condition>
+    </compare>
     <cluster_schema/>
     <remotesteps>
       <input>
@@ -2330,7 +2021,7 @@ if (dateDiff(observation_date_time,curr_dt_time,"d") &lt; 0 ||
     </remotesteps>
     <GUI>
       <xloc>944</xloc>
-      <yloc>288</yloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2403,58 +2094,8 @@ from ${olap_schema}.dim_mft2</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1024</xloc>
-      <yloc>720</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>dim_patient_location</name>
-    <type>CombinationLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <schema>${olap_schema}</schema>
-    <table>dim_patient_location</table>
-    <connection>DCPLDW</connection>
-    <commit>100</commit>
-    <cache_size>9999</cache_size>
-    <replace>N</replace>
-    <preloadCache>Y</preloadCache>
-    <crc>Y</crc>
-    <crcfield>hashcode</crcfield>
-    <fields>
-      <key>
-        <name>patient_zip</name>
-        <lookup>patient_zip</lookup>
-      </key>
-      <key>
-        <name>c_patient_county</name>
-        <lookup>patient_county</lookup>
-      </key>
-      <return>
-        <name>dw_patient_location_id</name>
-        <creation_method>tablemax</creation_method>
-        <use_autoinc>N</use_autoinc>
-      </return>
-    </fields>
-    <sequence/>
-    <last_update_field/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
       <xloc>1424</xloc>
-      <yloc>608</yloc>
+      <yloc>720</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2487,7 +2128,7 @@ from ${olap_schema}.dim_rt_facility_visit_type</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>768</xloc>
+      <xloc>1168</xloc>
       <yloc>752</yloc>
       <draw>N</draw>
     </GUI>
@@ -2558,37 +2199,6 @@ from ${olap_schema}.dim_time</sql>
     </GUI>
   </step>
   <step>
-    <name>get max src_id</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>DCPLDW</connection>
-    <sql>select (case when max(src_id) is not null then max(src_id) else -1 end) as max_src_id from syndromic_olap.qa_ss_processed_message</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>32</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>get ss_processed_messages 2</name>
     <type>DBJoin</type>
     <description/>
@@ -2656,188 +2266,6 @@ group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27
     <GUI>
       <xloc>272</xloc>
       <yloc>112</yloc>
-      <draw>N</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>get ss_processed_messages 2 2</name>
-    <type>DBJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>DCPLDW</connection>
-    <rowlimit>0</rowlimit>
-    <sql>select
-	now() as curr_dt_time,
-	spm.id as src_id,
-	ss_batched_messages_id,
-	created_at,
-	message_type,
-	trigger_event,
-	admit_reason_code,
-	admit_reason_description,
-	treating_facility_id,
-	sending_facility_id,
-	admit_date_time::date as admit_date,
-    admit_date_time,
-    discharge_date_time,
-	observation_date_time,
-	death_date_time,
-	recorded_date_time,
-	message_date_time,
-	case when first_patient_id_present = true then 1 else 0 end as first_patient_id_present,
-	patient_account_number,
-	visit_id,
-	medical_record_number_present,
-	patient_zip,
-	c_patient_county,
-	administrative_sex,
-	procedure_date_time::date as procedure_date,
-	procedure_date_time,
-	facility_type_code,
-	discharge_disposition,
-	case when triage_notes_present = true then 1 else 0 end as triage_notes_present,
-	age_reported,
-	age_units_reported,
-	ethnicity_code,
-	ethnicity_description,
-	medication_list,
-	facility_type_code_system,
-    'Reporting Period '||dd.quarter_number as tf1_reporting_period,
-	ss_batched_messages_created_at,
-    ss_batched_messages_created_at::date as ss_batched_messages_created_at_date,
-    facility_uid,
-    espccs.chief_complaint_texts,
-    espccs.tf1_chiefcomplaint_v,
-    case when spm.admit_reason_code is null then null 
-    when admtrsn.id is not null then 1 else 0 end as tf1_admit_reason_code_v,
-    case when spm.ethnicity_code is null then null
-    when reg.concept_code is not null then 1 else 0 end as tf1_ethnicity_code_v,
-    case when spm.age_units_reported is null then null
-    when rauss.concept_code is not null then 1 else 0 end as tf1_age_units_reported_v,
-    case when facility_type_code is null then null
-    when facility_type_code in ('261QE0002X','1021-5','261QM2500X', '261QP2300X','261QU0200X') then 1 else 0 end as tf1_facility_type_code_v2,
-    case when message_type is null then null 
-    when message_type = 'ADT' then 1 else 0 end as tf1_message_type_v1,
-    case when admit_date_time &lt; message_date_time then 1 else 0 end as tf1_admit_date_time_v,
-    case when spm.c_patient_county is null then null 
-    when rc.concept_code is not null then 1 else 0 end as tf1_c_patient_county_v,
-    case when spm.discharge_disposition is null then null
-    when nnt.nicc_term is not null then 0 else 1 end as tf1_discharge_disposition_v,
-    case when patient_zip is null then null
-    when (select regexp_matches(patient_zip, '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]')) is not null or (select regexp_matches(patient_zip, '[0-9][0-9][0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]')) is not null or (select regexp_matches(patient_zip, '[0-9][0-9][0-9][0-9][0-9]')) is not null then 1 else 0 end  as tf1_patient_zip_v,
-    pds.tf1_diagnosis_code_v,
-    pds.tf1_diagnosis_description_v,
-    prs.tf1_race_code_v
-from syndromic.ss_processed_message spm
-left join syndromic_olap.etl_ss_processed_chief_complaint_summary espccs on espccs.ss_processed_message_src_id = spm.id
-left join syndromic.rt_icd10cm_icd9cm_snomedct admtrsn on admtrsn.concept_code = spm.admit_reason_code or admtrsn.preferred_alternate_code = spm.admit_reason_code
-left join syndromic.rt_ethnicity_group reg on reg.concept_code = spm.ethnicity_code
-left join syndromic.rt_age_unit_syndromic_surveillance rauss on rauss.preferred_concept_name = spm.age_units_reported
-left join syndromic.rt_county rc on lower(rc.concept_name) = lower(spm.c_patient_county)
-left join syndromic_olap.etl_nssp_nicc_terminology nnt on nnt.nicc_term = spm.discharge_disposition
-left join syndromic_olap.etl_processed_diagnosis_summary pds on pds.ss_processed_message_id = spm.id
-left join syndromic_olap.etl_processed_race_summary prs on prs.ss_processed_message_id = spm.id
-left join syndromic_olap.dim_date dd on dd.dw_date_num_id = to_char(ss_batched_messages_created_at, 'YYYYMMDD')::integer
-where spm.id >= ${min_processed_message_id} and spm.id &lt; ${max_processed_message_id}
-limit 2000001</sql>
-    <outer_join>N</outer_join>
-    <replace_vars>Y</replace_vars>
-    <parameter>
-    </parameter>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>304</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>get ss_processed_messages 2 2 2</name>
-    <type>DBJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>DCPLDW</connection>
-    <rowlimit>0</rowlimit>
-    <sql>select
-	now() as curr_dt_time,
-	spm.id as src_id,
-	ss_batched_messages_id,
-	created_at,
-	message_type,
-	trigger_event,
-	admit_reason_code,
-	admit_reason_description,
-	treating_facility_id,
-	sending_facility_id,
-	admit_date_time::date as admit_date,
-    admit_date_time,
-    discharge_date_time,
-	observation_date_time,
-	death_date_time,
-	recorded_date_time,
-	message_date_time,
-	case when first_patient_id_present = true then 1 else 0 end as first_patient_id_present,
-	patient_account_number,
-	visit_id,
-	medical_record_number_present,
-	patient_zip,
-	c_patient_county,
-	administrative_sex,
-	procedure_date_time::date as procedure_date,
-	procedure_date_time,
-	facility_type_code,
-	discharge_disposition,
-	case when triage_notes_present = true then 1 else 0 end as triage_notes_present,
-	age_reported,
-	age_units_reported,
-	ethnicity_code,
-	ethnicity_description,
-	medication_list,
-	facility_type_code_system,
-	ss_batched_messages_created_at,
-    ss_batched_messages_created_at::date as ss_batched_messages_created_at_date,
-    facility_uid,
-	string_agg(spcc.chief_complaint_text, '|') as chief_complaints_text
-from syndromic.ss_processed_message spm
-left join syndromic.ss_processed_chief_complaint spcc on spcc.id = spm.id
-where spm.id >= ? and spm.id &lt;= ${max_processed_message_id}
-group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38</sql>
-    <outer_join>N</outer_join>
-    <replace_vars>Y</replace_vars>
-    <parameter>
-      <field>
-        <name>max_src_id</name>
-        <type>Integer</type>
-      </field>
-    </parameter>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>256</xloc>
-      <yloc>272</yloc>
       <draw>N</draw>
     </GUI>
   </step>
@@ -3041,7 +2469,7 @@ group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27
       </output>
     </remotesteps>
     <GUI>
-      <xloc>752</xloc>
+      <xloc>1152</xloc>
       <yloc>672</yloc>
       <draw>N</draw>
     </GUI>
@@ -3094,7 +2522,7 @@ group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1024</xloc>
+      <xloc>1424</xloc>
       <yloc>608</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3217,7 +2645,7 @@ group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27
       </output>
     </remotesteps>
     <GUI>
-      <xloc>880</xloc>
+      <xloc>1280</xloc>
       <yloc>608</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3258,8 +2686,52 @@ group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1168</xloc>
+      <xloc>1568</xloc>
       <yloc>608</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>null admin sex</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>tf1_administrative_sex_v = null;
+</jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>
+      <field>
+        <name>tf1_administrative_sex_v</name>
+        <rename>tf1_administrative_sex_v</rename>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
+      </field>
+    </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1056</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3280,7 +2752,9 @@ group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27
       <jsScript>
         <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>var age_reported_int = null;</jsScript_script>
+        <jsScript_script>var age_reported_int = null;
+
+writeToLog('m', 'ERROR CONVERTING AGE - Converted age set to null');</jsScript_script>
       </jsScript>
     </jsScripts>
     <fields>
@@ -3303,229 +2777,6 @@ group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27
     <GUI>
       <xloc>624</xloc>
       <yloc>304</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>qa_ss_processed_message</name>
-    <type>TableOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>DCPLDW</connection>
-    <schema>${olap_schema}</schema>
-    <table>qa_ss_processed_message</table>
-    <commit>1000</commit>
-    <truncate>N</truncate>
-    <ignore_errors>Y</ignore_errors>
-    <use_batch>N</use_batch>
-    <specify_fields>N</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
-    <fields>
-      <field>
-        <column_name>administrative_sex</column_name>
-        <stream_name>administrative_sex</stream_name>
-      </field>
-      <field>
-        <column_name>admit_reason_description</column_name>
-        <stream_name>admit_reason_description</stream_name>
-      </field>
-      <field>
-        <column_name>age_reported_num</column_name>
-        <stream_name>age_reported_int</stream_name>
-      </field>
-      <field>
-        <column_name>age_units_reported</column_name>
-        <stream_name>age_units_reported</stream_name>
-      </field>
-      <field>
-        <column_name>dw_admit_date_num_id</column_name>
-        <stream_name>dw_admit_date_num_id</stream_name>
-      </field>
-      <field>
-        <column_name>dw_admit_time_id</column_name>
-        <stream_name>dw_admit_time_id</stream_name>
-      </field>
-      <field>
-        <column_name>dw_mft_id</column_name>
-        <stream_name>dw_mft_id</stream_name>
-      </field>
-      <field>
-        <column_name>dw_patient_location_id</column_name>
-        <stream_name>dw_patient_location_id</stream_name>
-      </field>
-      <field>
-        <column_name>dw_rt_facility_visit_type_id</column_name>
-        <stream_name>dw_rt_facility_visit_type_id</stream_name>
-      </field>
-      <field>
-        <column_name>dw_ss_batched_message_created_at_time_id</column_name>
-        <stream_name>dw_ss_batched_message_created_at_time_id</stream_name>
-      </field>
-      <field>
-        <column_name>dw_ss_batched_messages_created_at_date_num_id</column_name>
-        <stream_name>dw_ss_batched_messages_created_at_date_num_id</stream_name>
-      </field>
-      <field>
-        <column_name>first_patient_id_present</column_name>
-        <stream_name>first_patient_id_present</stream_name>
-      </field>
-      <field>
-        <column_name>medical_record_number_present</column_name>
-        <stream_name>medical_record_number_present</stream_name>
-      </field>
-      <field>
-        <column_name>medication_list</column_name>
-        <stream_name>medication_list</stream_name>
-      </field>
-      <field>
-        <column_name>patient_account_number</column_name>
-        <stream_name>patient_account_number</stream_name>
-      </field>
-      <field>
-        <column_name>src_admit_date_time</column_name>
-        <stream_name>admit_date_time</stream_name>
-      </field>
-      <field>
-        <column_name>src_created_at</column_name>
-        <stream_name>created_at</stream_name>
-      </field>
-      <field>
-        <column_name>src_death_date_time</column_name>
-        <stream_name>death_date_time</stream_name>
-      </field>
-      <field>
-        <column_name>src_discharge_date_time</column_name>
-        <stream_name>discharge_date_time</stream_name>
-      </field>
-      <field>
-        <column_name>src_id</column_name>
-        <stream_name>src_id</stream_name>
-      </field>
-      <field>
-        <column_name>src_message_date_time</column_name>
-        <stream_name>message_date_time</stream_name>
-      </field>
-      <field>
-        <column_name>src_observation_date_time</column_name>
-        <stream_name>observation_date_time</stream_name>
-      </field>
-      <field>
-        <column_name>src_procedure_date_time</column_name>
-        <stream_name>procedure_date_time</stream_name>
-      </field>
-      <field>
-        <column_name>src_recorded_date_time</column_name>
-        <stream_name>recorded_date_time</stream_name>
-      </field>
-      <field>
-        <column_name>src_ss_batched_messages_created_at</column_name>
-        <stream_name>ss_batched_messages_created_at</stream_name>
-      </field>
-      <field>
-        <column_name>src_ss_batched_messages_id</column_name>
-        <stream_name>ss_batched_messages_id</stream_name>
-      </field>
-      <field>
-        <column_name>tf1_admit_date_time_c</column_name>
-        <stream_name>tf1_admit_date_time_c</stream_name>
-      </field>
-      <field>
-        <column_name>tf1_admit_reason_c</column_name>
-        <stream_name>tf1_admit_reason_c</stream_name>
-      </field>
-      <field>
-        <column_name>tf1_age_reported_v</column_name>
-        <stream_name>tf1_age_reported_v</stream_name>
-      </field>
-      <field>
-        <column_name>tf1_chiefcomplaint_v</column_name>
-        <stream_name>tf1_chiefcomplaint_v</stream_name>
-      </field>
-      <field>
-        <column_name>tf1_discharge_date_time_c</column_name>
-        <stream_name>tf1_discharge_date_time_c</stream_name>
-      </field>
-      <field>
-        <column_name>tf1_first_patient_id_present_c</column_name>
-        <stream_name>tf1_first_patient_id_present_c</stream_name>
-      </field>
-      <field>
-        <column_name>tf1_futuredate_v</column_name>
-        <stream_name>tf1_futuredate_v</stream_name>
-      </field>
-      <field>
-        <column_name>tf1_medical_record_number_present</column_name>
-        <stream_name>tf1_medical_record_number_present_c</stream_name>
-      </field>
-      <field>
-        <column_name>tf1_message_date_time_c</column_name>
-        <stream_name>tf1_message_date_time_c</stream_name>
-      </field>
-      <field>
-        <column_name>tf1_message_type_v</column_name>
-        <stream_name>tf1_message_type_v</stream_name>
-      </field>
-      <field>
-        <column_name>tf1_patient_death_date_time_c</column_name>
-        <stream_name>tf1_patient_death_date_time_c</stream_name>
-      </field>
-      <field>
-        <column_name>tf1_procedure_date_time_c</column_name>
-        <stream_name>tf1_procedure_date_time_c</stream_name>
-      </field>
-      <field>
-        <column_name>tf1_recorded_date_time_c</column_name>
-        <stream_name>tf1_recorded_date_time_c</stream_name>
-      </field>
-      <field>
-        <column_name>tf1_trigger_event_v</column_name>
-        <stream_name>tf1_trigger_event_v</stream_name>
-      </field>
-      <field>
-        <column_name>tf1_visit_id_c</column_name>
-        <stream_name>tf1_visit_id_c</stream_name>
-      </field>
-      <field>
-        <column_name>tf2_admit_date_time_v</column_name>
-        <stream_name>tf2_admit_date_time_v</stream_name>
-      </field>
-      <field>
-        <column_name>tf_administrative_sex_v</column_name>
-        <stream_name>tf1_administrative_sex_v</stream_name>
-      </field>
-      <field>
-        <column_name>triage_notes_present</column_name>
-        <stream_name>triage_notes_present</stream_name>
-      </field>
-      <field>
-        <column_name>visit_id</column_name>
-        <stream_name>visit_id</stream_name>
-      </field>
-    </fields>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>464</xloc>
-      <yloc>608</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3576,8 +2827,31 @@ group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27
       <jsScript>
         <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>tf1_administrative_sex_v = 0;
-</jsScript_script>
+        <jsScript_script>// writeToLog('m', 'administrative_sex (' + administrative_sex + ')')
+// writeToLog('m', administrative_sex.equals("F"));
+
+// A switch - case would be more appropriate here, but it appears that PDI uses == 
+// to test string equality which is incorrect.  Therefore an if / or is used here instead
+if (administrative_sex.equalsIgnoreCase('F') || administrative_sex.equalsIgnoreCase('M')
+	|| administrative_sex.equalsIgnoreCase('O') || administrative_sex.equalsIgnoreCase('U')) {
+	tf1_administrative_sex_v = 1;
+} else {
+	tf1_administrative_sex_v = 0;
+}
+
+/*
+switch (administrative_sex) {
+	case 'F', 'M', 'O', 'U':
+		writeToLog('m', 'admin sex valid');
+		tf1_administrative_sex_v = 1;
+		break;
+	default:
+        writeToLog('m', 'admin sex invalid');
+		tf1_administrative_sex_v = 0;
+};
+*/
+
+// writeToLog('m', 'tf1_administrative_sex_v: ' + tf1_administrative_sex_v);</jsScript_script>
       </jsScript>
     </jsScripts>
     <fields>
@@ -3598,8 +2872,8 @@ group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1168</xloc>
-      <yloc>288</yloc>
+      <xloc>944</xloc>
+      <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3724,507 +2998,10 @@ function containsInvalidText(str) {
       <draw>N</draw>
     </GUI>
   </step>
-  <step>
-    <name>admin sex not null</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <send_true_to>administrative_sex_v</send_true_to>
-    <send_false_to>null admin sex</send_false_to>
-    <compare>
-      <condition>
-        <negated>N</negated>
-        <leftvalue>administrative_sex</leftvalue>
-        <function>IS NOT NULL</function>
-        <rightvalue/>
-      </condition>
-    </compare>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>944</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>null admin sex</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>
-      <jsScript>
-        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>tf1_administrative_sex_v = null;
-</jsScript_script>
-      </jsScript>
-    </jsScripts>
-    <fields>
-      <field>
-        <name>tf1_administrative_sex_v</name>
-        <rename>tf1_administrative_sex_v</rename>
-        <type>Number</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>Y</replace>
-      </field>
-    </fields>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1056</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Upsert qa_ss_processed_message</name>
-    <type>InsertUpdate</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>DCPLDW</connection>
-    <commit>1000</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema>${olap_schema}</schema>
-      <table>qa_ss_processed_message</table>
-      <key>
-        <name>src_id</name>
-        <field>src_id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>src_id</name>
-        <rename>src_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>src_ss_batched_messages_id</name>
-        <rename>src_ss_batched_messages_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>src_created_at</name>
-        <rename>src_created_at</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>admit_reason_description</name>
-        <rename>admit_reason_description</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>dw_treating_mft_id</name>
-        <rename>dw_treating_mft_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>dw_sending_mft_id</name>
-        <rename>dw_sending_mft_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>src_discharge_date_time</name>
-        <rename>src_discharge_date_time</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>src_observation_date_time</name>
-        <rename>src_observation_date_time</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>src_death_date_time</name>
-        <rename>src_death_date_time</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>src_recorded_date_time</name>
-        <rename>src_recorded_date_time</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>src_message_date_time</name>
-        <rename>src_message_date_time</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>patient_account_number</name>
-        <rename>patient_account_number</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>visit_id</name>
-        <rename>visit_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>medical_record_number_present</name>
-        <rename>medical_record_number_present</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>src_procedure_date_time</name>
-        <rename>src_procedure_date_time</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>age_units_reported</name>
-        <rename>age_units_reported</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>age_reported_num</name>
-        <rename>age_reported_num</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>medication_list</name>
-        <rename>medication_list</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>dw_rt_facility_visit_type_id</name>
-        <rename>dw_rt_facility_visit_type_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>src_ss_batched_messages_created_at</name>
-        <rename>src_ss_batched_messages_created_at</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>dw_ss_batched_messages_created_at_date_num_id</name>
-        <rename>dw_ss_batched_messages_created_at_date_num_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>src_admit_date_time</name>
-        <rename>src_admit_date_time</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>dw_ss_batched_message_created_at_time_id</name>
-        <rename>dw_ss_batched_message_created_at_time_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>dw_admit_date_num_id</name>
-        <rename>dw_admit_date_num_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>dw_admit_time_id</name>
-        <rename>dw_admit_time_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>tf1_age_reported_v</name>
-        <rename>tf1_age_reported_v</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>tf1_admit_reason_c</name>
-        <rename>tf1_admit_reason_c</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>administrative_sex</name>
-        <rename>administrative_sex</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>tf1_chiefcomplaint_v</name>
-        <rename>tf1_chiefcomplaint_v</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>tf1_first_patient_id_present_c</name>
-        <rename>tf1_first_patient_id_present_c</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>tf1_visit_id_c</name>
-        <rename>tf1_visit_id_c</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>tf1_futuredate_v</name>
-        <rename>tf1_futuredate_v</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>tf1_trigger_event_v</name>
-        <rename>tf1_trigger_event_v</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>tf1_message_type_v</name>
-        <rename>tf1_message_type_v</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>tf1_discharge_date_time_c</name>
-        <rename>tf1_discharge_date_time_c</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>tf1_admit_date_time_c</name>
-        <rename>tf1_admit_date_time_c</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>tf1_patient_death_date_time_c</name>
-        <rename>tf1_patient_death_date_time_c</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>tf1_recorded_date_time_c</name>
-        <rename>tf1_recorded_date_time_c</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>tf1_message_date_time_c</name>
-        <rename>tf1_message_date_time_c</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>tf1_procedure_date_time_c</name>
-        <rename>tf1_procedure_date_time_c</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>tf2_admit_date_time_v</name>
-        <rename>tf2_admit_date_time_v</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>tf1_administrative_sex_v</name>
-        <rename>tf1_administrative_sex_v</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>dw_procedure_date_num_id</name>
-        <rename>dw_procedure_date_num_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>dw_procedure_time_id</name>
-        <rename>dw_procedure_time_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>dw_mft_id</name>
-        <rename>dw_mft_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>biosense_status</name>
-        <rename>biosense_status</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>dw_patient_location_id</name>
-        <rename>dw_patient_location_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>triage_notes_present</name>
-        <rename>triage_notes_present</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>first_patient_id_present</name>
-        <rename>first_patient_id_present</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>tf1_medical_record_number_present_c</name>
-        <rename>tf1_medical_record_number_present_c</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>mft_udoh_status</name>
-        <rename>mft_udoh_status</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>tf1_medication_list_c</name>
-        <rename>tf1_medication_list_c</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>tf1_discharge_disposition_c</name>
-        <rename>tf1_discharge_disposition_c</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>tf1_patient_account_number_c</name>
-        <rename>tf1_patient_account_number_c</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>tf1_observation_date_time_c</name>
-        <rename>tf1_observation_date_time_c</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>tf1_admit_reason_code_c</name>
-        <rename>tf1_admit_reason_code_c</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>tf1_admit_reason_description_c</name>
-        <rename>tf1_admit_reason_description_c</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>tf1_treating_facility_id_c</name>
-        <rename>tf1_treating_facility_id_c</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>tf1_sending_facility_id_c</name>
-        <rename>tf1_sending_facility_id_c</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>chief_complaints_text</name>
-        <rename>chief_complaints_text</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>tf1_admit_reason_code_v</name>
-        <rename>tf1_admit_reason_code_v</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>tf1_ethnicity_code_v</name>
-        <rename>tf1_ethnicity_code_v</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>tf1_age_units_reported_v</name>
-        <rename>tf1_age_units_reported_v</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>tf1_facility_type_code_v2</name>
-        <rename>tf1_facility_type_code_v2</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>tf1_message_type_v1</name>
-        <rename>tf1_message_type_v1</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>tf1_admit_date_time_v</name>
-        <rename>tf1_admit_date_time_v</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>tf1_c_patient_county_v</name>
-        <rename>tf1_c_patient_county_v</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>tf1_patient_zip_v</name>
-        <rename>tf1_patient_zip_v</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>tf1_diagnosis_code_v</name>
-        <rename>tf1_diagnosis_code_v</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>tf1_diagnosis_description_v</name>
-        <rename>tf1_diagnosis_description_v</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>tf1_race_code_v</name>
-        <rename>tf1_race_code_v</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>tf1_discharge_disposition_v</name>
-        <rename>tf1_discharge_disposition_v</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>tf1_reporting_period</name>
-        <rename>tf1_reporting_period</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>etl_load_date</name>
-        <rename>etl_load_date</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>464</xloc>
-      <yloc>512</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
   <step_error_handling>
     <error>
       <source_step>Convert Age to Int</source_step>
       <target_step>Error Handling - Invalid Num</target_step>
-      <is_enabled>Y</is_enabled>
-      <nr_valuename/>
-      <descriptions_valuename/>
-      <fields_valuename/>
-      <codes_valuename/>
-      <max_errors/>
-      <max_pct_errors/>
-      <min_pct_rows/>
-    </error>
-    <error>
-      <source_step>administrative_sex_v</source_step>
-      <target_step>update QA field 3</target_step>
       <is_enabled>Y</is_enabled>
       <nr_valuename/>
       <descriptions_valuename/>

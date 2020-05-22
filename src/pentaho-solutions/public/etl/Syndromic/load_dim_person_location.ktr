@@ -430,10 +430,33 @@
     <created_date>2019/07/26 11:38:53.490</created_date>
     <modified_user>-</modified_user>
     <modified_date>2019/07/26 11:38:53.490</modified_date>
-    <key_for_session_key/>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
+    <notepad>
+      <note>dim_patient_location2 has been in effect since the run of 
+qa_ss_processed_message src_id 40000000 to 45000000
+45000000+ needs to be rerun as well as &lt; 40000000</note>
+      <xloc>320</xloc>
+      <yloc>320</yloc>
+      <width>381</width>
+      <heigth>70</heigth>
+      <fontname>Cantarell</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
   </notepads>
   <connection>
     <name>DCPLDW</name>
@@ -489,30 +512,44 @@
   <order>
     <hop>
       <from>get patient locations</from>
-      <to>dim_patient_location</to>
-      <enabled>N</enabled>
-    </hop>
-    <hop>
-      <from>get max src_id</from>
-      <to>Log Max</to>
+      <to>valid zip?</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Log Max</from>
-      <to>get patient locations</to>
-      <enabled>N</enabled>
-    </hop>
-    <hop>
-      <from>Log Max</from>
-      <to>get patient locations 2</to>
+      <from>valid zip?</from>
+      <to>Dummy (do nothing)</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>get patient locations 2</from>
+      <from>valid zip?</from>
       <to>dim_patient_location</to>
       <enabled>Y</enabled>
     </hop>
   </order>
+  <step>
+    <name>Dummy (do nothing)</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>480</xloc>
+      <yloc>80</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step>
     <name>Table input</name>
     <type>TableInput</type>
@@ -551,6 +588,87 @@ group by 1,2</sql>
   </step>
   <step>
     <name>dim_patient_location</name>
+    <type>DimensionLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <schema>syndromic_olap</schema>
+    <table>dim_patient_location</table>
+    <connection>DCPLDW</connection>
+    <commit>100</commit>
+    <update>Y</update>
+    <fields>
+      <key>
+        <name>patient_zip</name>
+        <lookup>patient_zip</lookup>
+      </key>
+      <date>
+        <name/>
+        <from>start_date</from>
+        <to>end_date</to>
+      </date>
+      <field>
+        <name>state_id</name>
+        <lookup>patient_state_id</lookup>
+        <update>Punch through</update>
+      </field>
+      <field>
+        <name>patient_county_state_id</name>
+        <lookup>patient_county_state_id</lookup>
+        <update>Punch through</update>
+      </field>
+      <field>
+        <name>lat</name>
+        <lookup>patient_latitude</lookup>
+        <update>Punch through</update>
+      </field>
+      <field>
+        <name>lng</name>
+        <lookup>patient_longitude</lookup>
+        <update>Punch through</update>
+      </field>
+      <field>
+        <name>patient_county</name>
+        <lookup>patient_county</lookup>
+        <update>Punch through</update>
+      </field>
+      <return>
+        <name>dw_patient_location_id</name>
+        <rename/>
+        <creation_method>tablemax</creation_method>
+        <use_autoinc>N</use_autoinc>
+        <version>version_id</version>
+      </return>
+    </fields>
+    <sequence/>
+    <min_year>1900</min_year>
+    <max_year>2199</max_year>
+    <cache_size>5000</cache_size>
+    <preload_cache>N</preload_cache>
+    <use_start_date_alternative>N</use_start_date_alternative>
+    <start_date_alternative>none</start_date_alternative>
+    <start_date_field_name/>
+    <useBatch>N</useBatch>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>640</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>dim_patient_location - deprcr</name>
     <type>CombinationLookup</type>
     <description/>
     <distribute>Y</distribute>
@@ -578,6 +696,14 @@ group by 1,2</sql>
         <name>c_patient_county</name>
         <lookup>patient_county</lookup>
       </key>
+      <key>
+        <name>state_id</name>
+        <lookup>patient_state_id</lookup>
+      </key>
+      <key>
+        <name>patient_county_state_id</name>
+        <lookup>patient_county_state_id</lookup>
+      </key>
       <return>
         <name>dw_patient_location_id</name>
         <creation_method>tablemax</creation_method>
@@ -596,11 +722,11 @@ group by 1,2</sql>
     <GUI>
       <xloc>656</xloc>
       <yloc>192</yloc>
-      <draw>Y</draw>
+      <draw>N</draw>
     </GUI>
   </step>
   <step>
-    <name>get max src_id</name>
+    <name>get patient locations</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -611,7 +737,16 @@ group by 1,2</sql>
       <schema_name/>
     </partitioning>
     <connection>DCPLDW</connection>
-    <sql>select (case when max(src_id) is not null then max(src_id) else -1 end) as max_src_id from syndromic_olap.qa_ss_processed_message</sql>
+    <sql>select
+	substring(spm.patient_zip,0,6) as patient_zip,
+	lower(euz.county_name) as patient_county,
+    euz.state_id,
+    lower(euz.county_name)||', '||lower(euz.state_id) as patient_county_state_id,
+    euz.lat,
+	euz.lng
+from syndromic.ss_processed_message spm
+left join syndromic_olap.etl_us_zipcodes euz on euz.zip = substring(patient_zip, 0, 6)
+where spm.id >= ${min_processed_message_id} and spm.id &lt; ${max_processed_message_id}</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -625,14 +760,14 @@ group by 1,2</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>128</xloc>
+      <xloc>320</xloc>
       <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>get patient locations</name>
-    <type>DBJoin</type>
+    <name>valid zip?</name>
+    <type>FilterRows</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -641,21 +776,28 @@ group by 1,2</sql>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>DCPLDW</connection>
-    <rowlimit>0</rowlimit>
-    <sql>select
-	patient_zip,
-	c_patient_county
-from syndromic.ss_processed_message spm
-where spm.id > ? and spm.id &lt;= ${max_processed_message_id}</sql>
-    <outer_join>N</outer_join>
-    <replace_vars>Y</replace_vars>
-    <parameter>
-      <field>
-        <name>max_src_id</name>
-        <type>Integer</type>
-      </field>
-    </parameter>
+    <send_true_to>dim_patient_location</send_true_to>
+    <send_false_to>Dummy (do nothing)</send_false_to>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <conditions>
+          <condition>
+            <negated>N</negated>
+            <leftvalue>patient_zip</leftvalue>
+            <function>IS NOT NULL</function>
+            <rightvalue/>
+          </condition>
+          <condition>
+            <negated>N</negated>
+            <operator>AND</operator>
+            <leftvalue>state_id</leftvalue>
+            <function>IS NOT NULL</function>
+            <rightvalue/>
+          </condition>
+        </conditions>
+      </condition>
+    </compare>
     <cluster_schema/>
     <remotesteps>
       <input>
@@ -664,77 +806,8 @@ where spm.id > ? and spm.id &lt;= ${max_processed_message_id}</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>464</xloc>
-      <yloc>128</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Log Max</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>
-      <jsScript>
-        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>writeToLog('m', 'max src_id: ' + max_src_id);</jsScript_script>
-      </jsScript>
-    </jsScripts>
-    <fields>    </fields>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>288</xloc>
+      <xloc>480</xloc>
       <yloc>192</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>get patient locations 2</name>
-    <type>DBJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>DCPLDW</connection>
-    <rowlimit>0</rowlimit>
-    <sql>select
-	patient_zip,
-	c_patient_county
-from syndromic.ss_processed_message spm
-where spm.id >= 70000000 and spm.id &lt;= ${max_processed_message_id}</sql>
-    <outer_join>N</outer_join>
-    <replace_vars>Y</replace_vars>
-    <parameter>
-    </parameter>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>464</xloc>
-      <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

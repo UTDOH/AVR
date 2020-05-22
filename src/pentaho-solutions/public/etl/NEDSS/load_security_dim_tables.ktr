@@ -1,24 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>exec_update_nbs_result_w_msg_processed_on</name>
+    <name>load_security_dim_tables</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
-    <trans_status>0</trans_status>
     <directory>/</directory>
     <parameters>
-      <parameter>
-        <name>nbsoltp_schema</name>
-        <default_value>NBSPROD</default_value>
-        <description>NBSPROD|NBS_USER</description>
-      </parameter>
-      <parameter>
-        <name>nbsoltp_schemaz</name>
-        <default_value>NBS_USER</default_value>
-        <description>NBSPROD|NBS_USER</description>
-      </parameter>
     </parameters>
     <log>
       <trans-log-table>
@@ -438,20 +427,20 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2017/12/02 21:07:59.720</created_date>
+    <created_date>2020/01/06 17:33:05.504</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2017/12/02 21:07:59.720</modified_date>
-    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
+    <modified_date>2020/01/06 17:33:05.504</modified_date>
+    <key_for_session_key/>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
   <connection>
-    <name>NBSOLAPDS</name>
+    <name>NEDSSOLAPDS</name>
     <server/>
     <type>POSTGRESQL</type>
     <access>JNDI</access>
-    <database>NBSOLAPDS</database>
+    <database>NEDSSOLAPDS</database>
     <port>1521</port>
     <username/>
     <password>Encrypted </password>
@@ -510,17 +499,17 @@
     </attributes>
   </connection>
   <connection>
-    <name>NBSOLTP</name>
+    <name>NEDSSTXDS</name>
     <server/>
-    <type>ORACLE</type>
+    <type>POSTGRESQL</type>
     <access>JNDI</access>
-    <database>NBSOLTP</database>
+    <database>WebNEDSSTXDS</database>
     <port>1521</port>
     <username/>
     <password>Encrypted </password>
     <servername/>
-    <data_tablespace>${nbsoltp_schema}</data_tablespace>
-    <index_tablespace>${nbsoltp_schema}</index_tablespace>
+    <data_tablespace/>
+    <index_tablespace/>
     <attributes>
       <attribute>
         <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
@@ -552,14 +541,10 @@
       </attribute>
       <attribute>
         <code>PRESERVE_RESERVED_WORD_CASE</code>
-        <attribute>N</attribute>
+        <attribute>Y</attribute>
       </attribute>
       <attribute>
         <code>QUOTE_ALL_FIELDS</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>STRICT_NUMBER_38_INTERPRETATION</code>
         <attribute>N</attribute>
       </attribute>
       <attribute>
@@ -578,180 +563,38 @@
   </connection>
   <order>
     <hop>
-      <from>Log Date</from>
-      <to>Get ARUP Message Out Date 2</to>
+      <from>dim_agency</from>
+      <to>Lookup_dim_agency</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Get ARUP Message Out Date 2</from>
-      <to>Calculator</to>
-      <enabled>N</enabled>
-    </hop>
-    <hop>
-      <from>Calculator</from>
-      <to>Update fns.src_message_processed_on</to>
-      <enabled>N</enabled>
-    </hop>
-    <hop>
-      <from>Get Max SRC_MESSAGE_PROCESSED_ON</from>
-      <to>Log Date</to>
+      <from>Get User Agencies</from>
+      <to>Lookup_dim_agency</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Get ARUP Message Out Date 2</from>
-      <to>Update fns.src_message_processed_on</to>
+      <from>Lookup_dim_agency</from>
+      <to>dim_user_agency</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Get User Conditions</from>
+      <to>lookup_dim_condition</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>dim_condition</from>
+      <to>lookup_dim_condition</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>lookup_dim_condition</from>
+      <to>dim_user_allowed_conditions</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Calculator</name>
-    <type>Calculator</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <calculation>
-      <field_name>SAMPLE_NUMBER_AS_INT</field_name>
-      <calc_type>COPY_FIELD</calc_type>
-      <field_a>SAMPLE_NUMBER</field_a>
-      <field_b/>
-      <field_c/>
-      <value_type>Integer</value_type>
-      <value_length>-1</value_length>
-      <value_precision>-1</value_precision>
-      <remove>N</remove>
-      <conversion_mask/>
-      <decimal_symbol/>
-      <grouping_symbol/>
-      <currency_symbol/>
-    </calculation>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>752</xloc>
-      <yloc>96</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Data Grid</name>
-    <type>DataGrid</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>DW_MESSAGE_PROCESSED_ON</name>
-        <type>Integer</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>sample_number</name>
-        <type>BigNumber</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>SRC_MESSAGE_PROCESSED_ON</name>
-        <type>Timestamp</type>
-        <format>yyyy/MM/dd HH:mm:ss</format>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-    <data>
-      <line>
-        <item>20171011</item>
-        <item>3082829</item>
-        <item>2017/10/11 13:27:01</item>
-      </line>
-    </data>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>704</xloc>
-      <yloc>208</yloc>
-      <draw>N</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Get ARUP Message Out Date 2</name>
-    <type>DBJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>NBSOLTP</connection>
-    <rowlimit>0</rowlimit>
-    <sql>select 
-	 SAMPLE_NUMBER
-	,MAX(MESSAGE_PROCESSED_ON) as SRC_MESSAGE_PROCESSED_ON
-    ,TO_NUMBER(TO_CHAR(MAX(MESSAGE_PROCESSED_ON), 'YYYYMMDD')) AS DW_MESSAGE_PROCESSED_ON
-FROM ${nbsoltp_schema}.NBS_ARUP_MESSAGE_IN
-WHERE MESSAGE_PROCESSED_ON >= ?
-group by SAMPLE_NUMBER
-</sql>
-    <outer_join>N</outer_join>
-    <replace_vars>Y</replace_vars>
-    <parameter>
-      <field>
-        <name>max_src_message_processed_on</name>
-        <type>Date</type>
-      </field>
-    </parameter>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>560</xloc>
-      <yloc>208</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Get Max SRC_MESSAGE_PROCESSED_ON</name>
+    <name>Get User Agencies</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -761,10 +604,11 @@ group by SAMPLE_NUMBER
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>NBSOLAPDS</connection>
-    <sql>select 
-	case when max(SRC_MESSAGE_PROCESSED_ON) is not null then max(SRC_MESSAGE_PROCESSED_ON) else date '2006-01-01' end as max_SRC_MESSAGE_PROCESSED_ON 
-from nbs_olap.fact_nbs_result;</sql>
+    <connection>NEDSSTXDS</connection>
+    <sql>SELECT DISTINCT uid, agency_id AS src_agency_id
+FROM public.user_agency_role JOIN "user" ON user_agency_role.user_id = "user".id
+    WHERE role_id IN (SELECT role_id FROM public.privilege_role WHERE privilege_id IN (SELECT id FROM privilege WHERE priv_name = 'access_avr'))
+    AND "user".status = 'active'</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -778,14 +622,14 @@ from nbs_olap.fact_nbs_result;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>176</xloc>
-      <yloc>208</yloc>
+      <xloc>208</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Log Date</name>
-    <type>ScriptValueMod</type>
+    <name>Get User Conditions</name>
+    <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -794,16 +638,15 @@ from nbs_olap.fact_nbs_result;</sql>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>
-      <jsScript>
-        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>writeToLog('m', 'max_src_message_processed_on: ' + max_src_message_processed_on)</jsScript_script>
-      </jsScript>
-    </jsScripts>
-    <fields>    </fields>
+    <connection>NEDSSTXDS</connection>
+    <sql>SELECT uid, condition_id AS allowed_condition_id
+FROM public.user_condition JOIN "user" ON user_condition.user_id = "user".id
+    WHERE "user".status = 'active'</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
     <cluster_schema/>
     <remotesteps>
       <input>
@@ -812,14 +655,14 @@ from nbs_olap.fact_nbs_result;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>400</xloc>
-      <yloc>208</yloc>
+      <xloc>208</xloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Update fns.src_message_processed_on</name>
-    <type>Update</type>
+    <name>dim_agency</name>
+    <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -828,28 +671,52 @@ from nbs_olap.fact_nbs_result;</sql>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>NBSOLAPDS</connection>
-    <skip_lookup>Y</skip_lookup>
-    <commit>100</commit>
-    <use_batch>Y</use_batch>
-    <error_ignored>N</error_ignored>
-    <ignore_flag_field/>
+    <connection>NEDSSOLAPDS</connection>
+    <sql>select src_agency_id, dw_agency_id from nedss_olap.dim_agency;</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>384</xloc>
+      <yloc>16</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Lookup_dim_agency</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <from>dim_agency</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
     <lookup>
-      <schema>nbs_olap</schema>
-      <table>fact_nbs_result</table>
       <key>
-        <name>SAMPLE_NUMBER</name>
-        <field>sample_number</field>
-        <condition>=</condition>
-        <name2/>
+        <name>src_agency_id</name>
+        <field>src_agency_id</field>
       </key>
       <value>
-        <name>dw_message_processed_on_date_num_id</name>
-        <rename>DW_MESSAGE_PROCESSED_ON</rename>
-      </value>
-      <value>
-        <name>src_message_processed_on</name>
-        <rename>SRC_MESSAGE_PROCESSED_ON</rename>
+        <name>dw_agency_id</name>
+        <rename>dw_agency_id</rename>
+        <default/>
+        <type>Integer</type>
       </value>
     </lookup>
     <cluster_schema/>
@@ -860,8 +727,190 @@ from nbs_olap.fact_nbs_result;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>944</xloc>
-      <yloc>208</yloc>
+      <xloc>384</xloc>
+      <yloc>112</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>dim_user_agency</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>NEDSSOLAPDS</connection>
+    <schema>nedss_olap</schema>
+    <table>dim_user_agency</table>
+    <commit>1000</commit>
+    <truncate>Y</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+      <field>
+        <column_name>src_uid</column_name>
+        <stream_name>uid</stream_name>
+      </field>
+      <field>
+        <column_name>src_agency_id</column_name>
+        <stream_name>src_agency_id</stream_name>
+      </field>
+      <field>
+        <column_name>dw_agency_id</column_name>
+        <stream_name>dw_agency_id</stream_name>
+      </field>
+    </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>576</xloc>
+      <yloc>112</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>dim_condition</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>NEDSSOLAPDS</connection>
+    <sql>select src_condition_id, dw_condition_id from nedss_olap.dim_condition;</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>384</xloc>
+      <yloc>336</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>lookup_dim_condition</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <from>dim_condition</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>allowed_condition_id</name>
+        <field>src_condition_id</field>
+      </key>
+      <value>
+        <name>dw_condition_id</name>
+        <rename>dw_condition_id</rename>
+        <default/>
+        <type>Integer</type>
+      </value>
+    </lookup>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>384</xloc>
+      <yloc>224</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>dim_user_allowed_conditions</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>NEDSSOLAPDS</connection>
+    <schema>nedss_olap</schema>
+    <table>dim_user_allowed_condition</table>
+    <commit>1000</commit>
+    <truncate>Y</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+      <field>
+        <column_name>src_uid</column_name>
+        <stream_name>uid</stream_name>
+      </field>
+      <field>
+        <column_name>dw_condition_id</column_name>
+        <stream_name>dw_condition_id</stream_name>
+      </field>
+      <field>
+        <column_name>src_condition_id</column_name>
+        <stream_name>allowed_condition_id</stream_name>
+      </field>
+    </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>576</xloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

@@ -585,16 +585,21 @@
     <hop>
       <from>Get ARUP Message Out Date 2</from>
       <to>Calculator</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Calculator</from>
       <to>Update fns.src_message_processed_on</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Get Max SRC_MESSAGE_PROCESSED_ON</from>
       <to>Log Date</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Get ARUP Message Out Date 2</from>
+      <to>Update fns.src_message_processed_on</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -632,8 +637,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>752</xloc>
-      <yloc>208</yloc>
+      <xloc>768</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -717,7 +722,7 @@
     <connection>NBSOLTP</connection>
     <rowlimit>0</rowlimit>
     <sql>select 
-	 SAMPLE_NUMBER
+	 to_char(SAMPLE_NUMBER) as SAMPLE_NUMBER
 	,MAX(CHANGED_ON) as SRC_RESULT_ENTRY_DATE
     ,TO_NUMBER(TO_CHAR(MAX(CHANGED_ON), 'YYYYMMDD')) AS DW_RESULT_ENTRY_DATE
 FROM ${nbsoltp_schema}.PLATE_POSITION
@@ -833,7 +838,7 @@ from nbs_olap.fact_nbs_sample;</sql>
       <schema>nbs_olap</schema>
       <table>fact_nbs_sample</table>
       <key>
-        <name>SAMPLE_NUMBER_AS_INT</name>
+        <name>SAMPLE_NUMBER</name>
         <field>sample_number</field>
         <condition>=</condition>
         <name2/>

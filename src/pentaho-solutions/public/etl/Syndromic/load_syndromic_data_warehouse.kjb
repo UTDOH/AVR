@@ -4,6 +4,7 @@
   <description/>
   <extended_description/>
   <job_version/>
+  <job_status>0</job_status>
   <directory>/</directory>
   <created_user>-</created_user>
   <created_date>2019/05/21 12:50:18.797</created_date>
@@ -388,7 +389,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>432</xloc>
+      <xloc>640</xloc>
       <yloc>112</yloc>
     </entry>
     <entry>
@@ -491,7 +492,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>720</xloc>
+      <xloc>928</xloc>
       <yloc>112</yloc>
     </entry>
     <entry>
@@ -527,7 +528,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>576</xloc>
+      <xloc>784</xloc>
       <yloc>112</yloc>
     </entry>
     <entry>
@@ -536,7 +537,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>${pentaho.solutions.root.vfs}/etl/Syndromic/load_qa_processed_message_new.ktr</filename>
+      <filename>${pentaho.solutions.root.vfs}/etl/Syndromic/load_qa_processed_message_test.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -563,8 +564,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1120</xloc>
-      <yloc>432</yloc>
+      <xloc>896</xloc>
+      <yloc>656</yloc>
     </entry>
     <entry>
       <name>set_max_processed_message_id</name>
@@ -599,7 +600,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>880</xloc>
+      <xloc>448</xloc>
       <yloc>112</yloc>
     </entry>
     <entry>
@@ -635,8 +636,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1120</xloc>
-      <yloc>112</yloc>
+      <xloc>1264</xloc>
+      <yloc>224</yloc>
     </entry>
     <entry>
       <name>vacuum large table</name>
@@ -644,8 +645,9 @@
       <type>SQL</type>
       <sql>vacuum analyze syndromic_olap.qa_ss_processed_message;
 vacuum analyze syndromic_olap.dim_patient_location;
-
-
+vacuum analyze olap_temp.etl_ss_processed_chief_complaint_summary;
+vacuum analyze olap_temp.etl_processed_diagnosis_summary;
+vacuum analyze olap_temp.etl_processed_race_summary;
 
 
 
@@ -661,8 +663,8 @@ vacuum analyze syndromic_olap.dim_patient_location;
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1120</xloc>
-      <yloc>544</yloc>
+      <xloc>624</xloc>
+      <yloc>656</yloc>
     </entry>
     <entry>
       <name>load_ss_processed_chief_complaint_summary.ktr</name>
@@ -697,14 +699,16 @@ vacuum analyze syndromic_olap.dim_patient_location;
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1120</xloc>
-      <yloc>320</yloc>
+      <xloc>1264</xloc>
+      <yloc>432</yloc>
     </entry>
     <entry>
-      <name>truncate etl_ss_processed_chief_complaint_summary</name>
+      <name>truncate etl temp tables</name>
       <description/>
       <type>SQL</type>
-      <sql>delete from syndromic_olap.etl_ss_processed_chief_complaint_summary;</sql>
+      <sql>delete from olap_temp.etl_ss_processed_chief_complaint_summary;
+delete from olap_temp.etl_processed_diagnosis_summary;
+delete from olap_temp.etl_processed_race_summary;</sql>
       <useVariableSubstitution>F</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
@@ -713,8 +717,301 @@ vacuum analyze syndromic_olap.dim_patient_location;
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1120</xloc>
-      <yloc>208</yloc>
+      <xloc>1264</xloc>
+      <yloc>320</yloc>
+    </entry>
+    <entry>
+      <name>update_chief_complaint_on_ss_processed_message</name>
+      <description/>
+      <type>SQL</type>
+      <sql>update syndromic_olap.qa_ss_processed_message
+set tf1_chiefcomplaint_v = etl_ss_processed_chief_complaint_summary.tf1_chiefcomplaint_v,
+chief_complaints_text = etl_ss_processed_chief_complaint_summary.chief_complaint_texts
+from syndromic_olap.etl_ss_processed_chief_complaint_summary
+where qa_ss_processed_message.src_id = etl_ss_processed_chief_complaint_summary.ss_processed_message_src_id;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>DCPLDW</connection>
+      <parallel>N</parallel>
+      <draw>N</draw>
+      <nr>0</nr>
+      <xloc>864</xloc>
+      <yloc>832</yloc>
+    </entry>
+    <entry>
+      <name>Success</name>
+      <description/>
+      <type>SUCCESS</type>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>320</xloc>
+      <yloc>736</yloc>
+    </entry>
+    <entry>
+      <name>Success Mail</name>
+      <description/>
+      <type>MAIL</type>
+      <server>smtp.gmail.com</server>
+      <port>587</port>
+      <destination>tmacduff@gmail.com</destination>
+      <destinationCc/>
+      <destinationBCc/>
+      <replyto>udohnotifications@gmail.com</replyto>
+      <replytoname>UDOH - PDI Script Response</replytoname>
+      <subject>Success: Incremental UDOH Syndromic QA ETL Jobs</subject>
+      <include_date>Y</include_date>
+      <contact_person/>
+      <contact_phone/>
+      <comment>The incremental datawarehouse  ETL jobs for Syndromic QA Surveillance completed successfully.</comment>
+      <include_files>Y</include_files>
+      <zip_files>N</zip_files>
+      <zip_name/>
+      <use_auth>Y</use_auth>
+      <use_secure_auth>Y</use_secure_auth>
+      <auth_user>udohnotifications@gmail.com</auth_user>
+      <auth_password>Encrypted 2be98afc81fc39d8cff09ab7eca93a7d5</auth_password>
+      <only_comment>N</only_comment>
+      <use_HTML>N</use_HTML>
+      <use_Priority>N</use_Priority>
+      <encoding>UTF-8</encoding>
+      <priority>normal</priority>
+      <importance>normal</importance>
+      <sensitivity>normal</sensitivity>
+      <secureconnectiontype>TLS</secureconnectiontype>
+      <replyToAddresses/>
+      <filetypes>
+        <filetype>GENERAL</filetype>
+        <filetype>LOG</filetype>
+        <filetype>ERRORLINE</filetype>
+        <filetype>ERROR</filetype>
+        <filetype>WARNING</filetype>
+      </filetypes>
+      <embeddedimages>
+      </embeddedimages>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>432</xloc>
+      <yloc>736</yloc>
+    </entry>
+    <entry>
+      <name>Abort job</name>
+      <description/>
+      <type>ABORT</type>
+      <message/>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>560</xloc>
+      <yloc>400</yloc>
+    </entry>
+    <entry>
+      <name>Fail Mail</name>
+      <description/>
+      <type>MAIL</type>
+      <server>smtp.gmail.com</server>
+      <port>587</port>
+      <destination>tmacduff@gmail.com</destination>
+      <destinationCc/>
+      <destinationBCc/>
+      <replyto>udohnotifications@gmail.com</replyto>
+      <replytoname>UDOH - QA Syndromic PDI Script Response</replytoname>
+      <subject>Failure: Incremental QA Syndromic ETL Jobs</subject>
+      <include_date>Y</include_date>
+      <contact_person/>
+      <contact_phone/>
+      <comment>The incremental datawarehouse  ETL jobs for QA Syndromic did not complete successfully.</comment>
+      <include_files>Y</include_files>
+      <zip_files>N</zip_files>
+      <zip_name/>
+      <use_auth>Y</use_auth>
+      <use_secure_auth>Y</use_secure_auth>
+      <auth_user>udohnotifications@gmail.com</auth_user>
+      <auth_password>Encrypted 2be98afc81fc39d8cff09ab7eca93a7d5</auth_password>
+      <only_comment>N</only_comment>
+      <use_HTML>N</use_HTML>
+      <use_Priority>N</use_Priority>
+      <encoding>UTF-8</encoding>
+      <priority>normal</priority>
+      <importance>normal</importance>
+      <sensitivity>normal</sensitivity>
+      <secureconnectiontype>TLS</secureconnectiontype>
+      <replyToAddresses/>
+      <filetypes>
+        <filetype>GENERAL</filetype>
+        <filetype>LOG</filetype>
+        <filetype>ERRORLINE</filetype>
+        <filetype>ERROR</filetype>
+        <filetype>WARNING</filetype>
+      </filetypes>
+      <embeddedimages>
+      </embeddedimages>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>704</xloc>
+      <yloc>400</yloc>
+    </entry>
+    <entry>
+      <name>load_ss_processed_diagnosis_summary</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${pentaho.solutions.root.vfs}/etl/Syndromic/load_ss_processed_diagnosis_summary.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1264</xloc>
+      <yloc>544</yloc>
+    </entry>
+    <entry>
+      <name>load_ss_processed_race_summary</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${pentaho.solutions.root.vfs}/etl/Syndromic/load_ss_processed_race_summary.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>1</nr>
+      <xloc>1264</xloc>
+      <yloc>656</yloc>
+    </entry>
+    <entry>
+      <name>delete fact records</name>
+      <description/>
+      <type>SQL</type>
+      <sql>delete from syndromic_olap.qa_ss_processed_message where src_id >= ${min_processed_message_id} and src_id &lt; ${max_processed_message_id};</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>DCPLDW</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1088</xloc>
+      <yloc>112</yloc>
+    </entry>
+    <entry>
+      <name>load_syndromic_aggregate_tables</name>
+      <description/>
+      <type>JOB</type>
+      <specification_method>filename</specification_method>
+      <job_object_id/>
+      <filename>${pentaho.solutions.root.vfs}/etl/Syndromic/load_syndromic_aggregate_tables.kjb</filename>
+      <jobname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>432</xloc>
+      <yloc>656</yloc>
+    </entry>
+    <entry>
+      <name>load_dim_mft_smartystreets.ktr</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${pentaho.solutions.root.vfs}/etl/Syndromic/load_dim_mft_smartystreets.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1264</xloc>
+      <yloc>112</yloc>
     </entry>
   </entries>
   <hops>
@@ -728,39 +1025,12 @@ vacuum analyze syndromic_olap.dim_patient_location;
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>set schema</from>
-      <to>Simple evaluation</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Simple evaluation</from>
-      <to>load_date_time_dims</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>Simple evaluation</from>
       <to>Set variables</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Set variables</from>
-      <to>load_date_time_dims</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
     <hop>
@@ -782,24 +1052,6 @@ vacuum analyze syndromic_olap.dim_patient_location;
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>load_rt_dims</from>
-      <to>set_max_processed_message_id</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>set_max_processed_message_id</from>
-      <to>load_dim_person_location</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>load_qa_processed_message</from>
       <to>vacuum large table</to>
       <from_nr>0</from_nr>
@@ -809,17 +1061,107 @@ vacuum analyze syndromic_olap.dim_patient_location;
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>load_ss_processed_chief_complaint_summary.ktr</from>
-      <to>load_qa_processed_message</to>
+      <from>load_dim_person_location</from>
+      <to>truncate etl temp tables</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>truncate etl temp tables</from>
+      <to>load_ss_processed_chief_complaint_summary.ktr</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Success Mail</from>
+      <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>load_date_time_dims</from>
+      <to>Fail Mail</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>seed_time</from>
+      <to>Fail Mail</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>load_rt_dims</from>
+      <to>Fail Mail</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
       <unconditional>N</unconditional>
     </hop>
     <hop>
       <from>load_dim_person_location</from>
-      <to>truncate etl_ss_processed_chief_complaint_summary</to>
+      <to>Fail Mail</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>truncate etl temp tables</from>
+      <to>Fail Mail</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>load_ss_processed_chief_complaint_summary.ktr</from>
+      <to>Fail Mail</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>load_qa_processed_message</from>
+      <to>Fail Mail</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>vacuum large table</from>
+      <to>Fail Mail</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Fail Mail</from>
+      <to>Abort job</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -827,8 +1169,152 @@ vacuum analyze syndromic_olap.dim_patient_location;
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>truncate etl_ss_processed_chief_complaint_summary</from>
-      <to>load_ss_processed_chief_complaint_summary.ktr</to>
+      <from>load_ss_processed_diagnosis_summary</from>
+      <to>Fail Mail</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>load_ss_processed_chief_complaint_summary.ktr</from>
+      <to>load_ss_processed_diagnosis_summary</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>load_ss_processed_diagnosis_summary</from>
+      <to>load_ss_processed_race_summary</to>
+      <from_nr>0</from_nr>
+      <to_nr>1</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>load_ss_processed_race_summary</from>
+      <to>load_qa_processed_message</to>
+      <from_nr>1</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>load_ss_processed_race_summary</from>
+      <to>Fail Mail</to>
+      <from_nr>1</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>delete fact records</from>
+      <to>Fail Mail</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>vacuum large table</from>
+      <to>load_syndromic_aggregate_tables</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>load_syndromic_aggregate_tables</from>
+      <to>Success Mail</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>load_syndromic_aggregate_tables</from>
+      <to>Fail Mail</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>load_rt_dims</from>
+      <to>delete fact records</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>delete fact records</from>
+      <to>load_dim_mft_smartystreets.ktr</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>load_dim_mft_smartystreets.ktr</from>
+      <to>load_dim_person_location</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>load_dim_mft_smartystreets.ktr</from>
+      <to>Fail Mail</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>set schema</from>
+      <to>Simple evaluation</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Simple evaluation</from>
+      <to>set_max_processed_message_id</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Set variables</from>
+      <to>set_max_processed_message_id</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>set_max_processed_message_id</from>
+      <to>load_date_time_dims</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -837,6 +1323,35 @@ vacuum analyze syndromic_olap.dim_patient_location;
     </hop>
   </hops>
   <notepads>
+    <notepad>
+      <note>TODO:  Materialize this query daily in syndromic_olap.dim_mft_exception
+
+select distinct (ss_processed_message.facility_uid)
+, mft_feed.facility_uid as mft_feed_facility_uid
+from syndromic.ss_processed_message
+LEFT join syndromic.mft_feed on ( mft_feed.facility_uid = syndromic.ss_processed_message.facility_uid)
+where syndromic.mft_feed.facility_uid is null
+and syndromic.ss_processed_message.ss_batched_messages_created_at > '2019-11-01'
+;  </note>
+      <xloc>208</xloc>
+      <yloc>240</yloc>
+      <width>680</width>
+      <heigth>190</heigth>
+      <fontname>Cantarell</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
   </notepads>
   <attributes>
     <group>

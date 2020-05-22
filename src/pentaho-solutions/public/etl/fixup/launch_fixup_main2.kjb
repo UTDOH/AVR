@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <job>
-  <name>launch_fixup_main</name>
+  <name>launch_fixup_main2</name>
   <description/>
   <extended_description/>
   <job_version/>
@@ -3935,12 +3935,21 @@ CREATE INDEX idx_fct_pers_cond_dw_lhd_case_status_id
       <yloc>32</yloc>
     </entry>
     <entry>
-      <name>idx_dpa_src_id</name>
+      <name>dim_mft Updates</name>
       <description/>
       <type>SQL</type>
-      <sql>CREATE INDEX idx_dpa_src_id
-    ON nedss_olap.dim_person_address USING btree
-    (src_person_address_id)
+      <sql>-- ALTER TABLE syndromic_olap.dim_mft ADD src_mft_feed_id integer;  
+
+ALTER TABLE syndromic_olap.dim_mft rename id to src_mft_id;
+
+CREATE INDEX idx_dm_src_mft_feed_id
+    ON syndromic_olap.dim_mft USING btree
+    (src_mft_feed_id)
+    TABLESPACE pg_default;
+
+CREATE INDEX idx_dm_src_mft_id
+    ON syndromic_olap.dim_mft USING btree
+    (src_mft_id)
     TABLESPACE pg_default;</sql>
       <useVariableSubstitution>F</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
@@ -3951,7 +3960,7 @@ CREATE INDEX idx_fct_pers_cond_dw_lhd_case_status_id
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>560</xloc>
-      <yloc>160</yloc>
+      <yloc>112</yloc>
     </entry>
     <entry>
       <name>load_fact_person_condition</name>
@@ -3990,19 +3999,87 @@ CREATE INDEX idx_fct_pers_cond_dw_lhd_case_status_id
       <yloc>528</yloc>
     </entry>
     <entry>
-      <name>trunc fact_person_condition</name>
+      <name>create_syndromic_etl_temp_tables</name>
       <description/>
       <type>SQL</type>
-      <sql>delete from nedss_olap.fact_person_condition;</sql>
+      <sql>drop table if exists olap_temp.etl_processed_diagnosis_summary;
+
+drop table if exists olap_temp.etl_processed_diagnosis_summary;
+
+CREATE TABLE olap_temp.etl_processed_diagnosis_summary ( 
+	ss_processed_message_id integer  NOT NULL,
+	diagnosis_codes      varchar(512)  ,
+	diagnosis_descriptions varchar(1024)  ,
+	diagnosis_code_systems varchar(255)  ,
+	tf1_diagnosis_code_v integer  ,
+	tf1_diagnosis_description_v integer  ,
+	processed_diagnosis_message_count integer  ,
+	CONSTRAINT pk_etl_processed_diagnosis_summary PRIMARY KEY ( ss_processed_message_id )
+ );
+
+
+drop table if exists syndromic_olap.etl_processed_diagnosis_summary;
+
+drop table if exists olap_temp.etl_processed_race_summary;
+
+CREATE TABLE olap_temp.etl_processed_race_summary ( 
+	ss_processed_message_id integer  NOT NULL,
+	race_codes           varchar(255)  ,
+	race_descriptions    varchar  ,
+	tf1_race_code_v      integer  ,
+	processed_race_message_count integer  ,
+	CONSTRAINT pk_etl_processed_race_summary PRIMARY KEY ( ss_processed_message_id )
+ );
+
+
+DROP TABLE if exists syndromic_olap.etl_processed_race_summary;
+
+drop table if exists olap_temp.etl_ss_processed_chief_complaint_summary;
+
+CREATE TABLE olap_temp.etl_ss_processed_chief_complaint_summary ( 
+	ss_processed_message_src_id integer  NOT NULL,
+	chief_complaint_codes varchar(512)  ,
+	chief_complaint_texts varchar(512)  ,
+	tf1_chiefcomplaint_v integer  ,
+	chief_complaint_message_count integer  ,
+	CONSTRAINT idx_ss_processed_chief_complaint PRIMARY KEY ( ss_processed_message_src_id )
+ );
+
+
+/*
+COMMENT ON TABLE syndromic_olap.etl_ss_processed_chief_complaint_summary IS 'This table is a rollup of chief_complaint_codes and chief_complaint_texts';
+
+COMMENT ON COLUMN syndromic_olap.etl_ss_processed_chief_complaint_summary.chief_complaint_codes IS 'A rollup by qa_ss_processed_message_src_id';
+
+COMMENT ON COLUMN syndromic_olap.etl_ss_processed_chief_complaint_summary.chief_complaint_texts IS 'A rollup by qa_ss_processed_message_src_id';
+
+drop table if exists syndromic_olap.etl_ss_processed_chief_complaint_summary;
+
+ALTER TABLE syndromic_olap.qa_ss_processed_message ADD chief_complaint_message_count integer;
+
+ALTER TABLE syndromic_olap.qa_ss_processed_message ADD processed_diagnosis_message_count integer;
+
+ALTER TABLE syndromic_olap.qa_ss_processed_message ADD processed_race_message_count integer;
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.chief_complaint_message_count IS 'Count of chief complaint HL7 messages for this processed message.';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.processed_diagnosis_message_count IS 'Count of processed diagnosis HL7 messages for this processed message.';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.processed_race_message_count IS 'Count of processed race HL7 messages for this processed message.';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.etl_load_date IS 'Date ETL was loaded into the OLAP schema';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.c_patient_county IS 'Patient county';
+*/</sql>
       <useVariableSubstitution>F</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
       <sendOneStatement>F</sendOneStatement>
       <connection>NEDSSOLAPDS</connection>
       <parallel>N</parallel>
-      <draw>Y</draw>
+      <draw>N</draw>
       <nr>0</nr>
-      <xloc>352</xloc>
+      <xloc>384</xloc>
       <yloc>240</yloc>
     </entry>
     <entry>
@@ -4024,7 +4101,9 @@ CREATE INDEX idx_fct_pers_cond_dw_lhd_case_status_id
 ls -alt /var/local/pentaho8/tomcat/conf/Catalina/localhost
 cat /var/local/pentaho8/tomcat/webapps/pentaho/META-INF/context.xml
 cat /var/local/pentaho8/tomcat/conf/Catalina/localhost/pentaho.xml
-</script>
+
+#grep avr.health.utah.gov /var/local/pentaho8/pentaho-solutions/system/*.xml
+#grep utah.gov /var/local/pentaho8/pentaho-solutions/system/*.xml</script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
       <draw>Y</draw>
@@ -4033,80 +4112,12 @@ cat /var/local/pentaho8/tomcat/conf/Catalina/localhost/pentaho.xml
       <yloc>416</yloc>
     </entry>
     <entry>
-      <name>SQL</name>
+      <name>create_syndromic_temp_tables</name>
       <description/>
       <type>SQL</type>
-      <sql>DROP TABLE if exists nedss_olap.dim_user_agency;
-
-CREATE TABLE nedss_olap.dim_user_agency
-(
-     src_uid character varying
-    ,dw_agency_id integer
-    ,src_agency_id integer
-)
-WITH (
-    OIDS = FALSE
-)
-TABLESPACE pg_default;
-
-DROP INDEX if exists idx_dua_src_uid;
-
-CREATE INDEX idx_dua_src_uid
-    ON nedss_olap.dim_user_agency USING btree
-    (src_uid)
-    TABLESPACE pg_default;
-
-DROP INDEX if exists idx_dua_dw_agency_id;
-
-CREATE INDEX idx_dua_dw_agency_id
-    ON nedss_olap.dim_user_agency USING btree
-    (dw_agency_id)
-    TABLESPACE pg_default;
-
-DROP INDEX if exists idx_dua_src_agency_id;
-
-CREATE INDEX idx_dua_src_agency_id
-    ON nedss_olap.dim_user_agency USING btree
-    (src_agency_id)
-    TABLESPACE pg_default;
-
-DROP TABLE if exists nedss_olap.dim_user_allowed_conditions;
-
-DROP TABLE if exists nedss_olap.dim_user_allowed_condition;
-
-CREATE TABLE nedss_olap.dim_user_allowed_condition
-(
-     src_uid character varying
-    ,dw_condition_id integer
-    ,src_condition_id integer
-)
-WITH (
-    OIDS = FALSE
-)
-TABLESPACE pg_default;
-
-DROP INDEX if exists idx_duac_src_uid;
-
-CREATE INDEX idx_duac_src_uid
-    ON nedss_olap.dim_user_allowed_condition USING btree
-    (src_uid)
-    TABLESPACE pg_default;
-
-DROP INDEX if exists idx_duac_dw_condition_id;
-
-CREATE INDEX idx_duac_dw_condition_id
-    ON nedss_olap.dim_user_allowed_condition USING btree
-    (dw_condition_id)
-    TABLESPACE pg_default;
-
-DROP INDEX if exists idx_duac_src_condition_id;
-
-CREATE INDEX idx_duac_src_condition_id
-    ON nedss_olap.dim_user_allowed_condition USING btree
-    (src_condition_id)
-    TABLESPACE pg_default;
-
-</sql>
+      <sql>alter table syndromic_olap.agg_mft_day_processed_messages add column sum_processed_race_message_count integer;
+alter table syndromic_olap.agg_mft_day_processed_messages add column sum_processed_diagnosis_message_count integer;
+alter table syndromic_olap.agg_mft_day_processed_messages add column sum_chief_complaint_message_count integer;</sql>
       <useVariableSubstitution>F</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
@@ -5077,7 +5088,7 @@ cat /tmp/smartystreetstest_20191021.json</script>
     </hop>
     <hop>
       <from>START</from>
-      <to>idx_dpa_src_id</to>
+      <to>dim_mft Updates</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>N</enabled>
@@ -5085,7 +5096,7 @@ cat /tmp/smartystreetstest_20191021.json</script>
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>idx_dpa_src_id</from>
+      <from>dim_mft Updates</from>
       <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -5103,38 +5114,20 @@ cat /tmp/smartystreetstest_20191021.json</script>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>START</from>
-      <to>trunc fact_person_condition</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>trunc fact_person_condition</from>
-      <to>load_fact_person_condition</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>Shell</from>
       <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
     <hop>
       <from>START</from>
-      <to>SQL</to>
+      <to>create_syndromic_temp_tables</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
     </hop>
@@ -5224,7 +5217,7 @@ cat /tmp/smartystreetstest_20191021.json</script>
       <to>Shell</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
     </hop>
@@ -5238,11 +5231,11 @@ cat /tmp/smartystreetstest_20191021.json</script>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>SQL</from>
+      <from>create_syndromic_temp_tables</from>
       <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>

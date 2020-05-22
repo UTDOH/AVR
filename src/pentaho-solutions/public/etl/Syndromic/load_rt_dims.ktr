@@ -434,6 +434,30 @@
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
+    <notepad>
+      <note>TODO: Add process to resync dim_mft records that only 
+have the facility_uid set as these are orphaned dim_mft 
+records whose facility_uid was present in ss_processed_message
+but not yet in mft and mft_feed</note>
+      <xloc>448</xloc>
+      <yloc>32</yloc>
+      <width>430</width>
+      <heigth>90</heigth>
+      <fontname>Cantarell</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
   </notepads>
   <connection>
     <name>DCPLDW</name>
@@ -488,11 +512,6 @@
   </connection>
   <order>
     <hop>
-      <from>mft</from>
-      <to>dim_mft</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>rt_facility_visit_type</from>
       <to>rfvt_version_effective_date_num_id</to>
       <enabled>Y</enabled>
@@ -512,9 +531,165 @@
       <to>dim_rt_facility_visit_type</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>mft</from>
+      <to>dim_mft</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
   <step>
     <name>dim_mft</name>
+    <type>DimensionLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <schema>syndromic_olap</schema>
+    <table>dim_mft</table>
+    <connection>DCPLDW</connection>
+    <commit>100</commit>
+    <update>Y</update>
+    <fields>
+      <key>
+        <name>src_mft_id</name>
+        <lookup>src_mft_id</lookup>
+      </key>
+      <date>
+        <name/>
+        <from>start_date</from>
+        <to>end_date</to>
+      </date>
+      <field>
+        <name>udoh_status</name>
+        <lookup>udoh_status</lookup>
+        <update>Punch through</update>
+      </field>
+      <field>
+        <name>hco</name>
+        <lookup>hco</lookup>
+        <update>Punch through</update>
+      </field>
+      <field>
+        <name>biosense_status</name>
+        <lookup>biosense_status</lookup>
+        <update>Punch through</update>
+      </field>
+      <field>
+        <name>date_inactivated</name>
+        <lookup>date_inactivated</lookup>
+        <update>Punch through</update>
+      </field>
+      <field>
+        <name>vendor</name>
+        <lookup>vendor</lookup>
+        <update>Punch through</update>
+      </field>
+      <field>
+        <name>facility_name_mupi</name>
+        <lookup>facility_name_mupi</lookup>
+        <update>Punch through</update>
+      </field>
+      <field>
+        <name>c_biosense_facility_id</name>
+        <lookup>c_biosense_facility_id</lookup>
+        <update>Punch through</update>
+      </field>
+      <field>
+        <name>street_name</name>
+        <lookup>street_name</lookup>
+        <update>Punch through</update>
+      </field>
+      <field>
+        <name>city</name>
+        <lookup>city</lookup>
+        <update>Punch through</update>
+      </field>
+      <field>
+        <name>county</name>
+        <lookup>county</lookup>
+        <update>Punch through</update>
+      </field>
+      <field>
+        <name>local_health_district</name>
+        <lookup>local_health_district</lookup>
+        <update>Punch through</update>
+      </field>
+      <field>
+        <name>zip_code</name>
+        <lookup>zip_code</lookup>
+        <update>Punch through</update>
+      </field>
+      <field>
+        <name>src_mft_feed_id</name>
+        <lookup>src_mft_feed_id</lookup>
+        <update>Punch through</update>
+      </field>
+      <field>
+        <name>facility_type_code</name>
+        <lookup>facility_type_code</lookup>
+        <update>Punch through</update>
+      </field>
+      <field>
+        <name>facility_uid</name>
+        <lookup>facility_uid</lookup>
+        <update>Punch through</update>
+      </field>
+      <field>
+        <name>connector</name>
+        <lookup>connector</lookup>
+        <update>Punch through</update>
+      </field>
+      <field>
+        <name>facility_name</name>
+        <lookup>facility_name</lookup>
+        <update>Punch through</update>
+      </field>
+      <field>
+        <name>facility_id</name>
+        <lookup>facility_id</lookup>
+        <update>Punch through</update>
+      </field>
+      <field>
+        <name>application_name</name>
+        <lookup>application_name</lookup>
+        <update>Punch through</update>
+      </field>
+      <return>
+        <name>dw_mft_id</name>
+        <rename/>
+        <creation_method>tablemax</creation_method>
+        <use_autoinc>N</use_autoinc>
+        <version>version_id</version>
+      </return>
+    </fields>
+    <sequence/>
+    <min_year>1900</min_year>
+    <max_year>2199</max_year>
+    <cache_size>5000</cache_size>
+    <preload_cache>N</preload_cache>
+    <use_start_date_alternative>N</use_start_date_alternative>
+    <start_date_alternative>none</start_date_alternative>
+    <start_date_field_name/>
+    <useBatch>N</useBatch>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>384</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>dim_mft (type 2)</name>
     <type>CombinationLookup</type>
     <description/>
     <distribute>Y</distribute>
@@ -618,9 +793,9 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>480</xloc>
-      <yloc>64</yloc>
-      <draw>Y</draw>
+      <xloc>320</xloc>
+      <yloc>352</yloc>
+      <draw>N</draw>
     </GUI>
   </step>
   <step>
@@ -1427,7 +1602,31 @@
       <schema_name/>
     </partitioning>
     <connection>DCPLDW</connection>
-    <sql>select * from ${oltp_schema}.mft</sql>
+    <sql>select 
+ m.udoh_status
+,m.hco
+,m.biosense_status
+,m.date_inactivated
+,m.vendor
+,m.facility_name_mupi
+,m.c_biosense_facility_id
+,m.street_name
+,m.city
+,m.county
+,m.local_health_district
+,m.zip_code
+,m.id as src_mft_id
+,mf.id as src_mft_feed_id
+,m.facility_type_code
+,mf.facility_uid
+,mf.connector
+,mf.facility_name
+,mf.facility_id
+,mf.application_name
+from syndromic.mft_feed mf inner join
+(select max(id) as max_id, mft_id from syndromic.mft_feed
+group by 2) max_mf on max_mf.max_id = mf.id
+inner join syndromic.mft m on mf.mft_id = m.id</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>

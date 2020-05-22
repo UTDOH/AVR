@@ -712,7 +712,7 @@ CREATE INDEX idx_x_dx_treatment_date
       <yloc>48</yloc>
     </entry>
     <entry>
-      <name>2006 (2)</name>
+      <name>2020</name>
       <description/>
       <type>JOB</type>
       <specification_method>filename</specification_method>
@@ -740,7 +740,7 @@ CREATE INDEX idx_x_dx_treatment_date
         <parameter>
           <name>YYYY</name>
           <stream_name/>
-          <value>2006</value>
+          <value>2020</value>
         </parameter>
       </parameters>
       <set_append_logfile>N</set_append_logfile>
@@ -751,7 +751,7 @@ CREATE INDEX idx_x_dx_treatment_date
       <yloc>128</yloc>
     </entry>
     <entry>
-      <name>2007</name>
+      <name>2021</name>
       <description/>
       <type>JOB</type>
       <specification_method>filename</specification_method>
@@ -779,7 +779,7 @@ CREATE INDEX idx_x_dx_treatment_date
         <parameter>
           <name>YYYY</name>
           <stream_name/>
-          <value>2007</value>
+          <value>2021</value>
         </parameter>
       </parameters>
       <set_append_logfile>N</set_append_logfile>
@@ -790,7 +790,7 @@ CREATE INDEX idx_x_dx_treatment_date
       <yloc>128</yloc>
     </entry>
     <entry>
-      <name>2008</name>
+      <name>2022</name>
       <description/>
       <type>JOB</type>
       <specification_method>filename</specification_method>
@@ -818,18 +818,18 @@ CREATE INDEX idx_x_dx_treatment_date
         <parameter>
           <name>YYYY</name>
           <stream_name/>
-          <value>2008</value>
+          <value>2022</value>
         </parameter>
       </parameters>
       <set_append_logfile>N</set_append_logfile>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>464</xloc>
+      <xloc>448</xloc>
       <yloc>128</yloc>
     </entry>
     <entry>
-      <name>2009</name>
+      <name>2023</name>
       <description/>
       <type>JOB</type>
       <specification_method>filename</specification_method>
@@ -857,18 +857,18 @@ CREATE INDEX idx_x_dx_treatment_date
         <parameter>
           <name>YYYY</name>
           <stream_name/>
-          <value>2009</value>
+          <value>2023</value>
         </parameter>
       </parameters>
       <set_append_logfile>N</set_append_logfile>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>576</xloc>
+      <xloc>528</xloc>
       <yloc>128</yloc>
     </entry>
     <entry>
-      <name>2010</name>
+      <name>2024</name>
       <description/>
       <type>JOB</type>
       <specification_method>filename</specification_method>
@@ -896,18 +896,18 @@ CREATE INDEX idx_x_dx_treatment_date
         <parameter>
           <name>YYYY</name>
           <stream_name/>
-          <value>2010</value>
+          <value>2024</value>
         </parameter>
       </parameters>
       <set_append_logfile>N</set_append_logfile>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>672</xloc>
+      <xloc>608</xloc>
       <yloc>128</yloc>
     </entry>
     <entry>
-      <name>2011</name>
+      <name>2025</name>
       <description/>
       <type>JOB</type>
       <specification_method>filename</specification_method>
@@ -935,294 +935,21 @@ CREATE INDEX idx_x_dx_treatment_date
         <parameter>
           <name>YYYY</name>
           <stream_name/>
-          <value>2011</value>
+          <value>2025</value>
         </parameter>
       </parameters>
       <set_append_logfile>N</set_append_logfile>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>784</xloc>
-      <yloc>128</yloc>
-    </entry>
-    <entry>
-      <name>2012</name>
-      <description/>
-      <type>JOB</type>
-      <specification_method>filename</specification_method>
-      <job_object_id/>
-      <filename>${pentaho.solutions.root.vfs}/etl/NBS/create_fact_nbs_result_partition_table.kjb</filename>
-      <jobname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <expand_remote_job>N</expand_remote_job>
-      <create_parent_folder>N</create_parent_folder>
-      <pass_export>N</pass_export>
-      <run_configuration>Pentaho local</run_configuration>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-        <parameter>
-          <name>YYYY</name>
-          <stream_name/>
-          <value>2012</value>
-        </parameter>
-      </parameters>
-      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>880</xloc>
-      <yloc>128</yloc>
-    </entry>
-    <entry>
-      <name>2013</name>
-      <description/>
-      <type>JOB</type>
-      <specification_method>filename</specification_method>
-      <job_object_id/>
-      <filename>${pentaho.solutions.root.vfs}/etl/NBS/create_fact_nbs_result_partition_table.kjb</filename>
-      <jobname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <expand_remote_job>N</expand_remote_job>
-      <create_parent_folder>N</create_parent_folder>
-      <pass_export>N</pass_export>
-      <run_configuration>Pentaho local</run_configuration>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-        <parameter>
-          <name>YYYY</name>
-          <stream_name/>
-          <value>2013</value>
-        </parameter>
-      </parameters>
-      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>976</xloc>
-      <yloc>128</yloc>
-    </entry>
-    <entry>
-      <name>2014</name>
-      <description/>
-      <type>JOB</type>
-      <specification_method>filename</specification_method>
-      <job_object_id/>
-      <filename>${pentaho.solutions.root.vfs}/etl/NBS/create_fact_nbs_result_partition_table.kjb</filename>
-      <jobname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <expand_remote_job>N</expand_remote_job>
-      <create_parent_folder>N</create_parent_folder>
-      <pass_export>N</pass_export>
-      <run_configuration>Pentaho local</run_configuration>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-        <parameter>
-          <name>YYYY</name>
-          <stream_name/>
-          <value>2014</value>
-        </parameter>
-      </parameters>
-      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>1072</xloc>
-      <yloc>128</yloc>
-    </entry>
-    <entry>
-      <name>2015</name>
-      <description/>
-      <type>JOB</type>
-      <specification_method>filename</specification_method>
-      <job_object_id/>
-      <filename>${pentaho.solutions.root.vfs}/etl/NBS/create_fact_nbs_result_partition_table.kjb</filename>
-      <jobname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <expand_remote_job>N</expand_remote_job>
-      <create_parent_folder>N</create_parent_folder>
-      <pass_export>N</pass_export>
-      <run_configuration>Pentaho local</run_configuration>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-        <parameter>
-          <name>YYYY</name>
-          <stream_name/>
-          <value>2015</value>
-        </parameter>
-      </parameters>
-      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>1152</xloc>
-      <yloc>128</yloc>
-    </entry>
-    <entry>
-      <name>2016</name>
-      <description/>
-      <type>JOB</type>
-      <specification_method>filename</specification_method>
-      <job_object_id/>
-      <filename>${pentaho.solutions.root.vfs}/etl/NBS/create_fact_nbs_result_partition_table.kjb</filename>
-      <jobname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <expand_remote_job>N</expand_remote_job>
-      <create_parent_folder>N</create_parent_folder>
-      <pass_export>N</pass_export>
-      <run_configuration>Pentaho local</run_configuration>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-        <parameter>
-          <name>YYYY</name>
-          <stream_name/>
-          <value>2016</value>
-        </parameter>
-      </parameters>
-      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>1232</xloc>
-      <yloc>128</yloc>
-    </entry>
-    <entry>
-      <name>2017</name>
-      <description/>
-      <type>JOB</type>
-      <specification_method>filename</specification_method>
-      <job_object_id/>
-      <filename>${pentaho.solutions.root.vfs}/etl/NBS/create_fact_nbs_result_partition_table.kjb</filename>
-      <jobname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <expand_remote_job>N</expand_remote_job>
-      <create_parent_folder>N</create_parent_folder>
-      <pass_export>N</pass_export>
-      <run_configuration>Pentaho local</run_configuration>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-        <parameter>
-          <name>YYYY</name>
-          <stream_name/>
-          <value>2017</value>
-        </parameter>
-      </parameters>
-      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>1312</xloc>
-      <yloc>128</yloc>
-    </entry>
-    <entry>
-      <name>2018</name>
-      <description/>
-      <type>JOB</type>
-      <specification_method>filename</specification_method>
-      <job_object_id/>
-      <filename>${pentaho.solutions.root.vfs}/etl/NBS/create_fact_nbs_result_partition_table.kjb</filename>
-      <jobname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <expand_remote_job>N</expand_remote_job>
-      <create_parent_folder>N</create_parent_folder>
-      <pass_export>N</pass_export>
-      <run_configuration>Pentaho local</run_configuration>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-        <parameter>
-          <name>YYYY</name>
-          <stream_name/>
-          <value>2018</value>
-        </parameter>
-      </parameters>
-      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>1392</xloc>
+      <xloc>704</xloc>
       <yloc>128</yloc>
     </entry>
   </entries>
   <hops>
     <hop>
       <from>START</from>
-      <to>2006 (2)</to>
+      <to>2020</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1230,8 +957,8 @@ CREATE INDEX idx_x_dx_treatment_date
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>2006 (2)</from>
-      <to>2007</to>
+      <from>2021</from>
+      <to>2022</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1239,8 +966,8 @@ CREATE INDEX idx_x_dx_treatment_date
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>2007</from>
-      <to>2008</to>
+      <from>2022</from>
+      <to>2023</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1248,8 +975,8 @@ CREATE INDEX idx_x_dx_treatment_date
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>2008</from>
-      <to>2009</to>
+      <from>2023</from>
+      <to>2024</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1257,8 +984,8 @@ CREATE INDEX idx_x_dx_treatment_date
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>2009</from>
-      <to>2010</to>
+      <from>2020</from>
+      <to>2021</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1266,71 +993,8 @@ CREATE INDEX idx_x_dx_treatment_date
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>2010</from>
-      <to>2011</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>2011</from>
-      <to>2012</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>2012</from>
-      <to>2013</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>2013</from>
-      <to>2014</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>2014</from>
-      <to>2015</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>2015</from>
-      <to>2016</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>2016</from>
-      <to>2017</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>2017</from>
-      <to>2018</to>
+      <from>2024</from>
+      <to>2025</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

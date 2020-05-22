@@ -10,6 +10,15 @@
 			<column name="udoh_status" type="varchar" length="255" decimal="0" jt="12" />
 			<column name="hco" type="varchar" length="255" decimal="0" jt="12" />
 			<column name="biosense_status" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="date_inactivated" type="date" length="13" decimal="0" jt="91" />
+			<column name="vendor" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="facility_name_mupi" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="c_biosense_facility_id" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="street_name" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="city" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="county" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="local_health_district" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="zip_code" type="varchar" length="255" decimal="0" jt="12" />
 		</table>
 		<table name="rt_age_unit_syndromic_surveillance" >
 			<column name="concept_code" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
@@ -146,6 +155,9 @@
 			<index name="pk_rt_age_unit_syndromic_surveillance_5" unique="PRIMARY_KEY" >
 				<column name="concept_code" />
 			</index>
+			<index name="idx_rt_icd10cm_icd9cm_snomedct_code_system_name" unique="NORMAL" >
+				<column name="code_system_name" />
+			</index>
 		</table>
 		<table name="rt_identifier_type_syndromic_surveillance" >
 			<column name="concept_code" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
@@ -208,7 +220,7 @@
 		</table>
 		<table name="ss_processed_chief_complaint" >
 			<column name="id" type="integer" length="10" decimal="0" jt="4" />
-			<column name="ss_processed_message_id" type="integer" length="10" decimal="0" jt="4" />
+			<column name="ss_processed_message_id" type="integer" length="10" decimal="0" jt="4" mandatory="y" />
 			<column name="chief_complaint_code" type="varchar" length="255" decimal="0" jt="12" />
 			<column name="chief_complaint_text" type="varchar" length="255" decimal="0" jt="12" />
 		</table>
@@ -238,7 +250,7 @@
 			<column name="first_patient_id_present" type="bool" length="1" decimal="0" jt="-7" />
 			<column name="patient_account_number" type="varchar" length="255" decimal="0" jt="12" />
 			<column name="visit_id" type="varchar" length="255" decimal="0" jt="12" />
-			<column name="medical_record_number_present" type="varchar" length="2147483647" decimal="0" jt="12" />
+			<column name="medical_record_number_present" type="bool" length="1" decimal="0" jt="-7" />
 			<column name="patient_zip" type="varchar" length="255" decimal="0" jt="12" />
 			<column name="c_patient_county" type="varchar" length="255" decimal="0" jt="12" />
 			<column name="administrative_sex" type="varchar" length="255" decimal="0" jt="12" />
@@ -376,7 +388,9 @@
 TODO:
 Get address from lookup table in syndromic schema - Eunice to provide</comment>
 			<column name="dw_mft_id" type="integer" jt="4" mandatory="y" />
-			<column name="hashcode" type="integer" jt="4" />
+			<column name="version_id" type="integer" jt="4" />
+			<column name="start_date" type="timestamp" jt="93" />
+			<column name="end_date" type="timestamp" jt="93" />
 			<column name="facility_uid" type="varchar" length="255" jt="12" />
 			<column name="connector" type="varchar" length="255" jt="12" />
 			<column name="application_name" type="varchar" length="255" jt="12" />
@@ -387,11 +401,17 @@ Get address from lookup table in syndromic schema - Eunice to provide</comment>
 			<column name="biosense_status" type="varchar" length="255" jt="12" />
 			<column name="latitude" type="numeric" length="11" decimal="7" jt="2" />
 			<column name="longitude" type="numeric" length="11" decimal="7" jt="2" />
-			<column name="c_biofacility_id" type="varchar" length="255" decimal="0" jt="12" />
 			<column name="etl_update_date" type="timestamp" jt="93" />
-			<column name="mft_status" type="varchar" length="255" jt="12" >
-				<comment><![CDATA[onboarding, active, inactive, etc.. current state - qa_ss_processed_message includes this as well, but in the qa table, it is the state when the message was processed]]></comment>
-			</column>
+			<column name="date_inactivated" type="date" length="13" decimal="0" jt="91" />
+			<column name="vendor" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="facility_name_mupi" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="facility_type_code" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="c_biosense_facility_id" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="street_name" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="city" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="county" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="local_health_district" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="zip_code" type="varchar" length="255" decimal="0" jt="12" />
 			<index name="pk_dim_mft" unique="PRIMARY_KEY" >
 				<column name="dw_mft_id" />
 			</index>
@@ -399,19 +419,89 @@ Get address from lookup table in syndromic schema - Eunice to provide</comment>
 				<column name="facility_uid" />
 			</index>
 			<index name="idx_dim_mft_hashcode" unique="NORMAL" >
-				<column name="hashcode" />
+				<column name="version_id" />
+			</index>
+		</table>
+		<table name="dim_mft2" >
+			<column name="dw_mft_id" type="integer" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="version_id" type="integer" length="10" decimal="0" jt="4" />
+			<column name="start_date" type="timestamp" length="29" decimal="6" jt="93" />
+			<column name="end_date" type="timestamp" length="29" decimal="6" jt="93" />
+			<column name="facility_uid" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="connector" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="application_name" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="facility_name" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="facility_id" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="udoh_status" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="hco" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="biosense_status" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="latitude" type="numeric" length="11" decimal="7" jt="2" />
+			<column name="longitude" type="numeric" length="11" decimal="7" jt="2" />
+			<column name="etl_update_date" type="timestamp" length="29" decimal="6" jt="93" />
+			<column name="date_inactivated" type="date" length="13" decimal="0" jt="91" />
+			<column name="vendor" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="facility_name_mupi" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="facility_type_code" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="c_biosense_facility_id" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="street_name" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="city" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="county" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="local_health_district" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="zip_code" type="varchar" length="255" decimal="0" jt="12" />
+			<index name="pk_dim_mft2" unique="PRIMARY_KEY" >
+				<column name="dw_mft_id" />
 			</index>
 		</table>
 		<table name="dim_patient_location" >
 			<comment>TODO: move health district into this dimension - check on how to link these</comment>
 			<column name="dw_patient_location_id" type="integer" jt="4" />
-			<column name="hashcode" type="integer" jt="4" />
 			<column name="patient_zip" type="varchar" length="255" jt="12" />
 			<column name="patient_county" type="varchar" length="255" jt="12" />
 			<column name="patient_latitude" type="numeric" length="11" decimal="7" jt="2" />
 			<column name="patient_longitude" type="numeric" length="11" decimal="7" jt="2" />
+			<column name="patient_state_id" type="varchar" length="2" jt="12" />
+			<column name="patient_county_state_id" type="varchar" length="256" jt="12" />
+			<column name="version_id" type="integer" jt="4" />
+			<column name="start_date" type="timestamp" jt="93" />
+			<column name="end_date" type="timestamp" jt="93" />
 			<index name="pk_dim_patient_location" unique="UNIQUE" >
 				<column name="dw_patient_location_id" />
+			</index>
+			<index name="idx_dim_patient_location_lookup2" unique="NORMAL" >
+				<column name="patient_zip" />
+				<column name="patient_county" />
+			</index>
+			<index name="idx_dim_patient_location_patient_county_state_id" unique="NORMAL" >
+				<column name="patient_county_state_id" />
+			</index>
+			<index name="idx_dim_patient_location_patient_zip" unique="UNIQUE" >
+				<column name="patient_zip" />
+			</index>
+		</table>
+		<table name="dim_patient_location2" >
+			<comment>TODO: move health district into this dimension - check on how to link these</comment>
+			<column name="dw_patient_location_id" type="integer" jt="4" />
+			<column name="patient_zip" type="varchar" length="255" jt="12" />
+			<column name="patient_county" type="varchar" length="255" jt="12" />
+			<column name="patient_latitude" type="numeric" length="11" decimal="7" jt="2" />
+			<column name="patient_longitude" type="numeric" length="11" decimal="7" jt="2" />
+			<column name="patient_state_id" type="varchar" length="2" jt="12" />
+			<column name="patient_county_state_id" type="varchar" length="256" jt="12" />
+			<column name="version_id" type="integer" jt="4" />
+			<column name="start_date" type="timestamp" jt="93" />
+			<column name="end_date" type="timestamp" jt="93" />
+			<index name="pk_dim_patient_location_0" unique="UNIQUE" >
+				<column name="dw_patient_location_id" />
+			</index>
+			<index name="idx_dim_patient_location_lookup2_0" unique="NORMAL" >
+				<column name="patient_zip" />
+				<column name="patient_county" />
+			</index>
+			<index name="idx_dim_patient_location_patient_county_state_id_0" unique="NORMAL" >
+				<column name="patient_county_state_id" />
+			</index>
+			<index name="idx_dim_patient_location_patient_zip_0" unique="UNIQUE" >
+				<column name="patient_zip" />
 			</index>
 		</table>
 		<table name="dim_rt_age_unit_syndromic_surveillance" >
@@ -703,6 +793,19 @@ based on ss_processed_message.trigger_event</comment>
 				<column name="dw_trigger_event_id" />
 			</index>
 		</table>
+		<table name="etl_invalid_chief_complaint" >
+			<comment>Invalid chief complaints as described by the July CDC newsletter for NICC Terminology
+https://www.cdc.gov/nssp/news/2019/07-july/nssp-update-2019-07.pdf
+- page 14</comment>
+			<column name="nicc_id" type="integer" jt="4" mandatory="y" />
+			<column name="nicc_term" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<index name="pk_etl_invalid_chief_complaint" unique="PRIMARY_KEY" >
+				<column name="nicc_id" />
+			</index>
+			<index name="idx_etl_invalid_chief_complaint_nicc_term" unique="NORMAL" >
+				<column name="nicc_term" />
+			</index>
+		</table>
 		<table name="etl_metrics_config" >
 			<column name="id" type="integer" length="10" decimal="0" jt="4" />
 			<column name="description" type="varchar" length="255" decimal="0" jt="12" />
@@ -719,6 +822,64 @@ based on ss_processed_message.trigger_event</comment>
 			<column name="qa_column" type="varchar" length="255" decimal="0" jt="12" >
 				<comment><![CDATA[The column to store the boolean (0/1) result]]></comment>
 			</column>
+		</table>
+		<table name="etl_processed_diagnosis_summary" >
+			<column name="ss_processed_message_id" type="integer" jt="4" mandatory="y" />
+			<column name="diagnosis_codes" type="varchar" length="512" jt="12" />
+			<column name="diagnosis_descriptions" type="varchar" length="1024" jt="12" />
+			<column name="diagnosis_code_systems" type="varchar" length="255" jt="12" />
+			<column name="tf1_diagnosis_code_v" type="integer" jt="4" />
+			<column name="tf1_diagnosis_description_v" type="integer" jt="4" />
+			<index name="pk_etl_processed_diagnosis_summary" unique="PRIMARY_KEY" >
+				<column name="ss_processed_message_id" />
+			</index>
+		</table>
+		<table name="etl_processed_race_summary" >
+			<column name="ss_processed_message_id" type="integer" jt="4" mandatory="y" />
+			<column name="race_codes" type="varchar" length="255" jt="12" />
+			<column name="race_descriptions" type="varchar" jt="12" />
+			<column name="tf1_race_code_v" type="integer" jt="4" />
+			<index name="pk_etl_processed_race_summary" unique="PRIMARY_KEY" >
+				<column name="ss_processed_message_id" />
+			</index>
+		</table>
+		<table name="etl_ss_processed_chief_complaint_summary" >
+			<comment>This table is a rollup of chief_complaint_codes and chief_complaint_texts</comment>
+			<column name="ss_processed_message_src_id" type="integer" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="chief_complaint_codes" type="varchar" length="512" decimal="0" jt="12" >
+				<comment><![CDATA[A rollup by qa_ss_processed_message_src_id]]></comment>
+			</column>
+			<column name="chief_complaint_texts" type="varchar" length="512" decimal="0" jt="12" >
+				<comment><![CDATA[A rollup by qa_ss_processed_message_src_id]]></comment>
+			</column>
+			<column name="tf1_chiefcomplaint_v" type="integer" jt="4" />
+			<index name="idx_ss_processed_chief_complaint" unique="PRIMARY_KEY" >
+				<column name="ss_processed_message_src_id" />
+			</index>
+		</table>
+		<table name="etl_us_zipcodes" >
+			<column name="zip" type="bigint" length="19" decimal="0" jt="-5" />
+			<column name="lat" type="numeric" length="13" decimal="5" jt="2" />
+			<column name="lng" type="numeric" length="14" decimal="5" jt="2" />
+			<column name="city" type="varchar" length="14" decimal="0" jt="12" />
+			<column name="state_id" type="varchar" length="2" decimal="0" jt="12" />
+			<column name="state_name" type="varchar" length="11" decimal="0" jt="12" />
+			<column name="zcta" type="bool" length="1" decimal="0" jt="-7" />
+			<column name="parent_zcta" type="bool" length="1" decimal="0" jt="-7" />
+			<column name="population" type="bigint" length="19" decimal="0" jt="-5" />
+			<column name="density" type="numeric" length="8" decimal="1" jt="2" />
+			<column name="county_fips" type="bigint" length="19" decimal="0" jt="-5" />
+			<column name="county_name" type="varchar" length="128" jt="12" />
+			<column name="all_county_weights" type="varchar" length="255" jt="12" />
+			<column name="imprecise" type="bool" length="1" decimal="0" jt="-7" />
+			<column name="military" type="bool" length="1" decimal="0" jt="-7" />
+			<column name="timezone" type="varchar" length="19" decimal="0" jt="12" />
+			<column name="gc_county_name" type="varchar" length="128" jt="12" >
+				<comment><![CDATA[geocoded county name]]></comment>
+			</column>
+			<index name="idx_etl_us_zipcodes_zip" unique="NORMAL" >
+				<column name="zip" />
+			</index>
 		</table>
 		<table name="fact_ss_processed_chief_complaint" >
 			<column name="src_id" type="integer" jt="4" mandatory="y" />
@@ -780,21 +941,22 @@ based on ss_processed_message.trigger_event</comment>
 			</fk>
 		</table>
 		<table name="qa_ss_processed_message" >
-			<comment>TODO
-X all dw_date_num_id fields need a dw_time_id
-X gap analysis of any missing fields
-X move patient_county and patienti_zip and lat/lon to a new dimension (dim_patient_location)
+			<comment>Questions for 8/12/2019
+- where did tf1_age_reported_v go?
+- tf#_admit_reason_combo is named tf1_admit_reason_c.  Is this okay?
+- does the casing matter on the tf column names (i.e. v vs V)
+- Do we need to do something to automate the tf1_reporting_period (i.e. add a lookup table with date ranges and reporting period titles)?
 
-6/11/2019 - use src_ss_batched_messages_created_at as the partition key</comment>
+
+TODO 8/11/2019:
+- tf1_age_reported_v needs to check the validity of age_units to be one of rt_age_unit_syndromic_surveillance
+
+</comment>
 			<column name="src_id" type="integer" jt="4" mandatory="y" />
 			<column name="src_ss_batched_messages_id" type="integer" jt="4" />
 			<column name="src_created_at" type="timestamp" jt="93" >
 				<comment><![CDATA[in the source table this field is likely a timstamp WITH timezone]]></comment>
 			</column>
-			<column name="mft_status" type="varchar" length="255" jt="12" >
-				<comment><![CDATA[onboarding, active, inactive, etc.. this remains static (point in time history)]]></comment>
-			</column>
-			<column name="dw_trigger_event_id" type="integer" jt="4" />
 			<column name="admit_reason_description" type="varchar" length="255" jt="12" />
 			<column name="dw_treating_mft_id" type="integer" jt="4" />
 			<column name="dw_sending_mft_id" type="integer" jt="4" />
@@ -806,7 +968,7 @@ X move patient_county and patienti_zip and lat/lon to a new dimension (dim_patie
 			<column name="src_death_date_time" type="timestamp" jt="93" />
 			<column name="src_recorded_date_time" type="timestamp" jt="93" />
 			<column name="src_message_date_time" type="timestamp" jt="93" />
-			<column name="first_patient_id_present" type="bool" jt="-7" />
+			<column name="first_patient_id_present" type="integer" length="10" decimal="0" jt="4" />
 			<column name="visit_id" type="varchar" length="255" jt="12" />
 			<column name="patient_account_number" type="varchar" length="255" jt="12" />
 			<column name="medical_record_number_present" type="bool" jt="-7" />
@@ -815,7 +977,7 @@ X move patient_county and patienti_zip and lat/lon to a new dimension (dim_patie
 			<column name="src_procedure_date_time" type="timestamp" jt="93" />
 			<column name="dw_procedure_date_num_id" type="integer" jt="4" />
 			<column name="dw_procedure_time_id" type="integer" jt="4" />
-			<column name="triage_notes_present" type="bool" length="600" jt="-7" />
+			<column name="triage_notes_present" type="integer" length="10" decimal="0" jt="4" />
 			<column name="age_units_reported" type="varchar" length="255" jt="12" />
 			<column name="age_reported_num" type="integer" jt="4" >
 				<comment><![CDATA[if age_reported is numeric, that numeric value is set in this field]]></comment>
@@ -834,28 +996,139 @@ X move patient_county and patienti_zip and lat/lon to a new dimension (dim_patie
 			<column name="tf1_admit_reason_c" type="integer" jt="4" >
 				<comment><![CDATA[is admit_reason_description not null]]></comment>
 			</column>
-			<column name="tf_administrative_sex_v" type="integer" jt="4" >
-				<comment><![CDATA[is administrative_sex not null and one of syndromic.rt_gender_syndromic_surveillance]]></comment>
-			</column>
 			<column name="biosense_status" type="varchar" length="255" jt="12" />
 			<column name="chief_complaints_text" type="varchar" length="1024" jt="12" />
-			<column name="tf1_chiefcomplaint_v" type="integer" jt="4" />
-			<column name="tf1_first_patient_id_present_c" type="integer" jt="4" />
-			<column name="tf1_visit_id_c" type="integer" jt="4" />
-			<column name="tf1_medical_record_number_present" type="integer" jt="4" />
-			<column name="tf1_futuredate_v" type="integer" jt="4" />
-			<column name="tf1_trigger_event_v" type="integer" jt="4" />
-			<column name="tf1_message_type_v" type="integer" jt="4" />
-			<column name="tf1_discharge_date_time_c" type="integer" jt="4" />
-			<column name="tf1_admit_date_time_c" type="integer" jt="4" />
-			<column name="tf1_patient_death_date_time_c" type="integer" jt="4" />
-			<column name="tf1_recorded_date_time_c" type="integer" jt="4" />
-			<column name="tf1_message_date_time_c" type="integer" jt="4" />
-			<column name="tf1_procedure_date_time_c" type="integer" jt="4" />
-			<column name="tf2_admit_date_time_v" type="integer" jt="4" />
-			<index name="idx_fact_ss_processed_message_1" unique="NORMAL" >
-				<column name="dw_trigger_event_id" />
-			</index>
+			<column name="tf1_chiefcomplaint_v" type="integer" jt="4" >
+				<comment><![CDATA[is chief_complaint_text is more than 2 characters and one of an enumerated list]]></comment>
+			</column>
+			<column name="tf1_first_patient_id_present_c" type="integer" jt="4" >
+				<comment><![CDATA[is first_patient_id a non null value]]></comment>
+			</column>
+			<column name="tf1_visit_id_c" type="integer" jt="4" >
+				<comment><![CDATA[is visit_id a non null value]]></comment>
+			</column>
+			<column name="tf1_futuredate_v" type="integer" jt="4" >
+				<comment><![CDATA[If observation_date_time > current_date                        
+OR  discharge_date_time > current_date          
+OR   Admit Date/Time        > current_date                                   OR   Death Date/Time > current_date                       
+OR Recorded Date/Time > current_date                   
+OR Date/Time of Message > current_date                
+OR   Procedure Date/Time > current_date 
+Then a future date has been provided (1)     ]]></comment>
+			</column>
+			<column name="tf1_trigger_event_v" type="integer" jt="4" >
+				<comment><![CDATA[If trigger_event equals A01 or  A03 or A04 or A08,
+Then tf1_trigger_event_V==1 (Valid),
+Else tf1_trigger_event_V==2 (Invalid) 
+
+]]></comment>
+			</column>
+			<column name="tf1_message_type_v" type="integer" jt="4" >
+				<comment><![CDATA[If message_type equals PHVS_MessageType_SyndromicSurveillance == “ADT”,
+Then Message_Type_V==1 (Valid),
+Else Message_Type_V ==2 (Invalid)
+
+]]></comment>
+			</column>
+			<column name="tf1_discharge_date_time_c" type="integer" jt="4" >
+				<comment><![CDATA[if discharge_date_time is not null, then tf1_discharge_date_time_c = 1 (true / complete)]]></comment>
+			</column>
+			<column name="tf1_admit_date_time_c" type="integer" jt="4" >
+				<comment><![CDATA[if discharge_date_time is not null, then tf1_discharge_date_time_c = 1 (true / complete)]]></comment>
+			</column>
+			<column name="tf1_patient_death_date_time_c" type="integer" jt="4" >
+				<comment><![CDATA[if patient_death_date_time is not null, then tf1_patient_death_date_time_c = 1 (true / complete)]]></comment>
+			</column>
+			<column name="tf1_recorded_date_time_c" type="integer" jt="4" >
+				<comment><![CDATA[if recorded_date_time is not null, then tf1_recorded_date_time_c = 1 (true / complete)]]></comment>
+			</column>
+			<column name="tf1_message_date_time_c" type="integer" jt="4" >
+				<comment><![CDATA[if message_date_time is not null, then tf1_message_date_time_c = 1 (true / complete)]]></comment>
+			</column>
+			<column name="tf1_procedure_date_time_c" type="integer" jt="4" >
+				<comment><![CDATA[if procedure_date_time is not null, then tf1_procedure_date_time_c = 1 (true / complete)]]></comment>
+			</column>
+			<column name="tf2_admit_date_time_v" type="integer" jt="4" >
+				<comment><![CDATA[If admit_date_time <= ss_batched_messages_created_at, then tf2_admit_date_time_c == 1 (TRUE).]]></comment>
+			</column>
+			<column name="mft_udoh_status" type="varchar" length="255" decimal="0" jt="12" >
+				<comment><![CDATA[onboarding, active, inactive, etc.. this remains static (point in time history)]]></comment>
+			</column>
+			<column name="tf1_administrative_sex_v" type="integer" length="10" decimal="0" jt="4" >
+				<comment><![CDATA[is administrative_sex not null and one of syndromic.rt_gender_syndromic_surveillance]]></comment>
+			</column>
+			<column name="tf1_medical_record_number_present_c" type="integer" length="10" decimal="0" jt="4" >
+				<comment><![CDATA[is medical_record_number_present a non null value]]></comment>
+			</column>
+			<column name="tf1_reporting_period" type="varchar" length="128" jt="12" >
+				<comment><![CDATA[if ss_batched_messages_created_at between 20190101 to 20190331, then tf#_reporting_period = Reporting Period 1, else if ss_batched_messages_created_at between 20190401 to 20190630, then tf#_reporting_period = Reporting Period 2, else if ss_batched_messages_created_at between 20190701 and 20190930, then tf#_reporting_period = Reporting Period 3, else if ss_batched_messages_created_at between 20191001 and 20191231, then tf#_reporting_period = Reporting Period 4]]></comment>
+			</column>
+			<column name="tf1_medication_list_c" type="integer" length="10" decimal="0" jt="4" >
+				<comment><![CDATA[is medication_list a non null value]]></comment>
+			</column>
+			<column name="tf1_discharge_disposition_c" type="integer" length="10" decimal="0" jt="4" >
+				<comment><![CDATA[is discharge_disposition a non null value]]></comment>
+			</column>
+			<column name="tf1_discharge_disposition_v" type="integer" length="10" decimal="0" jt="4" >
+				<comment><![CDATA[is discharge_disposition one of values provided in NSSP NICC list]]></comment>
+			</column>
+			<column name="tf1_patient_account_number_c" type="integer" length="10" decimal="0" jt="4" >
+				<comment><![CDATA[is patient_account_number a non null value]]></comment>
+			</column>
+			<column name="tf1_observation_date_time_c" type="integer" length="10" decimal="0" jt="4" >
+				<comment><![CDATA[is observation_date_time a non null value]]></comment>
+			</column>
+			<column name="tf1_admit_reason_code_c" type="integer" length="10" decimal="0" jt="4" >
+				<comment><![CDATA[is admit_reason_code a non null value]]></comment>
+			</column>
+			<column name="tf1_admit_reason_code_v" type="integer" length="10" decimal="0" jt="4" >
+				<comment><![CDATA[is one of rt_icd10cm_icd9cm_snomedct.concept_code or rt_icd10cm_icd9cm_snomedct.preferred_alternate_code]]></comment>
+			</column>
+			<column name="tf1_admit_reason_description_c" type="integer" length="10" decimal="0" jt="4" >
+				<comment><![CDATA[is admit_reason_description a non null value]]></comment>
+			</column>
+			<column name="tf1_ethnicity_code_v" type="integer" length="10" decimal="0" jt="4" >
+				<comment><![CDATA[is one of rt_ethnicity_group.concept_code]]></comment>
+			</column>
+			<column name="tf1_age_units_reported_v" type="integer" length="10" decimal="0" jt="4" >
+				<comment><![CDATA[is one of rt_age_unit_syndromic_surveillance.preferred_concept_name]]></comment>
+			</column>
+			<column name="tf1_treating_facility_id_c" type="integer" length="10" decimal="0" jt="4" >
+				<comment><![CDATA[is treating_facility_id a non null value]]></comment>
+			</column>
+			<column name="tf1_sending_facility_id_c" type="integer" length="10" decimal="0" jt="4" >
+				<comment><![CDATA[is sending_facility_id a non null value]]></comment>
+			</column>
+			<column name="tf1_race_code_v" type="integer" length="10" decimal="0" jt="4" >
+				<comment><![CDATA[is race_code one of rt_race_category.concept_code]]></comment>
+			</column>
+			<column name="tf1_facility_type_code_v2" type="integer" length="10" decimal="0" jt="4" >
+				<comment><![CDATA[is batched_messages.facility_type_code one of  261QE0002X or 1021-5 or 261QM2500X or 261QP2300X or 261QU0200X ]]></comment>
+			</column>
+			<column name="tf1_message_type_v1" type="integer" length="10" decimal="0" jt="4" >
+				<comment><![CDATA[is message_type equal to ADT]]></comment>
+			</column>
+			<column name="tf1_admit_date_time_v" type="integer" length="10" decimal="0" jt="4" >
+				<comment><![CDATA[is admit_date_time < message_date_time]]></comment>
+			</column>
+			<column name="tf1_diagnosis_description_v" type="integer" length="10" decimal="0" jt="4" >
+				<comment><![CDATA[is diagnosis_code one of 'value from RT_rt_icd10cm_icd9cm_snomedct.concept_name' or ''value from RT_rt_icd10cm_icd9cm_snomedct.preferred_concept_name']]></comment>
+			</column>
+			<column name="tf1_c_patient_county_v" type="integer" length="10" decimal="0" jt="4" >
+				<comment><![CDATA[is patient_county one of rt_county.concept_code]]></comment>
+			</column>
+			<column name="tf1_patient_zip_v" type="integer" length="10" decimal="0" jt="4" >
+				<comment><![CDATA[If patient_zip LIKE '[0-9][0-9][0-9][0-9][0-9]' 
+OR patient_zip LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' 
+OR patient_zip LIKE '[0-9][0-9][0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]'
+
+]]></comment>
+			</column>
+			<column name="tf1_diagnosis_code_v" type="integer" length="10" decimal="0" jt="4" >
+				<comment><![CDATA[is diagnosis_code LIKE 'value from RT_rt_icd10cm_icd9cm_snomedct.preferred_alternate_code' or RT_rt_icd10cm_icd9cm_snomedct.concept_code' ]]></comment>
+			</column>
+			<column name="etl_load_date" type="timestamp" jt="93" />
+			<column name="c_patient_county" type="varchar" length="255" jt="12" />
 			<index name="idx_fact_ss_processed_message_3" unique="NORMAL" >
 				<column name="dw_treating_mft_id" />
 			</index>
@@ -883,7 +1156,7 @@ X move patient_county and patienti_zip and lat/lon to a new dimension (dim_patie
 			<index name="idx_fact_ss_processed_message_29" unique="NORMAL" >
 				<column name="dw_ss_batched_message_created_at_time_id" />
 			</index>
-			<index name="idx_fact_ss_processed_message_32" unique="UNIQUE" >
+			<index name="idx_fact_ss_processed_message_322" unique="UNIQUE" >
 				<column name="src_id" />
 			</index>
 			<index name="idx_fact_ss_processed_message" unique="NORMAL" >
@@ -892,15 +1165,126 @@ X move patient_county and patienti_zip and lat/lon to a new dimension (dim_patie
 			<index name="idx_fact_ss_processed_message_0" unique="NORMAL" >
 				<column name="dw_admit_time_id" />
 			</index>
-			<fk name="fk_fact_ss_processed_message_1" to_schema="syndromic_olap" to_table="dim_trigger_event" >
-				<fk_column name="dw_trigger_event_id" pk="dw_trigger_event_id" />
-			</fk>
-			<fk name="fk_fact_ss_processed_message_3" to_schema="syndromic_olap" to_table="dim_mft" >
-				<fk_column name="dw_treating_mft_id" pk="dw_mft_id" />
-			</fk>
-			<fk name="fk_fact_ss_processed_message_4" to_schema="syndromic_olap" to_table="dim_mft" >
-				<fk_column name="dw_sending_mft_id" pk="dw_mft_id" />
-			</fk>
+			<index name="idx_aspm_tf1_admit_date_time_v" unique="NORMAL" >
+				<column name="tf1_admit_date_time_v" />
+			</index>
+			<index name="idx_aspm_tf1_admit_reason_code_c" unique="NORMAL" >
+				<column name="tf1_admit_reason_code_c" />
+			</index>
+			<index name="idx_aspm_tf1_admit_reason_code_v" unique="NORMAL" >
+				<column name="tf1_admit_reason_code_v" />
+			</index>
+			<index name="idx_aspm_tf1_admit_reason_description_c" unique="NORMAL" >
+				<column name="tf1_admit_reason_description_c" />
+			</index>
+			<index name="idx_aspm_tf1_age_units_reported_v" unique="NORMAL" >
+				<column name="tf1_age_units_reported_v" />
+			</index>
+			<index name="idx_aspm_tf1_c_patient_county_v" unique="NORMAL" >
+				<column name="tf1_c_patient_county_v" />
+			</index>
+			<index name="idx_aspm_tf1_diagnosis_code_v" unique="NORMAL" >
+				<column name="tf1_diagnosis_code_v" />
+			</index>
+			<index name="idx_aspm_tf1_diagnosis_description_v" unique="NORMAL" >
+				<column name="tf1_diagnosis_description_v" />
+			</index>
+			<index name="idx_aspm_tf1_discharge_disposition_c" unique="NORMAL" >
+				<column name="tf1_discharge_disposition_c" />
+			</index>
+			<index name="idx_aspm_tf1_discharge_disposition_v" unique="NORMAL" >
+				<column name="tf1_discharge_disposition_v" />
+			</index>
+			<index name="idx_aspm_tf1_ethnicity_code_v" unique="NORMAL" >
+				<column name="tf1_ethnicity_code_v" />
+			</index>
+			<index name="idx_aspm_tf1_facility_type_code_v2" unique="NORMAL" >
+				<column name="tf1_facility_type_code_v2" />
+			</index>
+			<index name="idx_aspm_tf1_medication_list_c" unique="NORMAL" >
+				<column name="tf1_medication_list_c" />
+			</index>
+			<index name="idx_aspm_tf1_message_type_v1" unique="NORMAL" >
+				<column name="tf1_message_type_v1" />
+			</index>
+			<index name="idx_aspm_tf1_observation_date_time_c" unique="NORMAL" >
+				<column name="tf1_observation_date_time_c" />
+			</index>
+			<index name="idx_aspm_tf1_patient_account_number_c" unique="NORMAL" >
+				<column name="tf1_patient_account_number_c" />
+			</index>
+			<index name="idx_aspm_tf1_patient_zip_v" unique="NORMAL" >
+				<column name="tf1_patient_zip_v" />
+			</index>
+			<index name="idx_aspm_tf1_race_code_v" unique="NORMAL" >
+				<column name="tf1_race_code_v" />
+			</index>
+			<index name="idx_aspm_tf1_reporting_period" unique="NORMAL" >
+				<column name="tf1_reporting_period" />
+			</index>
+			<index name="idx_aspm_tf1_sending_facility_id_c" unique="NORMAL" >
+				<column name="tf1_sending_facility_id_c" />
+			</index>
+			<index name="idx_aspm_tf1_treating_facility_id_c" unique="NORMAL" >
+				<column name="tf1_treating_facility_id_c" />
+			</index>
+			<index name="idx_qspm_first_patient_id_present_c" unique="NORMAL" >
+				<column name="tf1_first_patient_id_present_c" />
+			</index>
+			<index name="idx_qspm_src_created_at" unique="NORMAL" >
+				<column name="src_created_at" />
+			</index>
+			<index name="idx_qspm_tf1_administrative_sex_v" unique="NORMAL" >
+				<column name="tf1_administrative_sex_v" />
+			</index>
+			<index name="idx_qspm_tf1_admit_date_time_c" unique="NORMAL" >
+				<column name="tf1_admit_date_time_c" />
+			</index>
+			<index name="idx_qspm_tf1_admit_reason_c" unique="NORMAL" >
+				<column name="tf1_admit_reason_c" />
+			</index>
+			<index name="idx_qspm_tf1_age_reported_v" unique="NORMAL" >
+				<column name="tf1_age_reported_v" />
+			</index>
+			<index name="idx_qspm_tf1_chiefcomplaint_v" unique="NORMAL" >
+				<column name="tf1_chiefcomplaint_v" />
+			</index>
+			<index name="idx_qspm_tf1_discharge_date_time_c" unique="NORMAL" >
+				<column name="tf1_discharge_date_time_c" />
+			</index>
+			<index name="idx_qspm_tf1_futuredate_v" unique="NORMAL" >
+				<column name="tf1_futuredate_v" />
+			</index>
+			<index name="idx_qspm_tf1_med_rec_num_present" unique="NORMAL" >
+				<column name="tf1_medical_record_number_present_c" />
+			</index>
+			<index name="idx_qspm_tf1_message_date_time_c" unique="NORMAL" >
+				<column name="tf1_message_date_time_c" />
+			</index>
+			<index name="idx_qspm_tf1_message_type_v" unique="NORMAL" >
+				<column name="tf1_message_type_v" />
+			</index>
+			<index name="idx_qspm_tf1_patient_death_date_time_c" unique="NORMAL" >
+				<column name="tf1_patient_death_date_time_c" />
+			</index>
+			<index name="idx_qspm_tf1_procedure_date_time_c" unique="NORMAL" >
+				<column name="tf1_procedure_date_time_c" />
+			</index>
+			<index name="idx_qspm_tf1_recorded_date_time_c" unique="NORMAL" >
+				<column name="tf1_recorded_date_time_c" />
+			</index>
+			<index name="idx_qspm_tf1_trigger_event_v" unique="NORMAL" >
+				<column name="tf1_trigger_event_v" />
+			</index>
+			<index name="idx_qspm_tf1_visit_id_c" unique="NORMAL" >
+				<column name="tf1_visit_id_c" />
+			</index>
+			<index name="idx_qspm_tf2_admit_date_time_v" unique="NORMAL" >
+				<column name="tf2_admit_date_time_v" />
+			</index>
+			<index name="idx_aspm_etl_load_date" unique="NORMAL" >
+				<column name="etl_load_date" />
+			</index>
 			<fk name="fk_fact_ss_processed_message_16" to_schema="syndromic_olap" to_table="dim_rt_facility_visit_type" >
 				<fk_column name="dw_rt_facility_visit_type_id" pk="dw_rt_facility_visit_type_id" />
 			</fk>
@@ -916,13 +1300,14 @@ X move patient_county and patienti_zip and lat/lon to a new dimension (dim_patie
 			<fk name="fk_fact_ss_processed_message_29" to_schema="syndromic_olap" to_table="dim_time" >
 				<fk_column name="dw_ss_batched_message_created_at_time_id" pk="dw_time_id" />
 			</fk>
-			<fk name="fk_fact_ss_processed_message" to_schema="syndromic_olap" to_table="dim_date" >
-				<fk_column name="dw_admit_date_num_id" pk="dw_date_id" />
-			</fk>
 			<fk name="fk_fact_ss_processed_message_0" to_schema="syndromic_olap" to_table="dim_time" >
 				<fk_column name="dw_admit_time_id" pk="dw_time_id" />
 			</fk>
+			<fk name="fk_qa_ss_processed_message" to_schema="syndromic_olap" to_table="dim_date" >
+				<fk_column name="dw_admit_date_num_id" pk="dw_date_num_id" />
+			</fk>
 		</table>
+		<function name="increment" id="Function2446469" isSystem="false" />
 	</schema>
 	<connector name="Syndromic_OLAP" database="PostgreSQL" driver_class="org.postgresql.Driver" driver_jar="postgresql-42.1.1.jar" host="localhost" port="5432" instance="dlpldw" user="pentaho" passwd="cGVudGFobw==" schema_mapping="" />
 	<layout id="Layout1626322" name="Default" show_relation_columns="y" >
@@ -941,7 +1326,6 @@ X move patient_county and patienti_zip and lat/lon to a new dimension (dim_patie
 		<entity schema="syndromic" name="ss_processed_segment" color="b2cdf7" x="135" y="1680" />
 		<entity schema="syndromic" name="ss_processed_message" color="b2cdf7" x="195" y="1665" />
 		<entity schema="syndromic" name="rt_race_category" color="b2cdf7" x="315" y="1650" />
-		<entity schema="syndromic" name="rt_icd10cm_icd9cm_snomedct" color="b2cdf7" x="150" y="1635" />
 		<entity schema="syndromic" name="rt_ethnicity_group" color="b2cdf7" x="60" y="1755" />
 		<entity schema="syndromic" name="ss_processed_segment_obx" color="b2cdf7" x="315" y="1605" />
 		<entity schema="syndromic_olap" name="deprecate_dim_admit_reason_code" color="b2cdf7" x="450" y="1410" />
@@ -957,9 +1341,7 @@ X move patient_county and patienti_zip and lat/lon to a new dimension (dim_patie
 			<column name="src_date_val" />
 		</entity>
 		<entity schema="syndromic" name="rt_gender_syndromic_surveillance" color="b2cdf7" x="225" y="1830" />
-		<entity schema="syndromic_olap" name="dim_patient_location" color="000000" x="1170" y="1995" />
 		<entity schema="syndromic_olap" name="dim_rt_health_district" color="000000" x="465" y="360" />
-		<entity schema="syndromic_olap" name="dim_mft" color="000000" x="1635" y="960" />
 		<entity schema="syndromic_olap" name="etl_metrics_config" color="b2cdf7" x="1620" y="1500" />
 		<entity schema="syndromic_olap" name="dim_rt_discharge_disposition" color="e8d18a" x="615" y="570" />
 		<entity schema="syndromic_olap" name="dim_rt_age_unit_syndromic_surveillance" color="e8d18a" x="195" y="1020" />
@@ -970,45 +1352,435 @@ X move patient_county and patienti_zip and lat/lon to a new dimension (dim_patie
 		<entity schema="syndromic_olap" name="dim_rt_message_type" color="e8d18a" x="420" y="1050" />
 		<entity schema="syndromic_olap" name="dim_rt_race_category" color="e8d18a" x="45" y="645" />
 		<entity schema="syndromic_olap" name="dim_rt_facility_visit_type" color="000000" x="825" y="1815" />
-		<entity schema="syndromic_olap" name="qa_ss_processed_message" color="b2cdf7" x="1110" y="1095" />
-		<script name="dim_rt_gender_syndromic_surveillance" id="SQL8033058" >
-			<string><![CDATA[CREATE TABLE syndromic_olap.dim_rt_gender_syndromic_surveillance ( 
-	dw_rt_gender_syndromic_surveillance_id integer  NOT NULL,
-	hashcode             integer  ,
-	concept_code         varchar(255)  ,
-	concept_name         varchar(255)  ,
-	preferred_concept_name varchar(255)  ,
-	preferred_alternate_code varchar(255)  ,
-	code_system_oid      varchar(255)  ,
-	code_system_name     varchar(255)  ,
-	code_system_code     varchar(255)  ,
-	code_system_version  varchar(255)  ,
-	hl7_table_0396_code  varchar(255)  ,
-	value_set_concept_definition_text varchar(255)  ,
-	value_set_version    varchar(255)  ,
-	dw_version_effective_date_num_id integer  ,
-	dw_version_expiration_date_num_id integer  ,
-	status               varchar(255)  ,
-	value_set_oid        varchar(255)  ,
+		<entity schema="syndromic_olap" name="etl_invalid_chief_complaint" color="b2cdf7" x="1350" y="915" />
+		<entity schema="syndromic_olap" name="etl_ss_processed_chief_complaint_summary" color="b2cdf7" x="1650" y="840" />
+		<entity schema="syndromic_olap" name="etl_processed_diagnosis_summary" color="b2cdf7" x="1620" y="1965" />
+		<entity schema="syndromic_olap" name="etl_processed_race_summary" color="b2cdf7" x="1680" y="1845" />
+		<entity schema="syndromic_olap" name="dim_mft" color="000000" x="1635" y="960" />
+		<entity schema="syndromic" name="rt_icd10cm_icd9cm_snomedct" color="b2cdf7" x="150" y="1635" />
+		<entity schema="syndromic_olap" name="etl_us_zipcodes" color="b2cdf7" x="720" y="1680" />
+		<entity schema="syndromic_olap" name="dim_mft2" color="b2cdf7" x="1455" y="1080" />
+		<entity schema="syndromic_olap" name="qa_ss_processed_message" color="b2cdf7" x="1095" y="1095" />
+		<entity schema="syndromic_olap" name="dim_patient_location" color="000000" x="1500" y="2025" />
+		<entity schema="syndromic_olap" name="dim_patient_location2" color="b2cdf7" x="1485" y="1755" />
+		<script name="dim_mft" id="SQL8171788" >
+			<string><![CDATA[CREATE TABLE syndromic_olap.dim_mft ( 
+	dw_mft_id            integer  NOT NULL,
+	version_id           integer  ,
+	start_date           timestamp  ,
+	end_date             timestamp  ,
+	facility_uid         varchar(255)  ,
+	connector            varchar(255)  ,
+	application_name     varchar(255)  ,
+	facility_name        varchar(255)  ,
+	facility_id          varchar(255)  ,
+	udoh_status          varchar(255)  ,
+	hco                  varchar(255)  ,
+	biosense_status      varchar(255)  ,
+	latitude             numeric(11,7)  ,
+	longitude            numeric(11,7)  ,
 	etl_update_date      timestamp  ,
-	CONSTRAINT pk_dim_rt_age_unit_syndromic_surveillance_4 PRIMARY KEY ( dw_rt_gender_syndromic_surveillance_id )
+	date_inactivated     date  ,
+	vendor               varchar(255)  ,
+	facility_name_mupi   varchar(255)  ,
+	facility_type_code   varchar(255)  ,
+	c_biosense_facility_id varchar(255)  ,
+	street_name          varchar(255)  ,
+	city                 varchar(255)  ,
+	county               varchar(255)  ,
+	local_health_district varchar(255)  ,
+	zip_code             varchar(255)  ,
+	CONSTRAINT pk_dim_mft PRIMARY KEY ( dw_mft_id )
  );
 
-COMMENT ON COLUMN syndromic_olap.dim_rt_gender_syndromic_surveillance.dw_version_effective_date_num_id IS 'e.g. 20190430';
+CREATE INDEX idx_dim_mft_facility_uid ON syndromic_olap.dim_mft ( facility_uid );
 
-COMMENT ON COLUMN syndromic_olap.dim_rt_gender_syndromic_surveillance.dw_version_expiration_date_num_id IS 'e.g. 20190430';
+CREATE INDEX idx_dim_mft_hashcode ON syndromic_olap.dim_mft ( version_id );
+
+COMMENT ON TABLE syndromic_olap.dim_mft IS 'Medical facility dimension
+
+TODO:
+Get address from lookup table in syndromic schema - Eunice to provide';
 
 ]]></string>
 		</script>
-		<script name="ss_processed_segment" id="SQL4493227" >
-			<string><![CDATA[SELECT * 
-FROM
-	syndromic.ss_processed_segment t;]]></string>
+		<script name="etl_invalid_chief_complaint" id="SQL684688" >
+			<string><![CDATA[CREATE TABLE syndromic_olap.etl_invalid_chief_complaint ( 
+	nicc_id              integer  NOT NULL,
+	nicc_term            varchar  ,
+	CONSTRAINT pk_etl_invalid_chief_complaint PRIMARY KEY ( nicc_id )
+ );
+
+CREATE INDEX idx_etl_invalid_chief_complaint_nicc_term ON syndromic_olap.etl_invalid_chief_complaint ( nicc_term );
+
+COMMENT ON TABLE syndromic_olap.etl_invalid_chief_complaint IS 'Invalid chief complaints as described by the July CDC newsletter for NICC Terminology
+https://www.cdc.gov/nssp/news/2019/07-july/nssp-update-2019-07.pdf
+- page 14';
+
+]]></string>
 		</script>
-		<script name="ss_processed_segment_obx" id="SQL4505665" >
-			<string><![CDATA[SELECT * 
-FROM
-	syndromic.ss_processed_segment_obx x;]]></string>
+		<script name="etl_us_zipcodes" id="SQL7672211" >
+			<string><![CDATA[CREATE TABLE syndromic_olap.etl_us_zipcodes ( 
+	zip                  bigint  ,
+	lat                  numeric(13,5)  ,
+	lng                  numeric(14,5)  ,
+	city                 varchar(14)  ,
+	state_id             varchar(2)  ,
+	state_name           varchar(11)  ,
+	zcta                 bool  ,
+	parent_zcta          bool  ,
+	population           bigint  ,
+	density              numeric(8,1)  ,
+	county_fips          bigint  ,
+	county_name          varchar(13)  ,
+	all_county_weights   varchar(79)  ,
+	imprecise            bool  ,
+	military             bool  ,
+	timezone             varchar(19)  
+ );
+
+CREATE INDEX idx_etl_us_zipcodes_zip ON syndromic_olap.etl_us_zipcodes ( zip );
+
+]]></string>
+		</script>
+		<script name="etl_us_zipcodes_001" id="SQL7704301" >
+			<string><![CDATA[CREATE TABLE syndromic_olap.etl_us_zipcodes ( 
+	zip                  bigint  ,
+	lat                  numeric(13,5)  ,
+	lng                  numeric(14,5)  ,
+	city                 varchar(14)  ,
+	state_id             varchar(2)  ,
+	state_name           varchar(11)  ,
+	zcta                 bool  ,
+	parent_zcta          bool  ,
+	population           bigint  ,
+	density              numeric(8,1)  ,
+	county_fips          bigint  ,
+	county_name          varchar(13)  ,
+	all_county_weights   varchar(255)  ,
+	imprecise            bool  ,
+	military             bool  ,
+	timezone             varchar(19)  
+ );
+
+CREATE INDEX idx_etl_us_zipcodes_zip ON syndromic_olap.etl_us_zipcodes ( zip );
+
+]]></string>
+		</script>
+		<script name="qa_ss_processed_message" id="SQL8019935" >
+			<string><![CDATA[CREATE TABLE syndromic_olap.qa_ss_processed_message ( 
+	src_id               integer  NOT NULL,
+	src_ss_batched_messages_id integer  ,
+	src_created_at       timestamp  ,
+	admit_reason_description varchar(255)  ,
+	dw_treating_mft_id   integer  ,
+	dw_sending_mft_id    integer  ,
+	src_admit_date_time  timestamp  ,
+	dw_admit_date_num_id integer  ,
+	dw_admit_time_id     integer  ,
+	src_discharge_date_time timestamp  ,
+	src_observation_date_time timestamp  ,
+	src_death_date_time  timestamp  ,
+	src_recorded_date_time timestamp  ,
+	src_message_date_time timestamp  ,
+	first_patient_id_present integer  ,
+	visit_id             varchar(255)  ,
+	patient_account_number varchar(255)  ,
+	medical_record_number_present bool  ,
+	administrative_sex   varchar(255)  ,
+	dw_patient_location_id integer  ,
+	src_procedure_date_time timestamp  ,
+	dw_procedure_date_num_id integer  ,
+	dw_procedure_time_id integer  ,
+	triage_notes_present integer  ,
+	age_units_reported   varchar(255)  ,
+	age_reported_num     integer  ,
+	medication_list      varchar(255)  ,
+	dw_rt_facility_visit_type_id integer  ,
+	src_ss_batched_messages_created_at timestamp  ,
+	dw_ss_batched_messages_created_at_date_num_id integer  ,
+	dw_ss_batched_message_created_at_time_id integer  ,
+	dw_mft_id            integer  ,
+	tf1_age_reported_v   integer  ,
+	tf1_admit_reason_c   integer  ,
+	biosense_status      varchar(255)  ,
+	chief_complaints_text varchar(1024)  ,
+	tf1_chiefcomplaint_v integer  ,
+	tf1_first_patient_id_present_c integer  ,
+	tf1_visit_id_c       integer  ,
+	tf1_futuredate_v     integer  ,
+	tf1_trigger_event_v  integer  ,
+	tf1_message_type_v   integer  ,
+	tf1_discharge_date_time_c integer  ,
+	tf1_admit_date_time_c integer  ,
+	tf1_patient_death_date_time_c integer  ,
+	tf1_recorded_date_time_c integer  ,
+	tf1_message_date_time_c integer  ,
+	tf1_procedure_date_time_c integer  ,
+	tf2_admit_date_time_v integer  ,
+	mft_udoh_status      varchar(255)  ,
+	tf1_administrative_sex_v integer  ,
+	tf1_medical_record_number_present_c integer  ,
+	tf1_reporting_period varchar(128)  ,
+	tf1_medication_list_c integer  ,
+	tf1_discharge_disposition_c integer  ,
+	tf1_discharge_disposition_v integer  ,
+	tf1_patient_account_number_c integer  ,
+	tf1_observation_date_time_c integer  ,
+	tf1_admit_reason_code_c integer  ,
+	tf1_admit_reason_code_v integer  ,
+	tf1_admit_reason_description_c integer  ,
+	tf1_ethnicity_code_v integer  ,
+	tf1_age_units_reported_v integer  ,
+	tf1_treating_facility_id_c integer  ,
+	tf1_sending_facility_id_c integer  ,
+	tf1_race_code_v      integer  ,
+	tf1_facility_type_code_v2 integer  ,
+	tf1_message_type_v1  integer  ,
+	tf1_admit_date_time_v integer  ,
+	tf1_diagnosis_description_v integer  ,
+	tf1_c_patient_county_v integer  ,
+	tf1_patient_zip_v    integer  ,
+	tf1_diagnosis_code_v integer  ,
+	etl_load_date        timestamp  ,
+	CONSTRAINT idx_fact_ss_processed_message_322 UNIQUE ( src_id ) 
+ );
+
+CREATE INDEX idx_fact_ss_processed_message_3 ON syndromic_olap.qa_ss_processed_message ( dw_treating_mft_id );
+
+CREATE INDEX idx_fact_ss_processed_message_4 ON syndromic_olap.qa_ss_processed_message ( dw_sending_mft_id );
+
+CREATE INDEX idx_fact_ss_processed_message_10 ON syndromic_olap.qa_ss_processed_message ( dw_procedure_date_num_id );
+
+CREATE INDEX idx_fact_ss_processed_message_16 ON syndromic_olap.qa_ss_processed_message ( dw_rt_facility_visit_type_id );
+
+CREATE INDEX idx_fact_ss_processed_message_17 ON syndromic_olap.qa_ss_processed_message ( dw_ss_batched_messages_created_at_date_num_id );
+
+CREATE INDEX idx_fact_ss_processed_message_19 ON syndromic_olap.qa_ss_processed_message ( dw_mft_id );
+
+CREATE INDEX idx_fact_ss_processed_message_20 ON syndromic_olap.qa_ss_processed_message ( dw_patient_location_id );
+
+CREATE INDEX idx_fact_ss_processed_message_28 ON syndromic_olap.qa_ss_processed_message ( dw_procedure_time_id );
+
+CREATE INDEX idx_fact_ss_processed_message_29 ON syndromic_olap.qa_ss_processed_message ( dw_ss_batched_message_created_at_time_id );
+
+CREATE INDEX idx_fact_ss_processed_message ON syndromic_olap.qa_ss_processed_message ( dw_admit_date_num_id );
+
+CREATE INDEX idx_fact_ss_processed_message_0 ON syndromic_olap.qa_ss_processed_message ( dw_admit_time_id );
+
+CREATE INDEX idx_aspm_tf1_admit_date_time_v ON syndromic_olap.qa_ss_processed_message ( tf1_admit_date_time_v );
+
+CREATE INDEX idx_aspm_tf1_admit_reason_code_c ON syndromic_olap.qa_ss_processed_message ( tf1_admit_reason_code_c );
+
+CREATE INDEX idx_aspm_tf1_admit_reason_code_v ON syndromic_olap.qa_ss_processed_message ( tf1_admit_reason_code_v );
+
+CREATE INDEX idx_aspm_tf1_admit_reason_description_c ON syndromic_olap.qa_ss_processed_message ( tf1_admit_reason_description_c );
+
+CREATE INDEX idx_aspm_tf1_age_units_reported_v ON syndromic_olap.qa_ss_processed_message ( tf1_age_units_reported_v );
+
+CREATE INDEX idx_aspm_tf1_c_patient_county_v ON syndromic_olap.qa_ss_processed_message ( tf1_c_patient_county_v );
+
+CREATE INDEX idx_aspm_tf1_diagnosis_code_v ON syndromic_olap.qa_ss_processed_message ( tf1_diagnosis_code_v );
+
+CREATE INDEX idx_aspm_tf1_diagnosis_description_v ON syndromic_olap.qa_ss_processed_message ( tf1_diagnosis_description_v );
+
+CREATE INDEX idx_aspm_tf1_discharge_disposition_c ON syndromic_olap.qa_ss_processed_message ( tf1_discharge_disposition_c );
+
+CREATE INDEX idx_aspm_tf1_discharge_disposition_v ON syndromic_olap.qa_ss_processed_message ( tf1_discharge_disposition_v );
+
+CREATE INDEX idx_aspm_tf1_ethnicity_code_v ON syndromic_olap.qa_ss_processed_message ( tf1_ethnicity_code_v );
+
+CREATE INDEX idx_aspm_tf1_facility_type_code_v2 ON syndromic_olap.qa_ss_processed_message ( tf1_facility_type_code_v2 );
+
+CREATE INDEX idx_aspm_tf1_medication_list_c ON syndromic_olap.qa_ss_processed_message ( tf1_medication_list_c );
+
+CREATE INDEX idx_aspm_tf1_message_type_v1 ON syndromic_olap.qa_ss_processed_message ( tf1_message_type_v1 );
+
+CREATE INDEX idx_aspm_tf1_observation_date_time_c ON syndromic_olap.qa_ss_processed_message ( tf1_observation_date_time_c );
+
+CREATE INDEX idx_aspm_tf1_patient_account_number_c ON syndromic_olap.qa_ss_processed_message ( tf1_patient_account_number_c );
+
+CREATE INDEX idx_aspm_tf1_patient_zip_v ON syndromic_olap.qa_ss_processed_message ( tf1_patient_zip_v );
+
+CREATE INDEX idx_aspm_tf1_race_code_v ON syndromic_olap.qa_ss_processed_message ( tf1_race_code_v );
+
+CREATE INDEX idx_aspm_tf1_reporting_period ON syndromic_olap.qa_ss_processed_message ( tf1_reporting_period );
+
+CREATE INDEX idx_aspm_tf1_sending_facility_id_c ON syndromic_olap.qa_ss_processed_message ( tf1_sending_facility_id_c );
+
+CREATE INDEX idx_aspm_tf1_treating_facility_id_c ON syndromic_olap.qa_ss_processed_message ( tf1_treating_facility_id_c );
+
+CREATE INDEX idx_qspm_first_patient_id_present_c ON syndromic_olap.qa_ss_processed_message ( tf1_first_patient_id_present_c );
+
+CREATE INDEX idx_qspm_src_created_at ON syndromic_olap.qa_ss_processed_message ( src_created_at );
+
+CREATE INDEX idx_qspm_tf1_administrative_sex_v ON syndromic_olap.qa_ss_processed_message ( tf1_administrative_sex_v );
+
+CREATE INDEX idx_qspm_tf1_admit_date_time_c ON syndromic_olap.qa_ss_processed_message ( tf1_admit_date_time_c );
+
+CREATE INDEX idx_qspm_tf1_admit_reason_c ON syndromic_olap.qa_ss_processed_message ( tf1_admit_reason_c );
+
+CREATE INDEX idx_qspm_tf1_age_reported_v ON syndromic_olap.qa_ss_processed_message ( tf1_age_reported_v );
+
+CREATE INDEX idx_qspm_tf1_chiefcomplaint_v ON syndromic_olap.qa_ss_processed_message ( tf1_chiefcomplaint_v );
+
+CREATE INDEX idx_qspm_tf1_discharge_date_time_c ON syndromic_olap.qa_ss_processed_message ( tf1_discharge_date_time_c );
+
+CREATE INDEX idx_qspm_tf1_futuredate_v ON syndromic_olap.qa_ss_processed_message ( tf1_futuredate_v );
+
+CREATE INDEX idx_qspm_tf1_med_rec_num_present ON syndromic_olap.qa_ss_processed_message ( tf1_medical_record_number_present_c );
+
+CREATE INDEX idx_qspm_tf1_message_date_time_c ON syndromic_olap.qa_ss_processed_message ( tf1_message_date_time_c );
+
+CREATE INDEX idx_qspm_tf1_message_type_v ON syndromic_olap.qa_ss_processed_message ( tf1_message_type_v );
+
+CREATE INDEX idx_qspm_tf1_patient_death_date_time_c ON syndromic_olap.qa_ss_processed_message ( tf1_patient_death_date_time_c );
+
+CREATE INDEX idx_qspm_tf1_procedure_date_time_c ON syndromic_olap.qa_ss_processed_message ( tf1_procedure_date_time_c );
+
+CREATE INDEX idx_qspm_tf1_recorded_date_time_c ON syndromic_olap.qa_ss_processed_message ( tf1_recorded_date_time_c );
+
+CREATE INDEX idx_qspm_tf1_trigger_event_v ON syndromic_olap.qa_ss_processed_message ( tf1_trigger_event_v );
+
+CREATE INDEX idx_qspm_tf1_visit_id_c ON syndromic_olap.qa_ss_processed_message ( tf1_visit_id_c );
+
+CREATE INDEX idx_qspm_tf2_admit_date_time_v ON syndromic_olap.qa_ss_processed_message ( tf2_admit_date_time_v );
+
+CREATE INDEX idx_aspm_etl_load_date ON syndromic_olap.qa_ss_processed_message ( etl_load_date );
+
+COMMENT ON TABLE syndromic_olap.qa_ss_processed_message IS 'Questions for 8/12/2019
+- where did tf1_age_reported_v go?
+- tf#_admit_reason_combo is named tf1_admit_reason_c.  Is this okay?
+- does the casing matter on the tf column names (i.e. v vs V)
+- Do we need to do something to automate the tf1_reporting_period (i.e. add a lookup table with date ranges and reporting period titles)?
+
+
+TODO 8/11/2019:
+- tf1_age_reported_v needs to check the validity of age_units to be one of rt_age_unit_syndromic_surveillance
+
+';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.src_created_at IS 'in the source table this field is likely a timstamp WITH timezone';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.age_reported_num IS 'if age_reported is numeric, that numeric value is set in this field';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.dw_mft_id IS 'ss_processed_message.facility_uid';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.tf1_age_reported_v IS 'is age_reported not null and one of rt_age_unit_syndromic_surveillance';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.tf1_admit_reason_c IS 'is admit_reason_description not null';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.tf1_chiefcomplaint_v IS 'is chief_complaint_text is more than 2 characters and one of an enumerated list';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.tf1_first_patient_id_present_c IS 'is first_patient_id a non null value';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.tf1_visit_id_c IS 'is visit_id a non null value';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.tf1_futuredate_v IS 'If observation_date_time > current_date                        
+OR  discharge_date_time > current_date          
+OR   Admit Date/Time        > current_date                                   OR   Death Date/Time > current_date                       
+OR Recorded Date/Time > current_date                   
+OR Date/Time of Message > current_date                
+OR   Procedure Date/Time > current_date 
+Then a future date has been provided (1)     ';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.tf1_trigger_event_v IS 'If trigger_event equals A01 or  A03 or A04 or A08,
+Then tf1_trigger_event_V==1 (Valid),
+Else tf1_trigger_event_V==2 (Invalid) 
+
+';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.tf1_message_type_v IS 'If message_type equals PHVS_MessageType_SyndromicSurveillance == “ADT”,
+Then Message_Type_V==1 (Valid),
+Else Message_Type_V ==2 (Invalid)
+
+';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.tf1_discharge_date_time_c IS 'if discharge_date_time is not null, then tf1_discharge_date_time_c = 1 (true / complete)';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.tf1_admit_date_time_c IS 'if discharge_date_time is not null, then tf1_discharge_date_time_c = 1 (true / complete)';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.tf1_patient_death_date_time_c IS 'if patient_death_date_time is not null, then tf1_patient_death_date_time_c = 1 (true / complete)';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.tf1_recorded_date_time_c IS 'if recorded_date_time is not null, then tf1_recorded_date_time_c = 1 (true / complete)';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.tf1_message_date_time_c IS 'if message_date_time is not null, then tf1_message_date_time_c = 1 (true / complete)';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.tf1_procedure_date_time_c IS 'if procedure_date_time is not null, then tf1_procedure_date_time_c = 1 (true / complete)';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.tf2_admit_date_time_v IS 'If admit_date_time <= ss_batched_messages_created_at, then tf2_admit_date_time_c == 1 (TRUE).';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.mft_udoh_status IS 'onboarding, active, inactive, etc.. this remains static (point in time history)';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.tf1_administrative_sex_v IS 'is administrative_sex not null and one of syndromic.rt_gender_syndromic_surveillance';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.tf1_medical_record_number_present_c IS 'is medical_record_number_present a non null value';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.tf1_reporting_period IS 'if ss_batched_messages_created_at between 20190101 to 20190331, then tf#_reporting_period = Reporting Period 1, else if ss_batched_messages_created_at between 20190401 to 20190630, then tf#_reporting_period = Reporting Period 2, else if ss_batched_messages_created_at between 20190701 and 20190930, then tf#_reporting_period = Reporting Period 3, else if ss_batched_messages_created_at between 20191001 and 20191231, then tf#_reporting_period = Reporting Period 4';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.tf1_medication_list_c IS 'is medication_list a non null value';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.tf1_discharge_disposition_c IS 'is discharge_disposition a non null value';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.tf1_discharge_disposition_v IS 'is discharge_disposition one of values provided in NSSP NICC list';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.tf1_patient_account_number_c IS 'is patient_account_number a non null value';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.tf1_observation_date_time_c IS 'is observation_date_time a non null value';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.tf1_admit_reason_code_c IS 'is admit_reason_code a non null value';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.tf1_admit_reason_code_v IS 'is one of rt_icd10cm_icd9cm_snomedct.concept_code or rt_icd10cm_icd9cm_snomedct.preferred_alternate_code';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.tf1_admit_reason_description_c IS 'is admit_reason_description a non null value';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.tf1_ethnicity_code_v IS 'is one of rt_ethnicity_group.concept_code';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.tf1_age_units_reported_v IS 'is one of rt_age_unit_syndromic_surveillance.preferred_concept_name';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.tf1_treating_facility_id_c IS 'is treating_facility_id a non null value';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.tf1_sending_facility_id_c IS 'is sending_facility_id a non null value';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.tf1_race_code_v IS 'is race_code one of rt_race_category.concept_code';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.tf1_facility_type_code_v2 IS 'is batched_messages.facility_type_code one of  261QE0002X or 1021-5 or 261QM2500X or 261QP2300X or 261QU0200X ';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.tf1_message_type_v1 IS 'is message_type equal to ADT';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.tf1_admit_date_time_v IS 'is admit_date_time < message_date_time';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.tf1_diagnosis_description_v IS 'is diagnosis_code one of `value from RT_rt_icd10cm_icd9cm_snomedct.concept_name` or ``value from RT_rt_icd10cm_icd9cm_snomedct.preferred_concept_name`';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.tf1_c_patient_county_v IS 'is patient_county one of rt_county.concept_code';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.tf1_patient_zip_v IS 'If patient_zip LIKE `[0-9][0-9][0-9][0-9][0-9]` 
+OR patient_zip LIKE `[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]` 
+OR patient_zip LIKE `[0-9][0-9][0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]`
+
+';
+
+COMMENT ON COLUMN syndromic_olap.qa_ss_processed_message.tf1_diagnosis_code_v IS 'is diagnosis_code LIKE `value from RT_rt_icd10cm_icd9cm_snomedct.preferred_alternate_code` or RT_rt_icd10cm_icd9cm_snomedct.concept_code` ';
+
+ALTER TABLE syndromic_olap.qa_ss_processed_message ADD CONSTRAINT fk_fact_ss_processed_message_3 FOREIGN KEY ( dw_treating_mft_id ) REFERENCES syndromic_olap.dim_mft( dw_mft_id );
+
+ALTER TABLE syndromic_olap.qa_ss_processed_message ADD CONSTRAINT fk_fact_ss_processed_message_4 FOREIGN KEY ( dw_sending_mft_id ) REFERENCES syndromic_olap.dim_mft( dw_mft_id );
+
+ALTER TABLE syndromic_olap.qa_ss_processed_message ADD CONSTRAINT fk_fact_ss_processed_message_16 FOREIGN KEY ( dw_rt_facility_visit_type_id ) REFERENCES syndromic_olap.dim_rt_facility_visit_type( dw_rt_facility_visit_type_id );
+
+ALTER TABLE syndromic_olap.qa_ss_processed_message ADD CONSTRAINT fk_fact_ss_processed_message_17 FOREIGN KEY ( dw_ss_batched_messages_created_at_date_num_id ) REFERENCES syndromic_olap.dim_date( dw_date_num_id );
+
+ALTER TABLE syndromic_olap.qa_ss_processed_message ADD CONSTRAINT fk_fact_ss_processed_message_19 FOREIGN KEY ( dw_mft_id ) REFERENCES syndromic_olap.dim_mft( dw_mft_id );
+
+ALTER TABLE syndromic_olap.qa_ss_processed_message ADD CONSTRAINT fk_fact_ss_processed_message_20 FOREIGN KEY ( dw_patient_location_id ) REFERENCES syndromic_olap.dim_patient_location( dw_patient_location_id );
+
+ALTER TABLE syndromic_olap.qa_ss_processed_message ADD CONSTRAINT fk_fact_ss_processed_message_29 FOREIGN KEY ( dw_ss_batched_message_created_at_time_id ) REFERENCES syndromic_olap.dim_time( dw_time_id );
+
+ALTER TABLE syndromic_olap.qa_ss_processed_message ADD CONSTRAINT fk_fact_ss_processed_message_0 FOREIGN KEY ( dw_admit_time_id ) REFERENCES syndromic_olap.dim_time( dw_time_id );
+
+ALTER TABLE syndromic_olap.qa_ss_processed_message ADD CONSTRAINT fk_qa_ss_processed_message FOREIGN KEY ( dw_admit_date_num_id ) REFERENCES syndromic_olap.dim_date( dw_date_num_id );
+
+]]></string>
 		</script>
 	</layout>
 </project>

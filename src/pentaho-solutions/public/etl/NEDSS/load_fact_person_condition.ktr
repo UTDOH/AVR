@@ -755,11 +755,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Get Event Facts Inc</from>
-      <to>Get person</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Investigating Agency</from>
       <to>Has Address?</to>
       <enabled>Y</enabled>
@@ -819,7 +814,51 @@
       <to>lookup dim condition</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>Get Event Facts Inc</from>
+      <to>Get person</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
+  <step>
+    <name>Calculator</name>
+    <type>Calculator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <calculation>
+      <field_name>age_at_onset</field_name>
+      <calc_type>CONSTANT</calc_type>
+      <field_a>-1</field_a>
+      <field_b/>
+      <field_c/>
+      <value_type>Integer</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <remove>N</remove>
+      <conversion_mask/>
+      <decimal_symbol/>
+      <grouping_symbol/>
+      <currency_symbol/>
+    </calculation>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>656</xloc>
+      <yloc>496</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step>
     <name>Dummy (do nothing)</name>
     <type>Dummy</type>
@@ -915,7 +954,7 @@
     </partitioning>
     <connection>NEDSSTXDS</connection>
     <rowlimit>0</rowlimit>
-    <sql>select distinct
+    <sql>select
 	 pc.id as src_person_condition_id
     ,pc.parent_id as src_parent_person_condition_id
     ,pc.record_number
@@ -940,19 +979,25 @@
     ,pc.occupation
     ,pc.pregnant
     ,pc.caused_hospital
-    ,pc.caused_death
+    ,case when pc.condition_caused_death = 'Yes' then true else false end as caused_death
     ,pc.mmwr_week
     ,pc.mmwr_year
-    ,audit.updated_at
+	,max(audit.updated_at) as updated_at
+    ,now() as curr_dt_time
 from person_condition pc
 left join
 (
    select 
+    globalid,
+    substring(globalid from position(':' in globalid)+1) :: int as id,
+    changes, 
     max(timestamp) as updated_at
    from audit 
    where globalid like 'gov.utah.health.model.PersonCondition%'
-) audit on 1 = 1
-</sql>
+   group by 1,2,3
+) audit on audit.id = pc.id
+group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27
+order by 1</sql>
     <outer_join>N</outer_join>
     <replace_vars>N</replace_vars>
     <parameter>
@@ -983,7 +1028,7 @@ left join
     </partitioning>
     <connection>NEDSSTXDS</connection>
     <rowlimit>0</rowlimit>
-    <sql>select distinct
+    <sql>select
 	 pc.id as src_person_condition_id
     ,pc.parent_id as src_parent_person_condition_id
     ,pc.record_number
@@ -1008,22 +1053,26 @@ left join
     ,pc.occupation
     ,pc.pregnant
     ,pc.caused_hospital
-    ,pc.caused_death
+    ,case when pc.condition_caused_death = 'Yes' then true else false end as caused_death
     ,pc.mmwr_week
     ,pc.mmwr_year
-	,audit.updated_at
+	,max(audit.updated_at) as updated_at
+    ,now() as curr_dt_time
 from person_condition pc
-left join
+inner join
 (
    select 
     globalid,
     substring(globalid from position(':' in globalid)+1) :: int as id,
     changes, 
-    timestamp as updated_at
+    max(timestamp) as updated_at
    from audit 
    where globalid like 'gov.utah.health.model.PersonCondition%'
    and timestamp > ?
-) audit on audit.id = pc.id</sql>
+   group by 1,2,3
+) audit on audit.id = pc.id
+group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27
+order by 1</sql>
     <outer_join>N</outer_join>
     <replace_vars>N</replace_vars>
     <parameter>
@@ -1040,7 +1089,7 @@ left join
       </output>
     </remotesteps>
     <GUI>
-      <xloc>464</xloc>
+      <xloc>448</xloc>
       <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1996,6 +2045,11 @@ from warehouse.dim_location</sql>
         <rename>updated_at</rename>
         <update>Y</update>
       </value>
+      <value>
+        <name>etl_load_date</name>
+        <rename>curr_dt_time</rename>
+        <update>Y</update>
+      </value>
     </lookup>
     <cluster_schema/>
     <remotesteps>
@@ -2454,45 +2508,6 @@ where src_person_address_id = ?
     <GUI>
       <xloc>832</xloc>
       <yloc>896</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Calculator</name>
-    <type>Calculator</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <calculation>
-      <field_name>age_at_onset</field_name>
-      <calc_type>CONSTANT</calc_type>
-      <field_a>-1</field_a>
-      <field_b/>
-      <field_c/>
-      <value_type>Integer</value_type>
-      <value_length>-1</value_length>
-      <value_precision>-1</value_precision>
-      <remove>N</remove>
-      <conversion_mask/>
-      <decimal_symbol/>
-      <grouping_symbol/>
-      <currency_symbol/>
-    </calculation>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>656</xloc>
-      <yloc>496</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

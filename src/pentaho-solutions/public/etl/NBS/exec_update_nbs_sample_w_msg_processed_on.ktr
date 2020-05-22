@@ -585,16 +585,21 @@
     <hop>
       <from>Get ARUP Message Out Date 2</from>
       <to>Calculator</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Calculator</from>
       <to>Update fns.src_message_processed_on</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Get Max SRC_MESSAGE_PROCESSED_ON</from>
       <to>Log Date</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Get ARUP Message Out Date 2</from>
+      <to>Update fns.src_message_processed_on</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -633,7 +638,7 @@
     </remotesteps>
     <GUI>
       <xloc>736</xloc>
-      <yloc>224</yloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -833,7 +838,7 @@ from nbs_olap.fact_nbs_sample;</sql>
       <schema>nbs_olap</schema>
       <table>fact_nbs_sample</table>
       <key>
-        <name>SAMPLE_NUMBER_AS_INT</name>
+        <name>SAMPLE_NUMBER</name>
         <field>sample_number</field>
         <condition>=</condition>
         <name2/>

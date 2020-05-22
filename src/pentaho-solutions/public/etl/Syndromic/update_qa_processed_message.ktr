@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>exec_update_nbs_result_w_msg_processed_on</name>
+    <name>update_qa_processed_message</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -9,16 +9,6 @@
     <trans_status>0</trans_status>
     <directory>/</directory>
     <parameters>
-      <parameter>
-        <name>nbsoltp_schema</name>
-        <default_value>NBSPROD</default_value>
-        <description>NBSPROD|NBS_USER</description>
-      </parameter>
-      <parameter>
-        <name>nbsoltp_schemaz</name>
-        <default_value>NBS_USER</default_value>
-        <description>NBSPROD|NBS_USER</description>
-      </parameter>
     </parameters>
     <log>
       <trans-log-table>
@@ -438,20 +428,20 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2017/12/02 21:07:59.720</created_date>
+    <created_date>2019/06/26 08:03:27.156</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2017/12/02 21:07:59.720</modified_date>
+    <modified_date>2019/06/26 08:03:27.156</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
   <connection>
-    <name>NBSOLAPDS</name>
+    <name>DCPLDW</name>
     <server/>
     <type>POSTGRESQL</type>
     <access>JNDI</access>
-    <database>NBSOLAPDS</database>
+    <database>DCPLDW</database>
     <port>1521</port>
     <username/>
     <password>Encrypted </password>
@@ -468,20 +458,8 @@
         <attribute>N</attribute>
       </attribute>
       <attribute>
-        <code>INITIAL_POOL_SIZE</code>
-        <attribute>5</attribute>
-      </attribute>
-      <attribute>
         <code>IS_CLUSTERED</code>
         <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>MAXIMUM_POOL_SIZE</code>
-        <attribute>20</attribute>
-      </attribute>
-      <attribute>
-        <code>POOLING_removeAbandoned</code>
-        <attribute>true</attribute>
       </attribute>
       <attribute>
         <code>PORT_NUMBER</code>
@@ -505,253 +483,19 @@
       </attribute>
       <attribute>
         <code>USE_POOLING</code>
-        <attribute>Y</attribute>
-      </attribute>
-    </attributes>
-  </connection>
-  <connection>
-    <name>NBSOLTP</name>
-    <server/>
-    <type>ORACLE</type>
-    <access>JNDI</access>
-    <database>NBSOLTP</database>
-    <port>1521</port>
-    <username/>
-    <password>Encrypted </password>
-    <servername/>
-    <data_tablespace>${nbsoltp_schema}</data_tablespace>
-    <index_tablespace>${nbsoltp_schema}</index_tablespace>
-    <attributes>
-      <attribute>
-        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
         <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>INITIAL_POOL_SIZE</code>
-        <attribute>5</attribute>
-      </attribute>
-      <attribute>
-        <code>IS_CLUSTERED</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>MAXIMUM_POOL_SIZE</code>
-        <attribute>20</attribute>
-      </attribute>
-      <attribute>
-        <code>POOLING_removeAbandoned</code>
-        <attribute>true</attribute>
-      </attribute>
-      <attribute>
-        <code>PORT_NUMBER</code>
-        <attribute>1521</attribute>
-      </attribute>
-      <attribute>
-        <code>PRESERVE_RESERVED_WORD_CASE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>QUOTE_ALL_FIELDS</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>STRICT_NUMBER_38_INTERPRETATION</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>USE_POOLING</code>
-        <attribute>Y</attribute>
       </attribute>
     </attributes>
   </connection>
   <order>
     <hop>
-      <from>Log Date</from>
-      <to>Get ARUP Message Out Date 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Get ARUP Message Out Date 2</from>
-      <to>Calculator</to>
-      <enabled>N</enabled>
-    </hop>
-    <hop>
-      <from>Calculator</from>
-      <to>Update fns.src_message_processed_on</to>
-      <enabled>N</enabled>
-    </hop>
-    <hop>
-      <from>Get Max SRC_MESSAGE_PROCESSED_ON</from>
-      <to>Log Date</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Get ARUP Message Out Date 2</from>
-      <to>Update fns.src_message_processed_on</to>
+      <from>Get processed messages</from>
+      <to>Update qa_ss_processed_message</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Calculator</name>
-    <type>Calculator</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <calculation>
-      <field_name>SAMPLE_NUMBER_AS_INT</field_name>
-      <calc_type>COPY_FIELD</calc_type>
-      <field_a>SAMPLE_NUMBER</field_a>
-      <field_b/>
-      <field_c/>
-      <value_type>Integer</value_type>
-      <value_length>-1</value_length>
-      <value_precision>-1</value_precision>
-      <remove>N</remove>
-      <conversion_mask/>
-      <decimal_symbol/>
-      <grouping_symbol/>
-      <currency_symbol/>
-    </calculation>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>752</xloc>
-      <yloc>96</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Data Grid</name>
-    <type>DataGrid</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>DW_MESSAGE_PROCESSED_ON</name>
-        <type>Integer</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>sample_number</name>
-        <type>BigNumber</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>SRC_MESSAGE_PROCESSED_ON</name>
-        <type>Timestamp</type>
-        <format>yyyy/MM/dd HH:mm:ss</format>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-    <data>
-      <line>
-        <item>20171011</item>
-        <item>3082829</item>
-        <item>2017/10/11 13:27:01</item>
-      </line>
-    </data>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>704</xloc>
-      <yloc>208</yloc>
-      <draw>N</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Get ARUP Message Out Date 2</name>
-    <type>DBJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>NBSOLTP</connection>
-    <rowlimit>0</rowlimit>
-    <sql>select 
-	 SAMPLE_NUMBER
-	,MAX(MESSAGE_PROCESSED_ON) as SRC_MESSAGE_PROCESSED_ON
-    ,TO_NUMBER(TO_CHAR(MAX(MESSAGE_PROCESSED_ON), 'YYYYMMDD')) AS DW_MESSAGE_PROCESSED_ON
-FROM ${nbsoltp_schema}.NBS_ARUP_MESSAGE_IN
-WHERE MESSAGE_PROCESSED_ON >= ?
-group by SAMPLE_NUMBER
-</sql>
-    <outer_join>N</outer_join>
-    <replace_vars>Y</replace_vars>
-    <parameter>
-      <field>
-        <name>max_src_message_processed_on</name>
-        <type>Date</type>
-      </field>
-    </parameter>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>560</xloc>
-      <yloc>208</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Get Max SRC_MESSAGE_PROCESSED_ON</name>
+    <name>Get processed messages</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -761,14 +505,47 @@ group by SAMPLE_NUMBER
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>NBSOLAPDS</connection>
-    <sql>select 
-	case when max(SRC_MESSAGE_PROCESSED_ON) is not null then max(SRC_MESSAGE_PROCESSED_ON) else date '2006-01-01' end as max_SRC_MESSAGE_PROCESSED_ON 
-from nbs_olap.fact_nbs_result;</sql>
+    <connection>DCPLDW</connection>
+    <sql>select
+	now() as curr_dt_time,
+	spm.id as src_id,
+	ss_batched_messages_id,
+    'Reporting Period '||dd.quarter_number as tf1_reporting_period,
+    case when spm.admit_reason_code is null then null 
+    when admtrsn.id is not null then 1 else 0 end as tf1_admit_reason_code_v,
+    case when spm.ethnicity_code is null then null
+    when reg.concept_code is not null then 1 else 0 end as tf1_ethnicity_code_v,
+    case when spm.age_units_reported is null then null
+    when rauss.concept_code is not null then 1 else 0 end as tf1_age_units_reported_v,
+    case when facility_type_code is null then null
+    when facility_type_code in ('261QE0002X','1021-5','261QM2500X', '261QP2300X','261QU0200X') then 1 else 0 end as tf1_facility_type_code_v2,
+    case when message_type is null then null 
+    when message_type = 'ADT' then 1 else 0 end as tf1_message_type_v1,
+    case when admit_date_time &lt; message_date_time then 1 else 0 end as tf1_admit_date_time_v,
+    case when spm.c_patient_county is null then null 
+    when rc.concept_code is not null then 1 else 0 end as tf1_c_patient_county_v,
+    case when spm.discharge_disposition is null then null
+    when nnt.nicc_term is not null then 0 else 1 end as tf1_discharge_disposition_v,
+    case when patient_zip is null then null
+    when (select regexp_matches(patient_zip, '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]')) is not null or (select regexp_matches(patient_zip, '[0-9][0-9][0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]')) is not null or (select regexp_matches(patient_zip, '[0-9][0-9][0-9][0-9][0-9]')) is not null then 1 else 0 end  as tf1_patient_zip_v,
+    pds.tf1_diagnosis_code_v,
+    pds.tf1_diagnosis_description_v,
+    prs.tf1_race_code_v
+from syndromic.ss_processed_message spm
+left join syndromic.rt_icd10cm_icd9cm_snomedct admtrsn on admtrsn.concept_code = spm.admit_reason_code or admtrsn.preferred_alternate_code = spm.admit_reason_code
+left join syndromic.rt_ethnicity_group reg on reg.concept_code = spm.ethnicity_code
+left join syndromic.rt_age_unit_syndromic_surveillance rauss on rauss.preferred_concept_name = spm.age_units_reported
+left join syndromic.rt_county rc on lower(rc.concept_name) = lower(spm.c_patient_county)
+left join syndromic_olap.etl_nssp_nicc_terminology nnt on nnt.nicc_term = spm.discharge_disposition
+left join syndromic_olap.etl_processed_diagnosis_summary pds on pds.ss_processed_message_id = spm.id
+left join syndromic_olap.etl_processed_race_summary prs on prs.ss_processed_message_id = spm.id
+left join syndromic_olap.dim_date dd on dd.dw_date_num_id = to_char(ss_batched_messages_created_at, 'YYYYMMDD')::integer
+where spm.id >= ${min_processed_message_id} and spm.id &lt; ${max_processed_message_id}
+limit 2000001</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
+    <variables_active>Y</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
     <cluster_schema/>
     <remotesteps>
@@ -778,47 +555,13 @@ from nbs_olap.fact_nbs_result;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>176</xloc>
-      <yloc>208</yloc>
+      <xloc>208</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Log Date</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>
-      <jsScript>
-        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>writeToLog('m', 'max_src_message_processed_on: ' + max_src_message_processed_on)</jsScript_script>
-      </jsScript>
-    </jsScripts>
-    <fields>    </fields>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>400</xloc>
-      <yloc>208</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Update fns.src_message_processed_on</name>
+    <name>Update qa_ss_processed_message</name>
     <type>Update</type>
     <description/>
     <distribute>Y</distribute>
@@ -828,28 +571,72 @@ from nbs_olap.fact_nbs_result;</sql>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>NBSOLAPDS</connection>
+    <connection>DCPLDW</connection>
     <skip_lookup>Y</skip_lookup>
-    <commit>100</commit>
+    <commit>1000</commit>
     <use_batch>Y</use_batch>
     <error_ignored>N</error_ignored>
     <ignore_flag_field/>
     <lookup>
-      <schema>nbs_olap</schema>
-      <table>fact_nbs_result</table>
+      <schema>${olap_schema}</schema>
+      <table>qa_ss_processed_message</table>
       <key>
-        <name>SAMPLE_NUMBER</name>
-        <field>sample_number</field>
+        <name>src_id</name>
+        <field>src_id</field>
         <condition>=</condition>
         <name2/>
       </key>
       <value>
-        <name>dw_message_processed_on_date_num_id</name>
-        <rename>DW_MESSAGE_PROCESSED_ON</rename>
+        <name>tf1_discharge_disposition_v</name>
+        <rename>tf1_discharge_disposition_v</rename>
       </value>
       <value>
-        <name>src_message_processed_on</name>
-        <rename>SRC_MESSAGE_PROCESSED_ON</rename>
+        <name>tf1_admit_reason_code_v</name>
+        <rename>tf1_admit_reason_code_v</rename>
+      </value>
+      <value>
+        <name>tf1_ethnicity_code_v</name>
+        <rename>tf1_ethnicity_code_v</rename>
+      </value>
+      <value>
+        <name>tf1_age_units_reported_v</name>
+        <rename>tf1_age_units_reported_v</rename>
+      </value>
+      <value>
+        <name>tf1_facility_type_code_v2</name>
+        <rename>tf1_facility_type_code_v2</rename>
+      </value>
+      <value>
+        <name>tf1_message_type_v1</name>
+        <rename>tf1_message_type_v1</rename>
+      </value>
+      <value>
+        <name>tf1_admit_date_time_v</name>
+        <rename>tf1_admit_date_time_v</rename>
+      </value>
+      <value>
+        <name>tf1_c_patient_county_v</name>
+        <rename>tf1_c_patient_county_v</rename>
+      </value>
+      <value>
+        <name>tf1_patient_zip_v</name>
+        <rename>tf1_patient_zip_v</rename>
+      </value>
+      <value>
+        <name>tf1_diagnosis_code_v</name>
+        <rename>tf1_diagnosis_code_v</rename>
+      </value>
+      <value>
+        <name>tf1_diagnosis_description_v</name>
+        <rename>tf1_diagnosis_description_v</rename>
+      </value>
+      <value>
+        <name>tf1_race_code_v</name>
+        <rename>tf1_race_code_v</rename>
+      </value>
+      <value>
+        <name>tf1_reporting_period</name>
+        <rename>tf1_reporting_period</rename>
       </value>
     </lookup>
     <cluster_schema/>
@@ -860,9 +647,75 @@ from nbs_olap.fact_nbs_result;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>944</xloc>
-      <yloc>208</yloc>
+      <xloc>512</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>get ss_processed_messages 2 2</name>
+    <type>DBJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>DCPLDW</connection>
+    <rowlimit>0</rowlimit>
+    <sql>select
+	now() as curr_dt_time,
+	spm.id as src_id,
+	ss_batched_messages_id,
+    'Reporting Period '||dd.quarter_number as tf1_reporting_period,
+    case when spm.admit_reason_description is null then null 
+    when admtrsn.id is not null then 1 else 0 end as tf1_admit_reason_code_v,
+    case when spm.ethnicity_code is null then null
+    when reg.concept_code is not null then 1 else 0 end as tf1_ethnicity_code_v,
+    case spm.age_units_reported is null then null
+    when rauss.concept_code is not null then 1 else 0 end as tf1_age_units_reported_v,
+    case when facility_type_code is null then null
+    when facility_type_code in ('261QE0002X','1021-5','261QM2500X', '261QP2300X','261QU0200X') then 1 else 0 end as tf1_facility_type_code_v2,
+    case when message_type is null then null 
+    when message_type = 'ADT' then 1 else 0 end as tf1_message_type_v1,
+    case when admit_date_time &lt; message_date_time then 1 else 0 end as tf1_admit_date_time_v,
+    case when spm.c_patient_county is null then null 
+    when rc.concept_code is not null then 1 else 0 end as tf1_c_patient_county_v,
+    case when spm.discharge_disposition is null then null
+    when nnt.nicc_term is not null then 1 else 0 end as tf1_discharge_disposition_v,
+    case when patient_zip is null then null
+    when (select regexp_matches(patient_zip, '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]')) is not null or (select regexp_matches(patient_zip, '[0-9][0-9][0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]')) is not null or (select regexp_matches(patient_zip, '[0-9][0-9][0-9][0-9][0-9]')) is not null then 1 else 0 end  as tf1_patient_zip_v,
+    pds.tf1_diagnosis_code_v,
+    pds.tf1_diagnosis_description_v,
+    prs.tf1_race_code_v
+from syndromic.ss_processed_message spm
+left join syndromic.rt_icd10cm_icd9cm_snomedct admtrsn on admtrsn.concept_code = spm.admit_reason_description or admtrsn.preferred_alternate_code = spm.admit_reason_description
+left join syndromic.rt_ethnicity_group reg on reg.concept_code = spm.ethnicity_code
+left join syndromic.rt_age_unit_syndromic_surveillance rauss on rauss.preferred_concept_name = spm.age_units_reported
+left join syndromic.rt_county rc on rc.concept_code = spm.c_patient_county
+left join syndromic_olap.etl_nssp_nicc_terminology nnt on nnt.nicc_term = spm.discharge_disposition
+left join syndromic_olap.etl_processed_diagnosis_summary pds on pds.ss_processed_message_id = spm.id
+left join syndromic_olap.etl_processed_race_summary prs on prs.ss_processed_message_id = spm.id
+left join syndromic_olap.dim_date dd on dd.dw_date_num_id = to_char(ss_batched_messages_created_at, 'YYYYMMDD')::integer
+where spm.id >= ${min_processed_message_id} and spm.id &lt; ${max_processed_message_id}
+limit 2000001</sql>
+    <outer_join>N</outer_join>
+    <replace_vars>Y</replace_vars>
+    <parameter>
+    </parameter>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>304</xloc>
+      <yloc>64</yloc>
+      <draw>N</draw>
     </GUI>
   </step>
   <step_error_handling>
