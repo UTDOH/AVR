@@ -1363,7 +1363,7 @@ if (age_reported != null) {
     pds.processed_diagnosis_message_count,
     prs.tf1_race_code_v,
     prs.processed_race_message_count,
-    mf.mft_id as src_mft_id
+    mmf.mft_id as src_mft_id
 from syndromic.ss_processed_message spm
 left join olap_temp.etl_ss_processed_chief_complaint_summary espccs on espccs.ss_processed_message_src_id = spm.id
 left join syndromic.rt_icd10cm_icd9cm_snomedct admtrsn on admtrsn.code_system_name='ICD-10-CM Diagnosis' and (admtrsn.concept_code = spm.admit_reason_code or admtrsn.preferred_alternate_code = spm.admit_reason_code) 
@@ -1375,8 +1375,13 @@ left join syndromic_olap.etl_nssp_nicc_terminology nnt on nnt.nicc_term = spm.di
 left join olap_temp.etl_processed_diagnosis_summary pds on pds.ss_processed_message_id = spm.id
 left join olap_temp.etl_processed_race_summary prs on prs.ss_processed_message_id = spm.id
 left join syndromic_olap.dim_date dd on dd.dw_date_num_id = to_char(ss_batched_messages_created_at, 'YYYYMMDD')::integer
-left join syndromic.mft_feed mf on mf.facility_uid = spm.facility_uid
-left join syndromic.mft m on m.id = mf.mft_id and m.facility_type_code = spm.facility_type_code
+left join (
+ select 
+	 mf.mft_id
+	,mf.facility_uid
+	,m.facility_type_code
+  from syndromic.mft_feed mf inner join syndromic.mft m on m.id = mf.mft_id
+) mmf on mmf.facility_uid = spm.facility_uid and mmf.facility_type_code = spm.facility_type_code
 where spm.id >= ${min_processed_message_id} and spm.id &lt; ${max_processed_message_id}</sql>
     <limit>0</limit>
     <lookup/>
