@@ -12,57 +12,6 @@
   <parameters>
     </parameters>
   <connection>
-    <name>DCPLDW</name>
-    <server/>
-    <type>POSTGRESQL</type>
-    <access>JNDI</access>
-    <database>DCPLDW</database>
-    <port>1521</port>
-    <username/>
-    <password>Encrypted </password>
-    <servername/>
-    <data_tablespace/>
-    <index_tablespace/>
-    <attributes>
-      <attribute>
-        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>IS_CLUSTERED</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>PORT_NUMBER</code>
-        <attribute>1521</attribute>
-      </attribute>
-      <attribute>
-        <code>PRESERVE_RESERVED_WORD_CASE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>QUOTE_ALL_FIELDS</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>USE_POOLING</code>
-        <attribute>N</attribute>
-      </attribute>
-    </attributes>
-  </connection>
-  <connection>
     <name>NEDSSOLAPDS</name>
     <server/>
     <type>POSTGRESQL</type>
@@ -401,10 +350,54 @@
   <shared_objects_file/>
   <entries>
     <entry>
-      <name>insert_agg_mft_day</name>
+      <name>START</name>
+      <description/>
+      <type>SPECIAL</type>
+      <start>Y</start>
+      <dummy>N</dummy>
+      <repeat>N</repeat>
+      <schedulerType>0</schedulerType>
+      <intervalSeconds>0</intervalSeconds>
+      <intervalMinutes>60</intervalMinutes>
+      <hour>12</hour>
+      <minutes>0</minutes>
+      <weekDay>1</weekDay>
+      <DayOfMonth>1</DayOfMonth>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>208</xloc>
+      <yloc>48</yloc>
+    </entry>
+    <entry>
+      <name>reload_agg_mft_day</name>
       <description/>
       <type>SQL</type>
-      <sql>--create table syndromic_olap.agg_mft_day_processed_messages as
+      <sql>/*
+DROP INDEX if exists idx_mft_day2_msg_date_num_id;
+
+DROP INDEX if exists idx_mft_day2_mft;
+
+DROP INDEX if exists idx_mft_day2_mft_connector;
+
+DROP INDEX if exists idx_mft_day2_mft_app_nm;
+
+DROP INDEX if exists idx_mft_day2_mft_facility_nm;
+
+DROP INDEX if exists idx_mft_day2_mft_facility_uid;
+
+DROP INDEX if exists idx_mft_day2_mft_udoh_status;
+
+DROP INDEX if exists idx_mft_day2_mft_hco;
+
+DROP INDEX if exists idx_mft_day2_mft_biosense_status;
+
+drop table syndromic_olap.agg_mft_day_processed_messages;
+
+*/
+delete from syndromic_olap.agg_mft_day_processed_messages;
+
+--create table syndromic_olap.agg_mft_day_processed_messages as
 insert into syndromic_olap.agg_mft_day_processed_messages
 (
 select
@@ -547,65 +540,7 @@ CREATE INDEX idx_mft_day2_mft_biosense_status
     ON syndromic_olap.agg_mft_day_processed_messages USING btree
     (biosense_status)
     TABLESPACE pg_default;
-*/</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename/>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>DCPLDW</connection>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>480</xloc>
-      <yloc>48</yloc>
-    </entry>
-    <entry>
-      <name>START</name>
-      <description/>
-      <type>SPECIAL</type>
-      <start>Y</start>
-      <dummy>N</dummy>
-      <repeat>N</repeat>
-      <schedulerType>0</schedulerType>
-      <intervalSeconds>0</intervalSeconds>
-      <intervalMinutes>60</intervalMinutes>
-      <hour>12</hour>
-      <minutes>0</minutes>
-      <weekDay>1</weekDay>
-      <DayOfMonth>1</DayOfMonth>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>208</xloc>
-      <yloc>48</yloc>
-    </entry>
-    <entry>
-      <name>delete_agg_mft_day</name>
-      <description/>
-      <type>SQL</type>
-      <sql>/*
-DROP INDEX if exists idx_mft_day2_msg_date_num_id;
-
-DROP INDEX if exists idx_mft_day2_mft;
-
-DROP INDEX if exists idx_mft_day2_mft_connector;
-
-DROP INDEX if exists idx_mft_day2_mft_app_nm;
-
-DROP INDEX if exists idx_mft_day2_mft_facility_nm;
-
-DROP INDEX if exists idx_mft_day2_mft_facility_uid;
-
-DROP INDEX if exists idx_mft_day2_mft_udoh_status;
-
-DROP INDEX if exists idx_mft_day2_mft_hco;
-
-DROP INDEX if exists idx_mft_day2_mft_biosense_status;
-
-drop table syndromic_olap.agg_mft_day_processed_messages;
-
 */
-delete from syndromic_olap.agg_mft_day_processed_messages;
 </sql>
       <useVariableSubstitution>F</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
@@ -622,21 +557,12 @@ delete from syndromic_olap.agg_mft_day_processed_messages;
   <hops>
     <hop>
       <from>START</from>
-      <to>delete_agg_mft_day</to>
+      <to>reload_agg_mft_day</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>delete_agg_mft_day</from>
-      <to>insert_agg_mft_day</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
     </hop>
   </hops>
   <notepads>

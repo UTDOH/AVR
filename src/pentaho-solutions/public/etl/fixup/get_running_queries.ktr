@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>load_ss_processed_chief_complaint_summary</name>
+    <name>get_running_queries</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -427,13 +427,38 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2019/08/15 12:53:07.470</created_date>
+    <created_date>2020/06/10 09:28:04.002</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2019/08/15 12:53:07.470</modified_date>
-    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
+    <modified_date>2020/06/10 09:28:04.002</modified_date>
+    <key_for_session_key/>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
+    <notepad>
+      <note>SELECT pid, age(query_start, clock_timestamp()), usename, query 
+FROM pg_stat_activity 
+WHERE query != '&lt;IDLE>' AND query NOT ILIKE '%pg_stat_activity%' 
+and usename='pentaho'
+ORDER BY query_start desc</note>
+      <xloc>272</xloc>
+      <yloc>112</yloc>
+      <width>446</width>
+      <heigth>110</heigth>
+      <fontname>Cantarell</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
   </notepads>
   <connection>
     <name>DCPLDW</name>
@@ -488,14 +513,14 @@
   </connection>
   <order>
     <hop>
-      <from>get chief complaints</from>
-      <to>etl_ss_processed_chief_complaint_summary</to>
+      <from>rowcount</from>
+      <to>Write to log</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>etl_ss_processed_chief_complaint_summary</name>
-    <type>TableOutput</type>
+    <name>Write to log</name>
+    <type>WriteToLog</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -504,43 +529,23 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>DCPLDW</connection>
-    <schema>olap_temp</schema>
-    <table>etl_ss_processed_chief_complaint_summary</table>
-    <commit>1000</commit>
-    <truncate>N</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
+    <loglevel>log_level_minimal</loglevel>
+    <displayHeader>Y</displayHeader>
+    <limitRows>N</limitRows>
+    <limitRowsNumber>0</limitRowsNumber>
+    <logmessage>running queries</logmessage>
     <fields>
       <field>
-        <column_name>chief_complaint_codes</column_name>
-        <stream_name>chief_complaint_codes</stream_name>
+        <name>usename</name>
       </field>
       <field>
-        <column_name>chief_complaint_texts</column_name>
-        <stream_name>chief_complaint_texts</stream_name>
+        <name>query</name>
       </field>
       <field>
-        <column_name>ss_processed_message_src_id</column_name>
-        <stream_name>ss_processed_message_id</stream_name>
+        <name>pid</name>
       </field>
       <field>
-        <column_name>tf1_chiefcomplaint_v</column_name>
-        <stream_name>tf1_chiefcomplaint_v</stream_name>
-      </field>
-      <field>
-        <column_name>chief_complaint_message_count</column_name>
-        <stream_name>chief_complaint_message_count</stream_name>
+        <name>age</name>
       </field>
     </fields>
     <cluster_schema/>
@@ -551,13 +556,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>832</xloc>
-      <yloc>224</yloc>
+      <xloc>496</xloc>
+      <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>get chief complaints</name>
+    <name>rowcount</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -568,22 +573,15 @@
       <schema_name/>
     </partitioning>
     <connection>DCPLDW</connection>
-    <sql>select
-	spcc.ss_processed_message_id
-	,substring(string_agg(spcc.chief_complaint_code, '|') from 1 for 512) as chief_complaint_codes
-	,substring(string_agg(spcc.chief_complaint_text, '|') from 1 for 512) as chief_complaint_texts
-	,case
-     when string_agg(spcc.chief_complaint_text, '|') is null then null 
-     when max(icc.nicc_id) is null then 1 else 0 end as tf1_chiefcomplaint_v
-    ,count(1) as chief_complaint_message_count
-from syndromic.ss_processed_chief_complaint spcc
-left join syndromic_olap.etl_nssp_nicc_terminology icc on icc.nicc_term = spcc.chief_complaint_text
-where spcc.ss_processed_message_id >= ${min_processed_message_id} and spcc.ss_processed_message_id &lt; ${max_processed_message_id}
-group by spcc.ss_processed_message_id</sql>
+    <sql>SELECT pid, age(query_start, clock_timestamp()), usename, query 
+FROM pg_stat_activity 
+WHERE query != '&lt;IDLE>' AND query NOT ILIKE '%pg_stat_activity%' 
+and usename='pentaho'
+ORDER BY query_start desc</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
+    <variables_active>N</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
     <cluster_schema/>
     <remotesteps>
@@ -593,8 +591,8 @@ group by spcc.ss_processed_message_id</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>512</xloc>
-      <yloc>224</yloc>
+      <xloc>320</xloc>
+      <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

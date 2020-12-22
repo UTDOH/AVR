@@ -664,7 +664,7 @@ vacuum analyze olap_temp.etl_processed_race_summary;
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>624</xloc>
-      <yloc>656</yloc>
+      <yloc>736</yloc>
     </entry>
     <entry>
       <name>load_ss_processed_chief_complaint_summary.ktr</name>
@@ -747,8 +747,8 @@ where qa_ss_processed_message.src_id = etl_ss_processed_chief_complaint_summary.
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>320</xloc>
-      <yloc>736</yloc>
+      <xloc>128</xloc>
+      <yloc>768</yloc>
     </entry>
     <entry>
       <name>Success Mail</name>
@@ -794,8 +794,8 @@ where qa_ss_processed_message.src_id = etl_ss_processed_chief_complaint_summary.
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>432</xloc>
-      <yloc>736</yloc>
+      <xloc>240</xloc>
+      <yloc>768</yloc>
     </entry>
     <entry>
       <name>Abort job</name>
@@ -1013,6 +1013,32 @@ where qa_ss_processed_message.src_id = etl_ss_processed_chief_complaint_summary.
       <xloc>1264</xloc>
       <yloc>112</yloc>
     </entry>
+    <entry>
+      <name>mft_exception</name>
+      <description/>
+      <type>SQL</type>
+      <sql>delete from syndromic_olap.mft_exception;
+
+insert into syndromic_olap.mft_exception
+select 
+ distinct (ss_processed_message.facility_uid) as facility_uid
+,mft_feed.facility_uid as mft_feed_facility_uid
+from syndromic.ss_processed_message
+LEFT join syndromic.mft_feed on ( mft_feed.facility_uid = syndromic.ss_processed_message.facility_uid)
+where syndromic.mft_feed.facility_uid is null
+and syndromic.ss_processed_message.ss_batched_messages_created_at > (date_trunc('month', current_date) - interval '6 month')
+; </sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>DCPLDW</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>240</xloc>
+      <yloc>656</yloc>
+    </entry>
   </entries>
   <hops>
     <hop>
@@ -1056,7 +1082,7 @@ where qa_ss_processed_message.src_id = etl_ss_processed_chief_complaint_summary.
       <to>vacuum large table</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1155,7 +1181,7 @@ where qa_ss_processed_message.src_id = etl_ss_processed_chief_complaint_summary.
       <to>Fail Mail</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>N</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1227,16 +1253,7 @@ where qa_ss_processed_message.src_id = etl_ss_processed_chief_complaint_summary.
       <to>load_syndromic_aggregate_tables</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>load_syndromic_aggregate_tables</from>
-      <to>Success Mail</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1321,37 +1338,44 @@ where qa_ss_processed_message.src_id = etl_ss_processed_chief_complaint_summary.
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
+    <hop>
+      <from>load_syndromic_aggregate_tables</from>
+      <to>mft_exception</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>mft_exception</from>
+      <to>Success Mail</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>mft_exception</from>
+      <to>Fail Mail</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>load_qa_processed_message</from>
+      <to>load_syndromic_aggregate_tables</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
   </hops>
   <notepads>
-    <notepad>
-      <note>TODO:  Materialize this query daily in syndromic_olap.dim_mft_exception
-
-select distinct (ss_processed_message.facility_uid)
-, mft_feed.facility_uid as mft_feed_facility_uid
-from syndromic.ss_processed_message
-LEFT join syndromic.mft_feed on ( mft_feed.facility_uid = syndromic.ss_processed_message.facility_uid)
-where syndromic.mft_feed.facility_uid is null
-and syndromic.ss_processed_message.ss_batched_messages_created_at > '2019-11-01'
-;  </note>
-      <xloc>208</xloc>
-      <yloc>240</yloc>
-      <width>680</width>
-      <heigth>190</heigth>
-      <fontname>Cantarell</fontname>
-      <fontsize>11</fontsize>
-      <fontbold>N</fontbold>
-      <fontitalic>N</fontitalic>
-      <fontcolorred>0</fontcolorred>
-      <fontcolorgreen>0</fontcolorgreen>
-      <fontcolorblue>0</fontcolorblue>
-      <backgroundcolorred>255</backgroundcolorred>
-      <backgroundcolorgreen>205</backgroundcolorgreen>
-      <backgroundcolorblue>112</backgroundcolorblue>
-      <bordercolorred>100</bordercolorred>
-      <bordercolorgreen>100</bordercolorgreen>
-      <bordercolorblue>100</bordercolorblue>
-      <drawshadow>Y</drawshadow>
-    </notepad>
   </notepads>
   <attributes>
     <group>

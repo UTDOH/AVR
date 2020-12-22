@@ -438,8 +438,8 @@
     <notepad>
       <note>Open question - what is the
 link to rt_facility_visit_type?</note>
-      <xloc>816</xloc>
-      <yloc>736</yloc>
+      <xloc>768</xloc>
+      <yloc>720</yloc>
       <width>189</width>
       <heigth>50</heigth>
       <fontname>Cantarell</fontname>
@@ -493,8 +493,8 @@ link to rt_facility_visit_type?</note>
     </notepad>
     <notepad>
       <note>Remove dw_sending_facility_id and dw_treating_facility_id</note>
-      <xloc>1248</xloc>
-      <yloc>544</yloc>
+      <xloc>1232</xloc>
+      <yloc>400</yloc>
       <width>386</width>
       <heigth>30</heigth>
       <fontname>Cantarell</fontname>
@@ -519,10 +519,33 @@ makes  it into the mft / mft_feed table.
 
 Update load_rt_dims to ensure the dim_mft gets synced
 when the orphaned mft show up in mft / mft_feed</note>
-      <xloc>1056</xloc>
+      <xloc>976</xloc>
       <yloc>672</yloc>
       <width>371</width>
       <heigth>130</heigth>
+      <fontname>Cantarell</fontname>
+      <fontsize>11</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>05/25/2020 - max src_id before running with
+dim_mft lookup on facility_uid
+108772209</note>
+      <xloc>736</xloc>
+      <yloc>496</yloc>
+      <width>295</width>
+      <heigth>70</heigth>
       <fontname>Cantarell</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -740,11 +763,6 @@ when the orphaned mft show up in mft / mft_feed</note>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>dim_mft</from>
-      <to>lookup_main_dim_mft</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Completeness Validations</from>
       <to>admin sex not null</to>
       <enabled>Y</enabled>
@@ -797,6 +815,16 @@ when the orphaned mft show up in mft / mft_feed</note>
     <hop>
       <from>lookup_main_dim_mft</from>
       <to>Modified Java Script Value</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>dim_mft</from>
+      <to>addtl_dim_mft_fields</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>addtl_dim_mft_fields</from>
+      <to>lookup_main_dim_mft</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -1306,7 +1334,7 @@ if (age_reported != null) {
 	spm.message_type,
 	spm.trigger_event,
 	spm.admit_reason_code,
-	spm.admit_reason_description,
+	substring(spm.admit_reason_description from 1 for 511) as admit_reason_description,
 	spm.treating_facility_id,
 	spm.sending_facility_id,
 	spm.admit_date_time::date as admit_date,
@@ -1362,8 +1390,7 @@ if (age_reported != null) {
     pds.tf1_diagnosis_description_v,
     pds.processed_diagnosis_message_count,
     prs.tf1_race_code_v,
-    prs.processed_race_message_count,
-    mmf.mft_id as src_mft_id
+    prs.processed_race_message_count
 from syndromic.ss_processed_message spm
 left join olap_temp.etl_ss_processed_chief_complaint_summary espccs on espccs.ss_processed_message_src_id = spm.id
 left join syndromic.rt_icd10cm_icd9cm_snomedct admtrsn on admtrsn.code_system_name='ICD-10-CM Diagnosis' and (admtrsn.concept_code = spm.admit_reason_code or admtrsn.preferred_alternate_code = spm.admit_reason_code) 
@@ -1375,13 +1402,6 @@ left join syndromic_olap.etl_nssp_nicc_terminology nnt on nnt.nicc_term = spm.di
 left join olap_temp.etl_processed_diagnosis_summary pds on pds.ss_processed_message_id = spm.id
 left join olap_temp.etl_processed_race_summary prs on prs.ss_processed_message_id = spm.id
 left join syndromic_olap.dim_date dd on dd.dw_date_num_id = to_char(ss_batched_messages_created_at, 'YYYYMMDD')::integer
-left join (
- select 
-	 mf.mft_id
-	,mf.facility_uid
-	,m.facility_type_code
-  from syndromic.mft_feed mf inner join syndromic.mft m on m.id = mf.mft_id
-) mmf on mmf.facility_uid = spm.facility_uid and mmf.facility_type_code = spm.facility_type_code
 where spm.id >= ${min_processed_message_id} and spm.id &lt; ${max_processed_message_id}</sql>
     <limit>0</limit>
     <lookup/>
@@ -2488,11 +2508,11 @@ from ${olap_schema}.dim_date
     </partitioning>
     <connection>DCPLDW</connection>
     <sql>select 
-	dw_mft_id
-	,src_mft_id
-    ,biosense_status
-    ,udoh_status
-from ${olap_schema}.dim_mft</sql>
+     facility_uid
+   ,max(dw_mft_id) as dw_mft_id
+from ${olap_schema}.dim_mft
+group by 1
+</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -2507,7 +2527,7 @@ from ${olap_schema}.dim_mft</sql>
     </remotesteps>
     <GUI>
       <xloc>1424</xloc>
-      <yloc>720</yloc>
+      <yloc>784</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2897,15 +2917,15 @@ group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <from>dim_mft</from>
+    <from>addtl_dim_mft_fields</from>
     <input_sorted>N</input_sorted>
-    <preserve_memory>Y</preserve_memory>
+    <preserve_memory>N</preserve_memory>
     <sorted_list>N</sorted_list>
     <integer_pair>N</integer_pair>
     <lookup>
       <key>
-        <name>src_mft_id</name>
-        <field>src_mft_id</field>
+        <name>facility_uid</name>
+        <field>facility_uid</field>
       </key>
       <value>
         <name>dw_mft_id</name>
@@ -3408,7 +3428,7 @@ group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27
       </output>
     </remotesteps>
     <GUI>
-      <xloc>864</xloc>
+      <xloc>848</xloc>
       <yloc>608</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3629,6 +3649,45 @@ function containsInvalidText(str) {
       <xloc>1600</xloc>
       <yloc>608</yloc>
       <draw>N</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>addtl_dim_mft_fields</name>
+    <type>DBJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>DCPLDW</connection>
+    <rowlimit>0</rowlimit>
+    <sql>select 
+     biosense_status
+    ,udoh_status
+from ${olap_schema}.dim_mft
+where dw_mft_id = ?</sql>
+    <outer_join>N</outer_join>
+    <replace_vars>Y</replace_vars>
+    <parameter>
+      <field>
+        <name>dw_mft_id</name>
+        <type>Integer</type>
+      </field>
+    </parameter>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1424</xloc>
+      <yloc>688</yloc>
+      <draw>Y</draw>
     </GUI>
   </step>
   <step_error_handling>

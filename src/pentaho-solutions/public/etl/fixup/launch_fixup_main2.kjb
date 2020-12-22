@@ -4112,17 +4112,15 @@ cat /var/local/pentaho8/tomcat/conf/Catalina/localhost/pentaho.xml
       <yloc>416</yloc>
     </entry>
     <entry>
-      <name>create_syndromic_temp_tables</name>
+      <name>sql update</name>
       <description/>
       <type>SQL</type>
-      <sql>alter table syndromic_olap.agg_mft_day_processed_messages add column sum_processed_race_message_count integer;
-alter table syndromic_olap.agg_mft_day_processed_messages add column sum_processed_diagnosis_message_count integer;
-alter table syndromic_olap.agg_mft_day_processed_messages add column sum_chief_complaint_message_count integer;</sql>
+      <sql>alter table syndromic_olap.qa_ss_processed_message alter column admit_reason_description type varchar(512);</sql>
       <useVariableSubstitution>F</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
       <sendOneStatement>F</sendOneStatement>
-      <connection>NEDSSOLAPDS</connection>
+      <connection>DCPLDW</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -4987,7 +4985,7 @@ cat /tmp/smartystreetstest_20191021.json</script>
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>${pentaho.solutions.root.vfs}/etl/fixup/load_qa_processed_message_agetest.ktr</filename>
+      <filename>${pentaho.solutions.root.vfs}/etl/fixup/get_row_count.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -5014,8 +5012,8 @@ cat /tmp/smartystreetstest_20191021.json</script>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>480</xloc>
-      <yloc>576</yloc>
+      <xloc>528</xloc>
+      <yloc>640</yloc>
     </entry>
     <entry>
       <name>Write To Log</name>
@@ -5063,8 +5061,34 @@ cat /tmp/smartystreetstest_20191021.json</script>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>288</xloc>
-      <yloc>16</yloc>
+      <xloc>336</xloc>
+      <yloc>176</yloc>
+    </entry>
+    <entry>
+      <name>mft_exception</name>
+      <description/>
+      <type>SQL</type>
+      <sql>drop table if exists syndromic_olap.mft_exception;
+
+create table syndromic_olap.mft_exception as
+select 
+ distinct (ss_processed_message.facility_uid) as facility_uid
+,mft_feed.facility_uid as mft_feed_facility_uid
+from syndromic.ss_processed_message
+LEFT join syndromic.mft_feed on ( mft_feed.facility_uid = syndromic.ss_processed_message.facility_uid)
+where syndromic.mft_feed.facility_uid is null
+and syndromic.ss_processed_message.ss_batched_messages_created_at > '2019-11-01'
+; </sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>DCPLDW</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>240</xloc>
+      <yloc>56</yloc>
     </entry>
   </entries>
   <hops>
@@ -5118,16 +5142,16 @@ cat /tmp/smartystreetstest_20191021.json</script>
       <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
     <hop>
       <from>START</from>
-      <to>create_syndromic_temp_tables</to>
+      <to>sql update</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
     </hop>
@@ -5217,7 +5241,7 @@ cat /tmp/smartystreetstest_20191021.json</script>
       <to>Shell</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
     </hop>
@@ -5231,11 +5255,11 @@ cat /tmp/smartystreetstest_20191021.json</script>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>create_syndromic_temp_tables</from>
+      <from>sql update</from>
       <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -5310,6 +5334,24 @@ cat /tmp/smartystreetstest_20191021.json</script>
       <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>START</from>
+      <to>mft_exception</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>mft_exception</from>
+      <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
     </hop>
   </hops>
   <notepads>
